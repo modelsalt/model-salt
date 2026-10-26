@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Platefull — Plan the week. Eat well. Waste less.</title>
+<meta name="description" content="Platefull is the friendly meal-planning app for anyone who cooks at home. Drag meals into your week, get a smart grocery list, and skip the 5pm 'what's for dinner?' panic.">
+<style>
+  :root{
+    --green:#2f8f5b; --green-dark:#206b43; --green-light:#e4f3ea; --green-pale:#f3faf5;
+    --tomato:#ef5a3c; --tomato-dark:#d2452a; --tomato-light:#fde9e4;
+    --cream:#fffaf3; --ink:#1f2a24; --muted:#5b6861; --line:#e3e9e5;
+    --radius:20px; --radius-sm:12px;
+    --shadow:0 10px 30px rgba(31,42,36,.08);
+    --font:"Nunito","Quicksand","Segoe UI",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font);color:var(--ink);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased}
+  img,svg{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{line-height:1.15;font-weight:800;letter-spacing:-.01em}
+  h1{font-size:clamp(2.2rem,5vw,3.6rem)}
+  h2{font-size:clamp(1.7rem,3.4vw,2.4rem)}
+  h3{font-size:1.15rem}
+  p.lead{font-size:1.15rem;color:var(--muted)}
+  .wrap{width:min(1120px,92%);margin:0 auto}
+  section{padding:84px 0}
+  .eyebrow{display:inline-block;font-size:.8rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--tomato);margin-bottom:12px}
+  .center{text-align:center}
+  .sub{max-width:620px;margin:12px auto 0;color:var(--muted);font-size:1.05rem}
+
+  /* buttons & store badges */
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border-radius:999px;font-weight:800;border:2px solid transparent;cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s;font-family:inherit;font-size:1rem}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.12)}
+  .btn-primary{background:var(--tomato);color:#fff}
+  .btn-primary:hover{background:var(--tomato-dark)}
+  .btn-ghost{background:transparent;border-color:var(--green);color:var(--green-dark)}
+  .btn-ghost:hover{background:var(--green-light)}
+  .badges{display:flex;gap:12px;flex-wrap:wrap}
+  .badge{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:#fff;border-radius:14px;padding:10px 18px 10px 14px;min-width:180px;transition:transform .15s,box-shadow .15s}
+  .badge:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(31,42,36,.25)}
+  .badge svg{width:28px;height:28px;flex:none}
+  .badge small{display:block;font-size:.65rem;letter-spacing:.06em;text-transform:uppercase;opacity:.8;line-height:1}
+  .badge strong{display:block;font-size:1.05rem;line-height:1.2}
+  .badges.light .badge{background:#fff;color:var(--ink)}
+
+  /* nav */
+  header{position:sticky;top:0;z-index:50;background:rgba(255,250,243,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.35rem;color:var(--green-dark)}
+  .logo svg{width:36px;height:36px}
+  .navlinks{display:flex;gap:28px;font-weight:700;color:var(--muted)}
+  .navlinks a:hover{color:var(--green-dark)}
+  .nav-cta{display:flex;gap:10px;align-items:center}
+  .menu-btn{display:none;background:none;border:0;font-size:1.6rem;cursor:pointer;color:var(--green-dark)}
+  @media (max-width:860px){
+    .navlinks,.nav-cta .btn-ghost{display:none}
+    .menu-btn{display:block}
+    .navlinks.open{display:flex;flex-direction:column;position:absolute;top:72px;left:0;right:0;background:var(--cream);padding:20px 4%;border-bottom:1px solid var(--line);gap:16px}
+  }
+
+  /* hero */
+  .hero{padding:72px 0 60px;position:relative;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+  .hero p.lead{margin:20px 0 28px;max-width:520px}
+  .hero-note{margin-top:16px;font-size:.9rem;color:var(--muted);display:flex;align-items:center;gap:8px}
+  .stars{color:#f5a623;letter-spacing:1px}
+  .hero-art{position:relative}
+  .phone{width:min(300px,80%);margin:0 auto;background:var(--ink);border-radius:40px;padding:12px;box-shadow:0 30px 60px rgba(31,42,36,.25);position:relative;z-index:2}
+  .screen{background:#fff;border-radius:30px;overflow:hidden;padding:18px 14px 20px}
+  .screen .s-head{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:.85rem;margin-bottom:12px}
+  .screen .s-head span{color:var(--muted);font-weight:600;font-size:.7rem}
+  .s-day{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;background:var(--green-pale);margin-bottom:8px;font-size:.78rem;font-weight:700}
+  .s-day em{font-style:normal;background:#fff;border-radius:8px;padding:4px 7px;color:var(--green-dark);font-size:.68rem;min-width:36px;text-align:center}
+  .s-day.tomato{background:var(--tomato-light)}
+  .s-day.tomato em{color:var(--tomato-dark)}
+  .s-list{margin-top:12px;background:var(--cream);border-radius:12px;padding:10px;font-size:.72rem}
+  .s-list b{display:block;margin-bottom:6px;font-size:.75rem}
+  .s-list div{display:flex;align-items:center;gap:6px;margin:4px 0;color:var(--muted)}
+  .s-list i{width:12px;height:12px;border-radius:4px;border:2px solid var(--green);display:inline-block;flex:none}
+  .s-list i.done{background:var(--green)}
+  .float{position:absolute;z-index:3;filter:drop-shadow(0 10px 16px rgba(31,42,36,.15));animation:bob 5s ease-in-out infinite}
+  .float svg{width:100%;height:100%}
+  .f1{width:96px;top:-10px;left:4%;animation-delay:0s}
+  .f2{width:84px;bottom:30px;left:2%;animation-delay:-1.5s}
+  .f3{width:90px;top:40px;right:4%;animation-delay:-3s}
+  .f4{width:78px;bottom:-6px;right:8%;animation-delay:-2s}
+  .blob{position:absolute;z-index:1;width:460px;height:460px;border-radius:46% 54% 55% 45%/50% 42% 58% 50%;background:var(--green-light);top:50%;left:50%;transform:translate(-50%,-50%)}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(4deg)}}
+  @media (max-width:860px){.hero-grid{grid-template-columns:1fr}.hero-art{margin-top:30px}.blob{width:320px;height:320px}.f1,.f2,.f3,.f4{width:64px}}
+
+  /* trust strip */
+  .strip{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px 0}
+  .strip .wrap{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;font-weight:800;color:var(--muted);font-size:.95rem}
+  .strip b{color:var(--green-dark);font-size:1.3rem;margin-right:6px}
+
+  /* features */
+  .features{background:var(--cream)}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+  .card{background:#fff;border-radius:var(--radius);padding:30px 26px;box-shadow:var(--shadow);border:1px solid var(--line);transition:transform .2s}
+  .card:hover{transform:translateY(-4px)}
+  .icon{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;margin-bottom:18px;background:var(--green-light)}
+  .icon.t{background:var(--tomato-light)}
+  .icon svg{width:30px;height:30px}
+  .card p{color:var(--muted);margin-top:8px;font-size:.98rem}
+  @media (max-width:860px){.grid3{grid-template-columns:1fr}}
+
+  /* how it works */
+  .how{background:var(--green-dark);color:#fff;position:relative;overflow:hidden}
+  .how .eyebrow{color:#9fe0bb}
+  .how .sub{color:#d4ecdd}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:52px;counter-reset:step}
+  .step{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:var(--radius);padding:30px 26px;position:relative}
+  .step .num{width:44px;height:44px;border-radius:50%;background:var(--tomato);display:grid;place-items:center;font-weight:900;font-size:1.1rem;margin-bottom:16px}
+  .step p{color:#d4ecdd;margin-top:8px}
+  @media (max-width:860px){.steps{grid-template-columns:1fr}}
+
+  /* planner demo */
+  .planner-wrap{margin-top:44px;background:#fff;border-radius:28px;padding:28px;box-shadow:var(--shadow);border:1px solid var(--line)}
+  .planner-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+  .planner-top h3{font-size:1.25rem}
+  .planner-top .hint{color:var(--muted);font-size:.92rem}
+  .planner{display:grid;grid-template-columns:260px 1fr;gap:22px}
+  .tray{background:var(--green-pale);border-radius:var(--radius);padding:16px;border:1px dashed #b8dcc7;min-height:200px}
+  .tray h4{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--green-dark);margin-bottom:10px}
+  .meal{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin-bottom:8px;cursor:grab;user-select:none;font-weight:700;font-size:.92rem;box-shadow:0 2px 6px rgba(0,0,0,.04);transition:transform .12s,box-shadow .12s,opacity .12s}
+  .meal:active{cursor:grabbing}
+  .meal:hover{transform:translateY(-1px);box-shadow:0 6px 14px rgba(0,0,0,.08)}
+  .meal.dragging{opacity:.4}
+  .meal.selected{outline:3px solid var(--tomato);outline-offset:1px}
+  .meal .emoji{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--green-light);flex:none}
+  .meal .emoji svg{width:20px;height:20px}
+  .meal small{display:block;font-weight:600;color:var(--muted);font-size:.72rem}
+  .meal .rm{margin-left:auto;background:none;border:0;cursor:pointer;color:var(--muted);font-size:1rem;line-height:1;padding:2px 4px;border-radius:6px;display:none}
+  .meal .rm:hover{background:var(--tomato-light);color:var(--tomato-dark)}
+  .week{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+  .day{background:var(--cream);border:2px dashed var(--line);border-radius:16px;min-height:170px;padding:10px 8px;display:flex;flex-direction:column;gap:8px;transition:background .15s,border-color .15s}
+  .day h5{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);text-align:center;margin-bottom:2px}
+  .day.over{background:var(--green-light);border-color:var(--green)}
+  .day.target{border-color:var(--tomato);background:var(--tomato-light)}
+  .day .meal{margin:0;cursor:grab;font-size:.8rem;padding:8px;flex-direction:column;align-items:flex-start;gap:6px}
+  .day .meal .rm{display:block;position:absolute;top:4px;right:4px}
+  .day .meal{position:relative}
+  .day .meal small{display:none}
+  .day .empty{flex:1;display:grid;place-items:center;color:#b3bdb7;font-size:.78rem;font-weight:700;text-align:center;padding:6px}
+  .day:not(:has(.meal)) .empty{display:grid}
+  .day:has(.meal) .empty{display:none}
+  .planner-foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}
+  .summary{display:flex;gap:22px;flex-wrap:wrap;font-weight:700;color:var(--muted);font-size:.95rem}
+  .summary b{color:var(--green-dark);font-size:1.15rem}
+  .grocery{margin-top:18px;background:var(--green-pale);border-radius:var(--radius);padding:18px 20px;display:none}
+  .grocery.show{display:block}
+  .grocery h4{font-size:.95rem;margin-bottom:10px;color:var(--green-dark)}
+  .grocery ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+  .grocery li{background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:.85rem;font-weight:700}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:12px 20px;border-radius:999px;font-weight:700;font-size:.9rem;opacity:0;pointer-events:none;transition:all .25s;z-index:100}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  @media (max-width:960px){.planner{grid-template-columns:1fr}.week{grid-template-columns:repeat(4,1fr)}.tray{min-height:auto}.tray .meals{display:flex;flex-wrap:wrap;gap:8px}.tray .meal{margin:0}}
+  @media (max-width:560px){.week{grid-template-columns:repeat(2,1fr)}.planner-wrap{padding:18px}}
+
+  /* pricing */
+  .pricing{background:#fff}
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;align-items:stretch}
+  .plan{border:2px solid var(--line);border-radius:var(--radius);padding:32px 28px;display:flex;flex-direction:column;position:relative;background:var(--cream)}
+  .plan.featured{border-color:var(--tomato);background:#fff;box-shadow:0 20px 50px rgba(239,90,60,.15);transform:scale(1.03)}
+  .plan .tag{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--tomato);color:#fff;font-size:.72rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:999px}
+  .plan h3{font-size:1.3rem}
+  .price{font-size:2.6rem;font-weight:900;margin:14px 0 2px;color:var(--green-dark)}
+  .price span{font-size:1rem;font-weight:700;color:var(--muted)}
+  .plan .per{color:var(--muted);font-size:.9rem;margin-bottom:22px}
+  .plan ul{list-style:none;margin-bottom:26px;flex:1}
+  .plan li{padding:7px 0 7px 30px;position:relative;color:var(--ink);font-size:.95rem}
+  .plan li::before{content:"";position:absolute;left:0;top:10px;width:18px;height:18px;border-radius:50%;background:var(--green-light)}
+  .plan li::after{content:"";position:absolute;left:5px;top:14px;width:7px;height:4px;border-left:2.5px solid var(--green-dark);border-bottom:2.5px solid var(--green-dark);transform:rotate(-45deg)}
+  .plan .btn{justify-content:center}
+  @media (max-width:860px){.plans{grid-template-columns:1fr}.plan.featured{transform:none}}
+
+  /* testimonials */
+  .testi{background:var(--green-pale)}
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+  .quote{background:#fff;border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);border:1px solid var(--line);display:flex;flex-direction:column}
+  .quote p{flex:1;font-size:1.02rem;margin:10px 0 20px}
+  .who{display:flex;align-items:center;gap:12px}
+  .avatar{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:900;color:#fff;background:var(--green)}
+  .avatar.t{background:var(--tomato)}
+  .avatar.y{background:#f5a623}
+  .who b{display:block;font-size:.95rem}
+  .who span{font-size:.82rem;color:var(--muted)}
+  @media (max-width:860px){.quotes{grid-template-columns:1fr}}
+
+  /* faq */
+  .faq{background:#fff}
+  .faq-list{max-width:760px;margin:40px auto 0}
+  details{border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--cream);margin-bottom:12px;overflow:hidden}
+  summary{cursor:pointer;list-style:none;padding:18px 22px;font-weight:800;display:flex;justify-content:space-between;align-items:center;gap:16px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-size:1.4rem;color:var(--tomato);font-weight:400;transition:transform .2s}
+  details[open] summary::after{transform:rotate(45deg)}
+  details div{padding:0 22px 20px;color:var(--muted)}
+
+  /* final cta */
+  .final{background:linear-gradient(135deg,var(--tomato) 0%,#f47a4b 100%);color:#fff;text-align:center;position:relative;overflow:hidden}
+  .final h2{color:#fff;font-size:clamp(1.9rem,4vw,2.8rem)}
+  .final p{color:#ffe6df;max-width:560px;margin:14px auto 30px;font-size:1.1rem}
+  .final .badges{justify-content:center}
+  .final .deco{position:absolute;opacity:.18;width:160px}
+  .final .d1{top:-30px;left:-20px;transform:rotate(-15deg)}
+  .final .d2{bottom:-40px;right:-20px;transform:rotate(20deg)}
+
+  /* footer */
+  footer{background:var(--ink);color:#b9c4be;padding:56px 0 28px;font-size:.92rem}
+  .fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:32px;margin-bottom:40px}
+  footer .logo{color:#fff;margin-bottom:12px}
+  footer h4{color:#fff;margin-bottom:14px;font-size:.95rem}
+  footer li{list-style:none;margin:8px 0}
+  footer a:hover{color:#fff}
+  .fbottom{border-top:1px solid rgba(255,255,255,.1);padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.82rem}
+  @media (max-width:860px){.fgrid{grid-template-columns:1fr 1fr}}
+  @media (prefers-reduced-motion:reduce){.float{animation:none}*{transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- ===== SVG SPRITE: illustrated ingredients ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-tomato" viewBox="0 0 64 64">
+      <path d="M32 14c-3-5-9-6-12-5 2 2 4 5 4 8" fill="none" stroke="#2f8f5b" stroke-width="4" stroke-linecap="round"/>
+      <path d="M32 14c3-5 9-6 12-5-2 2-4 5-4 8" fill="none" stroke="#2f8f5b" stroke-width="4" stroke-linecap="round"/>
+      <path d="M32 8v10" stroke="#2f8f5b" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="32" cy="38" r="22" fill="#ef5a3c"/>
+      <ellipse cx="24" cy="30" rx="6" ry="4" fill="#fff" opacity=".35" transform="rotate(-25 24 30)"/>
+    </symbol>
+    <symbol id="i-avocado" viewBox="0 0 64 64">
+      <path d="M32 6c-8 0-13 9-14 17-2 10-10 14-10 23 0 8 10 14 24 14s24-6 24-14c0-9-8-13-10-23C45 15 40 6 32 6z" fill="#3fa86a"/>
+      <path d="M32 12c-6 0-10 8-11 15-1 8-8 12-8 19 0 6 8 10 19 10s19-4 19-10c0-7-7-11-8-19-1-7-5-15-11-15z" fill="#d9ee9c"/>
+      <circle cx="32" cy="44" r="9" fill="#9c5a2b"/>
+      <circle cx="29" cy="41" r="3" fill="#fff" opacity=".35"/>
+    </symbol>
+    <symbol id="i-carrot" viewBox="0 0 64 64">
+      <path d="M40 10l4-8M44 14l9-5M46 20l10 0" stroke="#2f8f5b" stroke-width="4" stroke-linecap="round"/>
+      <path d="M44 20 12 52c-2 2-5 1-5-2L34 12c2-2 5-2 7 0l3 3c2 2 2 4 0 5z" fill="#f28a2e"/>
+      <path d="M30 24l6 6M22 32l6 6M15 40l5 5" stroke="#d9701c" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-leaf" viewBox="0 0 64 64">
+      <path d="M8 56C10 30 26 10 56 8c-2 30-20 46-48 48z" fill="#2f8f5b"/>
+      <path d="M12 52C22 36 36 22 52 12" stroke="#9fe0bb" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <path d="M22 40l8 2M30 32l8 1M38 24l6 1" stroke="#9fe0bb" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-egg" viewBox="0 0 64 64">
+      <ellipse cx="32" cy="32" rx="26" ry="20" fill="#fff" stroke="#e3e9e5" stroke-width="2"/>
+      <circle cx="30" cy="31" r="9" fill="#f5a623"/>
+      <circle cx="27" cy="28" r="3" fill="#fff" opacity=".5"/>
+    </symbol>
+    <symbol id="i-bowl" viewBox="0 0 64 64">
+      <path d="M6 30h52c0 14-10 24-26 24S6 44 6 30z" fill="#2f8f5b"/>
+      <path d="M12 30c0 10 8 18 20 18s20-8 20-18" fill="#206b43" opacity=".4"/>
+      <ellipse cx="32" cy="30" rx="26" ry="6" fill="#fffaf3"/>
+      <circle cx="22" cy="28" r="4" fill="#ef5a3c"/><circle cx="34" cy="27" r="4" fill="#f5a623"/><circle cx="43" cy="29" r="3.5" fill="#3fa86a"/>
+    </symbol>
+    <symbol id="i-fish" viewBox="0 0 64 64">
+      <path d="M8 32c8-12 20-18 34-18l14 18-14 18C28 50 16 44 8 32z" fill="#5fb3d9"/>
+      <path d="M56 32l-14-18v36z" fill="#3a93bd"/>
+      <circle cx="20" cy="29" r="3" fill="#1f2a24"/>
+      <path d="M30 24c-4 4-4 12 0 16" stroke="#fff" stroke-width="2.5" fill="none" opacity=".6" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-pasta" viewBox="0 0 64 64">
+      <path d="M10 44c6-16 36-16 44 0" fill="#f5c842"/>
+      <path d="M14 42c6-10 30-10 36 0M18 40c6-6 22-6 28 0" stroke="#e0a81a" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M6 44h52c0 8-8 14-26 14S6 52 6 44z" fill="#ef5a3c"/>
+      <circle cx="24" cy="36" r="4" fill="#ef5a3c"/><circle cx="40" cy="34" r="3" fill="#2f8f5b"/>
+    </symbol>
+    <symbol id="i-taco" viewBox="0 0 64 64">
+      <path d="M6 44a26 26 0 0 1 52 0z" fill="#f5c842"/>
+      <path d="M12 44a20 20 0 0 1 40 0z" fill="#9c5a2b"/>
+      <path d="M14 40c8-10 28-10 36 0" fill="#3fa86a"/>
+      <circle cx="22" cy="36" r="3" fill="#ef5a3c"/><circle cx="34" cy="33" r="3" fill="#ef5a3c"/><circle cx="44" cy="37" r="3" fill="#ef5a3c"/>
+      <path d="M6 44h52c0 4-2 6-6 6H12c-4 0-6-2-6-6z" fill="#e0a81a"/>
+    </symbol>
+    <symbol id="i-curry" viewBox="0 0 64 64">
+      <path d="M8 34h48c0 12-10 20-24 20S8 46 8 34z" fill="#fff"/>
+      <ellipse cx="32" cy="34" rx="24" ry="6" fill="#f28a2e"/>
+      <ellipse cx="30" cy="33" rx="6" ry="3" fill="#fff" opacity=".4"/>
+      <path d="M22 30c0-3 3-3 3-6M32 28c0-3 3-3 3-6M42 30c0-3 3-3 3-6" stroke="#b3bdb7" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M38 36l4 2M20 36l4 1" stroke="#2f8f5b" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-chicken" viewBox="0 0 64 64">
+      <path d="M14 46c-8-8-6-24 6-30s26 0 30 10c4 10-6 22-18 22-6 0-12-2-18-2z" fill="#e8b27a"/>
+      <path d="M12 48l-6 8M20 50l-4 10" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+      <path d="M12 48l-6 8M20 50l-4 10" stroke="#f0d9bd" stroke-width="3" stroke-linecap="round"/>
+      <path d="M24 26c6-4 14-4 18 2" stroke="#d69454" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2l2.4 11h11.2L21 8H7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.6" fill="currentColor"/><circle cx="17" cy="20" r="1.6" fill="currentColor"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="7" y="13" width="3" height="3" rx="1" fill="currentColor"/><rect x="12" y="13" width="3" height="3" rx="1" fill="currentColor"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" fill="currentColor"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z" fill="currentColor"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="17" cy="9" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 14c2.8 0 5 2.2 5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-fridge" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 10h14M9 5.5v2M9 13v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-apple" viewBox="0 0 24 24"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.8-.8-3-.8C6.9 7.4 5 8.8 5 11.8c0 1.1.2 2.2.6 3.3.8 2.3 2.6 5 4.1 5 .7 0 1.6-.6 2.8-.6s2 .6 2.9.6c1.6 0 3.1-2.5 3.8-4.6-2.2-.9-2.8-2.4-2.8-2.9zM14.1 5.8c.6-.8 1.1-1.9 1-3-.9.1-2 .6-2.7 1.4-.6.7-1.1 1.8-1 2.8 1 .1 2-.5 2.7-1.2z" fill="currentColor"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M4 3.5v17c0 .5.5.8.9.5L5.5 20 14 12 5.5 4l-.6-.9c-.4-.3-.9 0-.9.4z" fill="#34a853"/><path d="M14 12l3.2-3.2 3.3 1.9c.7.4.7 1.4 0 1.8l-3.3 1.9z" fill="#fbbc04"/><path d="M5.5 4L14 12l3.2-3.2L6.1 2.6c-.2-.1-.4-.1-.6 0z" fill="#4285f4"/><path d="M5.5 20L14 12l3.2 3.2L6.1 21.4c-.2.1-.4.1-.6 0z" fill="#ea4335"/></symbol>
+  </defs>
+</svg>
+
+<!-- ===== NAV ===== -->
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="#" class="logo" aria-label="Platefull home">
+        <svg viewBox="0 0 64 64"><use href="#i-bowl"/></svg>
+        Platefull
+      </a>
+      <div class="navlinks" id="navlinks">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#planner">Try it</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="nav-cta">
+        <a href="#download" class="btn btn-ghost">Log in</a>
+        <a href="#download" class="btn btn-primary">Get the app</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Meal planning for real kitchens</span>
+      <h1>Plan the week.<br>Eat well.<br><span style="color:var(--tomato)">Waste less.</span></h1>
+      <p class="lead">Platefull turns "what's for dinner?" into a five-minute Sunday ritual. Drag meals into your week, get a grocery list sorted by aisle, and cook with whatever's already in the fridge.</p>
+      <div class="badges" id="download">
+        <a class="badge" href="#" aria-label="Download on the App Store">
+          <svg><use href="#i-apple"/></svg>
+          <span><small>Download on the</small><strong>App Store</strong></span>
+        </a>
+        <a class="badge" href="#" aria-label="Get it on Google Play">
+          <svg><use href="#i-play"/></svg>
+          <span><small>Get it on</small><strong>Google Play</strong></span>
+        </a>
+      </div>
+      <div class="hero-note"><span class="stars">★★★★★</span> 4.8 from 12,400+ home cooks · Free to start</div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="blob"></div>
+      <div class="float f1"><svg viewBox="0 0 64 64"><use href="#i-tomato"/></svg></div>
+      <div class="float f2"><svg viewBox="0 0 64 64"><use href="#i-avocado"/></svg></div>
+      <div class="float f3"><svg viewBox="0 0 64 64"><use href="#i-carrot"/></svg></div>
+      <div class="float f4"><svg viewBox="0 0 64 64"><use href="#i-egg"/></svg></div>
+      <div class="phone">
+        <div class="screen">
+          <div class="s-head">This week <span>Oct 26 – Nov 1</span></div>
+          <div class="s-day"><em>Mon</em> Sheet-pan chicken & veg</div>
+          <div class="s-day tomato"><em>Tue</em> Tomato basil pasta</div>
+          <div class="s-day"><em>Wed</em> Leftovers night 🙌</div>
+          <div class="s-day tomato"><em>Thu</em> Black bean tacos</div>
+          <div class="s-day"><em>Fri</em> Salmon rice bowls</div>
+          <div class="s-list">
+            <b>Grocery list · 14 items</b>
+            <div><i class="done"></i> Chicken thighs</div>
+            <div><i class="done"></i> Cherry tomatoes</div>
+            <div><i></i> Fresh basil</div>
+            <div><i></i> Corn tortillas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap">
+    <div><b>1.2M</b> meals planned</div>
+    <div><b>$38</b> avg. weekly savings</div>
+    <div><b>30%</b> less food waste</div>
+    <div><b>5 min</b> to plan a week</div>
+  </div>
+</div>
+
+<!-- ===== FEATURES ===== -->
+<section class="features" id="features">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Everything you need</span>
+      <h2>Less deciding. More eating.</h2>
+      <p class="sub">Whether you cook for one or feed a crowd, Platefull takes the guesswork out of the week.</p>
+    </div>
+    <div class="grid3">
+      <div class="card">
+        <div class="icon" style="color:var(--green-dark)"><svg><use href="#i-cal"/></svg></div>
+        <h3>Drag-and-drop weekly planner</h3>
+        <p>Pick from thousands of recipes or add your own family favorites. Drop them onto any day and your week fills itself in.</p>
+      </div>
+      <div class="card">
+        <div class="icon t" style="color:var(--tomato-dark)"><svg><use href="#i-cart"/></svg></div>
+        <h3>Smart grocery list</h3>
+        <p>Every ingredient from every meal, combined, de-duplicated and sorted by aisle. Tick things off as you shop.</p>
+      </div>
+      <div class="card">
+        <div class="icon" style="color:var(--green-dark)"><svg><use href="#i-fridge"/></svg></div>
+        <h3>Cook from what you have</h3>
+        <p>Tell Platefull what's in your fridge and pantry. It suggests meals that use it up before it goes bad.</p>
+      </div>
+      <div class="card">
+        <div class="icon t" style="color:var(--tomato-dark)"><svg><use href="#i-spark"/></svg></div>
+        <h3>Auto-plan in one tap</h3>
+        <p>Short on time? Let Platefull build a balanced week around your tastes, budget and schedule. Swap anything you like.</p>
+      </div>
+      <div class="card">
+        <div class="icon" style="color:var(--green-dark)"><svg><use href="#i-users"/></svg></div>
+        <h3>Share with your household</h3>
+        <p>Everyone sees the plan and the list. Partners, roommates and kids can vote on meals and claim a cooking night.</p>
+      </div>
+      <div class="card">
+        <div class="icon t" style="color:var(--tomato-dark)"><svg><use href="#i-clock"/></svg></div>
+        <h3>Prep reminders</h3>
+        <p>"Take the chicken out of the freezer." "Soak the beans tonight." Little nudges so dinner actually happens on time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">How it works</span>
+      <h2>Three steps to a calmer week</h2>
+      <p class="sub">No spreadsheets, no sticky notes on the fridge.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>Tell us how you eat</h3>
+        <p>How many people, any allergies or dislikes, how much time you've got on weeknights. Takes about a minute.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>Fill your week</h3>
+        <p>Drag meals in, let Platefull auto-plan, or mix both. Leftovers and takeout nights are first-class citizens.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>Shop once, cook easy</h3>
+        <p>Your grocery list is ready instantly. Shop it yourself or send it to your favorite delivery service.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INTERACTIVE PLANNER ===== -->
+<section id="planner">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Try it right here</span>
+      <h2>Drag a few meals into your week</h2>
+      <p class="sub">This is a little taste of the real thing. Drag meals from the tray onto a day (or tap a meal, then tap a day). Watch the grocery list build itself.</p>
+    </div>
+
+    <div class="planner-wrap">
+      <div class="planner-top">
+        <h3>Your week</h3>
+        <span class="hint" id="hint">Drag or tap a meal, then a day →</span>
+      </div>
+      <div class="planner">
+        <aside class="tray" id="tray">
+          <h4>Meal ideas</h4>
+          <div class="meals" id="trayMeals"></div>
+        </aside>
+        <div class="week" id="week"></div>
+      </div>
+      <div class="planner-foot">
+        <div class="summary">
+          <div><b id="cPlanned">0</b> / 7 nights planned</div>
+          <div><b id="cItems">0</b> grocery items</div>
+          <div><b id="cTime">0</b> min avg. cook time</div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-ghost" id="autoBtn" type="button">✨ Auto-plan the rest</button>
+          <button class="btn btn-ghost" id="resetBtn" type="button">Reset</button>
+          <button class="btn btn-primary" id="listBtn" type="button">Build grocery list</button>
+        </div>
+      </div>
+      <div class="grocery" id="grocery">
+        <h4>🛒 Grocery list (combined & de-duplicated)</h4>
+        <ul id="groceryList"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Pricing</span>
+      <h2>Start free. Upgrade when it clicks.</h2>
+      <p class="sub">Every plan includes the weekly planner and grocery list. No credit card to start.</p>
+    </div>
+    <div class="plans">
+      <div class="plan">
+        <h3>Free</h3>
+        <div class="price">$0</div>
+        <div class="per">forever</div>
+        <ul>
+          <li>Weekly drag-and-drop planner</li>
+          <li>Grocery list sorted by aisle</li>
+          <li>500+ starter recipes</li>
+          <li>Add up to 20 of your own recipes</li>
+        </ul>
+        <a href="#download" class="btn btn-ghost">Download free</a>
+      </div>
+      <div class="plan featured">
+        <span class="tag">Most popular</span>
+        <h3>Plus</h3>
+        <div class="price">$4<span>.99</span></div>
+        <div class="per">per month, or $39/year</div>
+        <ul>
+          <li>Everything in Free</li>
+          <li>One-tap auto-plan</li>
+          <li>Cook-from-your-fridge suggestions</li>
+          <li>Unlimited personal recipes & imports</li>
+          <li>Prep reminders & leftovers tracking</li>
+          <li>Send list to grocery delivery</li>
+        </ul>
+        <a href="#download" class="btn btn-primary">Try Plus free for 14 days</a>
+      </div>
+      <div class="plan">
+        <h3>Household</h3>
+        <div class="price">$7<span>.99</span></div>
+        <div class="per">per month, up to 6 people</div>
+        <ul>
+          <li>Everything in Plus</li>
+          <li>Shared plan & list for the whole house</li>
+          <li>Meal voting and cooking-night assignments</li>
+          <li>Per-person preferences & allergies</li>
+          <li>Budget tracking</li>
+        </ul>
+        <a href="#download" class="btn btn-ghost">Start household trial</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testi">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">From real kitchens</span>
+      <h2>People who used to wing it</h2>
+    </div>
+    <div class="quotes">
+      <div class="quote">
+        <div class="stars">★★★★★</div>
+        <p>"I used to go to the store three times a week and still have nothing for dinner. Now it's one trip on Sunday and I actually use what I buy. My compost bin is lonely."</p>
+        <div class="who"><div class="avatar">M</div><div><b>Marisol T.</b><span>Cooks for two, Austin</span></div></div>
+      </div>
+      <div class="quote">
+        <div class="stars">★★★★★</div>
+        <p>"The shared list is the killer feature. My partner picks up what's missing on the way home without a single text. Our grocery bill is down about forty bucks a week."</p>
+        <div class="who"><div class="avatar t">D</div><div><b>Dev & Priya K.</b><span>Family of four, Toronto</span></div></div>
+      </div>
+      <div class="quote">
+        <div class="stars">★★★★★</div>
+        <p>"I'm not a 'meal prep' person and I never will be. But dragging five dinners onto a calendar? That I can do. Auto-plan handles the nights I can't be bothered."</p>
+        <div class="who"><div class="avatar y">J</div><div><b>Jonah R.</b><span>Cooks for one, Leeds</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Questions</span>
+      <h2>Frequently asked</h2>
+    </div>
+    <div class="faq-list">
+      <details open>
+        <summary>Do I need to be a good cook to use Platefull?</summary>
+        <div>Not at all. Most of our recipes are 30 minutes or less with clear step-by-step instructions. If you can follow a recipe, you can use Platefull. And if you want to plan a week of "pasta, tacos, leftovers, takeout," that's a perfectly valid week.</div>
+      </details>
+      <details>
+        <summary>Can I add my own recipes?</summary>
+        <div>Yes. Type them in, snap a photo of a recipe card, or paste a link from any recipe website and we'll import the ingredients and steps. Free accounts can add 20 recipes; Plus and Household are unlimited.</div>
+      </details>
+      <details>
+        <summary>Does it work with dietary restrictions?</summary>
+        <div>Platefull supports vegetarian, vegan, gluten-free, dairy-free, nut-free, halal, kosher and low-FODMAP filters, plus custom "never show me" ingredients. Household plans let each person set their own.</div>
+      </details>
+      <details>
+        <summary>Which grocery delivery services can I send my list to?</summary>
+        <div>Plus and Household subscribers can send lists to Instacart, Amazon Fresh, Walmart, Kroger and Tesco, with more arriving regularly. You can also share the list as plain text to anyone.</div>
+      </details>
+      <details>
+        <summary>Is there a web version?</summary>
+        <div>Yes. Your plan syncs between the iOS app, Android app and the web app at app.platefull.com, so you can plan on a laptop and shop with your phone.</div>
+      </details>
+      <details>
+        <summary>Can I cancel anytime?</summary>
+        <div>Of course. Cancel from inside the app and you'll drop back to the Free plan at the end of your billing period. Your recipes and plans stay put.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="final">
+  <svg class="deco d1" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-leaf"/></svg>
+  <svg class="deco d2" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-tomato"/></svg>
+  <div class="wrap">
+    <h2>Your next week of dinners is five minutes away.</h2>
+    <p>Download Platefull free and never stare into the fridge at 5pm again.</p>
+    <div class="badges light">
+      <a class="badge" href="#" aria-label="Download on the App Store">
+        <svg><use href="#i-apple"/></svg>
+        <span><small>Download on the</small><strong>App Store</strong></span>
+      </a>
+      <a class="badge" href="#" aria-label="Get it on Google Play">
+        <svg><use href="#i-play"/></svg>
+        <span><small>Get it on</small><strong>Google Play</strong></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a href="#top" class="logo"><svg viewBox="0 0 64 64"><use href="#i-bowl"/></svg> Platefull</a>
+        <p style="max-width:300px">The friendly meal planner for anyone who cooks at home. Made with love (and a lot of leftovers).</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul><li><a href="#features">Features</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#">Recipes</a></li><li><a href="#">Web app</a></li></ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul><li><a href="#">About</a></li><li><a href="#">Blog</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li></ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul><li><a href="#faq">FAQ</a></li><li><a href="#">Help center</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li></ul>
+      </div>
+    </div>
+    <div class="fbottom">
+      <span>© 2026 Platefull Inc. All rights reserved.</span>
+      <span>Apple and the App Store are trademarks of Apple Inc. Google Play is a trademark of Google LLC.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  // ---------- data ----------
+  const MEALS = [
+    {id:'pasta',   name:'Tomato basil pasta',    time:25, icon:'i-pasta',   ing:['Spaghetti','Cherry tomatoes','Fresh basil','Garlic','Parmesan','Olive oil']},
+    {id:'tacos',   name:'Black bean tacos',      time:20, icon:'i-taco',    ing:['Corn tortillas','Black beans','Avocado','Lime','Red onion','Cilantro']},
+    {id:'salmon',  name:'Salmon rice bowls',     time:30, icon:'i-fish',    ing:['Salmon fillets','Jasmine rice','Cucumber','Avocado','Soy sauce','Sesame seeds']},
+    {id:'curry',   name:'Chickpea coconut curry',time:35, icon:'i-curry',   ing:['Chickpeas','Coconut milk','Curry paste','Spinach','Jasmine rice','Garlic']},
+    {id:'chicken', name:'Sheet-pan chicken & veg',time:40,icon:'i-chicken', ing:['Chicken thighs','Carrots','Red onion','Potatoes','Olive oil','Rosemary']},
+    {id:'salad',   name:'Big green salad + eggs',time:15, icon:'i-leaf',    ing:['Mixed greens','Eggs','Cucumber','Cherry tomatoes','Avocado','Olive oil']},
+    {id:'omelet',  name:'Veggie omelet night',   time:15, icon:'i-egg',     ing:['Eggs','Spinach','Cheddar','Red onion','Butter']},
+    {id:'leftovers',name:'Leftovers night',      time:5,  icon:'i-bowl',    ing:[]},
+  ];
+  const DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+  const tray = document.getElementById('trayMeals');
+  const week = document.getElementById('week');
+  const toast = document.getElementById('toast');
+  const hint = document.getElementById('hint');
+  const grocery = document.getElementById('grocery');
+  const groceryList = document.getElementById('groceryList');
+  let selected = null;        // tapped meal element (tap-to-place fallback)
+  let dragged = null;         // element being dragged
+
+  // ---------- builders ----------
+  function mealEl(m){
+    const el = document.createElement('div');
+    el.className = 'meal';
+    el.draggable = true;
+    el.dataset.id = m.id;
+    el.setAttribute('role','button');
+    el.setAttribute('tabindex','0');
+    el.setAttribute('aria-label', m.name + ', ' + m.time + ' minutes');
+    el.innerHTML = `<span class="emoji"><svg><use href="#${m.icon}"/></svg></span>
+      <span class="txt"><span class="nm">${m.name}</span><small>${m.time} min</small></span>
+      <button class="rm" type="button" aria-label="Remove ${m.name}">✕</button>`;
+    el.addEventListener('dragstart', e=>{
+      dragged = el; el.classList.add('dragging');
+      e.dataTransfer.effectAllowed='move';
+      e.dataTransfer.setData('text/plain', m.id);
+    });
+    el.addEventListener('dragend', ()=>{ el.classList.remove('dragging'); dragged=null; clearOver(); });
+    el.addEventListener('click', e=>{
+      if(e.target.classList.contains('rm')) return;
+      select(el);
+    });
+    el.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();select(el);} });
+    el.querySelector('.rm').addEventListener('click', e=>{
+      e.stopPropagation();
+      returnToTray(el);
+      update();
+      showToast('Removed from your week');
+    });
+    return el;
+  }
+
+  function dayEl(name){
+    const d = document.createElement('div');
+    d.className = 'day';
+    d.dataset.day = name;
+    d.innerHTML = `<h5>${name}</h5><div class="empty">Drop a meal here</div>`;
+    d.addEventListener('dragover', e=>{ e.preventDefault(); e.dataTransfer.dropEffect='move'; d.classList.add('over'); });
+    d.addEventListener('dragleave', ()=> d.classList.remove('over'));
+    d.addEventListener('drop', e=>{
+      e.preventDefault(); d.classList.remove('over');
+      const id = e.dataTransfer.getData('text/plain');
+      const src = dragged || document.querySelector(`.meal[data-id="${id}"]`);
+      if(src) place(src, d);
+    });
+    d.addEventListener('click', e=>{
+      if(e.target.closest('.meal')) return;
+      if(selected) place(selected, d);
+    });
+    return d;
+  }
+
+  // ---------- actions ----------
+  function select(el){
+    if(selected===el){ el.classList.remove('selected'); selected=null; hint.textContent='Drag or tap a meal, then a day →'; return; }
+    document.querySelectorAll('.meal.selected').forEach(x=>x.classList.remove('selected'));
+    selected = el; el.classList.add('selected');
+    hint.textContent = 'Now tap a day to place "' + el.querySelector('.nm').textContent + '"';
+    document.querySelectorAll('.day').forEach(d=>d.classList.add('target'));
+  }
+  function clearSelect(){
+    document.querySelectorAll('.meal.selected').forEach(x=>x.classList.remove('selected'));
+    document.querySelectorAll('.day.target').forEach(d=>d.classList.remove('target'));
+    selected=null; hint.textContent='Drag or tap a meal, then a day →';
+  }
+  function clearOver(){ document.querySelectorAll('.day.over').forEach(d=>d.classList.remove('over')); }
+
+  function place(mealEl, day){
+    const existing = day.querySelector('.meal');
+    if(existing && existing!==mealEl){ returnToTray(existing); }
+    day.appendChild(mealEl);
+    clearSelect(); update();
+    const n = mealEl.querySelector('.nm').textContent;
+    showToast(`${n} → ${day.dataset.day}`);
+  }
+  function returnToTray(el){
+    // keep tray in original order
+    const order = MEALS.map(m=>m.id);
+    const idx = order.indexOf(el.dataset.id);
+    const siblings = [...tray.children];
+    const next = siblings.find(s=>order.indexOf(s.dataset.id)>idx);
+    tray.insertBefore(el, next||null);
+    el.classList.remove('selected');
+  }
+
+  function update(){
+    const planned = [...week.querySelectorAll('.day .meal')];
+    const ids = planned.map(e=>e.dataset.id);
+    const meals = ids.map(id=>MEALS.find(m=>m.id===id));
+    const items = new Set(); meals.forEach(m=>m.ing.forEach(i=>items.add(i)));
+    const cooking = meals.filter(m=>m.id!=='leftovers');
+    const avg = cooking.length ? Math.round(cooking.reduce((a,m)=>a+m.time,0)/cooking.length) : 0;
+    document.getElementById('cPlanned').textContent = planned.length;
+    document.getElementById('cItems').textContent = items.size;
+    document.getElementById('cTime').textContent = avg;
+    if(grocery.classList.contains('show')) renderGrocery(items);
+  }
+
+  function renderGrocery(items){
+    items = items || (()=>{ const s=new Set(); week.querySelectorAll('.day .meal').forEach(e=>MEALS.find(m=>m.id===e.dataset.id).ing.forEach(i=>s.add(i))); return s; })();
+    groceryList.innerHTML = '';
+    if(!items.size){ groceryList.innerHTML = '<li style="background:transparent;border:0;color:var(--muted)">Add a few meals to your week first.</li>'; return; }
+    [...items].sort().forEach(i=>{ const li=document.createElement('li'); li.textContent=i; groceryList.appendChild(li); });
+  }
+
+  let toastTimer;
+  function showToast(msg){
+    toast.textContent = msg; toast.classList.add('show');
+    clearTimeout(toastTimer); toastTimer = setTimeout(()=>toast.classList.remove('show'), 1800);
+  }
+
+  // ---------- init ----------
+  MEALS.forEach(m=>tray.appendChild(mealEl(m)));
+  DAYS.forEach(d=>week.appendChild(dayEl(d)));
+
+  // tray accepts drops back
+  const trayBox = document.getElementById('tray');
+  trayBox.addEventListener('dragover', e=>{ e.preventDefault(); });
+  trayBox.addEventListener('drop', e=>{ e.preventDefault(); if(dragged && dragged.closest('.day')){ returnToTray(dragged); update(); } });
+
+  document.getElementById('autoBtn').addEventListener('click', ()=>{
+    const emptyDays = [...week.querySelectorAll('.day')].filter(d=>!d.querySelector('.meal'));
+    const avail = [...tray.children];
+    if(!emptyDays.length){ showToast('Your week is already full 🎉'); return; }
+    emptyDays.forEach(d=>{ if(avail.length){ const pick = avail.splice(Math.floor(Math.random()*avail.length),1)[0]; d.appendChild(pick); } });
+    clearSelect(); update(); showToast('Auto-planned the rest of your week ✨');
+  });
+  document.getElementById('resetBtn').addEventListener('click', ()=>{
+    [...week.querySelectorAll('.day .meal')].forEach(returnToTray);
+    grocery.classList.remove('show'); clearSelect(); update(); showToast('Week cleared');
+  });
+  document.getElementById('listBtn').addEventListener('click', ()=>{
+    renderGrocery(); grocery.classList.add('show');
+    grocery.scrollIntoView({behavior:'smooth',block:'nearest'});
+  });
+
+  // escape cancels tap-selection
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') clearSelect(); });
+
+  // mobile nav
+  const menuBtn = document.getElementById('menuBtn'), navlinks = document.getElementById('navlinks');
+  menuBtn.addEventListener('click', ()=>{ const open = navlinks.classList.toggle('open'); menuBtn.setAttribute('aria-expanded', open); });
+  navlinks.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>navlinks.classList.remove('open')));
+
+  update();
+})();
+</script>
+</body>
+</html>

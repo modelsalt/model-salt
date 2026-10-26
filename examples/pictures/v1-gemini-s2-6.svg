@@ -1,0 +1,301 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1600" width="100%" height="100%">
+  <defs>
+    <!-- Soft Pastel Palette Styles -->
+    <style>
+      .outline { stroke: #1E1E24; stroke-width: 10; stroke-linecap: round; stroke-linejoin: round; }
+      .outline-thin { stroke: #1E1E24; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .spoke { stroke: #1E1E24; stroke-width: 4; stroke-linecap: round; }
+      .sky { fill: #C8E7F5; }
+      .cloud { fill: #FDFBF7; }
+      .cloud-shade { fill: #E2F1F8; }
+      .ground { fill: #DCEDC8; }
+      .ground-shade { fill: #B4DFB4; }
+      .mint { fill: #A3E4D7; }
+      .mint-shade { fill: #76C7B7; }
+      .cream { fill: #FFFDF2; }
+      .cream-shade { fill: #E5E8E8; }
+      .peach { fill: #FFD1B3; }
+      .peach-shade { fill: #F5B092; }
+      .pink-accent { fill: #F7B2B7; }
+      .pink-shade { fill: #E08E94; }
+      .tire { fill: #4A5559; }
+      .tire-highlight { fill: #6E7B80; }
+      .black-fill { fill: #1E1E24; }
+    </style>
+
+    <!-- Clip Paths for Simple Cel Shading -->
+    <clipPath id="body-clip">
+      <path d="M 380,680 C 310,680 280,760 290,820 C 300,880 350,910 420,910 C 490,910 530,850 510,770 C 490,710 470,640 480,550 C 490,480 460,450 430,450 C 390,450 400,520 395,580 C 390,640 410,680 380,680 Z" />
+    </clipPath>
+    <clipPath id="pouch-clip">
+      <path d="M 480,535 C 510,620 620,660 720,610 C 770,585 785,540 785,525 C 680,530 570,535 480,535 Z" />
+    </clipPath>
+    <clipPath id="upper-beak-clip">
+      <path d="M 475,475 C 560,475 680,460 790,495 C 810,502 805,530 785,530 C 775,520 660,535 480,535 Z" />
+    </clipPath>
+    <clipPath id="left-wing-clip">
+      <path d="M 390,730 C 290,690 140,680 75,720 C 55,735 75,775 115,775 C 90,795 110,825 155,820 C 140,840 165,865 205,850 C 200,870 230,885 265,865 C 315,840 375,800 415,785 Z" />
+    </clipPath>
+    <clipPath id="right-wing-clip">
+      <path d="M 485,730 C 570,690 710,680 785,730 C 805,745 780,785 740,780 C 765,800 740,830 700,820 C 715,840 690,860 655,845 C 600,825 530,795 475,775 Z" />
+    </clipPath>
+  </defs>
+
+  <!-- 1. BACKGROUND: Soft Baby Blue Sky -->
+  <rect width="900" height="1600" class="sky" />
+
+  <!-- Decorative Pastel Clouds in Upper Half -->
+  <g class="outline">
+    <!-- Top Left Cloud -->
+    <g transform="translate(80, 180)">
+      <path d="M 60,120 L 280,120 C 320,120 340,85 310,60 C 320,25 270,5 240,30 C 215,-15 135,-15 115,35 C 75,20 30,55 45,90 C 20,95 30,120 60,120 Z" class="cloud" />
+      <path d="M 50,115 C 30,115 25,95 45,90 C 60,105 120,105 160,100 C 210,105 270,105 310,80 C 325,95 310,115 280,115 Z" class="cloud-shade" stroke="none" />
+      <path d="M 60,120 L 280,120 C 320,120 340,85 310,60 C 320,25 270,5 240,30 C 215,-15 135,-15 115,35 C 75,20 30,55 45,90 C 20,95 30,120 60,120 Z" fill="none" />
+    </g>
+
+    <!-- Middle Right Cloud -->
+    <g transform="translate(520, 310) scale(0.85)">
+      <path d="M 60,120 L 310,120 C 350,120 370,80 335,55 C 345,15 285,-5 255,25 C 225,-25 140,-20 120,30 C 80,15 30,50 45,90 C 15,95 25,120 60,120 Z" class="cloud" />
+      <path d="M 55,115 C 30,115 25,95 45,90 C 70,105 140,105 190,100 C 240,105 290,105 340,75 C 355,95 340,115 310,115 Z" class="cloud-shade" stroke="none" />
+      <path d="M 60,120 L 310,120 C 350,120 370,80 335,55 C 345,15 285,-5 255,25 C 225,-25 140,-20 120,30 C 80,15 30,50 45,90 C 15,95 25,120 60,120 Z" fill="none" />
+    </g>
+
+    <!-- High Distant Cloud -->
+    <g transform="translate(360, 80) scale(0.55)">
+      <path d="M 60,110 L 240,110 C 275,110 290,75 260,55 C 260,20 210,10 190,30 C 165,-10 100,-5 85,35 C 50,30 25,65 40,85 C 20,90 30,110 60,110 Z" class="cloud" />
+    </g>
+  </g>
+
+  <!-- 2. GROUND & SHADOWS (Lower Half) -->
+  <!-- Pastel Mint Horizon -->
+  <path d="M -20,1410 Q 450,1385 920,1410 L 920,1620 L -20,1620 Z" class="ground outline" />
+  <path d="M -20,1425 Q 450,1400 920,1425 L 920,1450 Q 450,1425 -20,1450 Z" class="ground-shade" />
+
+  <!-- Ground Contact Shadows -->
+  <ellipse cx="445" cy="1445" rx="310" ry="22" class="ground-shade" />
+  <ellipse cx="550" cy="1445" rx="140" ry="14" fill="#9BC99E" />
+  <ellipse cx="210" cy="1445" rx="65" ry="12" fill="#9BC99E" />
+
+  <!--Cobblestone / Road Dashes -->
+  <line x1="120" y1="1495" x2="210" y2="1495" class="outline" />
+  <line x1="250" y1="1495" x2="275" y2="1495" class="outline" />
+  <line x1="620" y1="1520" x2="740" y2="1520" class="outline" />
+  <line x1="380" y1="1540" x2="450" y2="1540" class="outline" />
+
+  <!-- 3. DISTANT LIMBS (Right Wing & Far Leg Behind Bicycle) -->
+  <!-- Far Wing (Extended Forward/Right for Balance) -->
+  <g>
+    <path d="M 485,730 C 570,690 710,680 785,730 C 805,745 780,785 740,780 C 765,800 740,830 700,820 C 715,840 690,860 655,845 C 600,825 530,795 475,775 Z" class="cream" />
+    <g clip-path="url(#right-wing-clip)">
+      <path d="M 470,750 C 570,765 690,780 800,760 L 800,880 L 470,880 Z" class="cream-shade" />
+    </g>
+    <path d="M 485,730 C 570,690 710,680 785,730 C 805,745 780,785 740,780 C 765,800 740,830 700,820 C 715,840 690,860 655,845 C 600,825 530,795 475,775 Z" fill="none" class="outline" />
+    <path d="M 550,745 C 610,740 660,750 700,765" fill="none" class="outline-thin" />
+  </g>
+
+  <!-- Far Leg & Webbed Foot (Reaching to Far Pedal at (590, 1085)) -->
+  <g>
+    <!-- Far Leg -->
+    <path d="M 465,885 L 550,975 L 575,1075" fill="none" stroke="#F5B092" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M 465,885 L 550,975 L 575,1075" fill="none" class="outline" stroke-width="36" opacity="0" /> <!-- Spacer -->
+    <path d="M 452,892 L 537,982 L 562,1078 M 478,878 L 565,968 L 590,1072" fill="none" class="outline" />
+    <!-- Knee Joint -->
+    <circle cx="550" cy="975" r="16" class="peach-shade outline" />
+    <!-- Far Webbed Foot -->
+    <path d="M 565,1070 C 595,1065 645,1055 660,1075 C 655,1088 640,1095 650,1105 C 630,1110 595,1105 565,1092 Z" class="peach-shade outline" />
+    <!-- Far Pedal Platform -->
+    <rect x="560" y="1080" width="60" height="22" rx="8" class="mint-shade outline" />
+  </g>
+
+  <!-- Far Crank Arm (Behind Wheel) -->
+  <path d="M 542,1195 L 582,1085 L 598,1095 L 558,1205 Z" class="cream-shade outline" />
+
+
+  <!-- 4. VINTAGE PENNY-FARTHING BICYCLE -->
+  <g id="penny-farthing">
+    <!-- A. OVERSIZED FRONT WHEEL (Center: 550, 1200 | Outer R: 240) -->
+    <g id="front-wheel">
+      <!-- Radial Spokes -->
+      <g class="spoke">
+        <line x1="550" y1="985" x2="550" y2="1415" />
+        <line x1="335" y1="1200" x2="765" y2="1200" />
+        <line x1="398" y1="1048" x2="702" y2="1352" />
+        <line x1="398" y1="1352" x2="702" y2="1048" />
+        <line x1="468" y1="1001" x2="632" y2="1399" />
+        <line x1="351" y1="1118" x2="749" y2="1282" />
+        <line x1="351" y1="1282" x2="749" y2="1118" />
+        <line x1="468" y1="1399" x2="632" y2="1001" />
+        <!-- Hub Flange Ring -->
+        <circle cx="550" cy="1200" r="32" fill="none" class="outline-thin" />
+      </g>
+
+      <!-- Rubber Tire & Mint Rim (Even-Odd Rings) -->
+      <!-- Outer Tire (R=240 to 216) -->
+      <path d="M 550,960 A 240,240 0 1,0 550,1440 A 240,240 0 1,0 550,960 Z 
+               M 550,984 A 216,216 0 1,1 550,1416 A 216,216 0 1,1 550,984 Z" 
+            fill-rule="evenodd" class="tire outline" />
+      <!-- Pastel Mint Rim (R=216 to 198) -->
+      <path d="M 550,984 A 216,216 0 1,0 550,1416 A 216,216 0 1,0 550,984 Z 
+               M 550,1002 A 198,198 0 1,1 550,1398 A 198,198 0 1,1 550,1002 Z" 
+            fill-rule="evenodd" class="mint outline" />
+    </g>
+
+    <!-- B. TINY REAR WHEEL (Center: 210, 1365 | Outer R: 75) -->
+    <g id="rear-wheel">
+      <!-- Spokes -->
+      <g class="spoke">
+        <line x1="210" y1="1300" x2="210" y2="1430" />
+        <line x1="145" y1="1365" x2="275" y2="1365" />
+        <line x1="164" y1="1319" x2="256" y2="1411" />
+        <line x1="164" y1="1411" x2="256" y2="1319" />
+      </g>
+      <!-- Outer Tire (R=75 to 57) -->
+      <path d="M 210,1290 A 75,75 0 1,0 210,1440 A 75,75 0 1,0 210,1290 Z 
+               M 210,1308 A 57,57 0 1,1 210,1422 A 57,57 0 1,1 210,1308 Z" 
+            fill-rule="evenodd" class="tire outline" />
+      <!-- Mint Rim (R=57 to 44) -->
+      <path d="M 210,1308 A 57,57 0 1,0 210,1422 A 57,57 0 1,0 210,1308 Z 
+               M 210,1321 A 44,44 0 1,1 210,1409 A 44,44 0 1,1 210,1321 Z" 
+            fill-rule="evenodd" class="mint outline" />
+      <!-- Rear Hub -->
+      <circle cx="210" cy="1365" r="16" class="cream-shade outline" />
+    </g>
+
+    <!-- C. BICYCLE FRAME (Sweeping Spine & Fork) -->
+    <!-- Curved Backbone Frame -->
+    <path d="M 522,905 C 330,910 215,1090 210,1365" fill="none" stroke="#1E1E24" stroke-width="38" stroke-linecap="round" />
+    <path d="M 522,905 C 330,910 215,1090 210,1365" fill="none" stroke="#76C7B7" stroke-width="18" stroke-linecap="round" />
+    <path d="M 522,901 C 326,906 211,1086 206,1361" fill="none" stroke="#A3E4D7" stroke-width="10" stroke-linecap="round" />
+
+    <!-- Rear Mounting StepPeg -->
+    <rect x="172" y="1275" width="35" height="14" rx="6" class="cream-shade outline" />
+
+    <!-- Seat Post & Vintage Sprung Saddle -->
+    <line x1="425" y1="900" x2="425" y2="945" stroke="#1E1E24" stroke-width="24" stroke-linecap="round" />
+    <line x1="425" y1="900" x2="425" y2="945" stroke="#E5E8E8" stroke-width="10" stroke-linecap="round" />
+    <!-- Saddle Coil Spring -->
+    <path d="M 405,925 C 390,915 390,900 410,900 C 390,900 390,885 415,885" fill="none" class="outline-thin" />
+    <!-- Leather Saddle (Pale Peach/Tan) -->
+    <path d="M 355,880 C 355,905 405,912 475,902 C 495,898 500,880 475,875 C 435,870 395,885 375,865 C 360,855 355,868 355,880 Z" class="peach-shade outline" />
+    <path d="M 365,875 C 385,890 435,880 475,883" fill="none" class="outline-thin" />
+
+    <!-- Front Fork & Steering Head (From Hub (550,1200) up to Handlebars (512,845)) -->
+    <path d="M 550,1200 L 512,845" fill="none" stroke="#1E1E24" stroke-width="38" stroke-linecap="round" />
+    <path d="M 550,1200 L 512,845" fill="none" stroke="#A3E4D7" stroke-width="18" stroke-linecap="round" />
+    <path d="M 555,1200 L 517,845" fill="none" stroke="#76C7B7" stroke-width="8" stroke-linecap="round" />
+    <!-- Fork Crown Collar -->
+    <rect x="498" y="925" width="38" height="18" rx="6" transform="rotate(-6 517 934)" class="cream-shade outline" />
+
+    <!-- Handlebars (Sweeping Mustache Bar with Peach Grips - Unheld!) -->
+    <path d="M 512,845 C 500,820 465,825 450,845" fill="none" stroke="#1E1E24" stroke-width="24" stroke-linecap="round" />
+    <path d="M 512,845 C 500,820 465,825 450,845" fill="none" stroke="#FFFDF2" stroke-width="10" stroke-linecap="round" />
+    <!-- Vintage Bell -->
+    <path d="M 518,822 A 16,16 0 0,1 542,835 Z" class="pink-accent outline" />
+    <!-- Handlebar Grip -->
+    <rect x="422" y="835" width="38" height="20" rx="10" transform="rotate(-15 441 845)" class="pink-accent outline" />
+
+    <!-- Center Hub Cap -->
+    <circle cx="550" cy="1200" r="24" class="cream outline" />
+    <circle cx="550" cy="1200" r="10" class="mint-shade outline-thin" />
+  </g>
+
+
+  <!-- 5. PELICAN RIDING NO-HANDED (Side Profile Facing Right) -->
+  <g id="pelican">
+    <!-- Tail Feathers (Perky Tuft on the Left) -->
+    <path d="M 305,795 C 250,780 225,805 255,830 C 225,835 230,865 270,860 C 250,875 275,895 315,870 Z" class="cream outline" />
+
+    <!-- Torso, Chest & Neck Base -->
+    <path d="M 380,680 C 310,680 280,760 290,820 C 300,880 350,910 420,910 C 490,910 530,850 510,770 C 490,710 470,640 480,550 C 490,480 460,450 430,450 C 390,450 400,520 395,580 C 390,640 410,680 380,680 Z" class="cream" />
+    <!-- Cel Shading on Body -->
+    <g clip-path="url(#body-clip)">
+      <path d="M 270,810 C 320,865 440,875 525,810 L 530,930 L 270,930 Z" class="cream-shade" />
+      <path d="M 390,450 C 415,520 410,620 390,700 L 360,700 L 360,450 Z" class="cream-shade" />
+    </g>
+    <path d="M 380,680 C 310,680 280,760 290,820 C 300,880 350,910 420,910 C 490,910 530,850 510,770 C 490,710 470,640 480,550 C 490,480 460,450 430,450 C 390,450 400,520 395,580 C 390,640 410,680 380,680 Z" fill="none" class="outline" />
+
+    <!-- Head Crest Feathers -->
+    <path d="M 415,455 C 375,435 360,455 390,475 C 360,475 365,500 398,498" class="cream outline" />
+
+    <!-- Giant Gular Pouch (Lower Beak) -->
+    <path d="M 480,535 C 510,620 620,660 720,610 C 770,585 785,540 785,525 C 680,530 570,535 480,535 Z" class="peach" />
+    <g clip-path="url(#pouch-clip)">
+      <!-- Cel Shade on Bottom of Pouch -->
+      <path d="M 475,575 C 550,635 660,625 785,540 L 795,670 L 475,670 Z" class="peach-shade" />
+      <!-- Subtle Striation Lines -->
+      <path d="M 520,555 C 570,595 650,595 735,550" fill="none" stroke="#F5B092" stroke-width="5" stroke-linecap="round" />
+      <path d="M 550,585 C 600,610 660,605 715,575" fill="none" stroke="#F5B092" stroke-width="5" stroke-linecap="round" />
+    </g>
+    <path d="M 480,535 C 510,620 620,660 720,610 C 770,585 785,540 785,525 C 680,530 570,535 480,535 Z" fill="none" class="outline" />
+
+    <!-- Long Upper Beak -->
+    <path d="M 475,475 C 560,475 680,460 790,495 C 810,502 805,530 785,530 C 775,520 660,535 480,535 Z" class="peach" />
+    <g clip-path="url(#upper-beak-clip)">
+      <path d="M 475,512 C 600,515 700,505 805,510 L 805,540 L 475,540 Z" class="peach-shade" />
+    </g>
+    <path d="M 475,475 C 560,475 680,460 790,495 C 810,502 805,530 785,530 C 775,520 660,535 480,535" fill="none" class="outline" />
+    <!-- Pinkish Beak Tip Nail -->
+    <path d="M 770,490 C 782,492 790,495 795,498 C 808,506 803,530 785,530 C 780,524 774,523 768,523 Z" class="pink-accent outline" />
+
+    <!-- Cartoon Eye & Cheek (Facing Right) -->
+    <circle cx="452" cy="492" r="22" class="cream outline-thin" />
+    <circle cx="458" cy="492" r="11" class="black-fill" />
+    <circle cx="462" cy="487" r="4" class="cream" />
+    <!-- Happy/Focused Eyebrow -->
+    <path d="M 432,468 Q 455,460 472,474" fill="none" class="outline" />
+    <!-- Rosy Pastel Cheek -->
+    <ellipse cx="445" cy="522" rx="14" ry="8" class="pink-accent" />
+
+    <!--Jaunty Pastel Mint Bowtie on Neck (Optional Charm) -->
+    <g transform="translate(445, 650) rotate(12)">
+      <path d="M -28,-18 L 28,18 L 28,-18 L -28,18 Z" class="mint outline" />
+      <circle cx="0" cy="0" r="9" class="mint-shade outline" />
+    </g>
+
+    <!-- NEAR LEG & WEBBED FOOT (Pedaling Low Pedal at (510, 1315)) -->
+    <!-- Fluffy Thigh Base -->
+    <path d="M 410,875 C 405,915 435,935 460,920 C 475,910 475,885 465,870" class="cream-shade outline" />
+    <!-- Lower Orange/Peach Leg -->
+    <path d="M 442,918 L 488,1105 L 495,1295" fill="none" stroke="#1E1E24" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M 442,918 L 488,1105 L 495,1295" fill="none" stroke="#FFD1B3" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Cel Shade on Leg -->
+    <path d="M 438,918 L 484,1105 L 491,1295" fill="none" stroke="#F5B092" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Cartoon Knee Bump -->
+    <circle cx="488" cy="1105" r="16" class="peach outline" />
+
+    <!-- Near Crank Arm (Connected from Hub (550,1200) to (510,1315)) -->
+    <path d="M 542,1195 L 502,1310 L 518,1320 L 558,1205 Z" class="cream outline" />
+    <circle cx="550" cy="1200" r="8" class="black-fill" />
+
+    <!-- Near Webbed Foot Stepping on Pedal -->
+    <path d="M 480,1290 C 515,1290 570,1280 590,1302 C 585,1315 570,1322 578,1332 C 555,1338 515,1330 480,1315 Z" class="peach outline" />
+    <path d="M 515,1302 L 568,1305 M 510,1312 L 560,1320" fill="none" class="outline-thin" />
+    <!-- Near Pedal Platform -->
+    <rect x="480" y="1312" width="64" height="22" rx="8" class="mint outline" />
+
+    <!-- NEAR WING (Spread Wide to the Left for Balance - Riding No-Handed!) -->
+    <g>
+      <path d="M 390,730 C 290,690 140,680 75,720 C 55,735 75,775 115,775 C 90,795 110,825 155,820 C 140,840 165,865 205,850 C 200,870 230,885 265,865 C 315,840 375,800 415,785 Z" class="cream" />
+      <!-- Cel Shading on Wing Underside -->
+      <g clip-path="url(#left-wing-clip)">
+        <path d="M 60,765 C 160,795 290,790 420,755 L 420,900 L 60,900 Z" class="cream-shade" />
+      </g>
+      <path d="M 390,730 C 290,690 140,680 75,720 C 55,735 75,775 115,775 C 90,795 110,825 155,820 C 140,840 165,865 205,850 C 200,870 230,885 265,865 C 315,840 375,800 415,785" fill="none" class="outline" />
+      <!-- Inner Feather Details -->
+      <path d="M 330,745 C 260,735 195,745 150,765" fill="none" class="outline-thin" />
+      <path d="M 310,780 C 255,780 215,790 185,805" fill="none" class="outline-thin" />
+    </g>
+  </g>
+
+  <!-- 6. MOTION & BALANCE ACCENTS -->
+  <!-- Subtle Balance Wobble Arcs around Extended Wings -->
+  <path d="M 45,705 Q 30,745 55,785" fill="none" class="outline-thin" />
+  <path d="M 25,720 Q 15,745 32,770" fill="none" class="outline-thin" />
+  <path d="M 815,715 Q 830,755 805,795" fill="none" class="outline-thin" />
+  <path d="M 835,730 Q 845,755 828,780" fill="none" class="outline-thin" />
+
+  <!-- Speed Lines Behind Bicycle -->
+  <line x1="80" y1="1120" x2="170" y2="1120" class="outline-thin" />
+  <line x1="45" y1="1150" x2="120" y2="1150" class="outline-thin" />
+  <line x1="65" y1="1365" x2="115" y2="1365" class="outline-thin" />
+</svg>

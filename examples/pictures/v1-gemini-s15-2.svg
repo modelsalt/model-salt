@@ -1,0 +1,292 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 720" width="100%" height="100%">
+  <defs>
+    <!-- Cel-shading clip paths and reusable elements -->
+    <clipPath id="body-clip">
+      <path d="M 380 230 C 370 320, 410 385, 485 385 C 555 385, 610 345, 645 305 C 615 290, 565 265, 515 265 C 460 265, 440 205, 425 140 Z" />
+    </clipPath>
+    <clipPath id="pouch-clip">
+      <path d="M 202 150 C 205 245, 275 295, 345 275 C 385 260, 400 220, 405 182 C 350 182, 260 160, 202 150 Z" />
+    </clipPath>
+    <clipPath id="upper-beak-clip">
+      <path d="M 390 120 C 315 125, 240 135, 195 140 C 185 142, 182 152, 190 158 C 196 162, 202 154, 202 150 C 260 160, 350 182, 405 182 Z" />
+    </clipPath>
+    <clipPath id="wing-tucked-clip">
+      <path d="M 465 270 C 535 255, 610 280, 645 312 C 595 340, 550 340, 510 328 C 460 355, 435 315, 465 270 Z" />
+    </clipPath>
+
+    <!-- Wheel Spokes Group (Radius 106) -->
+    <g id="spokes" stroke="#7F8C8D" stroke-width="2" stroke-linecap="round">
+      <line x1="-106" y1="0" x2="106" y2="0" />
+      <line x1="0" y1="-106" x2="0" y2="106" />
+      <line x1="-75" y1="-75" x2="75" y2="75" />
+      <line x1="-75" y1="75" x2="75" y2="-75" />
+      <line x1="-98" y1="-40" x2="98" y2="40" />
+      <line x1="-40" y1="-98" x2="40" y2="98" />
+      <line x1="-98" y1="40" x2="98" y2="-40" />
+      <line x1="-40" y1="98" x2="40" y2="-98" />
+      <!-- Rim inner highlight -->
+      <circle cx="0" cy="0" r="96" fill="none" stroke="#BDC3C7" stroke-width="2" />
+    </g>
+
+    <!-- Racing Wheel Group -->
+    <g id="racing-wheel">
+      <!-- Spokes -->
+      <use href="#spokes" />
+      <!-- Deep Section Aero Carbon Rim -->
+      <circle cx="0" cy="0" r="106" fill="none" stroke="#1E272E" stroke-width="18" />
+      <!-- Cel-shaded Rim Highlight -->
+      <path d="M -75 -75 A 106 106 0 0 1 75 -75" fill="none" stroke="#485460" stroke-width="6" />
+      <path d="M 75 75 A 106 106 0 0 1 -75 75" fill="none" stroke="#485460" stroke-width="6" />
+      <!-- Rim Brake Track -->
+      <circle cx="0" cy="0" r="114" fill="none" stroke="#95A5A6" stroke-width="2.5" />
+      <!-- Tire -->
+      <circle cx="0" cy="0" r="122" fill="none" stroke="#2C3A47" stroke-width="14" />
+      <!-- Tire Outer Cartoon Outline -->
+      <circle cx="0" cy="0" r="129" fill="none" stroke="#182026" stroke-width="5.5" />
+      <circle cx="0" cy="0" r="97" fill="none" stroke="#182026" stroke-width="4" />
+      <!-- Valve Stem -->
+      <rect x="-3" y="86" width="6" height="12" fill="#D2DAE2" stroke="#182026" stroke-width="2" />
+    </g>
+  </defs>
+
+  <!-- Background Elements: Soft Sky Ring & Speed Lines -->
+  <circle cx="460" cy="360" r="300" fill="#F0F7FA" />
+  <circle cx="460" cy="360" r="240" fill="#E1EFF6" />
+  
+  <!-- Ground Shadow & Cartoon Speed Lines -->
+  <ellipse cx="455" cy="642" rx="340" ry="14" fill="#CBDCE6" />
+  <ellipse cx="455" cy="642" rx="260" ry="8" fill="#B0C9D9" />
+  <g stroke="#8AAEC4" stroke-width="3.5" stroke-linecap="round">
+    <line x1="740" y1="620" x2="830" y2="620" />
+    <line x1="770" y1="632" x2="810" y2="632" />
+    <line x1="680" y1="220" x2="760" y2="220" />
+    <line x1="710" y1="238" x2="795" y2="238" />
+    <line x1="690" y1="420" x2="775" y2="420" />
+  </g>
+
+  <!-- ==================== FAR SIDE PELICAN LEG (Behind Frame) ==================== -->
+  <g id="right-leg">
+    <!-- Far Thigh -->
+    <path d="M 465 360 C 460 390, 445 415, 435 430" fill="none" stroke="#182026" stroke-width="24" stroke-linecap="round" />
+    <path d="M 465 360 C 460 390, 445 415, 435 430" fill="none" stroke="#CBD2D9" stroke-width="14" stroke-linecap="round" />
+    <!-- Far Lower Orange Leg (Bent up to top pedal at 432, 468) -->
+    <path d="M 435 430 L 415 445 L 432 468" fill="none" stroke="#182026" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M 435 430 L 415 445 L 432 468" fill="none" stroke="#D96B27" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Far Webbed Foot -->
+    <path d="M 436 465 L 395 462 C 392 467, 396 474, 405 474 L 440 472 Z" fill="#D96B27" stroke="#182026" stroke-width="4.5" stroke-linejoin="round" />
+    <!-- Far Crank Arm & Pedal -->
+    <line x1="460" y1="510" x2="432" y2="468" stroke="#182026" stroke-width="14" stroke-linecap="round" />
+    <line x1="460" y1="510" x2="432" y2="468" stroke="#576574" stroke-width="6" stroke-linecap="round" />
+    <rect x="414" y="464" width="34" height="9" rx="4" fill="#2F3640" stroke="#182026" stroke-width="4" />
+  </g>
+
+  <!-- ==================== FRONT WING (Steering Far Drop Bar) ==================== -->
+  <!-- Drawn behind the head/handlebar stem to reach the far drop -->
+  <g id="steering-wing">
+    <!-- Main Wing Arm -->
+    <path d="M 425 268 C 385 280, 345 355, 255 348 C 232 346, 226 326, 248 320 C 315 322, 365 268, 412 248 Z" fill="#E4E9ED" stroke="#182026" stroke-width="5.5" stroke-linejoin="round" />
+    <!-- Cel-Shaded Shadow under arm -->
+    <path d="M 420 270 C 385 282, 345 352, 255 346 C 242 344, 236 336, 242 330 C 310 335, 365 282, 418 262 Z" fill="#C4CDD5" />
+    <!-- Wing Feather Fingers Curled Around Far Drop Bar (at 245, 335) -->
+    <path d="M 252 318 C 230 315, 224 335, 245 338 C 230 338, 228 352, 252 350 C 238 352, 240 364, 262 356" fill="#E4E9ED" stroke="#182026" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+
+  <!-- ==================== BICYCLE: WHEELS & FRAME ==================== -->
+  <!-- Front Wheel (Left - Strict Profile) -->
+  <use href="#racing-wheel" x="230" y="510" />
+  <!-- Rear Wheel (Right - Strict Profile) -->
+  <use href="#racing-wheel" x="640" y="510" />
+
+  <!-- Rear Cassette (Gears) -->
+  <circle cx="640" cy="510" r="24" fill="#7F8C8D" stroke="#182026" stroke-width="4" />
+  <circle cx="640" cy="510" r="17" fill="#BDC3C7" stroke="#182026" stroke-width="3" />
+
+  <!-- Drivetrain / Chain -->
+  <path d="M 460 476 L 640 488 L 640 532 L 460 544 Z" fill="none" stroke="#2F3640" stroke-width="5" stroke-linejoin="round" />
+  <path d="M 460 476 L 640 488 L 640 532 L 460 544 Z" fill="none" stroke="#95A5A6" stroke-width="2" stroke-dasharray="6,6" stroke-linejoin="round" />
+
+  <!-- Aggressive Racing Diamond Frame -->
+  <g id="bike-frame">
+    <!-- Seatpost (Aero Carbon) -->
+    <path d="M 520 385 L 542 332 L 526 332 L 504 385 Z" fill="#2C3A47" stroke="#182026" stroke-width="5" stroke-linejoin="round" />
+    <path d="M 536 335 L 516 383" stroke="#576574" stroke-width="3" />
+
+    <!-- Head Tube & Stem -->
+    <path d="M 294 316 L 260 316 L 260 302 L 298 302 Z" fill="#2C3A47" stroke="#182026" stroke-width="5" stroke-linejoin="round" />
+
+    <!-- Main Diamond Frame & Rear Triangle (Outlines + Cel-Shaded Tubes) -->
+    <!-- Chainstays: (460,510) to (640,510) -->
+    <line x1="460" y1="510" x2="640" y2="510" stroke="#182026" stroke-width="18" stroke-linecap="round" />
+    <line x1="460" y1="510" x2="640" y2="510" stroke="#C23616" stroke-width="9" stroke-linecap="round" />
+
+    <!-- Seatstays: (640,510) to (512,395) (Dropped aero seatstays) -->
+    <line x1="640" y1="510" x2="508" y2="395" stroke="#182026" stroke-width="16" stroke-linecap="round" />
+    <line x1="640" y1="510" x2="508" y2="395" stroke="#E84118" stroke-width="7" stroke-linecap="round" />
+    <line x1="635" y1="504" x2="512" y2="397" stroke="#FF7961" stroke-width="2.5" stroke-linecap="round" />
+
+    <!-- Down Tube: (460,510) to (290,350) -->
+    <line x1="460" y1="510" x2="290" y2="350" stroke="#182026" stroke-width="24" stroke-linecap="round" />
+    <line x1="460" y1="510" x2="290" y2="350" stroke="#E84118" stroke-width="13" stroke-linecap="round" />
+    <!-- Cel-Shaded Highlight & Shadow on Down Tube -->
+    <line x1="456" y1="502" x2="294" y2="350" stroke="#FF7961" stroke-width="4" stroke-linecap="round" />
+    <line x1="462" y1="514" x2="288" y2="354" stroke="#B32400" stroke-width="4" stroke-linecap="round" />
+
+    <!-- Seat Tube: (460,510) to (518,365) -->
+    <line x1="460" y1="510" x2="518" y2="365" stroke="#182026" stroke-width="22" stroke-linecap="round" />
+    <line x1="460" y1="510" x2="518" y2="365" stroke="#E84118" stroke-width="11" stroke-linecap="round" />
+    <line x1="457" y1="505" x2="514" y2="367" stroke="#FF7961" stroke-width="3.5" stroke-linecap="round" />
+
+    <!-- Top Tube: (515,372) to (295,332) (Aggressive horizontal/sloping geometry) -->
+    <line x1="515" y1="372" x2="295" y2="332" stroke="#182026" stroke-width="20" stroke-linecap="round" />
+    <line x1="515" y1="372" x2="295" y2="332" stroke="#E84118" stroke-width="10" stroke-linecap="round" />
+    <line x1="515" y1="369" x2="295" y2="329" stroke="#FF7961" stroke-width="3.5" stroke-linecap="round" />
+
+    <!-- Head Tube: (298,322) to (286,362) -->
+    <line x1="298" y1="322" x2="286" y2="362" stroke="#182026" stroke-width="24" stroke-linecap="round" />
+    <line x1="298" y1="322" x2="286" y2="362" stroke="#E84118" stroke-width="13" stroke-linecap="round" />
+    <line x1="295" y1="322" x2="283" y2="360" stroke="#FF7961" stroke-width="4" stroke-linecap="round" />
+
+    <!-- Aero Front Fork: (286,362) to (230,510) -->
+    <path d="M 292 362 L 236 512 L 224 508 L 278 358 Z" fill="#E84118" stroke="#182026" stroke-width="5.5" stroke-linejoin="round" />
+    <path d="M 282 360 L 228 508" stroke="#FF7961" stroke-width="3.5" stroke-linecap="round" />
+
+    <!-- Wheel Hubs / Quick Release Skewers -->
+    <circle cx="230" cy="510" r="10" fill="#2F3640" stroke="#182026" stroke-width="4.5" />
+    <circle cx="640" cy="510" r="10" fill="#2F3640" stroke="#182026" stroke-width="4.5" />
+
+    <!-- Drop Handlebars & Brake Hoods (Facing Left) -->
+    <!-- Brake Hoods -->
+    <path d="M 232 304 L 204 290 C 198 292, 198 304, 206 310 L 224 316 Z" fill="#1E272E" stroke="#182026" stroke-width="5" stroke-linejoin="round" />
+    <!-- Brake Lever Blade -->
+    <path d="M 206 308 C 198 326, 196 342, 202 352" fill="none" stroke="#182026" stroke-width="5" stroke-linecap="round" />
+    <!-- Drop Bar Curve -->
+    <path d="M 262 308 L 232 308 C 204 308, 204 356, 234 356 L 258 356" fill="none" stroke="#182026" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M 262 308 L 232 308 C 204 308, 204 356, 234 356 L 258 356" fill="none" stroke="#2F3640" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Handlebar Tape Texture & Highlight -->
+    <path d="M 255 305 L 232 305 C 210 305, 208 353, 234 353 L 256 353" fill="none" stroke="#576574" stroke-width="3" stroke-dasharray="5,5" stroke-linecap="round" />
+
+    <!-- Racing Saddle -->
+    <path d="M 490 330 C 505 328, 550 322, 568 328 C 562 340, 540 342, 525 340 C 510 340, 495 338, 490 330 Z" fill="#1E272E" stroke="#182026" stroke-width="5" stroke-linejoin="round" />
+    <path d="M 498 331 C 515 329, 545 326, 560 330" fill="none" stroke="#576574" stroke-width="3" stroke-linecap="round" />
+  </g>
+
+  <!-- Crankset / Chainring -->
+  <g id="crankset">
+    <circle cx="460" cy="510" r="36" fill="#2F3640" stroke="#182026" stroke-width="5.5" />
+    <!-- Aero Spider Cutouts -->
+    <circle cx="460" cy="510" r="24" fill="none" stroke="#7F8C8D" stroke-width="4" stroke-dasharray="16,12" />
+    <circle cx="460" cy="510" r="10" fill="#7F8C8D" stroke="#182026" stroke-width="4" />
+  </g>
+
+  <!-- ==================== PELICAN: BODY, HEAD, BEAK & TUCKED WING ==================== -->
+  <g id="pelican">
+    <!-- Tail Feathers (Protruding past the rear of the saddle) -->
+    <path d="M 625 305 L 675 288 L 658 308 L 682 308 L 655 322 L 668 332 L 620 325 Z" fill="#D5DDE5" stroke="#182026" stroke-width="5.5" stroke-linejoin="round" />
+
+    <!-- Main Body & Neck Base -->
+    <path d="M 380 230 C 370 320, 410 385, 485 385 C 555 385, 610 345, 645 305 C 615 290, 565 265, 515 265 C 460 265, 440 205, 425 140 Z" fill="#F7F9FA" />
+    
+    <!-- Body Cel-Shading (Clipped) -->
+    <g clip-path="url(#body-clip)">
+      <!-- Belly & Lower Back Hard-Edge Shadow -->
+      <path d="M 365 295 C 390 365, 485 370, 645 300 L 650 400 L 360 400 Z" fill="#D5DDE5" />
+      <!-- Warm Breeding Plumage Patch on Chest -->
+      <path d="M 370 235 C 398 250, 405 285, 380 308 L 365 270 Z" fill="#F2D194" />
+      <!-- Pure White Top Highlight -->
+      <path d="M 425 140 C 445 205, 465 260, 520 260 C 570 260, 615 285, 645 305 L 645 250 L 420 130 Z" fill="#FFFFFF" />
+    </g>
+    <!-- Body Cartoon Outline -->
+    <path d="M 385 215 C 370 315, 410 385, 485 385 C 555 385, 610 345, 645 305 C 615 290, 565 265, 515 265 C 462 265, 442 208, 427 148" fill="none" stroke="#182026" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- Head & Expressive Crest Feathers -->
+    <path d="M 382 122 C 388 94, 422 92, 440 110 L 462 104 L 448 118 L 468 120 L 446 130 L 456 138 L 427 148" fill="#F7F9FA" stroke="#182026" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Yellowish Crown Highlight -->
+    <path d="M 388 120 C 394 100, 420 98, 435 112 C 418 112, 400 116, 388 120 Z" fill="#FAE29C" />
+
+    <!-- Gular Pouch (Naturalistic Golden-Amber with Cel-Shading) -->
+    <g clip-path="url(#pouch-clip)">
+      <path d="M 202 150 C 205 245, 275 295, 345 275 C 385 260, 400 220, 405 182 C 350 182, 260 160, 202 150 Z" fill="#F7B731" />
+      <!-- Cel-Shaded Deep Pouch Shadow -->
+      <path d="M 200 190 C 235 265, 325 275, 395 215 L 410 295 L 195 295 Z" fill="#E1921D" />
+      <!-- Cel-Shaded Top Pouch Highlight -->
+      <path d="M 210 154 C 265 166, 340 185, 398 185 C 345 198, 265 182, 210 154 Z" fill="#FFCF66" />
+      <!-- Throat Striation Lines -->
+      <path d="M 235 175 C 265 225, 325 245, 385 205" fill="none" stroke="#C87A12" stroke-width="3" stroke-linecap="round" />
+      <path d="M 265 178 C 290 212, 335 225, 388 195" fill="none" stroke="#C87A12" stroke-width="2.5" stroke-linecap="round" />
+    </g>
+    <!-- Gular Pouch Outline -->
+    <path d="M 202 150 C 205 245, 275 295, 345 275 C 385 260, 400 220, 405 182" fill="none" stroke="#182026" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- Upper Beak (Long, Hooked, Facing Left) -->
+    <g clip-path="url(#upper-beak-clip)">
+      <path d="M 390 120 C 315 125, 240 135, 195 140 C 185 142, 182 152, 190 158 C 196 162, 202 154, 202 150 C 260 160, 350 182, 405 182 Z" fill="#FCE192" />
+      <!-- Upper Beak Ridge Highlight -->
+      <path d="M 390 120 C 315 125, 240 135, 195 140 L 195 148 C 245 142, 320 134, 392 130 Z" fill="#FFF5D6" />
+      <!-- Upper Beak Lower Edge Shadow -->
+      <path d="M 202 145 C 260 155, 350 175, 405 175 L 405 185 L 200 155 Z" fill="#E5A93B" />
+      <!-- Pinkish-Coral Beak Tip Nail -->
+      <path d="M 212 135 L 180 138 L 180 165 L 208 160 Z" fill="#EB6B56" />
+    </g>
+    <!-- Upper Beak Outline -->
+    <path d="M 390 120 C 315 125, 240 135, 195 140 C 185 142, 182 152, 190 158 C 196 162, 202 154, 202 150 C 260 160, 350 182, 405 182" fill="none" stroke="#182026" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Nostril Slit -->
+    <line x1="355" y1="134" x2="338" y2="136" stroke="#182026" stroke-width="3.5" stroke-linecap="round" />
+
+    <!-- Expressive Cartoon Eye & Eye Patch -->
+    <ellipse cx="404" cy="136" rx="16" ry="15" fill="#FAD390" stroke="#182026" stroke-width="4" />
+    <circle cx="402" cy="136" r="10.5" fill="#FFFFFF" stroke="#182026" stroke-width="4" />
+    <circle cx="399" cy="136" r="5" fill="#182026" />
+    <circle cx="397" cy="133" r="2.2" fill="#FFFFFF" />
+    <!-- Determined/Casual Eyebrow Ridge -->
+    <path d="M 385 122 C 396 118, 412 122, 420 130" fill="none" stroke="#182026" stroke-width="5" stroke-linecap="round" />
+    <!-- Cheek Smile Crease -->
+    <path d="M 398 176 C 406 174, 412 180, 412 188" fill="none" stroke="#182026" stroke-width="4.5" stroke-linecap="round" />
+
+    <!-- Left Wing (Tucked Casually Against Side) -->
+    <g clip-path="url(#wing-tucked-clip)">
+      <path d="M 465 270 C 535 255, 610 280, 645 312 C 595 340, 550 340, 510 328 C 460 355, 435 315, 465 270 Z" fill="#F7F9FA" />
+      <!-- Dark Slate-Black Primary Wing Tips (Naturalistic Pelican Coloration) -->
+      <path d="M 555 265 C 590 275, 625 292, 650 315 L 625 345 L 535 335 C 555 315, 560 290, 555 265 Z" fill="#2F3640" />
+      <!-- Secondary Feathers Mid-Tone Grey -->
+      <path d="M 515 265 C 545 270, 575 290, 585 335 L 515 335 Z" fill="#95A5A6" />
+      <!-- Cel-Shaded Lower Wing Shadow -->
+      <path d="M 445 310 C 485 335, 555 325, 645 308 L 645 350 L 440 350 Z" fill="#D5DDE5" fill-opacity="0.55" />
+      <!-- Crisp Top Highlight -->
+      <path d="M 465 270 C 525 258, 585 272, 635 302 L 635 280 L 460 255 Z" fill="#FFFFFF" />
+    </g>
+    <!-- Tucked Wing Cartoon Outline & Feather Scallops -->
+    <path d="M 465 270 C 535 255, 610 280, 645 312 C 618 326, 595 330, 578 324 C 562 334, 540 334, 525 326 C 470 352, 435 315, 465 270 Z" fill="none" stroke="#182026" stroke-width="6" stroke-linejoin="round" />
+    <!-- Inner Feather Detail Lines -->
+    <path d="M 485 295 C 515 292, 540 300, 560 312" fill="none" stroke="#182026" stroke-width="4" stroke-linecap="round" />
+    <path d="M 495 310 C 520 308, 545 314, 568 324" fill="none" stroke="#182026" stroke-width="4" stroke-linecap="round" />
+  </g>
+
+  <!-- ==================== NEAR SIDE PELICAN LEG (Foreground) ==================== -->
+  <g id="left-leg">
+    <!-- Feathered Thigh Drumstick -->
+    <path d="M 468 362 C 455 395, 465 432, 495 445 C 512 430, 518 395, 508 368" fill="#F7F9FA" />
+    <!-- Thigh Cel-Shadow -->
+    <path d="M 485 368 C 492 395, 488 425, 475 438 C 488 444, 502 440, 510 422 C 516 402, 515 382, 508 368 Z" fill="#D5DDE5" />
+    <path d="M 468 362 C 455 395, 465 432, 495 445 C 512 430, 518 395, 508 368" fill="none" stroke="#182026" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- Near Crank Arm (Behind Foot, Over Chainring) -->
+    <line x1="460" y1="510" x2="488" y2="552" stroke="#182026" stroke-width="15" stroke-linecap="round" />
+    <line x1="460" y1="510" x2="488" y2="552" stroke="#95A5A6" stroke-width="7" stroke-linecap="round" />
+
+    <!-- Lower Scaly Orange Leg (Extending down to bottom pedal at 488, 552) -->
+    <path d="M 484 440 L 502 492 L 488 548" fill="none" stroke="#182026" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M 484 440 L 502 492 L 488 548" fill="none" stroke="#F39C12" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Cel-Shaded Highlight on Leg -->
+    <path d="M 482 442 L 499 492 L 485 546" fill="none" stroke="#F8C471" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- Large Webbed Foot Pressing Near Pedal -->
+    <path d="M 494 544 L 440 546 C 434 552, 442 562, 454 560 C 458 565, 470 564, 478 558 L 498 554 Z" fill="#F39C12" stroke="#182026" stroke-width="5.5" stroke-linejoin="round" />
+    <!-- Webbing Toe Ridge Detail -->
+    <path d="M 486 549 L 452 554" fill="none" stroke="#D68910" stroke-width="3.5" stroke-linecap="round" />
+    <path d="M 448 548 L 486 546" fill="none" stroke="#F8C471" stroke-width="2.5" stroke-linecap="round" />
+
+    <!-- Near Pedal Platform -->
+    <rect x="468" y="550" width="38" height="10" rx="4" fill="#2F3640" stroke="#182026" stroke-width="4.5" />
+    <line x1="475" y1="555" x2="498" y2="555" stroke="#F39C12" stroke-width="2.5" stroke-linecap="round" />
+  </g>
+</svg>

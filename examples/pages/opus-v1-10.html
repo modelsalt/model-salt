@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hearth: Balanced family dinners, planned in minutes</title>
+<meta name="description" content="Hearth plans healthy, balanced weeknight dinners your whole family will actually eat. Free on iPhone and Android.">
+<style>
+  :root{
+    --cream:#FFF6EA;
+    --cream-2:#FBE9D2;
+    --tomato:#D9482B;
+    --tomato-dark:#B5361D;
+    --saffron:#F2A93B;
+    --herb:#4F7A34;
+    --herb-light:#8DB255;
+    --cocoa:#3A2418;
+    --cocoa-soft:#6B4A3A;
+    --plum:#7A2E46;
+    --radius:22px;
+    --serif: "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --sans: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--sans);
+    color:var(--cocoa);
+    background:var(--cream);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 28px}
+
+  /* ---------- Nav ---------- */
+  nav{padding:22px 0}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between}
+  .logo{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-size:1.6rem;font-weight:700;text-decoration:none;letter-spacing:-.01em}
+  .logo svg{width:38px;height:38px}
+  .nav-link{font-weight:600;font-size:.95rem;text-decoration:none;padding:10px 18px;border-radius:999px;border:2px solid var(--cocoa);transition:.2s}
+  .nav-link:hover{background:var(--cocoa);color:var(--cream)}
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative;overflow:hidden;padding:30px 0 90px}
+  .hero::before{
+    content:"";position:absolute;right:-180px;top:-120px;width:760px;height:760px;border-radius:50%;
+    background:radial-gradient(circle at 40% 40%,#FFD9A0 0%,#F7B76A 45%,rgba(242,169,59,0) 70%);
+    opacity:.55;z-index:0;
+  }
+  .hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    background:#fff;border:1.5px solid #F0D3B0;color:var(--herb);
+    font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;
+    padding:7px 14px;border-radius:999px;margin-bottom:22px
+  }
+  .eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--herb-light);display:block}
+  h1{
+    font-family:var(--serif);font-weight:700;
+    font-size:clamp(2.6rem,5.4vw,4.4rem);line-height:1.02;letter-spacing:-.02em;margin-bottom:22px
+  }
+  h1 em{font-style:italic;color:var(--tomato)}
+  .lede{font-size:1.2rem;color:var(--cocoa-soft);max-width:33ch;margin-bottom:32px}
+  .stores{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:28px}
+  .store{
+    display:inline-flex;align-items:center;gap:12px;
+    background:var(--cocoa);color:#fff;text-decoration:none;
+    padding:11px 22px 11px 18px;border-radius:14px;min-width:188px;
+    box-shadow:0 6px 0 #1f130c;transition:transform .15s, box-shadow .15s;
+  }
+  .store:hover{transform:translateY(-2px);box-shadow:0 8px 0 #1f130c}
+  .store:active{transform:translateY(4px);box-shadow:0 2px 0 #1f130c}
+  .store svg{width:28px;height:28px;flex:none}
+  .store small{display:block;font-size:.68rem;opacity:.8;letter-spacing:.03em;line-height:1.1}
+  .store strong{display:block;font-size:1.18rem;line-height:1.15;font-weight:600}
+  .proof{display:flex;align-items:center;gap:14px;font-size:.95rem;color:var(--cocoa-soft)}
+  .avatars{display:flex}
+  .avatars span{width:34px;height:34px;border-radius:50%;border:3px solid var(--cream);margin-left:-10px;display:block}
+  .avatars span:first-child{margin-left:0}
+  .stars{color:var(--saffron);letter-spacing:2px}
+
+  .plate-art{position:relative}
+  .plate-art svg{width:100%;height:auto;display:block;filter:drop-shadow(0 30px 40px rgba(90,40,10,.18))}
+  .tag{
+    position:absolute;background:#fff;border-radius:16px;padding:10px 14px;
+    box-shadow:0 12px 30px rgba(90,40,10,.15);font-size:.85rem;font-weight:600;display:flex;align-items:center;gap:10px
+  }
+  .tag b{display:block;font-size:1rem}
+  .tag span.dot{width:12px;height:12px;border-radius:50%;flex:none}
+  .tag.t1{left:-4%;top:14%}
+  .tag.t2{right:-2%;top:44%}
+  .tag.t3{left:6%;bottom:6%}
+  .float{animation:bob 5s ease-in-out infinite}
+  .t2.float{animation-delay:-1.6s}
+  .t3.float{animation-delay:-3.2s}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  @media (prefers-reduced-motion:reduce){.float{animation:none}}
+
+  /* ---------- How it works ---------- */
+  .how{background:#fff;border-radius:48px 48px 0 0;padding:100px 0 110px;position:relative}
+  .section-head{text-align:center;max-width:640px;margin:0 auto 64px}
+  .kicker{color:var(--tomato);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:.82rem;margin-bottom:12px}
+  h2{font-family:var(--serif);font-size:clamp(2rem,3.8vw,3rem);line-height:1.08;letter-spacing:-.015em;margin-bottom:16px}
+  .section-head p{color:var(--cocoa-soft);font-size:1.1rem}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;counter-reset:step}
+  .step{
+    background:var(--cream);border-radius:var(--radius);padding:30px 28px 34px;position:relative;
+    border:1.5px solid #F3DEC3;transition:transform .25s, box-shadow .25s
+  }
+  .step:hover{transform:translateY(-6px);box-shadow:0 22px 40px rgba(90,40,10,.1)}
+  .step .art{height:190px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;border-radius:16px}
+  .step:nth-child(1) .art{background:#FCE3CF}
+  .step:nth-child(2) .art{background:#E7EED5}
+  .step:nth-child(3) .art{background:#FBE6B9}
+  .step .art svg{height:160px;width:auto}
+  .num{
+    position:absolute;top:-18px;left:28px;width:40px;height:40px;border-radius:50%;
+    background:var(--tomato);color:#fff;font-family:var(--serif);font-weight:700;font-size:1.2rem;
+    display:flex;align-items:center;justify-content:center;box-shadow:0 4px 0 var(--tomato-dark)
+  }
+  .step h3{font-family:var(--serif);font-size:1.45rem;margin-bottom:8px;line-height:1.2}
+  .step p{color:var(--cocoa-soft)}
+  .step ul{list-style:none;margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+  .step li{font-size:.8rem;font-weight:600;background:#fff;border:1px solid #EED6B8;padding:4px 10px;border-radius:999px}
+
+  .balance-strip{
+    margin-top:64px;display:flex;flex-wrap:wrap;justify-content:center;gap:12px 34px;
+    color:var(--cocoa-soft);font-weight:600;font-size:.95rem
+  }
+  .balance-strip div{display:flex;align-items:center;gap:9px}
+  .balance-strip svg{width:22px;height:22px}
+
+  /* ---------- Closing CTA ---------- */
+  .cta{background:var(--cocoa);color:var(--cream);position:relative;overflow:hidden;padding:110px 0 120px}
+  .cta .wrap{position:relative;z-index:2;text-align:center}
+  .cta h2{font-size:clamp(2.4rem,5vw,4rem);margin-bottom:18px}
+  .cta h2 em{color:var(--saffron);font-style:italic}
+  .cta p{color:#E9D2BC;font-size:1.15rem;max-width:520px;margin:0 auto 36px}
+  .cta .stores{justify-content:center;margin-bottom:22px}
+  .cta .store{background:var(--cream);color:var(--cocoa);box-shadow:0 6px 0 #C9A889}
+  .cta .store:hover{box-shadow:0 8px 0 #C9A889}
+  .cta .fine{font-size:.88rem;color:#BFA28A}
+  .cta .deco{position:absolute;z-index:1;opacity:.95}
+  .cta .d1{left:-40px;top:40px;width:230px;transform:rotate(-14deg)}
+  .cta .d2{right:-30px;bottom:-20px;width:260px;transform:rotate(10deg)}
+  .cta .d3{right:8%;top:50px;width:90px}
+  .cta .d4{left:9%;bottom:50px;width:80px}
+
+  footer{background:#2A1910;color:#A88B76;font-size:.85rem;padding:26px 0}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  footer a{text-decoration:none;margin-left:18px}
+  footer a:hover{color:var(--cream)}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:920px){
+    .hero .wrap{grid-template-columns:1fr}
+    .plate-art{max-width:520px;margin:10px auto 0}
+    .steps{grid-template-columns:1fr;max-width:480px;margin:0 auto;gap:40px}
+    .cta .d1,.cta .d2{width:150px;opacity:.5}
+  }
+  @media (max-width:520px){
+    .tag{font-size:.75rem;padding:8px 10px}
+    .tag b{font-size:.85rem}
+    .store{min-width:0;flex:1}
+    .how{border-radius:32px 32px 0 0}
+  }
+</style>
+</head>
+<body>
+
+<!-- ======= NAV ======= -->
+<nav>
+  <div class="wrap">
+    <a href="#" class="logo" aria-label="Hearth home">
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="#D9482B"/>
+        <path d="M9 21h22a11 11 0 0 1-22 0z" fill="#FFF6EA"/>
+        <path d="M15 17c0-3 3-3 3-6M20 17c0-3 3-3 3-6M25 17c0-3 3-3 3-6" stroke="#FFF6EA" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+      </svg>
+      Hearth
+    </a>
+    <a href="#download" class="nav-link">Get the app</a>
+  </div>
+</nav>
+
+<!-- ======= HERO ======= -->
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow"><i></i>Made for busy families</span>
+      <h1>Balanced dinners your kids will <em>actually</em> eat.</h1>
+      <p class="lede">Hearth plans a week of healthy family dinners around your schedule and your picky eaters. Every plate gets veggies, protein and whole grains, and you never have to think about it.</p>
+
+      <div class="stores">
+        <a class="store" href="#" aria-label="Download on the App Store">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.6c-.02-2.2 1.8-3.26 1.88-3.31-1.03-1.5-2.62-1.7-3.19-1.73-1.36-.14-2.65.8-3.34.8-.69 0-1.75-.78-2.88-.76-1.48.02-2.85.86-3.61 2.19-1.54 2.67-.39 6.63 1.11 8.8.73 1.06 1.6 2.25 2.75 2.21 1.1-.04 1.52-.71 2.85-.71 1.33 0 1.71.71 2.88.69 1.19-.02 1.94-1.08 2.66-2.15.84-1.23 1.19-2.42 1.21-2.48-.03-.01-2.32-.89-2.34-3.55zM14.17 6.13c.61-.74 1.02-1.76.91-2.78-.88.04-1.94.59-2.57 1.32-.56.65-1.06 1.69-.93 2.69.98.08 1.98-.5 2.59-1.23z"/></svg>
+          <span><small>Download on the</small><strong>App Store</strong></span>
+        </a>
+        <a class="store" href="#" aria-label="Get it on Google Play">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3.6 2.3 13.4 12l-9.8 9.7c-.4-.2-.6-.6-.6-1.1V3.4c0-.5.2-.9.6-1.1z" fill="#4FC3F7"/>
+            <path d="m16.7 8.7-3.3 3.3-9.8-9.7c.3-.2.8-.2 1.2 0l11.9 6.4z" fill="#8BD46B"/>
+            <path d="m16.7 15.3-11.9 6.4c-.4.2-.9.2-1.2 0l9.8-9.7 3.3 3.3z" fill="#F0605D"/>
+            <path d="m20.4 13.3-3.7 2-3.3-3.3 3.3-3.3 3.7 2c1 .6 1 2 0 2.6z" fill="#FFC93C"/>
+          </svg>
+          <span><small>GET IT ON</small><strong>Google Play</strong></span>
+        </a>
+      </div>
+
+      <div class="proof">
+        <div class="avatars" aria-hidden="true">
+          <span style="background:#F2A93B"></span>
+          <span style="background:#8DB255"></span>
+          <span style="background:#D9482B"></span>
+          <span style="background:#7A2E46"></span>
+        </div>
+        <div><span class="stars" aria-label="4.9 out of 5 stars">★★★★★</span><br>Loved by 120,000+ families</div>
+      </div>
+    </div>
+
+    <!-- Rich plate illustration -->
+    <div class="plate-art">
+      <svg viewBox="0 0 520 520" role="img" aria-label="Illustration of a balanced dinner plate: half vegetables, a quarter salmon, a quarter whole grains">
+        <defs>
+          <radialGradient id="plateG" cx="45%" cy="40%" r="60%">
+            <stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F1E4D3"/>
+          </radialGradient>
+          <linearGradient id="salmonG" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#FFA678"/><stop offset="1" stop-color="#E86A45"/>
+          </linearGradient>
+          <radialGradient id="tomG" cx="35%" cy="30%" r="70%">
+            <stop offset="0" stop-color="#FF7A5C"/><stop offset="1" stop-color="#C22F17"/>
+          </radialGradient>
+          <radialGradient id="lemonG" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stop-color="#FFF4B0"/><stop offset="1" stop-color="#F6CF3A"/>
+          </radialGradient>
+          <pattern id="grain" width="16" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(25)">
+            <rect width="16" height="10" fill="#EBD3A6"/>
+            <ellipse cx="5" cy="3" rx="4" ry="1.6" fill="#F8EAD0"/>
+            <ellipse cx="12" cy="8" rx="4" ry="1.6" fill="#D8B983"/>
+          </pattern>
+        </defs>
+
+        <!-- placemat / table cloth -->
+        <rect x="30" y="40" width="460" height="440" rx="40" fill="#F7D9B5"/>
+        <g opacity=".35" stroke="#D9482B" stroke-width="6">
+          <path d="M30 120h460M30 200h460M30 280h460M30 360h460M30 440h460"/>
+          <path d="M110 40v440M190 40v440M270 40v440M350 40v440M430 40v440"/>
+        </g>
+
+        <!-- fork & knife -->
+        <g fill="#B8A595">
+          <rect x="48" y="150" width="10" height="230" rx="5"/>
+          <path d="M40 110h4v52h4v-52h4v52h4v-52h4v60a12 12 0 0 1-24 0z"/>
+          <path d="M466 110c14 10 14 70 4 90v180a6 6 0 0 1-12 0V110z"/>
+        </g>
+
+        <!-- plate -->
+        <circle cx="260" cy="262" r="200" fill="#E5D3BE"/>
+        <circle cx="260" cy="256" r="200" fill="url(#plateG)"/>
+        <circle cx="260" cy="256" r="160" fill="none" stroke="#EADBC7" stroke-width="3"/>
+
+        <!-- GRAINS (bottom-left quarter) -->
+        <path d="M260 262 L130 340 A150 150 0 0 0 250 405 Z" fill="url(#grain)"/>
+        <path d="M128 300c10-20 40-30 70-24 30 6 52 20 62 0 10 50-10 110-40 130-40 4-90-30-100-60-4-14-2-30 8-46z" fill="url(#grain)"/>
+        <path d="M128 300c10-20 40-30 70-24 30 6 52 20 62 0 10 50-10 110-40 130-40 4-90-30-100-60-4-14-2-30 8-46z" fill="none" stroke="#D2B07A" stroke-width="2" opacity=".6"/>
+        <!-- herbs on grains -->
+        <g fill="#5E8F3A">
+          <circle cx="170" cy="330" r="4"/><circle cx="205" cy="360" r="3.5"/><circle cx="188" cy="312" r="3"/>
+          <circle cx="225" cy="335" r="3.5"/><circle cx="160" cy="362" r="3"/><circle cx="210" cy="388" r="3"/>
+        </g>
+
+        <!-- SALMON (bottom-right quarter) -->
+        <g transform="rotate(-18 340 330)">
+          <path d="M270 300c20-30 120-40 150-10 18 18 10 60-20 78-40 22-110 18-130-8-10-14-10-40 0-60z" fill="url(#salmonG)"/>
+          <g stroke="#FFD7BF" stroke-width="5" stroke-linecap="round" fill="none" opacity=".9">
+            <path d="M300 298c-6 20-6 44 4 66"/>
+            <path d="M330 290c-8 24-8 54 4 80"/>
+            <path d="M362 288c-8 26-8 56 4 82"/>
+            <path d="M394 294c-6 22-6 48 4 68"/>
+          </g>
+          <!-- grill marks -->
+          <g stroke="#9C3A1E" stroke-width="5" stroke-linecap="round" opacity=".55">
+            <path d="M286 320l40-22M300 350l70-36M330 372l70-38"/>
+          </g>
+        </g>
+        <!-- lemon wedge -->
+        <g transform="translate(398 382) rotate(20)">
+          <path d="M-34 0a34 34 0 0 0 68 0z" fill="#F6CF3A"/>
+          <path d="M-28 0a28 28 0 0 0 56 0z" fill="url(#lemonG)"/>
+          <g stroke="#F6CF3A" stroke-width="2"><path d="M0 0v26M0 0l-18 18M0 0l18 18"/></g>
+        </g>
+
+        <!-- VEGETABLES (top half) -->
+        <!-- leafy greens base -->
+        <g>
+          <path d="M120 230c-6-40 20-90 70-110 40-16 90-20 140-6 50 14 86 50 80 108-60 14-230 22-290 8z" fill="#6E9E3F"/>
+          <path d="M140 218c10-30 40-60 80-70M200 230c4-40 30-70 70-84M270 230c10-36 40-60 84-64" stroke="#8DC255" stroke-width="5" fill="none" stroke-linecap="round"/>
+        </g>
+        <!-- broccoli florets -->
+        <g>
+          <g transform="translate(180 170)">
+            <rect x="-7" y="6" width="14" height="34" rx="6" fill="#A7C76A"/>
+            <circle cx="-16" cy="2" r="16" fill="#3F7A2A"/><circle cx="14" cy="0" r="17" fill="#3F7A2A"/>
+            <circle cx="0" cy="-14" r="18" fill="#4F8C33"/>
+            <g fill="#68A445"><circle cx="-6" cy="-18" r="4"/><circle cx="8" cy="-8" r="4"/><circle cx="-18" cy="-2" r="3.5"/><circle cx="18" cy="-4" r="3.5"/></g>
+          </g>
+          <g transform="translate(250 145) scale(.85)">
+            <rect x="-7" y="6" width="14" height="34" rx="6" fill="#A7C76A"/>
+            <circle cx="-16" cy="2" r="16" fill="#3F7A2A"/><circle cx="14" cy="0" r="17" fill="#3F7A2A"/>
+            <circle cx="0" cy="-14" r="18" fill="#4F8C33"/>
+            <g fill="#68A445"><circle cx="-6" cy="-18" r="4"/><circle cx="8" cy="-8" r="4"/><circle cx="-18" cy="-2" r="3.5"/></g>
+          </g>
+        </g>
+        <!-- carrot coins -->
+        <g>
+          <circle cx="330" cy="150" r="17" fill="#F08A2C"/><circle cx="330" cy="150" r="9" fill="#F7A84E"/>
+          <circle cx="360" cy="178" r="15" fill="#EB7A22"/><circle cx="360" cy="178" r="8" fill="#F7A84E"/>
+          <circle cx="300" cy="190" r="14" fill="#F08A2C"/><circle cx="300" cy="190" r="7" fill="#F7A84E"/>
+        </g>
+        <!-- cherry tomatoes -->
+        <g>
+          <circle cx="388" cy="218" r="20" fill="url(#tomG)"/>
+          <path d="M382 199l6 5 6-5-3 7 6 2-7 1-2 6-2-6-7-1 6-2z" fill="#3F7A2A"/>
+          <circle cx="381" cy="211" r="5" fill="#fff" opacity=".45"/>
+          <circle cx="140" cy="214" r="18" fill="url(#tomG)"/>
+          <path d="M134 197l6 5 6-5-3 7 6 2-7 1-2 6-2-6-7-1 6-2z" fill="#3F7A2A"/>
+          <circle cx="134" cy="208" r="4.5" fill="#fff" opacity=".45"/>
+          <!-- halved tomato -->
+          <g transform="translate(232 214)">
+            <path d="M-20 0a20 20 0 0 0 40 0z" fill="#E0472A"/>
+            <path d="M-15 0a15 15 0 0 0 30 0z" fill="#FF8C6B"/>
+            <g fill="#FFE29A"><circle cx="-7" cy="5" r="2.4"/><circle cx="0" cy="8" r="2.4"/><circle cx="7" cy="5" r="2.4"/></g>
+          </g>
+        </g>
+        <!-- avocado slices -->
+        <g>
+          <path d="M290 222c6-20 40-30 62-14-14 4-40 10-62 14z" fill="#C6DB76" stroke="#3E5E22" stroke-width="3"/>
+          <path d="M300 236c8-18 42-24 60-8-14 2-40 6-60 8z" fill="#C6DB76" stroke="#3E5E22" stroke-width="3"/>
+        </g>
+
+        <!-- herb sprig on table -->
+        <g transform="translate(440 60) rotate(30)">
+          <path d="M0 0v80" stroke="#4F7A34" stroke-width="3"/>
+          <g fill="#6FA046">
+            <ellipse cx="-10" cy="16" rx="10" ry="5" transform="rotate(-30 -10 16)"/>
+            <ellipse cx="10" cy="28" rx="10" ry="5" transform="rotate(30 10 28)"/>
+            <ellipse cx="-10" cy="42" rx="10" ry="5" transform="rotate(-30 -10 42)"/>
+            <ellipse cx="10" cy="54" rx="10" ry="5" transform="rotate(30 10 54)"/>
+            <ellipse cx="0" cy="-4" rx="5" ry="9"/>
+          </g>
+        </g>
+        <!-- peppercorns -->
+        <g fill="#5A3A28"><circle cx="70" cy="440" r="5"/><circle cx="86" cy="452" r="4"/><circle cx="60" cy="458" r="4"/></g>
+      </svg>
+
+      <div class="tag t1 float"><span class="dot" style="background:#4F8C33"></span><div><b>½ veggies</b>Broccoli, tomato, carrot</div></div>
+      <div class="tag t2 float"><span class="dot" style="background:#E86A45"></span><div><b>¼ protein</b>Lemon-glazed salmon</div></div>
+      <div class="tag t3 float"><span class="dot" style="background:#D8B983"></span><div><b>¼ whole grains</b>Herby brown rice · 25 min</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ======= HOW IT WORKS ======= -->
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">How it works</div>
+      <h2>A healthier week in three easy steps.</h2>
+      <p>You don't need a nutrition degree or a free Sunday afternoon. Hearth handles the balancing, and you just cook.</p>
+    </div>
+
+    <div class="steps">
+      <!-- Step 1 -->
+      <article class="step">
+        <div class="num">1</div>
+        <div class="art">
+          <svg viewBox="0 0 220 160" aria-hidden="true">
+            <!-- table line -->
+            <rect x="10" y="128" width="200" height="8" rx="4" fill="#E7B48F"/>
+            <!-- big bowl (parent) -->
+            <path d="M18 92h70a35 35 0 0 1-70 0z" fill="#D9482B"/>
+            <ellipse cx="53" cy="92" rx="35" ry="8" fill="#B5361D"/>
+            <ellipse cx="53" cy="90" rx="30" ry="6" fill="#F7C772"/>
+            <circle cx="44" cy="86" r="5" fill="#4F8C33"/><circle cx="60" cy="85" r="5" fill="#F08A2C"/>
+            <!-- medium bowl (kid) -->
+            <path d="M100 104h52a26 26 0 0 1-52 0z" fill="#F2A93B"/>
+            <ellipse cx="126" cy="104" rx="26" ry="6" fill="#D88A1E"/>
+            <ellipse cx="126" cy="102" rx="22" ry="4.5" fill="#FBE3B5"/>
+            <circle cx="120" cy="99" r="4" fill="#E86A45"/>
+            <!-- small bowl (toddler) -->
+            <path d="M164 112h36a18 18 0 0 1-36 0z" fill="#8DB255"/>
+            <ellipse cx="182" cy="112" rx="18" ry="4.5" fill="#6E9440"/>
+            <ellipse cx="182" cy="110.5" rx="15" ry="3.5" fill="#FFF1D6"/>
+            <!-- name flags -->
+            <g font-family="Georgia,serif" font-size="11" font-weight="700" fill="#3A2418" text-anchor="middle">
+              <rect x="30" y="28" width="46" height="20" rx="10" fill="#fff"/><text x="53" y="42">Mom</text>
+              <rect x="100" y="52" width="52" height="20" rx="10" fill="#fff"/><text x="126" y="66">Maya, 9</text>
+              <rect x="158" y="70" width="48" height="20" rx="10" fill="#fff"/><text x="182" y="84">Leo, 4</text>
+            </g>
+            <!-- no-nuts badge -->
+            <circle cx="186" cy="30" r="16" fill="#fff" stroke="#D9482B" stroke-width="3"/>
+            <ellipse cx="186" cy="30" rx="6" ry="8" fill="#C98A4B"/>
+            <path d="M175 19l22 22" stroke="#D9482B" stroke-width="3"/>
+          </svg>
+        </div>
+        <h3>Tell us about your crew</h3>
+        <p>Add everyone at your table: ages, allergies, the kid who won't touch anything green. It takes about two minutes.</p>
+        <ul><li>Picky eaters</li><li>Allergies</li><li>Busy nights</li></ul>
+      </article>
+
+      <!-- Step 2 -->
+      <article class="step">
+        <div class="num">2</div>
+        <div class="art">
+          <svg viewBox="0 0 220 160" aria-hidden="true">
+            <rect x="22" y="14" width="176" height="134" rx="14" fill="#fff"/>
+            <rect x="22" y="14" width="176" height="30" rx="14" fill="#4F7A34"/>
+            <rect x="22" y="30" width="176" height="14" fill="#4F7A34"/>
+            <circle cx="56" cy="14" r="5" fill="#3A2418"/><circle cx="164" cy="14" r="5" fill="#3A2418"/>
+            <text x="110" y="35" text-anchor="middle" font-family="Georgia,serif" font-size="13" font-weight="700" fill="#FFF6EA">This week</text>
+            <!-- rows -->
+            <g font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#6B4A3A">
+              <text x="34" y="66">MON</text><text x="34" y="88">TUE</text><text x="34" y="110">WED</text><text x="34" y="132">THU</text>
+            </g>
+            <!-- balance bars: veg/protein/grain -->
+            <g>
+              <rect x="66" y="58" width="56" height="10" rx="5" fill="#6E9E3F"/><rect x="124" y="58" width="28" height="10" rx="5" fill="#E86A45"/><rect x="154" y="58" width="28" height="10" rx="5" fill="#D8B983"/>
+              <rect x="66" y="80" width="56" height="10" rx="5" fill="#6E9E3F"/><rect x="124" y="80" width="28" height="10" rx="5" fill="#C98A4B"/><rect x="154" y="80" width="28" height="10" rx="5" fill="#D8B983"/>
+              <rect x="66" y="102" width="56" height="10" rx="5" fill="#6E9E3F"/><rect x="124" y="102" width="28" height="10" rx="5" fill="#F2A93B"/><rect x="154" y="102" width="28" height="10" rx="5" fill="#D8B983"/>
+              <rect x="66" y="124" width="56" height="10" rx="5" fill="#6E9E3F"/><rect x="124" y="124" width="28" height="10" rx="5" fill="#E86A45"/><rect x="154" y="124" width="28" height="10" rx="5" fill="#D8B983"/>
+            </g>
+            <!-- check badge -->
+            <circle cx="192" cy="140" r="17" fill="#D9482B"/>
+            <path d="M184 140l6 6 11-12" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Get a balanced week</h3>
+        <p>Hearth builds five weeknight dinners that hit the right mix of veggies, protein and whole grains. Swap any meal with one tap.</p>
+        <ul><li>Dietitian-reviewed</li><li>30 min or less</li><li>Kid-tested</li></ul>
+      </article>
+
+      <!-- Step 3 -->
+      <article class="step">
+        <div class="num">3</div>
+        <div class="art">
+          <svg viewBox="0 0 220 160" aria-hidden="true">
+            <!-- produce peeking out -->
+            <!-- leek / greens -->
+            <path d="M80 70c-10-30-4-56 6-64 4 20 4 44 4 64z" fill="#6E9E3F"/>
+            <path d="M92 70c2-32 14-54 26-58-6 22-10 42-14 58z" fill="#8DC255"/>
+            <!-- baguette -->
+            <rect x="122" y="6" width="22" height="80" rx="11" fill="#D9A15C" transform="rotate(16 133 46)"/>
+            <g stroke="#B57A36" stroke-width="3" stroke-linecap="round" transform="rotate(16 133 46)"><path d="M126 22l14-6M126 40l14-6M126 58l14-6"/></g>
+            <!-- carrot -->
+            <path d="M58 72l-20-44c-2-6 6-10 10-5l26 42z" fill="#F08A2C"/>
+            <path d="M40 26c-6-6-6-14-2-16 2 6 6 8 8 10zM44 22c0-8 4-14 10-14-2 6-4 10-6 14z" fill="#4F8C33"/>
+            <!-- tomato -->
+            <circle cx="160" cy="64" r="16" fill="#D9482B"/>
+            <path d="M154 49l6 5 6-5-3 6 6 2-7 1-2 5-2-5-7-1 6-2z" fill="#3F7A2A"/>
+            <!-- bag -->
+            <path d="M34 66h152l-12 84H46z" fill="#C98A4B"/>
+            <path d="M34 66h152l-2 14H36z" fill="#A86E35"/>
+            <rect x="80" y="96" width="60" height="30" rx="8" fill="#FFF6EA"/>
+            <text x="110" y="116" text-anchor="middle" font-family="Georgia,serif" font-size="13" font-weight="700" fill="#D9482B">Hearth</text>
+            <!-- list tag -->
+            <g transform="rotate(8 196 108)">
+              <rect x="176" y="84" width="38" height="50" rx="5" fill="#fff"/>
+              <g stroke="#8DB255" stroke-width="3" stroke-linecap="round"><path d="M182 96l3 3 5-5M182 110l3 3 5-5"/></g>
+              <g stroke="#E2CDB4" stroke-width="3" stroke-linecap="round"><path d="M194 97h14M194 111h14M184 124h24"/></g>
+            </g>
+          </svg>
+        </div>
+        <h3>Shop once, cook calmly</h3>
+        <p>A grocery list sorted by aisle shows up on its own, or goes straight to delivery. Step-by-step recipes keep weeknights low-stress.</p>
+        <ul><li>Smart list</li><li>Less waste</li><li>Delivery-ready</li></ul>
+      </article>
+    </div>
+
+    <div class="balance-strip">
+      <div><svg viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#6E9E3F"/></svg>Half the plate is veggies</div>
+      <div><svg viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#E86A45"/></svg>Lean protein every night</div>
+      <div><svg viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#D8B983"/></svg>Whole grains, not white</div>
+      <div><svg viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#F2A93B"/></svg>Lighter on salt and sugar</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= CLOSING CTA ======= -->
+<section class="cta" id="download">
+  <!-- decorative food -->
+  <svg class="deco d1" viewBox="0 0 200 200" aria-hidden="true">
+    <circle cx="100" cy="100" r="80" fill="#D9482B"/>
+    <circle cx="100" cy="100" r="66" fill="#E8603F"/>
+    <g fill="#FFD3A0" opacity=".9">
+      <ellipse cx="100" cy="70" rx="10" ry="18"/><ellipse cx="130" cy="100" rx="18" ry="10"/>
+      <ellipse cx="100" cy="130" rx="10" ry="18"/><ellipse cx="70" cy="100" rx="18" ry="10"/>
+    </g>
+    <circle cx="100" cy="100" r="12" fill="#B5361D"/>
+    <path d="M90 22l10 10 10-10-4 14 14 4-14 4 4 14-10-10-10 10 4-14-14-4 14-4z" fill="#4F8C33"/>
+  </svg>
+  <svg class="deco d2" viewBox="0 0 240 200" aria-hidden="true">
+    <path d="M20 90h200a100 100 0 0 1-200 0z" fill="#F2A93B"/>
+    <ellipse cx="120" cy="90" rx="100" ry="20" fill="#D88A1E"/>
+    <ellipse cx="120" cy="86" rx="88" ry="15" fill="#FFE7B8"/>
+    <circle cx="90" cy="80" r="12" fill="#4F8C33"/><circle cx="110" cy="76" r="10" fill="#3F7A2A"/>
+    <circle cx="140" cy="82" r="11" fill="#D9482B"/><circle cx="160" cy="78" r="8" fill="#F08A2C"/>
+    <path d="M100 50c0-14 10-14 10-28M125 50c0-14 10-14 10-28" stroke="#FFF6EA" stroke-width="5" stroke-linecap="round" fill="none" opacity=".5"/>
+  </svg>
+  <svg class="deco d3" viewBox="0 0 80 100" aria-hidden="true">
+    <path d="M40 30c-26 0-34 30-24 50 8 16 40 16 48 0 10-20 2-50-24-50z" fill="#D9482B"/>
+    <path d="M40 30c-2-12 4-20 12-24" stroke="#4F7A34" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <ellipse cx="54" cy="12" rx="10" ry="5" fill="#6E9E3F" transform="rotate(-20 54 12)"/>
+    <ellipse cx="28" cy="48" rx="6" ry="9" fill="#fff" opacity=".3"/>
+  </svg>
+  <svg class="deco d4" viewBox="0 0 80 80" aria-hidden="true">
+    <ellipse cx="40" cy="44" rx="26" ry="32" fill="#4F7A34"/>
+    <ellipse cx="40" cy="48" rx="19" ry="24" fill="#C6DB76"/>
+    <circle cx="40" cy="54" r="11" fill="#8A5A2B"/>
+  </svg>
+
+  <div class="wrap">
+    <div class="kicker" style="color:var(--saffron)">Free to start · No credit card</div>
+    <h2>Tonight's dinner, <em>sorted.</em></h2>
+    <p>Download Hearth and get your first balanced family meal plan before the kids get home from school.</p>
+    <div class="stores">
+      <a class="store" href="#" aria-label="Download on the App Store">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.6c-.02-2.2 1.8-3.26 1.88-3.31-1.03-1.5-2.62-1.7-3.19-1.730-1.36-.14-2.65.8-3.34.8-.69 0-1.75-.78-2.88-.76-1.48.02-2.85.86-3.61 2.19-1.54 2.670-.39 6.63 1.11 8.8.73 1.06 1.6 2.25 2.75 2.21 1.1-.04 1.52-.71 2.85-.71 1.33 0 1.71.71 2.88.69 1.19-.02 1.94-1.08 2.66-2.15.84-1.23 1.19-2.42 1.21-2.48-.03-.01-2.32-.89-2.34-3.55zM14.17 6.13c.61-.74 1.02-1.76.91-2.78-.88.04-1.94.59-2.57 1.32-.56.65-1.06 1.69-.93 2.69.98.08 1.98-.5 2.59-1.23z"/></svg>
+        <span><small>Download on the</small><strong>App Store</strong></span>
+      </a>
+      <a class="store" href="#" aria-label="Get it on Google Play">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3.6 2.3 13.4 12l-9.8 9.7c-.4-.2-.6-.6-.6-1.1V3.4c0-.5.2-.9.6-1.1z" fill="#2FA8E0"/>
+          <path d="m16.7 8.7-3.3 3.3-9.8-9.7c.3-.2.8-.2 1.2 0l11.9 6.4z" fill="#3DAA4E"/>
+          <path d="m16.7 15.3-11.9 6.4c-.4.2-.9.2-1.2 0l9.8-9.7 3.3 3.3z" fill="#E5463F"/>
+          <path d="m20.4 13.3-3.7 2-3.3-3.3 3.3-3.3 3.7 2c1 .6 1 2 0 2.6z" fill="#F7B500"/>
+        </svg>
+        <span><small>GET IT ON</small><strong>Google Play</strong></span>
+      </a>
+    </div>
+    <div class="fine">4.9★ on the App Store · iPhone, iPad &amp; Android</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Hearth Kitchen, Inc.</span>
+    <span><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Contact</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

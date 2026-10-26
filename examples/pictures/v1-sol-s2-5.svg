@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640" viewBox="0 0 640 640" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">An ochre pelican with low outstretched wings and an upturned bill rides a broad-beamed olive bicycle, shaded with halftone dots.</desc>
+  <defs>
+    <pattern id="dots" width="9" height="9" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="1.6" fill="#513b29"/>
+    </pattern>
+    <pattern id="fineDots" width="7" height="7" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#513b29"/>
+    </pattern>
+  </defs>
+
+  <rect width="640" height="640" rx="32" fill="#eee3bc"/>
+  <ellipse cx="316" cy="570" rx="245" ry="13" fill="url(#fineDots)" opacity=".35"/>
+
+  <!-- Wheels -->
+  <g fill="none" stroke="#513b29">
+    <g stroke-width="12">
+      <circle cx="178" cy="470" r="94"/>
+      <circle cx="454" cy="470" r="94"/>
+    </g>
+    <g stroke="#b18b45" stroke-width="3">
+      <circle cx="178" cy="470" r="82"/>
+      <circle cx="454" cy="470" r="82"/>
+    </g>
+    <g stroke-width="2" opacity=".65">
+      <path d="M178 388v164m-82-82h164m-140-58 116 116m-116 0 116-116"/>
+      <path d="M454 388v164m-82-82h164m-140-58 116 116m-116 0 116-116"/>
+    </g>
+  </g>
+
+  <!-- Far leg -->
+  <path d="M296 345 338 389 296 447" fill="none" stroke="#806333" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m295 441-24 12 39 5" fill="#b38a3e" stroke="#513b29" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- Single broad bicycle beam -->
+  <g stroke="#513b29" stroke-linejoin="round" stroke-linecap="round">
+    <path d="m178 470 96-104 47 104Z" fill="none" stroke-width="7"/>
+    <path d="M267 373 Q331 393 411 349 L423 379 Q366 443 316 471Z" fill="#818149" stroke-width="5"/>
+    <path d="M284 395 Q344 412 416 369 L421 381 Q363 443 316 466Z" fill="url(#dots)" stroke="none"/>
+    <path d="m270 375-10-42m157 22 37 115" fill="none" stroke-width="9"/>
+    <path d="m415 351-15-42q-4-12 10-15h24" fill="none" stroke-width="8"/>
+    <path d="M239 331q23-13 50-2l-3 11h-45Z" fill="#513b29" stroke-width="4"/>
+    <path d="M426 294h22" stroke-width="12"/>
+    <circle cx="320" cy="470" r="22" fill="#b18b45" stroke-width="5"/>
+    <path d="m320 470 32 28m-45-39-20-19" stroke-width="6"/>
+    <path d="M339 501h31m-98-64h28" stroke-width="8"/>
+    <circle cx="178" cy="470" r="7" fill="#513b29"/>
+    <circle cx="454" cy="470" r="7" fill="#513b29"/>
+  </g>
+
+  <!-- Tail and body -->
+  <g stroke="#513b29" stroke-width="4" stroke-linejoin="round">
+    <path d="m237 293-69-21 34 43-30 7 66 17" fill="#85804a"/>
+    <path d="M225 260q39-38 92-16 30 13 39 51 9 48-37 58-58 14-97-20-33-30 3-73Z" fill="#c6a04d"/>
+    <path d="M216 307q68 40 137-13 9 49-34 59-59 13-97-20Z" fill="url(#dots)" stroke="none"/>
+
+    <!-- Far wing, extended down -->
+    <path d="M317 267q48 23 105 103-29-4-49-24l8 19q-48-28-71-69Z" fill="#8a854a"/>
+    <path d="M336 294q39 33 69 67-34-15-67-48Z" fill="url(#dots)" stroke="none"/>
+
+    <!-- Upright neck -->
+    <path d="M301 271q28-30 24-78-3-51 32-72 32-21 53 3l-17 39q-30-5-28 29 7 61-24 98Z" fill="#d3b363"/>
+    <path d="M335 263q20-43 16-72-2-40 29-55l13 27q-30-5-28 29 7 61-24 98l-14-14Z" fill="url(#fineDots)" stroke="none"/>
+
+    <!-- Head and upward-tilted bill -->
+    <path d="M353 137q-1-34 29-40 33-6 43 28l-27 35q-37 6-45-23Z" fill="#d3b363"/>
+    <path d="m407 132 153-58q-20 39-63 70-37 27-91 11Z" fill="#b28a37"/>
+    <path d="m407 126 155-53-6 14-146 55Z" fill="#d8b255"/>
+    <path d="m418 145 119-48q-31 40-77 54Z" fill="url(#fineDots)" stroke="none"/>
+    <path d="m409 141 147-54" fill="none" stroke-width="3"/>
+    <circle cx="389" cy="122" r="7" fill="#513b29" stroke="none"/>
+    <circle cx="391" cy="120" r="2" fill="#eee3bc" stroke="none"/>
+
+    <!-- Near wing, extended down -->
+    <path d="M262 272q-34 27-55 63l-30 59q22-9 37-28l-6 22q28-19 46-49 22-30 24-47Z" fill="#b5994e"/>
+    <path d="M258 294q-28 36-56 79l6 15q28-19 46-49 22-30 24-47Z" fill="url(#dots)" stroke="none"/>
+    <path d="m215 356 32-43m-22 51 30-43" fill="none" stroke-width="2.5"/>
+  </g>
+
+  <!-- Near leg and webbed foot on the pedal -->
+  <path d="m299 344-8 58 62 88" fill="none" stroke="#513b29" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m299 344-8 58 62 88" fill="none" stroke="#b18b45" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m352 484-9 14 32 1-7-9Z" fill="#c6a04d" stroke="#513b29" stroke-width="4" stroke-linejoin="round"/>
+</svg>

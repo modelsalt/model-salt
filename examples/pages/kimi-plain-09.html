@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plantry — Meal planning, minus the chaos</title>
+<meta name="description" content="Plantry builds a week of meals around your tastes, time, and pantry — then writes the grocery list for you.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥗</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============ TOKENS & RESET ============ */
+:root {
+  --cream: #FDF7EF;
+  --cream-2: #F8EEDF;
+  --ink: #20302A;
+  --ink-soft: #5A6B62;
+  --green: #2D6A4F;
+  --green-dark: #1B4332;
+  --accent: #E76F51;
+  --accent-dark: #CE5437;
+  --accent-soft: #FBE4DA;
+  --sun: #F4A261;
+  --card: #FFFFFF;
+  --border: #EDE0CE;
+  --radius: 18px;
+  --shadow: 0 10px 30px rgba(27, 67, 50, .10);
+  --shadow-lg: 0 24px 60px rgba(27, 67, 50, .16);
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", -apple-system, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+::selection { background: var(--sun); color: var(--green-dark); }
+
+.container { width: min(1120px, 90%); margin: 0 auto; }
+.eyebrow {
+  display: inline-block;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .9rem;
+}
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.12; color: var(--green-dark); }
+.section-title { font-size: clamp(2rem, 4vw, 2.9rem); font-weight: 600; }
+.section-sub { color: var(--ink-soft); max-width: 560px; margin: 1rem auto 0; font-size: 1.05rem; }
+section { padding: 96px 0; }
+.center { text-align: center; }
+
+/* ============ BUTTONS ============ */
+.btn {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .9rem 1.7rem;
+  border-radius: 999px;
+  font-weight: 600; font-size: .98rem;
+  border: 2px solid transparent;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.btn-primary { background: var(--accent); color: #fff; box-shadow: 0 8px 20px rgba(231, 111, 81, .35); }
+.btn-primary:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 12px 26px rgba(231, 111, 81, .45); }
+.btn-ghost { border-color: var(--green); color: var(--green-dark); background: transparent; }
+.btn-ghost:hover { background: var(--green); color: #fff; transform: translateY(-2px); }
+.btn-sm { padding: .55rem 1.15rem; font-size: .88rem; }
+
+/* ============ NAV ============ */
+.nav {
+  position: fixed; inset: 0 0 auto 0; z-index: 50;
+  backdrop-filter: blur(12px);
+  background: rgba(253, 247, 239, .82);
+  border-bottom: 1px solid transparent;
+  transition: border-color .3s, box-shadow .3s;
+}
+.nav.scrolled { border-color: var(--border); box-shadow: 0 4px 20px rgba(27,67,50,.06); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.logo { display: flex; align-items: center; gap: .55rem; font-family: var(--font-display); font-weight: 700; font-size: 1.4rem; color: var(--green-dark); }
+.logo-badge {
+  width: 36px; height: 36px; border-radius: 11px;
+  background: var(--green); display: grid; place-items: center;
+  font-size: 1.1rem;
+}
+.nav-links { display: flex; align-items: center; gap: 2rem; }
+.nav-links a { font-size: .94rem; font-weight: 500; color: var(--ink-soft); transition: color .2s; }
+.nav-links a:hover { color: var(--green-dark); }
+.nav-cta { display: flex; align-items: center; gap: 1rem; }
+.menu-btn { display: none; background: none; border: 0; font-size: 1.5rem; color: var(--green-dark); }
+
+/* ============ HERO ============ */
+.hero { padding: 170px 0 90px; position: relative; overflow: hidden; }
+.hero::before {
+  content: ""; position: absolute; top: -180px; right: -140px;
+  width: 560px; height: 560px; border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-soft), transparent 65%);
+  z-index: -1;
+}
+.hero::after {
+  content: ""; position: absolute; bottom: -220px; left: -160px;
+  width: 520px; height: 520px; border-radius: 50%;
+  background: radial-gradient(circle, #DCEBDD, transparent 65%);
+  z-index: -1;
+}
+.hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 3rem; align-items: center; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: #fff; border: 1px solid var(--border);
+  padding: .4rem .95rem; border-radius: 999px;
+  font-size: .82rem; font-weight: 600; color: var(--green);
+  box-shadow: var(--shadow); margin-bottom: 1.4rem;
+}
+.hero h1 { font-size: clamp(2.7rem, 5.4vw, 4.1rem); font-weight: 700; letter-spacing: -.01em; }
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero p.lede { font-size: 1.15rem; color: var(--ink-soft); max-width: 480px; margin: 1.4rem 0 2rem; }
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+.hero-note { font-size: .82rem; color: var(--ink-soft); margin-top: 1rem; display: flex; gap: .4rem; align-items: center; }
+
+/* Phone mockup */
+.phone-stage { position: relative; display: flex; justify-content: center; }
+.phone {
+  width: 290px; height: 590px;
+  background: #123528;
+  border-radius: 46px;
+  padding: 12px;
+  box-shadow: var(--shadow-lg), inset 0 0 0 2px rgba(255,255,255,.08);
+  transform: rotate(3deg);
+  position: relative;
+}
+.phone-screen {
+  width: 100%; height: 100%;
+  background: linear-gradient(180deg, #FFFBF4, #F6EDDD);
+  border-radius: 36px; overflow: hidden;
+  padding: 18px 16px; position: relative;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.phone-notch {
+  position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+  width: 96px; height: 24px; background: #123528; border-radius: 999px; z-index: 2;
+}
+.p-greeting { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; color: var(--green-dark); margin-top: 26px; }
+.p-sub { font-size: .68rem; color: var(--ink-soft); margin-top: -8px; }
+.p-days { display: flex; gap: 5px; }
+.p-day {
+  flex: 1; text-align: center; font-size: .6rem; font-weight: 600;
+  padding: 6px 0; border-radius: 9px; background: #fff; color: var(--ink-soft);
+  border: 1px solid var(--border);
+}
+.p-day.active { background: var(--green); color: #fff; border-color: var(--green); }
+.p-tonight {
+  background: var(--green-dark); color: #fff; border-radius: 16px; padding: 14px;
+  display: flex; flex-direction: column; gap: 8px; position: relative; overflow: hidden;
+}
+.p-tonight::after {
+  content: "🍋"; position: absolute; right: -10px; top: -14px; font-size: 4.4rem; opacity: .14; transform: rotate(20deg);
+}
+.p-label { font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; color: var(--sun); font-weight: 700; }
+.p-meal-name { font-family: var(--font-display); font-size: 1rem; font-weight: 600; line-height: 1.25; }
+.p-meal-meta { font-size: .62rem; opacity: .85; display: flex; gap: 8px; }
+.p-swap {
+  align-self: flex-start; background: rgba(255,255,255,.16); color: #fff;
+  border: 0; border-radius: 999px; padding: 5px 12px; font-size: .62rem; font-weight: 600;
+  transition: background .2s;
+}
+.p-swap:hover { background: rgba(255,255,255,.3); }
+.p-next { display: flex; flex-direction: column; gap: 8px; }
+.p-next-title { font-size: .62rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); }
+.p-row {
+  background: #fff; border: 1px solid var(--border); border-radius: 12px;
+  padding: 9px 11px; display: flex; align-items: center; gap: 9px; font-size: .68rem; font-weight: 600; color: var(--ink);
+}
+.p-row .emoji { font-size: 1.05rem; }
+.p-row .time { margin-left: auto; color: var(--ink-soft); font-weight: 500; font-size: .6rem; }
+.p-tabbar {
+  margin-top: auto; background: #fff; border: 1px solid var(--border); border-radius: 14px;
+  display: flex; justify-content: space-around; padding: 8px 0; font-size: .95rem;
+}
+.float-card {
+  position: absolute; background: #fff; border-radius: 14px; padding: .7rem 1rem;
+  box-shadow: var(--shadow-lg); font-size: .8rem; font-weight: 600; color: var(--ink);
+  display: flex; align-items: center; gap: .55rem; border: 1px solid var(--border);
+  animation: bob 5s ease-in-out infinite;
+}
+.float-1 { top: 90px; left: -30px; animation-delay: .4s; }
+.float-2 { bottom: 110px; right: -20px; }
+.float-card .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+.float-card small { display: block; font-weight: 500; color: var(--ink-soft); font-size: .68rem; }
+@keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+/* ============ STATS ============ */
+.stats { padding: 0 0 70px; }
+.stats-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+  background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 2rem; box-shadow: var(--shadow);
+}
+.stat { text-align: center; }
+.stat b { font-family: var(--font-display); font-size: 2rem; color: var(--green-dark); display: block; }
+.stat span { font-size: .85rem; color: var(--ink-soft); }
+
+/* ============ FEATURES ============ */
+.features { background: var(--green-dark); border-radius: 48px 48px 0 0; }
+.features .section-title, .features h3 { color: #FDF7EF; }
+.features .section-sub { color: #B9CFC2; }
+.features .eyebrow { color: var(--sun); }
+.feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin-top: 3.5rem; }
+.feat-card {
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+  border-radius: var(--radius); padding: 1.9rem;
+  transition: transform .25s ease, background .25s ease;
+}
+.feat-card:hover { transform: translateY(-6px); background: rgba(255,255,255,.1); }
+.feat-icon {
+  width: 50px; height: 50px; border-radius: 14px; display: grid; place-items: center;
+  background: var(--accent); font-size: 1.4rem; margin-bottom: 1.1rem;
+  box-shadow: 0 6px 16px rgba(0,0,0,.25);
+}
+.feat-card:nth-child(2) .feat-icon { background: var(--sun); }
+.feat-card:nth-child(3) .feat-icon { background: #40916C; }
+.feat-card:nth-child(4) .feat-icon { background: #74C69D; }
+.feat-card:nth-child(5) .feat-icon { background: var(--accent); }
+.feat-card:nth-child(6) .feat-icon { background: var(--sun); }
+.feat-card h3 { font-size: 1.2rem; margin-bottom: .5rem; }
+.feat-card p { font-size: .92rem; color: #B9CFC2; }
+
+/* ============ HOW IT WORKS ============ */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3.5rem; counter-reset: step; }
+.step { position: relative; padding-top: 1rem; }
+.step-num {
+  font-family: var(--font-display); font-size: 3.6rem; font-weight: 700;
+  color: var(--accent-soft); -webkit-text-stroke: 1.5px var(--accent);
+  line-height: 1; display: block; margin-bottom: .8rem;
+}
+.step h3 { font-size: 1.25rem; margin-bottom: .5rem; }
+.step p { color: var(--ink-soft); font-size: .95rem; }
+
+/* ============ INTERACTIVE PLANNER ============ */
+.demo-wrap { background: var(--cream-2); border-radius: 48px; }
+.planner {
+  margin-top: 3rem; background: #fff; border: 1px solid var(--border);
+  border-radius: 24px; padding: 2rem; box-shadow: var(--shadow);
+}
+.planner-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.6rem; }
+.planner-head h3 { font-size: 1.35rem; }
+.week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: .8rem; }
+.day-card {
+  background: var(--cream); border: 1.5px solid var(--border); border-radius: 16px;
+  padding: .9rem .7rem; text-align: center; min-height: 150px;
+  display: flex; flex-direction: column; align-items: center; gap: .3rem;
+  transition: transform .2s, border-color .2s, box-shadow .2s;
+}
+.day-card:hover { transform: translateY(-4px); border-color: var(--sun); box-shadow: var(--shadow); }
+.day-card .dow { font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+.day-card .meal-emoji { font-size: 1.9rem; transition: transform .3s ease; }
+.day-card.flip .meal-emoji { animation: pop .35s ease; }
+@keyframes pop { 0% { transform: scale(.4) rotate(-20deg); } 70% { transform: scale(1.2); } 100% { transform: scale(1); } }
+.day-card .meal-name { font-size: .74rem; font-weight: 600; line-height: 1.3; color: var(--ink); min-height: 2.2em; }
+.day-card .meal-time { font-size: .64rem; color: var(--ink-soft); }
+.day-shuffle {
+  margin-top: auto; border: 0; background: #fff; border: 1px solid var(--border);
+  border-radius: 999px; width: 26px; height: 26px; font-size: .75rem;
+  display: grid; place-items: center; transition: background .2s, transform .3s;
+}
+.day-shuffle:hover { background: var(--accent-soft); transform: rotate(180deg); }
+.planner-foot { display: flex; align-items: center; gap: .6rem; margin-top: 1.5rem; font-size: .9rem; color: var(--ink-soft); flex-wrap: wrap; }
+.grocery-pill {
+  background: var(--green); color: #fff; font-weight: 700;
+  padding: .35rem .9rem; border-radius: 999px; font-size: .82rem;
+  transition: transform .2s;
+}
+.grocery-pill.bump { animation: bump .3s ease; }
+@keyframes bump { 50% { transform: scale(1.15); } }
+
+/* ============ TESTIMONIALS ============ */
+.quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin-top: 3.5rem; }
+.quote {
+  background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1.9rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 1.1rem;
+  transition: transform .25s ease;
+}
+.quote:hover { transform: translateY(-6px); }
+.quote .stars { color: var(--sun); letter-spacing: .15em; font-size: .9rem; }
+.quote p { font-size: .95rem; color: var(--ink); font-style: italic; }
+.quote-who { display: flex; align-items: center; gap: .8rem; margin-top: auto; }
+.avatar {
+  width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center;
+  font-weight: 700; color: #fff; font-size: .9rem;
+}
+.quote-who b { font-size: .9rem; display: block; color: var(--green-dark); }
+.quote-who span { font-size: .78rem; color: var(--ink-soft); }
+
+/* ============ PRICING ============ */
+.pricing { background: var(--cream-2); }
+.price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin-top: 3.5rem; align-items: stretch; }
+.price-card {
+  background: #fff; border: 1.5px solid var(--border); border-radius: 22px;
+  padding: 2.1rem; display: flex; flex-direction: column; position: relative;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.price-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.price-card.featured { border-color: var(--accent); box-shadow: var(--shadow-lg); }
+.pop-badge {
+  position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+  background: var(--accent); color: #fff; font-size: .72rem; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase; padding: .3rem .9rem; border-radius: 999px;
+  white-space: nowrap;
+}
+.price-card h3 { font-size: 1.2rem; }
+.price { font-family: var(--font-display); font-size: 2.6rem; font-weight: 700; color: var(--green-dark); margin: .8rem 0 .2rem; }
+.price small { font-family: var(--font-body); font-size: .9rem; font-weight: 500; color: var(--ink-soft); }
+.price-card ul { list-style: none; margin: 1.4rem 0 1.8rem; display: flex; flex-direction: column; gap: .65rem; }
+.price-card li { font-size: .9rem; color: var(--ink-soft); display: flex; gap: .6rem; align-items: flex-start; }
+.price-card li::before { content: "✓"; color: var(--green); font-weight: 700; }
+.price-card .btn { margin-top: auto; justify-content: center; }
+
+/* ============ FAQ ============ */
+.faq-list { max-width: 720px; margin: 3rem auto 0; display: flex; flex-direction: column; gap: .9rem; }
+.faq-item { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+.faq-q {
+  width: 100%; background: none; border: 0; text-align: left;
+  padding: 1.2rem 1.5rem; font-size: 1rem; font-weight: 600; color: var(--green-dark);
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+}
+.faq-q .chev { transition: transform .3s ease; font-size: 1.1rem; color: var(--accent); }
+.faq-item.open .chev { transform: rotate(45deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+.faq-a p { padding: 0 1.5rem 1.3rem; color: var(--ink-soft); font-size: .93rem; }
+
+/* ============ FINAL CTA ============ */
+.cta-band { padding: 0 0 96px; }
+.cta-card {
+  background: linear-gradient(135deg, var(--green), var(--green-dark));
+  border-radius: 32px; padding: 4.5rem 2rem; text-align: center;
+  position: relative; overflow: hidden;
+}
+.cta-card::before { content: "🥑"; position: absolute; font-size: 7rem; opacity: .12; left: 4%; top: 10%; transform: rotate(-15deg); }
+.cta-card::after { content: "🍅"; position: absolute; font-size: 7rem; opacity: .12; right: 4%; bottom: 8%; transform: rotate(15deg); }
+.cta-card h2 { color: #fff; font-size: clamp(2rem, 4vw, 3rem); }
+.cta-card p { color: #B9CFC2; margin: 1rem auto 2rem; max-width: 440px; }
+
+/* ============ FOOTER ============ */
+footer { background: var(--green-dark); color: #B9CFC2; padding: 60px 0 30px; }
+.foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+.foot-grid .logo { color: #fff; }
+.foot-grid p { font-size: .88rem; margin-top: .8rem; max-width: 260px; }
+.foot-col h4 { color: #fff; font-size: .85rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 1rem; }
+.foot-col a { display: block; font-size: .9rem; margin-bottom: .55rem; transition: color .2s; }
+.foot-col a:hover { color: var(--sun); }
+.foot-bottom { border-top: 1px solid rgba(255,255,255,.12); padding-top: 1.6rem; font-size: .8rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+
+/* ============ SCROLL REVEAL ============ */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 980px) {
+  .hero-grid { grid-template-columns: 1fr; text-align: center; }
+  .hero p.lede { margin-inline: auto; }
+  .hero-actions, .hero-note { justify-content: center; }
+  .phone-stage { margin-top: 2.5rem; }
+  .float-1 { left: 0; } .float-2 { right: 0; }
+  .feat-grid, .steps, .quotes, .price-grid { grid-template-columns: 1fr 1fr; }
+  .week-grid { grid-template-columns: repeat(4, 1fr); }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1.6rem; }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  section { padding: 64px 0; }
+  .nav-links { display: none; }
+  .menu-btn { display: block; }
+  .nav-links.open {
+    display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0;
+    background: var(--cream); padding: 1.4rem 5%; gap: 1.1rem; border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow);
+  }
+  .feat-grid, .steps, .quotes, .price-grid, .week-grid, .foot-grid { grid-template-columns: 1fr; }
+  .week-grid { grid-template-columns: repeat(2, 1fr); }
+  .phone { width: 262px; height: 540px; }
+  .float-card { display: none; }
+  .nav-cta .btn-ghost { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#" class="logo"><span class="logo-badge">🥗</span>Plantry</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#demo">Try it</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#pricing" class="btn btn-ghost btn-sm">Sign in</a>
+      <a href="#pricing" class="btn btn-primary btn-sm">Get started</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="hero-badge">✨ New · Pantry-powered planning is here</span>
+      <h1>“What’s for dinner?” <em>Already answered.</em></h1>
+      <p class="lede">Plantry builds a week of meals around your tastes, your schedule, and what’s already in your kitchen — then writes the grocery list for you.</p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn btn-primary">Start planning free →</a>
+        <a href="#how" class="btn btn-ghost">See how it works</a>
+      </div>
+      <p class="hero-note">✓ Free 14-day trial &nbsp;·&nbsp; ✓ No credit card &nbsp;·&nbsp; ✓ Cancel anytime</p>
+    </div>
+
+    <div class="phone-stage">
+      <div class="float-card float-1"><span class="dot"></span><div>Grocery list updated<small>32 items · sorted by aisle</small></div></div>
+      <div class="float-card float-2"><div>⭐ 4.9 rating<small>12,400+ App Store reviews</small></div></div>
+
+      <div class="phone" role="img" aria-label="Plantry app showing a weekly meal plan">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="p-greeting">Hi, Maya 👋</div>
+          <div class="p-sub">Your week is planned. Nice.</div>
+          <div class="p-days">
+            <div class="p-day">M</div><div class="p-day">T</div>
+            <div class="p-day active">W</div><div class="p-day">T</div>
+            <div class="p-day">F</div><div class="p-day">S</div><div class="p-day">S</div>
+          </div>
+          <div class="p-tonight">
+            <span class="p-label">Tonight</span>
+            <span class="p-meal-name" id="phoneMeal">Creamy Tuscan Chicken</span>
+            <span class="p-meal-meta">⏱ <span id="phoneTime">30 min</span> · 🔥 620 kcal</span>
+            <button class="p-swap" id="phoneSwap">↻ Swap meal</button>
+          </div>
+          <div class="p-next">
+            <span class="p-next-title">Up next</span>
+            <div class="p-row"><span class="emoji">🌮</span>Black Bean Tacos <span class="time">Thu · 20 min</span></div>
+            <div class="p-row"><span class="emoji">🍜</span>Ginger Miso Ramen <span class="time">Fri · 35 min</span></div>
+          </div>
+          <div class="p-tabbar"><span>📅</span><span>🛒</span><span>🥫</span><span>👤</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STATS ================= -->
+<div class="stats">
+  <div class="container stats-grid reveal">
+    <div class="stat"><b>120k+</b><span>weeks planned</span></div>
+    <div class="stat"><b>6.5 hrs</b><span>saved per month, on average</span></div>
+    <div class="stat"><b>31%</b><span>less food wasted</span></div>
+    <div class="stat"><b>4.9★</b><span>average app rating</span></div>
+  </div>
+</div>
+
+<!-- ================= FEATURES ================= -->
+<section class="features" id="features">
+  <div class="container center">
+    <span class="eyebrow">Why Plantry</span>
+    <h2 class="section-title reveal">Everything between “I’m hungry” and “Dinner’s ready.”</h2>
+    <p class="section-sub reveal">One app that plans your meals, writes your list, and keeps your pantry honest.</p>
+    <div class="feat-grid">
+      <div class="feat-card reveal"><div class="feat-icon">📅</div><h3>Smart weekly plans</h3><p>Tell us your tastes, diet, and how much time you have. Get a week of dinners you’ll actually want to cook — in seconds.</p></div>
+      <div class="feat-card reveal"><div class="feat-icon">🛒</div><h3>Automatic grocery lists</h3><p>Every plan becomes a list, merged, de-duplicated, and sorted by aisle. Check things off as you shop.</p></div>
+      <div class="feat-card reveal"><div class="feat-icon">🥫</div><h3>Pantry-aware recipes</h3><p>Log what’s in your kitchen and Plantry plans around it first — so that half-bag of spinach finally meets its destiny.</p></div>
+      <div class="feat-card reveal"><div class="feat-icon">🌱</div><h3>Every diet, covered</h3><p>Vegan, keto, gluten-free, picky toddler, “Mom’s visiting Sunday.” Filter once and every suggestion just fits.</p></div>
+      <div class="feat-card reveal"><div class="feat-icon">♻️</div><h3>Leftover logic</h3><p>Tonight’s roast chicken becomes tomorrow’s tacos. Plantry chains recipes together to cut waste and effort.</p></div>
+      <div class="feat-card reveal"><div class="feat-icon">👨‍👩‍👧</div><h3>Shared with your people</h3><p>One plan for the whole household. Anyone can swap a meal, add to the list, or claim “I’ll cook Friday.”</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section id="how">
+  <div class="container center">
+    <span class="eyebrow">How it works</span>
+    <h2 class="section-title reveal">Three steps. Zero 5 p.m. panic.</h2>
+    <div class="steps">
+      <div class="step reveal"><span class="step-num">01</span><h3>Tell us your tastes</h3><p>A 60-second setup covers diets, dislikes, cooking time, and how many mouths you’re feeding.</p></div>
+      <div class="step reveal"><span class="step-num">02</span><h3>Get your week, instantly</h3><p>Plantry drafts seven dinners that fit your life. Don’t love one? Swap it with a tap — the list updates itself.</p></div>
+      <div class="step reveal"><span class="step-num">03</span><h3>Shop once, cook easy</h3><p>One aisle-sorted list. Step-by-step recipes. And a pantry that quietly empties instead of expiring.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INTERACTIVE DEMO ================= -->
+<section class="demo-wrap" id="demo">
+  <div class="container center">
+    <span class="eyebrow">Try it right now</span>
+    <h2 class="section-title reveal">Shuffle a week of dinners</h2>
+    <p class="section-sub reveal">This is a tiny taste of Plantry. Hit shuffle on any day — or regenerate the whole week.</p>
+
+    <div class="planner reveal" style="text-align:left">
+      <div class="planner-head">
+        <h3>Your week · <span id="weekLabel">Vegetarian-ish</span></h3>
+        <button class="btn btn-primary btn-sm" id="shuffleAll">↻ Shuffle whole week</button>
+      </div>
+      <div class="week-grid" id="weekGrid"></div>
+      <div class="planner-foot">
+        <span class="grocery-pill" id="groceryCount">🛒 0 items</span>
+        <span>Grocery list updates automatically as you swap meals. That’s the whole trick.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section>
+  <div class="container center">
+    <span class="eyebrow">Loved by busy kitchens</span>
+    <h2 class="section-title reveal">People are cooking again</h2>
+    <div class="quotes">
+      <div class="quote reveal">
+        <div class="stars">★★★★★</div>
+        <p>“I used to dread the 5 p.m. ‘what’s for dinner’ text. Now my partner just checks the app. Our grocery bill dropped by about $60 a month, too.”</p>
+        <div class="quote-who"><div class="avatar" style="background:#E76F51">DK</div><div><b>Dana K.</b><span>Parent of two, chaos coordinator</span></div></div>
+      </div>
+      <div class="quote reveal">
+        <div class="stars">★★★★★</div>
+        <p>“The pantry feature is genuinely magic. It planned three dinners around stuff I already had. I threw away almost nothing last month.”</p>
+        <div class="quote-who"><div class="avatar" style="background:#2D6A4F">MR</div><div><b>Marcus R.</b><span>Solo cook, hates food waste</span></div></div>
+      </div>
+      <div class="quote reveal">
+        <div class="stars">★★★★★</div>
+        <p>“As someone who went vegetarian this year, the filters saved me. Every suggestion actually fits my diet — no more recipe detective work.”</p>
+        <div class="quote-who"><div class="avatar" style="background:#F4A261">AS</div><div><b>Priya S.</b><span>New vegetarian, weeknight warrior</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRICING ================= -->
+<section class="pricing" id="pricing">
+  <div class="container center">
+    <span class="eyebrow">Pricing</span>
+    <h2 class="section-title reveal">Cheaper than one takeout night</h2>
+    <p class="section-sub reveal">Start free. Upgrade when your fridge forgives you.</p>
+    <div class="price-grid">
+      <div class="price-card reveal">
+        <h3>Taste</h3>
+        <div class="price">$0<small>/forever</small></div>
+        <ul>
+          <li>3 planned dinners per week</li>
+          <li>Basic grocery list</li>
+          <li>200+ starter recipes</li>
+          <li>1 diner profile</li>
+        </ul>
+        <a href="#" class="btn btn-ghost">Start free</a>
+      </div>
+      <div class="price-card featured reveal">
+        <span class="pop-badge">Most popular</span>
+        <h3>Plus</h3>
+        <div class="price">$7.99<small>/month</small></div>
+        <ul>
+          <li>Full 7-day plans, unlimited swaps</li>
+          <li>Aisle-sorted smart grocery list</li>
+          <li>Pantry tracking & leftover logic</li>
+          <li>All diet filters · 5,000+ recipes</li>
+          <li>Nutrition & calorie views</li>
+        </ul>
+        <a href="#" class="btn btn-primary">Try free for 14 days</a>
+      </div>
+      <div class="price-card reveal">
+        <h3>Family</h3>
+        <div class="price">$11.99<small>/month</small></div>
+        <ul>
+          <li>Everything in Plus</li>
+          <li>Up to 6 diner profiles</li>
+          <li>Shared list with live sync</li>
+          <li>“Who’s cooking?” assignments</li>
+          <li>Pickiness diplomacy mode</li>
+        </ul>
+        <a href="#" class="btn btn-ghost">Try free for 14 days</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq">
+  <div class="container center">
+    <span class="eyebrow">FAQ</span>
+    <h2 class="section-title reveal">Fair questions</h2>
+    <div class="faq-list" style="text-align:left">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Do I have to be a good cook to use Plantry?<span class="chev">＋</span></button>
+        <div class="faq-a"><p>Not even a little. Set your skill level and max cooking time during setup, and every recipe will match. Most of our “Quick” meals take 20 minutes and one pan.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How does the pantry tracking work?<span class="chev">＋</span></button>
+        <div class="faq-a"><p>Add items manually, scan barcodes, or snap a photo of your fridge shelf. As you cook recipes, Plantry deducts ingredients automatically, and it prioritizes things nearing their use-by date when planning your week.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Can it handle allergies and mixed diets?<span class="chev">＋</span></button>
+        <div class="faq-a"><p>Yes. Allergies are hard filters — flagged ingredients never appear in your plan. Family plans support per-person profiles, so one vegetarian and two omnivores get meals that work for everyone (with smart “add protein on the side” suggestions).</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Does the grocery list work with delivery services?<span class="chev">＋</span></button>
+        <div class="faq-a"><p>Plantry exports your list to major grocery delivery apps in one tap, or you can use the built-in checklist in-store. Lists are merged and sorted by aisle either way.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Can I cancel anytime?<span class="chev">＋</span></button>
+        <div class="faq-a"><p>Of course. Cancel in two taps from the app — no emails, no phone calls, no guilt trips. You keep free-tier access forever.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<div class="cta-band">
+  <div class="container">
+    <div class="cta-card reveal">
+      <h2>Dinner, decided — starting tonight.</h2>
+      <p>Join 40,000+ households who stopped improvising and started eating well.</p>
+      <a href="#pricing" class="btn btn-primary">Get Plantry free →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <a href="#" class="logo"><span class="logo-badge">🥗</span>Plantry</a>
+        <p>Meal planning, minus the chaos. Made with love and an unreasonable number of chickpeas.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Product</h4>
+        <a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#demo">Live demo</a><a href="#">iOS & Android</a>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <a href="#">About</a><a href="#">Blog</a><a href="#">Careers</a><a href="#">Press kit</a>
+      </div>
+      <div class="foot-col">
+        <h4>Support</h4>
+        <a href="#faq">FAQ</a><a href="#">Contact</a><a href="#">Privacy</a><a href="#">Terms</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2025 Plantry, Inc. All rights reserved.</span>
+      <span>🍳 Cooked up in Portland, OR</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============ DATA ============ */
+const MEALS = [
+  { name: "Lemon Herb Salmon",        emoji: "🐟", time: "25 min", items: 6 },
+  { name: "Black Bean Tacos",         emoji: "🌮", time: "20 min", items: 7 },
+  { name: "Ginger Miso Ramen",        emoji: "🍜", time: "35 min", items: 9 },
+  { name: "Creamy Tuscan Chicken",    emoji: "🍗", time: "30 min", items: 8 },
+  { name: "Veggie Stir-Fry",          emoji: "🥦", time: "15 min", items: 6 },
+  { name: "Margherita Flatbread",     emoji: "🍕", time: "18 min", items: 5 },
+  { name: "Chickpea Curry",           emoji: "🍛", time: "30 min", items: 8 },
+  { name: "Shrimp Pesto Pasta",       emoji: "🍤", time: "22 min", items: 6 },
+  { name: "Stuffed Bell Peppers",     emoji: "🫑", time: "40 min", items: 7 },
+  { name: "Mushroom Risotto",         emoji: "🍄", time: "35 min", items: 6 },
+  { name: "Greek Grain Bowls",        emoji: "🥙", time: "20 min", items: 9 },
+  { name: "Beef & Broccoli",          emoji: "🥩", time: "25 min", items: 6 },
+  { name: "Caprese Gnocchi Bake",     emoji: "🧀", time: "28 min", items: 5 },
+  { name: "Thai Basil Lettuce Wraps", emoji: "🥬", time: "15 min", items: 7 },
+  { name: "Sweet Potato Chili",       emoji: "🍠", time: "35 min", items: 9 },
+  { name: "Honey Garlic Meatballs",   emoji: "🧆", time: "30 min", items: 7 },
+  { name: "Avocado Egg Toast",        emoji: "🥑", time: "10 min", items: 4 },
+  { name: "Spinach Ricotta Shells",   emoji: "🍝", time: "45 min", items: 8 }
+];
+const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+/* ============ WEEK PLANNER DEMO ============ */
+const weekGrid = document.getElementById("weekGrid");
+const groceryCount = document.getElementById("groceryCount");
+let weekMeals = [];
+
+function randomMeal(excludeName) {
+  let m;
+  do { m = MEALS[Math.floor(Math.random() * MEALS.length)]; }
+  while (excludeName && m.name === excludeName);
+  return m;
+}
+
+function renderWeek(animateCard = -1) {
+  weekGrid.innerHTML = "";
+  weekMeals.forEach((meal, i) => {
+    const card = document.createElement("div");
+    card.className = "day-card" + (i === animateCard ? " flip" : "");
+    card.innerHTML = `
+      <span class="dow">${DAYS[i]}</span>
+      <span class="meal-emoji">${meal.emoji}</span>
+      <span class="meal-name">${meal.name}</span>
+      <span class="meal-time">⏱ ${meal.time}</span>
+      <button class="day-shuffle" aria-label="Shuffle ${DAYS[i]}'s meal" data-day="${i}">↻</button>`;
+    weekGrid.appendChild(card);
+  });
+  updateGroceryCount();
+}
+
+function updateGroceryCount() {
+  const total = weekMeals.reduce((sum, m) => sum + m.items, 0);
+  groceryCount.textContent = `🛒 ${total} items`;
+  groceryCount.classList.remove("bump");
+  void groceryCount.offsetWidth; /* restart animation */
+  groceryCount.classList.add("bump");
+}
+
+weekMeals = DAYS.map(() => randomMeal());
+renderWeek();
+
+weekGrid.addEventListener("click", (e) => {
+  const btn = e.target.closest(".day-shuffle");
+  if (!btn) return;
+  const i = Number(btn.dataset.day);
+  weekMeals[i] = randomMeal(weekMeals[i].name);
+  renderWeek(i);
+});
+
+document.getElementById("shuffleAll").addEventListener("click", () => {
+  weekMeals = DAYS.map((_, i) => randomMeal(weekMeals[i].name));
+  renderWeek();
+  [...weekGrid.children].forEach((card, i) =>
+    setTimeout(() => card.classList.add("flip"), i * 70));
+});
+
+/* ============ PHONE MOCKUP SWAP ============ */
+const phoneMeal = document.getElementById("phoneMeal");
+const phoneTime = document.getElementById("phoneTime");
+document.getElementById("phoneSwap").addEventListener("click", () => {
+  const m = randomMeal(phoneMeal.textContent);
+  phoneMeal.textContent = m.name;
+  phoneTime.textContent = m.time;
+});
+
+/* ============ FAQ ACCORDION ============ */
+document.querySelectorAll(".faq-item").forEach(item => {
+  const q = item.querySelector(".faq-q");
+  const a = item.querySelector(".faq-a");
+  q.addEventListener("click", () => {
+    const open = item.classList.contains("open");
+    document.querySelectorAll(".faq-item.open").forEach(o => {
+      o.classList.remove("open");
+      o.querySelector(".faq-a").style.maxHeight = null;
+      o.querySelector(".faq-q").setAttribute("aria-expanded", "false");
+    });
+    if (!open) {
+      item.classList.add("open");
+      a.style.maxHeight = a.scrollHeight + "px";
+      q.setAttribute("aria-expanded", "true");
+    }
+  });
+});
+
+/* ============ SCROLL REVEAL ============ */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); observer.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+/* ============ NAV BEHAVIOR ============ */
+const nav = document.getElementById("nav");
+addEventListener("scroll", () => nav.classList.toggle("scrolled", scrollY > 10), { passive: true });
+
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+menuBtn.addEventListener("click", () => {
+  const open = navLinks.classList.toggle("open");
+  menuBtn.setAttribute("aria-expanded", open);
+  menuBtn.textContent = open ? "✕" : "☰";
+});
+navLinks.addEventListener("click", (e) => {
+  if (e.target.tagName === "A") { navLinks.classList.remove("open"); menuBtn.textContent = "☰"; }
+});
+</script>
+</body>
+</html>

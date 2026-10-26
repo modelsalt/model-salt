@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican cruising hands-free</title>
+  <desc id="desc">An angular white pelican raises both wings in a high V while riding a blue beach cruiser, viewed from a low front three-quarter angle.</desc>
+
+  <rect width="600" height="800" fill="#fff"/>
+  <path d="M68 734 506 711" stroke="#247ac4" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- Balloon tires: the front wheel looms toward the viewer. -->
+  <g fill="#fff" stroke="#252b35">
+    <ellipse cx="169" cy="590" rx="66" ry="112" stroke-width="20" transform="rotate(-11 169 590)"/>
+    <ellipse cx="402" cy="614" rx="88" ry="133" stroke-width="25" transform="rotate(-11 402 614)"/>
+  </g>
+  <g fill="none" stroke="#247ac4" stroke-width="4">
+    <path d="m148 482 42 216m-85-105 128-24m-105-62 84 167m-98-25 110-119"/>
+    <path d="m377 488 50 252m-111-110 172-33m-151-70 130 174m-134-5 135-165"/>
+  </g>
+
+  <!-- Swept cruiser frame and handlebars. -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M169 590 253 466 295 602 169 590
+             M253 466 Q301 514 365 474
+             M295 602 Q349 589 365 474"
+          stroke="#252b35" stroke-width="19"/>
+    <path d="M169 590 253 466 295 602 169 590
+             M253 466 Q301 514 365 474
+             M295 602 Q349 589 365 474"
+          stroke="#247ac4" stroke-width="10"/>
+    <path d="m359 447 43 167m-149-148-9-31" stroke="#252b35" stroke-width="13"/>
+    <path d="m359 447 43 167" stroke="#247ac4" stroke-width="6"/>
+    <path d="m359 449-12-47m-35 1 35-1 54-24 26 13" stroke="#252b35" stroke-width="12"/>
+    <path d="m300 401 19 5m105-19 18 7" stroke="#252b35" stroke-width="19"/>
+    <path d="M219 438q28-15 53-3" stroke="#252b35" stroke-width="18"/>
+  </g>
+
+  <!-- Pedaling legs and broad webbed feet. -->
+  <g fill="#efb52d" stroke="#252b35" stroke-linejoin="round">
+    <path d="m278 410 47 69-8 67 23 10-39 11-9-20 6-63-49-58Z" stroke-width="6"/>
+    <path d="m239 418-17 82 56 65-11 37 51-7-24-21-42-81 19-68Z" stroke-width="8"/>
+  </g>
+  <g fill="none" stroke="#252b35" stroke-width="9" stroke-linecap="round">
+    <circle cx="295" cy="602" r="18" fill="#fff" stroke-width="6"/>
+    <path d="m295 602-22-22m-12 0h29m5 22 28 30m-12 0h30"/>
+  </g>
+
+  <!-- High-V wings, cut into bold feather silhouettes. -->
+  <g fill="#fff" stroke="#252b35" stroke-linejoin="round">
+    <path d="M236 326 177 260 91 100 101 192 76 164 103 241
+             80 221 128 301 112 295 187 368Z" stroke-width="9"/>
+    <path d="m291 309 52-70L460 73l-25 96 31-28-34 78
+             28-18-52 79 23-9-84 96Z" stroke-width="8"/>
+  </g>
+  <g fill="#247ac4">
+    <path d="m101 192 70 108-43-27-25-32 32 21Z"/>
+    <path d="m435 169-70 126 43-28 24-48-31 30Z"/>
+  </g>
+
+  <!-- Body, lifted throat, and long pouched bill. -->
+  <path d="m184 341-32-11 24 48q8 64 73 65
+           63-1 76-65l-8-70-20-62 16-42
+           -50-15-29 48 5 68-23 20Z"
+        fill="#fff" stroke="#252b35" stroke-width="9" stroke-linejoin="round"/>
+  <path d="m180 378 43 24 50 2-24 21-42-12Z" fill="#247ac4"/>
+  <path d="m265 241 22 54 5 56-19-18-8-53Z" fill="#247ac4"/>
+
+  <path d="m247 206 3-45 25-25 43 1 29 28-1 48-39 27-39-8Z"
+        fill="#fff" stroke="#252b35" stroke-width="8" stroke-linejoin="round"/>
+  <path d="m324 185 180 48-103 39-46-15-34-41Z"
+        fill="#efb52d" stroke="#252b35" stroke-width="8" stroke-linejoin="round"/>
+  <path d="m328 187 176 46-172-20" fill="#efb52d" stroke="#252b35" stroke-width="6" stroke-linejoin="round"/>
+  <path d="m362 231 35 25 60-17Z" fill="#fff"/>
+  <path d="m274 169 23-8 16 9" fill="none" stroke="#252b35" stroke-width="6" stroke-linecap="round"/>
+  <ellipse cx="300" cy="185" rx="7" ry="10" fill="#252b35"/>
+  <circle cx="302" cy="182" r="2.5" fill="#fff"/>
+
+  <!-- Small comic motion accents. -->
+  <g fill="none" stroke="#247ac4" stroke-linecap="round">
+    <path d="m66 487 36-8m-49 38 36-7m408 164 20-17" stroke-width="7"/>
+    <path d="m72 111-12-24m416 15 17-20" stroke-width="5"/>
+  </g>
+</svg>

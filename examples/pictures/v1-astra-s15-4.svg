@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="640" height="640" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A white pelican facing left, both wings on the handlebars of a red penny-farthing bicycle.</desc>
+
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Wheels and spokes -->
+    <g stroke="#b8bec3" stroke-width="2">
+      <path d="M270 275V575 M120 425H420
+               M164 319L376 531 M164 531L376 319
+               M213 286L327 564 M131 368L409 482
+               M131 482L409 368 M213 564L327 286"/>
+      <path d="M515 485V575 M470 530H560
+               M483 498L547 562 M483 562L547 498"/>
+    </g>
+    <g stroke="#303b43" stroke-width="5">
+      <circle cx="270" cy="425" r="150"/>
+      <circle cx="515" cy="530" r="45"/>
+    </g>
+    <g stroke="#aeb6bc" stroke-width="1.5">
+      <circle cx="270" cy="425" r="141"/>
+      <circle cx="515" cy="530" r="37"/>
+    </g>
+
+    <!-- Far pedal and leg -->
+    <path d="M270 425L243 394" stroke="#303b43" stroke-width="5"/>
+    <path d="M230 394H254" stroke="#303b43" stroke-width="6"/>
+    <path d="M320 251L291 322L242 382" stroke="#df9d35" stroke-width="7"/>
+    <path d="M242 382L227 391L253 391" stroke="#df9d35" stroke-width="5"/>
+
+    <!-- Penny-farthing frame -->
+    <path d="M270 425L270 267
+             M270 289C351 288 357 389 397 443L515 530
+             M322 309L333 265" stroke="#cc4946" stroke-width="8"/>
+    <path d="M314 265H354" stroke="#303b43" stroke-width="9"/>
+    <path d="M270 267L259 238H213
+             M259 238L243 252H199" stroke="#303b43" stroke-width="5"/>
+    <path d="M211 238H226 M197 252H213" stroke="#cc4946" stroke-width="8"/>
+
+    <!-- Far wing reaching the handlebar -->
+    <path d="M336 180C301 175 274 202 251 225
+             L218 235Q209 240 222 244
+             C269 243 307 224 337 203"
+          fill="#fff" stroke="#89969e" stroke-width="3"/>
+
+    <!-- White body, neck and head -->
+    <path d="M362 218L405 197L391 225L410 220
+             C389 246 359 260 330 256
+             C285 252 260 225 260 192
+             C260 164 274 145 263 130
+             C251 116 222 125 211 108
+             C197 87 207 62 230 57
+             C257 50 283 68 284 94
+             C284 117 282 130 298 145
+             C320 161 355 164 372 189
+             Q382 206 362 218Z"
+          fill="#fff" stroke="#303b43" stroke-width="3.5"/>
+
+    <!-- Long bill and throat pouch -->
+    <path d="M214 98L65 111
+             Q105 154 165 157
+             Q201 157 224 117"
+          fill="#fff3d7" stroke="#d9992e" stroke-width="3"/>
+    <path d="M214 91L62 109Q57 113 69 116
+             L220 110"
+          fill="#ffd575" stroke="#d9992e" stroke-width="3"/>
+    <path d="M79 116L207 111" stroke="#d9992e" stroke-width="1.5"/>
+
+    <!-- Eye and crown -->
+    <circle cx="237" cy="86" r="4" fill="#303b43" stroke="none"/>
+    <path d="M231 72Q238 68 245 72
+             M251 58L259 49 M259 62L270 56"
+          stroke="#303b43" stroke-width="2.5"/>
+
+    <!-- Near wing, its tip resting on the near grip -->
+    <path d="M347 179C321 174 302 191 281 214
+             C262 233 236 241 205 245
+             Q194 247 201 253
+             C234 263 277 249 306 229
+             Q333 211 347 194"
+          fill="#fff" stroke="#303b43" stroke-width="3.5"/>
+    <path d="M217 249Q263 246 299 219
+             M233 253Q273 245 308 218"
+          stroke="#aab4bb" stroke-width="2"/>
+
+    <!-- Near leg and webbed foot -->
+    <path d="M341 254L354 320L304 447" stroke="#df9d35" stroke-width="7"/>
+    <path d="M304 447L289 459L323 459L313 449"
+          fill="#ffd575" stroke="#d9992e" stroke-width="3"/>
+
+    <!-- Crank and pedal -->
+    <circle cx="270" cy="425" r="8" fill="#fff" stroke="#303b43" stroke-width="3"/>
+    <path d="M270 425L306 464" stroke="#303b43" stroke-width="5"/>
+    <path d="M291 464H325" stroke="#303b43" stroke-width="6"/>
+    <circle cx="515" cy="530" r="5" fill="#cc4946" stroke="none"/>
+  </g>
+</svg>

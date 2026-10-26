@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 480" width="600" height="480" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A white pelican with a long golden bill sits on a teal bicycle, shown from the side, with both feet on the pedals.</desc>
+
+  <rect width="600" height="480" rx="28" fill="#f8f3e7"/>
+
+  <!-- Wheels -->
+  <g fill="none" stroke="#243d46">
+    <g stroke-width="7">
+      <circle cx="160" cy="360" r="76"/>
+      <circle cx="440" cy="360" r="76"/>
+    </g>
+    <g stroke-width="2" opacity=".35">
+      <path d="M160 284v152m-76-76h152m-130-54 108 108m-108 0 108-108"/>
+      <path d="M440 284v152m-76-76h152m-130-54 108 108m-108 0 108-108"/>
+    </g>
+  </g>
+
+  <!-- Bicycle frame, saddle, and handlebars -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m160 360 85-100 65 100H160l230-100-80 100m80-100 50 100"
+          stroke="#218f91" stroke-width="9"/>
+    <path d="m245 260-9-25m154 25-11-37h30"
+          stroke="#243d46" stroke-width="7"/>
+    <path d="M214 236h48" stroke="#243d46" stroke-width="12"/>
+  </g>
+
+  <!-- Far leg and pedal -->
+  <path d="m268 231 44 48-28 54" fill="none" stroke="#d58b35"
+        stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M272 334h26" stroke="#243d46" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Seated pelican silhouette -->
+  <path d="m208 198-34-24 12 41c3 21 25 27 53 22
+           39 2 61-24 71-57l14-37
+           c11 8 29 5 36-8 9-17-1-37-20-40
+           -23-4-39 14-40 35l-9 45
+           c-23-20-65-16-83 23Z"
+        fill="#fffdf7" stroke="#243d46" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- Wing reaching toward the handlebars -->
+  <path d="M222 185q26-9 51 14l35 28 70-3q-18 18-64 20-34-2-63-18"
+        fill="#dce8e5" stroke="#243d46" stroke-width="4"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Bill and generous throat pouch -->
+  <path d="M346 131h146q-55 54-105 42-28-7-41-42Z"
+        fill="#edb94f" stroke="#243d46" stroke-width="4" stroke-linejoin="round"/>
+  <path d="m345 122 153 10-151 8"
+        fill="#ffd56a" stroke="#243d46" stroke-width="4" stroke-linejoin="round"/>
+  <circle cx="335" cy="118" r="5" fill="#243d46"/>
+
+  <!-- Near leg -->
+  <path d="m246 235 34 48 52 87"
+        fill="none" stroke="#edac45" stroke-width="12"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Crank and feet on the pedals -->
+  <g stroke="#243d46" stroke-linecap="round">
+    <circle cx="310" cy="360" r="10" fill="#f8f3e7" stroke-width="4"/>
+    <path d="m284 334 26 26 22 16m-13 0h30" fill="none" stroke-width="5"/>
+  </g>
+  <path d="m281 325 19 7h-27m57 31 18 10h-29"
+        fill="#edac45" stroke="#edac45" stroke-width="5"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

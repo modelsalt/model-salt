@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640" viewBox="0 0 640 640" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A grayscale pelican seen from behind at a three-quarter angle, cycling away toward the left on a city bicycle. One wing holds the upright handlebars while the other stretches sideways.</desc>
+
+  <rect width="640" height="640" rx="32" fill="#f4f4f4"/>
+  <ellipse cx="315" cy="526" rx="185" ry="23" fill="#dedede"/>
+
+  <g stroke="#333" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Wheels, receding toward the left -->
+    <g fill="#fafafa" stroke-width="12">
+      <ellipse cx="203" cy="398" rx="46" ry="91" transform="rotate(-12 203 398)"/>
+      <ellipse cx="357" cy="448" rx="57" ry="105" transform="rotate(-12 357 448)"/>
+    </g>
+    <g fill="none" stroke="#aaa" stroke-width="2">
+      <path d="M184 312 222 484M160 389 246 407M171 336 235 460M166 451 240 345"/>
+      <path d="M335 348 379 548M303 437 411 459M312 375 402 521M319 513 395 383"/>
+    </g>
+
+    <!-- City bicycle frame and upright steering -->
+    <g fill="none" stroke-width="9">
+      <path d="M203 398 219 306 285 438 357 448 309 337Z" stroke="#777"/>
+      <path d="M219 306Q256 375 309 337M285 438 309 337" stroke="#999"/>
+      <path d="M203 398 189 292 183 264" stroke="#555"/>
+      <path d="M146 251 153 272 183 264 232 281 245 264" stroke="#777"/>
+      <path d="M309 337 315 315" stroke="#555"/>
+    </g>
+    <path d="M293 309Q320 301 341 316L333 326 299 322Z" fill="#444" stroke-width="4"/>
+    <g fill="none" stroke-width="5">
+      <circle cx="285" cy="438" r="17" fill="#ccc"/>
+      <path d="M285 438 315 456M285 438 260 418"/>
+      <path d="M301 458 331 454M247 421 272 415" stroke-width="8"/>
+    </g>
+    <path d="M296 405Q295 345 334 337Q386 324 414 420" fill="none" stroke="#aaa" stroke-width="7"/>
+
+    <!-- Webbed feet on the pedals -->
+    <path d="M282 310Q252 349 257 393L246 410 269 414 278 405 270 393 291 346"
+          fill="#aaa" stroke-width="4"/>
+    <path d="M330 324Q350 371 322 425L332 447 306 452 294 443 309 428 307 368"
+          fill="#bcbcbc" stroke-width="4"/>
+
+    <!-- Neck, seen over the left shoulder -->
+    <path d="M288 267Q239 243 233 199L230 154Q225 130 204 132
+             Q179 136 187 167L199 221Q207 278 254 300Z"
+          fill="#eee" stroke-width="4"/>
+
+    <!-- Long bill and hanging throat pouch -->
+    <path d="M192 158 88 174Q114 211 166 204Q193 200 208 174Z"
+          fill="#bcbcbc" stroke-width="4"/>
+    <path d="M195 148 76 173Q70 179 86 180L201 169Z"
+          fill="#dedede" stroke-width="4"/>
+    <path d="M93 182Q138 190 180 179" fill="none" stroke="#999" stroke-width="2"/>
+    <path d="M187 145Q201 126 219 143" fill="none" stroke="#eee" stroke-width="12"/>
+    <circle cx="196" cy="148" r="4" fill="#333" stroke="none"/>
+
+    <!-- Rounded back -->
+    <path d="M250 226Q277 208 315 235Q354 266 354 309
+             Q352 342 320 351Q283 350 255 318Q228 284 250 226Z"
+          fill="#eee" stroke-width="4"/>
+    <path d="M291 263Q329 279 339 314L357 354 326 346 305 323"
+          fill="#aaa" stroke-width="4"/>
+    <path d="M320 320 343 344M309 323 331 343" fill="none" stroke="#777" stroke-width="3"/>
+
+    <!-- Left wing reaches the handlebar -->
+    <path d="M255 238Q233 237 220 258L233 277Q240 284 248 277
+             L242 268Q264 267 279 253"
+          fill="#d4d4d4" stroke-width="4"/>
+    <path d="M231 270 242 279" fill="none" stroke="#888" stroke-width="3"/>
+
+    <!-- Right wing extended sideways -->
+    <path d="M298 244Q334 224 381 239Q433 253 527 231
+             Q534 240 513 253L481 270
+             Q508 263 517 266Q514 280 478 290
+             L449 296Q474 292 481 298Q468 313 430 315
+             Q389 317 356 294L322 283"
+          fill="#dedede" stroke-width="4"/>
+    <path d="M357 262Q409 286 481 270M368 278Q411 301 449 296"
+          fill="none" stroke="#999" stroke-width="3"/>
+    <path d="M263 282Q271 309 292 320" fill="none" stroke="#ccc" stroke-width="4"/>
+  </g>
+</svg>

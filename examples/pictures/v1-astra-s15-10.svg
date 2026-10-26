@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A layered paper-cut pelican rides a blue bicycle toward the left, seen from a front three-quarter angle, with both wings partly lifted toward its chest.</desc>
+  <defs>
+    <filter id="paper" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="3" dy="5" stdDeviation="2" flood-color="#293d48" flood-opacity=".18"/>
+    </filter>
+    <g id="rearSpokes" stroke="#afbdbe" stroke-width="2">
+      <path d="M0-76V76M-57 0H57M-41-54L41 54M-41 54L41-54"/>
+    </g>
+  </defs>
+
+  <path fill="#f4eddf" d="M0 0h960v540H0z"/>
+  <ellipse cx="486" cy="466" rx="251" ry="19" fill="#dcd5c6"/>
+
+  <!-- The farther wheel is narrower and higher in the picture. -->
+  <g transform="translate(626 377) rotate(-9)" filter="url(#paper)">
+    <ellipse rx="66" ry="87" fill="#293b43"/>
+    <ellipse rx="55" ry="75" fill="#f4eddf"/>
+    <use href="#rearSpokes"/>
+    <ellipse rx="6" ry="8" fill="#718b97"/>
+  </g>
+
+  <!-- Far pedal and leg -->
+  <path d="M552 280l31 39-42 44" fill="none" stroke="#d99842" stroke-width="13" stroke-linecap="round"/>
+  <path d="M530 355l32 8-19 12-28-4z" fill="#edb052" filter="url(#paper)"/>
+  <path d="M523 375h40" stroke="#283c49" stroke-width="9" stroke-linecap="round"/>
+
+  <!-- Bicycle frame -->
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round" filter="url(#paper)">
+    <path d="M358 391l85-113 71 116 112-17-80-104-103 5 183 99M514 394l32-121"
+          stroke="#246d98" stroke-width="13"/>
+    <path d="M445 283l65 103 108-13M451 274l88-4"
+          stroke="#66b7d4" stroke-width="4"/>
+    <path d="M549 276l7-29" stroke="#667d87" stroke-width="9"/>
+    <path d="M530 244l48 4" stroke="#253d4a" stroke-width="15"/>
+    <path d="M359 391l71-150-12-24" stroke="#328cb7" stroke-width="13"/>
+    <path d="M419 218l-32-14m30 13 45-13 17 9"
+          stroke="#748e98" stroke-width="9"/>
+    <path d="M378 201l18 6m74 2 15 8" stroke="#2d414a" stroke-width="12"/>
+    <path d="M392 211q-25 48-13 89" stroke="#405864" stroke-width="2"/>
+  </g>
+
+  <!-- Front wheel, nearer to the viewer -->
+  <g transform="translate(356 397) rotate(9)" filter="url(#paper)">
+    <ellipse rx="76" ry="98" fill="#293b43"/>
+    <ellipse rx="65" ry="86" fill="#e2e1d6"/>
+    <ellipse rx="59" ry="80" fill="#f4eddf"/>
+    <g stroke="#a2b3b7" stroke-width="2">
+      <path d="M0-80V80M-59 0H59M-42-57L42 57M-42 57L42-57M-23-74L23 74M-55-30L55 30M-55 30L55-30M-23 74L23-74"/>
+    </g>
+    <ellipse rx="10" ry="13" fill="#328cb7"/>
+    <ellipse rx="4" ry="6" fill="#dce4de"/>
+  </g>
+
+  <!-- Tail and body are overlapping pieces of paper. -->
+  <path d="M568 225l64-24-23 33 19 1-53 34z" fill="#46535a" filter="url(#paper)"/>
+  <path d="M490 174c51-16 102 9 106 56 4 37-26 61-65 59-49-2-85-34-83-65 1-22 17-42 42-50z"
+        fill="#e5e3d8" filter="url(#paper)"/>
+  <path d="M478 180c-19 35-4 70 34 85 27 10 56 5 74-12-10 27-36 41-66 31-46-15-68-43-66-64 1-17 10-31 24-40z"
+        fill="#c9cfca"/>
+
+  <!-- Far wing, partly raised with its tip against the chest -->
+  <path d="M548 213c28-11 37-40 23-55-8-8-15-3-17 12l-22 26z"
+        fill="#faf7eb" filter="url(#paper)"/>
+
+  <!-- Curved neck and head -->
+  <path d="M515 244c-34 7-68-16-73-45-4-24 11-42 5-59-4-12-21-14-25-29-5-21 11-40 34-42 28-3 46 16 42 39-3 20-24 33-24 55 0 23 25 29 41 40 14 10 16 32 0 41z"
+        fill="#fffcef" filter="url(#paper)"/>
+  <path d="M473 123c-3 25-17 35-12 58 4 19 21 30 39 39-25-4-48-22-48-45 0-22 16-36 21-52z"
+        fill="#dbe0d8"/>
+
+  <!-- Broad throat pouch and long bill, pointing left and toward us -->
+  <path d="M450 112l-151 36c21 28 59 45 91 33 27-10 48-34 60-69z"
+        fill="#e6ac51" filter="url(#paper)"/>
+  <path d="M438 121l-123 29c29 18 58 23 80 11 18-10 31-25 43-40z"
+        fill="#f3c974"/>
+  <path d="M448 103c-37 5-114 23-164 43-10 4-12 11 1 12l166-36z"
+        fill="#efb849" filter="url(#paper)"/>
+  <path d="M442 105L293 146l150-29z" fill="#ffda77"/>
+  <path d="M285 157l166-35" fill="none" stroke="#b88337" stroke-width="3"/>
+  <ellipse cx="457" cy="99" rx="9" ry="10" fill="#e8c879"/>
+  <ellipse cx="455" cy="98" rx="5" ry="6" fill="#243740"/>
+  <circle cx="453" cy="96" r="1.8" fill="#fff"/>
+  <path d="M473 77l12-10-3 16 13-5-7 14" fill="#fffcef"/>
+
+  <!-- Near wing: lifted elbow, feather tips turned inward -->
+  <path d="M518 253c-38 7-76-14-83-42-4-17 3-28 14-26 10 2 13 17 26 22l27 9-11 5 17 6-12 6 19 4z"
+        fill="#faf8ed" filter="url(#paper)"/>
+  <path d="M446 209c11 20 30 28 49 29l-8 6c-22-2-38-15-41-35z"
+        fill="#d5dbd4"/>
+
+  <!-- Near leg, webbed foot, and crank -->
+  <path d="M513 278l-28 38 20 56" fill="none" stroke="#dda148" stroke-width="14" stroke-linecap="round" filter="url(#paper)"/>
+  <circle cx="514" cy="394" r="18" fill="#284b61"/>
+  <circle cx="514" cy="394" r="10" fill="#b2c6cb"/>
+  <path d="M514 394l-25-14" stroke="#6b8792" stroke-width="7" stroke-linecap="round"/>
+  <path d="M474 384h39" stroke="#293d47" stroke-width="9" stroke-linecap="round"/>
+  <path d="M500 361l-14 9-19 5 10 6 13-1 8 4 8-5 12 1-7-12z"
+        fill="#efb653" filter="url(#paper)"/>
+</svg>

@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e4f4f8"/>
+      <stop offset="1" stop-color="#9fd0e0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Subtle vertical gradient sky -->
+  <rect width="600" height="450" fill="url(#sky)"/>
+
+  <!-- Ground band -->
+  <rect x="0" y="380" width="600" height="70" fill="#2a7f8f"/>
+  <rect x="0" y="380" width="600" height="6" fill="#1f6677"/>
+
+  <!-- ===== Mountain bike, rear three-quarter view (riding away, to the right) ===== -->
+
+  <!-- Front wheel (farther, narrower ellipse) -->
+  <ellipse cx="430" cy="340" rx="34" ry="54" fill="none" stroke="#163049" stroke-width="9"/>
+  <ellipse cx="430" cy="340" rx="34" ry="54" fill="none" stroke="#3b7d96" stroke-width="4" stroke-dasharray="5 6"/>
+  <ellipse cx="430" cy="340" rx="20" ry="32" fill="none" stroke="#1b3a5c" stroke-width="2"/>
+  <circle cx="430" cy="340" r="5" fill="#1b3a5c"/>
+
+  <!-- Suspension fork + stem -->
+  <polygon points="412,240 426,240 436,300 428,300" fill="#1b3a5c"/>
+  <rect x="421" y="250" width="12" height="28" fill="#3b7d96"/>
+  <!-- Flat wide handlebar -->
+  <rect x="372" y="226" width="92" height="8" rx="4" fill="#1b3a5c"/>
+  <rect x="372" y="226" width="14" height="8" rx="4" fill="#3b7d96"/>
+  <rect x="450" y="226" width="14" height="8" rx="4" fill="#3b7d96"/>
+
+  <!-- Frame: top tube, down tube, seat tube, rear triangle -->
+  <polygon points="250,230 418,238 418,250 254,244" fill="#1b3a5c"/>
+  <polygon points="248,232 262,232 274,330 258,330" fill="#1b3a5c"/>
+  <polygon points="258,318 274,318 426,254 422,242" fill="#1b3a5c"/>
+  <polygon points="252,236 262,240 214,330 204,324" fill="#1b3a5c"/>
+  <polygon points="208,326 212,336 268,334 266,324" fill="#1b3a5c"/>
+  <!-- Seat post + saddle -->
+  <rect x="250" y="206" width="10" height="30" fill="#3b7d96"/>
+  <rect x="230" y="200" width="48" height="12" rx="6" fill="#1b3a5c"/>
+
+  <!-- Crank + pedals -->
+  <circle cx="266" cy="328" r="14" fill="#1b3a5c"/>
+  <circle cx="266" cy="328" r="6" fill="#3b7d96"/>
+  <rect x="262" y="326" width="6" height="34" fill="#1b3a5c"/>
+  <rect x="250" y="356" width="24" height="7" rx="3" fill="#3b7d96"/>
+  <rect x="262" y="296" width="6" height="32" fill="#1b3a5c"/>
+  <rect x="256" y="292" width="20" height="7" rx="3" fill="#3b7d96"/>
+
+  <!-- Rear wheel (closer, larger, knobby) -->
+  <ellipse cx="208" cy="330" rx="46" ry="66" fill="none" stroke="#163049" stroke-width="12"/>
+  <ellipse cx="208" cy="330" rx="46" ry="66" fill="none" stroke="#3b7d96" stroke-width="5" stroke-dasharray="6 7"/>
+  <ellipse cx="208" cy="330" rx="28" ry="40" fill="none" stroke="#1b3a5c" stroke-width="2"/>
+  <polygon points="208,290 211,330 205,330" fill="#1b3a5c"/>
+  <polygon points="208,370 211,330 205,330" fill="#1b3a5c"/>
+  <polygon points="180,330 208,333 208,327" fill="#1b3a5c"/>
+  <polygon points="236,330 208,333 208,327" fill="#1b3a5c"/>
+  <circle cx="208" cy="330" r="6" fill="#1b3a5c"/>
+
+  <!-- ===== Pelican in a forward racing tuck, seen from behind-left ===== -->
+
+  <!-- Legs down to the pedals -->
+  <polygon points="278,236 292,236 274,296 264,296" fill="#3aa7c4"/>
+  <polygon points="300,236 314,236 282,358 272,358" fill="#3aa7c4"/>
+
+  <!-- Tail (closest to viewer, pointing back-left) -->
+  <polygon points="236,208 196,214 212,228 256,222" fill="#b7dde8"/>
+
+  <!-- Body: low, stretched forward -->
+  <ellipse cx="300" cy="206" rx="62" ry="34" fill="#e8f6fa"/>
+
+  <!-- Folded wing along the back -->
+  <polygon points="262,186 336,176 352,206 290,222 246,214" fill="#b7dde8"/>
+  <polygon points="280,190 332,182 336,200 292,210" fill="#9ccbdc"/>
+
+  <!-- Neck, stretched low over the handlebar -->
+  <polygon points="346,186 362,172 400,180 388,208" fill="#e8f6fa"/>
+
+  <!-- Wings/hands gripping the bar -->
+  <circle cx="384" cy="228" r="8" fill="#b7dde8"/>
+  <circle cx="456" cy="228" r="8" fill="#b7dde8"/>
+  <polygon points="350,204 384,222 378,234 342,214" fill="#b7dde8"/>
+  <polygon points="356,196 456,222 452,234 350,210" fill="#b7dde8"/>
+
+  <!-- Head -->
+  <circle cx="404" cy="176" r="22" fill="#e8f6fa"/>
+  <circle cx="416" cy="172" r="4" fill="#1b3a5c"/>
+
+  <!-- Long beak, pointing ahead and down -->
+  <polygon points="418,170 492,192 486,204 416,186" fill="#3aa7c4"/>
+  <!-- Pouch -->
+  <polygon points="418,186 486,204 468,220 424,200" fill="#2a7f8f"/>
+</svg>

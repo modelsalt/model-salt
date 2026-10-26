@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A cheerful white pelican facing left, with both wings on the handlebars of a coral-red bicycle.</desc>
+
+  <rect width="800" height="600" rx="32" fill="#e8f8fa"/>
+  <circle cx="610" cy="135" r="66" fill="#ffe083"/>
+  <ellipse cx="392" cy="534" rx="259" ry="17" fill="#bce5e6"/>
+
+  <g stroke="#203e50" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Wheels and spokes -->
+    <g fill="#f8ffff" stroke-width="9">
+      <circle cx="215" cy="440" r="88"/>
+      <circle cx="515" cy="440" r="88"/>
+    </g>
+    <g fill="none" stroke="#91c8d3" stroke-width="3">
+      <circle cx="215" cy="440" r="75"/>
+      <circle cx="515" cy="440" r="75"/>
+      <path d="M215 365V515 M140 440H290 M162 387L268 493 M162 493L268 387
+               M515 365V515 M440 440H590 M462 387L568 493 M462 493L568 387"/>
+    </g>
+
+    <!-- Far foot and pedal -->
+    <path d="M429 303L453 350L410 394" fill="none" stroke="#df942e" stroke-width="13"/>
+    <path d="M409 384Q396 385 387 398L423 401Q431 396 422 391Z"
+          fill="#ffbd43" stroke-width="4"/>
+    <path d="M389 404H426" fill="none" stroke-width="7"/>
+
+    <!-- Straight-tubed diamond frame -->
+    <path d="M263 333L417 333L365 440Z M417 333L515 440H365"
+          fill="none" stroke="#ef655f" stroke-width="12"/>
+    <path d="M263 333L215 440 M263 333L279 289 M417 333L427 304"
+          fill="none" stroke-width="9"/>
+    <path d="M279 289L251 275H233 M279 289H300"
+          fill="none" stroke-width="8"/>
+    <path d="M401 304H450" fill="none" stroke-width="13"/>
+    <path d="M233 275H250 M283 289H300" fill="none" stroke="#22aaa8" stroke-width="11"/>
+    <path d="M250 283Q211 319 242 358" fill="none" stroke-width="3"/>
+    <g fill="#ffd16b" stroke-width="5">
+      <circle cx="215" cy="440" r="8"/>
+      <circle cx="515" cy="440" r="8"/>
+      <circle cx="365" cy="440" r="19"/>
+    </g>
+
+    <!-- Far wing reaches the far handlebar -->
+    <path d="M419 217Q366 213 316 245L249 265
+             Q237 270 243 278Q249 285 262 279
+             L337 263Q395 253 433 242Z"
+          fill="#c6e4ed" stroke-width="5"/>
+
+    <!-- Tail, body, neck and head -->
+    <path d="M471 247L521 228L508 256L530 251
+             Q512 283 476 284Z"
+          fill="#d5eaf0" stroke-width="5"/>
+    <path d="M475 232
+             Q444 204 394 220
+             Q367 224 365 201
+             L365 155
+             Q369 120 344 108
+             Q316 94 298 116
+             Q282 137 299 158
+             Q315 172 316 195
+             L316 232
+             Q315 269 345 286
+             Q383 315 442 300
+             Q491 289 494 261
+             Q496 243 475 232Z"
+          fill="#fffefa" stroke-width="5"/>
+    <path d="M325 190L327 233Q326 267 359 282"
+          fill="none" stroke="#d5eaf0" stroke-width="10"/>
+
+    <!-- Broad pelican throat pouch and long bill -->
+    <path d="M304 150L157 155
+             Q184 192 237 197
+             Q284 201 306 168Z"
+          fill="#ffbd43" stroke-width="5"/>
+    <path d="M307 143Q263 139 214 145L143 155
+             Q137 157 145 161L306 159Z"
+          fill="#ffdf70" stroke-width="5"/>
+    <path d="M177 166Q230 187 278 170"
+          fill="none" stroke="#ee9638" stroke-width="3"/>
+
+    <!-- Eye and feather tuft -->
+    <circle cx="326" cy="132" r="7" fill="#203e50" stroke="none"/>
+    <circle cx="328" cy="130" r="2" fill="white" stroke="none"/>
+    <path d="M335 109L344 96 M344 112L355 102"
+          fill="none" stroke-width="4"/>
+
+    <!-- Near wing reaches the near handlebar -->
+    <path d="M443 231
+             Q416 215 389 235
+             Q357 261 300 278
+             Q286 277 283 285
+             Q280 296 295 297
+             Q355 291 407 271
+             Q437 261 443 245"
+          fill="#e4f2f5" stroke-width="5"/>
+    <path d="M407 246Q374 269 332 279"
+          fill="none" stroke="#b5dce6" stroke-width="4"/>
+
+    <!-- Near leg, webbed foot and crank -->
+    <path d="M405 297L380 344L399 421"
+          fill="none" stroke="#203e50" stroke-width="16"/>
+    <path d="M405 297L380 344L399 421"
+          fill="none" stroke="#ffbd43" stroke-width="10"/>
+    <path d="M365 440L401 439" fill="none" stroke-width="6"/>
+    <path d="M397 414Q383 419 373 432
+             L386 431L393 437L403 432L420 435
+             Q424 427 411 422Z"
+          fill="#ffbd43" stroke-width="4"/>
+    <path d="M382 443H422" fill="none" stroke-width="7"/>
+  </g>
+</svg>

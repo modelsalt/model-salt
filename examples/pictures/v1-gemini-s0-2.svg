@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#F0F5F9" />
+  
+  <!-- Minimalist Sun -->
+  <circle cx="150" cy="140" r="55" fill="#F9E2AF" />
+
+  <!-- Minimalist Clouds -->
+  <path d="M 550 150 A 25 25 0 0 1 590 130 A 35 35 0 0 1 655 135 A 20 20 0 0 1 680 150 Z" fill="#FFFFFF" />
+  <path d="M 80 240 A 20 20 0 0 1 115 225 A 25 25 0 0 1 160 230 A 15 15 0 0 1 180 240 Z" fill="#FFFFFF" />
+
+  <!-- Ground Line -->
+  <line x1="100" y1="538" x2="700" y2="538" stroke="#CBD5E1" stroke-width="8" stroke-linecap="round" />
+
+  <!-- ==================== PELICAN (FAR SIDE) ==================== -->
+  <!-- Far Leg (pedaling at top position) -->
+  <polyline points="350,275 415,355 410,415" fill="none" stroke="#E07A24" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" />
+  <!-- Far Foot -->
+  <path d="M 398 415 L 435 415 L 425 403 Z" fill="#E07A24" />
+  <!-- Far Pedal -->
+  <line x1="395" y1="418" x2="430" y2="418" stroke="#1D2D44" stroke-width="8" stroke-linecap="round" />
+  <!-- Far Crank Arm -->
+  <line x1="380" y1="440" x2="410" y2="418" stroke="#94A3B8" stroke-width="8" stroke-linecap="round" />
+
+  <!-- ==================== BICYCLE ==================== -->
+  <!-- Rear Wheel (Left) -->
+  <g id="rear-wheel">
+    <!-- Spokes -->
+    <line x1="230" y1="350" x2="230" y2="530" stroke="#CBD5E1" stroke-width="4" />
+    <line x1="140" y1="440" x2="320" y2="440" stroke="#CBD5E1" stroke-width="4" />
+    <line x1="166" y1="376" x2="294" y2="504" stroke="#CBD5E1" stroke-width="4" />
+    <line x1="166" y1="504" x2="294" y2="376" stroke="#CBD5E1" stroke-width="4" />
+    <!-- Rim & Tire -->
+    <circle cx="230" cy="440" r="82" fill="none" stroke="#E2E8F0" stroke-width="8" />
+    <circle cx="230" cy="440" r="90" fill="none" stroke="#1D2D44" stroke-width="16" />
+    <!-- Hub -->
+    <circle cx="230" cy="440" r="14" fill="#1D2D44" />
+  </g>
+
+  <!-- Front Wheel (Right) -->
+  <g id="front-wheel">
+    <!-- Spokes -->
+    <line x1="570" y1="350" x2="570" y2="530" stroke="#CBD5E1" stroke-width="4" />
+    <line x1="480" y1="440" x2="660" y2="440" stroke="#CBD5E1" stroke-width="4" />
+    <line x1="506" y1="376" x2="634" y2="504" stroke="#CBD5E1" stroke-width="4" />
+    <line x1="506" y1="504" x2="634" y2="376" stroke="#CBD5E1" stroke-width="4" />
+    <!-- Rim & Tire -->
+    <circle cx="570" cy="440" r="82" fill="none" stroke="#E2E8F0" stroke-width="8" />
+    <circle cx="570" cy="440" r="90" fill="none" stroke="#1D2D44" stroke-width="16" />
+    <!-- Hub -->
+    <circle cx="570" cy="440" r="14" fill="#1D2D44" />
+  </g>
+
+  <!-- Seatpost & Stem (Drawn behind main frame tubes) -->
+  <line x1="330" y1="320" x2="318" y2="285" stroke="#94A3B8" stroke-width="12" stroke-linecap="round" />
+  <polyline points="510,300 492,248 455,248" fill="none" stroke="#94A3B8" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Bicycle Frame (Modern Road/Cruiser Geometry in Coral Red) -->
+  <g stroke="#E63946" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Chainstay -->
+    <line x1="230" y1="440" x2="380" y2="440" />
+    <!-- Seatstay -->
+    <line x1="230" y1="440" x2="330" y2="320" />
+    <!-- Seat Tube -->
+    <line x1="380" y1="440" x2="330" y2="320" />
+    <!-- Down Tube -->
+    <line x1="380" y1="440" x2="520" y2="330" />
+    <!-- Top Tube -->
+    <line x1="330" y1="320" x2="510" y2="300" />
+    <!-- Head Tube -->
+    <line x1="507" y1="291" x2="525" y2="345" stroke-width="16" />
+    <!-- Fork -->
+    <line x1="520" y1="330" x2="570" y2="440" />
+  </g>
+
+  <!-- Saddle -->
+  <path d="M 285 285 L 350 285 C 350 268 300 268 285 285 Z" fill="#1D2D44" />
+
+  <!-- Handlebar Grip -->
+  <line x1="445" y1="248" x2="475" y2="248" stroke="#1D2D44" stroke-width="16" stroke-linecap="round" />
+
+  <!-- Crankset / Chainring -->
+  <circle cx="380" cy="440" r="28" fill="#1D2D44" />
+  <circle cx="380" cy="440" r="14" fill="#94A3B8" />
+
+  <!-- ==================== PELICAN (MAIN BODY & NEAR SIDE) ==================== -->
+  <!-- Near Leg (pedaling at bottom position) -->
+  <polyline points="340,275 375,375 350,462" fill="none" stroke="#F48C06" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" />
+  <!-- Near Crank Arm -->
+  <line x1="380" y1="440" x2="350" y2="462" stroke="#CBD5E1" stroke-width="8" stroke-linecap="round" />
+  <!-- Near Foot -->
+  <path d="M 338 462 L 378 462 L 365 448 Z" fill="#F48C06" />
+  <!-- Near Pedal -->
+  <line x1="332" y1="466" x2="368" y2="466" stroke="#1D2D44" stroke-width="8" stroke-linecap="round" />
+
+  <!-- Pelican Body & S-Curved Neck (Clean Geometric Silhouette) -->
+  <path d="M 270 255 
+           C 305 255, 340 245, 370 220 
+           C 400 195, 375 110, 435 110 
+           L 445 140 
+           C 405 140, 445 205, 415 250 
+           C 385 290, 315 290, 285 270 
+           Z" fill="#FFFFFF" />
+
+  <!-- Tail Feathers -->
+  <polygon points="285,268 240,260 255,248 235,235 280,248" fill="#1D2D44" stroke="#1D2D44" stroke-width="4" stroke-linejoin="round" />
+  <polygon points="285,260 250,245 295,245" fill="#FFFFFF" />
+
+  <!-- Pelican Head -->
+  <!-- Tuft/Crest Feathers -->
+  <polygon points="415,105 390,95 415,88 398,75 432,85" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
+  <!-- Head Circle -->
+  <circle cx="435" cy="110" r="26" fill="#FFFFFF" />
+
+  <!-- Distinctive Pelican Beak (Full Side Profile) -->
+  <!-- Massive Lower Gular Pouch -->
+  <path d="M 442 118 
+           C 442 205, 595 200, 622 115 
+           Z" fill="#F48C06" />
+  <!-- Pouch Shadow / Depth Line -->
+  <path d="M 455 122 C 465 170, 565 170, 605 118 Z" fill="#E07A24" />
+  <!-- Upper Mandible with Hooked Tip -->
+  <path d="M 448 92 
+           L 622 105 
+           C 632 106, 634 122, 623 125 
+           C 618 126, 616 118, 614 115 
+           L 438 118 
+           Z" fill="#FFBA08" />
+
+  <!-- Pelican Eye -->
+  <circle cx="442" cy="104" r="9" fill="#FFBA08" />
+  <circle cx="442" cy="104" r="5" fill="#1D2D44" />
+  <circle cx="444" cy="102" r="2" fill="#FFFFFF" />
+
+  <!-- Pelican Wing (Reaching forward to grip the handlebar) -->
+  <!-- Main White Wing -->
+  <path d="M 365 205 
+           C 405 190, 445 210, 465 248 
+           C 430 262, 395 255, 375 235 
+           C 360 220, 355 210, 365 205 Z" fill="#E2E8F0" />
+  <path d="M 365 200 
+           C 405 185, 445 205, 465 245 
+           C 435 255, 400 248, 380 228 
+           C 365 213, 355 205, 365 200 Z" fill="#FFFFFF" />
+  <!-- Black Primary Wingtips Wrap Around Grip -->
+  <path d="M 435 222 
+           C 450 230, 460 238, 468 250 
+           C 462 258, 448 258, 442 250 
+           C 436 244, 428 238, 420 235 
+           Z" fill="#1D2D44" />
+</svg>

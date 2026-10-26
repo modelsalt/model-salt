@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simmer — Meal planning that fits your week</title>
+<meta name="description" content="Simmer plans your meals, builds your grocery list, and adapts to your schedule so dinner stops being a daily decision.">
+<style>
+  :root {
+    --ink: #1f2a22;
+    --ink-soft: #55615a;
+    --ink-faint: #8a948e;
+    --cream: #fbf8f1;
+    --cream-deep: #f1ecdf;
+    --sage: #3f7d5a;
+    --sage-deep: #2f6245;
+    --sage-light: #dcebe1;
+    --apricot: #f2b36b;
+    --apricot-light: #fbe4c6;
+    --tomato: #d9584a;
+    --line: #e4ded0;
+    --radius: 18px;
+    --shadow: 0 20px 50px -20px rgba(31, 42, 34, 0.25);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { line-height: 1.15; letter-spacing: -0.02em; font-weight: 700; }
+  a { color: inherit; text-decoration: none; }
+  img, svg { display: block; }
+  .wrap { width: min(1120px, 92%); margin: 0 auto; }
+  section { padding: 96px 0; }
+  .eyebrow {
+    display: inline-block; font-size: 13px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--sage); margin-bottom: 14px;
+  }
+  .section-title { font-size: clamp(30px, 4vw, 42px); margin-bottom: 16px; }
+  .section-lead { font-size: 18px; color: var(--ink-soft); max-width: 580px; }
+  .center { text-align: center; }
+  .center .section-lead { margin: 0 auto; }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px;
+    border-radius: 999px; font-weight: 600; font-size: 15px; border: 1.5px solid transparent;
+    cursor: pointer; transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+    font-family: inherit;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--sage); color: #fff; box-shadow: 0 8px 20px -8px rgba(63,125,90,.6); }
+  .btn-primary:hover { background: var(--sage-deep); }
+  .btn-ghost { background: transparent; border-color: var(--line); color: var(--ink); }
+  .btn-ghost:hover { background: #fff; border-color: #d2cbb9; }
+  .btn-light { background: #fff; color: var(--sage-deep); }
+
+  /* Nav */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(251, 248, 241, 0.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent; transition: border-color .2s;
+  }
+  header.scrolled { border-bottom-color: var(--line); }
+  nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 20px; letter-spacing: -0.02em; }
+  .logo-mark {
+    width: 34px; height: 34px; border-radius: 10px; background: var(--sage);
+    display: grid; place-items: center;
+  }
+  .nav-links { display: flex; gap: 32px; font-size: 15px; color: var(--ink-soft); font-weight: 500; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta { display: flex; gap: 10px; align-items: center; }
+  .nav-cta .btn { padding: 10px 18px; font-size: 14px; }
+  .menu-btn { display: none; background: none; border: 0; cursor: pointer; padding: 6px; }
+  .mobile-menu {
+    display: none; flex-direction: column; gap: 18px; padding: 16px 0 24px;
+    border-top: 1px solid var(--line); font-weight: 500;
+  }
+  .mobile-menu.open { display: flex; }
+
+  /* Hero */
+  .hero { padding: 72px 0 40px; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+  .hero h1 { font-size: clamp(40px, 5.6vw, 66px); margin-bottom: 22px; }
+  .hero h1 em { font-style: normal; color: var(--sage); position: relative; }
+  .hero h1 em::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 4px; height: 10px;
+    background: var(--apricot-light); z-index: -1; border-radius: 4px;
+  }
+  .hero p { font-size: 19px; color: var(--ink-soft); max-width: 520px; margin-bottom: 32px; }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
+  .hero-proof { display: flex; align-items: center; gap: 14px; font-size: 14px; color: var(--ink-soft); }
+  .avatars { display: flex; }
+  .avatars span {
+    width: 34px; height: 34px; border-radius: 50%; border: 2.5px solid var(--cream);
+    margin-left: -10px; display: grid; place-items: center; font-size: 12px; font-weight: 700; color: #fff;
+  }
+  .avatars span:first-child { margin-left: 0; }
+  .stars { color: var(--apricot); letter-spacing: 1px; }
+
+  /* Phone mockup */
+  .hero-visual { position: relative; display: flex; justify-content: center; }
+  .blob {
+    position: absolute; inset: 10% -5% 0; background: radial-gradient(circle at 60% 40%, var(--sage-light), transparent 65%);
+    z-index: 0; border-radius: 50%;
+  }
+  .phone {
+    position: relative; z-index: 1; width: 300px; background: #fff; border-radius: 36px;
+    padding: 14px; box-shadow: var(--shadow), 0 0 0 1px var(--line); transform: rotate(-3deg);
+  }
+  .screen { background: var(--cream); border-radius: 26px; padding: 22px 18px; min-height: 560px; }
+  .screen-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18px; }
+  .screen-top strong { font-size: 18px; letter-spacing: -0.02em; }
+  .screen-top small { font-size: 12px; color: var(--ink-faint); }
+  .days { display: flex; justify-content: space-between; margin-bottom: 18px; }
+  .days span {
+    width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center;
+    font-size: 12px; font-weight: 600; color: var(--ink-soft);
+  }
+  .days span.on { background: var(--sage); color: #fff; }
+  .meal {
+    display: flex; gap: 12px; align-items: center; background: #fff; border-radius: 14px;
+    padding: 10px 12px; margin-bottom: 10px; box-shadow: 0 2px 8px -4px rgba(0,0,0,.08);
+  }
+  .meal-ico { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; flex-shrink: 0; }
+  .meal b { font-size: 13.5px; display: block; }
+  .meal small { font-size: 11.5px; color: var(--ink-faint); }
+  .meal .time { margin-left: auto; font-size: 11px; color: var(--sage); font-weight: 600; background: var(--sage-light); padding: 3px 7px; border-radius: 6px; }
+  .grocery-pill {
+    margin-top: 16px; background: var(--ink); color: #fff; border-radius: 14px; padding: 12px 14px;
+    display: flex; justify-content: space-between; align-items: center; font-size: 13px;
+  }
+  .grocery-pill b { font-weight: 600; }
+  .grocery-pill span { color: var(--apricot); font-weight: 600; }
+
+  .float-card {
+    position: absolute; z-index: 2; background: #fff; border-radius: 14px; padding: 12px 14px;
+    box-shadow: var(--shadow), 0 0 0 1px var(--line); font-size: 13px; display: flex; gap: 10px; align-items: center;
+    animation: float 6s ease-in-out infinite;
+  }
+  .float-card.a { top: 60px; left: -10px; animation-delay: -2s; }
+  .float-card.b { bottom: 80px; right: -14px; }
+  .float-card .dot { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; }
+  .float-card b { display: block; font-size: 13px; }
+  .float-card small { color: var(--ink-faint); font-size: 12px; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+  /* Logos strip */
+  .strip { padding: 40px 0 10px; }
+  .strip p { text-align: center; font-size: 13px; color: var(--ink-faint); margin-bottom: 20px; letter-spacing: .04em; text-transform: uppercase; }
+  .strip-logos { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; opacity: .55; font-weight: 700; font-size: 18px; letter-spacing: -0.02em; }
+
+  /* Features */
+  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+  .feature {
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 30px;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .feature:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .feature-ico { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; margin-bottom: 20px; }
+  .feature h3 { font-size: 20px; margin-bottom: 10px; }
+  .feature p { color: var(--ink-soft); font-size: 15.5px; }
+  .feature.wide { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center; }
+  .feature.wide .list-mock { background: var(--cream); border-radius: 14px; padding: 16px; }
+  .list-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px dashed var(--line); font-size: 14px; }
+  .list-row:last-child { border-bottom: 0; }
+  .check { width: 18px; height: 18px; border-radius: 6px; border: 1.5px solid #c9c2b1; flex-shrink: 0; display: grid; place-items: center; }
+  .check.done { background: var(--sage); border-color: var(--sage); }
+  .list-row.done span { text-decoration: line-through; color: var(--ink-faint); }
+  .list-row .qty { margin-left: auto; color: var(--ink-faint); font-size: 12px; }
+  .list-head { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-faint); font-weight: 700; margin: 6px 0; }
+
+  /* How it works */
+  .how { background: var(--ink); color: var(--cream); border-radius: 40px; margin: 0 auto; width: min(1200px, 96%); }
+  .how .eyebrow { color: var(--apricot); }
+  .how .section-lead { color: #b9c2bc; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 64px; position: relative; }
+  .steps::before {
+    content: ""; position: absolute; top: 28px; left: 10%; right: 10%; height: 1px;
+    background: repeating-linear-gradient(90deg, #4a5750 0 8px, transparent 8px 16px);
+  }
+  .step { position: relative; text-align: center; padding: 0 12px; }
+  .step-num {
+    width: 56px; height: 56px; border-radius: 50%; background: var(--sage); color: #fff; font-weight: 700;
+    font-size: 20px; display: grid; place-items: center; margin: 0 auto 24px; border: 6px solid var(--ink);
+    position: relative; z-index: 1;
+  }
+  .step h3 { font-size: 21px; margin-bottom: 10px; }
+  .step p { color: #b9c2bc; font-size: 15.5px; }
+
+  /* Testimonials */
+  .quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+  .quote { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; display: flex; flex-direction: column; }
+  .quote p { font-size: 16px; color: var(--ink); flex: 1; margin: 14px 0 22px; }
+  .quote .who { display: flex; align-items: center; gap: 12px; }
+  .quote .who span { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 14px; }
+  .quote .who b { display: block; font-size: 14px; }
+  .quote .who small { color: var(--ink-faint); font-size: 13px; }
+  .stat-row { display: flex; justify-content: center; gap: 64px; margin-top: 64px; flex-wrap: wrap; }
+  .stat b { display: block; font-size: 40px; letter-spacing: -0.03em; color: var(--sage); line-height: 1; }
+  .stat small { color: var(--ink-soft); font-size: 14px; }
+
+  /* Pricing */
+  .pricing { background: var(--cream-deep); }
+  .toggle { display: inline-flex; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 4px; margin: 28px auto 0; gap: 4px; }
+  .toggle button { border: 0; background: transparent; padding: 8px 18px; border-radius: 999px; font-weight: 600; font-size: 14px; cursor: pointer; color: var(--ink-soft); font-family: inherit; }
+  .toggle button.on { background: var(--ink); color: #fff; }
+  .toggle .save { color: var(--sage); font-size: 12px; margin-left: 6px; }
+  .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; align-items: stretch; }
+  .plan { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; display: flex; flex-direction: column; position: relative; }
+  .plan.hot { border: 2px solid var(--sage); box-shadow: var(--shadow); }
+  .plan .badge { position: absolute; top: -13px; left: 32px; background: var(--apricot); color: var(--ink); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 999px; }
+  .plan h3 { font-size: 20px; margin-bottom: 6px; }
+  .plan .desc { color: var(--ink-soft); font-size: 14.5px; margin-bottom: 20px; }
+  .price { font-size: 44px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; }
+  .price small { font-size: 15px; color: var(--ink-faint); font-weight: 500; letter-spacing: 0; }
+  .plan ul { list-style: none; margin: 24px 0 28px; flex: 1; }
+  .plan li { display: flex; gap: 10px; font-size: 15px; padding: 7px 0; color: var(--ink-soft); }
+  .plan li svg { flex-shrink: 0; margin-top: 4px; }
+  .plan .btn { justify-content: center; width: 100%; }
+
+  /* FAQ */
+  .faq-list { max-width: 740px; margin: 48px auto 0; }
+  details { border-bottom: 1px solid var(--line); }
+  summary {
+    list-style: none; cursor: pointer; padding: 22px 0; font-weight: 600; font-size: 17px;
+    display: flex; justify-content: space-between; align-items: center; gap: 20px;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary .plus { width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--line); display: grid; place-items: center; flex-shrink: 0; transition: transform .2s; }
+  details[open] summary .plus { transform: rotate(45deg); background: var(--sage); border-color: var(--sage); color: #fff; }
+  details p { color: var(--ink-soft); padding: 0 0 22px; max-width: 640px; }
+
+  /* CTA */
+  .cta-box {
+    background: linear-gradient(135deg, var(--sage), var(--sage-deep)); color: #fff; border-radius: 32px;
+    padding: 72px 48px; text-align: center; position: relative; overflow: hidden;
+  }
+  .cta-box::before, .cta-box::after {
+    content: ""; position: absolute; border-radius: 50%; background: rgba(255,255,255,.08);
+  }
+  .cta-box::before { width: 360px; height: 360px; top: -160px; right: -80px; }
+  .cta-box::after { width: 260px; height: 260px; bottom: -120px; left: -60px; }
+  .cta-box h2 { font-size: clamp(30px, 4vw, 44px); margin-bottom: 14px; position: relative; }
+  .cta-box p { opacity: .85; font-size: 18px; margin-bottom: 32px; position: relative; }
+  .cta-form { display: flex; gap: 10px; max-width: 460px; margin: 0 auto; position: relative; }
+  .cta-form input {
+    flex: 1; padding: 14px 20px; border-radius: 999px; border: 0; font-size: 15px; font-family: inherit;
+    outline: 2px solid transparent; outline-offset: 2px;
+  }
+  .cta-form input:focus { outline-color: var(--apricot); }
+  .cta-note { font-size: 13px; opacity: .7; margin-top: 14px; position: relative; }
+  .cta-success { display: none; font-weight: 600; font-size: 18px; position: relative; }
+
+  /* Footer */
+  footer { padding: 64px 0 32px; border-top: 1px solid var(--line); margin-top: 32px; }
+  .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
+  .foot-grid p { color: var(--ink-soft); font-size: 14.5px; max-width: 280px; margin-top: 14px; }
+  .foot-grid h4 { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-faint); margin-bottom: 16px; }
+  .foot-grid ul { list-style: none; }
+  .foot-grid li { margin-bottom: 10px; font-size: 15px; color: var(--ink-soft); }
+  .foot-grid li a:hover { color: var(--ink); }
+  .foot-bottom { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--ink-faint); flex-wrap: wrap; gap: 12px; }
+  .foot-bottom .social { display: flex; gap: 14px; }
+
+  /* Reveal animation */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* Responsive */
+  @media (max-width: 960px) {
+    .hero-grid { grid-template-columns: 1fr; text-align: center; }
+    .hero p { margin: 0 auto 32px; }
+    .hero-actions, .hero-proof { justify-content: center; }
+    .hero-visual { margin-top: 24px; }
+    .features-grid, .quotes, .plans, .steps { grid-template-columns: 1fr; }
+    .feature.wide { grid-column: span 1; grid-template-columns: 1fr; }
+    .steps::before { display: none; }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links, .nav-cta .btn-ghost { display: none; }
+    .menu-btn { display: block; }
+    section { padding: 72px 0; }
+  }
+  @media (max-width: 560px) {
+    .phone { width: 270px; }
+    .float-card.a { left: -4px; top: 30px; }
+    .float-card.b { right: -4px; }
+    .cta-form { flex-direction: column; }
+    .cta-box { padding: 56px 24px; }
+    .foot-grid { grid-template-columns: 1fr; }
+    .stat-row { gap: 36px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .float-card { animation: none; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="wrap">
+    <nav>
+      <a href="#" class="logo" aria-label="Simmer home">
+        <span class="logo-mark">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 11h16"/><path d="M5 11c0 4 3 7 7 7s7-3 7-7"/><path d="M9 7c0-1.5 1-2 1-3.5"/><path d="M13 7c0-1.5 1-2 1-3.5"/>
+          </svg>
+        </span>
+        Simmer
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="nav-cta">
+        <a href="#" class="btn btn-ghost">Log in</a>
+        <a href="#cta" class="btn btn-primary">Start free</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#">Log in</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Meal planning, finally painless</span>
+        <h1>Stop asking <em>"what's for dinner?"</em> every single night.</h1>
+        <p>Simmer builds a weekly plan around your tastes, your schedule, and what's already in your fridge — then turns it into a grocery list in one tap.</p>
+        <div class="hero-actions">
+          <a href="#cta" class="btn btn-primary">
+            Start your free week
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#how" class="btn btn-ghost">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            See how it works
+          </a>
+        </div>
+        <div class="hero-proof">
+          <div class="avatars">
+            <span style="background:#c47a5a">JM</span>
+            <span style="background:#5a8ac4">AK</span>
+            <span style="background:#7c5ac4">RT</span>
+            <span style="background:#3f7d5a">+</span>
+          </div>
+          <div>
+            <div class="stars">★★★★★</div>
+            <div>Loved by 40,000+ home cooks</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="blob"></div>
+        <div class="float-card a">
+          <span class="dot" style="background:var(--apricot-light)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b56a1a" stroke-width="2.2" stroke-linecap="round"><path d="M12 3v18M3 12h18"/></svg>
+          </span>
+          <div><b>Leftovers detected</b><small>Tuesday's rice → Thursday fried rice</small></div>
+        </div>
+        <div class="float-card b">
+          <span class="dot" style="background:var(--sage-light)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3f7d5a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
+          </span>
+          <div><b>Grocery list ready</b><small>23 items · $84 est.</small></div>
+        </div>
+        <div class="phone">
+          <div class="screen">
+            <div class="screen-top">
+              <strong>This week</strong>
+              <small>Oct 26 – Nov 1</small>
+            </div>
+            <div class="days">
+              <span>M</span><span>T</span><span class="on">W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+            </div>
+            <div class="meal">
+              <div class="meal-ico" style="background:#fbe4c6">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#b56a1a" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M8 12h8M12 8v8"/></svg>
+              </div>
+              <div><b>Overnight oats</b><small>Breakfast · 5 min</small></div>
+              <span class="time">Prepped</span>
+            </div>
+            <div class="meal">
+              <div class="meal-ico" style="background:#dcebe1">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3f7d5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14c0 3 3.5 6 8 6s8-3 8-6H4z"/><path d="M12 4c-2 2-2 4 0 6 2-2 2-4 0-6z"/></svg>
+              </div>
+              <div><b>Lemon chickpea salad</b><small>Lunch · 15 min</small></div>
+              <span class="time">15m</span>
+            </div>
+            <div class="meal">
+              <div class="meal-ico" style="background:#f8d6d2">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d9584a" stroke-width="2" stroke-linecap="round"><path d="M3 10h18l-2 9H5z"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+              </div>
+              <div><b>Sheet-pan chicken & veg</b><small>Dinner · 35 min</small></div>
+              <span class="time">35m</span>
+            </div>
+            <div class="meal" style="opacity:.6">
+              <div class="meal-ico" style="background:#e9e4f7">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7c5ac4" stroke-width="2" stroke-linecap="round"><path d="M12 3v3M5.6 5.6l2 2M3 12h3M18.4 5.6l-2 2M21 12h-3"/><path d="M6 20a6 6 0 0112 0z"/></svg>
+              </div>
+              <div><b>Thursday: fried rice</b><small>Uses Tuesday's leftovers</small></div>
+            </div>
+            <div class="grocery-pill">
+              <b>Grocery list</b>
+              <span>23 items →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRIP -->
+  <div class="strip">
+    <div class="wrap">
+      <p>As featured in</p>
+      <div class="strip-logos">
+        <span>Bon Appétit</span><span>The Kitchn</span><span>Wirecutter</span><span>Lifehacker</span><span>Food52</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="wrap">
+      <div class="center reveal">
+        <span class="eyebrow">Why Simmer</span>
+        <h2 class="section-title">Planning that bends to your life, not the other way around</h2>
+        <p class="section-lead">Most meal planners give you a rigid template. Simmer learns how you actually eat and plans around the real week ahead.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature reveal">
+          <div class="feature-ico" style="background:var(--sage-light)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3f7d5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+          </div>
+          <h3>Calendar-aware</h3>
+          <p>Late meeting Thursday? Simmer sees it and swaps in a 15-minute dinner. Hosting Saturday? It scales up and adds a dessert.</p>
+        </div>
+        <div class="feature reveal">
+          <div class="feature-ico" style="background:var(--apricot-light)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b56a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 017 7c0 5-7 13-7 13S5 14 5 9a7 7 0 017-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          </div>
+          <h3>Shop where you shop</h3>
+          <p>Lists are grouped by aisle for your store, with live price estimates. Send it to Instacart or your partner in one tap.</p>
+        </div>
+        <div class="feature reveal">
+          <div class="feature-ico" style="background:#f8d6d2">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d9584a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7L9 18l-5-5"/></svg>
+          </div>
+          <h3>Dietary needs, handled</h3>
+          <p>Vegetarian Monday, a nut allergy in the house, and a kid who hates mushrooms. Set it once; every recipe respects it.</p>
+        </div>
+        <div class="feature wide reveal">
+          <div>
+            <div class="feature-ico" style="background:#e9e4f7">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7c5ac4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 11-3-6.7"/><path d="M21 3v6h-6"/></svg>
+            </div>
+            <h3>Zero-waste by design</h3>
+            <p>Buy a bunch of cilantro for one recipe, and Simmer finds two more that week to use it up. Leftovers get a second life as tomorrow's lunch. Our users report throwing away 60% less food.</p>
+          </div>
+          <div class="list-mock">
+            <div class="list-head">Produce</div>
+            <div class="list-row done"><span class="check done"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg></span><span>Cilantro</span><span class="qty">1 bunch · 3 recipes</span></div>
+            <div class="list-row done"><span class="check done"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg></span><span>Limes</span><span class="qty">4</span></div>
+            <div class="list-row"><span class="check"></span><span>Sweet potatoes</span><span class="qty">3 lb</span></div>
+            <div class="list-head">Pantry</div>
+            <div class="list-row"><span class="check"></span><span>Chickpeas, canned</span><span class="qty">2</span></div>
+            <div class="list-row" style="color:var(--ink-faint)"><span class="check"></span><span>Jasmine rice</span><span class="qty">✓ have it</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="how">
+    <div class="wrap">
+      <div class="center reveal">
+        <span class="eyebrow">How it works</span>
+        <h2 class="section-title">Three minutes on Sunday. Done for the week.</h2>
+        <p class="section-lead">No recipe browsing rabbit holes. Simmer does the thinking so you can just cook.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step-num">1</div>
+          <h3>Tell us about your table</h3>
+          <p>Who's eating, what they love, what they won't touch, and how much time you realistically have on a Tuesday.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">2</div>
+          <h3>Review your plan</h3>
+          <p>Get a full week in seconds. Swipe to swap anything. Simmer re-balances the rest so nothing goes to waste.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">3</div>
+          <h3>Shop and cook</h3>
+          <p>One grocery list, sorted by aisle. Step-by-step cooking mode with timers that run in parallel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="stories">
+    <div class="wrap">
+      <div class="center reveal">
+        <span class="eyebrow">From real kitchens</span>
+        <h2 class="section-title">People who used to dread 5pm</h2>
+      </div>
+      <div class="quotes">
+        <div class="quote reveal">
+          <div class="stars">★★★★★</div>
+          <p>"We were spending $1,100 a month on groceries and still ordering takeout three nights a week. Two months in, we're at $700 and actually eating together."</p>
+          <div class="who"><span style="background:#c47a5a">JM</span><div><b>Jess Morales</b><small>Family of four, Austin</small></div></div>
+        </div>
+        <div class="quote reveal">
+          <div class="stars">★★★★★</div>
+          <p>"I've tried every app. This is the first one that noticed I had a work dinner Wednesday and just… didn't plan a meal for it. Small thing. Huge difference."</p>
+          <div class="who"><span style="background:#5a8ac4">AK</span><div><b>Aaron Kim</b><small>Solo cook, Chicago</small></div></div>
+        </div>
+        <div class="quote reveal">
+          <div class="stars">★★★★★</div>
+          <p>"My partner is gluten-free and I'm vegetarian. Simmer finds overlap I never would have, and when it can't, it plans one base with two toppings. Genius."</p>
+          <div class="who"><span style="background:#7c5ac4">RT</span><div><b>Riya Thakur</b><small>Couple, Portland</small></div></div>
+        </div>
+      </div>
+      <div class="stat-row reveal">
+        <div class="stat center"><b>4.8</b><small>App Store rating</small></div>
+        <div class="stat center"><b>$310</b><small>Avg. monthly savings</small></div>
+        <div class="stat center"><b>60%</b><small>Less food waste</small></div>
+        <div class="stat center"><b>5 hrs</b><small>Saved every week</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <div class="wrap">
+      <div class="center reveal">
+        <span class="eyebrow">Pricing</span>
+        <h2 class="section-title">Less than one skipped takeout order</h2>
+        <p class="section-lead">Start free. Upgrade when Simmer has earned it.</p>
+        <div class="toggle" role="group" aria-label="Billing period">
+          <button class="on" data-period="monthly">Monthly</button>
+          <button data-period="yearly">Yearly <span class="save">save 30%</span></button>
+        </div>
+      </div>
+      <div class="plans">
+        <div class="plan reveal">
+          <h3>Starter</h3>
+          <p class="desc">For trying it out and planning a few dinners a week.</p>
+          <div class="price">$0<small> / forever</small></div>
+          <ul>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3f7d5a" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>3 planned dinners per week</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3f7d5a" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>Basic grocery list</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3f7d5a" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>800+ recipes</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3f7d5a" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>1 dietary profile</li>
+          </ul>
+          <a href="#cta" class="btn btn-ghost">Get started</a>
+        </div>
+        <div class="plan hot reveal">
+          <span class="badge">Most popular</span>
+          <h3>Household</h3>
+          <p class="desc">The full kitchen brain, for one home with many appetites.</p>
+          <div class="price"><span data-monthly="$9" data-yearly="$6">$9</span><small> / month</small></div>
+          <ul>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3f7d5a" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>Unlimited meals, all week</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3f7d5a" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>Calendar sync &amp; smart swaps</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3f7d5a" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>Aisle-sorted list with price estimates</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3f7d5a" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>Up to 6 dietary profiles</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3f7d5a" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>Pantry tracking &amp; leftover planning</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3f7d5a" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>Shared with everyone in your home</li>
+          </ul>
+          <a href="#cta" class="btn btn-primary">Start 14-day free trial</a>
+        </div>
+        <div class="plan reveal">
+          <h3>Chef</h3>
+          <p class="desc">For serious cooks who want full control and nutrition data.</p>
+          <div class="price"><span data-monthly="$16" data-yearly="$11">$16</span><small> / month</small></div>
+          <ul>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3f7d5a" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>Everything in Household</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3f7d5a" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>Macro &amp; nutrition targets</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3f7d5a" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>Import your own recipes from any URL</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3f7d5a" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>Batch-cooking &amp; freezer planner</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3f7d5a" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>Priority support</li>
+          </ul>
+          <a href="#cta" class="btn btn-ghost">Start free trial</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="center reveal">
+        <span class="eyebrow">Questions</span>
+        <h2 class="section-title">Things people ask before they start</h2>
+      </div>
+      <div class="faq-list reveal">
+        <details>
+          <summary>Do I have to cook every night? <span class="plus">+</span></summary>
+          <p>No. Tell Simmer how many nights you want to cook and it fills the rest with leftovers, planned takeout, or "fend for yourself" nights. Many users plan four dinners and let the week breathe.</p>
+        </details>
+        <details>
+          <summary>What if I don't like a recipe it picks? <span class="plus">+</span></summary>
+          <p>Swipe it away and you'll get an alternative that still fits your week. Simmer also learns from this — reject mushrooms three times and they quietly stop showing up.</p>
+        </details>
+        <details>
+          <summary>Can my whole household use one account? <span class="plus">+</span></summary>
+          <p>Yes. Household and Chef plans let everyone in your home see the plan, check off groceries, and mark what they ate. Each person can have their own dietary profile.</p>
+        </details>
+        <details>
+          <summary>Does it work with my grocery store? <span class="plus">+</span></summary>
+          <p>Aisle sorting and price estimates cover most major US and UK chains. You can also export your list to Instacart, Walmart, Amazon Fresh, or just share it as plain text.</p>
+        </details>
+        <details>
+          <summary>What happens when my trial ends? <span class="plus">+</span></summary>
+          <p>You drop to the free Starter plan automatically. No surprise charges, and you keep every recipe and list you've saved.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta" style="padding-top:0">
+    <div class="wrap">
+      <div class="cta-box reveal">
+        <h2>Your next week of dinners, planned in 3 minutes.</h2>
+        <p>Free for 14 days. No credit card. Cancel in two taps.</p>
+        <form class="cta-form" id="ctaForm">
+          <input type="email" placeholder="you@example.com" required aria-label="Email address">
+          <button type="submit" class="btn btn-light">Get started</button>
+        </form>
+        <div class="cta-success" id="ctaSuccess">🎉 You're in — check your inbox for your first plan.</div>
+        <div class="cta-note">Available on iOS, Android, and web.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#" class="logo">
+          <span class="logo-mark">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 11h16"/><path d="M5 11c0 4 3 7 7 7s7-3 7-7"/><path d="M9 7c0-1.5 1-2 1-3.5"/><path d="M13 7c0-1.5 1-2 1-3.5"/>
+            </svg>
+          </span>
+          Simmer
+        </a>
+        <p>A calmer kitchen, one week at a time. Made with care in Portland, Oregon.</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul><li><a href="#features">Features</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#">Recipes</a></li><li><a href="#">Changelog</a></li></ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul><li><a href="#">About</a></li><li><a href="#">Blog</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li></ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul><li><a href="#faq">Help center</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Simmer Labs, Inc. All rights reserved.</span>
+      <div class="social">
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="#" aria-label="TikTok">TikTok</a>
+        <a href="#" aria-label="X">X</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Sticky header shadow
+  const header = document.getElementById('header');
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 8);
+  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Mobile menu
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false');
+  }));
+
+  // Pricing toggle
+  document.querySelectorAll('.toggle button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.toggle button').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      const period = btn.dataset.period;
+      document.querySelectorAll('.price span[data-monthly]').forEach(el => {
+        el.textContent = el.dataset[period];
+      });
+    });
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => io.observe(el));
+  } else {
+    reveals.forEach(el => el.classList.add('in'));
+  }
+
+  // Email form
+  document.getElementById('ctaForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    e.target.style.display = 'none';
+    document.getElementById('ctaSuccess').style.display = 'block';
+  });
+</script>
+</body>
+</html>

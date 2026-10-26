@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A cheerful white pelican with a golden beak pedals a teal bicycle beneath a sunny sky.</desc>
+
+  <rect width="640" height="480" rx="28" fill="#f8f1df"/>
+  <circle cx="515" cy="90" r="42" fill="#f2ca68"/>
+  <path d="M65 408H575" stroke="#d6ccb3" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="330" cy="410" rx="205" ry="13" fill="#e6dcc5"/>
+
+  <!-- Wheels and spokes -->
+  <g stroke-linecap="round">
+    <g fill="#fcf8ed" stroke="#293b43" stroke-width="9">
+      <circle cx="205" cy="338" r="74"/>
+      <circle cx="465" cy="338" r="74"/>
+    </g>
+    <g fill="none" stroke="#b3beb8" stroke-width="2">
+      <circle cx="205" cy="338" r="63"/>
+      <circle cx="465" cy="338" r="63"/>
+      <path d="M205 275V401M142 338H268M160 293L250 383M160 383L250 293
+               M465 275V401M402 338H528M420 293L510 383M420 383L510 293"/>
+    </g>
+
+    <!-- Bicycle frame -->
+    <g fill="none" stroke="#258d89" stroke-width="9" stroke-linejoin="round">
+      <path d="M205 338L270 240L326 338Z"/>
+      <path d="M270 240H420L326 338"/>
+      <path d="M408 211L465 338"/>
+      <path d="M270 240L260 218"/>
+    </g>
+    <path d="M239 216H281" stroke="#293b43" stroke-width="12"/>
+    <path d="M408 211L397 184H427" fill="none" stroke="#293b43" stroke-width="7"/>
+    <path d="M423 184H440" stroke="#ad6847" stroke-width="10"/>
+    <g fill="#293b43">
+      <circle cx="205" cy="338" r="7"/>
+      <circle cx="465" cy="338" r="7"/>
+    </g>
+    <circle cx="326" cy="338" r="19" fill="#f8f1df" stroke="#293b43" stroke-width="5"/>
+    <path d="M307 338H205" stroke="#293b43" stroke-width="3"/>
+
+    <!-- Far leg -->
+    <path d="M298 236L284 280L307 316" fill="none" stroke="#d79740" stroke-width="10"/>
+    <path d="M307 311L329 317L301 321Z" fill="#e9ac49" stroke="#293b43" stroke-width="3"/>
+    <path d="M326 338L307 316M297 321H321" stroke="#293b43" stroke-width="5"/>
+
+    <!-- Tail, body, and long curved neck -->
+    <path d="M256 196L207 166L221 207L202 198
+             Q219 228 252 231Z"
+          fill="#e1e7df" stroke="#293b43" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M238 193
+             C265 177 295 192 311 184
+             C330 175 326 145 334 117
+             C342 87 366 76 388 87
+             C409 97 410 121 395 136
+             C377 150 366 152 366 176
+             C370 211 348 242 309 251
+             C272 260 234 242 227 219
+             Q222 202 238 193Z"
+          fill="#fffdf5" stroke="#293b43" stroke-width="4"/>
+
+    <!-- Wing -->
+    <path d="M250 202C278 188 316 202 331 219
+             C311 242 272 243 250 202Z"
+          fill="#dce5df" stroke="#293b43" stroke-width="3"/>
+    <path d="M261 209Q285 226 313 220M268 219Q288 233 304 228"
+          fill="none" stroke="#a8bbb5" stroke-width="3"/>
+
+    <!-- Beak and generous throat pouch -->
+    <path d="M391 119L526 139
+             Q480 184 427 172
+             Q401 166 391 133Z"
+          fill="#edb24e" stroke="#293b43" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M391 119L532 137L393 139Z"
+          fill="#ffd26b" stroke="#293b43" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M415 149Q445 169 483 151" fill="none" stroke="#d58e36" stroke-width="3"/>
+
+    <!-- Eye and jaunty crest -->
+    <circle cx="380" cy="111" r="6" fill="#293b43"/>
+    <circle cx="382" cy="109" r="2" fill="#fff"/>
+    <path d="M350 92L345 79M358 87L358 73" stroke="#293b43" stroke-width="4"/>
+
+    <!-- Near leg and webbed foot on the pedal -->
+    <path d="M319 245L345 283L345 357"
+          fill="none" stroke="#293b43" stroke-width="12" stroke-linejoin="round"/>
+    <path d="M319 245L345 283L345 357"
+          fill="none" stroke="#edb24e" stroke-width="8" stroke-linejoin="round"/>
+    <path d="M326 338L347 362" stroke="#293b43" stroke-width="5"/>
+    <path d="M344 351L370 361L378 368H337Z"
+          fill="#edb24e" stroke="#293b43" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M334 370H379" stroke="#293b43" stroke-width="6"/>
+
+    <!-- Motion marks -->
+    <path d="M101 272H137M88 287H123M112 302H129"
+          stroke="#a9bdb4" stroke-width="4"/>
+  </g>
+</svg>

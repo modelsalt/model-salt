@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 520" role="img" aria-labelledby="title">
+  <title id="title">A pelican riding a bicycle with its wings on the handlebars</title>
+  <rect width="640" height="520" rx="32" fill="#f7f1e3"/>
+  <ellipse cx="320" cy="458" rx="240" ry="12" fill="#e4ddcc"/>
+
+  <g stroke="#263b42" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Wheels -->
+    <g fill="#fffdf6" stroke-width="9">
+      <circle cx="160" cy="370" r="85"/>
+      <circle cx="480" cy="370" r="85"/>
+    </g>
+    <g fill="none" stroke="#b7c5c4" stroke-width="3">
+      <path d="M160 290v160m-80-80h160m-137-57 114 114m-114 0 114-114"/>
+      <path d="M480 290v160m-80-80h160m-137-57 114 114m-114 0 114-114"/>
+    </g>
+
+    <!-- Bicycle frame -->
+    <g fill="none" stroke="#249b98" stroke-width="10">
+      <path d="m160 370 90-125 60 125H160l260-125-110 125"/>
+      <path d="m250 245 170 0 60 125"/>
+    </g>
+    <g fill="none" stroke-width="7">
+      <path d="m250 245-12-30m242 155-69-155 23-19h24"/>
+      <path d="M215 215h49"/>
+    </g>
+    <circle cx="310" cy="370" r="15" fill="#fffdf6" stroke-width="5"/>
+    <path d="m310 370 32 21h23" fill="none" stroke-width="6"/>
+
+    <!-- Far leg -->
+    <path d="m267 251 28 44-25 47" fill="none" stroke="#d98b3d" stroke-width="11"/>
+    <path d="m270 337-17 12h34" fill="#efae50" stroke-width="4"/>
+
+    <!-- Body and upright neck -->
+    <path d="m192 217-35-28 51 4
+             c18-34 50-47 88-36
+             l14-64
+             c5-27 22-43 44-43
+             25 0 41 19 38 41
+             -3 19-17 31-35 32
+             l-5 69
+             c-2 49-35 77-82 73
+             -38-3-63-20-78-48Z"
+          fill="#fffdf6" stroke-width="5"/>
+
+    <!-- Pelican pouch and long bill -->
+    <path d="m373 100 161 9
+             c-37 39-78 56-110 40
+             -22-11-34-28-51-49Z"
+          fill="#efb65e" stroke-width="4"/>
+    <path d="m374 91 172 17-172 7Z" fill="#f5ce72" stroke-width="4"/>
+    <circle cx="361" cy="81" r="5" fill="#263b42" stroke="none"/>
+
+    <!-- Wings reach the handlebars -->
+    <path d="M299 170q52-7 109 26l22 1"
+          fill="none" stroke="#b9c8c6" stroke-width="13"/>
+    <path d="M238 186
+             q30-21 66 5
+             l93 27
+             q20 5 37-16
+             l-32-1-91-42"
+          fill="#e3eae5" stroke-width="5"/>
+
+    <!-- Near leg and webbed foot on pedal -->
+    <path d="m284 258 43 40-1 78" fill="none" stroke="#efae50" stroke-width="12"/>
+    <path d="m326 375 29 8 11 9h-44Z" fill="#efae50" stroke-width="4"/>
+  </g>
+</svg>

@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-labelledby="title desc">
+  <title id="title">A pelican riding a bicycle</title>
+  <desc id="desc">A white pelican coasts on a red bicycle in side profile, both webbed feet resting on level pedals and its wingtips draped over the handlebar grips.</desc>
+
+  <defs>
+    <!-- Reusable wheel: tire, rim, spokes, hub -->
+    <g id="wheel">
+      <circle r="70" fill="none" stroke="#1F2733" stroke-width="14"/>
+      <circle r="55" fill="none" stroke="#D8DEE5" stroke-width="4"/>
+      <path d="M-53 0H53 M0-53V53 M-37.5-37.5L37.5 37.5 M-37.5 37.5L37.5-37.5"
+            fill="none" stroke="#AEB9C4" stroke-width="2.5"/>
+      <circle r="7" fill="#263238"/>
+    </g>
+    <!-- Reusable wing shape (near wing white, far wing gray) -->
+    <path id="wing" d="M348 206 C386 208 424 228 446 248 C452 254 456 254 460 252
+                       C468 250 472 258 468 266 C464 274 454 276 446 272
+                       C420 264 390 258 366 250 C350 246 342 224 348 206 Z"/>
+  </defs>
+
+  <g id="background">
+    <rect width="800" height="600" fill="#76BEE8"/>
+    <circle id="sun" cx="110" cy="84" r="34" fill="#FFD54A"/>
+    <g id="clouds" fill="#FFFFFF" opacity="0.92">
+      <ellipse cx="310" cy="88" rx="34" ry="18"/>
+      <ellipse cx="336" cy="78" rx="28" ry="22"/>
+      <ellipse cx="360" cy="90" rx="30" ry="16"/>
+      <ellipse cx="606" cy="62" rx="22" ry="12"/>
+      <ellipse cx="624" cy="54" rx="20" ry="15"/>
+      <ellipse cx="642" cy="63" rx="20" ry="11"/>
+    </g>
+    <rect id="ground" x="0" y="500" width="800" height="100" fill="#6AB04C"/>
+    <rect x="0" y="500" width="800" height="6" fill="#7FBF5E"/>
+    <g id="grass" fill="#4E9E43">
+      <path d="M120 500 L126 484 L132 500 Z"/>
+      <path d="M616 500 L622 482 L628 500 Z"/>
+      <path d="M700 500 L706 486 L712 500 Z"/>
+    </g>
+    <g id="motion-lines" fill="none" stroke="#FFFFFF" stroke-width="6"
+       stroke-linecap="round" opacity="0.75">
+      <path d="M64 396 H140"/>
+      <path d="M84 426 H168"/>
+      <path d="M60 456 H128"/>
+    </g>
+  </g>
+
+  <g id="bicycle" stroke-linecap="round" stroke-linejoin="round">
+    <g id="wheels">
+      <use href="#wheel" x="230" y="425"/>
+      <use href="#wheel" x="560" y="425"/>
+    </g>
+    <g id="drivetrain">
+      <path d="M380 421 L230 416 M380 459 L230 434" fill="none" stroke="#7A8694" stroke-width="3.5"/>
+      <circle cx="230" cy="425" r="9" fill="none" stroke="#5A6572" stroke-width="4"/>
+      <circle cx="380" cy="440" r="19" fill="none" stroke="#5A6572" stroke-width="5"/>
+      <circle cx="380" cy="440" r="4" fill="#5A6572"/>
+    </g>
+    <g id="frame" fill="none" stroke="#D62828">
+      <path d="M230 425 L380 440" stroke-width="5"/>
+      <path d="M230 425 L312 312" stroke-width="5"/>
+      <path d="M380 440 L310 306" stroke-width="7"/>
+      <path d="M380 440 L522 346" stroke-width="7"/>
+      <path d="M312 310 L508 304" stroke-width="7"/>
+      <path d="M504 300 L524 350" stroke-width="9"/>
+      <path d="M521 344 L560 425" stroke-width="6"/>
+    </g>
+    <g id="saddle">
+      <path d="M310 306 L306 284" fill="none" stroke="#555F6B" stroke-width="5"/>
+      <path d="M262 282 C274 274 308 272 326 278 C332 281 330 288 322 290
+               L268 292 C258 292 255 287 262 282 Z" fill="#263238"/>
+    </g>
+    <g id="cockpit">
+      <path d="M506 302 L500 272" fill="none" stroke="#555F6B" stroke-width="6"/>
+      <path d="M500 272 L468 264" fill="none" stroke="#263238" stroke-width="6"/>
+      <rect x="446" y="255" width="24" height="13" rx="6.5" fill="#263238"
+            transform="rotate(-8 458 261.5)"/>
+    </g>
+    <g id="cranks">
+      <path d="M380 440 L430 440 M380 440 L330 440" fill="none" stroke="#263238" stroke-width="6"/>
+      <rect x="421" y="433" width="18" height="9" rx="2" fill="#263238"/>
+      <rect x="321" y="433" width="18" height="9" rx="2" fill="#263238"/>
+    </g>
+  </g>
+
+  <g id="pelican" stroke-linecap="round" stroke-linejoin="round">
+    <use id="far-wing" href="#wing" transform="translate(-10,-12)"
+         fill="#D9DFE6" stroke="#263238" stroke-width="4"/>
+
+    <g id="far-leg">
+      <path d="M320 312 L305 384 L331 422" fill="none" stroke="#F28C28" stroke-width="8"/>
+      <path d="M323 416 C329 412 337 414 341 418 L356 425 C361 428 359 434 352 434
+               L326 434 C317 434 315 424 323 416 Z"
+            fill="#F28C28" stroke="#263238" stroke-width="3"/>
+      <path d="M340 418 L348 431 M331 417 L338 432" fill="none" stroke="#D96F1A" stroke-width="2"/>
+    </g>
+
+    <path id="body" d="M210 240 C234 198 284 178 330 182 C376 186 398 216 402 250
+                       C406 286 386 308 346 314 C300 321 254 313 230 292
+                       C212 278 204 260 210 240 Z"
+          fill="#FFFFFF" stroke="#263238" stroke-width="4"/>
+    <path id="tail-seams" d="M216 244 C226 251 233 259 237 268 M220 231 C231 238 240 247 246 257"
+          fill="none" stroke="#C3CDD6" stroke-width="2.5"/>
+
+    <path id="neck-head" d="M352 198 C376 190 394 172 400 148 C404 130 404 116 416 106
+                            C428 98 444 100 452 110 C459 118 459 129 454 137
+                            C449 146 441 151 433 155 C422 176 413 202 396 228
+                            C380 226 360 214 352 198 Z"
+          fill="#FFFFFF" stroke="#263238" stroke-width="4"/>
+    <path id="crest" d="M414 104 C408 98 406 91 411 85" fill="none" stroke="#263238" stroke-width="3"/>
+
+    <g id="bill">
+      <path id="pouch" d="M452 130 C470 150 482 176 508 190 C540 206 592 196 632 164
+                          L637 158 C596 180 548 184 512 172 C486 162 464 146 452 134 Z"
+            fill="#FF9E6D" stroke="#263238" stroke-width="3"/>
+      <path id="upper-mandible" d="M450 112 C522 122 582 136 634 150 C643 152 645 160 636 162
+                                   C582 152 518 140 452 132 Z"
+            fill="#F5A623" stroke="#263238" stroke-width="3.5"/>
+      <path id="bill-ridge" d="M470 118 C520 126 570 136 612 146"
+            fill="none" stroke="#E8930C" stroke-width="2.5"/>
+    </g>
+
+    <g id="eye">
+      <circle cx="435" cy="119" r="4.5" fill="#263238"/>
+      <circle cx="436.8" cy="117.2" r="1.4" fill="#FFFFFF"/>
+    </g>
+
+    <g id="near-leg">
+      <path d="M347 314 L372 390 L428 422" fill="none" stroke="#F28C28" stroke-width="8"/>
+      <path d="M421 416 C427 412 435 414 439 418 L455 425 C460 428 458 434 451 434
+               L424 434 C415 434 413 424 421 416 Z"
+            fill="#F28C28" stroke="#263238" stroke-width="3"/>
+      <path d="M438 418 L446 431 M429 417 L436 432" fill="none" stroke="#D96F1A" stroke-width="2"/>
+    </g>
+
+    <use id="near-wing" href="#wing" fill="#FFFFFF" stroke="#263238" stroke-width="4"/>
+    <path id="wing-seams" d="M372 216 C398 226 420 240 436 254 M366 234 C390 242 410 252 424 262"
+          fill="none" stroke="#C3CDD6" stroke-width="2.5"/>
+  </g>
+</svg>

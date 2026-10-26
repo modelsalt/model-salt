@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 450" width="700" height="450">
+  <title>Pelican riding a bicycle</title>
+
+  <!-- ground line -->
+  <line x1="110" y1="400" x2="660" y2="400" stroke="#26303a" stroke-width="5" stroke-linecap="square"/>
+
+  <!-- wheels (faceted polygons) -->
+  <polygon points="270,330 261,365 235,391 200,400 165,391 139,365 130,330 139,295 165,269 200,260 235,269 261,295"
+           fill="none" stroke="#26303a" stroke-width="7" stroke-linejoin="miter"/>
+  <polygon points="590,330 581,365 555,391 520,400 485,391 459,365 450,330 459,295 485,269 520,260 555,269 581,295"
+           fill="none" stroke="#26303a" stroke-width="7" stroke-linejoin="miter"/>
+
+  <!-- frame, fork, bars, crank -->
+  <path d="M200,330 L330,355 L298,238 Z
+           M298,238 L470,228 L488,262 L330,355
+           M488,262 L520,330
+           M470,228 L494,204 L508,208
+           M330,355 L356,342
+           M346,342 L368,342"
+        fill="none" stroke="#26303a" stroke-width="8" stroke-linejoin="miter" stroke-linecap="square"/>
+  <polygon points="287,240 311,240 300,226" fill="#26303a"/>
+
+  <!-- pelican leg + foot on pedal -->
+  <path d="M340,230 L316,296 L354,338" fill="none" stroke="#26303a" stroke-width="7" stroke-linejoin="miter" stroke-linecap="square"/>
+  <polygon points="348,334 372,342 350,350" fill="#26303a"/>
+
+  <!-- pelican body, belly-down along the top tube -->
+  <polygon points="248,208 292,186 392,178 470,180 496,192 488,208 440,216 352,230 282,226"
+           fill="#efe9dd" stroke="#26303a" stroke-width="2.5" stroke-linejoin="miter"/>
+
+  <!-- folded wing facet -->
+  <polygon points="304,196 392,186 428,202 356,220 306,212"
+           fill="#cdc7ba" stroke="#26303a" stroke-width="2" stroke-linejoin="miter"/>
+
+  <!-- beak: pouch + upper mandible -->
+  <polygon points="492,206 622,214 580,246 496,222"
+           fill="#f7b95c" stroke="#26303a" stroke-width="2.5" stroke-linejoin="miter"/>
+  <polygon points="490,192 634,208 632,214 490,204"
+           fill="#f39c2c" stroke="#26303a" stroke-width="2.5" stroke-linejoin="miter"/>
+
+  <!-- eye -->
+  <polygon points="466,188 471,192 466,196 461,192" fill="#26303a"/>
+</svg>

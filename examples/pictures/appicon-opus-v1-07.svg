@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" shape-rendering="crispEdges">
+  <!-- Square background, sharp corners -->
+  <rect width="1024" height="1024" fill="#E4F3FD"/>
+
+  <!-- Raindrop built row by row on a 32px grid (11 × 16 cells) -->
+  <g fill="#1C5DAE">
+    <rect x="496" y="256" width="32"  height="64"/>   <!-- tip -->
+    <rect x="464" y="320" width="96"  height="64"/>
+    <rect x="432" y="384" width="160" height="64"/>
+    <rect x="400" y="448" width="224" height="32"/>
+    <rect x="368" y="480" width="288" height="64"/>
+    <rect x="336" y="544" width="352" height="128"/>  <!-- widest body -->
+    <rect x="368" y="672" width="288" height="32"/>
+    <rect x="400" y="704" width="224" height="32"/>
+    <rect x="432" y="736" width="160" height="32"/>   <!-- base -->
+  </g>
+
+  <!-- Accent blocks, flat mid-blue -->
+  <g fill="#6FB1EA">
+    <rect x="400" y="576" width="32" height="32"/>
+    <rect x="400" y="608" width="32" height="32"/>
+    <rect x="432" y="640" width="32" height="32"/>
+  </g>
+
+  <!-- Grid seams that show the blocks -->
+  <path stroke="#E4F3FD" stroke-width="4" fill="none" d="
+    M368 256V768 M400 256V768 M432 256V768 M464 256V768 M496 256V768
+    M528 256V768 M560 256V768 M592 256V768 M624 256V768 M656 256V768
+    M336 288H688 M336 320H688 M336 352H688 M336 384H688 M336 416H688
+    M336 448H688 M336 480H688 M336 512H688 M336 544H688 M336 576H688
+    M336 608H688 M336 640H688 M336 672H688 M336 704H688 M336 736H688"/>
+</svg>

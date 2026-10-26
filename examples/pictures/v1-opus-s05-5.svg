@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- ===== Far-side leg (behind the bike) ===== -->
+  <path d="M232 262 L268 302 L236 350" fill="none" stroke="#c46f1f" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M226 352 L250 346 L240 358 Z" fill="#c46f1f"/>
+
+  <!-- ===== Wheels ===== -->
+  <g fill="none" stroke-linecap="round">
+    <!-- Rear wheel -->
+    <circle cx="140" cy="385" r="78" stroke="#2b2b2b" stroke-width="10"/>
+    <circle cx="140" cy="385" r="70" stroke="#9aa3ad" stroke-width="3"/>
+    <g stroke="#9aa3ad" stroke-width="2">
+      <line x1="140" y1="315" x2="140" y2="455"/>
+      <line x1="70" y1="385" x2="210" y2="385"/>
+      <line x1="90.5" y1="335.5" x2="189.5" y2="434.5"/>
+      <line x1="189.5" y1="335.5" x2="90.5" y2="434.5"/>
+    </g>
+    <!-- Front wheel -->
+    <circle cx="372" cy="385" r="78" stroke="#2b2b2b" stroke-width="10"/>
+    <circle cx="372" cy="385" r="70" stroke="#9aa3ad" stroke-width="3"/>
+    <g stroke="#9aa3ad" stroke-width="2">
+      <line x1="372" y1="315" x2="372" y2="455"/>
+      <line x1="302" y1="385" x2="442" y2="385"/>
+      <line x1="322.5" y1="335.5" x2="421.5" y2="434.5"/>
+      <line x1="421.5" y1="335.5" x2="322.5" y2="434.5"/>
+    </g>
+  </g>
+  <circle cx="140" cy="385" r="7" fill="#2b2b2b"/>
+  <circle cx="372" cy="385" r="7" fill="#2b2b2b"/>
+
+  <!-- ===== Frame ===== -->
+  <g fill="none" stroke="#2f7fd1" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="140" y1="385" x2="255" y2="385"/>   <!-- chain stay -->
+    <line x1="140" y1="385" x2="232" y2="290"/>   <!-- seat stay -->
+    <line x1="255" y1="385" x2="226" y2="278"/>   <!-- seat tube -->
+    <line x1="232" y1="290" x2="346" y2="282"/>   <!-- top tube -->
+    <line x1="255" y1="385" x2="350" y2="298"/>   <!-- down tube -->
+    <line x1="344" y1="272" x2="352" y2="302"/>   <!-- head tube -->
+    <line x1="352" y1="302" x2="372" y2="385"/>   <!-- fork -->
+  </g>
+  <!-- Stem & handlebar -->
+  <path d="M344 272 L340 250 Q338 240 326 242 L316 246" fill="none" stroke="#2b2b2b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Saddle -->
+  <line x1="226" y1="278" x2="224" y2="268" stroke="#2b2b2b" stroke-width="6" stroke-linecap="round"/>
+  <path d="M200 262 Q222 256 246 264 L242 270 Q222 268 204 270 Z" fill="#2b2b2b"/>
+
+  <!-- Chainring & crank -->
+  <circle cx="255" cy="385" r="18" fill="none" stroke="#2b2b2b" stroke-width="5"/>
+  <circle cx="255" cy="385" r="5" fill="#2b2b2b"/>
+  <line x1="236" y1="350" x2="276" y2="420" stroke="#2b2b2b" stroke-width="6" stroke-linecap="round"/>
+  <rect x="226" y="346" width="20" height="6" rx="2" fill="#2b2b2b"/>
+  <rect x="266" y="417" width="20" height="6" rx="2" fill="#2b2b2b"/>
+
+  <!-- ===== Pelican ===== -->
+  <!-- Tail -->
+  <path d="M172 236 L132 226 L140 246 L128 258 L176 262 Z" fill="#e6e1d6"/>
+  <!-- Body -->
+  <ellipse cx="228" cy="238" rx="68" ry="42" transform="rotate(-14 228 238)" fill="#f4f1ea"/>
+  <!-- Neck -->
+  <path d="M262 226 C292 214 300 190 290 170 C284 158 288 146 298 140" fill="none" stroke="#f4f1ea" stroke-width="30" stroke-linecap="round"/>
+  <!-- Wing (reaching to handlebar) -->
+  <path d="M176 222 C210 196 262 204 290 224 L322 240 Q330 246 322 250 L284 246 C250 262 204 260 180 246 Z" fill="#d9d3c4"/>
+  <path d="M176 222 L148 232 L160 240 L146 250 L180 246 Z" fill="#3a3a3a"/>
+  <path d="M312 240 L332 244 Q336 248 330 252 L310 250 Z" fill="#3a3a3a"/>
+
+  <!-- Head -->
+  <circle cx="302" cy="136" r="27" fill="#f4f1ea"/>
+  <!-- Crest -->
+  <path d="M282 120 Q270 104 260 110 Q272 114 276 128 Z" fill="#f2d8a0"/>
+  <!-- Pouch -->
+  <path d="M318 146 Q372 210 446 166 L440 160 Q380 168 318 140 Z" fill="#f7c35f"/>
+  <!-- Upper beak -->
+  <path d="M318 128 L446 162 Q450 166 444 168 L318 148 Z" fill="#ef9a2f"/>
+  <!-- Eye -->
+  <circle cx="310" cy="130" r="5" fill="#1d1d1d"/>
+  <circle cx="311.5" cy="128.5" r="1.6" fill="#ffffff"/>
+
+  <!-- Near-side leg to the front pedal -->
+  <path d="M244 264 L292 322 L274 412" fill="none" stroke="#e8892b" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M262 418 L292 412 L278 424 Z" fill="#e8892b"/>
+</svg>

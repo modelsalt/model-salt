@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#63B8F7"/>
+      <stop offset="55%" stop-color="#3E94E3"/>
+      <stop offset="100%" stop-color="#2470C2"/>
+    </linearGradient>
+    <radialGradient id="sunCore" cx="0.42" cy="0.38" r="0.75">
+      <stop offset="0%" stop-color="#FFF3B0"/>
+      <stop offset="45%" stop-color="#FFD93B"/>
+      <stop offset="100%" stop-color="#FFB400"/>
+    </radialGradient>
+    <linearGradient id="cloudGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#DCE9F6"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#FFF6C8" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#FFF6C8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="light" cx="0.2" cy="0.12" r="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.35"/>
+      <stop offset="60%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Square background, sharp corners -->
+  <rect width="512" height="512" fill="url(#sky)"/>
+  <rect width="512" height="512" fill="url(#light)"/>
+
+  <!-- Distant small cloud -->
+  <g fill="#FFFFFF" opacity="0.35">
+    <circle cx="382" cy="132" r="18"/>
+    <circle cx="407" cy="124" r="24"/>
+    <circle cx="431" cy="133" r="16"/>
+    <rect x="382" y="132" width="49" height="15"/>
+  </g>
+
+  <!-- Sun glow -->
+  <circle cx="200" cy="190" r="150" fill="url(#glow)"/>
+
+  <!-- Sun rays -->
+  <g stroke="#FFD24A" stroke-width="16" stroke-linecap="round">
+    <line x1="305" y1="190" x2="340" y2="190"/>
+    <line x1="274" y1="264" x2="299" y2="289"/>
+    <line x1="200" y1="295" x2="200" y2="330"/>
+    <line x1="126" y1="264" x2="101" y2="289"/>
+    <line x1="95"  y1="190" x2="60"  y2="190"/>
+    <line x1="126" y1="116" x2="101" y2="91"/>
+    <line x1="200" y1="85"  x2="200" y2="50"/>
+    <line x1="274" y1="116" x2="299" y2="91"/>
+  </g>
+
+  <!-- Sun -->
+  <circle cx="200" cy="190" r="85" fill="url(#sunCore)"/>
+
+  <!-- Main cloud -->
+  <g fill="url(#cloudGrad)">
+    <circle cx="250" cy="300" r="55"/>
+    <circle cx="320" cy="280" r="70"/>
+    <circle cx="390" cy="305" r="50"/>
+    <rect x="250" y="300" width="140" height="55"/>
+  </g>
+
+  <!-- Cloud highlight -->
+  <path d="M 262 268 A 62 62 0 0 1 366 240" fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" opacity="0.9"/>
+</svg>

@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <!-- Stroke-only line drawing, no fills, transparent background -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- ===== BICYCLE (dark) ===== -->
+    <g stroke="#2b2b2b" stroke-width="3">
+      <!-- Rear wheel -->
+      <circle cx="95" cy="225" r="50"/>
+      <circle cx="95" cy="225" r="4"/>
+      <!-- Front wheel -->
+      <circle cx="305" cy="225" r="50"/>
+      <circle cx="305" cy="225" r="4"/>
+      <!-- Spokes, rear -->
+      <g stroke-width="1.2">
+        <line x1="95" y1="175" x2="95" y2="275"/>
+        <line x1="45" y1="225" x2="145" y2="225"/>
+        <line x1="60" y1="190" x2="130" y2="260"/>
+        <line x1="130" y1="190" x2="60" y2="260"/>
+        <!-- Spokes, front -->
+        <line x1="305" y1="175" x2="305" y2="275"/>
+        <line x1="255" y1="225" x2="355" y2="225"/>
+        <line x1="270" y1="190" x2="340" y2="260"/>
+        <line x1="340" y1="190" x2="270" y2="260"/>
+      </g>
+      <!-- Frame -->
+      <line x1="95" y1="225" x2="175" y2="130"/>      <!-- seat stay -->
+      <line x1="95" y1="225" x2="195" y2="225"/>      <!-- chain stay -->
+      <line x1="175" y1="130" x2="195" y2="225"/>     <!-- seat tube -->
+      <line x1="175" y1="130" x2="270" y2="140"/>     <!-- top tube -->
+      <line x1="195" y1="225" x2="270" y2="140"/>     <!-- down tube -->
+      <line x1="270" y1="140" x2="305" y2="225"/>     <!-- fork -->
+      <!-- Head tube / handlebar -->
+      <line x1="270" y1="140" x2="262" y2="115"/>
+      <path d="M248 112 Q262 108 278 116"/>
+      <!-- Seat post and saddle -->
+      <line x1="175" y1="130" x2="170" y2="112"/>
+      <path d="M152 112 L188 110"/>
+      <!-- Crank and pedals -->
+      <circle cx="195" cy="225" r="9"/>
+      <line x1="195" y1="225" x2="212" y2="245"/>
+      <line x1="205" y1="245" x2="220" y2="245"/>
+      <line x1="195" y1="225" x2="178" y2="205"/>
+      <line x1="170" y1="205" x2="186" y2="205"/>
+      <!-- Chain -->
+      <path d="M95 218 L195 216 M95 232 L195 234"/>
+    </g>
+
+    <!-- ===== PELICAN (white/grey) ===== -->
+    <g stroke="#8a9199" stroke-width="2.5">
+      <!-- Body -->
+      <path d="M150 112 C135 100 130 80 150 68 C175 55 215 62 225 85 C232 100 220 115 195 118 C180 120 165 118 150 112 Z"/>
+      <!-- Wing folded against body -->
+      <path d="M160 85 C180 78 205 80 215 95 C205 102 180 104 162 98"/>
+      <!-- Tail feathers -->
+      <path d="M135 95 L118 108 M138 100 L122 115"/>
+      <!-- Neck -->
+      <path d="M215 72 C225 60 230 45 238 38"/>
+      <path d="M225 85 C238 70 242 55 250 44"/>
+      <!-- Head -->
+      <path d="M238 38 C235 28 245 20 256 22 C266 24 268 36 262 42 C256 46 248 46 250 44"/>
+      <!-- Eye -->
+      <circle cx="254" cy="31" r="2.2" stroke="#2b2b2b"/>
+      <!-- Leg to pedal -->
+      <path d="M190 118 C195 140 205 165 212 200 L212 245"/>
+      <!-- Foot on pedal -->
+      <path d="M204 245 L220 246" stroke="#e8a317"/>
+      <!-- Wing reaching to handlebar -->
+      <path d="M215 95 C235 100 250 108 262 113"/>
+    </g>
+
+    <!-- Bill (orange-yellow) -->
+    <g stroke="#f2a71b" stroke-width="2.5">
+      <path d="M266 30 L318 48"/>
+      <path d="M262 42 C280 52 300 58 318 48"/>
+      <!-- Pouch -->
+      <path d="M264 44 C275 70 300 72 316 50"/>
+    </g>
+  </g>
+</svg>

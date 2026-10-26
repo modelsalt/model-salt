@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClearPlate — Meal plans built around what you can't eat</title>
+<meta name="description" content="ClearPlate builds safe, tailored weekly meal plans for people with food allergies, intolerances and dietary restrictions.">
+<style>
+  :root {
+    --terracotta: #c2613b;
+    --terracotta-dark: #a24d2c;
+    --terracotta-light: #f1d5c6;
+    --cream: #f7f1e6;
+    --cream-dark: #ede3d1;
+    --olive: #6b7a3f;
+    --olive-dark: #525f2e;
+    --olive-light: #dde3c8;
+    --ink: #2b2620;
+    --ink-soft: #5e564c;
+    --white: #fffdf9;
+    --radius: 14px;
+    --shadow: 0 10px 30px rgba(43, 38, 32, 0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, .btn, nav, .eyebrow, .price, .step-number, .pill {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+
+  h1, h2, h3, h4 { line-height: 1.15; letter-spacing: -0.01em; }
+  h1 { font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 800; }
+  h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; }
+  h3 { font-size: 1.25rem; font-weight: 700; }
+  p { color: var(--ink-soft); }
+
+  a { color: var(--terracotta-dark); }
+
+  .container { width: min(1120px, 92%); margin: 0 auto; }
+
+  section { padding: 88px 0; }
+
+  .eyebrow {
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--olive);
+    margin-bottom: 14px;
+  }
+
+  .section-head { max-width: 640px; margin-bottom: 48px; }
+  .section-head p { font-size: 1.1rem; margin-top: 14px; }
+  .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    padding: 15px 28px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--terracotta);
+    color: var(--white);
+    box-shadow: 0 6px 18px rgba(194, 97, 59, 0.3);
+  }
+  .btn-primary:hover { background: var(--terracotta-dark); transform: translateY(-2px); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+  .btn-secondary:hover { background: var(--ink); color: var(--cream); }
+  .btn-olive { background: var(--olive); color: var(--white); }
+  .btn-olive:hover { background: var(--olive-dark); transform: translateY(-2px); }
+  .btn-lg { padding: 18px 36px; font-size: 1.1rem; }
+
+  /* Header */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(247, 241, 230, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--cream-dark);
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 1.3rem;
+    text-decoration: none;
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .logo-mark {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: var(--terracotta);
+    position: relative;
+    flex-shrink: 0;
+  }
+  .logo-mark::after {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border-radius: 50%;
+    background: var(--cream);
+  }
+  nav ul { display: flex; gap: 32px; list-style: none; }
+  nav a { text-decoration: none; color: var(--ink-soft); font-weight: 600; font-size: 0.95rem; }
+  nav a:hover { color: var(--terracotta-dark); }
+  .nav .btn { padding: 11px 22px; font-size: 0.9rem; }
+  .nav-links { display: flex; align-items: center; gap: 32px; }
+
+  /* Hero */
+  .hero { padding: 80px 0 96px; overflow: hidden; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .hero h1 { margin-bottom: 22px; }
+  .hero h1 em { font-style: normal; color: var(--terracotta); }
+  .hero-lead { font-size: 1.25rem; max-width: 520px; margin-bottom: 32px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; margin-bottom: 20px; }
+  .hero-note { font-size: 0.9rem; color: var(--ink-soft); }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+  .pill {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: var(--olive-light);
+    color: var(--olive-dark);
+  }
+  .pill.tc { background: var(--terracotta-light); color: var(--terracotta-dark); }
+
+  /* Photo placeholders */
+  .photo {
+    border-radius: var(--radius);
+    background: linear-gradient(135deg, #e6b89c 0%, #c2613b 55%, #8c3f22 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: 18px;
+    color: rgba(255, 253, 249, 0.92);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    min-height: 220px;
+  }
+  .photo::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(255,255,255,0.22) 0, transparent 38%),
+      radial-gradient(circle at 75% 70%, rgba(0,0,0,0.18) 0, transparent 45%);
+  }
+  .photo span { position: relative; background: rgba(43,38,32,0.45); padding: 6px 12px; border-radius: 6px; }
+  .photo.olive { background: linear-gradient(135deg, #c9d2a3 0%, #6b7a3f 55%, #43502a 100%); }
+  .photo.cream { background: linear-gradient(135deg, #fbf5e8 0%, #e3c99c 55%, #b89560 100%); color: var(--ink); }
+  .photo.cream span { background: rgba(255,253,249,0.75); color: var(--ink); }
+
+  .hero-visual { position: relative; }
+  .hero-visual .photo { min-height: 460px; box-shadow: var(--shadow); }
+  .hero-card {
+    position: absolute;
+    left: -28px;
+    bottom: 32px;
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    width: 270px;
+    border: 1px solid var(--cream-dark);
+  }
+  .hero-card h4 { font-size: 0.85rem; color: var(--olive); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
+  .hero-card ul { list-style: none; }
+  .hero-card li {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--cream-dark);
+  }
+  .hero-card li:last-child { border-bottom: none; }
+  .check {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    color: var(--olive);
+    font-size: 0.8rem;
+  }
+
+  /* Trust bar */
+  .trust {
+    padding: 28px 0;
+    border-top: 1px solid var(--cream-dark);
+    border-bottom: 1px solid var(--cream-dark);
+    background: var(--cream-dark);
+  }
+  .trust-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    text-align: center;
+  }
+  .trust-item { flex: 1; min-width: 160px; }
+  .trust-item strong {
+    display: block;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--terracotta-dark);
+  }
+  .trust-item span { font-size: 0.9rem; color: var(--ink-soft); }
+
+  /* How it works */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    counter-reset: step;
+  }
+  .step {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 28px;
+    border: 1px solid var(--cream-dark);
+    box-shadow: var(--shadow);
+  }
+  .step .photo { min-height: 160px; margin-bottom: 22px; }
+  .step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: var(--terracotta);
+    color: var(--white);
+    font-weight: 800;
+    margin-bottom: 14px;
+  }
+  .step h3 { margin-bottom: 10px; }
+
+  /* Features */
+  .features { background: var(--white); }
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .feature {
+    padding: 28px;
+    border-radius: var(--radius);
+    background: var(--cream);
+    border: 1px solid var(--cream-dark);
+  }
+  .feature-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    background: var(--olive-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+  .feature-icon svg { width: 24px; height: 24px; stroke: var(--olive-dark); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .feature:nth-child(even) .feature-icon { background: var(--terracotta-light); }
+  .feature:nth-child(even) .feature-icon svg { stroke: var(--terracotta-dark); }
+  .feature h3 { margin-bottom: 8px; }
+  .feature p { font-size: 0.98rem; }
+
+  /* Split section */
+  .split { background: var(--olive); color: var(--cream); }
+  .split p, .split h2, .split .eyebrow { color: var(--cream); }
+  .split .eyebrow { color: var(--olive-light); }
+  .split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .split ul { list-style: none; margin-top: 24px; }
+  .split li { padding: 10px 0 10px 32px; position: relative; font-size: 1.05rem; border-bottom: 1px solid rgba(255,255,255,0.15); }
+  .split li::before {
+    content: "✓";
+    position: absolute; left: 0; top: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-weight: 800;
+    color: var(--terracotta-light);
+  }
+  .split .photo { min-height: 400px; }
+
+  /* Testimonials */
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .testimonial {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 30px;
+    border: 1px solid var(--cream-dark);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .stars { color: var(--terracotta); letter-spacing: 2px; font-size: 1rem; }
+  .testimonial blockquote { font-size: 1.05rem; font-style: italic; color: var(--ink); flex: 1; }
+  .author { display: flex; align-items: center; gap: 12px; }
+  .avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--olive);
+    color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .testimonial:nth-child(2) .avatar { background: var(--terracotta); }
+  .author strong { display: block; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 0.95rem; }
+  .author span { font-size: 0.85rem; color: var(--ink-soft); }
+
+  /* Pricing */
+  .pricing { background: var(--white); }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    align-items: stretch;
+  }
+  .plan {
+    border-radius: var(--radius);
+    padding: 34px 30px;
+    border: 1px solid var(--cream-dark);
+    background: var(--cream);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .plan.featured {
+    background: var(--ink);
+    color: var(--cream);
+    border-color: var(--ink);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(43,38,32,0.2);
+  }
+  .plan.featured p, .plan.featured li { color: var(--cream-dark); }
+  .plan-badge {
+    position: absolute;
+    top: -14px; left: 30px;
+    background: var(--terracotta);
+    color: var(--white);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 6px 14px;
+    border-radius: 999px;
+  }
+  .plan h3 { margin-bottom: 6px; }
+  .plan > p { font-size: 0.95rem; margin-bottom: 18px; }
+  .price { font-size: 2.6rem; font-weight: 800; line-height: 1; margin-bottom: 4px; }
+  .price small { font-size: 1rem; font-weight: 600; color: var(--ink-soft); }
+  .plan.featured .price small { color: var(--cream-dark); }
+  .plan ul { list-style: none; margin: 22px 0 28px; flex: 1; }
+  .plan li { padding: 8px 0 8px 26px; position: relative; font-size: 0.95rem; color: var(--ink-soft); }
+  .plan li::before {
+    content: "✓";
+    position: absolute; left: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-weight: 800;
+    color: var(--olive);
+  }
+  .plan.featured li::before { color: var(--terracotta-light); }
+  .plan .btn { text-align: center; }
+  .pricing-note { text-align: center; margin-top: 28px; font-size: 0.9rem; }
+
+  /* FAQ */
+  .faq-list { max-width: 760px; margin: 0 auto; }
+  details {
+    background: var(--white);
+    border: 1px solid var(--cream-dark);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 20px 56px 20px 24px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    position: relative;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: "+";
+    position: absolute;
+    right: 22px; top: 50%;
+    transform: translateY(-50%);
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--terracotta-light);
+    color: var(--terracotta-dark);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+  details[open] summary::after { content: "–"; background: var(--terracotta); color: var(--white); }
+  details p { padding: 0 24px 22px; }
+
+  /* Final CTA */
+  .cta-band {
+    background: var(--terracotta);
+    color: var(--white);
+    text-align: center;
+    padding: 80px 0;
+  }
+  .cta-band h2, .cta-band p { color: var(--white); }
+  .cta-band p { opacity: 0.92; font-size: 1.15rem; max-width: 560px; margin: 16px auto 32px; }
+  .cta-band .btn-primary { background: var(--white); color: var(--terracotta-dark); box-shadow: none; }
+  .cta-band .btn-primary:hover { background: var(--cream); }
+
+  /* Footer */
+  footer { background: var(--ink); color: var(--cream-dark); padding: 60px 0 30px; }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 44px;
+  }
+  footer .logo { color: var(--cream); margin-bottom: 14px; }
+  footer p { color: #a9a197; font-size: 0.95rem; max-width: 320px; }
+  footer h4 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--cream);
+    margin-bottom: 16px;
+  }
+  footer ul { list-style: none; }
+  footer li { margin-bottom: 10px; }
+  footer li a { color: #a9a197; text-decoration: none; font-size: 0.95rem; }
+  footer li a:hover { color: var(--cream); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 0.85rem;
+    color: #8c847a;
+  }
+  .footer-bottom p { max-width: none; font-size: 0.85rem; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .hero-grid, .split-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero-visual .photo { min-height: 320px; }
+    .hero-card { left: 16px; bottom: 16px; }
+    .steps, .feature-grid, .testimonial-grid, .pricing-grid { grid-template-columns: 1fr; }
+    .plan.featured { transform: none; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    nav ul { display: none; }
+    section { padding: 64px 0; }
+  }
+  @media (max-width: 560px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .hero-card { width: calc(100% - 32px); }
+    .btn-lg { width: 100%; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="#top" class="logo"><span class="logo-mark"></span>ClearPlate</a>
+    <div class="nav-links">
+      <nav>
+        <ul>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+      <a href="https://app.clearplate.example/signup" class="btn btn-primary">Start your free trial</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">For allergies, intolerances &amp; restricted diets</span>
+        <h1>Meal plans built around <em>what you can't eat.</em></h1>
+        <p class="hero-lead">Tell ClearPlate your allergens, intolerances and medical diet once. Every recipe, grocery list and swap we suggest is checked against it — so you can stop reading labels and start enjoying dinner.</p>
+        <div class="hero-actions">
+          <a href="https://app.clearplate.example/signup" class="btn btn-primary btn-lg">Start your free trial</a>
+          <a href="#how" class="btn btn-secondary">See how it works</a>
+        </div>
+        <p class="hero-note">14 days free · No credit card required · Cancel anytime</p>
+        <div class="pill-row">
+          <span class="pill tc">Peanut &amp; tree nut</span>
+          <span class="pill">Gluten-free / Coeliac</span>
+          <span class="pill tc">Dairy &amp; lactose</span>
+          <span class="pill">Low-FODMAP</span>
+          <span class="pill tc">Egg · Soy · Shellfish</span>
+          <span class="pill">Kidney &amp; renal</span>
+          <span class="pill tc">Diabetes-friendly</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="photo"><span>Photo: roasted vegetable &amp; chickpea bowl</span></div>
+        <div class="hero-card">
+          <h4>Tuesday · Checked for you</h4>
+          <ul>
+            <li>Lemon herb chicken traybake <span class="check">✓ Nut-free</span></li>
+            <li>Coconut rice <span class="check">✓ Dairy-free</span></li>
+            <li>Charred broccoli <span class="check">✓ Low-FODMAP</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust">
+    <div class="container trust-grid">
+      <div class="trust-item"><strong>40+</strong><span>allergens &amp; restrictions supported</span></div>
+      <div class="trust-item"><strong>2,800+</strong><span>recipes reviewed by registered dietitians</span></div>
+      <div class="trust-item"><strong>0</strong><span>unflagged allergens — every ingredient is traced</span></div>
+      <div class="trust-item"><strong>4.8 / 5</strong><span>average rating from members</span></div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">How it works</span>
+        <h2>Safe, tailored plans in three steps</h2>
+        <p>Set up once. Every week after that, ClearPlate does the thinking for you.</p>
+      </div>
+      <div class="steps">
+        <article class="step">
+          <div class="photo cream"><span>Photo: pantry shelves &amp; labelled jars</span></div>
+          <span class="step-number">1</span>
+          <h3>Build your safe profile</h3>
+          <p>Add allergens, intolerances, medical diets and simple dislikes for every person in your household — including severity, so a trace warning is treated differently from a preference.</p>
+        </article>
+        <article class="step">
+          <div class="photo olive"><span>Photo: weekly planner on a kitchen table</span></div>
+          <span class="step-number">2</span>
+          <h3>Get a weekly plan that fits</h3>
+          <p>Receive seven days of breakfasts, lunches and dinners, each cross-checked against every profile. Swap any meal and the replacement is checked too.</p>
+        </article>
+        <article class="step">
+          <div class="photo"><span>Photo: grocery basket with fresh produce</span></div>
+          <span class="step-number">3</span>
+          <h3>Shop and cook with confidence</h3>
+          <p>Your grocery list groups safe brands by aisle, flags "may contain" risks, and ties each ingredient back to the recipe it belongs to.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="features">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Features</span>
+        <h2>Built for the details other apps skip</h2>
+        <p>Most meal planners filter by a tag. ClearPlate traces every ingredient, sub-ingredient and brand so nothing slips through.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <h3>Ingredient-level allergen tracing</h3>
+          <p>We check hidden sources — whey in "natural flavouring", wheat in soy sauce, nuts in pesto — not just the headline ingredient.</p>
+        </article>
+        <article class="feature">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.5 2.5-6 6-6s6 2.5 6 6"/><path d="M15 15.5c2.5.3 5 2 5 4.5"/></svg></div>
+          <h3>Multi-person households</h3>
+          <p>One child is coeliac, one adult is dairy-free? Plan a single dinner everyone can eat, or get parallel versions with shared prep.</p>
+        </article>
+        <article class="feature">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/><path d="M18 15l2 2 3-3"/></svg></div>
+          <h3>Safe-brand grocery lists</h3>
+          <p>Lists name specific brands verified free of your allergens, with cross-contamination warnings pulled from manufacturer statements.</p>
+        </article>
+        <article class="feature">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg></div>
+          <h3>Checked substitutions</h3>
+          <p>Don't like a recipe? Every suggested swap is re-screened against your profile before it ever appears on your plan.</p>
+        </article>
+        <article class="feature">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="5"/></svg></div>
+          <h3>Dietitian-reviewed recipes</h3>
+          <p>Our library is written and reviewed by registered dietitians specialising in allergy, IBS and medical nutrition therapy.</p>
+        </article>
+        <article class="feature">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg></div>
+          <h3>Eating-out &amp; travel cards</h3>
+          <p>Print or save a plain-language card of your restrictions in 12 languages to hand to kitchens when you're away from your own.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPLIT -->
+  <section class="split">
+    <div class="container split-grid">
+      <div class="photo cream"><span>Photo: family cooking together at a stove</span></div>
+      <div>
+        <span class="eyebrow">Why it matters</span>
+        <h2>Dinner shouldn't feel like a risk assessment</h2>
+        <p>If you've ever stood in the supermarket reading the same label three times, you know the mental load. ClearPlate carries it for you.</p>
+        <ul>
+          <li>Profiles support severity levels, from "avoid" to "anaphylaxis — no traces"</li>
+          <li>Medical diets built in: renal, diabetic, low-FODMAP, low-histamine, elimination</li>
+          <li>Recipes show exactly why each one was approved for your profile</li>
+          <li>Manual overrides when your allergist's guidance changes</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="stories">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Member stories</span>
+        <h2>Fewer reactions. More dinners.</h2>
+      </div>
+      <div class="testimonial-grid">
+        <article class="testimonial">
+          <div class="stars">★★★★★</div>
+          <blockquote>"My son has a severe peanut and tree nut allergy. For the first time I'm not cross-checking every single recipe myself. The 'why this is safe' note on each meal is what sold me."</blockquote>
+          <div class="author">
+            <div class="avatar">PR</div>
+            <div><strong>Priya R.</strong><span>Parent of two, Leeds</span></div>
+          </div>
+        </article>
+        <article class="testimonial">
+          <div class="stars">★★★★★</div>
+          <blockquote>"Low-FODMAP and dairy-free at the same time used to mean eating the same four things. Now I get a different plan every week and my gut has been calm for months."</blockquote>
+          <div class="author">
+            <div class="avatar">MT</div>
+            <div><strong>Marcus T.</strong><span>IBS, Portland</span></div>
+          </div>
+        </article>
+        <article class="testimonial">
+          <div class="stars">★★★★★</div>
+          <blockquote>"I was diagnosed coeliac at 54 and felt completely lost. The grocery list naming actual safe brands took the panic out of shopping. I recommend it to every newly diagnosed patient."</blockquote>
+          <div class="author">
+            <div class="avatar">HK</div>
+            <div><strong>Helen K.</strong><span>Coeliac, Melbourne</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="pricing">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Pricing</span>
+        <h2>Simple plans, every one with a free trial</h2>
+        <p>Start with 14 days free on any plan. No credit card needed to begin.</p>
+      </div>
+      <div class="pricing-grid">
+        <article class="plan">
+          <h3>Solo</h3>
+          <p>For one person managing their own restrictions.</p>
+          <div class="price">$7<small>/month</small></div>
+          <ul>
+            <li>1 safe profile</li>
+            <li>Weekly plan &amp; grocery list</li>
+            <li>Ingredient-level allergen tracing</li>
+            <li>Checked substitutions</li>
+          </ul>
+          <a href="https://app.clearplate.example/signup?plan=solo" class="btn btn-secondary">Start your free trial</a>
+        </article>
+        <article class="plan featured">
+          <span class="plan-badge">Most popular</span>
+          <h3>Household</h3>
+          <p>For families juggling more than one set of needs.</p>
+          <div class="price">$14<small>/month</small></div>
+          <ul>
+            <li>Up to 6 safe profiles</li>
+            <li>Shared meals or parallel versions</li>
+            <li>Safe-brand grocery lists</li>
+            <li>Eating-out &amp; travel cards</li>
+            <li>Dietitian-reviewed library</li>
+          </ul>
+          <a href="https://app.clearplate.example/signup?plan=household" class="btn btn-primary">Start your free trial</a>
+        </article>
+        <article class="plan">
+          <h3>Clinical</h3>
+          <p>For dietitians and clinics supporting patients.</p>
+          <div class="price">$39<small>/month</small></div>
+          <ul>
+            <li>Unlimited patient profiles</li>
+            <li>Shareable plans &amp; progress notes</li>
+            <li>Custom elimination protocols</li>
+            <li>Priority support</li>
+          </ul>
+          <a href="https://app.clearplate.example/signup?plan=clinical" class="btn btn-olive">Start your free trial</a>
+        </article>
+      </div>
+      <p class="pricing-note">Prices in USD. Annual billing saves 20%. Cancel anytime from your account page.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">FAQ</span>
+        <h2>Questions people with restrictions actually ask</h2>
+      </div>
+      <div class="faq-list">
+        <details open>
+          <summary>How do you make sure a recipe is actually safe for me?</summary>
+          <p>Every ingredient in our library is mapped to its sub-ingredients and known allergen sources, and each recipe is screened against your full profile — including severity and trace-avoidance settings — before it appears. Each approved recipe shows a "why this is safe" summary. ClearPlate is a planning tool and does not replace advice from your allergist or doctor; always check product labels before eating.</p>
+        </details>
+        <details>
+          <summary>Which allergens and diets do you support?</summary>
+          <p>All 14 major regulated allergens (including the EU and FDA lists), plus 25+ less common ones such as sesame, mustard, lupin, sulphites and corn. Medical diets include coeliac/gluten-free, low-FODMAP, low-histamine, renal, diabetes-friendly, low-sodium and custom elimination protocols. You can also add free-text restrictions and we'll map them to ingredients.</p>
+        </details>
+        <details>
+          <summary>Can I plan for a household where everyone has different restrictions?</summary>
+          <p>Yes. The Household plan supports up to six profiles. For each meal you choose "one dish for all" (screened against every profile at once) or "parallel versions" that share prep but differ in a key ingredient.</p>
+        </details>
+        <details>
+          <summary>What happens if my restrictions change?</summary>
+          <p>Update your profile at any time. Your current week is re-screened immediately and any recipe that no longer passes is flagged with a checked replacement suggested.</p>
+        </details>
+        <details>
+          <summary>Do I need a credit card for the free trial?</summary>
+          <p>No. Sign up on the web, use ClearPlate for 14 days, and only add payment if you decide to continue. Nothing is charged automatically.</p>
+        </details>
+        <details>
+          <summary>Are the safe-brand lists available in my country?</summary>
+          <p>Safe-brand matching is currently available in the US, Canada, UK, Ireland, Australia and New Zealand. Everywhere else you still get full recipe screening and generic grocery lists with allergen warnings.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="cta-band">
+    <div class="container">
+      <h2>Your first safe week is on us</h2>
+      <p>Set up your profile in five minutes and get a full week of meals you can trust — free for 14 days.</p>
+      <a href="https://app.clearplate.example/signup" class="btn btn-primary btn-lg">Start your free trial</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="#top" class="logo"><span class="logo-mark"></span>ClearPlate</a>
+        <p>Safe, tailored meal plans for people with food allergies, intolerances and medical diets.</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Allergen guide</a></li>
+          <li><a href="#">For dietitians</a></li>
+          <li><a href="#">Recipe library</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 ClearPlate. ClearPlate is a planning tool and not a substitute for medical advice. Always check labels.</p>
+      <p>Made with care for people who read every label.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

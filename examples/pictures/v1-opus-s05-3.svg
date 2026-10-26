@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <!-- Plain background -->
+  <rect width="800" height="600" fill="#FFD400"/>
+
+  <!-- ===== Wheels (filled rings, no strokes) ===== -->
+  <g fill="#111111">
+    <!-- Rear wheel -->
+    <path fill-rule="evenodd"
+          d="M110,430 a110,110 0 1,0 220,0 a110,110 0 1,0 -220,0 Z
+             M126,430 a94,94 0 1,0 188,0 a94,94 0 1,0 -188,0 Z"/>
+    <rect x="-94" y="-2.5" width="188" height="5" transform="translate(220 430) rotate(0)"/>
+    <rect x="-94" y="-2.5" width="188" height="5" transform="translate(220 430) rotate(60)"/>
+    <rect x="-94" y="-2.5" width="188" height="5" transform="translate(220 430) rotate(120)"/>
+    <circle cx="220" cy="430" r="14"/>
+
+    <!-- Front wheel -->
+    <path fill-rule="evenodd"
+          d="M470,430 a110,110 0 1,0 220,0 a110,110 0 1,0 -220,0 Z
+             M486,430 a94,94 0 1,0 188,0 a94,94 0 1,0 -188,0 Z"/>
+    <rect x="-94" y="-2.5" width="188" height="5" transform="translate(580 430) rotate(30)"/>
+    <rect x="-94" y="-2.5" width="188" height="5" transform="translate(580 430) rotate(90)"/>
+    <rect x="-94" y="-2.5" width="188" height="5" transform="translate(580 430) rotate(150)"/>
+    <circle cx="580" cy="430" r="14"/>
+  </g>
+
+  <!-- Far-side leg (behind frame) -->
+  <g fill="#002A9E">
+    <rect x="0" y="-7" width="72" height="14" rx="7" transform="translate(360 280) rotate(56)"/>
+    <rect x="0" y="-7" width="81" height="14" rx="7" transform="translate(400 340) rotate(120)"/>
+    <polygon points="345,405 385,404 372,420 340,420"/>
+  </g>
+
+  <!-- ===== Frame (filled bars) ===== -->
+  <g fill="#E3000F">
+    <!-- Seat tube -->
+    <rect x="0" y="-7" width="149" height="14" rx="7" transform="translate(390 440) rotate(-109.65)"/>
+    <!-- Top tube -->
+    <rect x="0" y="-7" width="200" height="14" rx="7" transform="translate(345 315) rotate(-2.86)"/>
+    <!-- Down tube -->
+    <rect x="0" y="-8" width="197" height="16" rx="8" transform="translate(390 440) rotate(-35.7)"/>
+    <!-- Chain stay -->
+    <rect x="0" y="-6" width="170" height="12" rx="6" transform="translate(390 440) rotate(-176.6)"/>
+    <!-- Seat stay -->
+    <rect x="0" y="-6" width="173" height="12" rx="6" transform="translate(340 305) rotate(133.8)"/>
+    <!-- Fork / head tube -->
+    <rect x="0" y="-8" width="157" height="16" rx="8" transform="translate(535 280) rotate(73.3)"/>
+    <!-- Stem -->
+    <rect x="0" y="-6" width="34" height="12" rx="6" transform="translate(535 282) rotate(-107)"/>
+  </g>
+
+  <!-- Handlebar, seat, crank -->
+  <g fill="#111111">
+    <rect x="500" y="242" width="50" height="12" rx="6"/>
+    <rect x="300" y="286" width="72" height="16" rx="8"/>
+    <circle cx="390" cy="440" r="16"/>
+    <rect x="0" y="-5" width="45" height="10" rx="5" transform="translate(390 440) rotate(55)"/>
+    <rect x="404" y="472" width="34" height="9" rx="4"/>
+  </g>
+
+  <!-- ===== Pelican ===== -->
+  <!-- Tail -->
+  <polygon points="290,225 235,205 250,250" fill="#FFFFFF"/>
+  <!-- Body -->
+  <ellipse cx="355" cy="240" rx="88" ry="56" fill="#FFFFFF" transform="rotate(-12 355 240)"/>
+  <!-- Neck -->
+  <rect x="0" y="-18" width="92" height="36" rx="18" fill="#FFFFFF" transform="translate(410 205) rotate(-63.4)"/>
+  <!-- Head -->
+  <circle cx="452" cy="115" r="30" fill="#FFFFFF"/>
+
+  <!-- Beak: upper mandible and pouch -->
+  <polygon points="470,96 640,140 472,124" fill="#E3000F"/>
+  <polygon points="472,124 636,144 540,178 478,150" fill="#A8000B"/>
+
+  <!-- Eye -->
+  <circle cx="458" cy="106" r="6" fill="#111111"/>
+  <circle cx="460" cy="104" r="2" fill="#FFFFFF"/>
+
+  <!-- Wing reaching forward to grip the handlebar -->
+  <polygon points="290,225 395,188 525,246 505,258 385,262" fill="#0033CC"/>
+  <polygon points="300,232 250,238 300,250" fill="#0033CC"/>
+
+  <!-- Near-side leg pushing the front pedal -->
+  <g fill="#0033CC">
+    <rect x="0" y="-8" width="92" height="16" rx="8" transform="translate(375 275) rotate(54)"/>
+    <rect x="0" y="-8" width="120" height="16" rx="8" transform="translate(430 350) rotate(95)"/>
+    <polygon points="400,466 450,464 436,482 396,482"/>
+  </g>
+</svg>

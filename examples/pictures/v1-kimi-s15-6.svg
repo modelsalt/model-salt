@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 540" width="640" height="540"
+     fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>A pelican riding a bicycle</title>
+  <desc>Line-art pelican in a racing crouch over drop handlebars, pedaling a muted-red road bike, viewed three-quarter from the front.</desc>
+
+  <!-- ======== WHEELS ======== -->
+  <g stroke="#a3a8ac" stroke-width="1.5">
+    <!-- front spokes -->
+    <path d="M170 400 L242 400 M170 400 L206 343 M170 400 L134 343 M170 400 L98 400 M170 400 L134 457 M170 400 L206 457"/>
+    <!-- rear spokes -->
+    <path d="M480 400 L545 400 M480 400 L513 347 M480 400 L448 347 M480 400 L415 400 M480 400 L448 453 M480 400 L513 453"/>
+  </g>
+  <g stroke="#7d8388" stroke-width="2.5">
+    <ellipse cx="170" cy="400" rx="72" ry="66"/>
+    <ellipse cx="480" cy="400" rx="65" ry="61"/>
+  </g>
+  <g stroke="#565b60" stroke-width="6">
+    <ellipse cx="170" cy="400" rx="86" ry="80"/>
+    <ellipse cx="480" cy="400" rx="78" ry="74"/>
+  </g>
+  <g stroke="#565b60" stroke-width="3">
+    <circle cx="170" cy="400" r="5"/>
+    <circle cx="480" cy="400" r="5"/>
+  </g>
+
+  <!-- ======== DRIVETRAIN ======== -->
+  <g stroke="#6f7478">
+    <circle cx="340" cy="398" r="15" stroke-width="3"/>
+    <circle cx="480" cy="400" r="7" stroke-width="2.5"/>
+    <path d="M353 388 L479 393 M353 408 L479 407" stroke-width="2.5"/>
+  </g>
+
+  <!-- ======== FRAME (muted red) ======== -->
+  <g stroke="#a04940" stroke-width="5">
+    <path d="M232 318 L170 400"/>          <!-- fork -->
+    <path d="M226 300 L366 286"/>          <!-- top tube -->
+    <path d="M236 322 L340 396"/>          <!-- down tube -->
+    <path d="M368 290 L342 396"/>          <!-- seat tube -->
+    <path d="M366 292 L480 400"/>          <!-- seat stay -->
+    <path d="M344 398 L480 400"/>          <!-- chain stay -->
+  </g>
+  <path d="M220 292 L240 328" stroke="#a04940" stroke-width="7"/> <!-- head tube -->
+
+  <!-- saddle, stem, drop handlebars -->
+  <path d="M348 280 C360 274 384 274 396 280" stroke="#4a4e52" stroke-width="5"/>
+  <path d="M221 294 L212 280" stroke="#4f5459" stroke-width="5"/>
+  <path d="M212 280 C203 276 192 281 188 292 C184 304 190 315 202 317" stroke="#4f5459" stroke-width="5"/>
+
+  <!-- ======== FAR-SIDE CRANK + LEG (lighter, slightly behind) ======== -->
+  <g stroke="#7c8186" stroke-width="4">
+    <path d="M340 398 L315 359"/>
+    <path d="M305 353 L325 357"/>
+  </g>
+  <g stroke="#a09890" stroke-width="3.5">
+    <path d="M360 288 C348 298 337 309 330 321 C324 331 319 340 315 348"/>
+    <path d="M315 348 C309 350 304 354 301 359"/>
+    <path d="M305 357 L297 361"/>
+  </g>
+
+  <!-- ======== PELICAN ======== -->
+  <g stroke="#5f666d" stroke-width="4">
+    <!-- tail fan -->
+    <path d="M430 232 C444 234 456 240 464 248"/>
+    <path d="M428 242 C440 246 450 252 457 260"/>
+    <!-- back, neck, crown : one hunched arc -->
+    <path d="M432 236 C402 208 356 192 314 197 C288 200 268 210 254 222
+             C240 208 216 202 196 208 C184 212 176 217 172 224"/>
+    <!-- skull -->
+    <path d="M172 224 C162 228 154 234 150 242"/>
+    <path d="M172 224 C180 230 184 240 182 250 C181 256 178 261 173 264"/>
+    <!-- crest -->
+    <path d="M176 222 C182 214 190 209 198 208"/>
+    <path d="M180 228 C187 221 195 217 202 217"/>
+    <!-- chin, throat, chest, belly to hip -->
+    <path d="M173 264 C200 250 228 244 248 240 C256 258 266 278 290 294
+             C308 306 338 309 357 303 C368 299 376 294 381 287"/>
+    <!-- rear body line closing to the tail -->
+    <path d="M381 287 C402 272 420 254 432 236"/>
+    <!-- flank feather hints -->
+    <path d="M296 246 C320 254 340 266 352 282" stroke-width="3"/>
+    <path d="M312 240 C332 248 348 260 357 274" stroke-width="3"/>
+    <!-- wing stretched forward to grip the drops -->
+    <path d="M250 246 C234 262 218 280 205 297"/>
+    <path d="M262 252 C248 268 232 286 215 301"/>
+    <path d="M215 301 C210 307 204 311 197 313"/>
+    <path d="M222 297 C218 304 212 309 205 312"/>
+  </g>
+  <path d="M252 250 C240 264 228 278 216 292" stroke="#7a8187" stroke-width="2.5"/>
+
+  <!-- bill and pouch (orange-yellow) -->
+  <g stroke="#dd8f2e" stroke-width="4">
+    <path d="M150 242 C118 245 82 252 50 263 C44 265 40 268 39 272 C38 276 40 279 44 280"/>
+    <path d="M149 252 C118 256 82 263 45 274"/>
+    <path d="M152 260 C138 286 112 304 86 306 C66 308 50 297 45 281"/>
+    <path d="M173 264 C166 264 158 262 152 260"/>
+  </g>
+  <g stroke="#edaa4f" stroke-width="2.5">
+    <path d="M148 246 C120 248 88 254 56 263"/>
+    <path d="M142 266 C126 286 102 298 80 298"/>
+  </g>
+
+  <!-- eye -->
+  <circle cx="166" cy="238" r="3.2" fill="#3c4248" stroke="none"/>
+
+  <!-- ======== NEAR-SIDE CRANK, PEDAL, LEG ======== -->
+  <g stroke="#4f5459" stroke-width="5">
+    <path d="M340 398 L364 438"/>
+    <path d="M354 443 L382 441"/>
+  </g>
+  <g stroke="#847b70" stroke-width="4">
+    <path d="M372 292 C363 307 355 321 351 336"/>
+    <path d="M351 336 C352 362 357 396 363 423"/>
+    <path d="M363 423 C360 432 363 440 371 444 C379 448 390 447 397 442"/>
+    <path d="M372 446 C366 449 360 450 354 448"/>
+    <path d="M382 447 C377 451 371 453 365 452"/>
+  </g>
+</svg>

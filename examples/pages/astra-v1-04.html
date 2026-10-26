@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f8f4">
+<meta name="description" content="Meet Daywell. A little meal planning, a lot less wondering what’s for dinner.">
+<title>Daywell — Dinner, off your mind.</title>
+<style>
+:root{--paper:#f7f8f4;--ink:#283b31;--muted:#738075;--green:#42654d;--line:#dde3d9;--white:#fff;--sage:#eaf0e5}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:30px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+button,a,summary{-webkit-tap-highlight-color:transparent}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #91ad73;outline-offset:5px}
+.wrap{width:min(1120px,calc(100% - 64px));margin:auto}
+nav{height:104px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.brand{display:inline-flex;align-items:center;gap:9px;font-size:25px;font-weight:700;letter-spacing:-1.2px}
+.brand svg{width:29px;height:33px}
+.nav-links{display:flex;align-items:center;gap:34px;font-size:13px}
+.nav-links>a:first-child{color:#5c6a5e}
+.nav-cta{border:1px solid #cbd5c6;border-radius:7px;padding:12px 17px}
+.arrow{display:inline-block;margin-left:15px}
+.hero{text-align:center;padding:78px 0 49px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:#60745b;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600}
+.dot{width:6px;height:6px;border-radius:50%;background:#729069}
+h1{font-weight:500;font-size:clamp(48px,7.1vw,82px);line-height:1.06;letter-spacing:-4.8px;margin:25px auto 24px}
+h1 span{color:#829478}
+.hero p{font-size:16px;line-height:1.8;color:#6a766b;margin:0 auto;max-width:450px}
+.hero-actions{display:flex;justify-content:center;align-items:center;gap:24px;margin:29px 0 17px}
+.button{display:inline-flex;align-items:center;justify-content:center;background:var(--green);color:white;border:1px solid var(--green);border-radius:7px;padding:15px 21px;font-size:13px;cursor:pointer;transition:background .2s,transform .2s}
+.button:hover{background:#304f3a;transform:translateY(-2px)}
+.text-link{font-size:13px;border-bottom:1px solid #9ca895;padding-bottom:4px}
+.hero-note{font-size:11px;color:#899184}
+.preview-area{position:relative;margin-top:5px}
+.preview-label{text-align:center;margin:0 0 17px;font-size:10px;letter-spacing:1.8px;color:#899181;text-transform:uppercase}
+.preview{padding:0 28px 25px;background:#fff;border:1px solid #dae0d5;border-radius:13px;box-shadow:0 18px 55px -35px #53633a38}
+.app-top{height:62px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #edf0e8}
+.app-brand{font-size:17px;letter-spacing:-.8px;font-weight:700}
+.app-nav{display:flex;gap:27px;font-size:10px;color:#8c9487;height:100%;align-items:center}
+.app-nav .selected{height:100%;display:flex;align-items:center;color:#456347;border-bottom:2px solid #6c895b}
+.avatar{width:25px;height:25px;border-radius:50%;display:grid;place-items:center;background:#e9eddf;color:#6d7a5d;font-size:9px}
+.plan-heading{display:flex;justify-content:space-between;align-items:center;margin:27px 0 22px}
+.plan-heading h2{font-size:22px;font-weight:500;letter-spacing:-.7px;margin:0 0 6px}
+.plan-heading p{margin:0;font-size:11px;color:#94998d}
+.week-tag{font-size:10px;background:#f5f7f1;border:1px solid #e7ecdf;padding:9px 12px;border-radius:5px}
+.week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px}
+.day-label{display:flex;justify-content:space-between;align-items:center;font-size:10px;color:#8c9487;padding:0 2px 10px}
+.day-label b{font-weight:500;color:#576650}
+.day:first-child .day-label b{color:#4c6f42}
+.meal{border:1px solid #e7eadd;border-radius:7px;overflow:hidden;height:190px;background:#fff}
+.food{width:100%;height:99px;display:block;background:#eff1e7}
+.day:nth-child(2) .food{background:#f2eee3}
+.day:nth-child(3) .food{background:#f0e9e2}
+.day:nth-child(4) .food{background:#e8ede3}
+.day:nth-child(5) .food{background:#f3ede4}
+.day:nth-child(6) .food{background:#eee9df}
+.day:nth-child(7) .food{background:#ecede5}
+.meal-text{padding:11px 10px}
+.meal-text h3{font-size:11px;line-height:1.45;margin:0 0 9px;font-weight:500}
+.meal-text p{font-size:9px;margin:0;color:#909687}
+.plan-footer{display:flex;justify-content:space-between;align-items:center;margin-top:20px;font-size:10px;color:#7d8874}
+.ready{display:flex;gap:6px;align-items:center}
+.check{display:inline-grid;place-items:center;width:15px;height:15px;border-radius:50%;background:#e8efdf;color:#668552;font-size:9px}
+.caption{text-align:center;color:#899181;font-size:11px;margin:18px 0 0}
+.benefit-strip{display:flex;justify-content:center;gap:50px;padding:42px 0 45px;border-bottom:1px solid var(--line);font-size:12px;color:#6f7c68}
+.benefit-strip span{display:flex;align-items:center;gap:8px}
+.benefit-strip svg{width:17px;height:17px;stroke:#809373;fill:none;stroke-width:1.5}
+.how{text-align:center;padding:83px 0 74px}
+.section-label{font-size:10px;letter-spacing:1.8px;color:#7a8e6c;text-transform:uppercase}
+.section-title{font-size:clamp(29px,4vw,40px);font-weight:500;letter-spacing:-1.6px;line-height:1.2;margin:17px 0 13px}
+.section-description{font-size:14px;color:#7a8475;line-height:1.7}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:50px;text-align:left;margin-top:47px}
+.step-number{display:flex;align-items:center;gap:14px;font-size:11px;color:#91a080;margin-bottom:22px}
+.step-number:after{content:"";height:1px;background:var(--line);flex:1}
+.steps h3{font-size:17px;font-weight:500;letter-spacing:-.4px;margin:0 0 12px}
+.steps p{font-size:13px;line-height:1.85;color:#7a8475;margin:0;max-width:280px}
+.closing{text-align:center;background:var(--sage);border:1px solid #e0e7d8;border-radius:12px;padding:53px 25px 47px}
+.closing .section-title{margin-top:0}
+.closing p{font-size:14px;color:#718067;line-height:1.7;margin-bottom:24px}
+.closing small{display:block;font-size:10px;color:#87917e;margin-top:13px}
+.faq{max-width:690px;margin:68px auto}
+.faq h2{text-align:center;font-size:24px;font-weight:500;letter-spacing:-.8px;margin-bottom:28px}
+details{border-bottom:1px solid var(--line);padding:18px 0}
+summary{cursor:pointer;display:flex;justify-content:space-between;font-size:13px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";font-size:18px;color:#809271}
+details[open] summary:after{content:"−"}
+details p{font-size:13px;color:#75816e;line-height:1.8;margin:14px 28px 0 0}
+footer{padding:27px 0 32px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+footer .brand{font-size:20px}
+footer .brand svg{width:23px;height:26px}
+footer p{font-size:10px;color:#8a9481}
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+@media(min-width:1400px){.hero{padding-top:95px}}
+@media(max-width:900px){.wrap{width:calc(100% - 40px)}.preview{padding:0 18px 20px}.week{gap:7px}.meal-text{padding:9px 7px}.meal-text h3{font-size:10px}.steps{gap:25px}.benefit-strip{gap:25px}}
+@media(max-width:680px){nav{height:80px}.brand{font-size:23px}.nav-links{gap:15px}.nav-links>a:first-child{display:none}.nav-cta{font-size:11px;padding:10px 12px}.hero{padding:53px 0 39px}h1{letter-spacing:-2.8px;font-size:52px}.hero p{font-size:14px;max-width:320px}.hero-actions{gap:17px}.button{font-size:12px;padding:14px 17px}.text-link{font-size:12px}.app-nav{gap:12px;font-size:9px}.app-brand{font-size:15px}.app-top{height:54px}.plan-heading h2{font-size:19px}.week-tag{font-size:8px;padding:7px}.week{grid-template-columns:repeat(2,minmax(0,1fr));gap:17px 12px}.meal{height:181px}.food{height:100px}.meal-text h3{font-size:12px}.meal-text p{font-size:10px}.day-label{font-size:11px}.day:last-child{grid-column:1/-1}.day:last-child .meal{height:105px;display:flex}.day:last-child .food{height:105px;width:43%;flex-shrink:0}.day:last-child .meal-text{padding:23px 17px}.plan-footer{font-size:9px;gap:10px}.benefit-strip{gap:16px;flex-wrap:wrap;font-size:10px;padding:30px 0}.how{padding:58px 0}.steps{grid-template-columns:1fr;gap:27px;max-width:350px;margin:35px auto 0}.steps p{max-width:none}.step-number{margin-bottom:14px}.closing{padding:38px 20px}.closing .section-title{font-size:30px}.faq{margin:48px 0}footer{gap:20px}footer p{text-align:right;line-height:1.6}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button{transition:none}}
+</style>
+</head>
+<body>
+<svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<defs>
+<symbol id="sprout" viewBox="0 0 32 36">
+<path d="M16 31V16" fill="none" stroke="currentColor" stroke-width="2"/>
+<path d="M16 21C4 22 2 12 3 7c10-1 15 4 13 14Z" fill="currentColor"/>
+<path d="M16 15C15 6 21 2 29 3c1 8-4 13-13 12Z" fill="currentColor" opacity=".55"/>
+</symbol>
+<symbol id="plate" viewBox="0 0 160 120">
+<ellipse cx="81" cy="66" rx="54" ry="45" fill="#263e2c" opacity=".07"/>
+<circle cx="80" cy="59" r="47" fill="#fafaf4"/>
+<circle cx="80" cy="59" r="37" fill="#f0eee3" stroke="#e2e2d6" stroke-width="1"/>
+</symbol>
+<symbol id="greens" viewBox="0 0 160 120">
+<g fill="#688450"><ellipse cx="65" cy="42" rx="13" ry="8" transform="rotate(-25 65 42)"/><ellipse cx="49" cy="57" rx="9" ry="14" transform="rotate(-30 49 57)"/><ellipse cx="59" cy="73" rx="13" ry="9"/><ellipse cx="76" cy="80" rx="11" ry="8"/></g>
+<g fill="#91a967"><ellipse cx="57" cy="47" rx="6" ry="10" transform="rotate(30 57 47)"/><ellipse cx="63" cy="65" rx="8" ry="12" transform="rotate(45 63 65)"/><ellipse cx="75" cy="48" rx="7" ry="11" transform="rotate(-20 75 48)"/></g>
+</symbol>
+<symbol id="bowl" viewBox="0 0 160 120">
+<use href="#plate"/><use href="#greens"/>
+<g fill="#d5a962"><circle cx="89" cy="39" r="5"/><circle cx="98" cy="44" r="5"/><circle cx="87" cy="49" r="5"/><circle cx="100" cy="54" r="5"/><circle cx="91" cy="60" r="5"/></g>
+<g fill="#bc7153"><path d="m81 69 13-8 7 12-13 8z"/><path d="m96 78 11-8 5 9-11 8z"/></g>
+<path d="M72 28a18 18 0 0 1 22 4l-11 12z" fill="#e7c56c"/><path d="m76 30 8 10 6-7" fill="none" stroke="#faf4d4" stroke-width="1.5"/>
+<g fill="#f6eee0"><circle cx="65" cy="52" r="2"/><circle cx="82" cy="73" r="2"/><circle cx="72" cy="62" r="2"/></g>
+</symbol>
+<symbol id="pasta" viewBox="0 0 160 120">
+<use href="#plate"/>
+<g fill="none" stroke="#d9b674" stroke-width="6" stroke-linecap="round">
+<path d="m54 45 14 8m6-17 10 10m9-7 9 12M48 61l15 4m8-8 13 7m8-6 16 5M55 76l12-3m7 3 9 8m8-12 10 6"/>
+</g>
+<g fill="#688452"><ellipse cx="66" cy="40" rx="5" ry="8" transform="rotate(40 66 40)"/><ellipse cx="87" cy="57" rx="7" ry="4"/><ellipse cx="72" cy="71" rx="5" ry="7"/></g>
+<g fill="#bd6d4d"><circle cx="57" cy="56" r="5"/><circle cx="94" cy="84" r="4"/><circle cx="104" cy="49" r="4"/></g>
+</symbol>
+<symbol id="salmon" viewBox="0 0 160 120">
+<use href="#plate"/><use href="#greens"/>
+<path d="m79 36 25 9q6 2 3 10L96 81q-2 5-8 3L71 77q-6-3-3-9z" fill="#ce8b6e"/>
+<path d="m79 44 23 9m-26 0 23 9m-27 0 23 9m-25 0 22 9" stroke="#e9b495" stroke-width="2" fill="none"/>
+<path d="M66 31a16 16 0 0 1 19 2L75 46Z" fill="#e5cc79"/>
+</symbol>
+<symbol id="tacos" viewBox="0 0 160 120">
+<use href="#plate"/>
+<g transform="rotate(-18 80 60)">
+<path d="M46 44q18-20 36 0v27q-18 15-36-1z" fill="#ddbd78"/>
+<path d="M81 44q18-20 36 0v27q-18 15-36-1z" fill="#ddbd78"/>
+<path d="M51 44q12-9 24 0v24q-12 8-24-1zM86 44q12-9 24 0v24q-12 8-24-1z" fill="#72915a"/>
+<g fill="#a86b4e"><circle cx="59" cy="48" r="5"/><circle cx="68" cy="60" r="5"/><circle cx="94" cy="48" r="5"/><circle cx="103" cy="61" r="5"/></g>
+<path d="m56 57 12-4m24 6 13-5" stroke="#ebdab6" stroke-width="3"/>
+</g>
+</symbol>
+</defs>
+</svg>
+
+<header class="wrap">
+<nav aria-label="Main navigation">
+<a class="brand" href="#" aria-label="Daywell home"><svg aria-hidden="true"><use href="#sprout"/></svg>daywell</a>
+<div class="nav-links"><a href="#how-it-works">How it works</a><a class="nav-cta" href="#sample">Meet your next week <span class="arrow" aria-hidden="true">↗</span></a></div>
+</nav>
+</header>
+
+<main class="wrap">
+<section class="hero">
+<div class="eyebrow"><span class="dot"></span>A little plan. A lighter day.</div>
+<h1>Dinner, off<br><span>your mind.</span></h1>
+<p>Less “what should we eat?” More getting on with life.<br>Meet the meal planner that makes room for both.</p>
+<div class="hero-actions">
+<a class="button" href="#sample">See your week <span class="arrow" aria-hidden="true">↗</span></a>
+<a class="text-link" href="#how-it-works">How Daywell works</a>
+</div>
+<div class="hero-note">Good food. One less thing to think about.</div>
+</section>
+
+<section class="preview-area" id="sample" aria-label="Sample weekly meal plan">
+<p class="preview-label">A week with a little more breathing room</p>
+<div class="preview">
+<div class="app-top">
+<span class="app-brand">daywell<span style="color:#8b9a7c">.</span></span>
+<div class="app-nav" aria-hidden="true"><span class="selected">My week</span><span>Recipes</span><span>Shopping list</span></div>
+<span class="avatar" aria-label="Sample profile: Alex">A</span>
+</div>
+<div class="plan-heading">
+<div><h2>Your week, sorted.</h2><p>A little variety. Plenty to look forward to.</p></div>
+<span class="week-tag">Sample week · Oct 19–25</span>
+</div>
+<div class="week">
+<article class="day"><div class="day-label"><b>Monday</b><span>19</span></div><div class="meal"><svg class="food" aria-hidden="true" viewBox="0 0 160 120"><use href="#bowl"/></svg><div class="meal-text"><h3>Lemony chickpea bowls</h3><p>25 min · Plant-based</p></div></div></article>
+<article class="day"><div class="day-label"><b>Tuesday</b><span>20</span></div><div class="meal"><svg class="food" aria-hidden="true" viewBox="0 0 160 120"><use href="#pasta"/></svg><div class="meal-text"><h3>Simple basil &amp; tomato pasta</h3><p>20 min · Vegetarian</p></div></div></article>
+<article class="day"><div class="day-label"><b>Wednesday</b><span>21</span></div><div class="meal"><svg class="food" aria-hidden="true" viewBox="0 0 160 120"><use href="#salmon"/></svg><div class="meal-text"><h3>Roasted salmon &amp; greens</h3><p>30 min · Protein-rich</p></div></div></article>
+<article class="day"><div class="day-label"><b>Thursday</b><span>22</span></div><div class="meal"><svg class="food" aria-hidden="true" viewBox="0 0 160 120"><use href="#bowl" transform="rotate(45 80 60)"/></svg><div class="meal-text"><h3>Crunchy garden grain bowls</h3><p>20 min · Plant-based</p></div></div></article>
+<article class="day"><div class="day-label"><b>Friday</b><span>23</span></div><div class="meal"><svg class="food" aria-hidden="true" viewBox="0 0 160 120"><use href="#tacos"/></svg><div class="meal-text"><h3>Black bean tacos with lime</h3><p>25 min · Vegetarian</p></div></div></article>
+<article class="day"><div class="day-label"><b>Saturday</b><span>24</span></div><div class="meal"><svg class="food" aria-hidden="true" viewBox="0 0 160 120"><use href="#pasta" transform="rotate(-40 80 60)"/></svg><div class="meal-text"><h3>Cozy roasted vegetable pasta</h3><p>35 min · Vegetarian</p></div></div></article>
+<article class="day"><div class="day-label"><b>Sunday</b><span>25</span></div><div class="meal"><svg class="food" aria-hidden="true" viewBox="0 0 160 120"><use href="#bowl" transform="rotate(-25 80 60)"/></svg><div class="meal-text"><h3>A little of everything bowl</h3><p>15 min · Use your leftovers</p></div></div></article>
+</div>
+<div class="plan-footer"><span class="ready"><span class="check">✓</span> Seven dinners. One less decision each day.</span><span>Made for real life ♡</span></div>
+</div>
+<p class="caption">A peek at a planned week. Leave a little space for the unexpected.</p>
+</section>
+
+<div class="benefit-strip" aria-label="Benefits">
+<span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg>Less daily decision-making</span>
+<span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h12v15H6zM9 3h6v4H9zM9 11h6M9 15h4"/></svg>One neatly organized week</span>
+<span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 16C3 6 12 3 20 4c0 10-6 16-14 13m0 3 9-12"/></svg>Good food, less fuss</span>
+</div>
+
+<section class="how" id="how-it-works">
+<div class="section-label">A simpler kind of routine</div>
+<h2 class="section-title">A few small choices.<br>A whole week of relief.</h2>
+<p class="section-description">A plan that fits around your life, one meal at a time.</p>
+<div class="steps">
+<article><div class="step-number">01</div><h3>Start with what you like.</h3><p>Your favorite flavors, your everyday staples, your kind of cooking. Good plans start with food you actually want to eat.</p></article>
+<article><div class="step-number">02</div><h3>Give every day a dinner.</h3><p>A quick meal for a busy Tuesday. Something slow for Sunday. See your week together, with space to change your mind.</p></article>
+<article><div class="step-number">03</div><h3>Let dinner be the easy part.</h3><p>When the day gets full, your next meal is already decided. Open your plan, put something on, and settle into your evening.</p></article>
+</div>
+</section>
+
+<section class="closing" aria-labelledby="closing-title">
+<h2 class="section-title" id="closing-title">What’s for dinner?<br>Already thought of.</h2>
+<p>Borrow our sample week and give your brain a little time off.</p>
+<button class="button" id="download">Get the sample plan <span class="arrow" aria-hidden="true">↓</span></button>
+<small>A free text download. No account, no extra tabs.</small>
+<p id="download-status" role="status" style="font-size:12px;margin:12px 0 0;min-height:17px"></p>
+</section>
+
+<section class="faq" aria-label="Frequently asked questions">
+<h2>A few things you might be wondering.</h2>
+<details><summary>Do I have to plan every meal?</summary><p>Start with dinner, or just the evenings that tend to get busy. A plan can include leftovers, eating out, and nights when you decide as you go.</p></details>
+<details><summary>What’s included in the sample plan?</summary><p>Seven dinner ideas from the preview, suggested cooking times, and a short planning checklist. It’s a starting point for your week, rather than a full recipe collection.</p></details>
+<details><summary>Can I use the app here?</summary><p>This page introduces Daywell with a sample of the weekly planning interface. The preview is static; you can download the sample plan to try the routine for yourself.</p></details>
+</section>
+</main>
+
+<footer class="wrap">
+<a class="brand" href="#"><svg aria-hidden="true"><use href="#sprout"/></svg>daywell</a>
+<p>A little more intention. A little less effort.<br>© 2026 Daywell</p>
+</footer>
+
+<script>
+document.getElementById('download').addEventListener('click', function () {
+  const plan = [
+    'DAYWELL — A little plan. A lighter day.',
+    '',
+    'YOUR SAMPLE WEEK',
+    '',
+    'Monday: Lemony chickpea bowls — 25 minutes',
+    'Tuesday: Simple basil & tomato pasta — 20 minutes',
+    'Wednesday: Roasted salmon & greens — 30 minutes',
+    'Thursday: Crunchy garden grain bowls — 20 minutes',
+    'Friday: Black bean tacos with lime — 25 minutes',
+    'Saturday: Cozy roasted vegetable pasta — 35 minutes',
+    'Sunday: A little of everything bowl — 15 minutes; use your leftovers',
+    '',
+    'BEFORE YOUR WEEK BEGINS',
+    '[ ] Check which evenings you will be eating at home.',
+    '[ ] Swap any meal that does not fit your tastes or dietary needs.',
+    '[ ] Choose recipes and quantities for the number of people eating.',
+    '[ ] Check your fridge and pantry before making a shopping list.',
+    '[ ] Leave room for a change of plans.',
+    '',
+    'This sample contains meal ideas, not complete recipes.',
+    'Cooking times are estimates and depend on the recipes you choose.',
+    '',
+    'Dinner, off your mind.'
+  ].join('\n');
+  const url = URL.createObjectURL(new Blob([plan], {type:'text/plain;charset=utf-8'}));
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'daywell-sample-week.txt';
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 10000);
+  document.getElementById('download-status').textContent = 'Your sample plan is ready. Enjoy a lighter week.';
+});
+</script>
+</body>
+</html>

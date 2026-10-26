@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <!-- Background: vertical gradient, deeper sky blue at top, lighter toward the bottom -->
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2F86E0"/>
+      <stop offset="1" stop-color="#9DD3FA"/>
+    </linearGradient>
+
+    <!-- Sun body: warm yellow clay sphere -->
+    <radialGradient id="sunBody" cx="0.38" cy="0.32" r="0.75">
+      <stop offset="0" stop-color="#FFF3A6"/>
+      <stop offset="0.45" stop-color="#FFD43B"/>
+      <stop offset="1" stop-color="#F2A600"/>
+    </radialGradient>
+
+    <!-- Rays: slightly deeper yellow with soft shading -->
+    <linearGradient id="ray" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE063"/>
+      <stop offset="1" stop-color="#F0A200"/>
+    </linearGradient>
+
+    <!-- Glossy highlight -->
+    <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Soft drop shadow for the 3D clay feel -->
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="22" stdDeviation="22" flood-color="#0E4C8F" flood-opacity="0.35"/>
+    </filter>
+
+    <!-- Subtle inner shading on the rays -->
+    <filter id="innerSoft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+  </defs>
+
+  <!-- Square background, sharp corners -->
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+
+  <!-- Sun group: centered, spanning ~60% of the square (about 615px) -->
+  <g transform="translate(512 512)" filter="url(#shadow)">
+    <!-- 12 rounded clay rays -->
+    <g id="rays" fill="url(#ray)">
+      <rect x="-34" y="-308" width="68" height="150" rx="34"/>
+      <rect x="-34" y="-308" width="68" height="150" rx="34" transform="rotate(30)"/>
+      <rect x="-34" y="-308" width="68" height="150" rx="34" transform="rotate(60)"/>
+      <rect x="-34" y="-308" width="68" height="150" rx="34" transform="rotate(90)"/>
+      <rect x="-34" y="-308" width="68" height="150" rx="34" transform="rotate(120)"/>
+      <rect x="-34" y="-308" width="68" height="150" rx="34" transform="rotate(150)"/>
+      <rect x="-34" y="-308" width="68" height="150" rx="34" transform="rotate(180)"/>
+      <rect x="-34" y="-308" width="68" height="150" rx="34" transform="rotate(210)"/>
+      <rect x="-34" y="-308" width="68" height="150" rx="34" transform="rotate(240)"/>
+      <rect x="-34" y="-308" width="68" height="150" rx="34" transform="rotate(270)"/>
+      <rect x="-34" y="-308" width="68" height="150" rx="34" transform="rotate(300)"/>
+      <rect x="-34" y="-308" width="68" height="150" rx="34" transform="rotate(330)"/>
+    </g>
+
+    <!-- Ray tip highlights for the glossy look -->
+    <g fill="#FFFFFF" opacity="0.55">
+      <ellipse cx="-8" cy="-280" rx="12" ry="18"/>
+      <ellipse cx="-8" cy="-280" rx="12" ry="18" transform="rotate(30)"/>
+      <ellipse cx="-8" cy="-280" rx="12" ry="18" transform="rotate(60)"/>
+      <ellipse cx="-8" cy="-280" rx="12" ry="18" transform="rotate(90)"/>
+      <ellipse cx="-8" cy="-280" rx="12" ry="18" transform="rotate(120)"/>
+      <ellipse cx="-8" cy="-280" rx="12" ry="18" transform="rotate(150)"/>
+      <ellipse cx="-8" cy="-280" rx="12" ry="18" transform="rotate(180)"/>
+      <ellipse cx="-8" cy="-280" rx="12" ry="18" transform="rotate(210)"/>
+      <ellipse cx="-8" cy="-280" rx="12" ry="18" transform="rotate(240)"/>
+      <ellipse cx="-8" cy="-280" rx="12" ry="18" transform="rotate(270)"/>
+      <ellipse cx="-8" cy="-280" rx="12" ry="18" transform="rotate(300)"/>
+      <ellipse cx="-8" cy="-280" rx="12" ry="18" transform="rotate(330)"/>
+    </g>
+
+    <!-- Sun core: clay sphere -->
+    <circle r="200" fill="url(#sunBody)"/>
+
+    <!-- Rim shading at the bottom of the sphere -->
+    <circle r="200" fill="none" stroke="#E08E00" stroke-width="10" opacity="0.35"/>
+
+    <!-- Glossy highlight across the upper face -->
+    <ellipse cx="-30" cy="-95" rx="120" ry="70" fill="url(#gloss)"/>
+
+    <!-- Small specular dot -->
+    <circle cx="-80" cy="-120" r="22" fill="#FFFFFF" opacity="0.9"/>
+  </g>
+</svg>

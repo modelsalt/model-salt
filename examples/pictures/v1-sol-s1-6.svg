@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640" viewBox="0 0 640 640" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A grayscale pelican pedals a diamond-frame bicycle, seen from the front at a three-quarter angle.</desc>
+
+  <rect width="640" height="640" fill="#f6f6f6"/>
+  <ellipse cx="326" cy="535" rx="211" ry="20" fill="#e2e2e2"/>
+
+  <g stroke="#353535" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Wheels, foreshortened in perspective -->
+    <ellipse cx="196" cy="426" rx="64" ry="96" fill="#555"/>
+    <ellipse cx="196" cy="426" rx="56" ry="87" fill="#fafafa"/>
+    <ellipse cx="433" cy="449" rx="54" ry="100" fill="#555"/>
+    <ellipse cx="433" cy="449" rx="46" ry="91" fill="#fafafa"/>
+
+    <g stroke="#aaa">
+      <path d="M196 339V513M140 426H252M157 364L235 488M157 488L235 364"/>
+      <path d="M433 358V540M387 449H479M401 385L465 513M401 513L465 385"/>
+      <path d="M145 393L247 459M145 459L247 393"/>
+      <path d="M391 414L475 484M391 484L475 414"/>
+    </g>
+
+    <!-- Far leg and pedal -->
+    <path d="M267 290Q300 311 303 344L274 397"
+          fill="none" stroke="#777"/>
+    <path d="M274 389L253 400L279 406L292 398Z" fill="#aaa"/>
+    <path d="M258 405H291" fill="none"/>
+
+    <!-- Conventional diamond bicycle frame -->
+    <path d="M196 426L242 330L289 432Z" fill="#c9c9c9"/>
+    <path d="M242 330H367L289 432Z" fill="#ddd"/>
+    <path d="M242 330H367L289 432L242 330L196 426L289 432"
+          fill="none" stroke="#4c4c4c" stroke-width="2"/>
+    <path d="M249 334H358L290 422Z" fill="#f6f6f6"/>
+    <path d="M239 344L204 419L280 424Z" fill="#f6f6f6"/>
+    <path d="M367 330L386 375L433 449L413 368L378 306Z" fill="#999"/>
+    <path d="M242 330L235 305" fill="none"/>
+    <path d="M211 302Q231 295 258 302L255 310H216Z" fill="#555"/>
+
+    <!-- Chain and crank -->
+    <path d="M196 417L288 413Q311 414 310 434Q308 452 288 452L196 436Z"
+          fill="#dedede"/>
+    <circle cx="289" cy="432" r="17" fill="#999"/>
+    <circle cx="289" cy="432" r="5" fill="#eee"/>
+    <path d="M289 432L324 455" fill="none"/>
+    <path d="M310 458L340 457" fill="none"/>
+    <ellipse cx="196" cy="426" rx="5" ry="7" fill="#777"/>
+    <ellipse cx="433" cy="449" rx="5" ry="7" fill="#777"/>
+
+    <!-- Handlebar -->
+    <path d="M378 306L368 279L343 267L398 257L424 271L424 287"
+          fill="none"/>
+    <path d="M333 268L352 265M415 284L432 289" fill="none"/>
+
+    <!-- Pelican tail and body -->
+    <path d="M212 274L155 256L179 290L159 285L206 313Z" fill="#aaa"/>
+    <path d="M209 208
+             C171 225 173 280 204 302
+             C229 321 279 313 298 288
+             C318 260 310 220 281 205
+             C259 194 230 197 209 208Z" fill="#fff"/>
+
+    <!-- Raised neck -->
+    <path d="M264 249
+             C288 238 291 208 284 183
+             C277 159 280 133 298 118
+             C311 107 336 108 348 123
+             C364 144 353 165 337 181
+             C323 196 325 218 322 240
+             C318 268 304 287 284 292"
+          fill="#fff"/>
+
+    <!-- Folded wing -->
+    <path d="M207 225
+             C228 207 266 216 283 247
+             C285 263 267 285 223 289
+             C239 280 246 272 248 264
+             C231 274 213 273 200 266
+             C215 260 224 252 226 244
+             C215 248 206 247 199 243Z" fill="#c2c2c2"/>
+
+    <!-- Near wing reaching the handlebar -->
+    <path d="M279 220
+             C298 217 318 233 333 247
+             L352 262
+             Q355 271 346 273
+             L320 260
+             C301 254 286 249 279 239Z" fill="#e4e4e4"/>
+    <path d="M341 263L350 270M336 260L345 270" fill="none"/>
+
+    <!-- Near leg, bent toward the pedal -->
+    <path d="M254 300L267 343L307 371L322 447
+             L334 451L320 361L283 333L277 298Z" fill="#aaa"/>
+    <path d="M322 441L304 453L313 459L345 459L354 453L334 446Z" fill="#bbb"/>
+    <path d="M321 449L330 457M331 449L339 457" fill="none"/>
+
+    <!-- Pelican bill and unmistakable throat pouch -->
+    <path d="M336 145
+             L469 178
+             Q449 188 421 192
+             Q386 223 361 199
+             Q344 183 336 160Z" fill="#b8b8b8"/>
+    <path d="M337 143
+             Q394 145 469 178
+             L459 183
+             L339 160Z" fill="#e0e0e0"/>
+    <path d="M344 164Q388 178 449 182" fill="none" stroke="#777"/>
+
+    <!-- Face -->
+    <path d="M291 126Q303 112 319 116" fill="none" stroke="#aaa"/>
+    <ellipse cx="326" cy="138" rx="9" ry="10" fill="#eee"/>
+    <ellipse cx="329" cy="138" rx="4" ry="5" fill="#303030"/>
+    <circle cx="330" cy="136" r="1" fill="#fff" stroke="none"/>
+    <path d="M316 123L331 125" fill="none"/>
+    <path d="M301 177Q305 193 302 205" fill="none" stroke="#aaa"/>
+  </g>
+</svg>

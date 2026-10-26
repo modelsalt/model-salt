@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tablefolk: Meal planning for the whole household</title>
+<meta name="description" content="Tablefolk plans the week's dinners around everyone at your table: picky eaters, late shifts, allergies and all. Join the waitlist.">
+<style>
+  :root{
+    --paper:#f5ede0;
+    --paper-deep:#ece0cc;
+    --ink:#2b1f16;
+    --ink-soft:#5a4a3c;
+    --rust:#b4502c;
+    --rust-deep:#8f3c1f;
+    --olive:#5c6a3a;
+    --mustard:#d49a2a;
+    --rule:#cdbca3;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:var(--sans);
+    color:var(--ink);
+    background:
+      radial-gradient(1200px 600px at 85% 10%, rgba(212,154,42,.13), transparent 60%),
+      radial-gradient(900px 500px at 0% 100%, rgba(180,80,44,.10), transparent 60%),
+      var(--paper);
+    min-height:100vh;
+    display:flex;flex-direction:column;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* subtle paper grain */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;opacity:.35;z-index:0;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .15 0 0 0 .08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  a{color:inherit}
+  .wrap{position:relative;z-index:1;width:min(1200px,100% - 3rem);margin-inline:auto}
+
+  /* ---------- Masthead ---------- */
+  header{position:relative;z-index:5;border-bottom:1px solid var(--rule)}
+  .masthead{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0}
+  .issue{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft)}
+  .logo{
+    font-family:var(--serif);font-size:1.7rem;font-weight:700;letter-spacing:-.01em;text-decoration:none;
+    display:flex;align-items:center;gap:.5rem;
+  }
+  .logo i{font-style:italic;font-weight:400;color:var(--rust)}
+  .logo svg{width:26px;height:26px}
+  nav ul{list-style:none;display:flex;gap:1.8rem;align-items:center}
+  nav a{text-decoration:none;font-size:.88rem;color:var(--ink-soft);transition:color .2s}
+  nav a:hover{color:var(--rust)}
+  nav .nav-cta{color:var(--ink);border-bottom:1.5px solid var(--rust);padding-bottom:2px}
+  .menu-btn{display:none;background:none;border:0;cursor:pointer;width:40px;height:40px;position:relative}
+  .menu-btn span{position:absolute;left:9px;right:9px;height:1.6px;background:var(--ink);transition:transform .3s,opacity .2s}
+  .menu-btn span:nth-child(1){top:14px}.menu-btn span:nth-child(2){top:20px}.menu-btn span:nth-child(3){top:26px}
+  .menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+  .menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
+  .menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+  /* ---------- Hero ---------- */
+  main{flex:1;display:flex;align-items:center;position:relative;z-index:1}
+  .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:4.5rem;align-items:center;padding:3.2rem 0 3rem}
+  .kicker{
+    display:inline-flex;align-items:center;gap:.7rem;
+    font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-bottom:1.4rem;
+  }
+  .kicker::before{content:"";width:34px;height:1.5px;background:var(--rust)}
+  h1{
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(2.7rem,5.6vw,4.9rem);line-height:1.02;letter-spacing:-.025em;
+  }
+  h1 em{font-style:italic;color:var(--rust)}
+  .dek{
+    font-family:var(--serif);font-size:clamp(1.1rem,1.5vw,1.28rem);line-height:1.55;color:var(--ink-soft);
+    max-width:34rem;margin-top:1.5rem;
+  }
+  .dek::first-letter{
+    float:left;font-size:3.4em;line-height:.82;padding:.06em .1em 0 0;color:var(--ink);font-weight:700;
+  }
+
+  /* waitlist form */
+  .signup{margin-top:2.2rem;max-width:32rem}
+  .field{
+    display:flex;background:#fffaf2;border:1.5px solid var(--ink);border-radius:999px;padding:5px;
+    box-shadow:4px 4px 0 var(--ink);transition:box-shadow .2s, transform .2s;
+  }
+  .field:focus-within{box-shadow:2px 2px 0 var(--ink);transform:translate(2px,2px)}
+  .field input{
+    flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:1rem;padding:.8rem 1.1rem;color:var(--ink);outline:none;
+  }
+  .field input::placeholder{color:#9a8875}
+  .field button{
+    border:0;cursor:pointer;background:var(--rust);color:#fff8ee;font:inherit;font-weight:600;font-size:.95rem;
+    padding:.8rem 1.4rem;border-radius:999px;white-space:nowrap;transition:background .2s;
+  }
+  .field button:hover{background:var(--rust-deep)}
+  .signup-note{margin-top:.95rem;font-size:.84rem;color:var(--ink-soft);display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+  .faces{display:flex}
+  .faces span{
+    width:26px;height:26px;border-radius:50%;border:2px solid var(--paper);margin-left:-7px;display:grid;place-items:center;
+    font-size:.66rem;font-weight:700;color:#fff;
+  }
+  .faces span:first-child{margin-left:0}
+  .msg{margin-top:.8rem;font-size:.9rem;min-height:1.3em}
+  .msg.err{color:var(--rust-deep)}
+  .thanks{
+    display:none;margin-top:2.2rem;max-width:32rem;padding:1.3rem 1.5rem;border:1.5px solid var(--olive);border-radius:14px;
+    background:rgba(92,106,58,.08);font-family:var(--serif);font-size:1.12rem;line-height:1.5;
+  }
+  .thanks strong{color:var(--olive)}
+
+  /* ---------- Planner card ---------- */
+  .card-stage{position:relative}
+  .card{
+    position:relative;background:#fffaf2;border:1px solid var(--rule);border-radius:6px;
+    padding:1.6rem 1.6rem 1.4rem;box-shadow:0 30px 60px -30px rgba(60,35,15,.35), 0 2px 0 var(--paper-deep);
+    transform:rotate(1.4deg);
+  }
+  .card::before{ /* tape */
+    content:"";position:absolute;top:-14px;left:50%;width:110px;height:28px;transform:translateX(-50%) rotate(-3deg);
+    background:rgba(212,154,42,.35);border-left:1px dashed rgba(0,0,0,.08);border-right:1px dashed rgba(0,0,0,.08);
+  }
+  .card-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--rule);padding-bottom:.8rem}
+  .card-head h2{font-family:var(--serif);font-weight:400;font-style:italic;font-size:1.35rem}
+  .card-head small{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+  .days{display:flex;gap:.3rem;margin:1rem 0 1.1rem}
+  .days button{
+    flex:1;border:1px solid transparent;background:none;cursor:pointer;font:inherit;font-size:.75rem;font-weight:600;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);padding:.5rem 0;border-radius:6px;transition:all .2s;
+  }
+  .days button:hover{border-color:var(--rule)}
+  .days button[aria-selected="true"]{background:var(--ink);color:var(--paper)}
+  .meal{min-height:190px}
+  .meal-title{font-family:var(--serif);font-size:1.75rem;line-height:1.15;letter-spacing:-.01em}
+  .meal-meta{display:flex;gap:1rem;font-size:.8rem;color:var(--ink-soft);margin:.55rem 0 1rem}
+  .meal-meta b{color:var(--ink);font-weight:600}
+  .who{list-style:none;display:grid;gap:.45rem}
+  .who li{display:flex;align-items:center;gap:.7rem;font-size:.88rem}
+  .who .av{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:.72rem;font-weight:700;flex:none}
+  .who .tag{margin-left:auto;font-size:.72rem;padding:.18rem .55rem;border-radius:999px;background:var(--paper);color:var(--ink-soft);white-space:nowrap}
+  .who .tag.swap{background:rgba(180,80,44,.12);color:var(--rust-deep)}
+  .who .tag.cook{background:rgba(92,106,58,.15);color:var(--olive)}
+  .card-foot{display:flex;justify-content:space-between;align-items:center;margin-top:1.2rem;padding-top:.9rem;border-top:1px dashed var(--rule)}
+  .toggle{display:flex;align-items:center;gap:.6rem;font-size:.8rem;color:var(--ink-soft);cursor:pointer;user-select:none}
+  .switch{width:34px;height:20px;border-radius:999px;background:var(--rule);position:relative;transition:background .2s;border:0;cursor:pointer}
+  .switch::after{content:"";position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:#fff;transition:transform .2s}
+  .switch[aria-checked="true"]{background:var(--olive)}
+  .switch[aria-checked="true"]::after{transform:translateX(14px)}
+  .grocery{font-size:.8rem;color:var(--ink-soft)}
+  .grocery b{color:var(--ink)}
+  .stamp{
+    position:absolute;right:-22px;bottom:-26px;width:104px;height:104px;border-radius:50%;
+    background:var(--mustard);color:var(--ink);display:grid;place-items:center;text-align:center;
+    font-family:var(--serif);font-style:italic;font-size:.92rem;line-height:1.1;transform:rotate(-12deg);
+    box-shadow:0 10px 20px -10px rgba(60,35,15,.5);
+  }
+  .stamp b{display:block;font-style:normal;font-size:1.6rem}
+  .fade{animation:fade .35s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+  /* ---------- Footer strip (the only thing below the hero) ---------- */
+  footer{position:relative;z-index:1;border-top:1px solid var(--rule)}
+  .foot{display:flex;justify-content:space-between;gap:1rem;padding:1rem 0;font-size:.78rem;color:var(--ink-soft);flex-wrap:wrap}
+  .foot q{font-family:var(--serif);font-style:italic;font-size:.92rem;color:var(--ink)}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:940px){
+    .hero{grid-template-columns:1fr;gap:3.5rem;padding-top:2.4rem}
+    .card-stage{max-width:440px;margin-inline:auto;width:100%}
+    .issue{display:none}
+  }
+  @media (max-width:720px){
+    .menu-btn{display:block}
+    nav ul{
+      position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:flex-start;gap:0;
+      background:var(--paper);border-bottom:1px solid var(--rule);padding:.5rem 1.5rem 1.2rem;
+      opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .25s,transform .25s;
+    }
+    nav ul.open{opacity:1;transform:none;pointer-events:auto}
+    nav li{width:100%;border-bottom:1px solid var(--rule)}
+    nav li:last-child{border:0}
+    nav a{display:block;padding:.9rem 0;font-size:1rem}
+    .field{flex-direction:column;border-radius:16px;gap:4px}
+    .field button{border-radius:12px;padding:.95rem}
+    .stamp{right:-6px;width:88px;height:88px;font-size:.8rem}
+    .stamp b{font-size:1.3rem}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap masthead">
+    <span class="issue">No. 01 · The Household Issue</span>
+    <a href="#" class="logo" aria-label="Tablefolk home">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="12.5" stroke="#2b1f16" stroke-width="1.6"/>
+        <circle cx="16" cy="16" r="7" fill="#b4502c"/>
+        <path d="M3 6v6M5 6v6M4 12v14M29 6c-2 2-2 6 0 8v12" stroke="#2b1f16" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      Table<i>folk</i>
+    </a>
+    <nav aria-label="Primary">
+      <button class="menu-btn" aria-expanded="false" aria-controls="nav-list" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="nav-list">
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#planner">A sample week</a></li>
+        <li><a href="#join" class="nav-cta">Join the waitlist</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <section id="join" aria-labelledby="headline">
+      <p class="kicker">Meal planning for households</p>
+      <h1 id="headline">One plan for <em>everyone</em> at the table.</h1>
+      <p class="dek" id="how">
+        Tablefolk plans the week's dinners around the people who actually eat them. That covers the
+        picky seven-year-old, the vegetarian teen, the parent home late on Thursdays and the grandparent
+        who's off salt. Everyone weighs in, one grocery list comes out, and nobody has to ask
+        "what's for dinner?" again.
+      </p>
+
+      <form class="signup" id="signup" novalidate>
+        <label for="email" class="sr" style="position:absolute;left:-9999px">Email address</label>
+        <div class="field">
+          <input id="email" name="email" type="email" placeholder="Your family's email address" autocomplete="email" required>
+          <button type="submit">Join the waitlist</button>
+        </div>
+        <div class="signup-note">
+          <span class="faces" aria-hidden="true">
+            <span style="background:#b4502c">M</span><span style="background:#5c6a3a">J</span><span style="background:#d49a2a">R</span><span style="background:#2b1f16">A</span>
+          </span>
+          <span>2,418 households in line · Early families get a free year</span>
+        </div>
+        <p class="msg" id="msg" role="alert" aria-live="polite"></p>
+      </form>
+
+      <div class="thanks" id="thanks" role="status">
+        <strong>You're on the list.</strong> We'll write when your seat at the table is ready. Until then,
+        you can forward this to whoever does the Sunday shop.
+      </div>
+    </section>
+
+    <aside class="card-stage" id="planner" aria-label="Sample weekly plan">
+      <div class="card">
+        <div class="card-head">
+          <h2>The Okafor-Lindqvist week</h2>
+          <small>5 at the table</small>
+        </div>
+
+        <div class="days" role="tablist" aria-label="Day of the week">
+          <button role="tab" aria-selected="true"  data-day="0">Mon</button>
+          <button role="tab" aria-selected="false" data-day="1">Tue</button>
+          <button role="tab" aria-selected="false" data-day="2">Wed</button>
+          <button role="tab" aria-selected="false" data-day="3">Thu</button>
+          <button role="tab" aria-selected="false" data-day="4">Fri</button>
+        </div>
+
+        <div class="meal" id="meal" role="tabpanel" aria-live="polite"></div>
+
+        <div class="card-foot">
+          <label class="toggle">
+            <button class="switch" id="cookToggle" role="switch" aria-checked="false" aria-label="Show who's cooking"></button>
+            Show who's cooking
+          </label>
+          <span class="grocery"><b id="items">31</b> items on one list</span>
+        </div>
+      </div>
+      <div class="stamp" aria-hidden="true"><span><b>0</b>dinner<br>debates</span></div>
+    </aside>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <q>Finally, a planner that knows my kids aren't the same kid.</q>
+    <span>© 2026 Tablefolk · Launching this winter on iOS &amp; Android</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* Mobile menu */
+  const btn = document.querySelector('.menu-btn');
+  const list = document.getElementById('nav-list');
+  btn.addEventListener('click', () => {
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+    btn.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
+    list.classList.toggle('open', !open);
+  });
+  list.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    btn.setAttribute('aria-expanded','false'); list.classList.remove('open');
+  }));
+
+  /* Sample planner */
+  const people = {
+    A:{name:'Ada',  color:'#b4502c'},
+    L:{name:'Lars', color:'#5c6a3a'},
+    T:{name:'Tobi, 15', color:'#2b1f16'},
+    M:{name:'Mira, 7',  color:'#d49a2a'},
+    G:{name:'Gran', color:'#8a6f55'}
+  };
+  const week = [
+    {title:'Sheet-pan lemon chicken & potatoes', time:'40 min', serves:'5', items:31, cook:'L',
+      notes:{A:'As planned',L:'As planned',T:'Swap: crispy halloumi',M:'Sauce on the side',G:'Low-salt portion'}},
+    {title:'Build-your-own tacos', time:'25 min', serves:'5', items:34, cook:'T',
+      notes:{A:'As planned',L:'Late: plate saved',T:'Black bean filling',M:'Plain cheese & rice',G:'Mild salsa'}},
+    {title:'Miso salmon, greens & rice', time:'30 min', serves:'5', items:36, cook:'A',
+      notes:{A:'As planned',L:'As planned',T:'Swap: miso tofu',M:'Rice & cucumbers',G:'Half-miso glaze'}},
+    {title:'Leftover night: Tuesday\u2019s tacos, remixed', time:'15 min', serves:'4', items:36, cook:'G',
+      notes:{A:'Quesadillas',L:'Away: work dinner',T:'Bean quesadillas',M:'Cheese quesadilla',G:'As planned'}},
+    {title:'Homemade pizza night', time:'45 min', serves:'5', items:41, cook:'M',
+      notes:{A:'As planned',L:'As planned',T:'Veggie half',M:'Head chef!',G:'Thin crust, light cheese'}}
+  ];
+  const mealEl = document.getElementById('meal');
+  const itemsEl = document.getElementById('items');
+  const toggle = document.getElementById('cookToggle');
+  let day = 0;
+
+  function render(){
+    const d = week[day];
+    const showCook = toggle.getAttribute('aria-checked') === 'true';
+    const rows = Object.keys(people).map(k => {
+      const p = people[k], note = d.notes[k];
+      let cls = /^(Swap|Late|Away)/.test(note) ? 'tag swap' : 'tag';
+      let label = note;
+      if (showCook && k === d.cook){ cls = 'tag cook'; label = '\u{1F944} Cooking tonight'; }
+      return `<li><span class="av" style="background:${p.color}">${p.name[0]}</span>${p.name}<span class="${cls}">${label}</span></li>`;
+    }).join('');
+    mealEl.innerHTML = `<div class="fade">
+      <div class="meal-title">${d.title}</div>
+      <div class="meal-meta"><span><b>${d.time}</b> total</span><span>Serves <b>${d.serves}</b></span></div>
+      <ul class="who">${rows}</ul></div>`;
+    itemsEl.textContent = d.items;
+  }
+
+  const tabs = document.querySelectorAll('.days button');
+  tabs.forEach(t => t.addEventListener('click', () => {
+    tabs.forEach(x => x.setAttribute('aria-selected','false'));
+    t.setAttribute('aria-selected','true');
+    day = +t.dataset.day; render();
+  }));
+  toggle.addEventListener('click', e => {
+    e.preventDefault();
+    toggle.setAttribute('aria-checked', toggle.getAttribute('aria-checked') === 'true' ? 'false' : 'true');
+    render();
+  });
+  render();
+
+  /* Waitlist form */
+  const form = document.getElementById('signup');
+  const email = document.getElementById('email');
+  const msg = document.getElementById('msg');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const v = email.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){
+      msg.textContent = 'That email doesn\u2019t look quite right. Mind checking it?';
+      msg.className = 'msg err'; email.focus(); return;
+    }
+    try { localStorage.setItem('tablefolk-waitlist', v); } catch(_){}
+    form.style.display = 'none';
+    document.getElementById('thanks').style.display = 'block';
+  });
+})();
+</script>
+</body>
+</html>

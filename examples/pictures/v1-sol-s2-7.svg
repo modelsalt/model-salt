@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a penny-farthing</title>
+  <desc id="desc">A cream, tan, and brown stippled pelican faces left, opening both wings forward above the handlebars of a high-wheel bicycle.</desc>
+
+  <defs>
+    <pattern id="light" width="9" height="9" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="3" r=".85" fill="#ac9271"/>
+      <circle cx="7" cy="7" r=".6" fill="#ac9271"/>
+    </pattern>
+    <pattern id="tan" width="7" height="7" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.2" fill="#aa8056"/>
+      <circle cx="5" cy="6" r=".9" fill="#aa8056"/>
+    </pattern>
+    <pattern id="brown" width="5" height="5" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1.3" fill="#604935"/>
+      <circle cx="4" cy="4" r=".8" fill="#604935"/>
+    </pattern>
+    <pattern id="shadow" width="8" height="6" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="3" r="1" fill="#c2ad8d"/>
+    </pattern>
+    <g id="spokes" stroke="#a48a68" stroke-width="1.2" stroke-dasharray=".4 3.5" stroke-linecap="round">
+      <path d="M0-139V139 M-139 0H139"/>
+      <path d="M0-139V139 M-139 0H139" transform="rotate(15)"/>
+      <path d="M0-139V139 M-139 0H139" transform="rotate(30)"/>
+      <path d="M0-139V139 M-139 0H139" transform="rotate(45)"/>
+      <path d="M0-139V139 M-139 0H139" transform="rotate(60)"/>
+      <path d="M0-139V139 M-139 0H139" transform="rotate(75)"/>
+    </g>
+  </defs>
+
+  <path fill="#f5efdf" d="M0 0H960V540H0z"/>
+  <ellipse cx="527" cy="510" rx="279" ry="12" fill="url(#shadow)"/>
+
+  <!-- Large front wheel and small trailing wheel. -->
+  <g fill="none" stroke-linecap="round">
+    <circle cx="365" cy="363" r="142" stroke="url(#brown)" stroke-width="12"/>
+    <circle cx="365" cy="363" r="132" stroke="url(#tan)" stroke-width="3"/>
+    <use href="#spokes" transform="translate(365 363)"/>
+    <circle cx="732" cy="463" r="42" stroke="url(#brown)" stroke-width="9"/>
+    <use href="#spokes" transform="translate(732 463) scale(.28)"/>
+    <path d="M365 363L382 222Q444 216 478 272L732 463"
+          stroke="url(#brown)" stroke-width="13"/>
+    <path d="M382 226L376 190L328 183M478 272L486 250"
+          stroke="url(#brown)" stroke-width="9"/>
+    <path d="M311 184L342 184M465 249L510 249"
+          stroke="url(#brown)" stroke-width="12"/>
+    <path d="M365 363L403 384M365 363L328 342"
+          stroke="url(#brown)" stroke-width="7"/>
+    <path d="M390 387H420M313 340H341"
+          stroke="url(#brown)" stroke-width="8"/>
+  </g>
+  <circle cx="365" cy="363" r="9" fill="url(#brown)"/>
+
+  <!-- Far leg and forward-opened far wing. -->
+  <path d="M472 240Q435 272 413 294L330 336L316 330L320 344L346 347L433 310L500 253Z"
+        fill="url(#tan)"/>
+  <path d="M474 190Q419 126 326 122Q291 123 258 143
+           L296 146L266 157L307 154L281 169L325 162
+           Q391 162 437 214Z"
+        fill="url(#tan)"/>
+
+  <!-- Body, tail, and long curved neck. -->
+  <path d="M456 174Q507 160 545 196L588 204L568 218L594 222
+           L560 238Q526 262 480 248Q435 242 426 217
+           Q413 187 395 171Q377 154 357 150
+           Q329 143 328 120Q327 95 351 91
+           Q384 86 398 116Q409 146 438 162Z"
+        fill="#eee5d2"/>
+  <path d="M456 174Q507 160 545 196L588 204L568 218L594 222
+           L560 238Q526 262 480 248Q435 242 426 217
+           Q413 187 395 171Q377 154 357 150
+           Q329 143 328 120Q327 95 351 91
+           Q384 86 398 116Q409 146 438 162Z"
+        fill="url(#light)"/>
+  <path d="M368 146Q399 159 416 198Q427 230 454 237
+           Q433 212 434 194Q412 167 393 133Z"
+        fill="url(#tan)"/>
+
+  <!-- Long bill and hanging pelican pouch. -->
+  <path d="M338 120L174 137Q198 169 254 169Q310 167 348 137Z"
+        fill="url(#tan)"/>
+  <path d="M339 115L167 134Q161 138 175 140L343 131Z"
+        fill="url(#brown)"/>
+  <path d="M185 144Q256 176 326 141"
+        fill="none" stroke="#b39570" stroke-width="2"
+        stroke-dasharray=".2 5" stroke-linecap="round"/>
+  <circle cx="355" cy="113" r="4.5" fill="#59432f"/>
+  <circle cx="354" cy="112" r="1.2" fill="#f5efdf"/>
+
+  <!-- Near wing opens forward, with separated feather tips. -->
+  <path d="M501 197Q449 135 365 146Q324 148 290 170
+           L327 169L301 184L339 177L316 194L357 184
+           L338 204L378 191Q429 185 467 222
+           Q489 232 501 197Z"
+        fill="#f0e7d4"/>
+  <path d="M501 197Q449 135 365 146Q324 148 290 170
+           L327 169L301 184L339 177L316 194L357 184
+           L338 204L378 191Q429 185 467 222
+           Q489 232 501 197Z"
+        fill="url(#light)"/>
+  <path d="M483 205Q429 158 343 168
+           M468 211Q422 174 358 183"
+        fill="none" stroke="#a78a64" stroke-width="3"
+        stroke-dasharray=".1 5" stroke-linecap="round"/>
+
+  <!-- Bent near leg reaches the front wheel's pedal. -->
+  <path d="M495 242Q477 278 447 291L418 366
+           L435 377L434 384L398 384L400 374
+           L425 286Q446 264 461 242Z"
+        fill="url(#tan)"/>
+  <path d="M405 378L423 380M409 372L430 377"
+        stroke="#8b6948" stroke-width="2"
+        stroke-dasharray=".2 3" stroke-linecap="round"/>
+</svg>

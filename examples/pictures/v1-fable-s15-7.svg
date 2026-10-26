@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" width="300" height="400">
+  <!-- Pictogram-style pelican in a racing crouch, seen from a slight high angle -->
+
+  <!-- Sky -->
+  <rect width="300" height="400" fill="#2EC4F0"/>
+
+  <!-- Ground plane, tilted toward viewer for the high-angle look -->
+  <rect y="250" width="300" height="150" fill="#2BD36B"/>
+  <path d="M0 262 Q150 236 300 262 L300 400 L0 400 Z" fill="#F9D41C"/>
+
+  <!-- Shadow under bike (flattened by the downward view) -->
+  <ellipse cx="150" cy="338" rx="118" ry="9" fill="#000" opacity="0.18"/>
+
+  <!-- Rear wheel: ellipse rather than circle because we look down on it -->
+  <ellipse cx="78" cy="312" rx="46" ry="38" fill="#1B1B2F"/>
+  <ellipse cx="78" cy="312" rx="30" ry="24" fill="#2EC4F0"/>
+  <ellipse cx="78" cy="312" rx="7" ry="6" fill="#1B1B2F"/>
+
+  <!-- Front wheel -->
+  <ellipse cx="226" cy="312" rx="46" ry="38" fill="#1B1B2F"/>
+  <ellipse cx="226" cy="312" rx="30" ry="24" fill="#2EC4F0"/>
+  <ellipse cx="226" cy="312" rx="7" ry="6" fill="#1B1B2F"/>
+
+  <!-- Frame -->
+  <g stroke="#FF2E63" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <polyline points="78,312 130,236 198,236 226,312"/>
+    <polyline points="130,236 150,300 198,236"/>
+    <line x1="150" y1="300" x2="78" y2="312"/>
+    <line x1="150" y1="300" x2="150" y2="316"/>
+  </g>
+  <!-- Seat post + saddle -->
+  <line x1="130" y1="236" x2="118" y2="206" stroke="#FF2E63" stroke-width="10" stroke-linecap="round"/>
+  <rect x="98" y="196" width="40" height="12" rx="6" fill="#1B1B2F"/>
+  <!-- Head tube + drop handlebar -->
+  <line x1="198" y1="236" x2="210" y2="196" stroke="#FF2E63" stroke-width="10" stroke-linecap="round"/>
+  <path d="M190 196 H232 Q244 196 244 208 Q244 222 230 222" stroke="#1B1B2F" stroke-width="9" stroke-linecap="round" fill="none"/>
+  <!-- Crank + pedal -->
+  <ellipse cx="150" cy="300" rx="12" ry="10" fill="#1B1B2F"/>
+  <line x1="150" y1="300" x2="166" y2="326" stroke="#1B1B2F" stroke-width="7" stroke-linecap="round"/>
+  <rect x="158" y="322" width="22" height="9" rx="4" fill="#1B1B2F"/>
+
+  <!-- Pelican body: one brown silhouette crouched low over the bars -->
+  <path d="M104 198
+           Q96 150 136 128
+           Q176 108 212 136
+           Q232 154 230 184
+           L214 192
+           Q200 166 176 168
+           Q146 172 138 200 Z"
+        fill="#8B4A1E"/>
+  <!-- Tail -->
+  <path d="M104 198 L72 184 L92 212 Z" fill="#8B4A1E"/>
+  <!-- Wing -->
+  <path d="M126 160 Q174 148 206 180 Q168 190 136 180 Z" fill="#6B3614"/>
+
+  <!-- Neck + head, tucked forward -->
+  <path d="M206 136 Q226 110 246 118 Q264 130 250 150 Q236 160 222 148 Z" fill="#8B4A1E"/>
+  <!-- Beak: big, bright orange pelican bill stretching forward and down -->
+  <path d="M250 124 L298 150 L256 158 Q242 150 250 124 Z" fill="#FF8A00"/>
+  <path d="M254 150 L296 150 L262 170 Q250 164 254 150 Z" fill="#FF6A00"/>
+  <!-- Eye -->
+  <circle cx="248" cy="130" r="5" fill="#1B1B2F"/>
+
+  <!-- Arm (wing tip) gripping the drop bar -->
+  <path d="M212 170 Q226 182 236 206" stroke="#8B4A1E" stroke-width="11" stroke-linecap="round" fill="none"/>
+  <circle cx="238" cy="208" r="8" fill="#FF8A00"/>
+
+  <!-- Leg from body to pedal -->
+  <path d="M136 200 Q148 232 162 272 L168 322" stroke="#FF8A00" stroke-width="9" stroke-linecap="round" fill="none"/>
+  <!-- Webbed foot on the pedal -->
+  <path d="M156 326 L182 322 L178 334 L156 334 Z" fill="#FF8A00"/>
+</svg>

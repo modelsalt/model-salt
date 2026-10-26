@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#B9C8E6"/>
+      <stop offset="1" stop-color="#FFF4E0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sky backdrop -->
+  <rect width="800" height="450" fill="url(#sky)"/>
+
+  <!-- Ground line -->
+  <path d="M60 412 Q400 400 740 412" fill="none" stroke="#2B3A67" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Coasting motion lines -->
+  <g stroke="#2B3A67" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.55">
+    <path d="M330 370 Q318 368 306 372"/>
+    <path d="M326 392 Q312 390 298 395"/>
+    <path d="M470 370 Q482 368 494 372"/>
+    <path d="M474 392 Q488 390 502 395"/>
+  </g>
+
+  <!-- Rear wheel (peeking behind the front) -->
+  <ellipse cx="400" cy="342" rx="11" ry="62" fill="#FFF4E0" stroke="#2B3A67" stroke-width="6"/>
+
+  <!-- Fork and head tube -->
+  <path d="M386 342 Q386 265 400 238 Q414 265 414 342" fill="none" stroke="#2B3A67" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="400" y1="238" x2="400" y2="225" stroke="#2B3A67" stroke-width="9" stroke-linecap="round"/>
+
+  <!-- Handlebars -->
+  <path d="M296 226 Q400 212 504 226" fill="none" stroke="#2B3A67" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="296" cy="226" r="8" fill="#FF8C42" stroke="#2B3A67" stroke-width="4"/>
+  <circle cx="504" cy="226" r="8" fill="#FF8C42" stroke="#2B3A67" stroke-width="4"/>
+
+  <!-- Saddle (visible just behind the body) -->
+  <ellipse cx="400" cy="282" rx="42" ry="12" fill="#2B3A67"/>
+
+  <!-- Dangling legs -->
+  <g stroke="#FF8C42" stroke-width="9" stroke-linecap="round" fill="none">
+    <path d="M372 280 Q362 318 368 350"/>
+    <path d="M428 280 Q438 318 432 350"/>
+  </g>
+  <!-- Webbed feet -->
+  <path d="M368 350 L348 372 Q368 364 388 372 Z" fill="#FF8C42" stroke="#2B3A67" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M432 350 L412 372 Q432 364 452 372 Z" fill="#FF8C42" stroke="#2B3A67" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- Tail feathers -->
+  <path d="M400 290 Q380 300 376 318 Q400 306 424 318 Q420 300 400 290 Z" fill="#FFF4E0" stroke="#2B3A67" stroke-width="5" stroke-linejoin="round"/>
+
+  <!-- Body -->
+  <ellipse cx="400" cy="232" rx="68" ry="62" fill="#FFF4E0" stroke="#2B3A67" stroke-width="6"/>
+
+  <!-- Wings reaching to the grips -->
+  <path d="M345 200 Q300 205 300 232 Q318 244 350 236 Q340 220 345 200 Z" fill="#FFF4E0" stroke="#2B3A67" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M455 200 Q500 205 500 232 Q482 244 450 236 Q460 220 455 200 Z" fill="#FFF4E0" stroke="#2B3A67" stroke-width="6" stroke-linejoin="round"/>
+
+  <!-- Neck -->
+  <path d="M376 190 Q376 160 400 150 Q424 160 424 190 Z" fill="#FFF4E0" stroke="#2B3A67" stroke-width="6" stroke-linejoin="round"/>
+
+  <!-- Head -->
+  <circle cx="400" cy="138" r="40" fill="#FFF4E0" stroke="#2B3A67" stroke-width="6"/>
+
+  <!-- Beak with pouch, foreshortened toward the viewer -->
+  <path d="M378 150 Q400 142 422 150 L412 206 Q400 218 388 206 Z" fill="#FF8C42" stroke="#2B3A67" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M384 164 Q400 170 416 164" fill="none" stroke="#2B3A67" stroke-width="4" stroke-linecap="round"/>
+  <path d="M390 190 Q400 198 410 190" fill="none" stroke="#2B3A67" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- Eyes -->
+  <circle cx="384" cy="128" r="8" fill="#2B3A67"/>
+  <circle cx="416" cy="128" r="8" fill="#2B3A67"/>
+  <circle cx="387" cy="125" r="3" fill="#FFF4E0"/>
+  <circle cx="419" cy="125" r="3" fill="#FFF4E0"/>
+
+  <!-- Soft cheek blushes -->
+  <circle cx="368" cy="146" r="7" fill="#FF8C42" opacity="0.45"/>
+  <circle cx="432" cy="146" r="7" fill="#FF8C42" opacity="0.45"/>
+
+  <!-- Front wheel -->
+  <ellipse cx="400" cy="342" rx="14" ry="70" fill="#FFF4E0" stroke="#2B3A67" stroke-width="7"/>
+  <line x1="400" y1="280" x2="400" y2="404" stroke="#2B3A67" stroke-width="3" opacity="0.5"/>
+</svg>

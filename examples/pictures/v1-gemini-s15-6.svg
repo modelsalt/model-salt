@@ -1,0 +1,355 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 700" width="100%" height="100%">
+  <defs>
+    <!-- Subtle edge matching to prevent hairline gaps between low-poly facets -->
+    <style>
+      .mesh { stroke-linejoin: round; stroke-width: 0.4px; }
+      .spoke { stroke: #94a3b8; stroke-width: 1.5; opacity: 0.6; }
+      .wheel-poly { stroke-linejoin: round; stroke-width: 1px; }
+    </style>
+  </defs>
+
+  <!-- ==================== BACKGROUND ==================== -->
+  <rect width="800" height="700" fill="#182232" />
+
+  <!-- Low-Poly Sun/Moon Backdrop -->
+  <g class="mesh" opacity="0.25">
+    <polygon points="400,120 490,140 440,210" fill="#f59e0b" stroke="#f59e0b"/>
+    <polygon points="400,120 440,210 350,200" fill="#fbbf24" stroke="#fbbf24"/>
+    <polygon points="350,200 310,140 400,120" fill="#fcd34d" stroke="#fcd34d"/>
+    <polygon points="310,140 350,200 260,230" fill="#f59e0b" stroke="#f59e0b"/>
+    <polygon points="260,230 350,200 330,300" fill="#d97706" stroke="#d97706"/>
+    <polygon points="350,200 440,210 390,310" fill="#f59e0b" stroke="#f59e0b"/>
+    <polygon points="350,200 390,310 330,300" fill="#b45309" stroke="#b45309"/>
+    <polygon points="440,210 530,240 470,320" fill="#d97706" stroke="#d97706"/>
+    <polygon points="440,210 470,320 390,310" fill="#b45309" stroke="#b45309"/>
+    <polygon points="490,140 530,240 440,210" fill="#f59e0b" stroke="#f59e0b"/>
+  </g>
+
+  <!-- ==================== FLAT HORIZONTAL BASELINE ==================== -->
+  <g class="mesh">
+    <!-- Ground Shadow -->
+    <polygon points="150,630 240,624 380,626 520,625 650,630 580,638 400,640 210,637" fill="#0f172a" />
+    <!-- Faceted Horizontal Baseline -->
+    <polygon points="40,630 180,625 160,635" fill="#38bdf8" stroke="#38bdf8" />
+    <polygon points="180,625 320,628 160,635" fill="#0284c7" stroke="#0284c7" />
+    <polygon points="320,628 290,637 160,635" fill="#0369a1" stroke="#0369a1" />
+    <polygon points="320,628 480,624 430,636" fill="#38bdf8" stroke="#38bdf8" />
+    <polygon points="320,628 430,636 290,637" fill="#0284c7" stroke="#0284c7" />
+    <polygon points="480,624 620,628 570,635" fill="#0ea5e9" stroke="#0ea5e9" />
+    <polygon points="480,624 570,635 430,636" fill="#0369a1" stroke="#0369a1" />
+    <polygon points="620,628 760,630 660,636" fill="#38bdf8" stroke="#38bdf8" />
+    <polygon points="620,628 660,636 570,635" fill="#0284c7" stroke="#0284c7" />
+  </g>
+
+  <!-- ==================== FAR SIDE ELEMENTS (BACKGROUND LAYER) ==================== -->
+  <!-- Far Pedal & Crank (Up/Forward Position) -->
+  <g class="mesh">
+    <polygon points="330,450 326,456 276,416 280,410" fill="#475569" stroke="#475569" />
+    <polygon points="262,408 298,408 294,418 266,418" fill="#1e293b" stroke="#1e293b" />
+  </g>
+
+  <!-- Far Leg (Bent Upward to Far Pedal) -->
+  <g class="mesh">
+    <!-- Far Thigh -->
+    <polygon points="440,340 455,355 370,385" fill="#c2410c" stroke="#c2410c" />
+    <polygon points="440,340 370,385 360,365" fill="#9a3412" stroke="#9a3412" />
+    <!-- Far Lower Leg -->
+    <polygon points="360,365 370,385 295,412" fill="#b45309" stroke="#b45309" />
+    <polygon points="360,365 295,412 285,400" fill="#92400e" stroke="#92400e" />
+    <!-- Far Webbed Foot -->
+    <polygon points="295,412 285,400 255,408" fill="#c2410c" stroke="#c2410c" />
+    <polygon points="295,412 255,408 270,416" fill="#9a3412" stroke="#9a3412" />
+  </g>
+
+  <!-- Far Wingtip (Gripping far handlebar) -->
+  <g class="mesh">
+    <polygon points="415,250 365,260 325,212" fill="#94a3b8" stroke="#94a3b8" />
+    <polygon points="415,250 325,212 375,215" fill="#64748b" stroke="#64748b" />
+  </g>
+
+  <!-- ==================== ANTIQUE PENNY-FARTHING BICYCLE ==================== -->
+  <!-- OVERSIZED FRONT WHEEL (Center: 330, 450 | Radius: 180) -->
+  <g id="front-wheel">
+    <!-- Radial Spokes (24-gon) -->
+    <g class="spoke">
+      <line x1="330" y1="450" x2="510" y2="450" />
+      <line x1="330" y1="450" x2="504" y2="497" />
+      <line x1="330" y1="450" x2="486" y2="540" />
+      <line x1="330" y1="450" x2="457" y2="577" />
+      <line x1="330" y1="450" x2="420" y2="606" />
+      <line x1="330" y1="450" x2="377" y2="624" />
+      <line x1="330" y1="450" x2="330" y2="630" />
+      <line x1="330" y1="450" x2="283" y2="624" />
+      <line x1="330" y1="450" x2="240" y2="606" />
+      <line x1="330" y1="450" x2="203" y2="577" />
+      <line x1="330" y1="450" x2="174" y2="540" />
+      <line x1="330" y1="450" x2="156" y2="497" />
+      <line x1="330" y1="450" x2="150" y2="450" />
+      <line x1="330" y1="450" x2="156" y2="403" />
+      <line x1="330" y1="450" x2="174" y2="360" />
+      <line x1="330" y1="450" x2="203" y2="323" />
+      <line x1="330" y1="450" x2="240" y2="294" />
+      <line x1="330" y1="450" x2="283" y2="276" />
+      <line x1="330" y1="450" x2="330" y2="270" />
+      <line x1="330" y1="450" x2="377" y2="276" />
+      <line x1="330" y1="450" x2="420" y2="294" />
+      <line x1="330" y1="450" x2="457" y2="323" />
+      <line x1="330" y1="450" x2="486" y2="360" />
+      <line x1="330" y1="450" x2="504" y2="403" />
+    </g>
+
+    <!-- Low-Poly Tire & Rim Segments (Alternating dark slate facets) -->
+    <g class="mesh">
+      <!-- Q1 -->
+      <polygon points="510,450 504,497 492,493 498,450" fill="#1e293b" stroke="#1e293b" />
+      <polygon points="504,497 486,540 476,534 492,493" fill="#334155" stroke="#334155" />
+      <polygon points="486,540 457,577 449,569 476,534" fill="#0f172a" stroke="#0f172a" />
+      <polygon points="457,577 420,606 414,596 449,569" fill="#1e293b" stroke="#1e293b" />
+      <polygon points="420,606 377,624 373,612 414,596" fill="#334155" stroke="#334155" />
+      <polygon points="377,624 330,630 330,618 373,612" fill="#0f172a" stroke="#0f172a" />
+      <!-- Q2 -->
+      <polygon points="330,630 283,624 287,612 330,618" fill="#334155" stroke="#334155" />
+      <polygon points="283,624 240,606 246,596 287,612" fill="#1e293b" stroke="#1e293b" />
+      <polygon points="240,606 203,577 211,569 246,596" fill="#0f172a" stroke="#0f172a" />
+      <polygon points="203,577 174,540 184,534 211,569" fill="#334155" stroke="#334155" />
+      <polygon points="174,540 156,497 168,493 184,534" fill="#1e293b" stroke="#1e293b" />
+      <polygon points="156,497 150,450 162,450 168,493" fill="#0f172a" stroke="#0f172a" />
+      <!-- Q3 -->
+      <polygon points="150,450 156,403 168,407 162,450" fill="#1e293b" stroke="#1e293b" />
+      <polygon points="156,403 174,360 184,366 168,407" fill="#334155" stroke="#334155" />
+      <polygon points="174,360 203,323 211,331 184,366" fill="#0f172a" stroke="#0f172a" />
+      <polygon points="203,323 240,294 246,304 211,331" fill="#1e293b" stroke="#1e293b" />
+      <polygon points="240,294 283,276 287,288 246,304" fill="#334155" stroke="#334155" />
+      <polygon points="283,276 330,270 330,282 287,288" fill="#0f172a" stroke="#0f172a" />
+      <!-- Q4 -->
+      <polygon points="330,270 377,276 373,288 330,282" fill="#334155" stroke="#334155" />
+      <polygon points="377,276 420,294 414,304 373,288" fill="#1e293b" stroke="#1e293b" />
+      <polygon points="420,294 457,323 449,331 414,304" fill="#0f172a" stroke="#0f172a" />
+      <polygon points="457,323 486,360 476,366 449,331" fill="#334155" stroke="#334155" />
+      <polygon points="486,360 504,403 492,407 476,366" fill="#1e293b" stroke="#1e293b" />
+      <polygon points="504,403 510,450 498,450 492,407" fill="#0f172a" stroke="#0f172a" />
+
+      <!-- Inner Brass/Steel Rim -->
+      <polygon points="498,450 492,493 487,491 493,450" fill="#94a3b8" stroke="#94a3b8" />
+      <polygon points="492,493 476,534 471,531 487,491" fill="#cbd5e1" stroke="#cbd5e1" />
+      <polygon points="476,534 449,569 445,565 471,531" fill="#64748b" stroke="#64748b" />
+      <polygon points="449,569 414,596 411,591 445,565" fill="#94a3b8" stroke="#94a3b8" />
+      <polygon points="414,596 373,612 371,607 411,591" fill="#cbd5e1" stroke="#cbd5e1" />
+      <polygon points="373,612 330,618 330,613 371,607" fill="#64748b" stroke="#64748b" />
+      <polygon points="330,618 287,612 289,607 330,613" fill="#94a3b8" stroke="#94a3b8" />
+      <polygon points="287,612 246,596 249,591 289,607" fill="#cbd5e1" stroke="#cbd5e1" />
+      <polygon points="246,596 211,569 215,565 249,591" fill="#64748b" stroke="#64748b" />
+      <polygon points="211,569 184,534 189,531 215,565" fill="#94a3b8" stroke="#94a3b8" />
+      <polygon points="184,534 168,493 173,491 189,531" fill="#cbd5e1" stroke="#cbd5e1" />
+      <polygon points="168,493 162,450 167,450 173,491" fill="#64748b" stroke="#64748b" />
+      <polygon points="162,450 168,407 173,409 167,450" fill="#94a3b8" stroke="#94a3b8" />
+      <polygon points="168,407 184,366 189,369 173,409" fill="#cbd5e1" stroke="#cbd5e1" />
+      <polygon points="184,366 211,331 215,335 189,369" fill="#64748b" stroke="#64748b" />
+      <polygon points="211,331 246,304 249,309 215,335" fill="#94a3b8" stroke="#94a3b8" />
+      <polygon points="246,304 287,288 289,293 249,309" fill="#cbd5e1" stroke="#cbd5e1" />
+      <polygon points="287,288 330,282 330,287 289,293" fill="#64748b" stroke="#64748b" />
+      <polygon points="330,282 373,288 371,293 330,287" fill="#94a3b8" stroke="#94a3b8" />
+      <polygon points="373,288 414,304 411,309 371,293" fill="#cbd5e1" stroke="#cbd5e1" />
+      <polygon points="414,304 449,331 445,335 411,309" fill="#64748b" stroke="#64748b" />
+      <polygon points="449,331 476,366 471,369 445,335" fill="#94a3b8" stroke="#94a3b8" />
+      <polygon points="476,366 492,407 487,409 471,369" fill="#cbd5e1" stroke="#cbd5e1" />
+      <polygon points="492,407 498,450 493,450 487,409" fill="#64748b" stroke="#64748b" />
+    </g>
+  </g>
+
+  <!-- TINY REAR WHEEL (Center: 580, 585 | Radius: 45) -->
+  <g id="rear-wheel">
+    <g class="spoke">
+      <line x1="580" y1="585" x2="625" y2="585" />
+      <line x1="580" y1="585" x2="619" y2="607" />
+      <line x1="580" y1="585" x2="602" y2="624" />
+      <line x1="580" y1="585" x2="580" y2="630" />
+      <line x1="580" y1="585" x2="558" y2="624" />
+      <line x1="580" y1="585" x2="541" y2="607" />
+      <line x1="580" y1="585" x2="535" y2="585" />
+      <line x1="580" y1="585" x2="541" y2="563" />
+      <line x1="580" y1="585" x2="558" y2="546" />
+      <line x1="580" y1="585" x2="580" y2="540" />
+      <line x1="580" y1="585" x2="602" y2="546" />
+      <line x1="580" y1="585" x2="619" y2="563" />
+    </g>
+    <g class="mesh">
+      <polygon points="625,585 619,607 611,603 616,585" fill="#1e293b" stroke="#1e293b" />
+      <polygon points="619,607 602,624 598,616 611,603" fill="#334155" stroke="#334155" />
+      <polygon points="602,624 580,630 580,621 598,616" fill="#0f172a" stroke="#0f172a" />
+      <polygon points="580,630 558,624 562,616 580,621" fill="#334155" stroke="#334155" />
+      <polygon points="558,624 541,607 549,603 562,616" fill="#1e293b" stroke="#1e293b" />
+      <polygon points="541,607 535,585 544,585 549,603" fill="#0f172a" stroke="#0f172a" />
+      <polygon points="535,585 541,563 549,567 544,585" fill="#1e293b" stroke="#1e293b" />
+      <polygon points="541,563 558,546 562,554 549,567" fill="#334155" stroke="#334155" />
+      <polygon points="558,546 580,540 580,549 562,554" fill="#0f172a" stroke="#0f172a" />
+      <polygon points="580,540 602,546 598,554 580,549" fill="#334155" stroke="#334155" />
+      <polygon points="602,546 619,563 611,567 598,554" fill="#1e293b" stroke="#1e293b" />
+      <polygon points="619,563 625,585 616,585 611,567" fill="#0f172a" stroke="#0f172a" />
+      <!-- Rear Hub -->
+      <polygon points="580,577 588,585 580,593 572,585" fill="#94a3b8" stroke="#94a3b8" />
+    </g>
+  </g>
+
+  <!-- BICYCLE FRAME (Spine, Front Fork, Handlebars, Saddle) -->
+  <g id="bicycle-frame" class="mesh">
+    <!-- Sweeping Spine (From Headtube 335,235 to Rear Axle 580,585) -->
+    <polygon points="335,235 415,270 405,282 330,248" fill="#cbd5e1" stroke="#cbd5e1" />
+    <polygon points="415,270 490,340 478,350 405,282" fill="#94a3b8" stroke="#94a3b8" />
+    <polygon points="490,340 545,450 532,456 478,350" fill="#cbd5e1" stroke="#cbd5e1" />
+    <polygon points="545,450 585,585 574,585 532,456" fill="#64748b" stroke="#64748b" />
+
+    <!-- Front Fork & Headtube (From Hub 330,450 up to Handlebars 315,205) -->
+    <polygon points="323,450 337,450 339,340 326,340" fill="#94a3b8" stroke="#94a3b8" />
+    <polygon points="326,340 339,340 342,240 328,240" fill="#e2e8f0" stroke="#e2e8f0" />
+    <polygon points="328,240 342,240 336,210 324,210" fill="#cbd5e1" stroke="#cbd5e1" />
+    <!-- Handlebar Stem & Grip -->
+    <polygon points="324,210 336,210 315,198 308,208" fill="#94a3b8" stroke="#94a3b8" />
+    <polygon points="295,202 318,202 318,214 295,214" fill="#475569" stroke="#475569" />
+
+    <!-- Antique Leather Saddle & Spring Post -->
+    <polygon points="435,302 452,315 442,322 425,310" fill="#475569" stroke="#475569" />
+    <polygon points="405,295 445,298 430,310 400,305" fill="#78350f" stroke="#78350f" />
+    <polygon points="445,298 480,290 468,308 430,310" fill="#92400e" stroke="#92400e" />
+    <polygon points="430,310 468,308 448,315" fill="#451a03" stroke="#451a03" />
+
+    <!-- Center Hub -->
+    <polygon points="330,436 344,450 330,464 316,450" fill="#e2e8f0" stroke="#e2e8f0" />
+    <polygon points="330,442 338,450 330,458 322,450" fill="#475569" stroke="#475569" />
+  </g>
+
+
+  <!-- ==================== LOW-POLY PELICAN (HUMANOID POSTURE FACING LEFT) ==================== -->
+  <g id="pelican" class="mesh">
+    <!-- TAIL FEATHERS (Projecting past the rear of the saddle) -->
+    <polygon points="465,305 510,295 495,315" fill="#f8fafc" stroke="#f8fafc" />
+    <polygon points="465,305 495,315 518,318 475,325" fill="#cbd5e1" stroke="#cbd5e1" />
+    <polygon points="465,305 475,325 455,322" fill="#94a3b8" stroke="#94a3b8" />
+
+    <!-- TORSO / BODY (Upright humanoid posture seated on saddle) -->
+    <!-- Upper Back & Shoulder -->
+    <polygon points="365,165 415,195 375,210" fill="#f1f5f9" stroke="#f1f5f9" />
+    <polygon points="415,195 450,235 405,235" fill="#e2e8f0" stroke="#e2e8f0" />
+    <polygon points="415,195 405,235 375,210" fill="#f8fafc" stroke="#f8fafc" />
+    <!-- Mid Back & Chest -->
+    <polygon points="335,195 375,210 355,250" fill="#ffffff" stroke="#ffffff" />
+    <polygon points="335,195 355,250 330,240" fill="#f1f5f9" stroke="#f1f5f9" />
+    <polygon points="375,210 405,235 355,250" fill="#f1f5f9" stroke="#f1f5f9" />
+    <polygon points="405,235 450,235 425,275" fill="#cbd5e1" stroke="#cbd5e1" />
+    <polygon points="405,235 425,275 375,275" fill="#e2e8f0" stroke="#e2e8f0" />
+    <polygon points="405,235 375,275 355,250" fill="#f8fafc" stroke="#f8fafc" />
+    <polygon points="450,235 475,275 425,275" fill="#94a3b8" stroke="#94a3b8" />
+    <!-- Belly, Pelvis & Seat -->
+    <polygon points="355,250 375,275 355,295" fill="#e2e8f0" stroke="#e2e8f0" />
+    <polygon points="375,275 425,275 405,305" fill="#cbd5e1" stroke="#cbd5e1" />
+    <polygon points="375,275 405,305 355,295" fill="#cbd5e1" stroke="#cbd5e1" />
+    <polygon points="425,275 475,275 465,305" fill="#94a3b8" stroke="#94a3b8" />
+    <polygon points="425,275 465,305 405,305" fill="#94a3b8" stroke="#94a3b8" />
+
+    <!-- NECK & HEAD (Profile facing left) -->
+    <!-- Neck -->
+    <polygon points="325,130 355,130 365,165" fill="#f1f5f9" stroke="#f1f5f9" />
+    <polygon points="325,130 365,165 335,175" fill="#ffffff" stroke="#ffffff" />
+    <polygon points="365,165 375,210 335,195" fill="#e2e8f0" stroke="#e2e8f0" />
+    <polygon points="365,165 335,195 335,175" fill="#f8fafc" stroke="#f8fafc" />
+    <!-- Crown & Crest -->
+    <polygon points="300,68 335,65 320,95" fill="#ffffff" stroke="#ffffff" />
+    <polygon points="335,65 365,75 348,100" fill="#f1f5f9" stroke="#f1f5f9" />
+    <polygon points="335,65 348,100 320,95" fill="#f8fafc" stroke="#f8fafc" />
+    <polygon points="365,75 385,90 355,105" fill="#cbd5e1" stroke="#cbd5e1" />
+    <polygon points="365,75 355,105 348,100" fill="#e2e8f0" stroke="#e2e8f0" />
+    <!-- Cheek & Jaw -->
+    <polygon points="280,82 300,68 320,95" fill="#f8fafc" stroke="#f8fafc" />
+    <polygon points="280,82 320,95 292,108" fill="#e2e8f0" stroke="#e2e8f0" />
+    <polygon points="320,95 348,100 325,130" fill="#f1f5f9" stroke="#f1f5f9" />
+    <polygon points="320,95 325,130 292,108" fill="#ffffff" stroke="#ffffff" />
+    <polygon points="348,100 355,130 325,130" fill="#cbd5e1" stroke="#cbd5e1" />
+
+    <!-- Eye Ring & Eye -->
+    <polygon points="295,82 308,80 310,92 298,95 290,88" fill="#fef08a" stroke="#fef08a" />
+    <polygon points="298,84 306,83 307,90 299,91" fill="#0f172a" stroke="#0f172a" />
+    <polygon points="300,85 303,85 302,88" fill="#ffffff" stroke="#ffffff" />
+
+    <!-- UPPER BEAK (Long, flat-topped, hooked tip facing left) -->
+    <polygon points="280,82 292,108 220,96" fill="#fde047" stroke="#fde047" />
+    <polygon points="280,82 220,96 210,88" fill="#fef08a" stroke="#fef08a" />
+    <polygon points="210,88 220,96 150,94" fill="#fde047" stroke="#fde047" />
+    <polygon points="210,88 150,94 140,92" fill="#fef08a" stroke="#fef08a" />
+    <!-- Hooked Beak Tip -->
+    <polygon points="140,92 150,94 142,108 134,102" fill="#ef4444" stroke="#ef4444" />
+
+    <!-- PUFFED THROAT POUCH (Smooth, round, balloon-like hemisphere, faceted low-poly) -->
+    <!-- Center of hemisphere ~(221, 101), Radius ~72. Outer boundary forms a smooth circular arc -->
+    <g id="balloon-pouch">
+      <!-- Outer Rim Ring (12 smooth arc segments for round hemisphere silhouette) -->
+      <polygon points="150,94 185,99 182,115 151,119" fill="#fb923c" stroke="#fb923c" />
+      <polygon points="151,119 182,115 186,129 158,136" fill="#f97316" stroke="#f97316" />
+      <polygon points="158,136 186,129 194,140 169,151" fill="#ea580c" stroke="#ea580c" />
+      <polygon points="169,151 194,140 205,147 184,163" fill="#f97316" stroke="#f97316" />
+      <polygon points="184,163 205,147 219,150 201,170" fill="#ea580c" stroke="#ea580c" />
+      <polygon points="201,170 219,150 232,147 220,173" fill="#c2410c" stroke="#c2410c" />
+      <polygon points="220,173 232,147 245,140 238,171" fill="#ea580c" stroke="#ea580c" />
+      <polygon points="238,171 245,140 255,129 256,164" fill="#c2410c" stroke="#c2410c" />
+      <polygon points="256,164 255,129 262,115 271,153" fill="#9a3412" stroke="#9a3412" />
+      <polygon points="271,153 262,115 265,104 283,138" fill="#c2410c" stroke="#c2410c" />
+      <polygon points="283,138 265,104 290,123" fill="#9a3412" stroke="#9a3412" />
+      <polygon points="290,123 265,104 292,108" fill="#7c2d12" stroke="#7c2d12" />
+
+      <!-- Mid-Band Facets (3D spherical shading & highlight) -->
+      <polygon points="150,94 220,96 185,99" fill="#fde047" stroke="#fde047" />
+      <polygon points="220,96 255,102 185,99" fill="#facc15" stroke="#facc15" />
+      <polygon points="220,96 292,108 265,104 255,102" fill="#fb923c" stroke="#fb923c" />
+
+      <!-- Core Balloon Highlight Facets -->
+      <polygon points="185,99 218,118 182,115" fill="#fed7aa" stroke="#fed7aa" />
+      <polygon points="185,99 255,102 218,118" fill="#fdba74" stroke="#fdba74" />
+      <polygon points="255,102 265,104 262,115 218,118" fill="#fb923c" stroke="#fb923c" />
+      <polygon points="218,118 186,129 182,115" fill="#fdba74" stroke="#fdba74" />
+      <polygon points="218,118 194,140 186,129" fill="#fb923c" stroke="#fb923c" />
+      <polygon points="218,118 205,147 194,140" fill="#f97316" stroke="#f97316" />
+      <polygon points="218,118 219,150 205,147" fill="#fb923c" stroke="#fb923c" />
+      <polygon points="218,118 232,147 219,150" fill="#f97316" stroke="#f97316" />
+      <polygon points="218,118 245,140 232,147" fill="#ea580c" stroke="#ea580c" />
+      <polygon points="218,118 255,129 245,140" fill="#f97316" stroke="#f97316" />
+      <polygon points="218,118 262,115 255,129" fill="#ea580c" stroke="#ea580c" />
+    </g>
+
+    <!-- NEAR LEG (Extended down to the lower/rear pedal at 380,490) -->
+    <!-- Thigh (Hip ~415,310 to Knee ~375,405) -->
+    <polygon points="395,295 435,305 405,355" fill="#cbd5e1" stroke="#cbd5e1" />
+    <polygon points="395,295 405,355 375,345" fill="#e2e8f0" stroke="#e2e8f0" />
+    <polygon points="375,345 405,355 390,405" fill="#f97316" stroke="#f97316" />
+    <polygon points="375,345 390,405 365,395" fill="#fb923c" stroke="#fb923c" />
+    <!-- Lower Leg (Knee ~375,400 to Ankle ~390,485) -->
+    <polygon points="365,395 390,405 395,482" fill="#ea580c" stroke="#ea580c" />
+    <polygon points="365,395 395,482 380,485" fill="#f97316" stroke="#f97316" />
+    <!-- Webbed Foot (Planted flat on the lower pedal at 380,490) -->
+    <polygon points="380,485 395,482 372,494 352,492" fill="#f97316" stroke="#f97316" />
+    <polygon points="395,482 402,492 372,494" fill="#c2410c" stroke="#c2410c" />
+  </g>
+
+  <!-- ==================== FOREGROUND CRANK & NEAR PEDAL ==================== -->
+  <g id="near-crank-pedal" class="mesh">
+    <!-- Crank Arm (From Center Hub 330,450 to Near Pedal 380,490) -->
+    <polygon points="326,454 334,446 384,486 376,494" fill="#cbd5e1" stroke="#cbd5e1" />
+    <!-- Pedal Platform -->
+    <polygon points="355,488 400,488 396,498 359,498" fill="#1e293b" stroke="#1e293b" />
+    <polygon points="362,490 393,490 391,495 364,495" fill="#f59e0b" stroke="#f59e0b" />
+  </g>
+
+  <!-- ==================== NEAR WING (ARM) GRIPPING HANDLEBARS ==================== -->
+  <g id="near-wing" class="mesh">
+    <!-- Upper Wing / Shoulder (395,215) to Elbow (420,265) -->
+    <polygon points="385,205 425,215 430,260" fill="#e2e8f0" stroke="#e2e8f0" />
+    <polygon points="385,205 430,260 390,255" fill="#ffffff" stroke="#ffffff" />
+    <!-- Forearm / Primary Feathers (Elbow 420,265 to Wrist/Handlebar 308,208) -->
+    <polygon points="390,255 430,260 360,268" fill="#cbd5e1" stroke="#cbd5e1" />
+    <polygon points="390,255 360,268 345,235" fill="#f1f5f9" stroke="#f1f5f9" />
+    <polygon points="345,235 360,268 315,222" fill="#94a3b8" stroke="#94a3b8" />
+    <polygon points="345,235 315,222 325,205" fill="#e2e8f0" stroke="#e2e8f0" />
+    <!-- Wingtip Feathers Curled Around Handlebar Grip (305,208) -->
+    <polygon points="325,205 315,222 292,216 296,196" fill="#f8fafc" stroke="#f8fafc" />
+    <polygon points="296,196 292,216 284,208" fill="#94a3b8" stroke="#94a3b8" />
+    <polygon points="315,222 300,226 292,216" fill="#64748b" stroke="#64748b" />
+  </g>
+</svg>

@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Sorrel is the meal-planning app that feels like a friend in the kitchen — planning your week, writing your list, and walking you through dinner.">
+<title>Sorrel — Dinner, taken care of</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Karla:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --cream:      #faf5ea;
+    --cream-2:    #f3ecdc;
+    --sage-tint:  #edf3e4;
+    --warm-tint:  #f7efdc;
+    --night:      #1e3d2b;
+    --night-deep: #16301f;
+    --ink:        #22301f;
+    --leaf:       #3f7d53;
+    --leaf-deep:  #2c5b3c;
+    --sage:       #a9c4a0;
+    --sage-line:  #9dbf95;
+    --butter:     #f2c94c;
+    --gold:       #dfa02e;
+    --clay:       #d4794e;
+    --muted:      #5d6f5e;
+    --radius-lg:  28px;
+    --shadow:     0 22px 45px -22px rgba(30,61,43,.30);
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family:'Karla', system-ui, -apple-system, sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.65;
+    font-size:1.05rem;
+    overflow-x:hidden;
+  }
+  ::selection{ background:var(--butter); color:var(--ink); }
+  img,svg{ display:block; }
+  a{ color:var(--leaf-deep); }
+  :focus-visible{ outline:3px solid var(--butter); outline-offset:3px; border-radius:6px; }
+
+  .skip{
+    position:absolute; left:1rem; top:-4rem; z-index:200;
+    background:var(--night); color:var(--cream); padding:.6rem 1rem;
+    border-radius:0 0 12px 12px; text-decoration:none; transition:top .2s;
+  }
+  .skip:focus{ top:0; }
+
+  h1,h2,h3,.serif{ font-family:'Fraunces', Georgia, serif; font-weight:560; line-height:1.12; letter-spacing:-.01em; }
+  h1 em, h2 em{ font-style:italic; color:var(--clay); font-weight:480; }
+
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 1.5rem; }
+
+  /* ---------------- grain texture ---------------- */
+  .grain{
+    position:fixed; inset:0; z-index:80; pointer-events:none;
+    opacity:.055; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='180' height='180' filter='url(%23n)' opacity='0.5'/></svg>");
+  }
+
+  /* ---------------- header ---------------- */
+  header{
+    position:sticky; top:0; z-index:50; height:68px;
+    background:rgba(250,245,234,.86);
+    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  }
+  .nav{
+    max-width:1120px; margin:0 auto; padding:0 1.5rem;
+    height:100%; display:flex; align-items:center; gap:1.5rem;
+  }
+  .logo{ display:flex; align-items:center; gap:.6rem; text-decoration:none; color:var(--ink); }
+  .logo-mark{
+    width:36px; height:36px; border-radius:50%;
+    background:var(--leaf); display:grid; place-items:center; flex:none;
+  }
+  .logo-mark svg{ width:20px; height:20px; }
+  .logo span{ font-family:'Fraunces',serif; font-size:1.45rem; font-weight:600; letter-spacing:-.01em; }
+  .nav-links{ display:flex; gap:1.6rem; margin-left:auto; align-items:center; }
+  .nav-links a{
+    text-decoration:none; color:var(--leaf-deep); font-weight:700; font-size:.92rem;
+    border-bottom:2px solid transparent; transition:border-color .2s;
+  }
+  .nav-links a:hover{ border-color:var(--butter); }
+  .clock-pill{
+    font-weight:800; font-size:.78rem; letter-spacing:.06em; color:var(--leaf-deep);
+    border:1.5px solid rgba(44,91,60,.35); background:rgba(255,255,255,.55);
+    padding:.28rem .8rem; border-radius:999px; min-width:86px; text-align:center;
+    font-variant-numeric:tabular-nums;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:.5rem;
+    background:var(--leaf); color:var(--cream); text-decoration:none;
+    font-weight:800; font-size:.95rem; padding:.7rem 1.4rem; border-radius:999px;
+    box-shadow:0 10px 22px -12px rgba(44,91,60,.55);
+    transition:transform .2s ease, background .2s ease;
+  }
+  .btn:hover{ background:var(--leaf-deep); transform:translateY(-2px); }
+  .btn.small{ padding:.55rem 1.1rem; font-size:.88rem; }
+
+  /* sun-arc scroll progress */
+  .arc{ position:absolute; left:0; right:0; bottom:0; height:30px; pointer-events:none; }
+  .horizon{ position:absolute; left:0; right:0; bottom:0; height:1px; background:rgba(44,91,60,.18); }
+  .orbiter{ position:absolute; left:0; bottom:5px; width:26px; height:26px; will-change:transform; }
+  .orbiter svg{ position:absolute; inset:0; width:100%; height:100%; transition:opacity .6s ease; }
+  .orbiter .moon{ opacity:0; }
+  header.night .orbiter .sun{ opacity:0; }
+  header.night .orbiter .moon{ opacity:1; }
+
+  /* ---------------- hero ---------------- */
+  .hero{ position:relative; padding:5.5rem 0 7rem; overflow:hidden; }
+  .hero .wrap{ display:grid; grid-template-columns:1.05fr .95fr; gap:3rem; align-items:center; }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:.5rem;
+    background:var(--sage-tint); color:var(--leaf-deep);
+    font-weight:800; font-size:.8rem; letter-spacing:.12em; text-transform:uppercase;
+    padding:.45rem 1rem; border-radius:999px; margin-bottom:1.4rem;
+  }
+  .eyebrow svg{ width:15px; height:15px; }
+  h1{ font-size:clamp(2.7rem, 5.4vw, 4.3rem); margin-bottom:1.3rem; }
+  .lede{ font-size:1.18rem; color:var(--muted); max-width:34rem; margin-bottom:2rem; }
+  .badges{ display:flex; flex-wrap:wrap; gap:.9rem; margin-bottom:1rem; }
+  .badge{
+    display:inline-flex; align-items:center; gap:.65rem;
+    background:#101f16; color:#fff; text-decoration:none;
+    padding:.55rem 1rem .55rem .8rem; border-radius:13px;
+    border:1px solid rgba(255,255,255,.14);
+    transition:transform .2s ease, background .2s ease;
+  }
+  .badge:hover{ transform:translateY(-2px); background:#000; }
+  .badge svg{ width:25px; height:25px; fill:#fff; flex:none; }
+  .badge small{ display:block; font-size:.6rem; letter-spacing:.05em; opacity:.8; line-height:1.2; }
+  .badge strong{ display:block; font-size:1.02rem; font-weight:800; line-height:1.25; }
+  .micro{ font-size:.85rem; color:var(--muted); }
+  .micro strong{ color:var(--leaf-deep); }
+
+  .hero-path{
+    margin-top:2.4rem; display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; align-items:center;
+    font-weight:800; font-size:.82rem; letter-spacing:.14em; text-transform:uppercase; color:var(--leaf-deep);
+  }
+  .hero-path svg{ width:16px; height:16px; stroke:var(--sage); }
+
+  .hero-visual{ position:relative; display:grid; place-items:center; }
+  .blob{
+    position:absolute; width:min(30vw,440px); aspect-ratio:1;
+    background:var(--sage-tint);
+    border-radius:46% 54% 58% 42% / 52% 41% 59% 48%;
+  }
+  .blob.b2{
+    width:38%; background:var(--cream-2);
+    border-radius:58% 42% 45% 55% / 45% 55% 48% 52%;
+    transform:translate(62%, -58%);
+  }
+  .hero-visual .art{ position:relative; width:min(100%,460px); animation:float 7s ease-in-out infinite alternate; }
+
+  @keyframes float{ from{ transform:translateY(-6px); } to{ transform:translateY(8px); } }
+
+  /* ---------------- prologue ---------------- */
+  .prologue{ text-align:center; padding:2rem 0 5rem; }
+  .prologue .kicker{
+    font-weight:800; font-size:.8rem; letter-spacing:.2em; text-transform:uppercase; color:var(--clay);
+    margin-bottom:1rem;
+  }
+  .prologue h2{ font-size:clamp(1.9rem, 3.4vw, 2.8rem); margin-bottom:1.1rem; }
+  .prologue p{ max-width:38rem; margin:0 auto 2rem; color:var(--muted); font-size:1.1rem; }
+  .scroll-cue{
+    display:inline-flex; flex-direction:column; align-items:center; gap:.4rem;
+    color:var(--leaf-deep); font-weight:800; font-size:.85rem; letter-spacing:.1em; text-transform:uppercase;
+  }
+  .scroll-cue svg{ width:22px; height:30px; animation:bob 2.2s ease-in-out infinite; }
+  @keyframes bob{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(6px);} }
+
+  /* ---------------- chapters ---------------- */
+  .chapter{ position:relative; padding:5.5rem 0; }
+  .ch-inner{
+    display:grid; grid-template-columns:1.05fr .95fr; gap:4rem; align-items:center;
+    max-width:1120px; margin:0 auto; padding:0 1.5rem;
+  }
+  .chapter.flip .ch-inner{ grid-template-columns:.95fr 1.05fr; }
+  .chapter.flip .ch-text{ order:2; }
+  .chapter.flip .ch-visual{ order:1; }
+
+  .ch-meta{ display:flex; align-items:baseline; gap:1rem; margin-bottom:1.1rem; }
+  .ch-num{
+    background:rgba(169,196,160,.35); color:var(--leaf-deep);
+    font-weight:800; font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    padding:.35rem .85rem; border-radius:999px;
+  }
+  .ch-time{ font-family:'Fraunces',serif; font-style:italic; font-size:1.25rem; color:var(--clay); }
+  .chapter h2{ font-size:clamp(1.9rem, 3.2vw, 2.6rem); margin-bottom:1.1rem; }
+  .chapter .body{ color:var(--muted); font-size:1.1rem; margin-bottom:1.6rem; max-width:32rem; }
+
+  .ticks{ list-style:none; display:grid; gap:.8rem; }
+  .ticks li{ display:flex; gap:.75rem; align-items:flex-start; font-weight:700; color:var(--leaf-deep); }
+  .tick{
+    flex:none; width:24px; height:24px; border-radius:50%;
+    background:var(--sage-tint); display:grid; place-items:center; margin-top:.1rem;
+  }
+  .tick svg{ width:13px; height:13px; stroke:var(--leaf); }
+
+  .ch-visual{ position:relative; display:grid; place-items:center; min-height:280px; }
+  .ch-visual .blob{ width:min(26vw,360px); }
+  .ch-visual .art{ position:relative; width:min(100%,340px); animation:float 8s ease-in-out infinite alternate; }
+
+  .bg-sage{ background:var(--sage-tint); }
+  .bg-warm{ background:var(--warm-tint); }
+
+  /* ---- grocery list card ---- */
+  .card{
+    position:relative; background:#fff; border-radius:var(--radius-lg);
+    border:1px solid rgba(30,61,43,.08); box-shadow:var(--shadow);
+    padding:1.4rem 1.5rem; width:min(100%,360px);
+  }
+  .card-head{ display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:1rem; }
+  .card-head h3{ font-size:1.15rem; }
+  .avatars{ display:flex; }
+  .avatar{
+    width:30px; height:30px; border-radius:50%; display:grid; place-items:center;
+    font-size:.72rem; font-weight:800; color:#fff; border:2px solid #fff;
+  }
+  .avatar.a1{ background:var(--leaf); }
+  .avatar.a2{ background:var(--clay); margin-left:-9px; }
+  .groc{ list-style:none; display:grid; gap:.65rem; }
+  .groc li{ display:flex; align-items:center; gap:.7rem; font-weight:700; font-size:.95rem; }
+  .groc .box{
+    flex:none; width:20px; height:20px; border-radius:7px;
+    border:2px solid var(--sage); display:grid; place-items:center;
+  }
+  .groc .box svg{ width:12px; height:12px; stroke:#fff; opacity:0; }
+  .groc li.done{ color:var(--muted); text-decoration:line-through; text-decoration-color:var(--sage); }
+  .groc li.done .box{ background:var(--leaf); border-color:var(--leaf); }
+  .groc li.done .box svg{ opacity:1; }
+  .card-foot{
+    margin-top:1.1rem; padding-top:1rem; border-top:1.5px dashed rgba(44,91,60,.2);
+    font-size:.85rem; color:var(--muted); display:flex; gap:.5rem; align-items:center;
+  }
+  .card-foot svg{ width:15px; height:15px; stroke:var(--leaf); flex:none; }
+
+  /* ---- notification card ---- */
+  .notif-stack{ position:relative; width:min(100%,360px); }
+  .notif-stack .ghost{
+    position:absolute; inset:0; transform:rotate(-4deg) translate(-10px, 12px);
+    background:var(--cream-2); border-radius:24px; border:1.5px dashed rgba(44,91,60,.25);
+  }
+  .notif{
+    position:relative; background:#fff; border-radius:24px; box-shadow:var(--shadow);
+    border:1px solid rgba(30,61,43,.08); padding:1.15rem 1.3rem;
+    display:flex; gap:.9rem; align-items:flex-start;
+    animation:float 6s ease-in-out infinite alternate;
+  }
+  .notif .app-ico{
+    flex:none; width:42px; height:42px; border-radius:12px; background:var(--leaf);
+    display:grid; place-items:center;
+  }
+  .notif .app-ico svg{ width:22px; height:22px; }
+  .notif .n-top{ display:flex; justify-content:space-between; gap:1rem; font-size:.72rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:.25rem; }
+  .notif p{ font-size:.95rem; line-height:1.5; }
+  .notif p strong{ color:var(--leaf-deep); }
+  .bell-float{ position:absolute; top:-26px; right:-14px; width:54px; height:54px; animation:swing 4s ease-in-out infinite; transform-origin:top center; }
+  @keyframes swing{ 0%,100%{ transform:rotate(-8deg);} 50%{ transform:rotate(8deg);} }
+
+  /* ---- recipe step card ---- */
+  .step-tag{
+    display:inline-flex; align-items:center; gap:.5rem; font-size:.75rem; font-weight:800;
+    letter-spacing:.12em; text-transform:uppercase; color:var(--clay); margin-bottom:.6rem;
+  }
+  .step-bar{ height:7px; border-radius:99px; background:var(--cream-2); overflow:hidden; margin-bottom:1rem; }
+  .step-bar i{ display:block; height:100%; width:50%; background:var(--leaf); border-radius:99px; }
+  .recipe-name{ font-size:1.25rem; margin-bottom:.35rem; }
+  .recipe-step{ color:var(--muted); font-size:.98rem; margin-bottom:1.1rem; }
+  .chips{ display:flex; flex-wrap:wrap; gap:.6rem; }
+  .chip{
+    display:inline-flex; align-items:center; gap:.45rem;
+    background:var(--sage-tint); color:var(--leaf-deep);
+    font-size:.82rem; font-weight:800; padding:.4rem .85rem; border-radius:999px;
+  }
+  .chip svg{ width:14px; height:14px; stroke:var(--leaf-deep); }
+  .chip.warm{ background:#fbe9d9; color:#a4532b; }
+  .chip.warm svg{ stroke:#a4532b; }
+
+  /* ---------------- night chapter ---------------- */
+  .night{ background:var(--night); color:var(--cream); position:relative; overflow:hidden; }
+  .night .ch-num{ background:rgba(242,201,76,.16); color:var(--butter); }
+  .night .ch-time{ color:var(--butter); }
+  .night .body{ color:#c9d8c6; }
+  .night h2{ color:var(--cream); }
+  .night h2 em{ color:var(--butter); }
+  .night .stars svg{ position:absolute; }
+  .tw1{ animation:twinkle 3.4s ease-in-out infinite; }
+  .tw2{ animation:twinkle 4.6s ease-in-out .8s infinite; }
+  .tw3{ animation:twinkle 5.2s ease-in-out 1.6s infinite; }
+  @keyframes twinkle{ 0%,100%{ opacity:.25;} 50%{ opacity:1;} }
+
+  .stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:2.5rem; margin-top:4.5rem; padding-top:3rem; border-top:1.5px dashed rgba(242,201,76,.3); }
+  .stat .num{ font-family:'Fraunces',serif; font-size:clamp(2.2rem,4vw,3rem); color:var(--butter); font-weight:560; }
+  .stat p{ color:#c9d8c6; font-size:.95rem; max-width:15rem; }
+  .stat .tick{ background:rgba(242,201,76,.16); margin-bottom:.7rem; }
+  .stat .tick svg{ stroke:var(--butter); }
+
+  /* ---------------- quote ---------------- */
+  .quote{ background:var(--sage-tint); padding:5.5rem 0; text-align:center; position:relative; }
+  .quote blockquote{
+    font-family:'Fraunces',serif; font-style:italic; font-weight:480;
+    font-size:clamp(1.5rem, 3vw, 2.2rem); line-height:1.35;
+    max-width:46rem; margin:0 auto 1.6rem; color:var(--leaf-deep);
+  }
+  .quote .who{ font-weight:800; font-size:.85rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); display:inline-flex; align-items:center; gap:.6rem; }
+  .quote .who svg{ width:16px; height:16px; }
+
+  /* ---------------- download ---------------- */
+  .download{ position:relative; padding:6.5rem 0 7rem; text-align:center; overflow:hidden; }
+  .download .blob{ width:min(34vw,420px); left:50%; top:44%; transform:translate(-50%,-50%); background:var(--sage-tint); }
+  .download .inner{ position:relative; }
+  .download h2{ font-size:clamp(2.4rem, 4.6vw, 3.6rem); margin-bottom:1.2rem; }
+  .download .lede{ margin:0 auto 2.4rem; }
+  .download .badges{ justify-content:center; }
+  .download .art{ width:150px; margin:0 auto 1.8rem; }
+
+  /* ---------------- footer ---------------- */
+  footer{ background:var(--night-deep); color:#b9cbb4; padding:3.5rem 0 2.5rem; }
+  footer .wrap{ display:flex; flex-wrap:wrap; gap:2rem; align-items:center; justify-content:space-between; }
+  footer .logo span{ color:var(--cream); }
+  footer .logo-mark{ background:rgba(242,201,76,.15); }
+  footer .logo-mark svg path{ stroke:var(--butter); }
+  footer nav{ display:flex; gap:1.6rem; flex-wrap:wrap; }
+  footer nav a{ color:#b9cbb4; text-decoration:none; font-weight:700; font-size:.9rem; }
+  footer nav a:hover{ color:var(--butter); }
+  footer .fine{ width:100%; border-top:1px solid rgba(255,255,255,.1); padding-top:1.5rem; display:flex; flex-wrap:wrap; gap:1rem; justify-content:space-between; font-size:.82rem; }
+  footer .fine .serif{ font-style:italic; color:#d7e3d2; }
+
+  /* ---------------- wave dividers ---------------- */
+  .wave{ display:block; width:100%; height:70px; margin-bottom:-1px; }
+
+  /* ---------------- reveal ---------------- */
+  .reveal{ opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+  .reveal.d1{ transition-delay:.12s; }
+  .reveal.d2{ transition-delay:.24s; }
+
+  /* ---------------- responsive ---------------- */
+  @media (max-width:900px){
+    .hero .wrap, .ch-inner, .chapter.flip .ch-inner{ grid-template-columns:1fr; gap:2.5rem; }
+    .chapter.flip .ch-text{ order:1; }
+    .chapter.flip .ch-visual{ order:2; }
+    .hero{ padding:3.5rem 0 5rem; }
+    .hero-visual{ order:-1; }
+    .blob{ width:min(64vw,380px); }
+    .stats{ grid-template-columns:1fr; gap:2rem; }
+    .ch-visual{ min-height:0; }
+  }
+  @media (max-width:640px){
+    .nav-links a{ display:none; }
+    .clock-pill{ display:none; }
+    .chapter{ padding:4rem 0; }
+    .badges .badge{ flex:1 1 auto; justify-content:center; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *, *::before, *::after{ animation:none !important; transition:none !important; }
+    .reveal{ opacity:1; transform:none; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ================= HEADER ================= -->
+<header id="siteHeader">
+  <nav class="nav" aria-label="Main">
+    <a class="logo" href="#top" aria-label="Sorrel home">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f2ecd9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20C4 10 11 4 20 4c0 9-6 16-16 16z"/><path d="M4 20C8 14 13 9 20 4"/>
+        </svg>
+      </span>
+      <span>Sorrel</span>
+    </a>
+    <div class="nav-links">
+      <a href="#morning">A day with Sorrel</a>
+      <a href="#night">The good stuff</a>
+      <span class="clock-pill" id="clock" aria-hidden="true">7:12 AM</span>
+      <a class="btn small" href="#download">Get the app</a>
+    </div>
+  </nav>
+  <div class="arc" aria-hidden="true">
+    <div class="orbiter" id="orbiter">
+      <svg class="sun" viewBox="0 0 26 26">
+        <circle cx="13" cy="13" r="6" fill="#f2c94c"/>
+        <g stroke="#dfa02e" stroke-width="2" stroke-linecap="round">
+          <path d="M22 13h3M19.4 6.6l2.1-2.1M13 4V1M6.6 6.6L4.5 4.5M4 13H1M6.6 19.4l-2.1 2.1M13 22v3M19.4 19.4l2.1 2.1"/>
+        </g>
+      </svg>
+      <svg class="moon" viewBox="0 0 24 24">
+        <path d="M12 3a9 9 0 1 0 0 18a11 11 0 0 1 0-18z" fill="#2c5b3c"/>
+        <circle cx="17.5" cy="8" r="1.2" fill="#2c5b3c"/>
+      </svg>
+    </div>
+    <div class="horizon"></div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#2c5b3c" stroke-width="2" stroke-linecap="round"><path d="M4 20C4 10 11 4 20 4c0 9-6 16-16 16z"/></svg>
+        Hello, hungry friend
+      </p>
+      <h1 class="reveal d1">Dinner’s already <em>decided.</em></h1>
+      <p class="lede reveal d2">Sorrel is the meal-planning app that feels like a friend in the kitchen — planning your week, writing your list, and walking you through every recipe. All you bring is an appetite.</p>
+      <div class="badges reveal d2">
+        <a class="badge" href="#download" aria-label="Download on the App Store">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.05 12.54c-.03-2.89 2.36-4.27 2.47-4.34-1.35-1.97-3.44-2.24-4.18-2.27-1.78-.18-3.47 1.05-4.37 1.05-.9 0-2.29-1.02-3.77-1-1.94.03-3.72 1.13-4.72 2.86-2.01 3.49-.51 8.66 1.45 11.5.96 1.39 2.1 2.95 3.6 2.89 1.44-.06 1.99-.93 3.73-.93s2.23.93 3.76.9c1.55-.03 2.54-1.41 3.49-2.8 1.1-1.61 1.55-3.17 1.58-3.25-.04-.02-3.02-1.16-3.06-4.61zM14.16 4.06c.8-.97 1.34-2.31 1.19-3.65-1.15.05-2.55.77-3.38 1.74-.74.85-1.39 2.23-1.22 3.54 1.29.1 2.6-.65 3.41-1.63z"/></svg>
+          <span><small>Download on the</small><strong>App Store</strong></span>
+        </a>
+        <a class="badge" href="#download" aria-label="Get it on Google Play">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.6v16.8c0 .5.55.8.96.5l12.3-8.4c.34-.23.34-.73 0-.96L6.96 3.1c-.4-.3-.96 0-.96.5z"/></svg>
+          <span><small>Get it on</small><strong>Google Play</strong></span>
+        </a>
+      </div>
+      <p class="micro reveal d2"><strong>Free to download</strong> · Your first week of dinners is on us</p>
+      <div class="hero-path reveal d2" aria-hidden="true">
+        <span>Plan the week</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 12h14m-5-5l5 5-5 5"/></svg>
+        <span>Shop once</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 12h14m-5-5l5 5-5 5"/></svg>
+        <span>Cook with company</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 12h14m-5-5l5 5-5 5"/></svg>
+        <span>Gather round</span>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal d1" aria-hidden="true">
+      <div class="blob"></div>
+      <div class="blob b2"></div>
+      <svg class="art" viewBox="0 0 220 220" fill="none" stroke="#2c5b3c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="110" cy="112" r="86" stroke="#9dbf95" stroke-width="1.5" stroke-dasharray="2 8"/>
+        <!-- sun -->
+        <circle cx="150" cy="58" r="15" fill="#f2c94c" stroke="#dfa02e" stroke-width="2"/>
+        <g stroke="#dfa02e" stroke-width="2.5">
+          <path d="M171 58h7M164.9 43.1l4.9-4.9M150 37v-7M135.1 43.1l-4.9-4.9M129 58h-7M135.1 72.9l-4.9 4.9M150 79v7M164.9 72.9l4.9 4.9"/>
+        </g>
+        <!-- bowl -->
+        <path d="M56 122h88a44 27 0 0 1-88 0z" fill="#ffffff"/>
+        <ellipse cx="100" cy="122" rx="44" ry="9"/>
+        <path d="M76 119q6-8 12-2q6-8 12-2q6-8 12-2" stroke="#3f7d53"/>
+        <!-- steam -->
+        <path d="M90 102c-4-6 4-10 0-16"/>
+        <path d="M106 104c-4-6 4-10 0-16"/>
+        <!-- sprig -->
+        <path d="M40 168c20-10 38-14 56-12"/>
+        <path d="M52 163q-4-9-14-9q1 9 14 9z"/>
+        <path d="M66 158q-2-10-12-11q0 10 12 11z"/>
+        <path d="M80 155q0-10-10-13q-1 10 10 13z"/>
+        <!-- sparkles -->
+        <path d="M52 80v8M48 84h8"/>
+        <circle cx="178" cy="120" r="2.5" fill="#a9c4a0" stroke="none"/>
+        <path d="M36 182h148" stroke="#9dbf95" stroke-width="1.5" stroke-dasharray="1 8"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROLOGUE ================= -->
+<section class="prologue" aria-label="Introduction">
+  <div class="wrap">
+    <p class="kicker reveal">One app · One ordinary Tuesday</p>
+    <h2 class="reveal d1">Come along for <em>a day with Sorrel</em></h2>
+    <p class="reveal d2">You could read a feature list. Or you could follow an ordinary Tuesday — first coffee to last leftover — and see how it feels when dinner stops being a question. Scroll slowly. We’ll put the kettle on.</p>
+    <p class="scroll-cue reveal d2">
+      Begin at breakfast
+      <svg viewBox="0 0 24 32" fill="none" stroke="#2c5b3c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 3v24" stroke-dasharray="1 5"/><path d="M6 21l6 7 6-7"/>
+      </svg>
+    </p>
+  </div>
+</section>
+
+<!-- ================= CHAPTER ONE ================= -->
+<section class="chapter" id="morning" data-time="7:12 AM" aria-label="Chapter one: morning">
+  <div class="ch-inner">
+    <div class="ch-text reveal">
+      <p class="ch-meta"><span class="ch-num">Chapter One</span><span class="ch-time">7:12 AM</span></p>
+      <h2>The whole week, planned before the <em>kettle boils.</em></h2>
+      <p class="body">Over your first coffee, tell Sorrel who’s eating, how much time you have, and what everyone actually likes. By the bottom of the mug, breakfast through Friday is planned — balanced, varied, and built around what’s already sitting in your fridge.</p>
+      <ul class="ticks">
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Plans a full week in about fifteen minutes</li>
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Remembers allergies, dislikes &amp; diets</li>
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Uses up what’s already in the fridge</li>
+      </ul>
+    </div>
+    <div class="ch-visual reveal d1" aria-hidden="true">
+      <div class="blob"></div>
+      <svg class="art" viewBox="0 0 120 120" fill="none" stroke="#2c5b3c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <!-- plan card -->
+        <rect x="56" y="26" width="48" height="62" rx="9" fill="#ffffff"/>
+        <circle cx="66" cy="40" r="2.5" fill="#3f7d53" stroke="none"/>
+        <circle cx="66" cy="52" r="2.5" fill="#3f7d53" stroke="none"/>
+        <circle cx="66" cy="64" r="2.5" fill="#3f7d53" stroke="none"/>
+        <path d="M74 40h22M74 52h22M74 64h16"/>
+        <path d="M66 76l4 4 8-9" stroke="#3f7d53"/>
+        <!-- mug -->
+        <path d="M22 62h38v22a9 9 0 0 1-9 9H31a9 9 0 0 1-9-9z" fill="#ffffff"/>
+        <path d="M60 68h5a7 7 0 0 1 0 14h-5"/>
+        <path d="M16 101h50"/>
+        <path d="M33 53c-3-4 3-7 0-11M45 53c-3-4 3-7 0-11"/>
+        <path d="M18 20v7M14.5 23.5h7" stroke="#9dbf95"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true" style="background:var(--cream)">
+  <path d="M0,38 C220,70 480,4 740,30 C1000,56 1220,18 1440,42 L1440,70 L0,70 Z" fill="var(--sage-tint)"/>
+</svg>
+
+<!-- ================= CHAPTER TWO ================= -->
+<section class="chapter flip bg-sage" id="midday" data-time="12:30 PM" aria-label="Chapter two: midday">
+  <div class="ch-inner">
+    <div class="ch-text reveal">
+      <p class="ch-meta"><span class="ch-num">Chapter Two</span><span class="ch-time">12:30 PM</span></p>
+      <h2>A grocery list that writes itself — <em>and sorts itself, too.</em></h2>
+      <p class="body">One tap and the week becomes a list, grouped by aisle and shared with the whole household. Peek at the pantry before you shop, cross things off together in the store, and wave goodbye to the wilted spinach you forgot you bought.</p>
+      <ul class="ticks">
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Grouped by aisle, not by chaos</li>
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Shared live with the whole household</li>
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Skips what your pantry already has</li>
+      </ul>
+    </div>
+    <div class="ch-visual reveal d1" aria-hidden="true">
+      <div class="blob" style="background:var(--cream)"></div>
+      <div class="card">
+        <div class="card-head">
+          <h3>This week’s list</h3>
+          <div class="avatars" aria-hidden="true"><span class="avatar a1">S</span><span class="avatar a2">J</span></div>
+        </div>
+        <ul class="groc">
+          <li class="done"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Carrots · 1 bunch</li>
+          <li class="done"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Baby spinach</li>
+          <li><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Greek yogurt</li>
+          <li><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Lemons · 3</li>
+          <li><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Chicken thighs · 500g</li>
+        </ul>
+        <p class="card-foot">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+          6 things already in your pantry — you saved $14 today
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true" style="background:var(--sage-tint)">
+  <path d="M0,34 C260,66 520,6 780,32 C1040,58 1240,20 1440,40 L1440,70 L0,70 Z" fill="var(--cream)"/>
+</svg>
+
+<!-- ================= CHAPTER THREE ================= -->
+<section class="chapter" id="afternoon" data-time="4:58 PM" aria-label="Chapter three: afternoon">
+  <div class="ch-inner">
+    <div class="ch-text reveal">
+      <p class="ch-meta"><span class="ch-num">Chapter Three</span><span class="ch-time">4:58 PM</span></p>
+      <h2>The five o’clock question, <em>answered at 4:58.</em></h2>
+      <p class="body">You know the one — <em>what’s for dinner?</em> — that small, familiar panic. With Sorrel it never quite arrives. A gentle nudge in the late afternoon, a plan that’s already made, ingredients already waiting. The evening is suddenly… easy.</p>
+    </div>
+    <div class="ch-visual reveal d1" aria-hidden="true">
+      <div class="blob"></div>
+      <div class="notif-stack">
+        <div class="ghost"></div>
+        <div class="notif">
+          <span class="app-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#f2ecd9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20C4 10 11 4 20 4c0 9-6 16-16 16z"/><path d="M4 20C8 14 13 9 20 4"/></svg>
+          </span>
+          <div>
+            <div class="n-top"><span>Sorrel</span><span>now</span></div>
+            <p><strong>Tonight: lemon-herb chicken with honeyed carrots.</strong> 35 minutes, and everything’s already in the fridge. Shall we put the oven on?</p>
+          </div>
+        </div>
+        <svg class="bell-float" viewBox="0 0 24 24" fill="none" stroke="#d4794e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 16H6c1.2-1.2 1.8-2.8 1.8-4.8C7.8 8 9.6 6 12 6s4.2 2 4.2 5.2c0 2 .6 3.6 1.8 4.8z"/>
+          <path d="M10.3 19a1.8 1.8 0 0 0 3.4 0"/>
+          <path d="M4 6l1.5 1.5M20 6l-1.5 1.5" stroke="#f2c94c"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true" style="background:var(--cream)">
+  <path d="M0,40 C240,68 500,8 760,30 C1020,52 1240,22 1440,44 L1440,70 L0,70 Z" fill="var(--warm-tint)"/>
+</svg>
+
+<!-- ================= CHAPTER FOUR ================= -->
+<section class="chapter flip bg-warm" id="evening" data-time="6:47 PM" aria-label="Chapter four: evening">
+  <div class="ch-inner">
+    <div class="ch-text reveal">
+      <p class="ch-meta"><span class="ch-num">Chapter Four</span><span class="ch-time">6:47 PM</span></p>
+      <h2>Cooking that feels like <em>company.</em></h2>
+      <p class="body">Sorrel talks you through dinner like a friend leaning on the counter: one step at a time, timers built right in, portions scaled to your table. Missing an ingredient? There’s a swap for that — and a kind word if the smoke alarm disagrees.</p>
+      <ul class="ticks">
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Step-by-step, at your pace</li>
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Portions scaled to your table</li>
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Smart swaps for missing ingredients</li>
+      </ul>
+    </div>
+    <div class="ch-visual reveal d1" aria-hidden="true">
+      <div class="blob" style="background:#fdfaf1"></div>
+      <div class="card">
+        <p class="step-tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d4794e" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
+          Lemon-herb chicken
+        </p>
+        <div class="step-bar"><i></i></div>
+        <h3 class="recipe-name serif">Step 3 of 6</h3>
+        <p class="recipe-step">Stir in the lemon zest, garlic &amp; herbs. Breathe in — that’s dinner happening.</p>
+        <div class="chips">
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>Timer · 12:00</span>
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7.5" r="3.5"/><path d="M21 21v-2a4 4 0 0 0-3-3.87"/></svg>Serves 4 → yours: 3</span>
+          <span class="chip warm"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5L4 10l6.5-6.5L15 8"/><path d="M13 11l7 7-2.5 2.5-7-7"/></svg>Swap: thyme works too</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true" style="background:var(--warm-tint)">
+  <path d="M0,36 C260,68 520,6 780,32 C1040,58 1240,18 1440,42 L1440,70 L0,70 Z" fill="var(--night)"/>
+</svg>
+
+<!-- ================= CHAPTER FIVE — NIGHT ================= -->
+<section class="chapter night" id="night" data-time="9:15 PM" aria-label="Chapter five: night">
+  <div class="stars" aria-hidden="true">
+    <svg class="tw1" style="top:8%; left:6%" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f2c94c" stroke-width="2" stroke-linecap="round"><path d="M12 4v16M4 12h16"/></svg>
+    <svg class="tw2" style="top:16%; right:8%" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a9c4a0" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+    <svg class="tw3" style="bottom:12%; left:12%" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#f2c94c" stroke-width="2.6" stroke-linecap="round"><path d="M12 6v12M6 12h12"/></svg>
+  </div>
+  <div class="ch-inner">
+    <div class="ch-text reveal">
+      <p class="ch-meta"><span class="ch-num">Chapter Five</span><span class="ch-time">9:15 PM</span></p>
+      <h2>And tomorrow’s lunch? <em>Already handled.</em></h2>
+      <p class="body">Tonight’s extras become tomorrow’s lunches — on purpose. The plan quietly stretches every shop a little further: less waste, lower bills, and the deep, quiet satisfaction of a fridge that empties exactly on time.</p>
+      <ul class="ticks" style="--x:1">
+        <li style="color:#eaf3e4"><span class="tick" style="background:rgba(242,201,76,.16)"><svg viewBox="0 0 24 24" fill="none" stroke="#f2c94c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Planned leftovers, not sad ones</li>
+        <li style="color:#eaf3e4"><span class="tick" style="background:rgba(242,201,76,.16)"><svg viewBox="0 0 24 24" fill="none" stroke="#f2c94c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Every ingredient earns its place</li>
+      </ul>
+    </div>
+    <div class="ch-visual reveal d1" aria-hidden="true">
+      <svg class="art" viewBox="0 0 120 120" fill="none" stroke="#dfe9d6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M26 30v8M22 34h8" stroke="#f2c94c"/>
+        <path d="M98 23v6M95 26h6" stroke="#a9c4a0"/>
+        <circle cx="88" cy="48" r="2" fill="#a9c4a0" stroke="none"/>
+        <!-- crescent moon -->
+        <path d="M58 30a24 24 0 1 0 0 48a26 26 0 0 1 0-48z" fill="#f2c94c" stroke="#dfa02e"/>
+        <!-- leftover container -->
+        <rect x="33" y="68" width="56" height="9" rx="4.5" fill="#ffffff" stroke="#2c5b3c"/>
+        <path d="M54 66h14" stroke="#2c5b3c"/>
+        <path d="M61 68q3-6 8-6q0 6-8 6z" fill="#3f7d53" stroke="#2c5b3c" stroke-width="1.8"/>
+        <rect x="36" y="77" width="50" height="28" rx="7" fill="#ffffff" stroke="#2c5b3c"/>
+        <path d="M46 86h30M46 93h18" stroke="#2c5b3c"/>
+        <path d="M28 110h64" stroke="#3f6b4f" stroke-width="1.5" stroke-dasharray="1 8"/>
+      </svg>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat reveal">
+        <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20C4 10 11 4 20 4c0 9-6 16-16 16z"/></svg></span>
+        <p class="num">⅓ less</p>
+        <p>food wasted by the average Sorrel household</p>
+      </div>
+      <div class="stat reveal d1">
+        <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v9M15 9.8c-.7-1-1.8-1.4-3-1.4-1.6 0-2.8.9-2.8 2.1 0 2.9 5.9 1.5 5.9 4.3 0 1.2-1.3 2.1-3 2.1-1.2 0-2.3-.5-3-1.4"/></svg></span>
+        <p class="num">$120</p>
+        <p>saved each month by most families, just from shopping the plan</p>
+      </div>
+      <div class="stat reveal d2">
+        <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span>
+        <p class="num">15 min</p>
+        <p>to plan an entire week of breakfasts, lunches &amp; dinners</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true" style="background:var(--night)">
+  <path d="M0,38 C240,68 500,8 760,30 C1020,54 1240,20 1440,42 L1440,70 L0,70 Z" fill="var(--sage-tint)"/>
+</svg>
+
+<!-- ================= QUOTE ================= -->
+<section class="quote" aria-label="What families say">
+  <div class="wrap">
+    <blockquote class="reveal">“It stopped feeling like a chore and started feeling like someone was looking after us.”</blockquote>
+    <p class="who reveal d1">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#3f7d53" stroke-width="2" stroke-linecap="round"><path d="M4 20C4 10 11 4 20 4c0 9-6 16-16 16z"/></svg>
+      The Okafor family · Cooking with Sorrel for 8 months
+    </p>
+  </div>
+</section>
+
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true" style="background:var(--sage-tint)">
+  <path d="M0,34 C260,66 520,6 780,32 C1040,58 1240,18 1440,40 L1440,70 L0,70 Z" fill="var(--cream)"/>
+</svg>
+
+<!-- ================= DOWNLOAD ================= -->
+<section class="download" id="download" aria-label="Download Sorrel">
+  <div class="blob" aria-hidden="true"></div>
+  <div class="wrap inner">
+    <svg class="art reveal" viewBox="0 0 160 140" fill="none" stroke="#2c5b3c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <!-- fork & spoon -->
+      <path d="M20 32v8a4 4 0 0 0 8 0v-8M24 46v22"/>
+      <ellipse cx="134" cy="36" rx="5" ry="7"/><path d="M134 43v23"/>
+      <!-- heart steam -->
+      <path d="M80 42c-3-6-13-5-13 2c0 6 8 10 13 14c5-4 13-8 13-14c0-7-10-8-13-2z" stroke="#d4794e"/>
+      <!-- bowl -->
+      <path d="M44 86h72a36 22 0 0 1-72 0z" fill="#ffffff"/>
+      <ellipse cx="80" cy="86" rx="36" ry="8"/>
+      <path d="M62 82q5-7 10-1q5-7 10-1q5-7 10-1" stroke="#3f7d53"/>
+      <path d="M110 56v8M106 60h8" stroke="#9dbf95"/>
+      <circle cx="48" cy="52" r="2" fill="#f2c94c" stroke="none"/>
+    </svg>
+    <h2 class="reveal d1">Pull up a <em>chair.</em></h2>
+    <p class="lede reveal d2">Dinner for the people you love, minus the mental load. Sorrel is free to download — and your first week of plans is on us.</p>
+    <div class="badges reveal d2">
+      <a class="badge" href="https://www.apple.com/app-store/" aria-label="Download on the App Store">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.05 12.54c-.03-2.89 2.36-4.27 2.47-4.34-1.35-1.97-3.44-2.24-4.18-2.27-1.78-.18-3.47 1.05-4.37 1.05-.9 0-2.29-1.02-3.77-1-1.94.03-3.72 1.13-4.72 2.86-2.01 3.49-.51 8.66 1.45 11.5.96 1.39 2.1 2.95 3.6 2.89 1.44-.06 1.99-.93 3.73-.93s2.23.93 3.76.9c1.55-.03 2.54-1.41 3.49-2.8 1.1-1.61 1.55-3.17 1.58-3.25-.04-.02-3.02-1.16-3.06-4.61zM14.16 4.06c.8-.97 1.34-2.31 1.19-3.65-1.15.05-2.55.77-3.38 1.74-.74.85-1.39 2.23-1.22 3.54 1.29.1 2.6-.65 3.41-1.63z"/></svg>
+        <span><small>Download on the</small><strong>App Store</strong></span>
+      </a>
+      <a class="badge" href="https://play.google.com/store" aria-label="Get it on Google Play">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.6v16.8c0 .5.55.8.96.5l12.3-8.4c.34-.23.34-.73 0-.96L6.96 3.1c-.4-.3-.96 0-.96.5z"/></svg>
+        <span><small>Get it on</small><strong>Google Play</strong></span>
+      </a>
+    </div>
+    <p class="micro reveal d2">iOS 15+ · Android 10+ · No card required</p>
+  </div>
+</section>
+
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true" style="background:var(--cream)">
+  <path d="M0,38 C240,68 520,6 780,32 C1040,58 1240,20 1440,44 L1440,70 L0,70 Z" fill="var(--night-deep)"/>
+</svg>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Back to top">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20C4 10 11 4 20 4c0 9-6 16-16 16z"/><path d="M4 20C8 14 13 9 20 4"/>
+        </svg>
+      </span>
+      <span>Sorrel</span>
+    </a>
+    <nav aria-label="Footer">
+      <a href="#morning">The day</a>
+      <a href="#night">Why Sorrel</a>
+      <a href="#download">Download</a>
+      <a href="#">Privacy</a>
+      <a href="#">Say hello</a>
+    </nav>
+    <div class="fine">
+      <span>© 2025 Sorrel Kitchen Co. Made with love &amp; leafy greens.</span>
+      <span class="serif">Eat well, friends.</span>
+    </div>
+  </div>
+</footer>
+
+</main>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- scroll reveals ---- */
+  var reveals = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) {
+    reveals.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.18 });
+    reveals.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---- chapter clock in header ---- */
+  var clock = document.getElementById('clock');
+  if ('IntersectionObserver' in window) {
+    var cio = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) clock.textContent = e.target.dataset.time;
+      });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    document.querySelectorAll('.chapter[data-time]').forEach(function(c){ cio.observe(c); });
+  }
+
+  /* ---- sun arc scroll progress ---- */
+  var orb = document.getElementById('orbiter');
+  var header = document.getElementById('siteHeader');
+  var ticking = false;
+
+  function place(){
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    var p = max > 0 ? Math.min(Math.max(doc.scrollTop / max, 0), 1) : 0;
+    var w = header.clientWidth;
+    var x = 14 + p * (w - 74);
+    var y = -Math.sin(p * Math.PI) * 20;   /* rises to noon, sets toward night */
+    orb.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+    header.classList.toggle('night', p > 0.84);
+    ticking = false;
+  }
+  function onScroll(){
+    if (!ticking) { window.requestAnimationFrame(place); ticking = true; }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', place);
+  place();
+})();
+</script>
+</body>
+</html>

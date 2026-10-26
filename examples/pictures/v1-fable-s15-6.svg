@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 500" width="480" height="500">
+  <!-- Pelican pulling a wheelie on a beach cruiser — isometric, flat cartoon, bold outlines, transparent bg -->
+
+  <!-- Isometric depth layer: far-side tire/fender edges -->
+  <g transform="translate(-12,-7)">
+    <g transform="translate(210,440) matrix(0.866,-0.5,0,1,0,0) rotate(-25)" stroke="#1e1b2e" stroke-width="4">
+      <circle cx="0" cy="-60" r="60" fill="#1e1b2e"/>
+      <circle cx="190" cy="-60" r="60" fill="#1e1b2e"/>
+      <path d="M -62 -92 A 70 70 0 0 1 62 -92" fill="none" stroke="#1e1b2e" stroke-width="15"/>
+      <path d="M 128 -92 A 70 70 0 0 1 252 -92" fill="none" stroke="#1e1b2e" stroke-width="15"/>
+    </g>
+  </g>
+
+  <!-- Main isometric group: side-view coords, rotated -25° for the wheelie, then projected -->
+  <g transform="translate(210,440) matrix(0.866,-0.5,0,1,0,0) rotate(-25)"
+     stroke="#1e1b2e" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+
+    <!-- Tail feathers (behind body) -->
+    <path d="M -10 -230 L -62 -252 L -50 -226 L -74 -214 L -20 -198 Z" fill="#fdfdfd"/>
+
+    <!-- Far leg -->
+    <path d="M 40 -185 L 42 -125 L 53 -72" fill="none" stroke="#1e1b2e" stroke-width="14"/>
+    <path d="M 40 -185 L 42 -125 L 53 -72" fill="none" stroke="#d9822b" stroke-width="8"/>
+    <path d="M 42 -76 L 68 -78 L 64 -70 L 46 -71 Z" fill="#d9822b"/>
+
+    <!-- Rear wheel -->
+    <g transform="translate(0,-60)">
+      <circle r="60" fill="#2d2d2d"/>
+      <circle r="46" fill="#e9e9e9"/>
+      <g stroke-width="3">
+        <line x1="0" y1="-46" x2="0" y2="46"/>
+        <line x1="0" y1="-46" x2="0" y2="46" transform="rotate(45)"/>
+        <line x1="0" y1="-46" x2="0" y2="46" transform="rotate(90)"/>
+        <line x1="0" y1="-46" x2="0" y2="46" transform="rotate(135)"/>
+      </g>
+      <circle r="9" fill="#8a8a8a"/>
+    </g>
+
+    <!-- Front wheel (lifted) -->
+    <g transform="translate(190,-60)">
+      <circle r="60" fill="#2d2d2d"/>
+      <circle r="46" fill="#e9e9e9"/>
+      <g stroke-width="3">
+        <line x1="0" y1="-46" x2="0" y2="46" transform="rotate(20)"/>
+        <line x1="0" y1="-46" x2="0" y2="46" transform="rotate(65)"/>
+        <line x1="0" y1="-46" x2="0" y2="46" transform="rotate(110)"/>
+        <line x1="0" y1="-46" x2="0" y2="46" transform="rotate(155)"/>
+      </g>
+      <circle r="9" fill="#8a8a8a"/>
+    </g>
+
+    <!-- Chain -->
+    <path d="M 75 -68 L 0 -69 M 75 -32 L 0 -51" fill="none" stroke-width="3"/>
+
+    <!-- Frame (beach cruiser swoops) -->
+    <g fill="none" stroke="#1e1b2e" stroke-width="12">
+      <path d="M 0 -60 L 75 -50 M 0 -60 L 48 -145 M 75 -50 L 48 -150"/>
+      <path d="M 75 -50 C 110 -80, 150 -95, 172 -112"/>
+      <path d="M 48 -142 C 90 -160, 130 -150, 168 -136"/>
+      <path d="M 165 -142 L 177 -108 C 182 -90, 188 -75, 190 -60"/>
+      <path d="M 165 -142 L 160 -162 M 48 -150 L 47 -162"/>
+    </g>
+    <g fill="none" stroke="#2a9d8f" stroke-width="6">
+      <path d="M 0 -60 L 75 -50 M 0 -60 L 48 -145 M 75 -50 L 48 -150"/>
+      <path d="M 75 -50 C 110 -80, 150 -95, 172 -112"/>
+      <path d="M 48 -142 C 90 -160, 130 -150, 168 -136"/>
+      <path d="M 165 -142 L 177 -108 C 182 -90, 188 -75, 190 -60"/>
+      <path d="M 165 -142 L 160 -162 M 48 -150 L 47 -162"/>
+    </g>
+
+    <!-- Fenders -->
+    <path d="M -62 -92 A 70 70 0 0 1 62 -92" fill="none" stroke="#1e1b2e" stroke-width="15"/>
+    <path d="M -62 -92 A 70 70 0 0 1 62 -92" fill="none" stroke="#f4e9cf" stroke-width="8"/>
+    <path d="M 128 -92 A 70 70 0 0 1 252 -92" fill="none" stroke="#1e1b2e" stroke-width="15"/>
+    <path d="M 128 -92 A 70 70 0 0 1 252 -92" fill="none" stroke="#f4e9cf" stroke-width="8"/>
+
+    <!-- Crank, pedals -->
+    <circle cx="75" cy="-50" r="18" fill="#8a8a8a"/>
+    <circle cx="0" cy="-60" r="9" fill="#8a8a8a"/>
+    <path d="M 75 -50 L 97 -28 M 75 -50 L 53 -72" fill="none" stroke-width="6"/>
+    <rect x="89" y="-31" width="16" height="6" fill="#444"/>
+    <rect x="45" y="-75" width="16" height="6" fill="#444"/>
+
+    <!-- Saddle -->
+    <path d="M 18 -160 Q 47 -178 78 -160 Q 48 -150 18 -160 Z" fill="#5a3b2a"/>
+
+    <!-- Swept-back handlebars -->
+    <path d="M 160 -162 C 185 -178, 165 -192, 128 -186" fill="none" stroke="#1e1b2e" stroke-width="11"/>
+    <path d="M 160 -162 C 185 -178, 165 -192, 128 -186" fill="none" stroke="#8a8a8a" stroke-width="5"/>
+    <circle cx="128" cy="-186" r="7" fill="#2d2d2d"/>
+
+    <!-- Near leg + webbed foot -->
+    <path d="M 60 -185 L 88 -115 L 97 -30" fill="none" stroke="#1e1b2e" stroke-width="14"/>
+    <path d="M 60 -185 L 88 -115 L 97 -30" fill="none" stroke="#f29a2e" stroke-width="8"/>
+    <path d="M 86 -34 L 114 -36 L 110 -27 L 90 -28 Z" fill="#f29a2e"/>
+
+    <!-- Body -->
+    <ellipse cx="40" cy="-215" rx="58" ry="42" fill="#fdfdfd"/>
+
+    <!-- Neck -->
+    <path d="M 70 -245 C 60 -290, 95 -285, 100 -305" fill="none" stroke="#1e1b2e" stroke-width="34"/>
+    <path d="M 70 -245 C 60 -290, 95 -285, 100 -305" fill="none" stroke="#fdfdfd" stroke-width="26"/>
+
+    <!-- Head, crest, beak, eye -->
+    <path d="M 88 -338 L 74 -350 L 94 -346 Z" fill="#fdfdfd"/>
+    <circle cx="103" cy="-318" r="26" fill="#fdfdfd"/>
+    <path d="M 122 -311 L 216 -299 Q 170 -266 122 -300 Z" fill="#e8873b"/>
+    <path d="M 122 -323 L 218 -305 L 216 -298 L 122 -311 Z" fill="#f4a638"/>
+    <circle cx="112" cy="-327" r="5.5" fill="#1e1b2e"/>
+    <circle cx="114" cy="-329" r="2" fill="#fdfdfd" stroke="none"/>
+
+    <!-- Wing gripping the bars -->
+    <path d="M 62 -232 C 95 -228, 120 -210, 136 -188 L 130 -176 L 122 -182 L 116 -176 C 104 -192, 88 -198, 66 -200 Z" fill="#fdfdfd"/>
+  </g>
+</svg>

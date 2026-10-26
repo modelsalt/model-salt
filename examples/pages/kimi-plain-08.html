@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forkcast — Meal planning that thinks ahead</title>
+<meta name="description" content="Forkcast plans your week of meals, builds your grocery list, and helps you waste less. Start free.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-950: #0e241b;
+    --green-900: #14332а;
+    --green-900: #14332a;
+    --green-800: #1b4534;
+    --green-600: #2f7a57;
+    --green-400: #57b58a;
+    --green-100: #dff0e6;
+    --cream: #faf6ef;
+    --cream-2: #f3ecdf;
+    --orange: #ff6b35;
+    --orange-dark: #e5531f;
+    --amber: #ffc24b;
+    --ink: #17201b;
+    --muted: #5c6a62;
+    --white: #ffffff;
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+    --shadow-lg: 0 24px 60px -20px rgba(14, 36, 27, .28);
+    --shadow-md: 0 12px 32px -12px rgba(14, 36, 27, .18);
+    --shadow-sm: 0 4px 14px -6px rgba(14, 36, 27, .15);
+    --font-display: "Fraunces", Georgia, serif;
+    --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  img, svg { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  ul { list-style: none; }
+  button { font: inherit; cursor: pointer; border: none; background: none; }
+
+  .container { width: min(1160px, 92%); margin: 0 auto; }
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s cubic-bezier(.22,1,.36,1); }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal[data-delay="1"] { transition-delay: .1s; }
+  .reveal[data-delay="2"] { transition-delay: .2s; }
+  .reveal[data-delay="3"] { transition-delay: .3s; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; gap: .55rem;
+    padding: .95rem 1.7rem; border-radius: 999px;
+    font-weight: 600; font-size: 1rem; line-height: 1;
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    white-space: nowrap;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn-primary { background: var(--orange); color: #fff; box-shadow: 0 10px 24px -8px rgba(255,107,53,.55); }
+  .btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 16px 30px -8px rgba(255,107,53,.6); }
+  .btn-light { background: var(--white); color: var(--green-950); box-shadow: var(--shadow-sm); }
+  .btn-light:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .btn-ghost { border: 1.5px solid rgba(23,32,27,.18); color: var(--ink); }
+  .btn-ghost:hover { border-color: var(--green-800); color: var(--green-800); }
+  .btn-sm { padding: .65rem 1.25rem; font-size: .9rem; }
+
+  /* ---------- Nav ---------- */
+  header {
+    position: fixed; inset: 0 0 auto 0; z-index: 100;
+    transition: background .3s ease, box-shadow .3s ease, backdrop-filter .3s ease;
+  }
+  header.scrolled {
+    background: rgba(250,246,239,.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 1px 0 rgba(14,36,27,.08);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 0; }
+  .logo { display: flex; align-items: center; gap: .55rem; font-family: var(--font-display); font-weight: 700; font-size: 1.4rem; color: var(--green-950); }
+  .logo-mark {
+    width: 38px; height: 38px; border-radius: 12px;
+    background: linear-gradient(135deg, var(--green-600), var(--green-800));
+    display: grid; place-items: center; font-size: 1.15rem;
+    box-shadow: var(--shadow-sm);
+  }
+  .nav-links { display: flex; align-items: center; gap: 2rem; }
+  .nav-links a { font-size: .95rem; font-weight: 500; color: var(--muted); transition: color .2s; }
+  .nav-links a:hover { color: var(--green-800); }
+  .nav-cta { display: flex; align-items: center; gap: .8rem; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; padding: .5rem; }
+  .hamburger span { width: 24px; height: 2px; background: var(--ink); border-radius: 2px; transition: .3s; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; z-index: 99;
+    background: var(--cream); padding: 6.5rem 8% 3rem;
+    flex-direction: column; gap: 1.4rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-family: var(--font-display); font-size: 1.7rem; font-weight: 600; color: var(--green-950); }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    padding: 10.5rem 0 6rem;
+    background:
+      radial-gradient(ellipse 60% 50% at 85% 10%, rgba(87,181,138,.18), transparent 60%),
+      radial-gradient(ellipse 50% 45% at 5% 85%, rgba(255,194,75,.14), transparent 60%),
+      var(--cream);
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 3.5rem; align-items: center; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: var(--green-100); color: var(--green-800);
+    font-size: .82rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+    padding: .45rem 1rem; border-radius: 999px; margin-bottom: 1.4rem;
+  }
+  .eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green-600); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(47,122,87,.4);} 50% { box-shadow: 0 0 0 6px rgba(47,122,87,0);} }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 5.2vw, 4.1rem);
+    line-height: 1.05; font-weight: 600; color: var(--green-950);
+    letter-spacing: -.01em; margin-bottom: 1.3rem;
+  }
+  h1 em { font-style: italic; color: var(--orange); }
+  .hero-sub { font-size: 1.15rem; color: var(--muted); max-width: 30rem; margin-bottom: 2rem; }
+  .hero-actions { display: flex; gap: .9rem; flex-wrap: wrap; margin-bottom: 1.6rem; }
+  .hero-proof { display: flex; align-items: center; gap: .9rem; font-size: .9rem; color: var(--muted); }
+  .avatars { display: flex; }
+  .avatars span {
+    width: 36px; height: 36px; border-radius: 50%; border: 2.5px solid var(--cream);
+    display: grid; place-items: center; font-size: .95rem; margin-left: -10px;
+  }
+  .avatars span:first-child { margin-left: 0; }
+  .stars { color: var(--amber); letter-spacing: 1px; }
+
+  /* Phone mockup */
+  .hero-visual { position: relative; display: flex; justify-content: center; }
+  .phone {
+    position: relative; width: 300px; height: 600px;
+    background: var(--green-950); border-radius: 46px;
+    padding: 12px; box-shadow: var(--shadow-lg), inset 0 0 0 2px rgba(255,255,255,.08);
+    transform: rotate(3deg);
+  }
+  .phone-screen {
+    width: 100%; height: 100%; border-radius: 36px; overflow: hidden;
+    background: var(--white); display: flex; flex-direction: column;
+  }
+  .notch { position: absolute; top: 22px; left: 50%; transform: translateX(-50%); width: 100px; height: 26px; background: var(--green-950); border-radius: 999px; z-index: 2; }
+  .app-head { padding: 3.2rem 1.2rem .9rem; background: linear-gradient(135deg, var(--green-800), var(--green-600)); color: #fff; }
+  .app-head .hi { font-size: .72rem; opacity: .8; }
+  .app-head .day { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; }
+  .app-body { padding: 1rem 1rem 1.2rem; display: flex; flex-direction: column; gap: .7rem; flex: 1; }
+  .meal-card { display: flex; align-items: center; gap: .8rem; padding: .65rem .8rem; border-radius: 14px; background: var(--cream); border: 1px solid rgba(14,36,27,.05); }
+  .meal-card .emoji { width: 42px; height: 42px; border-radius: 12px; background: #fff; display: grid; place-items: center; font-size: 1.3rem; box-shadow: var(--shadow-sm); }
+  .meal-card .meta .label { font-size: .62rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--orange); }
+  .meal-card .meta .name { font-size: .86rem; font-weight: 600; color: var(--ink); }
+  .meal-card .meta .time { font-size: .7rem; color: var(--muted); }
+  .grocery-chip { margin-top: auto; background: var(--green-100); border-radius: 14px; padding: .75rem .9rem; display: flex; justify-content: space-between; align-items: center; }
+  .grocery-chip .t { font-size: .78rem; font-weight: 600; color: var(--green-800); }
+  .grocery-chip .n { font-size: .72rem; color: var(--green-600); font-weight: 700; }
+
+  .float-card {
+    position: absolute; background: #fff; border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md); padding: .8rem 1rem;
+    display: flex; align-items: center; gap: .65rem;
+    font-size: .82rem; font-weight: 600; color: var(--ink);
+    animation: float 5s ease-in-out infinite;
+  }
+  .float-card .ic { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; font-size: 1.05rem; }
+  .float-1 { top: 8%; left: -4%; animation-delay: .4s; }
+  .float-1 .ic { background: var(--green-100); }
+  .float-2 { bottom: 20%; right: -3%; }
+  .float-2 .ic { background: #ffe8dd; }
+  .float-2 small { display: block; font-weight: 500; color: var(--muted); }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+  /* ---------- Logos / stats ---------- */
+  .stats { padding: 3.2rem 0; border-block: 1px solid rgba(14,36,27,.08); background: var(--white); }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
+  .stat .num { font-family: var(--font-display); font-size: clamp(1.9rem, 3.4vw, 2.7rem); font-weight: 700; color: var(--green-800); }
+  .stat .num sup { font-size: .5em; color: var(--orange); }
+  .stat .lbl { font-size: .9rem; color: var(--muted); margin-top: .15rem; }
+
+  /* ---------- Section scaffolding ---------- */
+  section { padding: 6rem 0; }
+  .section-head { max-width: 40rem; margin-bottom: 3.2rem; }
+  .section-head.center { margin-inline: auto; text-align: center; }
+  .kicker { font-size: .82rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--orange); margin-bottom: .7rem; }
+  h2 { font-family: var(--font-display); font-size: clamp(2rem, 3.8vw, 2.9rem); line-height: 1.12; font-weight: 600; color: var(--green-950); letter-spacing: -.01em; }
+  .section-head p { color: var(--muted); font-size: 1.08rem; margin-top: .9rem; }
+
+  /* ---------- Features ---------- */
+  .features { background: var(--cream); }
+  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+  .feature {
+    background: var(--white); border-radius: var(--radius-lg); padding: 2rem 1.8rem;
+    border: 1px solid rgba(14,36,27,.06); box-shadow: var(--shadow-sm);
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .feature:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+  .feature .icon {
+    width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center;
+    font-size: 1.5rem; margin-bottom: 1.2rem;
+  }
+  .feature:nth-child(1) .icon { background: var(--green-100); }
+  .feature:nth-child(2) .icon { background: #ffe8dd; }
+  .feature:nth-child(3) .icon { background: #fff3d6; }
+  .feature:nth-child(4) .icon { background: #e8ecff; }
+  .feature:nth-child(5) .icon { background: #fde8f0; }
+  .feature:nth-child(6) .icon { background: #e2f5ee; }
+  .feature h3 { font-family: var(--font-display); font-size: 1.28rem; font-weight: 600; margin-bottom: .5rem; color: var(--green-950); }
+  .feature p { color: var(--muted); font-size: .96rem; }
+
+  /* ---------- How it works ---------- */
+  .how { background: var(--green-950); color: var(--cream); border-radius: 40px; margin: 0 1.2rem; }
+  .how h2 { color: var(--cream); }
+  .how .section-head p { color: rgba(250,246,239,.65); }
+  .how .kicker { color: var(--amber); }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; counter-reset: step; }
+  .step { position: relative; padding: 2rem 1.7rem; border-radius: var(--radius-lg); background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09); }
+  .step .n {
+    font-family: var(--font-display); font-size: 2.6rem; font-weight: 700;
+    background: linear-gradient(135deg, var(--amber), var(--orange));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    margin-bottom: .8rem;
+  }
+  .step h3 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; margin-bottom: .5rem; }
+  .step p { color: rgba(250,246,239,.68); font-size: .96rem; }
+  .step .emoji-line { font-size: 1.4rem; margin-top: 1rem; letter-spacing: .35rem; }
+
+  /* ---------- Interactive plan demo ---------- */
+  .demo { background: var(--white); }
+  .demo-wrap { display: grid; grid-template-columns: .9fr 1.1fr; gap: 3.5rem; align-items: center; }
+  .day-tabs { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.4rem; }
+  .day-tab {
+    padding: .6rem 1.05rem; border-radius: 999px; font-weight: 600; font-size: .88rem;
+    background: var(--cream-2); color: var(--muted); transition: all .25s ease;
+  }
+  .day-tab:hover { background: var(--green-100); color: var(--green-800); }
+  .day-tab.active { background: var(--green-800); color: #fff; box-shadow: var(--shadow-sm); }
+  .day-panel { display: grid; gap: .8rem; }
+  .day-meal {
+    display: flex; align-items: center; gap: 1rem; padding: 1rem 1.2rem;
+    border-radius: var(--radius-md); background: var(--cream);
+    border: 1px solid rgba(14,36,27,.06); animation: slideIn .4s cubic-bezier(.22,1,.36,1) both;
+  }
+  .day-meal:nth-child(2) { animation-delay: .06s; }
+  .day-meal:nth-child(3) { animation-delay: .12s; }
+  @keyframes slideIn { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: none; } }
+  .day-meal .emoji { width: 50px; height: 50px; border-radius: 14px; background: #fff; display: grid; place-items: center; font-size: 1.5rem; box-shadow: var(--shadow-sm); flex-shrink: 0; }
+  .day-meal .label { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--orange); }
+  .day-meal .name { font-weight: 600; color: var(--ink); }
+  .day-meal .time { font-size: .8rem; color: var(--muted); }
+  .day-meal .swap { margin-left: auto; font-size: .8rem; font-weight: 600; color: var(--green-600); padding: .45rem .85rem; border-radius: 999px; border: 1.5px solid var(--green-100); transition: all .2s; flex-shrink: 0; }
+  .day-meal .swap:hover { background: var(--green-100); }
+  .demo-list { display: grid; gap: .9rem; }
+  .demo-list li { display: flex; gap: .8rem; align-items: flex-start; color: var(--muted); font-size: 1.02rem; }
+  .demo-list .check { width: 24px; height: 24px; border-radius: 50%; background: var(--green-100); color: var(--green-800); display: grid; place-items: center; font-size: .75rem; font-weight: 700; flex-shrink: 0; margin-top: .15rem; }
+
+  /* ---------- Testimonials ---------- */
+  .testimonials { background: var(--cream); }
+  .t-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+  .t-card { background: #fff; border-radius: var(--radius-lg); padding: 1.9rem; border: 1px solid rgba(14,36,27,.06); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 1.1rem; }
+  .t-card .stars { font-size: .9rem; }
+  .t-card p { color: var(--ink); font-size: .98rem; }
+  .t-user { display: flex; align-items: center; gap: .8rem; margin-top: auto; }
+  .t-user .pic { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-size: 1.15rem; }
+  .t-user .who .nm { font-weight: 700; font-size: .92rem; }
+  .t-user .who .rl { font-size: .8rem; color: var(--muted); }
+
+  /* ---------- Pricing ---------- */
+  .pricing { background: var(--white); }
+  .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; align-items: stretch; }
+  .price-card {
+    background: var(--cream); border-radius: var(--radius-lg); padding: 2.2rem 2rem;
+    border: 1px solid rgba(14,36,27,.07); display: flex; flex-direction: column;
+    transition: transform .3s ease, box-shadow .3s ease; position: relative;
+  }
+  .price-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+  .price-card.featured { background: var(--green-950); color: var(--cream); border: none; box-shadow: var(--shadow-lg); transform: scale(1.03); }
+  .price-card.featured:hover { transform: scale(1.03) translateY(-6px); }
+  .badge {
+    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+    background: var(--orange); color: #fff; font-size: .72rem; font-weight: 700;
+    letter-spacing: .06em; text-transform: uppercase; padding: .35rem 1rem; border-radius: 999px;
+    box-shadow: var(--shadow-sm); white-space: nowrap;
+  }
+  .plan-name { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; margin-bottom: .35rem; }
+  .plan-desc { font-size: .9rem; color: var(--muted); margin-bottom: 1.4rem; }
+  .featured .plan-desc { color: rgba(250,246,239,.65); }
+  .plan-price { font-family: var(--font-display); font-size: 2.8rem; font-weight: 700; color: var(--green-950); line-height: 1; margin-bottom: 1.5rem; }
+  .featured .plan-price { color: var(--cream); }
+  .plan-price span { font-family: var(--font-body); font-size: .95rem; font-weight: 500; color: var(--muted); }
+  .featured .plan-price span { color: rgba(250,246,239,.6); }
+  .plan-feats { display: grid; gap: .7rem; margin-bottom: 2rem; }
+  .plan-feats li { display: flex; gap: .6rem; align-items: flex-start; font-size: .93rem; color: var(--muted); }
+  .featured .plan-feats li { color: rgba(250,246,239,.8); }
+  .plan-feats .tick { color: var(--green-600); font-weight: 700; flex-shrink: 0; }
+  .featured .plan-feats .tick { color: var(--amber); }
+  .price-card .btn { margin-top: auto; justify-content: center; }
+  .featured .btn-primary { background: var(--amber); color: var(--green-950); box-shadow: 0 10px 24px -8px rgba(255,194,75,.5); }
+  .featured .btn-primary:hover { background: #ffd06e; }
+
+  /* ---------- FAQ ---------- */
+  .faq { background: var(--cream); }
+  .faq-list { max-width: 46rem; margin: 0 auto; display: grid; gap: .9rem; }
+  .faq-item { background: #fff; border-radius: var(--radius-md); border: 1px solid rgba(14,36,27,.07); overflow: hidden; }
+  .faq-q {
+    width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    padding: 1.2rem 1.5rem; text-align: left; font-weight: 600; font-size: 1rem; color: var(--green-950);
+  }
+  .faq-q .chev { width: 28px; height: 28px; border-radius: 50%; background: var(--green-100); display: grid; place-items: center; font-size: .8rem; color: var(--green-800); transition: transform .3s ease; flex-shrink: 0; }
+  .faq-item.open .chev { transform: rotate(180deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+  .faq-a p { padding: 0 1.5rem 1.3rem; color: var(--muted); font-size: .95rem; }
+
+  /* ---------- Final CTA ---------- */
+  .cta { padding: 5rem 1.2rem 7rem; }
+  .cta-box {
+    position: relative; overflow: hidden;
+    background: linear-gradient(135deg, var(--green-800), var(--green-600));
+    border-radius: 40px; padding: 5rem 2rem; text-align: center; color: #fff;
+  }
+  .cta-box::before { content: "🥑 🍅 🥕 🍋 🥦 🍓"; position: absolute; font-size: 3rem; opacity: .12; top: 1.2rem; left: 50%; transform: translateX(-50%); white-space: nowrap; letter-spacing: 2rem; }
+  .cta-box h2 { color: #fff; margin-bottom: 1rem; }
+  .cta-box p { color: rgba(255,255,255,.78); max-width: 32rem; margin: 0 auto 2.2rem; font-size: 1.08rem; }
+  .cta-form { display: flex; gap: .7rem; max-width: 30rem; margin: 0 auto; }
+  .cta-form input {
+    flex: 1; padding: .95rem 1.3rem; border-radius: 999px; border: none;
+    font: inherit; font-size: .95rem; background: rgba(255,255,255,.95); color: var(--ink);
+    outline: none; min-width: 0;
+  }
+  .cta-form input:focus { box-shadow: 0 0 0 4px rgba(255,255,255,.25); }
+  .cta-note { margin-top: 1.1rem; font-size: .82rem; color: rgba(255,255,255,.6); }
+  .cta-success { display: none; font-weight: 600; font-size: 1.1rem; padding: 1rem; }
+
+  /* ---------- Footer ---------- */
+  footer { background: var(--green-950); color: rgba(250,246,239,.6); padding: 4rem 0 2rem; }
+  .foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+  .foot-brand .logo { color: var(--cream); margin-bottom: .9rem; }
+  .foot-brand p { font-size: .92rem; max-width: 18rem; }
+  .foot-col h4 { color: var(--cream); font-size: .85rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 1.1rem; }
+  .foot-col ul { display: grid; gap: .6rem; }
+  .foot-col a { font-size: .93rem; transition: color .2s; }
+  .foot-col a:hover { color: var(--amber); }
+  .foot-bottom { border-top: 1px solid rgba(255,255,255,.1); padding-top: 1.6rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; font-size: .85rem; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 960px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 4rem; }
+    .hero-visual { order: -1; }
+    .phone { transform: rotate(0); }
+    .features-grid, .steps, .t-grid, .price-grid { grid-template-columns: 1fr 1fr; }
+    .demo-wrap { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+    .price-card.featured { transform: none; }
+    .price-card.featured:hover { transform: translateY(-6px); }
+  }
+  @media (max-width: 640px) {
+    .nav-links, .nav-cta .btn-ghost { display: none; }
+    .hamburger { display: flex; }
+    .features-grid, .steps, .t-grid, .price-grid, .foot-grid { grid-template-columns: 1fr; }
+    .hero { padding-top: 8rem; }
+    .float-1 { left: 0; }
+    .float-2 { right: 0; }
+    .cta-form { flex-direction: column; }
+    section { padding: 4.5rem 0; }
+    .how { margin: 0 .8rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header id="header">
+  <div class="container nav">
+    <a href="#" class="logo"><span class="logo-mark">🍴</span>Forkcast</a>
+    <nav class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#demo">Live demo</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#cta" class="btn btn-ghost btn-sm">Log in</a>
+      <a href="#cta" class="btn btn-primary btn-sm">Start free</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#features">Features</a>
+  <a href="#how">How it works</a>
+  <a href="#demo">Live demo</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#faq">FAQ</a>
+  <a href="#cta" class="btn btn-primary" style="justify-content:center; margin-top:1rem;">Start free →</a>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow reveal"><span class="dot"></span> New: AI pantry scanner</span>
+      <h1 class="reveal" data-delay="1">Dinner decided.<br><em>Every single week.</em></h1>
+      <p class="hero-sub reveal" data-delay="2">Forkcast plans your meals, writes your grocery list, and uses up what's already in your fridge — so "what's for dinner?" is never a question again.</p>
+      <div class="hero-actions reveal" data-delay="3">
+        <a href="#cta" class="btn btn-primary">Plan my first week free →</a>
+        <a href="#demo" class="btn btn-light">▶&nbsp; See it in action</a>
+      </div>
+      <div class="hero-proof reveal" data-delay="3">
+        <div class="avatars">
+          <span style="background:#dff0e6">👩🏽</span>
+          <span style="background:#ffe8dd">👨🏻</span>
+          <span style="background:#fff3d6">👩🏻‍🦱</span>
+          <span style="background:#e8ecff">🧔🏾</span>
+        </div>
+        <div>
+          <span class="stars">★★★★★</span><br>
+          Loved by 120,000+ home cooks
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal" data-delay="2">
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="phone-screen">
+          <div class="app-head">
+            <div class="hi">Good evening, Maya</div>
+            <div class="day">Monday's plan 🌿</div>
+          </div>
+          <div class="app-body">
+            <div class="meal-card">
+              <div class="emoji">🍳</div>
+              <div class="meta">
+                <div class="label">Breakfast</div>
+                <div class="name">Spinach & feta omelette</div>
+                <div class="time">12 min · 380 kcal</div>
+              </div>
+            </div>
+            <div class="meal-card">
+              <div class="emoji">🥗</div>
+              <div class="meta">
+                <div class="label">Lunch</div>
+                <div class="name">Chickpea power bowl</div>
+                <div class="time">15 min · 520 kcal</div>
+              </div>
+            </div>
+            <div class="meal-card">
+              <div class="emoji">🍝</div>
+              <div class="meta">
+                <div class="label">Dinner</div>
+                <div class="name">Lemon garlic pasta</div>
+                <div class="time">25 min · 640 kcal</div>
+              </div>
+            </div>
+            <div class="grocery-chip">
+              <span class="t">🛒 Grocery list ready</span>
+              <span class="n">14 items</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="float-card float-1"><span class="ic">🥑</span> Avocado used before it browns!</div>
+      <div class="float-card float-2"><span class="ic">💸</span><span>$38 saved this week<small>vs. takeout & food waste</small></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS ============ -->
+<div class="stats">
+  <div class="container stats-grid">
+    <div class="stat reveal"><div class="num" data-count="120">0</div><div class="lbl">thousand happy cooks</div></div>
+    <div class="stat reveal" data-delay="1"><div class="num" data-count="5.2" data-decimal="1">0</div><div class="lbl">million meals planned</div></div>
+    <div class="stat reveal" data-delay="2"><div class="num" data-count="38" data-prefix="$">0</div><div class="lbl">avg. saved per week</div></div>
+    <div class="stat reveal" data-delay="3"><div class="num" data-count="4.9" data-decimal="1">0</div><div class="lbl">App Store rating</div></div>
+  </div>
+</div>
+
+<!-- ============ FEATURES ============ -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="kicker">Why Forkcast</div>
+      <h2>Everything between "I'm hungry"<br>and dinner on the table</h2>
+      <p>Six tools that work together to take the mental load out of feeding yourself (and everyone else).</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature reveal">
+        <div class="icon">🗓️</div>
+        <h3>Smart weekly plans</h3>
+        <p>A full week of breakfasts, lunches, and dinners built around your tastes, diet, schedule, and how much time you actually have on a Tuesday.</p>
+      </div>
+      <div class="feature reveal" data-delay="1">
+        <div class="icon">🛒</div>
+        <h3>Auto grocery lists</h3>
+        <p>Every ingredient from your plan, merged, measured, and sorted by aisle. Check things off as you shop — or send it straight to delivery.</p>
+      </div>
+      <div class="feature reveal" data-delay="2">
+        <div class="icon">🥕</div>
+        <h3>Pantry-first cooking</h3>
+        <p>Tell Forkcast what's in your fridge and it prioritizes recipes that use it up. Less waste, lower bills, fewer sad wilted herbs.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="icon">🔄</div>
+        <h3>One-tap swaps</h3>
+        <p>Not feeling salmon tonight? Swap any meal for a similar one — matching your macros, ingredients on hand, and prep time.</p>
+      </div>
+      <div class="feature reveal" data-delay="1">
+        <div class="icon">👨‍👩‍👧</div>
+        <h3>Family profiles</h3>
+        <p>Nut allergies, picky eaters, vegan teens — Forkcast juggles everyone's needs in one plan, with smart variations instead of separate meals.</p>
+      </div>
+      <div class="feature reveal" data-delay="2">
+        <div class="icon">📊</div>
+        <h3>Nutrition insights</h3>
+        <p>Calories, protein, fiber, and more — tracked automatically across your week, with gentle nudges instead of guilt trips.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="kicker">How it works</div>
+      <h2>From zero to planned in five minutes</h2>
+      <p>No spreadsheets. No recipe hoarding. Just three steps and your week is sorted.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="n">01</div>
+        <h3>Tell us about you</h3>
+        <p>Dietary needs, favorite cuisines, cooking skill, household size, weekly budget. Forkcast learns more with every meal you rate.</p>
+        <div class="emoji-line">🌱 🌾 🥜 🌶️</div>
+      </div>
+      <div class="step reveal" data-delay="1">
+        <div class="n">02</div>
+        <h3>Get your plan</h3>
+        <p>Every Sunday, a fresh week of meals lands in your app — balanced, varied, and built around ingredients that overlap to cut waste.</p>
+        <div class="emoji-line">🍲 🥙 🍛 🥘</div>
+      </div>
+      <div class="step reveal" data-delay="2">
+        <div class="n">03</div>
+        <h3>Shop & cook</h3>
+        <p>Follow the aisle-sorted list, then cook with step-by-step guided mode. Running late? Swap in a 15-minute backup meal instantly.</p>
+        <div class="emoji-line">🛒 🔪 🍳 😋</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTERACTIVE DEMO ============ -->
+<section class="demo" id="demo">
+  <div class="container demo-wrap">
+    <div class="reveal">
+      <div class="kicker">Try it now</div>
+      <h2>Tap a day. See the plan.</h2>
+      <p style="color:var(--muted); margin:.9rem 0 2rem;">This is a real slice of a Forkcast week. Each day balances variety, nutrition, and ingredients that carry over — notice how Monday's spinach shows up again Wednesday.</p>
+      <ul class="demo-list">
+        <li><span class="check">✓</span> Plans adapt to vegan, gluten-free, keto & more</li>
+        <li><span class="check">✓</span> Prep times fit your real schedule</li>
+        <li><span class="check">✓</span> Ingredients shared across meals = less waste</li>
+      </ul>
+    </div>
+    <div class="reveal" data-delay="1">
+      <div class="day-tabs" id="dayTabs" role="tablist" aria-label="Days of the week"></div>
+      <div class="day-panel" id="dayPanel" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="testimonials">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="kicker">Happy kitchens</div>
+      <h2>People stopped stressing about dinner</h2>
+    </div>
+    <div class="t-grid">
+      <div class="t-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>"I used to spend Sunday nights dreading the week's meals. Now I spend five minutes approving a plan and my grocery list just… exists. It genuinely gave me my evenings back."</p>
+        <div class="t-user">
+          <div class="pic" style="background:#dff0e6">👩🏽</div>
+          <div class="who"><div class="nm">Maya R.</div><div class="rl">Mom of three · Austin</div></div>
+        </div>
+      </div>
+      <div class="t-card reveal" data-delay="1">
+        <div class="stars">★★★★★</div>
+        <p>"The pantry feature is witchcraft. It planned three dinners around a half-bag of spinach and one lonely sweet potato. My food waste is basically zero and I've saved about $150 a month."</p>
+        <div class="t-user">
+          <div class="pic" style="background:#e8ecff">👨🏻</div>
+          <div class="who"><div class="nm">Daniel K.</div><div class="rl">Solo cook · Chicago</div></div>
+        </div>
+      </div>
+      <div class="t-card reveal" data-delay="2">
+        <div class="stars">★★★★★</div>
+        <p>"I'm vegan, my husband isn't, and our kid eats approximately four foods. Forkcast is the first app that plans for all three of us without me cooking separate meals every night."</p>
+        <div class="t-user">
+          <div class="pic" style="background:#fde8f0">👩🏻‍🦱</div>
+          <div class="who"><div class="nm">Priya S.</div><div class="rl">Family of three · Seattle</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="kicker">Pricing</div>
+      <h2>Cheaper than one night of takeout</h2>
+      <p>Start free forever. Upgrade when you want the full magic. Cancel anytime.</p>
+    </div>
+    <div class="price-grid">
+      <div class="price-card reveal">
+        <div class="plan-name">Nibble</div>
+        <div class="plan-desc">Dip a toe in the kitchen</div>
+        <div class="plan-price">$0 <span>/ forever</span></div>
+        <ul class="plan-feats">
+          <li><span class="tick">✓</span> 3 planned dinners per week</li>
+          <li><span class="tick">✓</span> Basic grocery list</li>
+          <li><span class="tick">✓</span> 1 dietary preference</li>
+          <li><span class="tick">✓</span> 500+ starter recipes</li>
+        </ul>
+        <a href="#cta" class="btn btn-ghost">Start free</a>
+      </div>
+      <div class="price-card featured reveal" data-delay="1">
+        <span class="badge">Most popular</span>
+        <div class="plan-name">Full Plate</div>
+        <div class="plan-desc">The whole enchilada, for one</div>
+        <div class="plan-price">$7 <span>/ month</span></div>
+        <ul class="plan-feats">
+          <li><span class="tick">✓</span> Full week: breakfast, lunch & dinner</li>
+          <li><span class="tick">✓</span> Pantry scanner & waste tracking</li>
+          <li><span class="tick">✓</span> One-tap meal swaps</li>
+          <li><span class="tick">✓</span> Nutrition insights dashboard</li>
+          <li><span class="tick">✓</span> Guided cooking mode</li>
+        </ul>
+        <a href="#cta" class="btn btn-primary">Try free for 14 days</a>
+      </div>
+      <div class="price-card reveal" data-delay="2">
+        <div class="plan-name">Family Table</div>
+        <div class="plan-desc">Feed the whole crew</div>
+        <div class="plan-price">$12 <span>/ month</span></div>
+        <ul class="plan-feats">
+          <li><span class="tick">✓</span> Everything in Full Plate</li>
+          <li><span class="tick">✓</span> Up to 6 family profiles</li>
+          <li><span class="tick">✓</span> Allergy-safe planning</li>
+          <li><span class="tick">✓</span> Shared grocery list sync</li>
+          <li><span class="tick">✓</span> Budget optimizer</li>
+        </ul>
+        <a href="#cta" class="btn btn-ghost">Try free for 14 days</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="kicker">FAQ</div>
+      <h2>Questions, answered</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Can it handle allergies and special diets? <span class="chev">▼</span></button>
+        <div class="faq-a"><p>Yes — Forkcast supports vegan, vegetarian, pescatarian, keto, gluten-free, dairy-free, halal, and more, plus hard exclusions for the 14 major allergens. Allergen rules are never compromised, even when you use meal swaps.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Do I have to follow the plan exactly? <span class="chev">▼</span></button>
+        <div class="faq-a"><p>Not at all. Plans are a starting point, not a contract. Swap meals, drag dinners to different days, or mark a night as "leftovers" or "eating out" — the grocery list updates itself instantly.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">How does the pantry scanner work? <span class="chev">▼</span></button>
+        <div class="faq-a"><p>Snap a photo of your fridge or pantry shelves and Forkcast identifies what you have. It then prioritizes recipes using ingredients closest to expiring, so food gets eaten instead of thrown away.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Can I import my own recipes? <span class="chev">▼</span></button>
+        <div class="faq-a"><p>Absolutely. Paste a URL from any recipe site or enter family recipes manually. Forkcast folds them into your rotation and includes their ingredients in your grocery lists automatically.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Is there really a free plan? <span class="chev">▼</span></button>
+        <div class="faq-a"><p>Yes — the Nibble plan is free forever with no credit card required. Paid plans come with a 14-day free trial, and you can cancel in two taps from the app.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<div class="cta" id="cta">
+  <div class="container">
+    <div class="cta-box reveal">
+      <h2>Your week of meals is waiting</h2>
+      <p>Join 120,000+ cooks who stopped asking "what's for dinner?" Get your first plan in under five minutes.</p>
+      <form class="cta-form" id="ctaForm">
+        <input type="email" placeholder="you@example.com" required aria-label="Email address">
+        <button type="submit" class="btn btn-primary">Get started →</button>
+      </form>
+      <div class="cta-success" id="ctaSuccess">🎉 You're on the list! Check your inbox to start planning.</div>
+      <div class="cta-note">Free forever plan · No credit card required · Cancel anytime</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#" class="logo"><span class="logo-mark">🍴</span>Forkcast</a>
+        <p>Meal planning that thinks ahead — so you don't have to.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#demo">Live demo</a></li>
+          <li><a href="#">iOS & Android</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press kit</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#">Help center</a></li>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2025 Forkcast, Inc. Made with 🥦 in Portland.</span>
+      <span>Instagram · TikTok · Pinterest</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- Sticky header ---------- */
+  const header = document.getElementById("header");
+  const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 24);
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* ---------- Mobile menu ---------- */
+  const hamburger = document.getElementById("hamburger");
+  const mobileMenu = document.getElementById("mobileMenu");
+  hamburger.addEventListener("click", () => {
+    const open = mobileMenu.classList.toggle("open");
+    hamburger.classList.toggle("open", open);
+    hamburger.setAttribute("aria-expanded", String(open));
+    document.body.style.overflow = open ? "hidden" : "";
+  });
+  mobileMenu.querySelectorAll("a").forEach(a =>
+    a.addEventListener("click", () => {
+      mobileMenu.classList.remove("open");
+      hamburger.classList.remove("open");
+      hamburger.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
+    })
+  );
+
+  /* ---------- Reveal on scroll ---------- */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add("visible");
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  /* ---------- Animated stat counters ---------- */
+  const counters = document.querySelectorAll("[data-count]");
+  const cio = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      cio.unobserve(entry.target);
+      const el = entry.target;
+      const target = parseFloat(el.dataset.count);
+      const decimals = parseInt(el.dataset.decimal || "0", 10);
+      const prefix = el.dataset.prefix || "";
+      const duration = 1400;
+      const start = performance.now();
+      const tick = now => {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = prefix + (target * eased).toFixed(decimals);
+        if (p < 1) requestAnimationFrame(tick);
+        else el.textContent = prefix + target.toFixed(decimals);
+      };
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: 0.6 });
+  counters.forEach(c => cio.observe(c));
+
+  /* ---------- Interactive week demo ---------- */
+  const week = {
+    Mon: [
+      ["🍳", "Breakfast", "Spinach & feta omelette", "12 min · 380 kcal"],
+      ["🥗", "Lunch", "Chickpea power bowl", "15 min · 520 kcal"],
+      ["🍝", "Dinner", "Lemon garlic pasta", "25 min · 640 kcal"]
+    ],
+    Tue: [
+      ["🥣", "Breakfast", "Berry overnight oats", "5 min · 340 kcal"],
+      ["🌯", "Lunch", "Chicken & avocado wrap", "10 min · 560 kcal"],
+      ["🍛", "Dinner", "Coconut chickpea curry", "30 min · 610 kcal"]
+    ],
+    Wed: [
+      ["🍞", "Breakfast", "Avocado toast + egg", "10 min · 410 kcal"],
+      ["🥙", "Lunch", "Leftover curry bowl", "5 min · 580 kcal"],
+      ["🥘", "Dinner", "Spinach & white bean stew", "35 min · 540 kcal"]
+    ],
+    Thu: [
+      ["🥤", "Breakfast", "Green protein smoothie", "5 min · 290 kcal"],
+      ["🍲", "Lunch", "Tomato lentil soup", "20 min · 450 kcal"],
+      ["🌮", "Dinner", "Sheet-pan fish tacos", "25 min · 620 kcal"]
+    ],
+    Fri: [
+      ["🥞", "Breakfast", "Banana oat pancakes", "15 min · 430 kcal"],
+      ["🥪", "Lunch", "Caprese grilled sandwich", "12 min · 510 kcal"],
+      ["🍕", "Dinner", "Homemade margherita pizza", "40 min · 720 kcal"]
+    ],
+    Sat: [
+      ["🧇", "Breakfast", "Weekend waffles & fruit", "20 min · 480 kcal"],
+      ["🍜", "Lunch", "Ginger sesame noodles", "18 min · 550 kcal"],
+      ["🥩", "Dinner", "Herb steak & roasted veg", "35 min · 680 kcal"]
+    ],
+    Sun: [
+      ["🍳", "Breakfast", "Shakshuka for two", "25 min · 390 kcal"],
+      ["🥗", "Lunch", "Harvest grain salad", "15 min · 470 kcal"],
+      ["🍖", "Dinner", "Slow Sunday roast chicken", "90 min · 650 kcal"]
+    ]
+  };
+
+  const dayTabs = document.getElementById("dayTabs");
+  const dayPanel = document.getElementById("dayPanel");
+  const days = Object.keys(week);
+
+  function renderDay(day) {
+    dayPanel.innerHTML = week[day]
+      .map(m => `
+        <div class="day-meal">
+          <div class="emoji">${m[0]}</div>
+          <div>
+            <div class="label">${m[1]}</div>
+            <div class="name">${m[2]}</div>
+            <div class="time">${m[3]}</div>
+          </div>
+          <button class="swap" type="button" aria-label="Swap this meal">Swap ↺</button>
+        </div>`)
+      .join("");
+    dayPanel.querySelectorAll(".swap").forEach(btn =>
+      btn.addEventListener("click", () => {
+        btn.textContent = "Swapped ✓";
+        btn.disabled = true;
+        setTimeout(() => { btn.textContent = "Swap ↺"; btn.disabled = false; }, 1500);
+      })
+    );
+  }
+
+  days.forEach((day, i) => {
+    const tab = document.createElement("button");
+    tab.className = "day-tab" + (i === 0 ? " active" : "");
+    tab.textContent = day;
+    tab.setAttribute("role", "tab");
+    tab.setAttribute("aria-selected", String(i === 0));
+    tab.addEventListener("click", () => {
+      dayTabs.querySelectorAll(".day-tab").forEach(t => {
+        t.classList.remove("active");
+        t.setAttribute("aria-selected", "false");
+      });
+      tab.classList.add("active");
+      tab.setAttribute("aria-selected", "true");
+      renderDay(day);
+    });
+    dayTabs.appendChild(tab);
+  });
+  renderDay(days[0]);
+
+  /* ---------- FAQ accordion ---------- */
+  document.querySelectorAll(".faq-item").forEach(item => {
+    const q = item.querySelector(".faq-q");
+    const a = item.querySelector(".faq-a");
+    q.addEventListener("click", () => {
+      const isOpen = item.classList.contains("open");
+      document.querySelectorAll(".faq-item.open").forEach(other => {
+        other.classList.remove("open");
+        other.querySelector(".faq-a").style.maxHeight = null;
+        other.querySelector(".faq-q").setAttribute("aria-expanded", "false");
+      });
+      if (!isOpen) {
+        item.classList.add("open");
+        a.style.maxHeight = a.scrollHeight + "px";
+        q.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+
+  /* ---------- CTA form ---------- */
+  const form = document.getElementById("ctaForm");
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    form.style.display = "none";
+    document.getElementById("ctaSuccess").style.display = "block";
+  });
+})();
+</script>
+</body>
+</html>

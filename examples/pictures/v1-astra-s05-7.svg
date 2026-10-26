@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640" viewBox="0 0 640 640" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A monochrome pelican sits upright on a bicycle, viewed from the front and one side.</desc>
+
+  <rect width="640" height="640" rx="32" fill="#f5f5f5"/>
+  <ellipse cx="324" cy="563" rx="211" ry="24" fill="#ddd"/>
+
+  <g stroke="#252525" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Wheels recede toward the rear of the bicycle. -->
+    <ellipse cx="211" cy="441" rx="62" ry="100" fill="#fafafa" stroke-width="11"/>
+    <ellipse cx="211" cy="441" rx="52" ry="89" fill="none" stroke="#aaa" stroke-width="2"/>
+    <g stroke="#aaa" stroke-width="2">
+      <path d="M211 352v178M159 441h104M174 378l74 126M174 504l74-126"/>
+    </g>
+
+    <!-- Far pedal and bicycle frame -->
+    <path d="M305 451l25-31" fill="none" stroke-width="7"/>
+    <path d="M317 417l28 8" stroke-width="8"/>
+    <path d="M211 441l62-102 32 112-94-10 174-65-80 75"
+          fill="none" stroke-width="10"/>
+    <path d="M273 339l-9-35M385 376l-14-54" fill="none" stroke-width="9"/>
+    <path d="M244 303l45 10" stroke-width="15"/>
+
+    <!-- Chain -->
+    <path d="M211 429l91 5a18 18 0 0 1 5 35l-97-17a12 12 0 0 1 1-23Z"
+          fill="none" stroke="#777" stroke-width="3"/>
+
+    <!-- Far leg -->
+    <path d="M307 291l24 58-14 57" fill="none" stroke="#777" stroke-width="12"/>
+    <path d="M316 398l-12 18 39 8-12-19" fill="#aaa" stroke-width="3"/>
+
+    <!-- Tail and upright torso -->
+    <path d="M248 271l-57-18 29 40 38 10" fill="#777" stroke-width="4"/>
+    <path d="M266 169
+             C230 187 219 229 234 272
+             C244 305 278 323 309 307
+             C338 292 349 258 334 222
+             L313 176Z"
+          fill="#fff" stroke-width="4"/>
+
+    <!-- Curving neck -->
+    <path d="M283 222
+             C310 209 304 180 291 157
+             C277 132 279 107 298 91
+             C317 76 344 83 353 102
+             C365 129 344 153 329 170
+             C323 180 333 199 337 218"
+          fill="#fff" stroke-width="4"/>
+    <path d="M304 214c18-12 11-31 6-44" fill="none" stroke="#bbb" stroke-width="3"/>
+
+    <!-- Head, long bill, and hanging throat pouch -->
+    <path d="M323 119
+             C351 129 390 147 447 168
+             C415 177 378 192 349 174
+             C336 165 328 145 323 119Z"
+          fill="#bcbcbc" stroke-width="4"/>
+    <path d="M326 112
+             C358 119 405 140 452 164
+             L447 171
+             C404 158 361 143 324 132Z"
+          fill="#e7e7e7" stroke-width="4"/>
+    <path d="M335 132l105 32" fill="none" stroke="#777" stroke-width="2"/>
+    <ellipse cx="321" cy="107" rx="5" ry="6" fill="#252525" stroke="none"/>
+    <circle cx="322" cy="105" r="1.5" fill="#fff" stroke="none"/>
+    <path d="M298 87l-8-8m16 5-3-10" fill="none" stroke-width="3"/>
+
+    <!-- Handlebars, visibly spanning the front -->
+    <path d="M371 330l-6-30 43 12M365 300l-40-13"
+          fill="none" stroke-width="7"/>
+    <path d="M315 285l20 6M400 310l21 7" stroke-width="10"/>
+
+    <!-- Wing reaches the near handlebar -->
+    <path d="M255 207
+             C240 234 251 261 279 268
+             L329 289
+             C342 296 346 306 357 307
+             L369 300
+             C357 288 344 277 329 268
+             L282 228"
+          fill="#d6d6d6" stroke-width="4"/>
+    <path d="M263 239l49 31m-45-20 34 25" fill="none" stroke="#999" stroke-width="3"/>
+
+    <!-- Near leg and webbed foot -->
+    <path d="M277 303l-9 65 37 69" fill="none" stroke-width="12"/>
+    <path d="M305 428l-9 22 39 9-13-17-8 2Z" fill="#999" stroke-width="3"/>
+
+    <!-- Front wheel and fork -->
+    <ellipse cx="432" cy="471" rx="72" ry="108" fill="#fafafa" stroke-width="12"/>
+    <ellipse cx="432" cy="471" rx="61" ry="96" fill="none" stroke="#aaa" stroke-width="2"/>
+    <g stroke="#aaa" stroke-width="2">
+      <path d="M432 375v192M371 471h122M389 403l86 136M389 539l86-136"/>
+      <path d="M408 383l48 176M376 434l112 74"/>
+    </g>
+    <path d="M385 376l47 95M401 380l44 88" fill="none" stroke-width="8"/>
+    <ellipse cx="432" cy="471" rx="9" ry="11" fill="#555" stroke-width="3"/>
+    <circle cx="211" cy="441" r="7" fill="#555" stroke-width="3"/>
+    <circle cx="305" cy="451" r="15" fill="#ddd" stroke-width="4"/>
+    <path d="M305 451l-20 29" fill="none" stroke-width="6"/>
+    <path d="M270 477l30 8" stroke-width="8"/>
+  </g>
+</svg>

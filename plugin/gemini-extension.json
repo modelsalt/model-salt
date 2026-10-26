@@ -1,0 +1,7 @@
+{
+  "name": "model-salt",
+  "version": "1.0.0",
+  "mcpServers": {
+    "model-salt": { "command": "npx", "args": ["-y", "@modelsalt/model-salt", "anthropic"] }
+  }
+}

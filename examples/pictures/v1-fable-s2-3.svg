@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
+  <defs>
+    <!-- engraving hatch patterns -->
+    <pattern id="hatchA" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#0d0221" stroke-width="1.3"/>
+    </pattern>
+    <pattern id="hatchB" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-30)">
+      <line x1="0" y1="0" x2="0" y2="5" stroke="#0d0221" stroke-width="1.1"/>
+    </pattern>
+    <pattern id="crossHatch" width="6" height="6" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="6" y2="6" stroke="#0d0221" stroke-width="1"/>
+      <line x1="6" y1="0" x2="0" y2="6" stroke="#0d0221" stroke-width="1"/>
+    </pattern>
+    <pattern id="hatchFine" width="3.5" height="3.5" patternUnits="userSpaceOnUse" patternTransform="rotate(90)">
+      <line x1="0" y1="0" x2="0" y2="3.5" stroke="#0d0221" stroke-width="0.8"/>
+    </pattern>
+    <pattern id="hatchLight" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(60)">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#0d0221" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- background -->
+  <rect width="400" height="500" fill="#0d0221"/>
+
+  <!-- ground line -->
+  <line x1="20" y1="462" x2="380" y2="462" stroke="#b6ff00" stroke-width="3" stroke-linecap="round"/>
+  <line x1="40" y1="468" x2="360" y2="468" stroke="#b6ff00" stroke-width="1" stroke-dasharray="4 5"/>
+
+  <!-- rear wheel (edge-on, peeking behind front) -->
+  <g>
+    <ellipse cx="200" cy="376" rx="19" ry="86" fill="#5a8a00" stroke="#0d0221" stroke-width="3"/>
+    <ellipse cx="200" cy="376" rx="19" ry="86" fill="url(#crossHatch)"/>
+  </g>
+
+  <!-- legs (behind frame) -->
+  <g stroke="#0d0221" stroke-width="3" stroke-linejoin="round">
+    <!-- left leg: pedal up -->
+    <path d="M183 300 L172 345 L176 378" fill="none" stroke="#ff6a00" stroke-width="9" stroke-linecap="round"/>
+    <path d="M183 300 L172 345 L176 378" fill="none" stroke="#0d0221" stroke-width="2" stroke-dasharray="3 3"/>
+    <!-- right leg: pedal down -->
+    <path d="M217 300 L228 360 L226 408" fill="none" stroke="#ff6a00" stroke-width="9" stroke-linecap="round"/>
+    <path d="M217 300 L228 360 L226 408" fill="none" stroke="#0d0221" stroke-width="2" stroke-dasharray="3 3"/>
+  </g>
+
+  <!-- cranks + pedals + webbed feet -->
+  <g stroke="#0d0221" stroke-width="2.5" stroke-linejoin="round">
+    <line x1="200" y1="395" x2="172" y2="380" stroke="#ff2bd6" stroke-width="5"/>
+    <line x1="200" y1="395" x2="228" y2="410" stroke="#ff2bd6" stroke-width="5"/>
+    <circle cx="200" cy="395" r="7" fill="#ff2bd6"/>
+    <circle cx="200" cy="395" r="7" fill="url(#hatchFine)"/>
+    <!-- feet -->
+    <path d="M160 380 L176 372 L192 380 L186 388 L166 388 Z" fill="#ffee00"/>
+    <path d="M160 380 L176 372 L192 380 L186 388 L166 388 Z" fill="url(#hatchB)"/>
+    <path d="M212 410 L228 402 L244 410 L238 418 L218 418 Z" fill="#ffee00"/>
+    <path d="M212 410 L228 402 L244 410 L238 418 L218 418 Z" fill="url(#hatchB)"/>
+  </g>
+
+  <!-- frame: head tube, fork, down tube hints -->
+  <g stroke="#0d0221" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+    <!-- fork blades -->
+    <path d="M190 298 L186 340 L192 378" fill="none" stroke="#ff2bd6" stroke-width="7"/>
+    <path d="M210 298 L214 340 L208 378" fill="none" stroke="#ff2bd6" stroke-width="7"/>
+    <path d="M190 298 L186 340 L192 378" fill="none" stroke="#0d0221" stroke-width="1.5" stroke-dasharray="2 3"/>
+    <path d="M210 298 L214 340 L208 378" fill="none" stroke="#0d0221" stroke-width="1.5" stroke-dasharray="2 3"/>
+    <!-- head tube / stem -->
+    <rect x="193" y="268" width="14" height="34" rx="4" fill="#ff2bd6"/>
+    <rect x="193" y="268" width="14" height="34" rx="4" fill="url(#hatchFine)"/>
+    <!-- aero seat tube / seat peeking -->
+    <ellipse cx="200" cy="312" rx="22" ry="7" fill="#ff2bd6"/>
+    <ellipse cx="200" cy="312" rx="22" ry="7" fill="url(#hatchA)"/>
+  </g>
+
+  <!-- front wheel (edge-on) -->
+  <g>
+    <ellipse cx="200" cy="380" rx="15" ry="82" fill="#b6ff00" stroke="#0d0221" stroke-width="3.5"/>
+    <ellipse cx="200" cy="380" rx="15" ry="82" fill="url(#hatchA)"/>
+    <ellipse cx="200" cy="380" rx="8" ry="74" fill="none" stroke="#0d0221" stroke-width="2"/>
+    <ellipse cx="200" cy="380" rx="4" ry="6" fill="#0d0221"/>
+  </g>
+
+  <!-- body (tucked, foreshortened) -->
+  <g stroke="#0d0221" stroke-width="3.5" stroke-linejoin="round">
+    <ellipse cx="200" cy="248" rx="62" ry="64" fill="#e6ffff"/>
+    <ellipse cx="200" cy="248" rx="62" ry="64" fill="url(#hatchLight)"/>
+    <!-- shadow under chest -->
+    <path d="M150 280 Q200 318 250 280 Q200 300 150 280 Z" fill="#00f5ff" stroke="none"/>
+    <path d="M150 280 Q200 318 250 280 Q200 300 150 280 Z" fill="url(#crossHatch)" stroke="none"/>
+  </g>
+
+  <!-- wings folded forward onto aero pads -->
+  <g stroke="#0d0221" stroke-width="3" stroke-linejoin="round">
+    <path d="M142 236 Q130 262 160 272 L178 252 L166 236 Z" fill="#00f5ff"/>
+    <path d="M142 236 Q130 262 160 272 L178 252 L166 236 Z" fill="url(#hatchA)"/>
+    <path d="M258 236 Q270 262 240 272 L222 252 L234 236 Z" fill="#00f5ff"/>
+    <path d="M258 236 Q270 262 240 272 L222 252 L234 236 Z" fill="url(#hatchA)"/>
+    <!-- primary feathers trailing out to the sides -->
+    <path d="M142 236 L112 250 L138 252 L108 268 L144 262 Z" fill="#00f5ff"/>
+    <path d="M142 236 L112 250 L138 252 L108 268 L144 262 Z" fill="url(#hatchB)"/>
+    <path d="M258 236 L288 250 L262 252 L292 268 L256 262 Z" fill="#00f5ff"/>
+    <path d="M258 236 L288 250 L262 252 L292 268 L256 262 Z" fill="url(#hatchB)"/>
+  </g>
+
+  <!-- time-trial cockpit: base bar, extensions, elbow pads -->
+  <g stroke="#0d0221" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- base bar (bullhorn) -->
+    <path d="M138 276 Q200 262 262 276" fill="none" stroke="#ff2bd6" stroke-width="8"/>
+    <path d="M138 276 Q200 262 262 276" fill="none" stroke="#0d0221" stroke-width="1.5" stroke-dasharray="2 3"/>
+    <!-- bullhorn tips pointing at viewer -->
+    <circle cx="138" cy="276" r="6" fill="#ff2bd6"/>
+    <circle cx="138" cy="276" r="2.5" fill="#0d0221" stroke="none"/>
+    <circle cx="262" cy="276" r="6" fill="#ff2bd6"/>
+    <circle cx="262" cy="276" r="2.5" fill="#0d0221" stroke="none"/>
+    <!-- elbow pads -->
+    <ellipse cx="178" cy="252" rx="16" ry="7" fill="#ffee00"/>
+    <ellipse cx="178" cy="252" rx="16" ry="7" fill="url(#hatchFine)"/>
+    <ellipse cx="222" cy="252" rx="16" ry="7" fill="#ffee00"/>
+    <ellipse cx="222" cy="252" rx="16" ry="7" fill="url(#hatchFine)"/>
+    <!-- aero extensions, foreshortened toward viewer -->
+    <line x1="186" y1="270" x2="186" y2="238" stroke="#ff2bd6" stroke-width="7"/>
+    <line x1="214" y1="270" x2="214" y2="238" stroke="#ff2bd6" stroke-width="7"/>
+    <circle cx="186" cy="236" r="6" fill="#ff2bd6"/>
+    <circle cx="186" cy="236" r="2.5" fill="#0d0221" stroke="none"/>
+    <circle cx="214" cy="236" r="6" fill="#ff2bd6"/>
+    <circle cx="214" cy="236" r="2.5" fill="#0d0221" stroke="none"/>
+  </g>
+
+  <!-- neck -->
+  <g stroke="#0d0221" stroke-width="3.5">
+    <path d="M178 200 Q200 180 222 200 L216 165 Q200 150 184 165 Z" fill="#e6ffff"/>
+    <path d="M178 200 Q200 180 222 200 L216 165 Q200 150 184 165 Z" fill="url(#hatchFine)"/>
+  </g>
+
+  <!-- head, tilted up -->
+  <g stroke="#0d0221" stroke-width="3.5" stroke-linejoin="round">
+    <circle cx="200" cy="148" r="30" fill="#e6ffff"/>
+    <circle cx="200" cy="148" r="30" fill="url(#hatchLight)"/>
+    <!-- crest tuft -->
+    <path d="M186 122 L182 108 L194 118 L198 104 L204 118 L210 106 L214 122 Z" fill="#00f5ff"/>
+    <!-- eyes, flanking -->
+    <circle cx="178" cy="142" r="6" fill="#ffee00"/>
+    <circle cx="178" cy="142" r="2.5" fill="#0d0221" stroke="none"/>
+    <circle cx="222" cy="142" r="6" fill="#ffee00"/>
+    <circle cx="222" cy="142" r="2.5" fill="#0d0221" stroke="none"/>
+  </g>
+
+  <!-- open beak: gape, lower mandible with pouch, upper mandible skyward -->
+  <g stroke="#0d0221" stroke-width="3.5" stroke-linejoin="round">
+    <!-- mouth interior -->
+    <path d="M184 150 L216 150 L200 206 Z" fill="#ff2bd6"/>
+    <path d="M184 150 L216 150 L200 206 Z" fill="url(#crossHatch)"/>
+    <!-- lower mandible + throat pouch -->
+    <path d="M182 152 Q170 190 200 222 Q230 190 218 152 Q200 162 182 152 Z" fill="#ff6a00"/>
+    <path d="M182 152 Q170 190 200 222 Q230 190 218 152 Q200 162 182 152 Z" fill="url(#hatchB)"/>
+    <!-- upper mandible pointing up -->
+    <path d="M182 146 L218 146 L200 40 Z" fill="#ffee00"/>
+    <path d="M182 146 L218 146 L200 40 Z" fill="url(#hatchA)"/>
+    <line x1="200" y1="48" x2="200" y2="140" stroke="#0d0221" stroke-width="1.5"/>
+    <!-- hook at the tip -->
+    <path d="M196 44 Q200 34 206 42" fill="none" stroke="#0d0221" stroke-width="2.5"/>
+  </g>
+</svg>

@@ -1,0 +1,24 @@
+name: Something does not work
+description: setup, uninstall or the tool fails or does something unexpected
+labels: [bug]
+body:
+  - type: input
+    id: command
+    attributes:
+      label: The command you ran
+      placeholder: npx -y @modelsalt/model-salt setup codex
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what you expected
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Model Salt (npx -y @modelsalt/model-salt --version), Node (node --version), your client and your OS
+    validations:
+      required: true

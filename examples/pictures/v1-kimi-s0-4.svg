@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 620" width="800" height="620" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <!-- wheels -->
+  <g stroke="#253241" stroke-width="10">
+    <circle cx="250" cy="470" r="85"/>
+    <circle cx="570" cy="470" r="85"/>
+  </g>
+  <g fill="#253241" stroke="none">
+    <circle cx="250" cy="470" r="10"/>
+    <circle cx="570" cy="470" r="10"/>
+  </g>
+
+  <!-- bicycle frame -->
+  <g stroke="#2ec4b6" stroke-width="12">
+    <path d="M250 470 L400 470"/>
+    <path d="M250 470 L352 342"/>
+    <path d="M400 470 L356 336"/>
+    <path d="M356 336 L524 302"/>
+    <path d="M400 470 L542 344"/>
+    <path d="M524 302 L542 344"/>
+    <path d="M542 344 L568 468"/>
+  </g>
+
+  <!-- saddle -->
+  <path d="M356 336 L352 324" stroke="#253241" stroke-width="8"/>
+  <path d="M322 318 Q352 306 386 316 Q384 332 352 332 Q324 331 322 318 Z" fill="#253241"/>
+
+  <!-- handlebar stem -->
+  <path d="M524 302 L514 264" stroke="#253241" stroke-width="10"/>
+
+  <!-- far crank + pedal -->
+  <path d="M400 470 L352 434" stroke="#253241" stroke-width="9"/>
+  <path d="M336 428 L366 440" stroke="#253241" stroke-width="8"/>
+
+  <!-- far leg + foot -->
+  <path d="M338 336 Q330 392 350 428" stroke="#ff9f1c" stroke-width="15"/>
+  <path d="M336 426 Q354 418 370 430 Q368 446 350 448 Q336 442 336 426 Z" fill="#ff9f1c" stroke="#253241" stroke-width="7"/>
+
+  <!-- tail -->
+  <path d="M258 280 Q222 288 196 310 Q228 320 262 318 Z" fill="#fff6e9" stroke="#253241" stroke-width="8"/>
+
+  <!-- body -->
+  <path d="M238 296 Q255 215 330 180 Q400 152 438 210 Q458 262 430 312 Q395 352 330 346 Q262 342 238 296 Z" fill="#fff6e9" stroke="#253241" stroke-width="8"/>
+
+  <!-- near crank + chainring + pedal -->
+  <circle cx="400" cy="470" r="15" fill="#253241"/>
+  <path d="M400 470 L444 498" stroke="#253241" stroke-width="9"/>
+  <path d="M428 506 L462 506" stroke="#253241" stroke-width="8"/>
+
+  <!-- near leg + foot -->
+  <path d="M366 330 Q404 400 442 492" stroke="#ff9f1c" stroke-width="15"/>
+  <path d="M426 488 Q446 480 464 492 Q462 510 442 512 Q426 504 426 488 Z" fill="#ff9f1c" stroke="#253241" stroke-width="7"/>
+
+  <!-- neck -->
+  <path d="M396 224 Q420 178 446 142 Q460 122 484 118 Q506 116 516 130 Q502 138 488 152 Q460 182 440 232 Q414 244 396 224 Z" fill="#fff6e9" stroke="#253241" stroke-width="8"/>
+
+  <!-- pouch -->
+  <path d="M528 138 Q540 202 612 194 Q652 184 662 158 Q640 170 600 166 Q556 160 528 148 Z" fill="#ff9f1c" stroke="#253241" stroke-width="7"/>
+
+  <!-- head -->
+  <circle cx="508" cy="126" r="30" fill="#fff6e9" stroke="#253241" stroke-width="8"/>
+
+  <!-- upper beak -->
+  <path d="M528 108 Q600 118 662 158 Q592 150 528 138 Z" fill="#ffb64d" stroke="#253241" stroke-width="7"/>
+
+  <!-- eye + tuft -->
+  <circle cx="500" cy="116" r="6" fill="#253241" stroke="none"/>
+  <path d="M484 100 Q474 84 454 80" stroke="#253241" stroke-width="7"/>
+
+  <!-- wing reaching to handlebar -->
+  <path d="M352 192 Q424 198 466 240 Q482 256 472 270 Q428 284 380 264 Q344 246 340 218 Q342 200 352 192 Z" fill="#fff6e9" stroke="#253241" stroke-width="8"/>
+
+  <!-- grip (drawn over wing tip so it looks held) -->
+  <path d="M514 264 L470 260" stroke="#253241" stroke-width="12"/>
+</svg>

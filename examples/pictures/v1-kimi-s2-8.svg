@@ -1,0 +1,337 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="900" height="600">
+  <title>A pelican wobbling unsteadily on a fixed-gear bicycle, vaporwave backdrop</title>
+
+  <defs>
+    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#150332"/>
+      <stop offset="0.4" stop-color="#3a0a60"/>
+      <stop offset="0.7" stop-color="#8f1279"/>
+      <stop offset="0.9" stop-color="#e92d78"/>
+      <stop offset="1" stop-color="#ff6a5e"/>
+    </linearGradient>
+    <linearGradient id="floorGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a0750"/>
+      <stop offset="1" stop-color="#0a011d"/>
+    </linearGradient>
+    <linearGradient id="sunGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe95e"/>
+      <stop offset="0.5" stop-color="#ff9a3d"/>
+      <stop offset="1" stop-color="#ff2975"/>
+    </linearGradient>
+    <radialGradient id="horizonGlow">
+      <stop offset="0" stop-color="#ff2e88" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#ff2e88" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="rimGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00f0ff"/>
+      <stop offset="1" stop-color="#2e5bff"/>
+    </linearGradient>
+    <linearGradient id="frameGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff2ea6"/>
+      <stop offset="0.45" stop-color="#b967ff"/>
+      <stop offset="1" stop-color="#00f0ff"/>
+    </linearGradient>
+    <linearGradient id="barGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff2ea6"/>
+      <stop offset="1" stop-color="#b967ff"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffe95e"/>
+      <stop offset="1" stop-color="#ff9a3d"/>
+    </linearGradient>
+    <radialGradient id="bodyGrad" cx="0.42" cy="0.3" r="0.95">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.55" stop-color="#ffe9f6"/>
+      <stop offset="0.85" stop-color="#ffc9ec"/>
+      <stop offset="1" stop-color="#9fdcff"/>
+    </radialGradient>
+    <linearGradient id="wingGrad" x1="1" y1="0.5" x2="0" y2="0.5">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.6" stop-color="#ffd7f1"/>
+      <stop offset="1" stop-color="#8fd8ff"/>
+    </linearGradient>
+    <linearGradient id="farWingGrad" x1="1" y1="0.5" x2="0" y2="0.5">
+      <stop offset="0" stop-color="#cbb8ff"/>
+      <stop offset="1" stop-color="#ff8fd0"/>
+    </linearGradient>
+    <linearGradient id="neckGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#ffd2ef"/>
+    </linearGradient>
+    <linearGradient id="beakGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffe95e"/>
+      <stop offset="0.6" stop-color="#ff9a3d"/>
+      <stop offset="1" stop-color="#ff4e6d"/>
+    </linearGradient>
+    <linearGradient id="pouchGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffb03d"/>
+      <stop offset="1" stop-color="#ff3d7f"/>
+    </linearGradient>
+    <linearGradient id="legGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffb03d"/>
+      <stop offset="1" stop-color="#ff5e78"/>
+    </linearGradient>
+    <linearGradient id="legGrad2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d9822b"/>
+      <stop offset="1" stop-color="#c14a5e"/>
+    </linearGradient>
+
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3.5" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+
+    <mask id="sunMask" maskUnits="userSpaceOnUse" x="500" y="100" width="300" height="300">
+      <circle cx="640" cy="235" r="115" fill="#fff"/>
+      <rect x="520" y="252" width="240" height="5" fill="#000"/>
+      <rect x="520" y="264" width="240" height="7" fill="#000"/>
+      <rect x="520" y="278" width="240" height="9" fill="#000"/>
+      <rect x="520" y="294" width="240" height="11" fill="#000"/>
+      <rect x="520" y="312" width="240" height="13" fill="#000"/>
+    </mask>
+
+    <path id="spark" d="M0,-9 Q1.5,-1.5 9,0 Q1.5,1.5 0,9 Q-1.5,1.5 -9,0 Q-1.5,-1.5 0,-9 Z"/>
+  </defs>
+
+  <!-- ======= SKY ======= -->
+  <rect x="0" y="0" width="900" height="432" fill="url(#skyGrad)"/>
+
+  <!-- stars -->
+  <g fill="#ffffff">
+    <circle cx="60" cy="60" r="1.8" opacity="0.6"/>
+    <circle cx="210" cy="42" r="1.4" opacity="0.5"/>
+    <circle cx="420" cy="118" r="1.6" opacity="0.55"/>
+    <circle cx="560" cy="40" r="2" opacity="0.65"/>
+    <circle cx="740" cy="42" r="1.5" opacity="0.5"/>
+    <circle cx="880" cy="84" r="1.8" opacity="0.6"/>
+  </g>
+
+  <!-- vaporwave sun -->
+  <circle cx="640" cy="235" r="118" fill="#ff5e9e" opacity="0.4" filter="url(#soft)"/>
+  <circle cx="640" cy="235" r="115" fill="url(#sunGrad)" mask="url(#sunMask)"/>
+  <ellipse cx="640" cy="430" rx="260" ry="60" fill="url(#horizonGlow)"/>
+
+  <!-- ======= FLOOR + PERSPECTIVE GRID ======= -->
+  <rect x="0" y="430" width="900" height="170" fill="url(#floorGrad)"/>
+  <g stroke="#00e5ff" stroke-width="1.5" opacity="0.5">
+    <line x1="-80" y1="600" x2="418" y2="430"/>
+    <line x1="-20" y1="600" x2="420" y2="430"/>
+    <line x1="40"  y1="600" x2="425" y2="430"/>
+    <line x1="100" y1="600" x2="429" y2="430"/>
+    <line x1="160" y1="600" x2="433" y2="430"/>
+    <line x1="220" y1="600" x2="436" y2="430"/>
+    <line x1="280" y1="600" x2="440" y2="430"/>
+    <line x1="340" y1="600" x2="443" y2="430"/>
+    <line x1="400" y1="600" x2="447" y2="430"/>
+    <line x1="460" y1="600" x2="451" y2="430"/>
+    <line x1="520" y1="600" x2="454" y2="430"/>
+    <line x1="580" y1="600" x2="458" y2="430"/>
+    <line x1="640" y1="600" x2="461" y2="430"/>
+    <line x1="700" y1="600" x2="465" y2="430"/>
+    <line x1="760" y1="600" x2="469" y2="430"/>
+    <line x1="820" y1="600" x2="472" y2="430"/>
+    <line x1="880" y1="600" x2="476" y2="430"/>
+    <line x1="940" y1="600" x2="479" y2="430"/>
+    <line x1="0" y1="438" x2="900" y2="438"/>
+    <line x1="0" y1="452" x2="900" y2="452"/>
+    <line x1="0" y1="470" x2="900" y2="470"/>
+    <line x1="0" y1="492" x2="900" y2="492"/>
+    <line x1="0" y1="518" x2="900" y2="518"/>
+    <line x1="0" y1="550" x2="900" y2="550"/>
+    <line x1="0" y1="586" x2="900" y2="586"/>
+  </g>
+  <line x1="0" y1="430" x2="900" y2="430" stroke="#00e5ff" stroke-width="2.5" opacity="0.9" filter="url(#glow)"/>
+
+  <!-- wireframe mountains -->
+  <path d="M36,430 L84,368 L132,430" stroke="#00f0ff" stroke-width="2" fill="none" opacity="0.35"/>
+  <path d="M764,430 L812,362 L860,430" stroke="#ff2ea6" stroke-width="2" fill="none" opacity="0.4"/>
+  <path d="M832,430 L868,382 L904,430" stroke="#ff2ea6" stroke-width="2" fill="none" opacity="0.25"/>
+
+  <!-- ======= FLOATING GEOMETRIC SHAPES ======= -->
+  <polygon points="120,78 158,142 82,142" transform="rotate(14 120 110)" stroke="#00f0ff" stroke-width="3" fill="none" opacity="0.9" filter="url(#glow)"/>
+  <polygon points="780,122 808,170 752,170" transform="rotate(-12 780 146)" stroke="#ff2ea6" stroke-width="3" fill="none" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="848" cy="318" r="24" stroke="#ffe95e" stroke-width="4" fill="none" filter="url(#glow)"/>
+  <circle cx="70" cy="330" r="15" stroke="#00f0ff" stroke-width="3" fill="none" opacity="0.8"/>
+  <path d="M540,92 v32 M524,108 h32" stroke="#ff2ea6" stroke-width="5" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M330,60 v22 M319,71 h22" stroke="#00f0ff" stroke-width="4" stroke-linecap="round" opacity="0.85"/>
+  <path d="M470,158 L492,180 L470,202 L448,180 Z" stroke="#b967ff" stroke-width="3" fill="none" opacity="0.8"/>
+  <path d="M700,520 q12,-14 24,0 t24,0 t24,0" stroke="#ffe95e" stroke-width="3.5" fill="none" stroke-linecap="round" filter="url(#glow)"/>
+  <circle cx="250" cy="80" r="4" fill="#ff2ea6" opacity="0.85"/>
+  <circle cx="610" cy="66" r="3.5" fill="#00f0ff" opacity="0.85"/>
+  <circle cx="862" cy="218" r="4" fill="#ffe95e" opacity="0.85"/>
+  <circle cx="176" cy="262" r="3" fill="#b967ff" opacity="0.85"/>
+  <use href="#spark" transform="translate(700,96)" fill="#ffffff" opacity="0.85"/>
+  <use href="#spark" transform="translate(520,330) scale(0.7)" fill="#7ff7ff" opacity="0.7"/>
+  <use href="#spark" transform="translate(140,60) scale(0.8)" fill="#ff9ad5" opacity="0.75"/>
+
+  <!-- ======= HALO FRAMING THE SUBJECT (left third) ======= -->
+  <circle cx="300" cy="398" r="148" stroke="#ff2ea6" stroke-width="2.5" fill="none" opacity="0.28"/>
+  <circle cx="300" cy="398" r="170" stroke="#00f0ff" stroke-width="2" fill="none" opacity="0.16" stroke-dasharray="3 9"/>
+
+  <!-- wobbly tire track left behind -->
+  <path d="M185,452 C152,430 128,470 98,449 C72,431 52,467 26,448 C10,437 -2,455 -18,445"
+        stroke="#ff2ea6" stroke-width="4" fill="none" stroke-linecap="round"
+        stroke-dasharray="12 9" opacity="0.85" filter="url(#glow)"/>
+
+  <!-- ground shadow -->
+  <ellipse cx="300" cy="466" rx="148" ry="12" fill="#000000" opacity="0.35" filter="url(#soft)"/>
+
+  <!-- ======= PELICAN + FIXED-GEAR BIKE (tilted, mid-wobble) ======= -->
+  <g transform="translate(300,400) rotate(-6)">
+
+    <!-- rear wheel -->
+    <g transform="translate(-85,0)">
+      <circle r="62" stroke="#150329" stroke-width="7" fill="none"/>
+      <g stroke="#9be7ff" stroke-width="1.5" opacity="0.65">
+        <line x1="0" y1="0" x2="47" y2="0"/><line x1="0" y1="0" x2="33" y2="33"/>
+        <line x1="0" y1="0" x2="0" y2="47"/><line x1="0" y1="0" x2="-33" y2="33"/>
+        <line x1="0" y1="0" x2="-47" y2="0"/><line x1="0" y1="0" x2="-33" y2="-33"/>
+        <line x1="0" y1="0" x2="0" y2="-47"/><line x1="0" y1="0" x2="33" y2="-33"/>
+      </g>
+      <circle r="53" stroke="url(#rimGrad)" stroke-width="9" fill="none" filter="url(#glow)"/>
+      <circle r="47" stroke="#00f0ff" stroke-width="1.5" fill="none" opacity="0.25"/>
+      <circle r="4.5" fill="url(#goldGrad)"/>
+    </g>
+
+    <!-- front wheel -->
+    <g transform="translate(85,0)">
+      <circle r="62" stroke="#150329" stroke-width="7" fill="none"/>
+      <g stroke="#9be7ff" stroke-width="1.5" opacity="0.65">
+        <line x1="0" y1="0" x2="47" y2="0"/><line x1="0" y1="0" x2="33" y2="33"/>
+        <line x1="0" y1="0" x2="0" y2="47"/><line x1="0" y1="0" x2="-33" y2="33"/>
+        <line x1="0" y1="0" x2="-47" y2="0"/><line x1="0" y1="0" x2="-33" y2="-33"/>
+        <line x1="0" y1="0" x2="0" y2="-47"/><line x1="0" y1="0" x2="33" y2="-33"/>
+      </g>
+      <circle r="53" stroke="url(#rimGrad)" stroke-width="9" fill="none" filter="url(#glow)"/>
+      <circle r="47" stroke="#00f0ff" stroke-width="1.5" fill="none" opacity="0.25"/>
+      <circle r="4.5" fill="url(#goldGrad)"/>
+    </g>
+
+    <!-- frame -->
+    <g stroke="url(#frameGrad)" stroke-linecap="round" fill="none">
+      <line x1="-26" y1="-56" x2="-85" y2="0" stroke-width="4"/>
+      <line x1="0" y1="14" x2="-84" y2="3" stroke-width="4"/>
+      <line x1="0" y1="12" x2="-26" y2="-56" stroke-width="6"/>
+      <line x1="-26" y1="-56" x2="64" y2="-50" stroke-width="6"/>
+      <line x1="0" y1="12" x2="71" y2="-13" stroke-width="6"/>
+      <line x1="64" y1="-50" x2="73" y2="-15" stroke-width="7"/>
+      <line x1="73" y1="-14" x2="85" y2="0" stroke-width="5"/>
+      <line x1="64" y1="-50" x2="84" y2="-57" stroke-width="5"/>
+    </g>
+    <!-- bullhorn bars -->
+    <path d="M84,-57 C96,-60 104,-55 106,-45 C107,-40 105,-36 102,-34"
+          stroke="url(#barGrad)" stroke-width="5.5" stroke-linecap="round" fill="none"/>
+    <circle cx="102" cy="-34" r="2.5" fill="#00f0ff"/>
+
+    <!-- drivetrain (fixed gear) -->
+    <line x1="0" y1="-4" x2="-85" y2="-6" stroke="#d9c8ff" stroke-width="2" opacity="0.8"/>
+    <line x1="0" y1="28" x2="-85" y2="6" stroke="#d9c8ff" stroke-width="2" opacity="0.8"/>
+    <circle cx="-85" cy="0" r="6" stroke="#ffd319" stroke-width="3" fill="none"/>
+    <circle cx="0" cy="12" r="16" stroke="url(#goldGrad)" stroke-width="4" fill="none"/>
+    <circle cx="0" cy="12" r="4.5" fill="#ffb03d"/>
+    <line x1="0" y1="12" x2="14" y2="28" stroke="url(#goldGrad)" stroke-width="5" stroke-linecap="round"/>
+    <rect x="6" y="26" width="16" height="5" rx="2" fill="#1c0533" opacity="0.9"/>
+    <line x1="0" y1="12" x2="-14" y2="-4" stroke="url(#goldGrad)" stroke-width="5" stroke-linecap="round"/>
+    <rect x="-25" y="-10" width="18" height="6" rx="2" fill="#1c0533" stroke="#00f0ff" stroke-width="1.5"/>
+
+    <!-- saddle -->
+    <line x1="-26" y1="-56" x2="-31" y2="-68" stroke="url(#frameGrad)" stroke-width="4" stroke-linecap="round"/>
+    <path d="M-52,-72 C-38,-77 -18,-75 -6,-67 C-14,-62 -28,-60 -40,-62 C-50,-64 -54,-68 -52,-72 Z"
+          fill="#21063f" stroke="#ff7ad9" stroke-width="1.5" stroke-opacity="0.6"/>
+
+    <!-- ======= PELICAN ======= -->
+    <!-- neck -->
+    <path d="M8,-138 C18,-152 22,-164 34,-178" stroke="url(#neckGrad)" stroke-width="20"
+          stroke-linecap="round" fill="none"/>
+
+    <!-- tail feathers -->
+    <g fill="url(#bodyGrad)">
+      <ellipse cx="-80" cy="-90" rx="20" ry="7.5" transform="rotate(-14 -80 -90)"/>
+      <ellipse cx="-77" cy="-79" rx="17" ry="6.5" transform="rotate(2 -77 -79)"/>
+      <ellipse cx="-71" cy="-70" rx="14" ry="6" transform="rotate(16 -71 -70)"/>
+    </g>
+
+    <!-- far wing, sweeping up for balance -->
+    <g fill="url(#farWingGrad)" stroke="#7b4fb8" stroke-width="1.5" stroke-opacity="0.5">
+      <path d="M-8,-128 C-34,-150 -64,-166 -100,-176 C-88,-152 -68,-134 -44,-122 C-28,-115 -14,-118 -8,-128 Z"/>
+      <ellipse cx="-102" cy="-176" rx="21" ry="7" transform="rotate(-32 -102 -176)"/>
+      <ellipse cx="-92" cy="-187" rx="19" ry="6.5" transform="rotate(-48 -92 -187)"/>
+      <ellipse cx="-78" cy="-193" rx="16" ry="6" transform="rotate(-62 -78 -193)"/>
+    </g>
+
+    <!-- far leg, kicked out for balance -->
+    <path d="M-4,-74 C8,-60 16,-48 26,-38" stroke="url(#legGrad2)" stroke-width="7"
+          stroke-linecap="round" fill="none"/>
+    <ellipse cx="31" cy="-35" rx="12" ry="5" transform="rotate(38 31 -35)" fill="#e07b39"/>
+
+    <!-- body -->
+    <path d="M12,-140 C30,-134 38,-116 30,-98 C23,-82 6,-72 -14,-70 C-40,-68 -60,-78 -65,-98
+             C-69,-116 -58,-136 -38,-143 C-20,-149 0,-148 12,-140 Z" fill="url(#bodyGrad)"/>
+    <ellipse cx="-28" cy="-120" rx="24" ry="14" transform="rotate(-18 -28 -120)" fill="#ffffff" opacity="0.5"/>
+    <path d="M28,-100 C20,-84 4,-74 -14,-72" stroke="#ff9ad5" stroke-width="2" fill="none" opacity="0.35"/>
+
+    <!-- near wing, spread wide -->
+    <g fill="url(#wingGrad)" stroke="#c77dff" stroke-width="1.5" stroke-opacity="0.45">
+      <path d="M-4,-116 C-40,-120 -78,-112 -110,-94 C-88,-84 -60,-82 -36,-88 C-20,-92 -8,-102 -4,-116 Z"/>
+      <ellipse cx="-114" cy="-92" rx="22" ry="8" transform="rotate(-10 -114 -92)"/>
+      <ellipse cx="-107" cy="-78" rx="20" ry="7" transform="rotate(8 -107 -78)"/>
+      <ellipse cx="-95" cy="-67" rx="17" ry="6.5" transform="rotate(26 -95 -67)"/>
+    </g>
+    <g stroke="#b26fe0" stroke-width="1.5" fill="none" opacity="0.35">
+      <path d="M-30,-100 C-60,-104 -84,-100 -104,-92"/>
+      <path d="M-28,-94 C-56,-94 -80,-88 -100,-80"/>
+      <path d="M-26,-88 C-50,-86 -70,-80 -88,-72"/>
+    </g>
+
+    <!-- near leg on pedal -->
+    <path d="M-14,-72 C-10,-54 -17,-32 -15,-13" stroke="url(#legGrad)" stroke-width="8"
+          stroke-linecap="round" fill="none"/>
+    <ellipse cx="-17" cy="-8" rx="13" ry="5.5" transform="rotate(-8 -17 -8)" fill="url(#legGrad)"/>
+    <path d="M-29,-10 l6,2 M-29,-5 l6,1" stroke="#d9480f" stroke-width="1.4" fill="none"/>
+
+    <!-- head -->
+    <ellipse cx="36" cy="-182" rx="20" ry="16" transform="rotate(-8 36 -182)" fill="url(#bodyGrad)"/>
+    <g stroke="#ffe1f3" stroke-width="2.5" stroke-linecap="round" fill="none">
+      <path d="M18,-192 C14,-198 12,-202 12,-206"/>
+      <path d="M22,-194 C20,-201 20,-206 21,-210"/>
+      <path d="M26,-195 C26,-202 27,-206 29,-209"/>
+    </g>
+
+    <!-- beak + pouch -->
+    <path d="M50,-182 C60,-156 92,-147 120,-164 C104,-167 74,-171 50,-176 Z" fill="url(#pouchGrad)"/>
+    <path d="M50,-193 C76,-189 102,-179 122,-167 L120,-164 C98,-173 72,-180 49,-181 Z" fill="url(#beakGrad)"/>
+    <path d="M117,-171 L127,-164 L116,-161 Z" fill="#d1006b"/>
+    <path d="M54,-189 C76,-185 98,-177 116,-168" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.5"/>
+    <path d="M62,-186 l10,2" stroke="#c22e6b" stroke-width="1.5" fill="none"/>
+
+    <!-- wide nervous eye -->
+    <circle cx="40" cy="-188" r="5.5" fill="#ffffff"/>
+    <circle cx="41.5" cy="-188" r="2.6" fill="#21063f"/>
+    <circle cx="40" cy="-189.5" r="1.2" fill="#ffffff"/>
+    <path d="M33,-196 q7,-4 14,-1" stroke="#d98bb8" stroke-width="1.5" fill="none" opacity="0.7"/>
+    <circle cx="26" cy="-172" r="6" fill="#ff2e88" opacity="0.22"/>
+
+    <!-- panic marks -->
+    <path d="M6,-214 C0,-204 0,-197 6,-195 C12,-197 12,-204 6,-214 Z" fill="#7ff7ff" stroke="#00c2d8" stroke-width="1"/>
+    <circle cx="4.5" cy="-203" r="1.3" fill="#ffffff" opacity="0.8"/>
+    <g stroke="#ffe95e" stroke-width="2.5" stroke-linecap="round" opacity="0.9">
+      <path d="M60,-214 l6,-9"/>
+      <path d="M70,-206 l9,-5"/>
+      <path d="M76,-196 l10,-2"/>
+    </g>
+
+    <!-- wobble motion arcs -->
+    <g stroke="#7ff7ff" stroke-width="3" stroke-linecap="round" fill="none">
+      <path d="M-154,-24 C-162,-12 -162,4 -154,16" opacity="0.8"/>
+      <path d="M-168,-32 C-178,-14 -178,12 -168,30" opacity="0.55"/>
+      <path d="M156,-22 C164,-10 164,6 156,18" opacity="0.8"/>
+      <path d="M170,-30 C180,-12 180,14 170,32" opacity="0.55"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,361 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+  <defs>
+    <!-- Subtle inner glow and crisp edges for low-poly aesthetic -->
+    <style>
+      polygon {
+        stroke-linejoin: round;
+        stroke-width: 0.4px;
+      }
+      .bg-poly { stroke: #120024; }
+      .pelican-poly { stroke: #ffffff; stroke-opacity: 0.3; }
+      .beak-poly { stroke: #ff0055; stroke-opacity: 0.2; }
+      .bike-poly { stroke: #00ffff; stroke-opacity: 0.3; }
+      .tire-poly { stroke: #050014; stroke-opacity: 0.8; }
+      .spoke { stroke: #00f0ff; stroke-width: 1.5; stroke-opacity: 0.5; stroke-linecap: round; }
+      .speed-poly { opacity: 0.85; mix-blend-mode: screen; }
+    </style>
+  </defs>
+
+  <!-- ================= BACKGROUND (LOW-POLY TROPICAL NIGHT/SUNSET) ================= -->
+  <g id="background" class="bg-poly">
+    <polygon points="0,0 400,0 200,250" fill="#10002b" />
+    <polygon points="0,0 200,250 0,450" fill="#180038" />
+    <polygon points="400,0 800,0 550,200" fill="#240046" />
+    <polygon points="400,0 550,200 200,250" fill="#190036" />
+    <polygon points="800,0 800,350 550,200" fill="#3c096c" />
+    <polygon points="0,450 200,250 320,520" fill="#240046" />
+    <polygon points="200,250 550,200 450,480" fill="#310055" />
+    <polygon points="200,250 450,480 320,520" fill="#2b004d" />
+    <polygon points="550,200 800,350 650,550" fill="#480ca8" />
+    <polygon points="550,200 650,550 450,480" fill="#3f0071" />
+    <polygon points="0,450 320,520 150,700" fill="#150030" />
+    <polygon points="0,450 150,700 0,800" fill="#0d001f" />
+    <polygon points="320,520 450,480 500,680" fill="#3c096c" />
+    <polygon points="320,520 500,680 150,700" fill="#260046" />
+    <polygon points="450,480 650,550 500,680" fill="#5a189a" />
+    <polygon points="800,350 800,650 650,550" fill="#7209b7" />
+    <polygon points="650,550 800,650 800,800" fill="#b5179e" />
+    <polygon points="650,550 800,800 500,680" fill="#9d4edd" />
+    <polygon points="150,700 500,680 400,800" fill="#3c096c" />
+    <polygon points="150,700 400,800 0,800" fill="#1b003a" />
+    <polygon points="500,680 800,800 400,800" fill="#7b2cbf" />
+  </g>
+
+  <!-- ================= TROPICAL SUN & SPEED SHARDS ================= -->
+  <g id="sun-and-Effects">
+    <!-- Low-Poly Sun -->
+    <polygon points="220,220 350,150 480,190" fill="#fff75e" />
+    <polygon points="220,220 480,190 360,320" fill="#ffdd00" />
+    <polygon points="480,190 590,290 360,320" fill="#ffc300" />
+    <polygon points="590,290 610,430 470,450" fill="#ff9e00" />
+    <polygon points="590,290 470,450 360,320" fill="#ffaa00" />
+    <polygon points="220,220 360,320 200,390" fill="#ffea00" />
+    <polygon points="360,320 470,450 310,510" fill="#ff7b00" />
+    <polygon points="360,320 310,510 200,390" fill="#ff9500" />
+    <polygon points="200,390 310,510 190,530" fill="#ff5400" />
+    <polygon points="470,450 610,430 500,590" fill="#ff0055" />
+    <polygon points="470,450 500,590 310,510" fill="#ff2a6d" />
+
+    <!-- Dynamic Dutch-Angle Speed Shards (tilted ~ -26 deg) -->
+    <polygon class="speed-poly" points="50,390 240,295 210,325" fill="#00ffff" />
+    <polygon class="speed-poly" points="650,90 780,25 750,55" fill="#00ffff" />
+    <polygon class="speed-poly" points="80,690 310,575 290,605" fill="#ff007f" />
+    <polygon class="speed-poly" points="580,440 770,345 730,385" fill="#ffbe0b" />
+    <polygon class="speed-poly" points="15,520 145,455 125,480" fill="#ff007f" />
+  </g>
+
+  <!-- ================= DUTCH-ANGLE SCENE (TILTED -26 DEGREES FOR SHARP CORNERING) ================= -->
+  <g id="dutch-angle-scene" transform="translate(400, 420) rotate(-26) translate(-400, -420)">
+
+    <!-- ================= ROAD SURFACE (LOW-POLY ASPHALT & NEON CURB) ================= -->
+    <g id="road">
+      <polygon points="-250,645 90,645 -80,740" fill="#ff007f" />
+      <polygon points="90,645 380,645 240,730" fill="#ffbe0b" />
+      <polygon points="-80,740 90,645 240,730" fill="#d90467" />
+      <polygon points="380,645 720,645 550,750" fill="#00f0ff" />
+      <polygon points="240,730 380,645 550,750" fill="#00b4d8" />
+      <polygon points="720,645 1050,645 890,740" fill="#ff007f" />
+      <polygon points="550,750 720,645 890,740" fill="#b5179e" />
+      <polygon points="-250,645 -80,740 -250,820" fill="#7209b7" />
+      <polygon points="-80,740 240,730 90,850" fill="#3a0ca3" />
+      <polygon points="240,730 550,750 410,860" fill="#4cc9f0" />
+      <polygon points="550,750 890,740 750,850" fill="#7209b7" />
+      <!-- Crisp road horizon line -->
+      <polygon points="-250,642 1050,642 1050,647 -250,647" fill="#ffff00" />
+    </g>
+
+    <!-- ================= BICYCLE WHEELS (THIN ROAD RACING TIRES) ================= -->
+    <!-- Rear Wheel (Center: 220, 520 | Outer R: 125 | Inner R: 112) -->
+    <g id="rear-wheel">
+      <!-- Spokes -->
+      <g class="spoke">
+        <line x1="220" y1="520" x2="340" y2="520" />
+        <line x1="220" y1="520" x2="324" y2="580" />
+        <line x1="220" y1="520" x2="280" y2="624" />
+        <line x1="220" y1="520" x2="220" y2="640" />
+        <line x1="220" y1="520" x2="160" y2="624" />
+        <line x1="220" y1="520" x2="116" y2="580" />
+        <line x1="220" y1="520" x2="100" y2="520" />
+        <line x1="220" y1="520" x2="116" y2="460" />
+        <line x1="220" y1="520" x2="160" y2="416" />
+        <line x1="220" y1="520" x2="220" y2="400" />
+        <line x1="220" y1="520" x2="280" y2="416" />
+        <line x1="220" y1="520" x2="324" y2="460" />
+      </g>
+      <!-- Low-Poly Thin Tire (12 Segments, 24 Triangles) -->
+      <g class="tire-poly">
+        <polygon points="345,520 328,582 317,576" fill="#0d001a"/><polygon points="345,520 317,576 332,520" fill="#240046"/>
+        <polygon points="328,582 282,628 276,617" fill="#180030"/><polygon points="328,582 276,617 317,576" fill="#3c096c"/>
+        <polygon points="282,628 220,645 220,632" fill="#0d001a"/><polygon points="282,628 220,632 276,617" fill="#240046"/>
+        <polygon points="220,645 158,628 164,617" fill="#180030"/><polygon points="220,645 164,617 220,632" fill="#3c096c"/>
+        <polygon points="158,628 112,582 123,576" fill="#0d001a"/><polygon points="158,628 123,576 164,617" fill="#240046"/>
+        <polygon points="112,582 95,520 108,520" fill="#180030"/><polygon points="112,582 108,520 123,576" fill="#3c096c"/>
+        <polygon points="95,520 112,458 123,464" fill="#0d001a"/><polygon points="95,520 123,464 108,520" fill="#240046"/>
+        <polygon points="112,458 158,412 164,423" fill="#180030"/><polygon points="112,458 164,423 123,464" fill="#3c096c"/>
+        <polygon points="158,412 220,395 220,408" fill="#0d001a"/><polygon points="158,412 220,408 164,423" fill="#240046"/>
+        <polygon points="220,395 282,412 276,423" fill="#180030"/><polygon points="220,395 276,423 220,408" fill="#3c096c"/>
+        <polygon points="282,412 328,458 317,464" fill="#0d001a"/><polygon points="282,412 317,464 276,423" fill="#240046"/>
+        <polygon points="328,458 345,520 332,520" fill="#180030"/><polygon points="328,458 332,520 317,464" fill="#3c096c"/>
+      </g>
+      <!-- Rear Hub / Cassette -->
+      <polygon points="220,505 233,512 220,520" fill="#ffbe0b" />
+      <polygon points="233,512 233,528 220,520" fill="#ff007f" />
+      <polygon points="233,528 220,535 220,520" fill="#00f0ff" />
+      <polygon points="220,535 207,528 220,520" fill="#ffbe0b" />
+      <polygon points="207,528 207,512 220,520" fill="#ff007f" />
+      <polygon points="207,512 220,505 220,520" fill="#00f0ff" />
+    </g>
+
+    <!-- Front Wheel (Center: 580, 520 | Outer R: 125 | Inner R: 112) -->
+    <g id="front-wheel">
+      <!-- Spokes -->
+      <g class="spoke">
+        <line x1="580" y1="520" x2="700" y2="520" />
+        <line x1="580" y1="520" x2="684" y2="580" />
+        <line x1="580" y1="520" x2="640" y2="624" />
+        <line x1="580" y1="520" x2="580" y2="640" />
+        <line x1="580" y1="520" x2="520" y2="624" />
+        <line x1="580" y1="520" x2="476" y2="580" />
+        <line x1="580" y1="520" x2="460" y2="520" />
+        <line x1="580" y1="520" x2="476" y2="460" />
+        <line x1="580" y1="520" x2="520" y2="416" />
+        <line x1="580" y1="520" x2="580" y2="400" />
+        <line x1="580" y1="520" x2="640" y2="416" />
+        <line x1="580" y1="520" x2="684" y2="460" />
+      </g>
+      <!-- Low-Poly Thin Tire -->
+      <g class="tire-poly">
+        <polygon points="705,520 688,582 677,576" fill="#0d001a"/><polygon points="705,520 677,576 692,520" fill="#240046"/>
+        <polygon points="688,582 642,628 636,617" fill="#180030"/><polygon points="688,582 636,617 677,576" fill="#3c096c"/>
+        <polygon points="642,628 580,645 580,632" fill="#0d001a"/><polygon points="642,628 580,632 636,617" fill="#240046"/>
+        <polygon points="580,645 518,628 524,617" fill="#180030"/><polygon points="580,645 524,617 580,632" fill="#3c096c"/>
+        <polygon points="518,628 472,582 483,576" fill="#0d001a"/><polygon points="518,628 483,576 524,617" fill="#240046"/>
+        <polygon points="472,582 455,520 468,520" fill="#180030"/><polygon points="472,582 468,520 483,576" fill="#3c096c"/>
+        <polygon points="455,520 472,458 483,464" fill="#0d001a"/><polygon points="455,520 483,464 468,520" fill="#240046"/>
+        <polygon points="472,458 518,412 524,423" fill="#180030"/><polygon points="472,458 524,423 483,464" fill="#3c096c"/>
+        <polygon points="518,412 580,395 580,408" fill="#0d001a"/><polygon points="518,412 580,408 524,423" fill="#240046"/>
+        <polygon points="580,395 642,412 636,423" fill="#180030"/><polygon points="580,395 636,423 580,408" fill="#3c096c"/>
+        <polygon points="642,412 688,458 677,464" fill="#0d001a"/><polygon points="642,412 677,464 636,423" fill="#240046"/>
+        <polygon points="688,458 705,520 692,520" fill="#180030"/><polygon points="688,458 692,520 677,464" fill="#3c096c"/>
+      </g>
+      <!-- Front Hub -->
+      <polygon points="580,508 592,520 580,532" fill="#ff007f" />
+      <polygon points="580,508 580,532 568,520" fill="#00f0ff" />
+    </g>
+
+    <!-- ================= BACK LEG (LEFT LEG - PEDAL UP) ================= -->
+    <g id="back-leg">
+      <!-- Upper Leg / Thigh -->
+      <polygon points="345,310 385,315 395,380" fill="#ff5400" />
+      <polygon points="345,310 395,380 365,385" fill="#ff0055" />
+      <!-- Lower Leg -->
+      <polygon points="395,380 365,385 405,465" fill="#ff7b00" />
+      <polygon points="365,385 385,470 405,465" fill="#e0004d" />
+      <!-- Webbed Foot (High Pedal at 395, 465) -->
+      <polygon points="385,470 405,465 440,460" fill="#ff9e00" />
+      <polygon points="385,470 440,460 415,480" fill="#ff0055" />
+      <!-- Back Pedal -->
+      <polygon points="380,465 425,465 415,475" fill="#7209b7" />
+    </g>
+
+    <!-- ================= ROAD RACING BICYCLE FRAME (LOW-POLY CYAN/MAGENTA) ================= -->
+    <g id="bike-frame" class="bike-poly">
+      <!-- Top Tube -->
+      <polygon points="315,355 510,330 415,355" fill="#00ffff" />
+      <polygon points="315,355 415,355 325,375" fill="#00b4d8" />
+      <polygon points="415,355 510,330 505,350" fill="#0096c7" />
+      <polygon points="415,355 505,350 325,375" fill="#0077b6" />
+
+      <!-- Down Tube -->
+      <polygon points="505,350 520,370 430,450" fill="#00f0ff" />
+      <polygon points="505,350 430,450 495,350" fill="#00b4d8" />
+      <polygon points="430,450 375,525 360,510" fill="#0077b6" />
+      <polygon points="495,350 430,450 360,510" fill="#0096c7" />
+
+      <!-- Seat Tube -->
+      <polygon points="315,355 335,365 350,445" fill="#ff007f" />
+      <polygon points="315,355 350,445 330,445" fill="#d90467" />
+      <polygon points="350,445 375,520 355,525" fill="#b5179e" />
+      <polygon points="330,445 350,445 355,525" fill="#7209b7" />
+
+      <!-- Seat Stay -->
+      <polygon points="315,360 328,372 225,515" fill="#00f0ff" />
+      <polygon points="315,360 225,515 215,510" fill="#0077b6" />
+
+      <!-- Chain Stay -->
+      <polygon points="365,515 365,530 220,525" fill="#00b4d8" />
+      <polygon points="365,515 220,525 225,512" fill="#00ffff" />
+
+      <!-- Head Tube -->
+      <polygon points="505,320 522,320 525,375" fill="#ffbe0b" />
+      <polygon points="505,320 525,375 505,370" fill="#fb5607" />
+
+      <!-- Front Fork (Aero Racing Blade) -->
+      <polygon points="505,370 525,375 555,450" fill="#00ffff" />
+      <polygon points="505,370 555,450 538,455" fill="#0096c7" />
+      <polygon points="555,450 586,520 574,522" fill="#00f0ff" />
+      <polygon points="538,455 555,450 574,522" fill="#0077b6" />
+
+      <!-- Seat Post & Racing Saddle (Empty - Pelican is standing out of the saddle!) -->
+      <polygon points="308,320 322,320 328,358" fill="#240046" />
+      <polygon points="308,320 328,358 314,358" fill="#10002b" />
+      <polygon points="275,312 315,310 305,324" fill="#ff0055" />
+      <polygon points="315,310 348,318 305,324" fill="#ffbe0b" />
+      <polygon points="275,312 305,324 285,322" fill="#b5179e" />
+
+      <!-- Stem & Modern Drop Handlebars -->
+      <polygon points="508,302 552,295 548,312" fill="#ff007f" />
+      <polygon points="508,302 548,312 512,320" fill="#b5179e" />
+      <!-- Top Bar & Hoods -->
+      <polygon points="548,295 595,292 585,308" fill="#ffbe0b" />
+      <polygon points="595,292 612,280 600,305" fill="#ff0055" />
+      <!-- Curved Drop Bar -->
+      <polygon points="585,308 602,305 612,338" fill="#240046" />
+      <polygon points="585,308 612,338 596,338" fill="#3c096c" />
+      <polygon points="612,338 595,372 582,362" fill="#10002b" />
+      <polygon points="596,338 612,338 582,362" fill="#240046" />
+      <polygon points="595,372 552,370 558,358" fill="#ff007f" />
+      <polygon points="582,362 595,372 558,358" fill="#d90467" />
+    </g>
+
+    <!-- ================= CRANKSET & FRONT LEG (RIGHT LEG - STANDING HARD ON PEDAL) ================= -->
+    <g id="crank-and-front-leg">
+      <!-- Chainring -->
+      <polygon points="365,495 388,508 365,520" fill="#ffbe0b" />
+      <polygon points="388,508 388,532 365,520" fill="#fb5607" />
+      <polygon points="388,532 365,545 365,520" fill="#ff007f" />
+      <polygon points="365,545 342,532 365,520" fill="#b5179e" />
+      <polygon points="342,532 342,508 365,520" fill="#ff0055" />
+      <polygon points="342,508 365,495 365,520" fill="#ffbe0b" />
+
+      <!-- Downward Crank Arm -->
+      <polygon points="360,520 372,520 348,582" fill="#10002b" />
+      <polygon points="360,520 348,582 336,578" fill="#3c096c" />
+
+      <!-- Front Leg (Extended, standing out of the saddle) -->
+      <!-- Muscular Thigh / Knee -->
+      <polygon points="335,320 385,325 368,415" fill="#ffbe0b" />
+      <polygon points="335,320 368,415 330,405" fill="#ff9e00" />
+      <!-- Long Pelican Shin/Tarsus -->
+      <polygon points="330,405 368,415 352,505" fill="#ff7b00" />
+      <polygon points="330,405 352,505 335,505" fill="#ff5400" />
+      <polygon points="335,505 352,505 350,575" fill="#ffbe0b" />
+      <polygon points="335,505 350,575 334,575" fill="#ff0055" />
+      <!-- Webbed Foot Mashed on Bottom Pedal -->
+      <polygon points="334,575 350,575 392,582" fill="#ffbe0b" />
+      <polygon points="334,575 392,582 362,595" fill="#ff7b00" />
+      <polygon points="334,575 362,595 325,588" fill="#ff0055" />
+      <!-- Pedal Platform -->
+      <polygon points="325,588 385,585 375,596" fill="#00f0ff" />
+    </g>
+
+    <!-- ================= PELICAN BODY, STRETCHED NECK, HEAD & BEAK (LOW-POLY) ================= -->
+    <g id="pelican-body-and-head">
+      <!-- Tail Feathers (High in the air above the empty saddle) -->
+      <polygon class="pelican-poly" points="235,245 285,230 275,265" fill="#00f0ff" />
+      <polygon class="pelican-poly" points="215,268 235,245 275,265" fill="#ffffff" />
+      <polygon class="pelican-poly" points="215,268 275,265 268,288" fill="#caf0f8" />
+      <polygon class="pelican-poly" points="238,295 215,268 268,288" fill="#00b4d8" />
+
+      <!-- Torso / Back / Belly (Elevated well above the saddle at 310,315) -->
+      <polygon class="pelican-poly" points="285,230 365,205 340,265" fill="#ffffff" />
+      <polygon class="pelican-poly" points="285,230 340,265 275,265" fill="#e0fbfc" />
+      <polygon class="pelican-poly" points="365,205 445,195 405,258" fill="#ffffff" />
+      <polygon class="pelican-poly" points="365,205 405,258 340,265" fill="#caf0f8" />
+      <polygon class="pelican-poly" points="275,265 340,265 325,315" fill="#90e0ef" />
+      <polygon class="pelican-poly" points="275,265 325,315 268,288" fill="#48cae4" />
+      <polygon class="pelican-poly" points="340,265 405,258 385,322" fill="#ade8f4" />
+      <polygon class="pelican-poly" points="340,265 385,322 325,315" fill="#00b4d8" />
+      <polygon class="pelican-poly" points="445,195 495,215 455,275" fill="#fff0f3" />
+      <polygon class="pelican-poly" points="445,195 455,275 405,258" fill="#ffffff" />
+      <polygon class="pelican-poly" points="405,258 455,275 385,322" fill="#ffccd5" />
+
+      <!-- Stretched High Neck (Towering from Chest at 460,210 up to Head at 515,65) -->
+      <polygon class="pelican-poly" points="445,195 475,135 495,215" fill="#ffffff" />
+      <polygon class="pelican-poly" points="475,135 512,155 495,215" fill="#caf0f8" />
+      <polygon class="pelican-poly" points="475,135 495,82 528,108" fill="#ffffff" />
+      <polygon class="pelican-poly" points="475,135 528,108 512,155" fill="#e0fbfc" />
+      <polygon class="pelican-poly" points="512,155 528,108 545,150" fill="#ffccd5" />
+      <polygon class="pelican-poly" points="512,155 545,150 495,215" fill="#ffb3c1" />
+
+      <!-- Pelican Head & Punky Crest -->
+      <polygon class="pelican-poly" points="495,82 525,45 548,68" fill="#ffffff" />
+      <polygon class="pelican-poly" points="495,82 548,68 528,108" fill="#caf0f8" />
+      <polygon class="pelican-poly" points="548,68 578,72 560,98" fill="#ffffff" />
+      <polygon class="pelican-poly" points="548,68 560,98 528,108" fill="#90e0ef" />
+      <!-- Plume Feathers on Back of Head -->
+      <polygon class="pelican-poly" points="495,82 455,68 488,55" fill="#ffbe0b" />
+      <polygon class="pelican-poly" points="488,55 465,35 525,45" fill="#ff007f" />
+      <polygon class="pelican-poly" points="495,82 488,55 525,45" fill="#ff7b00" />
+
+      <!-- Iconic Giant Pelican Beak & Gular Pouch (Sunny Yellow & Hot Magenta) -->
+      <!-- Upper Mandible -->
+      <polygon class="beak-poly" points="578,72 665,78 635,96" fill="#ffea00" />
+      <polygon class="beak-poly" points="578,72 635,96 560,98" fill="#ffbe0b" />
+      <polygon class="beak-poly" points="665,78 755,85 725,104" fill="#fff75e" />
+      <polygon class="beak-poly" points="665,78 725,104 635,96" fill="#ffaa00" />
+      <!-- Hooked Tip -->
+      <polygon class="beak-poly" points="755,85 768,108 742,108" fill="#ff0055" />
+      <polygon class="beak-poly" points="755,85 742,108 725,104" fill="#ff5400" />
+      <!-- Giant Throat Pouch -->
+      <polygon class="beak-poly" points="560,98 635,96 615,152" fill="#ff007f" />
+      <polygon class="beak-poly" points="635,96 725,104 678,145" fill="#ff2a85" />
+      <polygon class="beak-poly" points="635,96 678,145 615,152" fill="#d90467" />
+      <polygon class="beak-poly" points="725,104 742,108 678,145" fill="#b5179e" />
+      <polygon class="beak-poly" points="528,108 560,98 615,152" fill="#e0006c" />
+      <polygon class="beak-poly" points="528,108 615,152 545,150" fill="#9d0259" />
+
+      <!-- Fierce Racing Eye & Aerodynamic Visor -->
+      <polygon points="545,62 588,58 575,76" fill="#00f0ff" />
+      <polygon points="545,62 575,76 540,75" fill="#7209b7" />
+      <polygon points="554,67 564,65 560,73" fill="#ffffff" />
+
+      <!-- Right Wing Reaching Down to Grip the Drop Handlebars -->
+      <!-- Shoulder & Upper Wing -->
+      <polygon class="pelican-poly" points="405,215 465,210 475,268" fill="#ffffff" />
+      <polygon class="pelican-poly" points="405,215 475,268 425,275" fill="#caf0f8" />
+      <!-- Forearm Wing Angling to Drop Bars -->
+      <polygon class="pelican-poly" points="475,268 538,275 518,318" fill="#e0fbfc" />
+      <polygon class="pelican-poly" points="425,275 475,268 518,318" fill="#90e0ef" />
+      <!-- Primary Flight Feathers Gripping the Drops (at 585,345) -->
+      <polygon class="pelican-poly" points="538,275 598,318 558,335" fill="#00f0ff" />
+      <polygon class="pelican-poly" points="518,318 538,275 558,335" fill="#00b4d8" />
+      <polygon class="pelican-poly" points="558,335 598,318 608,355" fill="#ff007f" />
+      <polygon class="pelican-poly" points="558,335 608,355 572,368" fill="#b5179e" />
+      <!-- Wingtip Flare -->
+      <polygon class="pelican-poly" points="425,275 518,318 465,332" fill="#ffbe0b" />
+      <polygon class="pelican-poly" points="465,332 518,318 558,335" fill="#ff007f" />
+    </g>
+
+    <!-- ================= FOREGROUND WIND & MOTION PARTICLES ================= -->
+    <g id="foreground-particles">
+      <polygon points="620,635 710,610 675,642" fill="#00ffff" />
+      <polygon points="675,642 750,625 720,652" fill="#ffbe0b" />
+      <polygon points="150,635 80,605 115,642" fill="#ff007f" />
+      <polygon points="210,180 140,165 185,205" fill="#ffbe0b" />
+      <polygon points="135,230 75,220 115,250" fill="#00f0ff" />
+      <polygon points="265,120 205,105 240,140" fill="#ff007f" />
+    </g>
+
+  </g>
+</svg>

@@ -1,0 +1,176 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5fa8e8"/>
+      <stop offset="0.7" stop-color="#bfe0f7"/>
+      <stop offset="1" stop-color="#f3e6c8"/>
+    </linearGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9cc26a"/>
+      <stop offset="1" stop-color="#5d8a3a"/>
+    </linearGradient>
+    <radialGradient id="body" cx="0.4" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.6" stop-color="#ebe8e2"/>
+      <stop offset="1" stop-color="#b9b4ab"/>
+    </radialGradient>
+    <linearGradient id="wing" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e9e5de"/>
+      <stop offset="0.6" stop-color="#b8b1a5"/>
+      <stop offset="1" stop-color="#5c5650"/>
+    </linearGradient>
+    <linearGradient id="neck" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d9d4cb"/>
+      <stop offset="0.5" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#d4cec4"/>
+    </linearGradient>
+    <radialGradient id="head" cx="0.4" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.7" stop-color="#f4efd9"/>
+      <stop offset="1" stop-color="#cfc6ad"/>
+    </radialGradient>
+    <linearGradient id="beak" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd36b"/>
+      <stop offset="1" stop-color="#e88a2a"/>
+    </linearGradient>
+    <linearGradient id="pouch" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f6b25a"/>
+      <stop offset="1" stop-color="#c8662a"/>
+    </linearGradient>
+    <linearGradient id="leg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f5a25a"/>
+      <stop offset="1" stop-color="#c9682e"/>
+    </linearGradient>
+    <linearGradient id="frame" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e2453c"/>
+      <stop offset="1" stop-color="#8e1d18"/>
+    </linearGradient>
+    <radialGradient id="tire" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0.85" stop-color="#3a3a3a"/>
+      <stop offset="0.93" stop-color="#555"/>
+      <stop offset="1" stop-color="#1a1a1a"/>
+    </radialGradient>
+    <radialGradient id="hub" cx="0.35" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#888"/>
+    </radialGradient>
+    <radialGradient id="shadow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="sun" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fffbe0"/>
+      <stop offset="0.5" stop-color="#fff2a8" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#fff2a8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Sky backdrop -->
+  <rect x="0" y="0" width="800" height="600" fill="url(#sky)"/>
+  <circle cx="680" cy="100" r="80" fill="url(#sun)"/>
+  <ellipse cx="160" cy="110" rx="70" ry="22" fill="#fff" opacity="0.7"/>
+  <ellipse cx="200" cy="96" rx="45" ry="20" fill="#fff" opacity="0.7"/>
+  <ellipse cx="520" cy="70" rx="55" ry="16" fill="#fff" opacity="0.6"/>
+
+  <!-- Ground line -->
+  <rect x="0" y="500" width="800" height="100" fill="url(#ground)"/>
+  <line x1="0" y1="500" x2="800" y2="500" stroke="#4e7330" stroke-width="3"/>
+  <ellipse cx="400" cy="505" rx="260" ry="14" fill="url(#shadow)"/>
+
+  <!-- Rear wheel -->
+  <circle cx="250" cy="430" r="72" fill="url(#tire)"/>
+  <circle cx="250" cy="430" r="60" fill="none" stroke="#c9c9c9" stroke-width="3"/>
+  <g stroke="#bbb" stroke-width="1.5">
+    <line x1="250" y1="370" x2="250" y2="490"/>
+    <line x1="190" y1="430" x2="310" y2="430"/>
+    <line x1="208" y1="388" x2="292" y2="472"/>
+    <line x1="208" y1="472" x2="292" y2="388"/>
+    <line x1="227" y1="375" x2="273" y2="485"/>
+    <line x1="195" y1="407" x2="305" y2="453"/>
+    <line x1="195" y1="453" x2="305" y2="407"/>
+    <line x1="227" y1="485" x2="273" y2="375"/>
+  </g>
+  <circle cx="250" cy="430" r="8" fill="url(#hub)"/>
+
+  <!-- Front wheel -->
+  <circle cx="560" cy="430" r="72" fill="url(#tire)"/>
+  <circle cx="560" cy="430" r="60" fill="none" stroke="#c9c9c9" stroke-width="3"/>
+  <g stroke="#bbb" stroke-width="1.5">
+    <line x1="560" y1="370" x2="560" y2="490"/>
+    <line x1="500" y1="430" x2="620" y2="430"/>
+    <line x1="518" y1="388" x2="602" y2="472"/>
+    <line x1="518" y1="472" x2="602" y2="388"/>
+    <line x1="537" y1="375" x2="583" y2="485"/>
+    <line x1="505" y1="407" x2="615" y2="453"/>
+    <line x1="505" y1="453" x2="615" y2="407"/>
+    <line x1="537" y1="485" x2="583" y2="375"/>
+  </g>
+  <circle cx="560" cy="430" r="8" fill="url(#hub)"/>
+
+  <!-- Far leg on rear pedal -->
+  <polyline points="322,318 368,372 362,402" fill="none" stroke="#b85a24" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="350,402 380,398 386,410 352,410" fill="#b85a24"/>
+  <line x1="390" y1="440" x2="362" y2="410" stroke="#555" stroke-width="6" stroke-linecap="round"/>
+  <rect x="348" y="406" width="28" height="7" rx="2" fill="#333"/>
+
+  <!-- Bicycle frame -->
+  <g stroke="url(#frame)" stroke-width="10" stroke-linecap="round">
+    <line x1="250" y1="430" x2="390" y2="440"/>
+    <line x1="250" y1="430" x2="345" y2="335"/>
+    <line x1="390" y1="440" x2="340" y2="320"/>
+    <line x1="345" y1="335" x2="512" y2="330"/>
+    <line x1="390" y1="440" x2="515" y2="345"/>
+    <line x1="512" y1="325" x2="520" y2="352"/>
+  </g>
+  <line x1="518" y1="345" x2="560" y2="430" stroke="#9a9a9a" stroke-width="7" stroke-linecap="round"/>
+  <line x1="512" y1="325" x2="505" y2="292" stroke="#9a9a9a" stroke-width="7" stroke-linecap="round"/>
+  <line x1="505" y1="292" x2="540" y2="288" stroke="#444" stroke-width="7" stroke-linecap="round"/>
+  <ellipse cx="540" cy="289" rx="9" ry="6" fill="#222"/>
+
+  <!-- Chainring and chain -->
+  <circle cx="390" cy="440" r="20" fill="none" stroke="#777" stroke-width="4"/>
+  <circle cx="390" cy="440" r="6" fill="url(#hub)"/>
+  <line x1="250" y1="430" x2="390" y2="420" stroke="#666" stroke-width="2"/>
+  <line x1="250" y1="430" x2="390" y2="460" stroke="#666" stroke-width="2"/>
+
+  <!-- Saddle -->
+  <ellipse cx="335" cy="318" rx="30" ry="8" fill="#2b2b2b"/>
+
+  <!-- Tail feathers -->
+  <polygon points="275,285 220,300 228,312 278,305" fill="#9e978c"/>
+  <polygon points="275,292 215,318 226,326 282,310" fill="#7d776e"/>
+
+  <!-- Body, seated upright -->
+  <ellipse cx="330" cy="275" rx="62" ry="52" fill="url(#body)" transform="rotate(-25 330 275)"/>
+
+  <!-- Wing reaching to the handlebar grip -->
+  <polygon points="352,232 392,240 470,270 540,284 536,296 462,292 380,300 330,296 300,270"
+           fill="url(#wing)" stroke="#6e675e" stroke-width="1.5" stroke-linejoin="round"/>
+  <line x1="340" y1="268" x2="470" y2="282" stroke="#8a8378" stroke-width="1.5"/>
+  <line x1="330" y1="282" x2="480" y2="290" stroke="#6e675e" stroke-width="1.5"/>
+  <polygon points="520,282 548,284 546,298 524,296" fill="#4a453f"/>
+
+  <!-- Near leg on front pedal -->
+  <polyline points="352,315 412,388 420,462" fill="none" stroke="url(#leg)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="390" y1="440" x2="420" y2="470" stroke="#777" stroke-width="7" stroke-linecap="round"/>
+  <rect x="406" y="466" width="30" height="8" rx="2" fill="#333"/>
+  <polygon points="405,462 440,456 448,468 408,468" fill="#f08a3a" stroke="#b85a24" stroke-width="1.5"/>
+
+  <!-- Neck -->
+  <polygon points="350,240 385,238 410,195 395,170 380,175 388,198" fill="url(#neck)"/>
+
+  <!-- Head -->
+  <circle cx="400" cy="168" r="28" fill="url(#head)"/>
+  <ellipse cx="392" cy="146" rx="14" ry="6" fill="#f2e7b8" transform="rotate(-20 392 146)"/>
+
+  <!-- Pouch and beak -->
+  <polygon points="420,180 560,200 520,222 470,226 432,208" fill="url(#pouch)" opacity="0.95"/>
+  <polygon points="418,160 568,190 566,200 420,182" fill="url(#beak)" stroke="#c46b20" stroke-width="1"/>
+  <circle cx="567" cy="198" r="5" fill="#d9772a"/>
+  <line x1="425" y1="171" x2="560" y2="194" stroke="#c46b20" stroke-width="1"/>
+
+  <!-- Eye -->
+  <circle cx="410" cy="160" r="6" fill="#fff4cc"/>
+  <circle cx="411" cy="160" r="3.5" fill="#1c1c1c"/>
+  <circle cx="412.5" cy="158.5" r="1.2" fill="#fff"/>
+</svg>

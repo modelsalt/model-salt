@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+  <!-- Sky -->
+  <rect width="600" height="800" fill="#2F80FF"/>
+  <circle cx="465" cy="150" r="70" fill="#FFE600"/>
+  <g fill="#FFFFFF">
+    <circle cx="110" cy="160" r="28"/><circle cx="145" cy="145" r="36"/>
+    <circle cx="185" cy="162" r="26"/><rect x="82" y="160" width="130" height="28" rx="14"/>
+  </g>
+
+  <!-- Rolling hills -->
+  <path d="M0 470 C120 400 220 420 300 460 C380 500 480 410 600 430 L600 800 L0 800 Z" fill="#FFC800"/>
+  <path d="M0 560 C100 510 200 520 300 545 C420 575 500 500 600 520 L600 800 L0 800 Z" fill="#0B3BD1"/>
+  <path d="M0 640 C200 634 400 634 600 640 L600 800 L0 800 Z" fill="#E4161E"/>
+  <path d="M0 720 C150 690 300 700 420 730 C500 750 560 720 600 715 L600 800 L0 800 Z" fill="#B00D14"/>
+
+  <!-- Speed lines (trailing to the right) -->
+  <g fill="#FFFFFF">
+    <rect x="470" y="372" width="80" height="8" rx="4"/>
+    <rect x="485" y="412" width="95" height="8" rx="4"/>
+    <rect x="500" y="470" width="65" height="8" rx="4"/>
+    <rect x="525" y="600" width="60" height="8" rx="4"/>
+  </g>
+
+  <!-- Far leg + far crank (behind bike) -->
+  <g fill="#D95F00">
+    <rect x="0" y="-4.5" width="79" height="9" rx="4.5" transform="translate(330 405) rotate(124.7)"/>
+    <rect x="0" y="-4.5" width="85" height="9" rx="4.5" transform="translate(285 470) rotate(49.8)"/>
+    <circle cx="285" cy="470" r="6"/>
+    <polygon points="325,540 362,535 356,547 328,549"/>
+  </g>
+  <rect x="0" y="-4" width="35" height="8" rx="4" fill="#111111" transform="translate(320 565) rotate(-45)"/>
+
+  <!-- Wheels -->
+  <path fill-rule="evenodd" fill="#111111" d="M345,555 a85,85 0 1,0 170,0 a85,85 0 1,0 -170,0 Z M358,555 a72,72 0 1,0 144,0 a72,72 0 1,0 -144,0 Z"/>
+  <path fill-rule="evenodd" fill="#111111" d="M85,555 a85,85 0 1,0 170,0 a85,85 0 1,0 -170,0 Z M98,555 a72,72 0 1,0 144,0 a72,72 0 1,0 -144,0 Z"/>
+  <g fill="#F2F2F2">
+    <g transform="translate(430 555)">
+      <rect x="-1.5" y="-72" width="3" height="144"/>
+      <rect x="-1.5" y="-72" width="3" height="144" transform="rotate(30)"/>
+      <rect x="-1.5" y="-72" width="3" height="144" transform="rotate(60)"/>
+      <rect x="-1.5" y="-72" width="3" height="144" transform="rotate(90)"/>
+      <rect x="-1.5" y="-72" width="3" height="144" transform="rotate(120)"/>
+      <rect x="-1.5" y="-72" width="3" height="144" transform="rotate(150)"/>
+    </g>
+    <g transform="translate(170 555)">
+      <rect x="-1.5" y="-72" width="3" height="144"/>
+      <rect x="-1.5" y="-72" width="3" height="144" transform="rotate(30)"/>
+      <rect x="-1.5" y="-72" width="3" height="144" transform="rotate(60)"/>
+      <rect x="-1.5" y="-72" width="3" height="144" transform="rotate(90)"/>
+      <rect x="-1.5" y="-72" width="3" height="144" transform="rotate(120)"/>
+      <rect x="-1.5" y="-72" width="3" height="144" transform="rotate(150)"/>
+    </g>
+  </g>
+  <circle cx="430" cy="555" r="10" fill="#FFE600"/>
+  <circle cx="170" cy="555" r="10" fill="#FFE600"/>
+
+  <!-- Chain -->
+  <g fill="#111111">
+    <rect x="320" y="546" width="110" height="3"/>
+    <rect x="0" y="-1.5" width="111" height="3" transform="translate(320 583) rotate(-10.4)"/>
+    <circle cx="430" cy="555" r="5"/>
+  </g>
+
+  <!-- Frame -->
+  <g fill="#E4161E">
+    <rect x="0" y="-6" width="152" height="12" rx="6" transform="translate(205 465) rotate(41)"/>
+    <rect x="0" y="-6" width="147" height="12" rx="6" transform="translate(352 440) rotate(181.9)"/>
+    <rect x="0" y="-6" width="144" height="12" rx="6" transform="translate(320 565) rotate(-77.1)"/>
+    <rect x="0" y="-5" width="110" height="10" rx="5" transform="translate(320 565) rotate(-5.2)"/>
+    <rect x="0" y="-5" width="140" height="10" rx="5" transform="translate(350 440) rotate(55.2)"/>
+    <rect x="0" y="-6" width="141" height="12" rx="6" transform="translate(210 420) rotate(106.5)"/>
+  </g>
+
+  <!-- Handlebar -->
+  <g fill="#111111">
+    <rect x="207" y="400" width="8" height="24" rx="3"/>
+    <rect x="176" y="398" width="40" height="8" rx="4"/>
+    <rect x="174" y="398" width="8" height="28" rx="4"/>
+  </g>
+
+  <!-- Saddle -->
+  <path d="M328 414 Q350 406 382 412 Q384 422 372 424 L336 424 Q326 422 328 414 Z" fill="#111111"/>
+
+  <!-- Pelican body (flat, aero tuck) -->
+  <polygon points="400,350 448,336 442,360 402,374" fill="#FFFFFF"/>
+  <ellipse cx="330" cy="378" rx="82" ry="40" fill="#FFFFFF" transform="rotate(-12 330 378)"/>
+  <ellipse cx="342" cy="370" rx="60" ry="21" fill="#DCE5F2" transform="rotate(-12 342 370)"/>
+  <polygon points="372,360 446,342 432,357 380,377" fill="#111111"/>
+
+  <!-- Tucked neck + low head -->
+  <path d="M265 358 C242 350 228 358 218 360 L212 402 C232 406 250 410 266 404 Z" fill="#FFFFFF"/>
+  <circle cx="218" cy="381" r="25" fill="#FFFFFF"/>
+  <ellipse cx="232" cy="360" rx="13" ry="6" fill="#FFE600" transform="rotate(-20 232 360)"/>
+
+  <!-- Beak and pouch -->
+  <path d="M206 388 L74 393 Q118 420 168 419 Q198 416 214 400 Z" fill="#E4161E"/>
+  <path d="M206 369 L72 386 Q64 389 70 394 L206 389 Z" fill="#FFD400"/>
+  <path d="M72 386 Q60 388 64 398 Q70 395 75 392 Z" fill="#E4161E"/>
+  <circle cx="221" cy="373" r="5" fill="#111111"/>
+  <circle cx="222.5" cy="371.5" r="1.6" fill="#FFFFFF"/>
+
+  <!-- Near leg + near crank -->
+  <circle cx="320" cy="565" r="18" fill="#111111"/>
+  <circle cx="320" cy="565" r="8" fill="#E4161E"/>
+  <rect x="0" y="-4" width="35" height="8" rx="4" fill="#111111" transform="translate(320 565) rotate(135)"/>
+  <g fill="#FF7A00">
+    <rect x="0" y="-5" width="102" height="10" rx="5" transform="translate(310 405) rotate(118.1)"/>
+    <rect x="0" y="-5" width="92" height="10" rx="5" transform="translate(262 495) rotate(71)"/>
+    <circle cx="262" cy="495" r="7"/>
+    <polygon points="274,588 314,583 307,595 278,597"/>
+  </g>
+</svg>

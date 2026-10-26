@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" role="img" aria-labelledby="t d">
+  <title id="t">A pelican riding a bicycle</title>
+  <desc id="d">A neon cyan pelican with pink wings spread mid-flap rides a lime-green bicycle, with speed streaks trailing behind.</desc>
+
+  <!-- Background -->
+  <rect width="900" height="620" fill="#160A2E"/>
+
+  <!-- Motion streaks (trailing only) -->
+  <g>
+    <rect x="30"  y="392" width="170" height="12" rx="6" fill="#FF2E9A" opacity="0.9"/>
+    <rect x="70"  y="422" width="130" height="10" rx="5" fill="#00E5FF" opacity="0.8"/>
+    <rect x="20"  y="452" width="200" height="14" rx="7" fill="#C6FF00" opacity="0.85"/>
+    <rect x="90"  y="484" width="110" height="9"  rx="4" fill="#FF2E9A" opacity="0.7"/>
+    <rect x="45"  y="514" width="150" height="11" rx="5" fill="#00E5FF" opacity="0.6"/>
+    <circle cx="232" cy="459" r="7" fill="#C6FF00" opacity="0.8"/>
+    <circle cx="210" cy="398" r="5" fill="#FF7AC0" opacity="0.7"/>
+  </g>
+
+  <!-- Wheel definition -->
+  <defs>
+    <g id="wheel">
+      <circle r="84" fill="#00E5FF"/>
+      <circle r="70" fill="#160A2E"/>
+      <g fill="#C6FF00" opacity="0.8">
+        <rect x="-3" y="-68" width="6" height="136" rx="3"/>
+        <rect x="-3" y="-68" width="6" height="136" rx="3" transform="rotate(60)"/>
+        <rect x="-3" y="-68" width="6" height="136" rx="3" transform="rotate(120)"/>
+      </g>
+      <circle r="11" fill="#FF2E9A"/>
+      <circle r="4" fill="#160A2E"/>
+    </g>
+  </defs>
+
+  <!-- Wheels -->
+  <use href="#wheel" x="290" y="440"/>
+  <use href="#wheel" x="620" y="440"/>
+
+  <!-- Chain -->
+  <polygon points="448,432 292,427 292,435 450,440" fill="#FF7AC0" opacity="0.8"/>
+  <polygon points="450,460 292,453 292,461 448,468" fill="#FF7AC0" opacity="0.8"/>
+
+  <!-- Frame (lime) -->
+  <g fill="#C6FF00">
+    <polygon points="290,435 450,445 450,455 290,445"/>          <!-- chainstay -->
+    <polygon points="286,443 381,318 389,312 294,437"/>          <!-- seatstay -->
+    <polygon points="446,452 380,317 390,313 454,448"/>          <!-- seat tube -->
+    <polygon points="447,445 602,345 608,355 453,455"/>          <!-- down tube -->
+    <polygon points="385,310 585,300 585,310 385,320"/>          <!-- top tube -->
+    <polygon points="579,306 599,351 611,348 591,303"/>          <!-- head tube -->
+    <polygon points="601,350 614,441 626,439 611,348"/>          <!-- fork -->
+    <polygon points="580,306 566,262 576,258 590,302"/>          <!-- handlebar post -->
+    <rect x="516" y="250" width="62" height="10" rx="5"/>         <!-- handlebar -->
+    <rect x="381" y="310" width="9"  height="20" rx="3"/>         <!-- seat post -->
+  </g>
+  <rect x="504" y="248" width="20" height="14" rx="6" fill="#FF2E9A"/> <!-- grip -->
+  <ellipse cx="378" cy="306" rx="32" ry="9" fill="#FF2E9A" transform="rotate(-5 378 306)"/> <!-- saddle -->
+
+  <!-- Crank, chainring, pedals -->
+  <g fill="#FF2E9A">
+    <polygon points="446,444 490,482 484,490 440,452"/>
+    <polygon points="454,444 416,406 408,414 446,452"/>
+    <circle cx="450" cy="450" r="19"/>
+  </g>
+  <circle cx="450" cy="450" r="12" fill="#160A2E"/>
+  <circle cx="450" cy="450" r="5"  fill="#FF2E9A"/>
+  <rect x="478" y="486" width="28" height="8" rx="4" fill="#00E5FF"/>
+  <rect x="402" y="408" width="28" height="8" rx="4" fill="#00E5FF"/>
+
+  <!-- Far leg (darker) -->
+  <polygon points="392,358 424,406 408,420 380,368" fill="#9BE800"/>
+  <polygon points="396,408 434,404 432,418 398,420" fill="#9BE800"/>
+
+  <!-- Tail feathers -->
+  <g fill="#FF2E9A">
+    <polygon points="318,282 252,258 304,300"/>
+    <polygon points="322,304 248,296 306,318"/>
+    <polygon points="322,326 258,346 310,338"/>
+  </g>
+
+  <!-- Far wing (raised right, behind body) -->
+  <path d="M 470 262 C 520 170, 590 100, 705 62 C 680 130, 640 180, 590 212 C 550 236, 505 255, 468 272 Z" fill="#C6FF00"/>
+  <g fill="#FF2E9A" opacity="0.85">
+    <ellipse cx="640" cy="120" rx="34" ry="10" transform="rotate(-32 640 120)"/>
+    <ellipse cx="606" cy="156" rx="34" ry="10" transform="rotate(-32 606 156)"/>
+    <ellipse cx="575" cy="188" rx="34" ry="10" transform="rotate(-32 575 188)"/>
+  </g>
+
+  <!-- Body -->
+  <ellipse cx="405" cy="298" rx="102" ry="72" fill="#00E5FF" transform="rotate(-12 405 298)"/>
+  <ellipse cx="428" cy="326" rx="58"  ry="36" fill="#A9F6FF" opacity="0.9" transform="rotate(-12 428 326)"/>
+
+  <!-- Near leg + foot on pedal -->
+  <polygon points="436,352 494,480 480,493 424,362" fill="#C6FF00"/>
+  <polygon points="466,488 512,482 514,494 470,500" fill="#C6FF00"/>
+
+  <!-- Near wing (raised left, mid-flap) -->
+  <path d="M 445 270 C 400 185, 320 110, 155 70 C 190 130, 230 175, 285 205 C 340 235, 405 258, 452 282 Z" fill="#FF2E9A"/>
+  <g fill="#FF7AC0" opacity="0.9">
+    <ellipse cx="225" cy="148" rx="40" ry="12" transform="rotate(28 225 148)"/>
+    <ellipse cx="262" cy="178" rx="40" ry="12" transform="rotate(28 262 178)"/>
+    <ellipse cx="300" cy="205" rx="40" ry="12" transform="rotate(28 300 205)"/>
+    <ellipse cx="338" cy="226" rx="40" ry="12" transform="rotate(28 338 226)"/>
+  </g>
+
+  <!-- Neck and head -->
+  <path d="M 455 300 C 505 265, 535 225, 550 190 L 572 200 C 555 240, 525 280, 480 315 Z" fill="#00E5FF"/>
+  <circle cx="582" cy="170" r="36" fill="#00E5FF"/>
+  <g fill="#FF2E9A">
+    <polygon points="550,142 524,116 560,134"/>
+    <polygon points="552,156 520,146 560,148"/>
+  </g>
+
+  <!-- Pouch -->
+  <path d="M 614 168 C 648 184, 706 192, 758 184 C 748 230, 704 256, 662 250 C 630 244, 614 206, 610 172 Z" fill="#FF2E9A"/>
+  <path d="M 636 192 C 662 202, 706 206, 738 198 C 728 226, 698 242, 670 238 C 650 234, 640 214, 636 196 Z" fill="#FF7AC0" opacity="0.85"/>
+
+  <!-- Upper beak with hooked tip -->
+  <polygon points="610,150 766,170 760,186 612,170" fill="#C6FF00"/>
+  <polygon points="766,170 778,182 758,188" fill="#C6FF00"/>
+
+  <!-- Eye -->
+  <circle cx="590" cy="158" r="6.5" fill="#160A2E"/>
+  <circle cx="592.5" cy="155.5" r="2.2" fill="#FFFFFF"/>
+</svg>

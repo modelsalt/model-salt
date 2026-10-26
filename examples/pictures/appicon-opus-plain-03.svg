@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <!-- Sky background -->
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#1D4ED8"/>
+      <stop offset="55%"  stop-color="#2F8DF5"/>
+      <stop offset="100%" stop-color="#5FD3FF"/>
+    </linearGradient>
+
+    <!-- Warm ambient light around the sun -->
+    <radialGradient id="ambient" cx="667" cy="387" r="520" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#FFE7A3" stop-opacity="0.45"/>
+      <stop offset="45%"  stop-color="#FFD166" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#FFD166" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Sun body -->
+    <radialGradient id="sun" cx="620" cy="320" r="230" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#FFF4C2"/>
+      <stop offset="45%"  stop-color="#FFD23F"/>
+      <stop offset="100%" stop-color="#FF9F1C"/>
+    </radialGradient>
+
+    <!-- Sun halo -->
+    <radialGradient id="halo" cx="667" cy="387" r="260" gradientUnits="userSpaceOnUse">
+      <stop offset="60%"  stop-color="#FFD23F" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#FFD23F" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Cloud fill (user space so all parts share one seamless gradient) -->
+    <linearGradient id="cloud" x1="0" y1="370" x2="0" y2="810" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#FFFFFF"/>
+      <stop offset="70%"  stop-color="#F1F6FF"/>
+      <stop offset="100%" stop-color="#D6E4FA"/>
+    </linearGradient>
+
+    <!-- Soft shadow under the cloud -->
+    <filter id="cloudShadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#0B2A6B" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Background (square, full bleed) -->
+  <rect width="1024" height="1024" fill="url(#sky)"/>
+  <rect width="1024" height="1024" fill="url(#ambient)"/>
+
+  <!-- Artwork, optically centered -->
+  <g transform="translate(-13 27)">
+    <!-- Sun -->
+    <circle cx="680" cy="360" r="250" fill="url(#halo)"/>
+    <circle cx="680" cy="360" r="170" fill="url(#sun)"/>
+
+    <!-- Cloud -->
+    <g filter="url(#cloudShadow)" fill="url(#cloud)">
+      <rect x="200" y="580" width="620" height="200" rx="100"/>
+      <circle cx="380" cy="590" r="130"/>
+      <circle cx="590" cy="540" r="180"/>
+    </g>
+
+    <!-- Subtle highlight on the cloud's top edge -->
+    <path d="M440 470 A180 180 0 0 1 700 395" fill="none"
+          stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+  </g>
+</svg>

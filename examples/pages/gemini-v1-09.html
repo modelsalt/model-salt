@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VerdantPrep — Organic Macro Meal Planning for Athletes</title>
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono for numerical data -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      /* Fresh Organic Modern Palette */
+      --bg-cream: #FAF7F2;
+      --bg-oat: #F1ECE1;
+      --bg-card: #FFFFFF;
+      --green-deep: #143625;
+      --green-leaf: #2E6F40;
+      --green-lime: #68B684;
+      --green-tint: #E3F0E8;
+      --accent-terracotta: #D96B43;
+      --text-dark: #112218;
+      --text-muted: #526358;
+      --border-light: #DFD9CD;
+      --ui-high-contrast: #0D1F16;
+      --ui-surface: #183225;
+      
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --shadow-soft: 0 12px 32px -8px rgba(20, 54, 37, 0.08);
+      --shadow-ui: 0 24px 48px -12px rgba(13, 31, 22, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .container {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      color: var(--green-deep);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--green-tint);
+      color: var(--green-leaf);
+      font-weight: 700;
+      font-size: 0.825rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+
+    /* Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 247, 242, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 80px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.35rem;
+      color: var(--green-deep);
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--green-leaf);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      color: var(--bg-cream);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--green-leaf);
+    }
+
+    .nav-cta {
+      background-color: var(--green-deep);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .nav-cta:hover {
+      background-color: var(--green-leaf);
+      transform: translateY(-1px);
+    }
+
+    /* Split Hero Section */
+    .hero {
+      padding: 72px 0 96px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 4.5vw, 3.75rem);
+      font-weight: 800;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span {
+      color: var(--green-leaf);
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      max-width: 540px;
+    }
+
+    /* Email Capture Form */
+    .email-capture-form {
+      display: flex;
+      gap: 12px;
+      max-width: 500px;
+      margin-bottom: 14px;
+    }
+
+    .email-input {
+      flex: 1;
+      padding: 16px 20px;
+      border-radius: var(--radius-sm);
+      border: 2px solid var(--border-light);
+      background: #FFFFFF;
+      font-size: 1rem;
+      font-family: inherit;
+      color: var(--text-dark);
+      transition: border-color 0.2s;
+    }
+
+    .email-input:focus {
+      outline: none;
+      border-color: var(--green-leaf);
+    }
+
+    .btn-primary {
+      background-color: var(--green-leaf);
+      color: #FFFFFF;
+      border: none;
+      padding: 16px 26px;
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--green-deep);
+      transform: translateY(-1px);
+    }
+
+    .trial-microcopy {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .trial-microcopy span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .form-feedback {
+      display: none;
+      margin-top: 12px;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      background-color: var(--green-tint);
+      color: var(--green-deep);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* Hero Right Graphic */
+    .hero-visual {
+      position: relative;
+      background: var(--bg-oat);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      border: 1px solid var(--border-light);
+    }
+
+    .macro-card-hero {
+      background: var(--ui-high-contrast);
+      color: #FFFFFF;
+      border-radius: var(--radius-md);
+      padding: 28px;
+      box-shadow: var(--shadow-ui);
+    }
+
+    .macro-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .macro-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--green-lime);
+      font-weight: 700;
+    }
+
+    .calorie-readout {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 20px;
+    }
+
+    .calorie-readout .big-num {
+      font-size: 2.4rem;
+      font-weight: 700;
+    }
+
+    .macro-bars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .macro-pill {
+      background: var(--ui-surface);
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .macro-pill-label {
+      font-size: 0.75rem;
+      color: #A5B8AD;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .macro-pill-val {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #FFF;
+    }
+
+    .progress-track {
+      height: 6px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 99px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 99px;
+    }
+
+    .fill-protein { width: 92%; background: var(--green-lime); }
+    .fill-carbs { width: 78%; background: #E9C46A; }
+    .fill-fats { width: 85%; background: var(--accent-terracotta); }
+
+    .hero-meal-preview {
+      background: #FFFFFF;
+      color: var(--text-dark);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 16px;
+    }
+
+    .meal-tag {
+      background: var(--green-tint);
+      color: var(--green-deep);
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    /* 3-Column Value Pillars */
+    .pillars {
+      padding: 88px 0;
+      border-top: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+      background: var(--bg-oat);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 60px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2rem, 3.5vw, 2.75rem);
+      margin-bottom: 16px;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .pillar-card {
+      background: var(--bg-card);
+      padding: 36px 30px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.2s;
+    }
+
+    .pillar-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .pillar-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: var(--green-tint);
+      color: var(--green-leaf);
+      display: grid;
+      place-items: center;
+      margin-bottom: 24px;
+    }
+
+    .pillar-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 12px;
+    }
+
+    .pillar-card p {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      margin-bottom: 20px;
+    }
+
+    .pillar-stat {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--green-leaf);
+      border-top: 1px solid var(--border-light);
+      padding-top: 14px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Centerpiece Interactive Demo: Tabbed Feature Switcher */
+    .demo-section {
+      padding: 100px 0;
+    }
+
+    .tabs-bar {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: var(--bg-oat);
+      border: 2px solid var(--border-light);
+      color: var(--text-dark);
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover {
+      border-color: var(--green-leaf);
+    }
+
+    .tab-btn.active {
+      background: var(--green-deep);
+      color: #FFFFFF;
+      border-color: var(--green-deep);
+      box-shadow: 0 8px 20px rgba(20, 54, 37, 0.22);
+    }
+
+    .tab-step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      display: inline-grid;
+      place-items: center;
+      font-size: 0.8rem;
+    }
+
+    .tab-btn:not(.active) .tab-step-num {
+      background: var(--border-light);
+      color: var(--green-deep);
+    }
+
+    /* High-Contrast App Mockup Frame */
+    .mockup-frame {
+      background: var(--ui-high-contrast);
+      color: #FFFFFF;
+      border-radius: var(--radius-lg);
+      border: 4px solid #264635;
+      box-shadow: var(--shadow-ui);
+      overflow: hidden;
+      min-height: 500px;
+    }
+
+    .mockup-topbar {
+      background: #08150E;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: #2E4B3B;
+    }
+
+    .dot.green { background: var(--green-lime); }
+
+    .mockup-status {
+      font-size: 0.8rem;
+      color: #9AB5A6;
+    }
+
+    .tab-pane {
+      display: none;
+      padding: 36px;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    .tab-pane.active {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .pane-copy h3 {
+      color: #FFFFFF;
+      font-size: 1.85rem;
+      margin-bottom: 16px;
+    }
+
+    .pane-copy p {
+      color: #B7C9BF;
+      margin-bottom: 24px;
+      font-size: 1.05rem;
+    }
+
+    .feature-checklist {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .feature-checklist li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      color: #E3F0E8;
+    }
+
+    .check-badge {
+      color: var(--green-lime);
+      font-weight: bold;
+    }
+
+    /* High-contrast UI Widget inside Mockup */
+    .ui-canvas {
+      background: var(--ui-surface);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-md);
+      padding: 24px;
+    }
+
+    .ui-row {
+      background: #0D1F16;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .ui-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .macro-chip-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    .macro-chip {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: rgba(104, 182, 132, 0.16);
+      color: var(--green-lime);
+      border: 1px solid rgba(104, 182, 132, 0.35);
+    }
+
+    .macro-chip.carb {
+      background: rgba(233, 196, 106, 0.15);
+      color: #F4D58D;
+      border-color: rgba(233, 196, 106, 0.3);
+    }
+
+    /* Social Proof */
+    .social-proof {
+      padding: 88px 0;
+      background: var(--bg-oat);
+      border-top: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .testimonial-card {
+      background: var(--bg-card);
+      padding: 32px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-light);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .quote-text {
+      font-size: 1.02rem;
+      color: var(--text-dark);
+      margin-bottom: 24px;
+      font-weight: 500;
+    }
+
+    .athlete-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-light);
+      padding-top: 16px;
+    }
+
+    .athlete-name {
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--green-deep);
+    }
+
+    .athlete-sport {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .verified-macro-badge {
+      background: var(--green-tint);
+      color: var(--green-leaf);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 99px;
+    }
+
+    /* Pricing Section */
+    .pricing-section {
+      padding: 96px 0;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .price-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 36px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .price-card.featured {
+      background: var(--green-deep);
+      color: #FFFFFF;
+      border: 2px solid var(--green-leaf);
+      transform: scale(1.03);
+      box-shadow: var(--shadow-ui);
+    }
+
+    .price-card.featured h3,
+    .price-card.featured .price-amount {
+      color: #FFFFFF;
+    }
+
+    .price-tier-name {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .price-amount {
+      font-size: 2.75rem;
+      font-weight: 800;
+      color: var(--green-deep);
+      margin: 16px 0;
+    }
+
+    .price-amount span {
+      font-size: 1rem;
+      font-weight: 500;
+      opacity: 0.75;
+    }
+
+    .price-features {
+      list-style: none;
+      margin: 24px 0 32px;
+      display: grid;
+      gap: 12px;
+      font-size: 0.95rem;
+    }
+
+    .price-btn {
+      display: block;
+      text-align: center;
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      text-decoration: none;
+      border: 2px solid var(--green-deep);
+      color: var(--green-deep);
+      transition: all 0.2s;
+    }
+
+    .price-btn:hover {
+      background: var(--green-deep);
+      color: #FFFFFF;
+    }
+
+    .price-card.featured .price-btn {
+      background: var(--green-lime);
+      border-color: var(--green-lime);
+      color: var(--ui-high-contrast);
+    }
+
+    .price-card.featured .price-btn:hover {
+      background: #7CE09D;
+    }
+
+    /* Footer CTA & Email Capture */
+    footer {
+      background: var(--green-deep);
+      color: var(--bg-cream);
+      padding: 80px 0 48px;
+    }
+
+    .footer-cta-box {
+      background: var(--ui-surface);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-lg);
+      padding: 56px 40px;
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .footer-cta-box h2 {
+      color: #FFFFFF;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      margin-bottom: 14px;
+    }
+
+    .footer-cta-box p {
+      color: #B7C9BF;
+      max-width: 540px;
+      margin: 0 auto 28px;
+    }
+
+    .footer-cta-box .email-capture-form {
+      margin: 0 auto 14px;
+    }
+
+    .footer-cta-box .trial-microcopy {
+      justify-content: center;
+      color: #A5B8AD;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+      color: #9AB5A6;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 960px) {
+      .hero-grid,
+      .pillars-grid,
+      .tab-pane.active,
+      .testimonials-grid,
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .price-card.featured {
+        transform: none;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .email-capture-form {
+        flex-direction: column;
+      }
+      .macro-bars {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <div class="container nav-bar">
+      <a href="#" class="logo">
+        <span class="logo-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+          </svg>
+        </span>
+        VerdantPrep
+      </a>
+      <ul class="nav-links">
+        <li><a href="#pillars">Why Verdant</a></li>
+        <li><a href="#interactive-demo">How It Works</a></li>
+        <li><a href="#athletes">Athletes</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+      </ul>
+      <a href="#hero-input" class="nav-cta">Start 14-Day Free Trial</a>
+    </div>
+  </header>
+
+  <!-- 1. Split Hero Section -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="badge">
+          <span>●</span> Whole-Food Performance Nutrition
+        </div>
+        <h1>Hit Your Exact Macros With <span>Real, Organic</span> Meal Prep.</h1>
+        <p class="hero-sub">
+          Built for strength athletes, runners, and macro-conscious lifters. Automatically generate high-protein weekly meal plans,精确 gram-scaled grocery lists, and batch-prep timelines in 60 seconds.
+        </p>
+
+        <!-- Direct Email Capture Input Field -->
+        <form class="email-capture-form" onsubmit="handleTrialSignup(event, 'hero-feedback')">
+          <input 
+            id="hero-input"
+            type="email" 
+            class="email-input" 
+            placeholder="Enter your email address..." 
+            required 
+            aria-label="Email address"
+          />
+          <button type="submit" class="btn-primary">Start 14-Day Free Trial</button>
+        </form>
+        <div class="trial-microcopy">
+          <span>✓ Instant 14-day access</span>
+          <span>✓ No credit card required</span>
+          <span>✓ Cancel in 1 click</span>
+        </div>
+        <div id="hero-feedback" class="form-feedback"></div>
+      </div>
+
+      <!-- High-Contrast Macro Card Visual -->
+      <div class="hero-visual">
+        <div class="macro-card-hero">
+          <div class="macro-header">
+            <span class="macro-title">Today's Training Day Target</span>
+            <span class="mono" style="color: #9AB5A6; font-size: 0.85rem;">99.4% Macro Match</span>
+          </div>
+          <div class="calorie-readout">
+            <div>
+              <div style="font-size: 0.85rem; color: #9AB5A6;">Planned Daily Intake</div>
+              <div class="big-num mono">2,850 <span style="font-size: 1rem; font-weight: 400; color: #9AB5A6;">kcal</span></div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 0.8rem; color: var(--green-lime); font-weight: 700;">HIGH PROTEIN PREP</div>
+              <div class="mono" style="font-size: 0.9rem; color: #FFF;">4 Meals + 1 Shake</div>
+            </div>
+          </div>
+
+          <div class="macro-bars">
+            <div class="macro-pill">
+              <span class="macro-pill-label">PROTEIN</span>
+              <span class="macro-pill-val mono">215g</span>
+              <div class="progress-track"><div class="progress-fill fill-protein"></div></div>
+            </div>
+            <div class="macro-pill">
+              <span class="macro-pill-label">NET CARBS</span>
+              <span class="macro-pill-val mono">310g</span>
+              <div class="progress-track"><div class="progress-fill fill-carbs"></div></div>
+            </div>
+            <div class="macro-pill">
+              <span class="macro-pill-label">HEALTHY FATS</span>
+              <span class="macro-pill-val mono">82g</span>
+              <div class="progress-track"><div class="progress-fill fill-fats"></div></div>
+            </div>
+          </div>
+
+          <div class="hero-meal-preview">
+            <div>
+              <div style="font-weight: 800; font-size: 0.95rem;">Post-Workout: Chimichurri Bison & Jasmine Bowl</div>
+              <div class="mono" style="font-size: 0.8rem; color: var(--text-muted);">64g P • 78g C • 18g F • 730 kcal</div>
+            </div>
+            <span class="meal-tag">25m Batch</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 3-Column Value Pillars -->
+  <section id="pillars" class="pillars">
+    <div class="container">
+      <div class="section-header">
+        <div class="badge">Engineered For Hypertrophy & Endurance</div>
+        <h2>Stop Playing "Macro Tetris" Every Night at 9 PM.</h2>
+        <p>Instead of logging random snacks to hit your protein goal, VerdantPrep reverse-engineers your entire week of whole-food meals before you even step into the grocery store.</p>
+      </div>
+
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>
+            </svg>
+          </div>
+          <h3>Algorithmic Macro Scaling</h3>
+          <p>Every recipe dynamically adjusts ingredient weights in grams so each meal lands within ±2g of your protein, carb, and fat targets automatically.</p>
+          <div class="pillar-stat mono">
+            <span>PRECISION TOLERANCE</span>
+            <span>±1.5g MACROS</span>
+          </div>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </div>
+          <h3>High-Protein Whole Foods</h3>
+          <p>Over 650 chef-tested recipes crafted from grass-fed meats, wild fish, tempeh, and seasonal produce—zero artificial fillers or ultra-processed junk.</p>
+          <div class="pillar-stat mono">
+            <span>AVG MEAL PROTEIN</span>
+            <span>45g – 68g / SERVING</span>
+          </div>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <h3>90-Minute Sunday Batch Prep</h3>
+          <p>Our multi-timer cooking queue sequences oven roasts, grain cookers, and skillet sears in parallel so 15 контейнеры are stacked and chilled in under 90 minutes.</p>
+          <div class="pillar-stat mono">
+            <span>WEEKLY TIME SAVED</span>
+            <span>6.4 HRS / WEEK</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Interactive Demo: Tabbed Feature Switcher -->
+  <section id="interactive-demo" class="demo-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="badge">Interactive App Walkthrough</div>
+        <h2>From Macro Target to Tupperware in Three Steps</h2>
+        <p>Click through the high-contrast workspace below to see how VerdantPrep handles planning, grocery runs, and Sunday batch cooking.</p>
+      </div>
+
+      <!-- Tab Buttons -->
+      <div class="tabs-bar" role="tablist">
+        <button class="tab-btn active" role="tab" aria-selected="true" onclick="switchTab('planning', this)">
+          <span class="tab-step-num mono">1</span> Macro Planning
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('shopping', this)">
+          <span class="tab-step-num mono">2</span> Smart Grocery List
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('cooking', this)">
+          <span class="tab-step-num mono">3</span> Parallel Batch Cooking
+        </button>
+      </div>
+
+      <!-- High-Contrast App Interface Mockup -->
+      <div class="mockup-frame">
+        <div class="mockup-topbar">
+          <div class="window-dots">
+            <span class="dot green"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <div class="mockup-status mono" id="mockup-header-label">VERDANT_OS // MODE: MACRO_PLANNER_V4</div>
+          <div class="mono" style="font-size: 0.8rem; color: var(--green-lime);">● SYNCED WITH APPLE HEALTH & GARMIN</div>
+        </div>
+
+        <!-- TAB 1: PLANNING -->
+        <div id="tab-planning" class="tab-pane active">
+          <div class="pane-copy">
+            <div class="badge" style="background: rgba(104,182,132,0.15); color: var(--green-lime);">Step 01 • Macro Architect</div>
+            <h3>Carb-Cycle Around Your Heavy Training Days</h3>
+            <p>Set different caloric and carbohydrate targets for leg day, upper body, and active recovery days. VerdantPrep scales your rice, sweet potato, and protein portions automatically.</p>
+            <ul class="feature-checklist">
+              <li><span class="check-badge">✓</span> One-click macro lock across 3, 4, or 5 meals/day</li>
+              <li><span class="check-badge">✓</span> Swap any recipe while preserving exact macro totals</li>
+              <li><span class="check-badge">✓</span> Supports Paleo, Gluten-Free, Dairy-Free & Plant-Based</li>
+            </ul>
+          </div>
+
+          <div class="ui-canvas">
+            <div style="display:flex; justify-content:space-between; margin-bottom:16px; font-size:0.85rem; color:#9AB5A6;" class="mono">
+              <span>WEEK 14: LEAN BULK CYCLE</span>
+              <span style="color:var(--green-lime);">TARGET: 210P / 320C / 75F</span>
+            </div>
+
+            <div class="ui-row">
+              <div>
+                <div style="font-weight:700; font-size:0.95rem;">Meal 1 • Green Shakshuka & Egg Whites</div>
+                <div class="mono" style="font-size:0.8rem; color:#9AB5A6;">Prep: 4 Containers • Freezes Well</div>
+              </div>
+              <div class="macro-chip-group mono">
+                <span class="macro-chip">52g P</span>
+                <span class="macro-chip carb">44g C</span>
+              </div>
+            </div>
+
+            <div class="ui-row">
+              <div>
+                <div style="font-weight:700; font-size:0.95rem;">Meal 2 • Wild Salmon, Quinoa & Charred Broccolini</div>
+                <div class="mono" style="font-size:0.8rem; color:#9AB5A6;">Prep: 5 Containers • Omega-3 Rich</div>
+              </div>
+              <div class="macro-chip-group mono">
+                <span class="macro-chip">58g P</span>
+                <span class="macro-chip carb">86g C</span>
+              </div>
+            </div>
+
+            <div class="ui-row">
+              <div>
+                <div style="font-weight:700; font-size:0.95rem;">Meal 3 • Grass-Fed Sirloin & Crispy Rosemary Potatoes</div>
+                <div class="mono" style="font-size:0.8rem; color:#9AB5A6;">Prep: 5 Containers • Post-Lift Fuel</div>
+              </div>
+              <div class="macro-chip-group mono">
+                <span class="macro-chip">64g P</span>
+                <span class="macro-chip carb">110g C</span>
+              </div>
+            </div>
+
+            <div class="ui-row" style="border-color: var(--green-lime); background: rgba(104,182,132,0.08);">
+              <div class="mono" style="font-size:0.85rem; font-weight:700; color:var(--green-lime);">
+                ✓ DAILY TOTAL LOCKED: 2,795 KCAL
+              </div>
+              <div class="mono" style="font-size:0.85rem; color:#FFFFFF;">
+                210g P • 318g C • 74g F
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: SHOPPING -->
+        <div id="tab-shopping" class="tab-pane">
+          <div class="pane-copy">
+            <div class="badge" style="background: rgba(104,182,132,0.15); color: var(--green-lime);">Step 02 • Zero-Waste Groceries</div>
+            <h3>Consolidated to the Exact Gram & Ounce</h3>
+            <p>No more buying three bunches of cilantro when you only need half of one. Your weekly plan compiles into an aisle-sorted list with exact raw weight requirements.</p>
+            <ul class="feature-checklist">
+              <li><span class="check-badge">✓</span> Toggle between raw weight (grams/oz) and package count</li>
+              <li><span class="check-badge">✓</span> Pantry check removes spices & oils you already own</li>
+              <li><span class="check-badge">✓</span> 1-tap export to Instacart, Whole Foods, or Apple Reminders</li>
+            </ul>
+          </div>
+
+          <div class="ui-canvas">
+            <div style="display:flex; justify-content:space-between; margin-bottom:16px; font-size:0.85rem; color:#9AB5A6;" class="mono">
+              <span>AISLE-SORTED GROCERY MANIFEST</span>
+              <span style="color:var(--green-lime);">14 ITEMS • EST. $84.50</span>
+            </div>
+
+            <div class="ui-row">
+              <div>
+                <div style="font-weight:700; font-size:0.95rem;">☑ Pasture-Raised Chicken Breast (Boneless)</div>
+                <div class="mono" style="font-size:0.8rem; color:#9AB5A6;">Used in: Chipotle Lime Bowls (5 Meals)</div>
+              </div>
+              <div class="mono macro-chip">1,250g (2.75 lbs)</div>
+            </div>
+
+            <div class="ui-row">
+              <div>
+                <div style="font-weight:700; font-size:0.95rem;">☑ Grass-Fed Top Sirloin Steak</div>
+                <div class="mono" style="font-size:0.8rem; color:#9AB5A6;">Used in: Post-Lift Steak & Potatoes (4 Meals)</div>
+              </div>
+              <div class="mono macro-chip">920g (2.02 lbs)</div>
+            </div>
+
+            <div class="ui-row">
+              <div>
+                <div style="font-weight:700; font-size:0.95rem;">☐ Organic Jasmine Rice (Dry Weight)</div>
+                <div class="mono" style="font-size:0.8rem; color:#9AB5A6;">Yields 2,100g cooked across 9 containers</div>
+              </div>
+              <div class="mono macro-chip carb">700g Dry</div>
+            </div>
+
+            <div class="ui-row">
+              <div>
+                <div style="font-weight:700; font-size:0.95rem;">☐ Baby Spinach & Lacinato Kale Mix</div>
+                <div class="mono" style="font-size:0.8rem; color:#9AB5A6;">Produce Aisle • Zero leftover waste</div>
+              </div>
+              <div class="mono macro-chip">450g (1 Large Clam)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: COOKING -->
+        <div id="tab-cooking" class="tab-pane">
+          <div class="pane-copy">
+            <div class="badge" style="background: rgba(104,182,132,0.15); color: var(--green-lime);">Step 03 • Kitchen Command Mode</div>
+            <h3>Cook 15 Meals Simultaneously Without Chaos</h3>
+            <p>High-contrast, hands-free Kitchen Mode sequences every preheat, chop, and sear across all recipes at once—and tells you exactly how many grams to portion into each container.</p>
+            <ul class="feature-checklist">
+              <li><span class="check-badge">✓</span> Smart staggered timers prevent cold food or burnt trays</li>
+              <li><span class="check-badge">✓</span> Cooked-weight conversion accounts for moisture loss</li>
+              <li><span class="check-badge">✓</span> Container labeling guide with macro stickers & shelf life</li>
+            </ul>
+          </div>
+
+          <div class="ui-canvas">
+            <div style="display:flex; justify-content:space-between; margin-bottom:16px; font-size:0.85rem; color:#9AB5A6;" class="mono">
+              <span>BATCH TIMELINE • ELAPSED: 00:34:12</span>
+              <span style="color:#F4D58D;">REMAINING: 41 MIN</span>
+            </div>
+
+            <div class="ui-row" style="border-left: 4px solid var(--green-lime);">
+              <div>
+                <div style="font-weight:700; font-size:0.95rem;">ACTIVE TIMER: Sheet Pan Sweet Potatoes & Broccoli</div>
+                <div class="mono" style="font-size:0.8rem; color:#9AB5A6;">Oven Rack 1 & 2 @ 425°F Convection</div>
+              </div>
+              <div class="mono macro-chip">11:20 LEFT</div>
+            </div>
+
+            <div class="ui-row" style="border-left: 4px solid #F4D58D;">
+              <div>
+                <div style="font-weight:700; font-size:0.95rem;">CURRENT STEP: Sear Marinated Sirloin in Cast Iron</div>
+                <div class="mono" style="font-size:0.8rem; color:#9AB5A6;">3 mins per side → Rest 8 mins before slicing</div>
+              </div>
+              <div class="mono macro-chip carb">IN PROGRESS</div>
+            </div>
+
+            <div class="ui-row">
+              <div>
+                <div style="font-weight:700; font-size:0.95rem;">PORTION SCALE: Divide Cooked Chicken into 5 Boxes</div>
+                <div class="mono" style="font-size:0.8rem; color:#9AB5A6;">Adjusted for 22% thermal moisture loss</div>
+              </div>
+              <div class="mono macro-chip">195g Cooked / Box</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Social Proof -->
+  <section id="athletes" class="social-proof">
+    <div class="container">
+      <div class="section-header">
+        <div class="badge">Proven In Training Camps</div>
+        <h2>Trusted by 42,000+ Macro-Driven Athletes</h2>
+        <p>From competitive CrossFitters and natural bodybuilders to marathoners fueling 70-mile weeks with clean, organic whole foods.</p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="quote-text">
+            "I used to spend two hours every Sunday with a spreadsheet and MyFitnessPal trying to get 210g of protein without eating plain dry turkey. VerdantPrep scales every sauce and grain to the gram."
+          </p>
+          <div class="athlete-meta">
+            <div>
+              <div class="athlete-name">Marcus Vance</div>
+              <div class="athlete-sport">USAPL 83kg Powerlifter</div>
+            </div>
+            <span class="verified-macro-badge mono">215P / 340C / 70F</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="quote-text">
+            "The raw-to-cooked weight converter during batch prep is a lifesaver. My husband and I eat the exact same organic recipes, and the app tells us the exact gram scoop for his 3,100 kcal and my 2,150 kcal."
+          </p>
+          <div class="athlete-meta">
+            <div>
+              <div class="athlete-name">Elena Rostova</div>
+              <div class="athlete-sport">Hyrox Pro Doubles Competitor</div>
+            </div>
+            <span class="verified-macro-badge mono">165P / 230C / 62F</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="quote-text">
+            "My grocery bill at Whole Foods actually dropped by $65 a week because the ingredient overlap engine uses 100% of every herb bunch and vegetable bag I buy."
+          </p>
+          <div class="athlete-meta">
+            <div>
+              <div class="athlete-name">Devon Brooks, CSCS</div>
+              <div class="athlete-sport">D1 Strength & Conditioning Coach</div>
+            </div>
+            <span class="verified-macro-badge mono">230P / 380C / 85F</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Pricing Tiers -->
+  <section id="pricing" class="pricing-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="badge">Simple, Transparent Pricing</div>
+        <h2>Invest in Your Recovery. Start Free for 14 Days.</h2>
+        <p>Every plan begins with an instant 14-day full-access trial—no credit card required to generate your first two weeks of macro meal plans.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Tier 1 -->
+        <div class="price-card">
+          <div>
+            <div class="price-tier-name">Solo Prepper</div>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Essential macro meal planning for consistent daily targets.</p>
+            <div class="price-amount mono">$9<span>/mo</span></div>
+            <ul class="price-features">
+              <li>✓ Custom daily calorie & macro lock</li>
+              <li>✓ Full library of 650+ organic recipes</li>
+              <li>✓ Gram-accurate smart grocery lists</li>
+              <li>✓ Parallel Sunday batch-cooking mode</li>
+            </ul>
+          </div>
+          <a href="#footer-input" class="price-btn">Start 14-Day Free Trial</a>
+        </div>
+
+        <!-- Tier 2 (Featured) -->
+        <div class="price-card featured">
+          <div>
+            <div class="badge" style="background: var(--green-lime); color: var(--ui-high-contrast); margin-bottom: 10px;">Most Popular</div>
+            <div class="price-tier-name">Performance Athlete</div>
+            <p style="color: #B7C9BF; font-size: 0.9rem;">Advanced carb-cycling, wearables sync, and raw-to-cooked scaling.</p>
+            <div class="price-amount mono">$14<span>/mo</span></div>
+            <ul class="price-features">
+              <li>✓ Everything in Solo Prepper</li>
+              <li>✓ Training vs. Rest day carb cycling</li>
+              <li>✓ Apple Health, Whoop & Garmin sync</li>
+              <li>✓ Micronutrient & fiber optimization</li>
+              <li>✓ 1-Click Instacart & Whole Foods cart</li>
+            </ul>
+          </div>
+          <a href="#footer-input" class="price-btn">Start 14-Day Free Trial</a>
+        </div>
+
+        <!-- Tier 3 -->
+        <div class="price-card">
+          <div>
+            <div class="price-tier-name">Dual / Coach Plan</div>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Cook one batch of recipes split across two different macro profiles.</p>
+            <div class="price-amount mono">$22<span>/mo</span></div>
+            <ul class="price-features">
+              <li>✓ Everything in Performance Athlete</li>
+              <li>✓ Dual-Partner macro portion splitter</li>
+              <li>✓ Shared live grocery list sync</li>
+              <li>✓ Export PDF meal plans for clients</li>
+            </ul>
+          </div>
+          <a href="#footer-input" class="price-btn">Start 14-Day Free Trial</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Footer with Direct Email Capture -->
+  <footer>
+    <div class="container">
+      <div class="footer-cta-box">
+        <div class="badge" style="background: rgba(104,182,132,0.2); color: var(--green-lime);">Ready For This Sunday's Prep?</div>
+        <h2>Build Your First High-Protein Week in 60 Seconds.</h2>
+        <p>Enter your email below to unlock your 14-day free trial immediately. No credit card required, no commitment.</p>
+        
+        <form class="email-capture-form" onsubmit="handleTrialSignup(event, 'footer-feedback')">
+          <input 
+            id="footer-input"
+            type="email" 
+            class="email-input" 
+            placeholder="athlete@yourdomain.com" 
+            required 
+            aria-label="Email address for free trial"
+          />
+          <button type="submit" class="btn-primary">Unlock 14-Day Free Trial</button>
+        </form>
+        <div class="trial-microcopy">
+          <span>✓ Instant web & iOS/Android access</span>
+          <span>✓ No credit card needed</span>
+        </div>
+        <div id="footer-feedback" class="form-feedback"></div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="logo" style="color: #FFFFFF;">
+          <span class="logo-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+              <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+            </svg>
+          </span>
+          VerdantPrep
+        </div>
+        <div>© 2025 VerdantPrep Nutrition Inc. Crafted with whole ingredients & precision macros.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Interactive Tab Switcher for the Centerpiece App Mockup
+    function switchTab(tabName, btnElement) {
+      // Update buttons
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-selected', 'false');
+      });
+      btnElement.classList.add('active');
+      btnElement.setAttribute('aria-selected', 'true');
+
+      // Update panes
+      const panes = document.querySelectorAll('.tab-pane');
+      panes.forEach(pane => pane.classList.remove('active'));
+      document.getElementById('tab-' + tabName).classList.add('active');
+
+      // Update status bar text
+      const statusMap = {
+        planning: 'VERDANT_OS // MODE: MACRO_PLANNER_V4',
+        shopping: 'VERDANT_OS // MODE: GRAM_GROCERY_MANIFEST',
+        cooking:  'VERDANT_OS // MODE: PARALLEL_BATCH_TIMELINE'
+      };
+      document.getElementById('mockup-header-label').textContent = statusMap[tabName];
+    }
+
+    // Direct Email Capture Handler (Instant 14-day trial without credit card)
+    function handleTrialSignup(event, feedbackId) {
+      event.preventDefault();
+      const form = event.target;
+      const emailInput = form.querySelector('input[type="email"]');
+      const feedbackEl = document.getElementById(feedbackId);
+
+      if (emailInput && emailInput.value) {
+        feedbackEl.style.display = 'block';
+        feedbackEl.textContent = `✓ Welcome aboard! Your 14-day free trial link and macro setup wizard have been sent to ${emailInput.value} (No credit card required).`;
+        emailInput.value = '';
+      }
+    }
+  </script>
+</body>
+</html>

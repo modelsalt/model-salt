@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="750" height="500" viewBox="0 0 750 500" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a BMX bicycle</title>
+  <desc id="desc">A cream pelican with a coral bill hovers above a rose BMX saddle, bent legs pedaling and both wings gripping raised handlebars. Bold burgundy outlines and cel shading, viewed from the front at three quarters.</desc>
+  <rect width="750" height="500" rx="28" fill="#fff4df"/>
+  <ellipse cx="395" cy="441" rx="248" ry="22" fill="#eed1c8"/>
+
+  <g stroke="#59273f" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Wheels: narrow ellipses establish the three-quarter view. -->
+    <g fill="#59273f">
+      <ellipse cx="539" cy="352" rx="68" ry="86"/>
+      <ellipse cx="245" cy="366" rx="77" ry="94"/>
+    </g>
+    <g fill="#fff4df" stroke="#dc8797" stroke-width="5">
+      <ellipse cx="539" cy="352" rx="54" ry="72"/>
+      <ellipse cx="245" cy="366" rx="62" ry="79"/>
+    </g>
+    <g fill="none" stroke="#c38b95" stroke-width="2">
+      <path d="M539 280V424M485 352H593M501 301L577 403M501 403L577 301"/>
+      <path d="M245 287V445M183 366H307M201 310L289 422M201 422L289 310"/>
+    </g>
+
+    <!-- Far pedal and leg. -->
+    <path d="M459 241L478 289L421 333" fill="none" stroke="#ad687b" stroke-width="15"/>
+    <path d="M418 326L443 335L417 343L396 337Z" fill="#d97986"/>
+    <path d="M399 340L436 340" fill="none" stroke-width="8"/>
+
+    <!-- Compact BMX frame. -->
+    <path d="M539 352L443 279L401 365Z" fill="none" stroke-width="14"/>
+    <path d="M539 352L443 279L401 365Z" fill="none" stroke="#d36b86" stroke-width="7"/>
+    <path d="M296 273L443 279L401 365Z" fill="none" stroke-width="16"/>
+    <path d="M296 273L443 279L401 365Z" fill="none" stroke="#e78d9d" stroke-width="9"/>
+    <path d="M443 279L450 258" fill="none" stroke-width="10"/>
+    <path d="M423 253Q446 246 476 252L481 260Q451 266 426 261Z" fill="#59273f"/>
+    <path d="M281 258L245 366M301 259L266 362" fill="none" stroke-width="12"/>
+    <path d="M281 258L245 366" fill="none" stroke="#e78d9d" stroke-width="5"/>
+    <path d="M290 266L303 221L282 191L249 196M303 221L333 191L359 195" fill="none" stroke-width="10"/>
+    <path d="M290 266L303 221L282 191M303 221L333 191" fill="none" stroke="#e78d9d" stroke-width="4"/>
+    <path d="M238 196L264 193M347 193L370 198" fill="none" stroke-width="12"/>
+    <circle cx="401" cy="365" r="19" fill="#b75372"/>
+    <circle cx="401" cy="365" r="6" fill="#fff4df" stroke="none"/>
+    <path d="M401 365L368 390" fill="none" stroke-width="8"/>
+    <path d="M351 392L388 392" fill="none" stroke-width="9"/>
+    <circle cx="245" cy="366" r="8" fill="#d97986"/>
+    <circle cx="539" cy="352" r="7" fill="#d97986"/>
+
+    <!-- Far wing reaches the far handlebar. -->
+    <path d="M420 158Q392 141 370 158L349 185Q344 197 357 202Q369 205 377 192L412 183Z" fill="#d9a4ab"/>
+
+    <!-- Tail and lifted body leave a visible gap above the saddle. -->
+    <path d="M484 196L543 174L526 201L548 198L514 225L478 230Z" fill="#d9a4ab"/>
+    <path d="M397 146Q452 128 492 171Q521 204 491 235Q471 251 436 236Q405 226 386 198Z" fill="#fff4df"/>
+    <path d="M494 180Q507 217 479 230Q452 242 423 220L438 239Q477 260 498 229Q513 206 494 180Z" fill="#d9a4ab" stroke="none"/>
+
+    <!-- Bent foreground leg and webbed foot on the pedal. -->
+    <path d="M444 232L414 286L434 327L374 382" fill="none" stroke-width="16"/>
+    <path d="M444 232L414 286L434 327L374 382" fill="none" stroke="#ed9b92" stroke-width="9"/>
+    <path d="M375 375L389 388L371 389L357 393L345 386Z" fill="#ef927f"/>
+
+    <!-- Upright curved neck and head. -->
+    <path d="M424 186Q386 183 374 152Q363 129 373 99Q380 74 362 58Q342 40 318 53Q296 66 301 89Q304 104 321 112Q331 115 327 136Q318 174 345 201Q369 224 409 217Z" fill="#fff4df"/>
+    <path d="M356 58Q376 80 359 109Q345 143 365 172Q376 191 402 199L409 217Q374 224 347 201Q328 183 327 160Q340 180 354 182Q331 148 344 114Q358 82 346 56Z" fill="#d9a4ab" stroke="none"/>
+
+    <!-- Long bill and deep pelican throat pouch. -->
+    <path d="M310 87L142 111Q180 157 246 157Q289 154 322 109Z" fill="#ef927f"/>
+    <path d="M157 119Q211 153 262 142Q294 133 316 108Q289 154 246 157Q190 159 157 119Z" fill="#c95e79" stroke="none"/>
+    <path d="M310 81Q245 80 140 108Q129 112 141 117L313 103Q324 95 310 81Z" fill="#f6b198"/>
+    <path d="M151 111L300 95" fill="none" stroke="#fff4df" stroke-width="3"/>
+    <path d="M311 73Q320 67 328 73" fill="none" stroke-width="3"/>
+    <ellipse cx="319" cy="81" rx="6" ry="8" fill="#59273f" stroke="none"/>
+    <circle cx="317" cy="78" r="2" fill="#fff4df" stroke="none"/>
+
+    <!-- Foreground wing wraps around the near grip. -->
+    <path d="M425 171Q406 152 385 167L302 185Q276 182 257 187Q245 190 247 200Q250 210 268 207L305 211Q362 215 410 197Q428 190 425 171Z" fill="#fff4df"/>
+    <path d="M414 184Q358 208 304 202L268 199Q257 204 250 200Q252 210 268 207L305 211Q362 215 410 197Q422 192 425 182Z" fill="#d9a4ab" stroke="none"/>
+    <path d="M267 190L263 202M278 189L275 201M391 178L367 190" fill="none" stroke-width="3"/>
+  </g>
+</svg>

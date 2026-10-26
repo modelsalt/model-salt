@@ -1,0 +1,672 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 900" width="100%" height="100%">
+  <defs>
+    <!-- Fine crosshatch for dark brown plumage -->
+    <pattern id="dark-hatch" width="6" height="6" patternTransform="rotate(35)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#000" stroke-width="1.5" />
+      <line x1="3" y1="0" x2="3" y2="6" stroke="#000" stroke-width="1" />
+      <line x1="0" y1="2" x2="6" y2="2" stroke="#000" stroke-width="1.2" />
+    </pattern>
+
+    <!-- Medium parallel hatch for contour shading and mechanical tubing -->
+    <pattern id="med-hatch" width="5" height="5" patternTransform="rotate(-40)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="5" stroke="#000" stroke-width="1.2" />
+    </pattern>
+
+    <!-- Dense ink stipple/hatch for cast shadows and gular pouch -->
+    <pattern id="pouch-hatch" width="4" height="8" patternTransform="rotate(15)" patternUnits="userSpaceOnUse">
+      <path d="M 0,0 Q 2,4 0,8 M 2,0 Q 4,4 2,8" fill="none" stroke="#000" stroke-width="0.9" />
+    </pattern>
+
+    <!-- Fine sky engraving lines for heroic low-angle backdrop -->
+    <pattern id="sky-lines" width="10" height="12" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="10" y2="0" stroke="#000" stroke-width="0.6" stroke-dasharray="7,3" />
+      <line x1="0" y1="6" x2="10" y2="6" stroke="#000" stroke-width="0.4" />
+    </pattern>
+
+    <!-- Feather texture pattern for wing coverts -->
+    <pattern id="feather-scales" width="14" height="14" patternTransform="rotate(-15)" patternUnits="userSpaceOnUse">
+      <path d="M 0,7 Q 7,14 14,7 M 7,0 Q 14,7 21,0 M -7,0 Q 0,7 7,0" fill="none" stroke="#000" stroke-width="1.1" />
+      <line x1="3" y1="2" x2="3" y2="9" stroke="#000" stroke-width="0.6" />
+      <line x1="7" y1="4" x2="7" y2="11" stroke="#000" stroke-width="0.6" />
+      <line x1="11" y1="2" x2="11" y2="9" stroke="#000" stroke-width="0.6" />
+    </pattern>
+
+    <style>
+      .ink-solid { fill: #000000; stroke: none; }
+      .paper-fill { fill: #ffffff; stroke: #000000; stroke-width: 1.8; stroke-linejoin: round; stroke-linecap: round; }
+      .etch-outline { fill: none; stroke: #000000; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+      .etch-fine { fill: none; stroke: #000000; stroke-width: 0.9; stroke-linecap: round; }
+      .etch-ultra { fill: none; stroke: #000000; stroke-width: 0.5; stroke-linecap: round; }
+      .spoke { fill: none; stroke: #000000; stroke-width: 0.8; }
+    </style>
+  </defs>
+
+  <!-- Crisp White Paper Background -->
+  <rect width="800" height="900" fill="#ffffff" />
+
+  <!-- ========================================================================= -->
+  <!-- BACKGROUND: WORM'S-EYE PERSPECTIVE SKY & RADIATING CONTOUR ETCHING        -->
+  <!-- ========================================================================= -->
+  <g id="background-engraving">
+    <!-- Dramatic woodcut-style sky arch behind the towering figure -->
+    <path d="M 80,680 C 80,220 260,60 400,60 C 540,60 720,220 720,680 Z" fill="url(#sky-lines)" />
+    <!-- White halo cut-out around the figure to accentuate silhouette -->
+    <path d="M 35,340 Q 200,260 320,200 Q 340,70 430,85 Q 520,100 590,155 Q 640,240 775,270 Q 670,430 500,450 L 530,850 L 220,850 L 290,460 Q 130,450 35,340 Z" fill="#ffffff" />
+    
+    <!-- Perspective speed/height rays converging toward top-left vanishing point -->
+    <g class="etch-ultra" opacity="0.75">
+      <line x1="400" y1="30" x2="100" y2="220" />
+      <line x1="400" y1="30" x2="60" y2="280" />
+      <line x1="400" y1="30" x2="700" y2="180" />
+      <line x1="400" y1="30" x2="740" y2="240" />
+      <!-- Engraved cloud/wind scrolls -->
+      <path d="M 110,160 C 160,150 190,170 250,165 M 130,170 C 170,165 200,178 235,175" />
+      <path d="M 550,115 C 610,110 640,125 690,120 M 570,125 C 615,120 645,132 675,128" />
+      <path d="M 80,520 C 130,515 160,528 210,522 M 610,490 C 660,485 690,498 735,492" />
+    </g>
+
+    <!-- Ground plane worm's-eye cobble/asphalt hatching at very bottom -->
+    <g transform="translate(0, 760)">
+      <path d="M 40,110 L 760,30 L 780,120 L 20,120 Z" fill="#ffffff" />
+      <!-- Heavy shadow cast directly underneath the small-wheeled bike -->
+      <ellipse cx="410" cy="85" rx="260" ry="26" transform="rotate(-7 410 85)" fill="url(#dark-hatch)" stroke="#000" stroke-width="1.5" />
+      <ellipse cx="385" cy="92" rx="160" ry="16" transform="rotate(-7 385 92)" class="ink-solid" />
+      <!-- Ground texture lines -->
+      <path d="M 30,115 L 770,22 M 80,120 L 750,38 M 160,125 L 770,52 M 290,128 L 760,70" class="etch-fine" />
+      <path d="M 120,95 L 180,92 M 220,75 L 290,70 M 520,55 L 610,48 M 640,85 L 730,78" class="etch-outline" />
+    </g>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- PELICAN WINGSPAN (SPREAD WIDE FOR CAREFREE BALANCE, VIEWED FROM BELOW)    -->
+  <!-- ========================================================================= -->
+  <g id="pelican-wings">
+    <!-- ==================== BIRD'S RIGHT WING (VIEWER'S LEFT) ==================== -->
+    <g id="wing-viewer-left">
+      <!-- Base Wing Silhouette -->
+      <path d="M 355,345 
+               C 265,305 165,295 28,335 
+               L 68,358 L 38,376 L 82,390 L 55,408 L 105,416 L 85,432 L 135,435
+               C 195,442 275,438 355,415 Z" class="paper-fill" />
+
+      <!-- Dark Brown/Black Remiges (Primary & Secondary Flight Feathers) -->
+      <g>
+        <!-- Primary 1 (Leading outer feather) -->
+        <path d="M 190,328 C 125,322 75,325 28,335 L 68,358 C 115,348 155,345 195,345 Z" fill="url(#dark-hatch)" stroke="#000" stroke-width="1.6" />
+        <path d="M 190,335 L 35,337" class="etch-outline" /> <!-- Feather Rachis (Shaft) -->
+        <!-- Primary 2 -->
+        <path d="M 195,342 C 130,342 80,352 38,376 L 82,390 C 125,372 165,362 202,358 Z" fill="url(#dark-hatch)" stroke="#000" stroke-width="1.6" />
+        <path d="M 196,348 L 45,374" class="etch-outline" />
+        <!-- Primary 3 -->
+        <path d="M 200,356 C 140,362 95,378 55,408 L 105,416 C 145,392 178,378 210,372 Z" fill="url(#dark-hatch)" stroke="#000" stroke-width="1.6" />
+        <path d="M 202,362 L 62,405" class="etch-outline" />
+        <!-- Primary 4 -->
+        <path d="M 208,370 C 155,382 115,402 85,432 L 135,435 C 165,412 195,395 220,382 Z" fill="url(#dark-hatch)" stroke="#000" stroke-width="1.6" />
+        <path d="M 210,375 L 92,428" class="etch-outline" />
+
+        <!-- Secondaries (Row of dark inner flight feathers seen from underneath) -->
+        <path d="M 215,380 C 195,405 165,425 135,435 C 205,442 280,438 355,415 L 350,380 Z" fill="url(#dark-hatch)" stroke="#000" stroke-width="1.8" />
+        <!-- Individual Secondary Feather Divisions & Shafts -->
+        <path d="M 162,436 L 222,382 M 188,438 L 240,385 M 215,439 L 258,388 M 242,438 L 278,390 M 270,435 L 298,392 M 298,430 L 318,394 M 325,424 L 338,396" stroke="#ffffff" stroke-width="1.4" />
+        <path d="M 160,436 L 220,382 M 186,438 L 238,385 M 213,439 L 256,388 M 240,438 L 276,390 M 268,435 L 296,392 M 296,430 L 316,394 M 323,424 L 336,396" class="etch-outline" />
+      </g>
+
+      <!-- Underwing Coverts & Anatomical Musculature (Patagium & Humerus/Radius) -->
+      <path d="M 355,345 C 265,305 185,302 125,318 C 165,332 225,368 350,392 Z" fill="url(#feather-scales)" stroke="#000" stroke-width="1.8" />
+      <!-- Bright white leading edge highlight with fine anatomical engraving -->
+      <path d="M 355,345 C 265,305 170,298 85,322 C 155,316 245,328 352,368 Z" class="paper-fill" />
+      <path d="M 345,352 C 265,318 185,312 115,320 M 345,360 C 275,330 205,324 145,328" class="etch-fine" />
+      <!-- Tiered Greater Underwing Coverts -->
+      <path d="M 185,332 Q 200,348 215,342 Q 230,358 245,350 Q 260,366 275,358 Q 290,374 305,366 Q 320,382 342,374" class="etch-outline" fill="#ffffff" />
+    </g>
+
+    <!-- ==================== BIRD'S LEFT WING (VIEWER'S RIGHT) ==================== -->
+    <g id="wing-viewer-right">
+      <!-- Base Wing Silhouette (Higher & slightly foreshortened) -->
+      <path d="M 480,325 
+               C 565,245 655,215 782,235 
+               L 745,265 L 775,278 L 732,302 L 758,318 L 708,335 L 728,352 L 675,362
+               C 615,382 545,392 475,388 Z" class="paper-fill" />
+
+      <!-- Dark Brown/Black Remiges (Primary & Secondary Flight Feathers) -->
+      <g>
+        <!-- Primary 1 -->
+        <path d="M 632,248 C 695,230 740,228 782,235 L 745,265 C 702,262 662,265 625,270 Z" fill="url(#dark-hatch)" stroke="#000" stroke-width="1.6" />
+        <path d="M 630,256 L 775,238" class="etch-outline" />
+        <!-- Primary 2 -->
+        <path d="M 625,265 C 685,255 735,260 775,278 L 732,302 C 690,290 652,286 618,286 Z" fill="url(#dark-hatch)" stroke="#000" stroke-width="1.6" />
+        <path d="M 624,273 L 766,278" class="etch-outline" />
+        <!-- Primary 3 -->
+        <path d="M 618,282 C 675,278 720,292 758,318 L 708,335 C 670,316 638,308 608,302 Z" fill="url(#dark-hatch)" stroke="#000" stroke-width="1.6" />
+        <path d="M 616,290 L 750,316" class="etch-outline" />
+        <!-- Primary 4 -->
+        <path d="M 610,298 C 660,302 700,322 728,352 L 675,362 C 645,342 618,328 598,318 Z" fill="url(#dark-hatch)" stroke="#000" stroke-width="1.6" />
+        <path d="M 608,306 L 720,348" class="etch-outline" />
+
+        <!-- Secondaries -->
+        <path d="M 602,312 C 625,335 650,352 675,362 C 610,382 542,392 475,388 L 478,348 Z" fill="url(#dark-hatch)" stroke="#000" stroke-width="1.8" />
+        <!-- Individual Secondary Feather Divisions -->
+        <path d="M 652,368 L 592,318 M 628,374 L 575,324 M 602,379 L 558,330 M 576,383 L 540,335 M 550,386 L 522,340 M 524,387 L 504,344" stroke="#ffffff" stroke-width="1.4" />
+        <path d="M 650,368 L 590,318 M 626,374 L 573,324 M 600,379 L 556,330 M 574,383 L 538,335 M 548,386 L 520,340 M 522,387 L 502,344" class="etch-outline" />
+      </g>
+
+      <!-- Underwing Coverts -->
+      <path d="M 480,325 C 560,252 635,232 695,238 C 655,260 595,305 478,360 Z" fill="url(#feather-scales)" stroke="#000" stroke-width="1.8" />
+      <path d="M 480,325 C 565,248 650,222 730,232 C 665,238 580,268 480,345 Z" class="paper-fill" />
+      <path d="M 488,330 C 562,265 635,242 702,238 M 488,338 C 555,280 618,260 675,252" class="etch-fine" />
+      <path d="M 635,260 Q 622,278 606,274 Q 592,292 576,288 Q 562,306 546,302 Q 532,320 516,316 Q 502,334 485,330" class="etch-outline" fill="#ffffff" />
+    </g>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- PELICAN TAIL & LOWER TORSO (RESTING ON THE HIGH SADDLE)                   -->
+  <!-- ========================================================================= -->
+  <g id="pelican-tail-and-saddle">
+    <!-- Fan of dark rectrices (tail feathers) projecting behind the saddle -->
+    <g>
+      <path d="M 425,465 L 495,515 L 480,528 L 465,522 L 452,535 L 435,525 L 418,536 L 405,520 L 395,475 Z" fill="url(#dark-hatch)" stroke="#000" stroke-width="1.8" />
+      <path d="M 435,475 L 485,520 M 430,478 L 458,528 M 422,478 L 426,530 M 415,478 L 408,520" class="etch-outline" />
+    </g>
+
+    <!-- High Commuter Saddle (Viewed from worm's-eye angle underneath) -->
+    <g id="bicycle-saddle">
+      <!-- Saddle shell -->
+      <path d="M 355,468 C 355,452 395,448 445,455 C 468,458 475,472 455,482 C 425,490 385,485 355,468 Z" class="ink-solid" />
+      <!-- Highlighted leather rim & underside rails -->
+      <path d="M 358,466 C 378,458 425,458 460,468" stroke="#ffffff" stroke-width="2" fill="none" />
+      <!-- Chromed steel saddle rails & clamp -->
+      <path d="M 372,472 L 398,492 L 438,488 L 448,475" fill="none" stroke="#000" stroke-width="3.5" stroke-linejoin="round" />
+      <path d="M 372,472 L 398,492 L 438,488 L 448,475" fill="none" stroke="#fff" stroke-width="1.2" stroke-linejoin="round" />
+      <!-- Seatpost clamp block -->
+      <rect x="392" y="482" width="24" height="18" rx="3" transform="rotate(-8 404 491)" class="paper-fill" />
+      <circle cx="404" cy="491" r="4" class="ink-solid" />
+    </g>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- BROWN PELICAN BODY, CHEST, NECK, HEAD & GULAR POUCH                       -->
+  <!-- ========================================================================= -->
+  <g id="pelican-body-and-head">
+    <!-- Broad, heroic chest & belly viewed from below (Dark brown-black plumage) -->
+    <path d="M 342,325 
+             C 312,365 315,425 348,458 
+             C 375,480 428,478 455,452 
+             C 488,415 492,355 468,312 Z" class="paper-fill" />
+    <path d="M 342,325 
+             C 312,365 315,425 348,458 
+             C 375,480 428,478 455,452 
+             C 488,415 492,355 468,312 Z" fill="url(#dark-hatch)" stroke="#000" stroke-width="2.2" />
+
+    <!-- Anatomical keel/sternum contour lines and feather tuft detailing on chest -->
+    <path d="M 412,320 C 418,375 412,430 398,468" stroke="#ffffff" stroke-width="2.5" fill="none" stroke-dasharray="6,4" />
+    <path d="M 410,320 C 416,375 410,430 396,468" class="etch-outline" />
+    
+    <!-- Layered breast plumage etching (U-shaped dark feather contours) -->
+    <g stroke="#ffffff" stroke-width="1.3" fill="none">
+      <path d="M 345,355 Q 375,372 405,358 Q 435,372 465,350" />
+      <path d="M 335,380 Q 370,398 408,382 Q 442,398 472,375" />
+      <path d="M 335,405 Q 370,425 406,408 Q 440,425 470,400" />
+      <path d="M 342,430 Q 372,448 404,432 Q 435,448 460,425" />
+    </g>
+    <g class="etch-outline">
+      <path d="M 345,357 Q 375,374 405,360 Q 435,374 465,352" />
+      <path d="M 335,382 Q 370,400 408,384 Q 442,400 472,377" />
+      <path d="M 335,407 Q 370,427 406,410 Q 440,427 470,402" />
+      <path d="M 342,432 Q 372,450 404,434 Q 435,450 460,427" />
+    </g>
+
+    <!-- Silvery-brown scapulars and shoulder plumage transitions -->
+    <path d="M 338,332 C 325,355 322,380 330,400 C 345,382 355,358 358,335 Z" class="paper-fill" />
+    <path d="M 338,338 L 332,388 M 345,336 L 340,382 M 352,336 L 348,372" class="etch-fine" />
+    <path d="M 472,320 C 485,345 488,370 478,392 C 462,372 455,348 452,325 Z" class="paper-fill" />
+    <path d="M 472,328 L 478,378 M 465,326 L 470,372 M 458,326 L 462,362" class="etch-fine" />
+
+    <!-- ==================== PELICAN NECK & DISTINCTIVE WHITE STRIPES ==================== -->
+    <g id="pelican-neck">
+      <!-- S-curved neck rising heroically -->
+      <path d="M 358,332 
+               C 345,275 340,215 352,162 
+               C 358,132 375,108 402,105 
+               C 428,102 442,125 438,158 
+               C 432,205 445,265 462,322 Z" class="paper-fill" />
+
+      <!-- Dark dorsal/hindneck and ventral/foreneck patches -->
+      <path d="M 358,332 C 345,275 340,215 352,162 C 356,142 365,126 378,118 C 370,155 368,205 378,265 C 382,292 385,315 385,332 Z" fill="url(#dark-hatch)" stroke="#000" stroke-width="1.5" />
+      <path d="M 412,165 C 408,215 415,268 432,325 L 462,322 C 445,265 432,205 438,158 Z" fill="url(#dark-hatch)" stroke="#000" stroke-width="1.5" />
+
+      <!-- Characteristic Brown Pelican White Lateral Neck Stripes -->
+      <path d="M 378,118 
+               C 392,115 405,122 412,145 
+               C 405,195 412,262 428,325 
+               L 392,330 
+               C 380,268 370,198 378,118 Z" fill="#ffffff" stroke="#000" stroke-width="1.5" />
+      <!-- Fine feather texture inside the white neck stripe -->
+      <path d="M 388,135 C 384,185 388,245 402,315 M 398,142 C 395,192 400,252 415,318" class="etch-ultra" stroke-dasharray="8,4" />
+    </g>
+
+    <!-- ==================== PELICAN HEAD, CROWN, EYE & LONG HOOKED BILL ==================== -->
+    <g id="pelican-head-and-bill">
+      <!-- White/Yellowish-White Crown and Cheek -->
+      <path d="M 352,155 
+               C 348,120 368,92 402,90 
+               C 428,88 450,102 465,118 
+               L 435,158 
+               C 412,155 382,158 352,155 Z" class="paper-fill" />
+      <!-- Tufted occipital crest feathers at back of head -->
+      <path d="M 354,142 L 338,138 L 352,130 L 336,122 L 355,116 L 344,108 L 364,104" class="paper-fill" />
+      <!-- Crown feather etching -->
+      <path d="M 365,105 C 385,95 415,96 442,108 M 360,115 C 385,104 415,105 445,115 M 358,125 C 382,114 408,115 435,122" class="etch-fine" />
+
+      <!-- Eye & Bare Orbital Skin Ring -->
+      <g transform="translate(422, 118)">
+        <!-- Bare facial skin patch -->
+        <ellipse cx="0" cy="0" rx="13" ry="10" transform="rotate(10)" fill="url(#med-hatch)" stroke="#000" stroke-width="1.2" />
+        <!-- Pale eye ring -->
+        <circle cx="0" cy="0" r="7" class="paper-fill" />
+        <!-- Intense watchful iris & pupil looking down at viewer -->
+        <circle cx="1" cy="1" r="4.5" class="ink-solid" />
+        <circle cx="-1" cy="-1" r="1.6" fill="#ffffff" />
+      </g>
+
+      <!-- HUGE GULAR POUCH (Dramatically foreshortened from worm's-eye view, billowing slightly in the breeze) -->
+      <path d="M 412,148 
+               C 402,185 422,228 468,238 
+               C 515,248 568,215 622,175 
+               L 455,120 Z" class="paper-fill" />
+      <!-- Intricate anatomical longitudinal pleats and vascular etching on gular pouch -->
+      <path d="M 412,148 
+               C 402,185 422,228 468,238 
+               C 515,248 568,215 622,175 
+               L 455,120 Z" fill="url(#pouch-hatch)" stroke="#000" stroke-width="2" />
+      <!-- Pouch stretch folds converging toward the tip of the mandible -->
+      <g class="etch-fine">
+        <path d="M 416,158 C 435,195 495,212 615,174" />
+        <path d="M 415,170 C 438,208 502,222 610,175" />
+        <path d="M 420,185 C 445,220 508,230 602,178" />
+        <path d="M 430,202 C 458,230 515,235 588,184" />
+        <path d="M 448,218 C 478,238 522,236 570,192" />
+        <!-- Delicate cross-wrinkles on pouch -->
+        <path d="M 455,165 Q 445,195 458,225 M 485,162 Q 475,198 488,236 M 518,162 Q 510,195 520,230 M 552,165 Q 548,190 555,212" class="etch-ultra" />
+      </g>
+
+      <!-- LONG UPPER & LOWER MANDIBLES (Pointing heroically forward and right) -->
+      <!-- Lower Mandible Ramus (Bone framing the pouch) -->
+      <path d="M 442,135 L 622,175 L 624,169 L 448,126 Z" class="paper-fill" />
+      <path d="M 445,131 L 620,172" class="etch-fine" />
+
+      <!-- Upper Mandible (Culmen ridge, nostril groove, and terminal nail/hook) -->
+      <path d="M 455,112 
+               C 515,128 578,146 635,162 
+               C 644,165 648,174 642,184 
+               C 638,190 632,188 630,180 
+               C 628,175 624,173 618,171 
+               L 445,128 Z" class="paper-fill" />
+      <!-- Etched shading along the upper bill ridge and hook -->
+      <path d="M 452,120 L 632,168" class="etch-outline" />
+      <path d="M 454,116 L 628,163 M 465,125 L 595,160" class="etch-fine" />
+      <!-- Dark terminal hook (nail) shading -->
+      <path d="M 628,160 C 640,164 646,173 642,184 C 638,190 632,188 630,180 C 632,172 630,165 622,162 Z" class="ink-solid" />
+      <!-- Mottled horn markings on beak -->
+      <path d="M 490,124 L 495,138 M 515,130 L 520,145 M 545,138 L 548,152 M 575,146 L 578,160 M 602,154 L 604,166" class="etch-ultra" />
+    </g>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- PELICAN LEGS & TOTIPALMATE WEBBED FEET (RESTING ON THE FOLDING FRAME)     -->
+  <!-- ========================================================================= -->
+  <g id="pelican-legs-and-feet">
+    <!-- Crural feathers (drumstick/tibiotarsus plumage) emerging from lower belly -->
+    <!-- Viewer's Left Leg -->
+    <path d="M 342,438 C 332,465 335,492 348,512 L 372,505 C 368,485 370,462 378,445 Z" fill="url(#dark-hatch)" stroke="#000" stroke-width="1.8" />
+    <!-- Viewer's Right Leg -->
+    <path d="M 432,442 C 445,465 455,488 452,510 L 475,502 C 478,478 468,452 455,432 Z" fill="url(#dark-hatch)" stroke="#000" stroke-width="1.8" />
+
+    <!-- Scaly Tarsometatarsus (Lower bird legs) bent relaxed toward the frame -->
+    <!-- Left Tarsus -->
+    <path d="M 352,508 C 350,535 358,558 372,575 L 386,568 C 375,552 368,530 368,504 Z" class="paper-fill" />
+    <path d="M 353,515 L 368,512 M 353,522 L 368,519 M 354,529 L 369,526 M 356,536 L 371,533 M 358,543 L 373,540 M 361,550 L 376,547 M 365,557 L 380,554 M 369,564 L 383,560" class="etch-fine" />
+
+    <!-- Right Tarsus (Resting higher up near the main frame hinge) -->
+    <path d="M 456,504 C 462,528 458,548 448,565 L 462,572 C 474,552 478,528 472,498 Z" class="paper-fill" />
+    <path d="M 457,510 L 473,507 M 459,517 L 474,515 M 459,524 L 475,522 M 459,531 L 474,530 M 458,538 L 473,538 M 456,545 L 470,546 M 453,552 L 467,554 M 450,559 L 464,562" class="etch-fine" />
+
+    <!-- Note: Webbed feet will be layered over the frame tube below so they wrap convincingly around it -->
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- FOLDING COMPACT COMMUTER BICYCLE (LOW-ANGLE FORESHORTENED MECHANICS)      -->
+  <!-- ========================================================================= -->
+  <g id="folding-bicycle">
+
+    <!-- ==================== REAR COMPACT WHEEL (LOWER LEFT, FURTHER BACK) ==================== -->
+    <g id="rear-wheel" transform="translate(235, 715)">
+      <!-- Rear Tire (Deep black rubber with white etched tread ribs) -->
+      <ellipse cx="0" cy="0" rx="82" ry="92" transform="rotate(-10)" class="ink-solid" />
+      <ellipse cx="0" cy="0" rx="82" ry="92" transform="rotate(-10)" fill="none" stroke="#000" stroke-width="2" />
+      <!-- Etched tire sidewall & tread highlights -->
+      <ellipse cx="0" cy="0" rx="76" ry="86" transform="rotate(-10)" fill="none" stroke="#ffffff" stroke-width="1" stroke-dasharray="5,7" />
+      <!-- Inner Wheel Cutout & Alloy Rim -->
+      <ellipse cx="-3" cy="-2" rx="66" ry="75" transform="rotate(-10)" class="paper-fill" />
+      <!-- Deep-section rim inner wall (worm's-eye perspective) -->
+      <ellipse cx="-6" cy="-3" rx="60" ry="69" transform="rotate(-10)" fill="url(#med-hatch)" stroke="#000" stroke-width="1.6" />
+      <ellipse cx="-9" cy="-4" rx="56" ry="65" transform="rotate(-10)" class="paper-fill" />
+
+      <!-- Rear Spokes (20-inch compact wheel lacing pattern) -->
+      <g class="spoke">
+        <line x1="-8" y1="-4" x2="-8" y2="-69" />
+        <line x1="-8" y1="-4" x2="25" y2="-62" />
+        <line x1="-8" y1="-4" x2="46" y2="-35" />
+        <line x1="-8" y1="-4" x2="48" y2="2" />
+        <line x1="-8" y1="-4" x2="36" y2="38" />
+        <line x1="-8" y1="-4" x2="12" y2="58" />
+        <line x1="-8" y1="-4" x2="-18" y2="60" />
+        <line x1="-8" y1="-4" x2="-45" y2="42" />
+        <line x1="-8" y1="-4" x2="-62" y2="12" />
+        <line x1="-8" y1="-4" x2="-62" y2="-25" />
+        <line x1="-8" y1="-4" x2="-42" y2="-55" />
+        <!-- Cross-lacing spokes -->
+        <line x1="-4" y1="2" x2="-25" y2="-65" />
+        <line x1="-4" y1="2" x2="10" y2="-67" />
+        <line x1="-4" y1="2" x2="38" y2="-48" />
+        <line x1="-4" y1="2" x2="48" y2="-16" />
+        <line x1="-4" y1="2" x2="43" y2="22" />
+        <line x1="-4" y1="2" x2="25" y2="50" />
+        <line x1="-4" y1="2" x2="-2" y2="61" />
+        <line x1="-4" y1="2" x2="-32" y2="52" />
+        <line x1="-4" y1="2" x2="-55" y2="28" />
+        <line x1="-4" y1="2" x2="-64" y2="-8" />
+        <line x1="-4" y1="2" x2="-52" y2="-42" />
+      </g>
+
+      <!-- Rear Mudguard / Fender wrapping top of wheel -->
+      <path d="M -68,-35 C -55,-88 12,-105 62,-62 C 82,-42 90,-5 84,32 L 76,28 C 80,-5 72,-36 54,-54 C 10,-92 -48,-76 -60,-30 Z" class="paper-fill" />
+      <path d="M 80,15 L -8,-4" class="etch-outline" /> <!-- Fender stay rod -->
+
+      <!-- Rear Hub & Multi-speed Cassette Cogs -->
+      <ellipse cx="-6" cy="-3" rx="16" ry="18" class="paper-fill" />
+      <ellipse cx="-4" cy="-2" rx="12" ry="14" fill="url(#dark-hatch)" stroke="#000" stroke-width="1.5" />
+      <ellipse cx="-2" cy="-1" rx="7" ry="8" class="ink-solid" />
+    </g>
+
+    <!-- ==================== REAR TRIANGLE, TELESCOPIC SEATPOST & DRIVETRAIN ==================== -->
+    <g id="frame-and-drivetrain">
+      <!-- Rear Chainstays & Seatstays -->
+      <path d="M 230,708 L 372,665 L 372,676 L 230,718 Z" class="paper-fill" />
+      <path d="M 232,712 L 370,670" class="etch-fine" />
+      <path d="M 230,708 L 392,555 L 400,562 L 238,715 Z" class="paper-fill" />
+      <path d="M 234,711 L 396,558" class="etch-fine" />
+
+      <!-- LONG TELESCOPIC SEATPOST (Signature feature of a folding commuter bike) -->
+      <!-- Lower Seat Tube (Frame part) -->
+      <path d="M 366,672 L 392,535 L 414,538 L 386,675 Z" class="paper-fill" />
+      <path d="M 366,672 L 392,535 L 402,536 L 375,673 Z" fill="url(#med-hatch)" />
+      <!-- Quick-Release Seatpost Collar Clamp -->
+      <rect x="388" y="526" width="30" height="12" rx="3" transform="rotate(9 403 532)" class="ink-solid" />
+      <path d="M 388,530 L 372,525 C 368,523 368,518 374,520 L 390,526 Z" class="paper-fill" /> <!-- QR Lever -->
+      <!-- Upper Extended Chromed Seatpost -->
+      <path d="M 396,528 L 402,492 L 416,494 L 410,530 Z" class="paper-fill" />
+      <line x1="400" y1="528" x2="406" y2="492" class="etch-fine" />
+
+      <!-- LOW-SLUNG MONOTUBE FOLDING FRAME & CENTRAL FOLDING HINGE -->
+      <!-- Rear section of main tube -->
+      <path d="M 372,662 L 390,552 L 452,568 L 444,598 L 382,668 Z" class="paper-fill" />
+      <path d="M 375,664 L 444,592 L 446,598 L 382,668 Z" class="ink-solid" /> <!-- Underside tube shadow -->
+      <path d="M 382,645 L 446,582" class="etch-fine" />
+
+      <!-- Heavy-Duty Central Folding Hinge Mechanism & Latch -->
+      <g transform="translate(446, 562) rotate(12)">
+        <rect x="0" y="0" width="18" height="38" rx="3" class="paper-fill" />
+        <line x1="9" y1="0" x2="9" y2="38" stroke="#000" stroke-width="2.2" />
+        <!-- Hinge Locking Lever & Pivot Pins -->
+        <circle cx="5" cy="8" r="2.5" class="ink-solid" />
+        <circle cx="5" cy="30" r="2.5" class="ink-solid" />
+        <path d="M 9,14 L 32,12 C 36,12 36,24 32,24 L 9,22 Z" class="ink-solid" />
+        <path d="M 11,17 L 30,16" stroke="#ffffff" stroke-width="1.2" />
+      </g>
+
+      <!-- Front section of main folding tube curving up to head tube -->
+      <path d="M 462,568 C 495,574 525,555 552,515 L 568,532 C 538,578 502,602 454,598 Z" class="paper-fill" />
+      <path d="M 454,592 C 500,596 534,574 564,528 L 568,532 C 538,578 502,602 454,598 Z" class="ink-solid" />
+      <path d="M 460,584 C 498,588 530,568 558,524" class="etch-fine" />
+
+      <!-- Under-frame Folding Reinforcement Gusset -->
+      <path d="M 382,668 C 405,635 425,612 448,598 L 442,592 C 418,608 398,630 376,662 Z" fill="url(#med-hatch)" stroke="#000" stroke-width="1.5" />
+
+      <!-- LARGE COMMUTER CHAINRING, CRANKS, PEDALS & CHAIN (Unattended as pelican coasts!) -->
+      <!-- Rear Derailleur & Tension Pulleys -->
+      <g transform="translate(228, 725)">
+        <path d="M 0,0 L 8,28 L 18,26 L 12,-2 Z" class="paper-fill" />
+        <circle cx="6" cy="10" r="6" class="ink-solid" />
+        <circle cx="12" cy="26" r="7" class="ink-solid" />
+        <circle cx="12" cy="26" r="3" fill="#ffffff" />
+      </g>
+
+      <!-- Bicycle Roller Chain (Upper taut run & lower derailleur run) -->
+      <path d="M 232,698 L 385,638 M 240,750 L 378,704" stroke="#000" stroke-width="4" stroke-dasharray="4,2" fill="none" />
+      <path d="M 232,698 L 385,638 M 240,750 L 378,704" stroke="#000" stroke-width="1.5" fill="none" />
+
+      <!-- Large 52T Folding Bike Chainring ( compensates for small wheels ) -->
+      <g transform="translate(380, 672)">
+        <!-- Outer Chainring Guard -->
+        <ellipse cx="0" cy="0" rx="34" ry="38" transform="rotate(-8)" class="paper-fill" />
+        <ellipse cx="0" cy="0" rx="30" ry="34" transform="rotate(-8)" class="ink-solid" />
+        <!-- Machined Spider Cutouts -->
+        <path d="M -6,-8 L -18,-24 A 24,26 0 0,1 6,-26 L -2,-8 Z" fill="#ffffff" />
+        <path d="M 6,-4 L 22,-14 A 24,26 0 0,1 24,8 L 6,2 Z" fill="#ffffff" />
+        <path d="M 4,6 L 18,20 A 24,26 0 0,1 -4,26 L -2,6 Z" fill="#ffffff" />
+        <path d="M -6,4 L -22,16 A 24,26 0 0,1 -24,-8 L -6,-2 Z" fill="#ffffff" />
+        <!-- Bottom Bracket Axle -->
+        <circle cx="0" cy="0" r="7" class="paper-fill" />
+        <circle cx="0" cy="0" r="3" class="ink-solid" />
+
+        <!-- Left Crank Arm & Folding Pedal (hanging down/back) -->
+        <path d="M -5,-3 L -38,38 L -30,44 L 3,3 Z" class="paper-fill" />
+        <g transform="translate(-36, 42) rotate(-12)">
+          <rect x="-18" y="-5" width="32" height="10" rx="2" class="ink-solid" />
+          <rect x="-14" y="-2" width="10" height="4" fill="#ffffff" />
+          <rect x="0" y="-2" width="10" height="4" fill="#ffffff" />
+        </g>
+
+        <!-- Right Crank Arm & Folding Pedal (pointing forward/up, completely empty) -->
+        <path d="M -3,3 L 34,-36 L 42,-30 L 5,9 Z" class="paper-fill" />
+        <path d="M 0,5 L 36,-33" class="etch-fine" />
+        <g transform="translate(38, -34) rotate(-12)">
+          <rect x="-14" y="-6" width="34" height="11" rx="2" class="ink-solid" />
+          <rect x="-10" y="-3" width="11" height="5" fill="#ffffff" />
+          <rect x="5" y="-3" width="11" height="5" fill="#ffffff" />
+          <!-- Pedal teeth ridges -->
+          <path d="M -10,-6 L -8,-9 M -2,-6 L 0,-9 M 6,-6 L 8,-9 M 14,-6 L 16,-9" class="etch-outline" />
+        </g>
+      </g>
+    </g>
+
+    <!-- ==================== PELICAN WEBBED FEET WRAPPING THE FRAME ==================== -->
+    <g id="pelican-webbed-feet-foreground">
+      <!-- Viewer's Left Totipalmate Foot gripping the rear main tube -->
+      <g transform="translate(378, 565)">
+        <path d="M -6,0 
+                 C -22,8 -32,22 -28,32 
+                 C -18,28 -8,28 2,36 
+                 C 10,28 20,28 30,32 
+                 C 34,20 24,6 8,-2 Z" class="paper-fill" />
+        <!-- Webbing folds and four toe bones (hallux + 3 anterior digits connected) -->
+        <path d="M -4,2 L -24,28 M 0,2 L 2,33 M 5,2 L 26,28" stroke="#000" stroke-width="2" fill="none" />
+        <path d="M -18,18 Q -8,22 0,18 Q 10,22 18,18 M -22,25 Q -10,29 1,26 Q 12,29 22,25" class="etch-fine" />
+        <!-- Curved bird claws -->
+        <path d="M -24,28 Q -28,34 -23,36 M 2,33 Q 2,40 6,39 M 26,28 Q 31,34 27,36" class="etch-outline" />
+      </g>
+
+      <!-- Viewer's Right Totipalmate Foot resting carefree across the folding hinge -->
+      <g transform="translate(454, 562)">
+        <path d="M -6,0 
+                 C -18,10 -24,25 -18,35 
+                 C -8,30 4,32 14,38 
+                 C 22,30 34,28 42,32 
+                 C 44,18 32,4 10,-2 Z" class="paper-fill" />
+        <path d="M -2,2 L -15,31 M 3,2 L 13,34 M 8,2 L 38,28" stroke="#000" stroke-width="2" fill="none" />
+        <path d="M -10,18 Q 0,22 8,19 Q 18,22 26,18 M -13,26 Q 0,30 11,28 Q 22,30 32,25" class="etch-fine" />
+        <path d="M -15,31 Q -18,38 -13,39 M 13,34 Q 15,41 19,39 M 38,28 Q 44,33 40,36" class="etch-outline" />
+      </g>
+    </g>
+
+    <!-- ==================== FRONT STEERING COLUMN, HEAD TUBE & HANDLEBARS ==================== -->
+    <g id="front-steering-assembly">
+      <!-- Head Tube -->
+      <path d="M 548,505 L 560,468 L 580,474 L 568,512 Z" class="paper-fill" />
+      <path d="M 556,508 L 568,470 L 580,474 L 568,512 Z" fill="url(#med-hatch)" />
+      <!-- Headset Cups -->
+      <rect x="558" y="462" width="24" height="6" rx="2" transform="rotate(18 570 465)" class="ink-solid" />
+      <rect x="545" y="510" width="24" height="6" rx="2" transform="rotate(18 557 513)" class="ink-solid" />
+
+      <!-- Folding Handlepost Hinge (Right above the headset) -->
+      <g transform="translate(560, 444) rotate(16)">
+        <rect x="0" y="0" width="20" height="20" rx="2" class="paper-fill" />
+        <line x1="0" y1="10" x2="20" y2="10" stroke="#000" stroke-width="2" />
+        <path d="M 20,6 L 28,2 L 28,16 L 20,14 Z" class="ink-solid" />
+      </g>
+
+      <!-- Tall Telescopic Handlepost Stem rising toward the handlebars -->
+      <path d="M 564,445 L 588,332 L 604,335 L 580,448 Z" class="paper-fill" />
+      <path d="M 572,446 L 596,334 L 604,335 L 580,448 Z" fill="url(#med-hatch)" />
+      <!-- Stem height adjustment clamp -->
+      <rect x="576" y="382" width="20" height="9" rx="2" transform="rotate(12 586 386)" class="ink-solid" />
+      <circle cx="582" cy="386" r="2" fill="#ffffff" />
+
+      <!-- Compact Commuter Riser Handlebars (Unheld! Pelican is coasting wing-balanced) -->
+      <!-- Center Handlebar Clamp -->
+      <ellipse cx="596" cy="330" rx="10" ry="10" class="ink-solid" />
+      <circle cx="596" cy="330" r="4" fill="#ffffff" />
+
+      <!-- Left Handlebar Bar & Ergonomic Grip & Brake Lever -->
+      <path d="M 590,332 C 562,328 548,312 532,308 L 502,306 L 502,296 L 535,298 C 554,302 568,318 592,322 Z" class="paper-fill" />
+      <!-- Ribbed Rubber Grip (Left) -->
+      <g transform="translate(462, 292) rotate(3)">
+        <rect x="0" y="0" width="46" height="16" rx="6" class="ink-solid" />
+        <path d="M 8,2 L 8,14 M 14,2 L 14,14 M 20,2 L 20,14 M 26,2 L 26,14 M 32,2 L 32,14 M 38,2 L 38,14" stroke="#ffffff" stroke-width="1" />
+        <!-- Brake Lever -->
+        <path d="M 42,14 L 36,26 L 6,28 C 2,28 2,23 6,23 L 32,21 L 36,14 Z" class="paper-fill" />
+      </g>
+
+      <!-- Right Handlebar Bar & Ergonomic Grip & Brake Lever & Brass Bell -->
+      <path d="M 602,326 C 625,322 638,308 655,302 L 685,296 L 688,306 L 658,312 C 642,318 628,332 602,336 Z" class="paper-fill" />
+      <!-- Classic Dome Bicycle Bell -->
+      <ellipse cx="648" cy="294" rx="10" ry="8" transform="rotate(-10 648 294)" class="paper-fill" />
+      <path d="M 640,294 C 644,288 652,288 656,292" class="etch-fine" />
+      <!-- Ribbed Rubber Grip (Right) -->
+      <g transform="translate(682, 290) rotate(-10)">
+        <rect x="0" y="0" width="48" height="16" rx="6" class="ink-solid" />
+        <path d="M 8,2 L 8,14 M 14,2 L 14,14 M 20,2 L 20,14 M 26,2 L 26,14 M 32,2 L 32,14 M 38,2 L 38,14" stroke="#ffffff" stroke-width="1" />
+        <!-- Brake Lever -->
+        <path d="M 6,14 L 12,26 L 42,28 C 46,28 46,23 42,23 L 16,21 L 12,14 Z" class="paper-fill" />
+      </g>
+
+      <!-- Graceful Looping Brake & Shifter Cables -->
+      <path d="M 498,318 C 515,395 538,445 554,495" fill="none" stroke="#000" stroke-width="2.2" />
+      <path d="M 692,315 C 675,395 615,445 562,490" fill="none" stroke="#000" stroke-width="2.2" />
+      <path d="M 680,312 C 655,410 585,465 535,545" fill="none" stroke="#000" stroke-width="1.6" />
+    </g>
+
+    <!-- ==================== FRONT COMPACT WHEEL & FORK (HEROIC FOREGROUND, LOWER RIGHT) ==================== -->
+    <g id="front-wheel-and-fork" transform="translate(592, 668)">
+      <!-- Rear Fork Blade (Behind the front wheel) -->
+      <path d="M -42,-155 L -16,-6 L -4,-4 L -28,-152 Z" fill="url(#med-hatch)" stroke="#000" stroke-width="1.8" />
+
+      <!-- Front Compact 20" Wheel (Large in foreground due to worm's-eye proximity) -->
+      <!-- Thick Commuter Tire -->
+      <ellipse cx="0" cy="0" rx="108" ry="122" transform="rotate(-14)" class="ink-solid" />
+      <ellipse cx="0" cy="0" rx="108" ry="122" transform="rotate(-14)" fill="none" stroke="#000" stroke-width="2.5" />
+      <!-- Engraved Tire Tread Grooves & Sidewall Hatching -->
+      <ellipse cx="2" cy="1" rx="102" ry="116" transform="rotate(-14)" fill="none" stroke="#ffffff" stroke-width="1.3" stroke-dasharray="8,6" />
+      <ellipse cx="-2" cy="-1" rx="95" ry="108" transform="rotate(-14)" fill="none" stroke="#ffffff" stroke-width="0.8" stroke-dasharray="3,9" />
+
+      <!-- Alloy Rim & Inner Wheel Cutout -->
+      <ellipse cx="-5" cy="-3" rx="86" ry="98" transform="rotate(-14)" class="paper-fill" />
+      <!-- Deep Rim Dish (Showing worm's-eye angle inside the wheel rim) -->
+      <ellipse cx="-9" cy="-5" rx="79" ry="91" transform="rotate(-14)" fill="url(#med-hatch)" stroke="#000" stroke-width="1.8" />
+      <ellipse cx="-14" cy="-7" rx="74" ry="85" transform="rotate(-14)" class="paper-fill" />
+
+      <!-- Radial & Tangent Front Spokes -->
+      <g class="spoke">
+        <line x1="-12" y1="-4" x2="-28" y2="-90" />
+        <line x1="-12" y1="-4" x2="8" y2="-91" />
+        <line x1="-12" y1="-4" x2="40" y2="-72" />
+        <line x1="-12" y1="-4" x2="58" y2="-38" />
+        <line x1="-12" y1="-4" x2="60" y2="5" />
+        <line x1="-12" y1="-4" x2="46" y2="46" />
+        <line x1="-12" y1="-4" x2="18" y2="72" />
+        <line x1="-12" y1="-4" x2="-18" y2="78" />
+        <line x1="-12" y1="-4" x2="-52" y2="62" />
+        <line x1="-12" y1="-4" x2="-78" y2="28" />
+        <line x1="-12" y1="-4" x2="-85" y2="-16" />
+        <line x1="-12" y1="-4" x2="-72" y2="-56" />
+        <line x1="-12" y1="-4" x2="-48" y2="-82" />
+        <!-- Secondary Flange Spokes (Creating 3D cone depth) -->
+        <line x1="2" y1="2" x2="-10" y2="-92" />
+        <line x1="2" y1="2" x2="25" y2="-84" />
+        <line x1="2" y1="2" x2="52" y2="-56" />
+        <line x1="2" y1="2" x2="62" y2="-16" />
+        <line x1="2" y1="2" x2="55" y2="26" />
+        <line x1="2" y1="2" x2="34" y2="62" />
+        <line x1="2" y1="2" x2="0" y2="78" />
+        <line x1="2" y1="2" x2="-36" y2="72" />
+        <line x1="2" y1="2" x2="-66" y2="46" />
+        <line x1="2" y1="2" x2="-84" y2="6" />
+        <line x1="2" y1="2" x2="-82" y2="-38" />
+        <line x1="2" y1="2" x2="-60" y2="-70" />
+      </g>
+
+      <!-- Schrader Valve Stem -->
+      <rect x="-24" y="64" width="5" height="14" transform="rotate(-10 -24 64)" class="ink-solid" />
+
+      <!-- Front Hub & Mechanical Disc Brake Rotor -->
+      <ellipse cx="-10" cy="-3" rx="28" ry="32" transform="rotate(-14)" fill="none" stroke="#000" stroke-width="2.5" stroke-dasharray="6,3" />
+      <ellipse cx="-10" cy="-3" rx="22" ry="25" transform="rotate(-14)" fill="url(#med-hatch)" stroke="#000" stroke-width="1.5" />
+      <ellipse cx="-5" cy="-1" rx="10" ry="12" class="ink-solid" />
+      <ellipse cx="2" cy="2" rx="7" ry="8" class="paper-fill" />
+
+      <!-- Front Mudguard / Fender & Wire Stay -->
+      <path d="M -75,-85 C -35,-132 45,-128 88,-72 C 112,-40 120,8 112,48 L 102,42 C 108,6 100,-35 78,-64 C 38,-115 -32,-118 -68,-75 Z" class="paper-fill" />
+      <path d="M 106,24 L 4,2" class="etch-outline" />
+
+      <!-- Foreground Front Fork Blade & Crown -->
+      <path d="M -38,-158 
+               C -22,-158 -12,-148 -8,-128 
+               L 12,-2 
+               C 13,6 2,8 -2,0 
+               L -26,-122 
+               C -30,-138 -36,-142 -44,-142 Z" class="paper-fill" />
+      <!-- Etched shading on the curved fork blade -->
+      <path d="M -18,-132 L 6,-4" class="etch-fine" />
+      <path d="M -22,-128 L 2,-2" class="etch-ultra" />
+      <!-- Quick-Release Axle Skewer Nut -->
+      <circle cx="5" cy="1" r="6" class="ink-solid" />
+      <circle cx="5" cy="1" r="2" fill="#ffffff" />
+
+      <!-- Classic Commuter Headlamp mounted on Fork Crown (Pointing upward) -->
+      <g transform="translate(-14, -148) rotate(-15)">
+        <path d="M -12,6 L 0,10 L 0,16 L -14,12 Z" class="ink-solid" />
+        <path d="M 0,-6 C 14,-8 22,-4 22,6 C 22,16 14,20 0,18 Z" class="paper-fill" />
+        <path d="M 0,4 C 12,4 20,6 22,8 C 20,16 12,18 0,18 Z" fill="url(#dark-hatch)" />
+        <ellipse cx="2" cy="6" rx="4" ry="12" class="paper-fill" />
+        <ellipse cx="2" cy="6" rx="2" ry="9" fill="url(#med-hatch)" />
+      </g>
+    </g>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- FOREGROUND ETCHING FLOURISHES & VINTAGE PLATE BORDER                      -->
+  <!-- ========================================================================= -->
+  <g id="plate-finishing">
+    <!-- Subtle motion air-currents around the wingtips and spinning wheels -->
+    <path d="M 18,325 C 45,305 85,298 125,302" class="etch-fine" />
+    <path d="M 788,222 C 755,205 715,202 675,212" class="etch-fine" />
+    <path d="M 520,795 C 575,818 655,802 695,755" class="etch-fine" stroke-dasharray="12,5,3,5" />
+    <path d="M 165,805 C 215,825 275,812 308,775" class="etch-fine" stroke-dasharray="10,4,2,4" />
+
+    <!-- Classic Double-Line Intaglio Engraving Plate Frame -->
+    <rect x="14" y="14" width="772" height="872" fill="none" stroke="#000000" stroke-width="2.5" />
+    <rect x="20" y="20" width="760" height="860" fill="none" stroke="#000000" stroke-width="0.8" />
+    <!-- Corner Plate Marks -->
+    <path d="M 20,36 L 36,20 M 780,36 L 764,20 M 20,864 L 36,880 M 780,864 L 764,880" class="etch-fine" />
+  </g>
+</svg>

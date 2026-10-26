@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480" width="400" height="480">
+  <!-- Pelican riding a bicycle, front-on view, flat cartoon style, transparent background -->
+  <g stroke="#2b2b2b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+
+    <!-- Rear wheel (peeking out behind the front wheel) -->
+    <ellipse cx="200" cy="395" rx="22" ry="62" fill="#4a4a4a"/>
+    <ellipse cx="200" cy="395" rx="10" ry="48" fill="#8a8a8a"/>
+
+    <!-- Legs (orange, feet on pedals) -->
+    <path d="M168 300 L150 350 L158 382" fill="none" stroke="#e8891d" stroke-width="9"/>
+    <path d="M232 300 L250 350 L242 382" fill="none" stroke="#e8891d" stroke-width="9"/>
+    <path d="M168 300 L150 350 L158 382" fill="none" stroke-width="3"/>
+    <path d="M232 300 L250 350 L242 382" fill="none" stroke-width="3"/>
+    <!-- Webbed feet -->
+    <path d="M140 384 L158 376 L176 384 L164 392 L152 392 Z" fill="#f0a030"/>
+    <path d="M224 384 L242 376 L260 384 L248 392 L236 392 Z" fill="#f0a030"/>
+
+    <!-- Body -->
+    <ellipse cx="200" cy="265" rx="78" ry="70" fill="#f4f4f1"/>
+    <!-- Grey wing shading on each side -->
+    <path d="M128 250 Q140 300 175 328 Q150 300 142 240 Z" fill="#c9c9c4"/>
+    <path d="M272 250 Q260 300 225 328 Q250 300 258 240 Z" fill="#c9c9c4"/>
+
+    <!-- Wings reaching forward to the handlebars -->
+    <path d="M135 248 Q95 270 105 318 L120 322 Q118 290 150 262 Z" fill="#f4f4f1"/>
+    <path d="M265 248 Q305 270 295 318 L280 322 Q282 290 250 262 Z" fill="#f4f4f1"/>
+
+    <!-- Neck -->
+    <path d="M178 215 Q175 175 180 150 L220 150 Q225 175 222 215 Z" fill="#f4f4f1"/>
+
+    <!-- Head -->
+    <circle cx="200" cy="125" r="46" fill="#f4f4f1"/>
+    <!-- Grey crest -->
+    <path d="M165 100 Q200 70 235 100 Q210 92 200 95 Q190 92 165 100 Z" fill="#c9c9c4"/>
+
+    <!-- Eyes -->
+    <circle cx="182" cy="118" r="9" fill="#ffffff"/>
+    <circle cx="218" cy="118" r="9" fill="#ffffff"/>
+    <circle cx="184" cy="119" r="4.5" fill="#2b2b2b" stroke="none"/>
+    <circle cx="216" cy="119" r="4.5" fill="#2b2b2b" stroke="none"/>
+
+    <!-- Beak: pointing at viewer, so it reads as a long wedge coming down -->
+    <path d="M172 140 L228 140 L214 215 L186 215 Z" fill="#f2a63b"/>
+    <!-- Pouch hanging beneath -->
+    <path d="M186 215 L214 215 Q222 250 200 262 Q178 250 186 215 Z" fill="#e8891d"/>
+    <!-- Beak ridge line -->
+    <line x1="200" y1="142" x2="200" y2="212" stroke-width="2"/>
+
+    <!-- Handlebars -->
+    <line x1="200" y1="312" x2="200" y2="345" stroke-width="7"/>
+    <path d="M110 318 Q200 300 290 318" fill="none" stroke-width="7"/>
+    <rect x="98" y="310" width="22" height="14" rx="6" fill="#2b2b2b"/>
+    <rect x="280" y="310" width="22" height="14" rx="6" fill="#2b2b2b"/>
+
+    <!-- Front fork and head tube -->
+    <rect x="193" y="340" width="14" height="40" rx="4" fill="#3a3a3a"/>
+
+    <!-- Front wheel (narrow ellipse, since it faces us) -->
+    <ellipse cx="200" cy="405" rx="26" ry="68" fill="#4a4a4a"/>
+    <ellipse cx="200" cy="405" rx="12" ry="54" fill="#8a8a8a"/>
+    <ellipse cx="200" cy="405" rx="4" ry="6" fill="#2b2b2b"/>
+
+    <!-- Pedals / crank arms seen from front -->
+    <line x1="150" y1="382" x2="250" y2="382" stroke-width="5"/>
+    <rect x="140" y="376" width="22" height="10" rx="3" fill="#3a3a3a"/>
+    <rect x="238" y="376" width="22" height="10" rx="3" fill="#3a3a3a"/>
+  </g>
+</svg>

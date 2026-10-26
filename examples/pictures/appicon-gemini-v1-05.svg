@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Strict Square Clip Path (No Round Borders) -->
+    <clipPath id="sharp-square">
+      <rect x="0" y="0" width="512" height="512" rx="0" ry="0" />
+    </clipPath>
+
+    <!-- Claymorphic Gradient for Central Raindrop -->
+    <linearGradient id="clay-drop-grad" x1="25%" y1="15%" x2="80%" y2="85%">
+      <stop offset="0%" stop-color="#FFFDF7" />
+      <stop offset="45%" stop-color="#FFE082" />
+      <stop offset="100%" stop-color="#F59E0B" />
+    </linearGradient>
+
+    <!-- Claymorphic Gradient for Wind Lines -->
+    <linearGradient id="clay-wind-grad" x1="15%" y1="10%" x2="85%" y2="90%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="55%" stop-color="#FFF3CD" />
+      <stop offset="100%" stop-color="#FBBF24" />
+    </linearGradient>
+
+    <!-- Soft 3D Clay Shadow & Inner Cushion Filter for Raindrop -->
+    <filter id="clay-drop-effect" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+      <!-- Outer Ambient Shadow -->
+      <feDropShadow dx="14" dy="22" stdDeviation="16" flood-color="#92400E" flood-opacity="0.38" result="dropShadow" />
+      
+      <!-- Deep Clay Bottom-Right Inner Shading -->
+      <feFlood flood-color="#B45309" flood-opacity="0.45" result="shadeColor" />
+      <feComposite in="shadeColor" in2="SourceAlpha" operator="out" result="outerShade" />
+      <feOffset dx="-10" dy="-14" in="outerShade" result="offsetShade" />
+      <feGaussianBlur stdDeviation="12" in="offsetShade" result="blurredShade" />
+      <feComposite in="blurredShade" in2="SourceAlpha" operator="in" result="innerShade" />
+
+      <!-- Bright Clay Top-Left Inner Highlight -->
+      <feFlood flood-color="#FFFFFF" flood-opacity="0.85" result="lightColor" />
+      <feComposite in="lightColor" in2="SourceAlpha" operator="out" result="outerLight" />
+      <feOffset dx="8" dy="10" in="outerLight" result="offsetLight" />
+      <feGaussianBlur stdDeviation="8" in="offsetLight" result="blurredLight" />
+      <feComposite in="blurredLight" in2="SourceAlpha" operator="in" result="innerLight" />
+
+      <!-- Combine All Layers -->
+      <feMerge>
+        <feMergeNode in="dropShadow" />
+        <feMergeNode in="SourceGraphic" />
+        <feMergeNode in="innerShade" />
+        <feMergeNode in="innerLight" />
+      </feMerge>
+    </filter>
+
+    <!-- Soft 3D Clay Filter for Wind Lines -->
+    <filter id="clay-wind-effect" x="-40%" y="-40%" width="180%" height="180%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="8" dy="12" stdDeviation="9" flood-color="#92400E" flood-opacity="0.32" result="windShadow" />
+      <feMerge>
+        <feMergeNode in="windShadow" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Subtle Shadow for Diagonal Background Bands -->
+    <filter id="band-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="-3" dy="-3" stdDeviation="6" flood-color="#78350F" flood-opacity="0.12" />
+    </filter>
+  </defs>
+
+  <!-- Main Square Container -->
+  <g clip-path="url(#sharp-square)">
+    
+    <!-- 1. DYNAMIC DIAGONAL BACKGROUND BANDS -->
+    <!-- Band 1: Soft Cream (Top-Left) -->
+    <rect x="0" y="0" width="512" height="512" fill="#FFFBEB" />
+    
+    <!-- Band 2: Warm Soft Gold -->
+    <polygon points="210,0 512,0 512,512 0,512 0,210" fill="#FDE68A" filter="url(#band-shadow)" />
+    
+    <!-- Band 3: Rich Golden Yellow -->
+    <polygon points="440,0 512,0 512,512 0,512 0,440" fill="#FBBF24" filter="url(#band-shadow)" />
+    
+    <!-- Band 4: Deep Warm Amber (Bottom-Right) -->
+    <polygon points="512,170 512,512 170,512" fill="#D97706" filter="url(#band-shadow)" />
+
+
+    <!-- 2. CENTERED MOTIF (GENEROUS MARGIN SPACE) -->
+    <g transform="translate(0, 6)">
+      
+      <!-- Back Wind Line (Sweeping Behind Raindrop) -->
+      <path d="M 136 226 
+               C 168 206, 204 206, 232 220" 
+            fill="none" 
+            stroke="url(#clay-wind-grad)" 
+            stroke-width="24" 
+            stroke-linecap="round"
+            filter="url(#clay-wind-effect)" />
+
+      <!-- Central Claymorphic Raindrop -->
+      <path d="M 256 124 
+               C 268 124, 348 228, 348 294 
+               C 348 346, 306 386, 256 386 
+               C 206 386, 164 346, 164 294 
+               C 164 228, 244 124, 256 124 Z" 
+            fill="url(#clay-drop-grad)" 
+            filter="url(#clay-drop-effect)" />
+
+      <!-- Tactile Matte Specular Pill Highlight on Raindrop -->
+      <path d="M 218 204 
+               C 202 235, 194 265, 194 290" 
+            fill="none" 
+            stroke="#FFFFFF" 
+            stroke-width="14" 
+            stroke-linecap="round" 
+            opacity="0.65" />
+
+      <!-- Front Primary Wind Line (Sweeping Across Lower Raindrop) -->
+      <g filter="url(#clay-wind-effect)">
+        <path d="M 148 328 
+                 C 204 358, 286 352, 346 312 
+                 C 368 297, 376 272, 356 258 
+                 C 338 246, 316 262, 326 280" 
+              fill="none" 
+              stroke="url(#clay-wind-grad)" 
+              stroke-width="28" 
+              stroke-linecap="round" />
+        <!-- Highlight ridge on the front wind line -->
+        <path d="M 152 324 
+                 C 204 352, 284 346, 342 308" 
+              fill="none" 
+              stroke="#FFFFFF" 
+              stroke-width="6" 
+              stroke-linecap="round" 
+              opacity="0.6" />
+      </g>
+
+      <!-- Small Trailing Wind Puff (Right) -->
+      <circle cx="382" cy="348" r="14" 
+              fill="url(#clay-wind-grad)" 
+              filter="url(#clay-wind-effect)" />
+              
+    </g>
+  </g>
+</svg>

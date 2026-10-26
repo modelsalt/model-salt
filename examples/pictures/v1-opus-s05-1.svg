@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" width="400" height="320">
+  <title>A pelican riding a bicycle</title>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- Ground line and wheel shadows -->
+    <path d="M30,292 H370" stroke="#b8b2a7" stroke-width="2"/>
+    <path d="M85,296 H155 M255,296 H325" stroke="#cfc9be" stroke-width="2" stroke-dasharray="4 5"/>
+
+    <!-- ===== Bicycle (neutral) ===== -->
+    <g stroke="#6b6b6b">
+      <!-- Wheels -->
+      <circle cx="120" cy="240" r="50" stroke-width="4"/>
+      <circle cx="120" cy="240" r="44" stroke-width="1.2" stroke="#9a9a9a"/>
+      <circle cx="290" cy="240" r="50" stroke-width="4"/>
+      <circle cx="290" cy="240" r="44" stroke-width="1.2" stroke="#9a9a9a"/>
+      <!-- Spokes -->
+      <path stroke-width="1" stroke="#a5a5a5"
+            d="M120,196 V284 M76,240 H164 M89,209 L151,271 M151,209 L89,271
+               M290,196 V284 M246,240 H334 M259,209 L321,271 M321,209 L259,271"/>
+      <circle cx="120" cy="240" r="4" stroke-width="2"/>
+      <circle cx="290" cy="240" r="4" stroke-width="2"/>
+
+      <!-- Frame -->
+      <path stroke-width="4.5"
+            d="M120,240 L195,245 L172,170 L268,162 L276,186 L195,245
+               M120,240 L172,172
+               M276,186 L290,240"/>
+      <!-- Seat post and saddle -->
+      <path stroke-width="4" d="M172,170 L168,158"/>
+      <path stroke-width="5" d="M150,156 Q166,150 184,157"/>
+      <!-- Stem and handlebar -->
+      <path stroke-width="4" d="M268,162 L262,142 Q252,136 244,142"/>
+      <!-- Chainring, chain, cranks -->
+      <circle cx="195" cy="245" r="11" stroke-width="2.5"/>
+      <path stroke-width="1.2" stroke="#8c8c8c" d="M195,234 L120,236 M195,256 L120,244"/>
+      <path stroke-width="3.5" d="M195,245 L212,266 M195,245 L178,224"/>
+      <path stroke-width="4" d="M205,267 H220 M171,224 H186"/>
+    </g>
+
+    <!-- ===== Pelican ===== -->
+    <!-- Back leg (behind body) -->
+    <path stroke="#c99a4c" stroke-width="3.5"
+          d="M168,170 L196,198 L180,223"/>
+    <path stroke="#c99a4c" stroke-width="2.5"
+          d="M180,223 L170,222 M180,223 L176,229 M180,223 L187,228"/>
+
+    <!-- Chunky body -->
+    <path stroke="#8a8f96" stroke-width="3.5"
+          d="M232,110 C248,140 228,178 185,178
+             C150,178 124,162 118,136
+             L98,116 L124,121
+             C136,99 172,92 206,100"/>
+    <!-- Soft breast feather marks -->
+    <path stroke="#c6cace" stroke-width="2"
+          d="M225,130 q-6,8 -2,16 M212,152 q-8,6 -4,14 M196,160 q-6,6 -2,12"/>
+
+    <!-- Wing reaching to the handlebar -->
+    <path stroke="#8a8f96" stroke-width="3"
+          d="M146,122 C172,108 214,118 246,141
+             M146,122 C156,146 196,152 234,146"/>
+    <!-- Dark flight-feather tips -->
+    <path stroke="#4c5157" stroke-width="2.5"
+          d="M228,138 l14,5 M216,140 l14,6 M204,141 l13,6 M128,124 l-14,-4"/>
+
+    <!-- Neck -->
+    <path stroke="#8a8f96" stroke-width="3.5"
+          d="M206,100 C216,90 212,80 214,72
+             M232,110 C228,96 236,86 238,76"/>
+
+    <!-- Head -->
+    <circle cx="226" cy="60" r="15" stroke="#8a8f96" stroke-width="3.5"/>
+    <path stroke="#c6cace" stroke-width="2" d="M214,50 q6,-8 14,-6"/>
+    <circle cx="231" cy="56" r="2.6" stroke="#3a3d42" stroke-width="2.2"/>
+
+    <!-- Oversized bill -->
+    <path stroke="#e0a43a" stroke-width="3.5"
+          d="M238,53 Q290,55 340,70 Q348,74 340,80 Q300,74 241,65"/>
+    <path stroke="#e8bd62" stroke-width="1.6" d="M250,58 Q295,62 332,72"/>
+
+    <!-- Huge droopy pouch -->
+    <path stroke="#d48a2c" stroke-width="3.5"
+          d="M241,66 C252,118 304,124 334,80"/>
+    <path stroke="#e3ad57" stroke-width="1.6"
+          d="M256,80 C266,102 290,106 308,92
+             M270,74 C280,92 298,94 318,82"/>
+
+    <!-- Front leg pushing the pedal -->
+    <path stroke="#c99a4c" stroke-width="3.5"
+          d="M196,172 L230,212 L212,264"/>
+    <!-- Webbed foot on pedal -->
+    <path stroke="#c99a4c" stroke-width="2.5"
+          d="M212,264 L200,262 M212,264 L210,270 M212,264 L222,268
+             M200,262 Q205,268 210,270 Q216,270 222,268"/>
+  </g>
+</svg>

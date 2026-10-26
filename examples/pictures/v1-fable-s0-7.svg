@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" width="640" height="420">
+  <!-- Sky and ground -->
+  <rect width="640" height="420" fill="#cfe9f7"/>
+  <rect y="330" width="640" height="90" fill="#8fbf6a"/>
+  <rect y="322" width="640" height="10" fill="#6f8f54"/>
+
+  <!-- Rear wheel (full circle, side profile) -->
+  <circle cx="160" cy="300" r="70" fill="#2b2b2b"/>
+  <circle cx="160" cy="300" r="58" fill="#cfe9f7"/>
+  <circle cx="160" cy="300" r="10" fill="#555"/>
+  <g fill="#9a9a9a">
+    <rect x="158" y="244" width="4" height="112"/>
+    <rect x="104" y="298" width="112" height="4"/>
+    <rect x="158" y="244" width="4" height="112" transform="rotate(45 160 300)"/>
+    <rect x="158" y="244" width="4" height="112" transform="rotate(-45 160 300)"/>
+  </g>
+
+  <!-- Front wheel (full circle, side profile) -->
+  <circle cx="480" cy="300" r="70" fill="#2b2b2b"/>
+  <circle cx="480" cy="300" r="58" fill="#cfe9f7"/>
+  <circle cx="480" cy="300" r="10" fill="#555"/>
+  <g fill="#9a9a9a">
+    <rect x="478" y="244" width="4" height="112"/>
+    <rect x="424" y="298" width="112" height="4"/>
+    <rect x="478" y="244" width="4" height="112" transform="rotate(45 480 300)"/>
+    <rect x="478" y="244" width="4" height="112" transform="rotate(-45 480 300)"/>
+  </g>
+
+  <!-- Frame (filled polygons) -->
+  <g fill="#d6382e">
+    <!-- down tube: head to crank -->
+    <polygon points="438,170 452,176 322,302 310,292"/>
+    <!-- top tube: head to seat -->
+    <polygon points="440,168 446,180 262,188 258,176"/>
+    <!-- seat tube: seat to crank -->
+    <polygon points="256,178 270,180 322,296 308,300"/>
+    <!-- chain stay: crank to rear hub -->
+    <polygon points="310,294 316,306 166,306 160,294"/>
+    <!-- seat stay: seat to rear hub -->
+    <polygon points="256,180 268,184 166,300 158,292"/>
+    <!-- fork: head to front hub -->
+    <polygon points="440,170 452,174 486,298 474,302"/>
+    <!-- head tube -->
+    <polygon points="432,150 456,150 456,185 432,185"/>
+  </g>
+
+  <!-- Crank and chainring -->
+  <circle cx="316" cy="298" r="22" fill="#444"/>
+  <circle cx="316" cy="298" r="14" fill="#cfe9f7"/>
+  <circle cx="316" cy="298" r="6" fill="#444"/>
+  <!-- chain -->
+  <polygon points="160,290 316,276 316,281 160,295" fill="#333"/>
+  <polygon points="160,305 316,316 316,320 160,310" fill="#333"/>
+  <!-- crank arms -->
+  <polygon points="313,298 319,298 336,332 328,336" fill="#333"/>
+  <polygon points="313,298 319,298 300,264 294,268" fill="#333"/>
+  <!-- pedals -->
+  <rect x="322" y="330" width="26" height="8" fill="#222"/>
+  <rect x="284" y="258" width="26" height="8" fill="#222"/>
+
+  <!-- Seat and seat post -->
+  <rect x="254" y="160" width="12" height="24" fill="#444"/>
+  <polygon points="228,160 292,160 284,148 240,148" fill="#2b2b2b"/>
+
+  <!-- Handlebars and stem -->
+  <rect x="438" y="128" width="12" height="26" fill="#444"/>
+  <polygon points="412,122 470,122 470,132 412,132" fill="#2b2b2b"/>
+  <rect x="404" y="118" width="14" height="18" fill="#1a1a1a"/>
+
+  <!-- Pelican: tail -->
+  <polygon points="212,172 180,150 190,186 212,196" fill="#e9e4d8"/>
+
+  <!-- Pelican: body (upright seated) -->
+  <ellipse cx="270" cy="160" rx="62" ry="48" fill="#f4f1ea"/>
+  <!-- belly shading -->
+  <ellipse cx="282" cy="178" rx="44" ry="26" fill="#e3ddd0"/>
+
+  <!-- Pelican: leg on the lower pedal -->
+  <polygon points="282,196 294,196 330,330 320,334" fill="#f0a830"/>
+  <polygon points="316,326 346,330 348,338 318,340" fill="#f0a830"/>
+  <!-- Pelican: leg on the upper pedal -->
+  <polygon points="268,196 280,196 300,262 290,266" fill="#d98f22"/>
+  <polygon points="284,256 310,258 310,266 282,266" fill="#d98f22"/>
+
+  <!-- Pelican: neck -->
+  <polygon points="300,130 332,126 352,62 326,56" fill="#f4f1ea"/>
+
+  <!-- Pelican: head -->
+  <circle cx="348" cy="52" r="30" fill="#f4f1ea"/>
+  <!-- head crest -->
+  <polygon points="326,30 318,16 338,24" fill="#e3ddd0"/>
+
+  <!-- Pelican: beak (upper) -->
+  <polygon points="366,44 470,66 472,74 368,60" fill="#f2a53a"/>
+  <!-- Pelican: pouch (lower beak) -->
+  <polygon points="368,60 472,74 440,100 376,88" fill="#e78a2c"/>
+  <!-- beak tip hook -->
+  <polygon points="462,64 476,70 472,80" fill="#d8731c"/>
+
+  <!-- Eye -->
+  <circle cx="356" cy="44" r="6" fill="#1a1a1a"/>
+  <circle cx="358" cy="42" r="2" fill="#ffffff"/>
+
+  <!-- Pelican: wing gripping the handlebars -->
+  <polygon points="282,136 300,120 414,124 418,136 400,140 300,150" fill="#e3ddd0"/>
+  <!-- wing feather tips -->
+  <polygon points="300,150 330,146 322,160" fill="#d2cbbc"/>
+  <polygon points="330,146 360,142 352,156" fill="#d2cbbc"/>
+  <!-- wing "hand" wrapped on the grip -->
+  <ellipse cx="412" cy="128" rx="12" ry="9" fill="#e3ddd0"/>
+
+  <!-- Motion lines -->
+  <g fill="#ffffff">
+    <rect x="30" y="200" width="60" height="5"/>
+    <rect x="50" y="230" width="40" height="5"/>
+    <rect x="20" y="260" width="70" height="5"/>
+  </g>
+</svg>

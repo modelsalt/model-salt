@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 620" width="400" height="620">
+  <title>Pelican riding a Dutch bicycle, seen from directly above — sketchy ink</title>
+  <defs>
+    <!-- wobble filter for hand-drawn feel -->
+    <filter id="wobble" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="wobble2" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="3" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+
+  <rect width="400" height="620" fill="#fff"/>
+
+  <!-- ===== ROAD STRIP (top-down) ===== -->
+  <g filter="url(#wobble)" fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M70 0 C72 120 68 300 71 450 C73 540 69 590 70 620" stroke-width="2.2"/>
+    <path d="M73 0 C70 150 75 310 72 470 C71 560 74 600 73 620" stroke-width="1" opacity="0.6"/>
+    <path d="M330 0 C328 140 333 280 329 440 C327 530 331 590 330 620" stroke-width="2.2"/>
+    <path d="M327 0 C331 110 326 320 330 480 C331 570 328 600 327 620" stroke-width="1" opacity="0.6"/>
+    <!-- dashed centre line, drawn as separate wobbly dashes -->
+    <g stroke-width="2.6">
+      <path d="M200 8 L201 42"/>
+      <path d="M199 72 L200 106"/>
+      <path d="M201 548 L200 582"/>
+      <path d="M200 600 L201 620"/>
+    </g>
+  </g>
+
+  <!-- ===== BICYCLE (step-through Dutch frame, from above) ===== -->
+  <g filter="url(#wobble)" fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round">
+    <!-- front wheel + fender -->
+    <ellipse cx="200" cy="165" rx="7" ry="62" stroke-width="2.4"/>
+    <ellipse cx="200" cy="165" rx="4" ry="58" stroke-width="1"/>
+    <path d="M187 112 C186 140 186 190 188 220" stroke-width="1.6"/>
+    <path d="M213 112 C214 140 214 190 212 220" stroke-width="1.6"/>
+    <path d="M187 112 C194 104 206 104 213 112" stroke-width="1.6"/>
+
+    <!-- rear wheel + fender -->
+    <ellipse cx="200" cy="480" rx="7" ry="62" stroke-width="2.4"/>
+    <ellipse cx="200" cy="480" rx="4" ry="58" stroke-width="1"/>
+    <path d="M186 430 C185 460 185 510 187 540" stroke-width="1.6"/>
+    <path d="M214 430 C215 460 215 510 213 540" stroke-width="1.6"/>
+    <path d="M187 540 C193 548 207 548 213 540" stroke-width="1.6"/>
+
+    <!-- rear rack over back wheel -->
+    <path d="M180 440 L220 441 L221 512 L179 511 Z" stroke-width="1.8"/>
+    <path d="M181 458 L219 459 M180 476 L220 477 M181 494 L219 495" stroke-width="1.2"/>
+
+    <!-- step-through frame (top tube swoop visible from above) -->
+    <path d="M200 150 C203 200 196 280 200 335" stroke-width="3.2"/>
+    <path d="M196 335 C195 370 197 400 200 420" stroke-width="2.4"/>
+    <!-- chainstays splay out to rear hub -->
+    <path d="M200 335 C190 360 188 420 193 478" stroke-width="2"/>
+    <path d="M200 335 C210 360 212 420 207 478" stroke-width="2"/>
+
+    <!-- chain guard on the right-hand side -->
+    <path d="M212 322 C235 326 236 372 226 404 C222 420 216 440 212 468" stroke-width="1.8"/>
+    <path d="M212 322 C222 340 224 390 214 468" stroke-width="1"/>
+
+    <!-- cranks + pedals -->
+    <path d="M160 334 L240 336" stroke-width="3"/>
+    <rect x="140" y="326" width="22" height="16" rx="2" stroke-width="2"/>
+    <rect x="238" y="328" width="22" height="16" rx="2" stroke-width="2"/>
+    <circle cx="200" cy="335" r="7" stroke-width="2"/>
+
+    <!-- stem + swept-back Dutch handlebars -->
+    <circle cx="200" cy="150" r="6" stroke-width="2"/>
+    <path d="M200 150 C160 150 128 156 120 175 C117 183 118 195 120 205" stroke-width="3"/>
+    <path d="M200 150 C240 150 272 156 280 175 C283 183 282 195 280 205" stroke-width="3"/>
+    <!-- grips -->
+    <path d="M114 178 C112 190 113 200 115 210 M126 178 C125 190 126 200 128 210" stroke-width="2.2"/>
+    <path d="M274 178 C273 190 274 200 272 210 M286 178 C287 190 286 200 285 210" stroke-width="2.2"/>
+    <!-- bell -->
+    <circle cx="158" cy="153" r="6" stroke-width="1.6"/>
+
+    <!-- saddle (teardrop, under pelican — just the nose peeks out) -->
+    <path d="M200 372 C186 380 182 395 184 410 C188 422 212 422 216 410 C218 395 214 380 200 372 Z" stroke-width="2"/>
+  </g>
+
+  <!-- ===== PELICAN (sitting far back, relaxed, wings on bars) ===== -->
+  <g filter="url(#wobble2)" fill="#fff" stroke="#111" stroke-linecap="round" stroke-linejoin="round">
+    <!-- tail feathers fanned out behind -->
+    <path d="M188 486 L170 524 L182 510 L178 538 L193 512 L198 544 L205 512 L221 538 L217 510 L229 524 L212 486 Z" stroke-width="2"/>
+
+    <!-- wings: long, lazily stretched forward to rest on the grips -->
+    <path d="M160 410 C128 400 110 330 108 260 C107 230 110 205 118 192 C126 186 134 190 134 200 C132 240 126 300 142 350 C150 375 164 392 176 400 Z" stroke-width="2.4"/>
+    <path d="M240 410 C272 400 290 330 292 260 C293 230 290 205 282 192 C274 186 266 190 266 200 C268 240 274 300 258 350 C250 375 236 392 224 400 Z" stroke-width="2.4"/>
+    <!-- feather lines on wings -->
+    <g fill="none" stroke-width="1.1">
+      <path d="M122 240 C120 290 124 330 138 360"/>
+      <path d="M130 225 C128 280 134 320 148 350"/>
+      <path d="M278 240 C280 290 276 330 262 360"/>
+      <path d="M270 225 C272 280 266 320 252 350"/>
+    </g>
+    <!-- wingtip 'fingers' curling over the grips -->
+    <g fill="none" stroke-width="2">
+      <path d="M118 192 C112 198 110 206 112 214"/>
+      <path d="M124 190 C120 198 119 208 121 216"/>
+      <path d="M282 192 C288 198 290 206 288 214"/>
+      <path d="M276 190 C280 198 281 208 279 216"/>
+    </g>
+
+    <!-- body, sitting well back over the saddle and rear wheel -->
+    <ellipse cx="200" cy="428" rx="56" ry="72" stroke-width="2.8"/>
+    <path d="M160 400 C172 390 190 388 200 392 C212 388 228 390 240 400" fill="none" stroke-width="1.2"/>
+    <path d="M152 440 C170 452 230 452 248 440" fill="none" stroke-width="1"/>
+
+    <!-- legs out to the pedals -->
+    <g fill="none" stroke-width="2.6">
+      <path d="M172 372 C166 360 158 350 152 338"/>
+      <path d="M228 372 C234 360 242 350 248 338"/>
+    </g>
+    <!-- webbed feet on the pedals -->
+    <path d="M152 338 L140 326 L148 330 L146 318 L152 328 L158 318 L156 330 L164 326 Z" stroke-width="1.8"/>
+    <path d="M248 338 L236 326 L244 330 L242 318 L248 328 L254 318 L252 330 L260 326 Z" stroke-width="1.8"/>
+
+    <!-- neck: relaxed S-curve forward -->
+    <path d="M188 360 C180 330 186 300 192 270 C196 254 200 246 200 240 L218 240 C216 250 212 262 210 275 C206 305 212 335 212 360 Z" stroke-width="2.4"/>
+    <path d="M200 350 C196 320 200 290 206 262" fill="none" stroke-width="1"/>
+
+    <!-- head -->
+    <circle cx="206" cy="232" r="20" stroke-width="2.6"/>
+    <!-- eyes, one each side of the bill -->
+    <circle cx="194" cy="224" r="3" fill="#111" stroke="none"/>
+    <circle cx="218" cy="224" r="3" fill="#111" stroke="none"/>
+    <!-- head crest tuft -->
+    <path d="M204 252 C200 258 198 262 202 266 M210 252 C214 258 216 262 212 266" fill="none" stroke-width="1.5"/>
+
+    <!-- the big bill, long and narrow from above, out over the front wheel -->
+    <path d="M196 214 C190 180 192 140 200 96 C202 90 210 90 212 96 C220 140 222 180 216 214 Z" stroke-width="2.6"/>
+    <path d="M206 96 L206 214" fill="none" stroke-width="1.2"/>
+    <path d="M196 206 C200 202 212 202 216 206" fill="none" stroke-width="1.2"/>
+    <!-- pouch hint: slightly bulgy lines along the lower bill -->
+    <path d="M194 170 C191 150 193 125 199 104" fill="none" stroke-width="1" opacity="0.7"/>
+    <path d="M218 170 C221 150 219 125 213 104" fill="none" stroke-width="1" opacity="0.7"/>
+  </g>
+
+  <!-- a few loose sketch hatch marks for shadow under the bird -->
+  <g filter="url(#wobble2)" fill="none" stroke="#111" stroke-width="1" opacity="0.55">
+    <path d="M150 470 L160 486 M158 478 L168 494 M166 486 L176 502"/>
+    <path d="M250 470 L240 486 M242 478 L232 494 M234 486 L224 502"/>
+  </g>
+</svg>

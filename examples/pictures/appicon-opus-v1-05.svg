@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- Square canvas, sharp corners -->
+  <rect x="0" y="0" width="1024" height="1024" fill="#E8501E"/>
+
+  <!-- Sun halo: concentric rings, cropped by the top/right edges -->
+  <circle cx="700" cy="300" r="580" fill="#EF6A22"/>
+  <circle cx="700" cy="300" r="460" fill="#F58A28"/>
+
+  <!-- Sun disc, bleeding off the top and right -->
+  <circle cx="700" cy="300" r="340" fill="#FFC23A"/>
+
+  <!-- Cloud: union of circles plus a base, bleeding off left, right and bottom -->
+  <g fill="#FFF3DA">
+    <circle cx="180" cy="760" r="200"/>
+    <circle cx="470" cy="640" r="280"/>
+    <circle cx="880" cy="820" r="220"/>
+    <rect x="0" y="820" width="1024" height="204"/>
+  </g>
+</svg>

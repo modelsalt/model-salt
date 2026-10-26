@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: How Model Salt works
+    url: https://github.com/modelsalt/model-salt/blob/main/docs/how-it-works.md
+    about: The steps, the randomness and why simpler ways failed

@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Basketful: Meal plans that shrink your grocery bill</title>
+<meta name="description" content="Basketful plans your week around what's on sale and what's already in your fridge, so you spend less on groceries and waste less food.">
+<style>
+  :root{
+    --cream:#fff8f0; --peach:#ffd9c2; --peach-deep:#ffb895; --butter:#fff1b8;
+    --mint:#cdeedd; --mint-deep:#8fd3b2; --lilac:#e4dcff; --sky:#d4ebff; --rose:#ffd6de;
+    --ink:#3d2f2a; --ink-soft:#6f5d55; --tomato:#f0715a; --tomato-dark:#d85a43; --leaf:#3f9a6f;
+    --radius-lg:32px; --radius-md:22px; --radius-sm:14px;
+    --shadow:0 10px 30px -12px rgba(120,70,40,.25);
+    --font: ui-rounded, "SF Pro Rounded", "Nunito", "Varela Round", "Quicksand", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font);color:var(--ink);background:var(--cream);line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+
+  /* ---------- Split layout ---------- */
+  .split{display:grid;grid-template-columns:minmax(380px,44%) 1fr;min-height:100vh}
+
+  /* LEFT: fixed pitch */
+  .pitch{
+    position:sticky;top:0;height:100vh;background:var(--peach);
+    padding:40px clamp(28px,4vw,64px);display:flex;flex-direction:column;overflow:hidden;
+    border-radius:0 var(--radius-lg) var(--radius-lg) 0;
+  }
+  .pitch::before,.pitch::after{content:"";position:absolute;border-radius:50%;z-index:0;pointer-events:none}
+  .pitch::before{width:420px;height:420px;background:var(--butter);right:-170px;top:-160px;opacity:.9}
+  .pitch::after{width:300px;height:300px;background:var(--rose);left:-140px;bottom:-120px;opacity:.85}
+  .pitch > *{position:relative;z-index:1}
+
+  .brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:1.35rem;letter-spacing:-.01em;text-decoration:none}
+  .brand-mark{width:44px;height:44px;border-radius:15px;background:var(--cream);display:grid;place-items:center;box-shadow:var(--shadow)}
+  .pitch-body{margin:auto 0;padding:32px 0}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--cream);color:var(--leaf);font-weight:700;font-size:.85rem;padding:7px 14px;border-radius:999px;margin-bottom:22px}
+  .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--mint-deep)}
+  h1{font-size:clamp(2.1rem,3.6vw,3.3rem);line-height:1.06;letter-spacing:-.025em;font-weight:800;margin-bottom:18px}
+  h1 .hl{background:linear-gradient(transparent 58%, var(--butter) 58%, var(--butter) 92%, transparent 92%);padding:0 4px;border-radius:6px}
+  .lede{font-size:1.1rem;color:var(--ink-soft);max-width:30em;margin-bottom:28px}
+
+  /* Signup form */
+  .signup{background:var(--cream);border-radius:var(--radius-md);padding:22px;box-shadow:var(--shadow);max-width:440px}
+  .signup h2{font-size:1.05rem;font-weight:800;margin-bottom:14px}
+  .field{margin-bottom:12px}
+  .field label{display:block;font-size:.82rem;font-weight:700;color:var(--ink-soft);margin-bottom:5px;padding-left:4px}
+  .field input{width:100%;font:inherit;font-size:1rem;color:var(--ink);border:2px solid #f1e0d3;background:#fff;border-radius:var(--radius-sm);padding:12px 16px;outline:none;transition:border-color .15s, box-shadow .15s}
+  .field input:focus{border-color:var(--peach-deep);box-shadow:0 0 0 4px rgba(255,184,149,.35)}
+  .field input[aria-invalid="true"]{border-color:var(--tomato)}
+  .pw-wrap{position:relative}
+  .pw-wrap input{padding-right:76px}
+  .pw-toggle{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:var(--peach);color:var(--ink);font:inherit;font-size:.78rem;font-weight:700;padding:6px 11px;border-radius:999px;cursor:pointer}
+  .hint{font-size:.78rem;color:var(--ink-soft);padding:5px 4px 0}
+  .error{font-size:.8rem;color:var(--tomato-dark);padding:5px 4px 0;font-weight:700;display:none}
+  .error.show{display:block}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;border:0;cursor:pointer;font:inherit;font-weight:800;font-size:1.05rem;background:var(--tomato);color:#fff;padding:15px 22px;border-radius:999px;margin-top:6px;box-shadow:0 8px 0 -2px var(--tomato-dark);transition:transform .12s, box-shadow .12s, background .12s}
+  .btn:hover{background:#f37e68}
+  .btn:active{transform:translateY(4px);box-shadow:0 4px 0 -2px var(--tomato-dark)}
+  .fine{font-size:.78rem;color:var(--ink-soft);margin-top:14px;text-align:center}
+  .success{display:none;text-align:center;padding:10px 4px}
+  .success .big{font-size:2.4rem}
+  .success h2{margin:6px 0}
+  .success p{color:var(--ink-soft);font-size:.95rem}
+  .signup.done form{display:none}
+  .signup.done .success{display:block}
+
+  .pitch-foot{display:flex;gap:18px;flex-wrap:wrap;font-size:.85rem;font-weight:700;color:var(--ink-soft)}
+
+  /* RIGHT: scrolling content */
+  .content{padding:40px clamp(24px,5vw,80px) 60px;display:flex;flex-direction:column;gap:84px;min-width:0}
+  .topnav{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+  .topnav a{text-decoration:none;font-weight:700;font-size:.92rem;padding:9px 16px;border-radius:999px;color:var(--ink-soft)}
+  .topnav a:hover{background:var(--butter);color:var(--ink)}
+
+  section h2.title{font-size:clamp(1.7rem,2.6vw,2.3rem);line-height:1.12;letter-spacing:-.02em;font-weight:800;margin-bottom:12px}
+  section p.sub{color:var(--ink-soft);font-size:1.05rem;max-width:36em;margin-bottom:32px}
+  .tag{display:inline-block;font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--tomato-dark);margin-bottom:10px}
+
+  /* Savings stats */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .stat{border-radius:var(--radius-md);padding:26px 22px}
+  .stat:nth-child(1){background:var(--mint)} .stat:nth-child(2){background:var(--butter)} .stat:nth-child(3){background:var(--lilac)}
+  .stat strong{display:block;font-size:2.4rem;font-weight:800;letter-spacing:-.03em;line-height:1}
+  .stat span{display:block;margin-top:10px;font-size:.95rem;color:var(--ink-soft);font-weight:600}
+
+  /* Receipt comparison */
+  .receipts{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
+  .receipt{background:#fff;border-radius:var(--radius-md);padding:22px 24px;border:2px dashed #f1e0d3}
+  .receipt h3{font-size:1rem;font-weight:800;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .pill{font-size:.72rem;font-weight:800;padding:4px 10px;border-radius:999px}
+  .pill.before{background:var(--rose);color:#a3424f}
+  .pill.after{background:var(--mint);color:var(--leaf)}
+  .receipt ul{list-style:none;font-size:.92rem;color:var(--ink-soft)}
+  .receipt li{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dotted #eedccd}
+  .receipt li.total{border:0;padding-top:12px;color:var(--ink);font-weight:800;font-size:1.05rem}
+  .receipt.good li.total span:last-child{color:var(--leaf)}
+
+  /* Feature grid */
+  .features{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
+  .feature{background:#fff;border-radius:var(--radius-md);padding:26px 24px;border:2px solid #f6e8dc;transition:transform .2s, box-shadow .2s}
+  .feature:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .icon{width:58px;height:58px;border-radius:20px;display:grid;place-items:center;margin-bottom:18px}
+  .icon svg{width:30px;height:30px}
+  .feature h3{font-size:1.1rem;font-weight:800;margin-bottom:6px}
+  .feature p{font-size:.94rem;color:var(--ink-soft)}
+  .bg-peach{background:var(--peach)} .bg-mint{background:var(--mint)} .bg-butter{background:var(--butter)}
+  .bg-lilac{background:var(--lilac)} .bg-sky{background:var(--sky)} .bg-rose{background:var(--rose)}
+
+  /* Steps */
+  .steps{display:grid;gap:14px;counter-reset:step}
+  .step{display:grid;grid-template-columns:56px 1fr;gap:18px;align-items:start;background:#fff;border-radius:var(--radius-md);padding:20px 22px;border:2px solid #f6e8dc}
+  .step::before{counter-increment:step;content:counter(step);width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:1.3rem;background:var(--butter)}
+  .step:nth-child(2)::before{background:var(--mint)}
+  .step:nth-child(3)::before{background:var(--lilac)}
+  .step h3{font-size:1.08rem;font-weight:800;margin:4px 0}
+  .step p{color:var(--ink-soft);font-size:.95rem}
+
+  /* Calculator */
+  .calc{background:var(--mint);border-radius:var(--radius-lg);padding:34px clamp(22px,4vw,40px);display:grid;grid-template-columns:1.2fr 1fr;gap:30px;align-items:center}
+  .calc label{display:flex;justify-content:space-between;font-weight:800;font-size:.95rem;margin-bottom:8px}
+  .calc label output{background:var(--cream);padding:2px 12px;border-radius:999px;font-size:.9rem}
+  .range-row{margin-bottom:22px}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:12px;border-radius:999px;background:var(--cream);outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:var(--leaf);border:5px solid var(--cream);cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.15)}
+  input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--leaf);border:5px solid var(--cream);cursor:pointer}
+  input[type=range]:focus-visible{box-shadow:0 0 0 4px rgba(63,154,111,.35)}
+  .calc-result{background:var(--cream);border-radius:var(--radius-md);padding:28px;text-align:center}
+  .calc-result small{display:block;font-weight:700;color:var(--ink-soft)}
+  .calc-result .money{font-size:clamp(2.6rem,4.5vw,3.6rem);font-weight:800;letter-spacing:-.03em;color:var(--leaf);line-height:1.1;margin:6px 0}
+  .calc-result .per{font-size:.9rem;color:var(--ink-soft)}
+  .calc-note{font-size:.78rem;color:var(--ink-soft);margin-top:4px}
+
+  /* Testimonials */
+  .quotes{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+  .quote{border-radius:var(--radius-md);padding:26px 24px;display:flex;flex-direction:column;gap:18px}
+  .quote:nth-child(1){background:var(--butter)} .quote:nth-child(2){background:var(--sky)} .quote:nth-child(3){background:var(--rose)}
+  .quote blockquote{font-size:1.02rem;font-weight:600}
+  .who{display:flex;align-items:center;gap:12px;margin-top:auto}
+  .avatar{width:44px;height:44px;border-radius:50%;background:var(--cream);display:grid;place-items:center;font-weight:800}
+  .who b{display:block;font-size:.95rem}
+  .who span{font-size:.82rem;color:var(--ink-soft)}
+  .saved{display:inline-block;background:var(--cream);font-size:.78rem;font-weight:800;color:var(--leaf);padding:4px 10px;border-radius:999px;align-self:flex-start}
+
+  /* FAQ */
+  .faq{display:grid;gap:12px}
+  details{background:#fff;border-radius:var(--radius-md);border:2px solid #f6e8dc;padding:4px 22px}
+  summary{cursor:pointer;list-style:none;font-weight:800;padding:16px 0;display:flex;justify-content:space-between;align-items:center;gap:16px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";flex:none;width:32px;height:32px;border-radius:50%;background:var(--peach);display:grid;place-items:center;font-size:1.2rem;transition:transform .2s}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p{color:var(--ink-soft);padding:0 0 18px;font-size:.96rem}
+
+  /* Closing nudge */
+  .nudge{background:var(--lilac);border-radius:var(--radius-lg);padding:38px clamp(22px,4vw,44px);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  .nudge h2{font-size:1.6rem;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+  .nudge p{color:var(--ink-soft)}
+  .btn-ghost{display:inline-flex;align-items:center;gap:8px;font:inherit;font-weight:800;background:var(--cream);padding:14px 24px;border-radius:999px;box-shadow:var(--shadow);border:0;cursor:pointer;color:var(--ink)}
+  .btn-ghost:hover{background:#fff}
+
+  footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--ink-soft);font-size:.85rem;padding-top:16px;border-top:2px dotted #eedccd}
+  footer nav{display:flex;gap:18px}
+  footer a{text-decoration:none}
+  footer a:hover{color:var(--ink)}
+  footer .disclaimer{width:100%;font-size:.75rem}
+
+  .flash{animation:flash 1.2s ease}
+  @keyframes flash{0%,100%{box-shadow:var(--shadow)}30%{box-shadow:0 0 0 8px rgba(240,113,90,.35)}}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 940px){
+    .split{grid-template-columns:1fr}
+    .pitch{position:relative;height:auto;border-radius:0 0 var(--radius-lg) var(--radius-lg)}
+    .pitch-body{margin:0}
+    .topnav{justify-content:center}
+    .calc{grid-template-columns:1fr}
+  }
+  @media (max-width: 620px){
+    .stats,.receipts{grid-template-columns:1fr}
+    .content{gap:64px}
+  }
+  @media (max-height: 760px) and (min-width: 941px){
+    .pitch{padding-top:26px;padding-bottom:26px}
+    .pitch-body{padding:16px 0}
+    h1{font-size:clamp(1.9rem,3vw,2.6rem)}
+    .lede{margin-bottom:18px;font-size:1rem}
+    .signup{padding:18px}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+  }
+</style>
+</head>
+<body>
+
+<div class="split">
+
+  <!-- ============ LEFT: fixed pitch ============ -->
+  <aside class="pitch" aria-label="Sign up for Basketful">
+    <a class="brand" href="#top" aria-label="Basketful home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 32 32" fill="none">
+          <path d="M5 13h22l-2.4 11.2A3 3 0 0 1 21.7 27H10.3a3 3 0 0 1-2.9-2.8L5 13Z" fill="#f0715a"/>
+          <path d="M10 13l4-7M22 13l-4-7" stroke="#3d2f2a" stroke-width="2.4" stroke-linecap="round"/>
+          <circle cx="12" cy="19.5" r="1.6" fill="#fff8f0"/><circle cx="16" cy="19.5" r="1.6" fill="#fff8f0"/><circle cx="20" cy="19.5" r="1.6" fill="#fff8f0"/>
+        </svg>
+      </span>
+      Basketful
+    </a>
+
+    <div class="pitch-body">
+      <span class="eyebrow"><span class="dot"></span>Families save around $38 a week*</span>
+      <h1>Plan your week.<br><span class="hl">Spend less</span> at the store.</h1>
+      <p class="lede">Basketful plans your meals around this week's sales and the food already in your fridge. You get one short list, fewer extra trips, and a smaller receipt.</p>
+
+      <div class="signup" id="signup">
+        <form id="signup-form" novalidate>
+          <h2>Create your free account</h2>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="email-error">
+            <p class="error" id="email-error" role="alert">Please enter a valid email address.</p>
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <div class="pw-wrap">
+              <input id="password" name="password" type="password" autocomplete="new-password" placeholder="At least 8 characters" minlength="8" required aria-describedby="pw-hint pw-error">
+              <button type="button" class="pw-toggle" id="pw-toggle" aria-controls="password" aria-pressed="false">Show</button>
+            </div>
+            <p class="hint" id="pw-hint">8+ characters. A food word works fine.</p>
+            <p class="error" id="pw-error" role="alert">Your password needs at least 8 characters.</p>
+          </div>
+          <button class="btn" type="submit">
+            Start saving, free
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <p class="fine">Free forever plan. No credit card required.</p>
+        </form>
+        <div class="success" role="status" aria-live="polite">
+          <div class="big" aria-hidden="true">🧺</div>
+          <h2>You're in!</h2>
+          <p>We sent a welcome note to <b id="success-email"></b>. Your first money-saving plan is ready to build.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="pitch-foot">
+      <span>⭐ 4.8 average rating</span>
+      <span>🥕 Works with 40+ grocery chains</span>
+    </div>
+  </aside>
+
+  <!-- ============ RIGHT: scrolling content ============ -->
+  <main class="content" id="top">
+
+    <nav class="topnav" aria-label="Page sections">
+      <a href="#savings">Savings</a>
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#calculator">Calculator</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <!-- Savings -->
+    <section id="savings">
+      <span class="tag">The receipt doesn't lie</span>
+      <h2 class="title">Groceries cost more without a plan.</h2>
+      <p class="sub">Most of a grocery bill gets decided in the aisle: impulse buys, duplicates of things already at home, and produce that goes bad before you cook it. Basketful makes those decisions before you leave the house.</p>
+
+      <div class="stats">
+        <div class="stat"><strong>$160</strong><span>average monthly savings for a family of four</span></div>
+        <div class="stat"><strong>31%</strong><span>less food thrown out</span></div>
+        <div class="stat"><strong>1.4</strong><span>fewer store trips each week</span></div>
+      </div>
+
+      <div class="receipts" aria-label="Example weekly receipts">
+        <div class="receipt">
+          <h3>A week with no plan <span class="pill before">Before</span></h3>
+          <ul>
+            <li><span>Main shop</span><span>$142.80</span></li>
+            <li><span>"Just one thing" trip</span><span>$23.15</span></li>
+            <li><span>Takeout (nothing to cook)</span><span>$38.00</span></li>
+            <li><span>Spoiled produce</span><span>$14.50</span></li>
+            <li class="total"><span>Total</span><span>$218.45</span></li>
+          </ul>
+        </div>
+        <div class="receipt good">
+          <h3>A Basketful week <span class="pill after">After</span></h3>
+          <ul>
+            <li><span>Planned shop (on sale)</span><span>$151.20</span></li>
+            <li><span>Extra trips</span><span>$0.00</span></li>
+            <li><span>Takeout</span><span>$0.00</span></li>
+            <li><span>Spoiled produce</span><span>$2.10</span></li>
+            <li class="total"><span>Total</span><span>$153.30</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features">
+      <span class="tag">What's inside</span>
+      <h2 class="title">Small habits that add up to real savings.</h2>
+      <p class="sub">Every feature is there to put money back in your pocket. Eating better comes along with it.</p>
+
+      <div class="features">
+        <article class="feature">
+          <div class="icon bg-peach" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none"><path d="M17.5 4H27v9.5L14.5 26a2.1 2.1 0 0 1-3 0L6 20.5a2.1 2.1 0 0 1 0-3L17.5 4Z" fill="#fff8f0" stroke="#3d2f2a" stroke-width="2.2" stroke-linejoin="round"/><circle cx="21.5" cy="9.5" r="2.2" fill="#f0715a"/></svg>
+          </div>
+          <h3>Sale-smart menus</h3>
+          <p>Each week we read the flyers from your local stores and build meals around what's discounted.</p>
+        </article>
+
+        <article class="feature">
+          <div class="icon bg-mint" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none"><rect x="8" y="3.5" width="16" height="25" rx="4" fill="#fff8f0" stroke="#3d2f2a" stroke-width="2.2"/><path d="M8 13h16" stroke="#3d2f2a" stroke-width="2.2"/><path d="M12 8v2M12 17v4" stroke="#3f9a6f" stroke-width="2.4" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Pantry first</h3>
+          <p>Tell us what you already have. We cook with it before you buy anything new, so you stop buying the same jar of paprika twice.</p>
+        </article>
+
+        <article class="feature">
+          <div class="icon bg-butter" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="11.5" fill="#fff8f0" stroke="#3d2f2a" stroke-width="2.2"/><path d="M16 10v12M19.2 12.4c-.6-1-1.8-1.6-3.2-1.6-1.9 0-3.2 1-3.2 2.4 0 3.4 6.6 1.8 6.6 5.2 0 1.4-1.4 2.5-3.4 2.5-1.5 0-2.8-.6-3.4-1.7" stroke="#f0715a" stroke-width="2.2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Weekly budget cap</h3>
+          <p>Choose your number, like $120. Your plan stays under it, and we show the cost of every meal before you pick it.</p>
+        </article>
+
+        <article class="feature">
+          <div class="icon bg-lilac" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none"><path d="M6 18c0-6 4.5-10 10-10s10 4 10 10H6Z" fill="#fff8f0" stroke="#3d2f2a" stroke-width="2.2" stroke-linejoin="round"/><path d="M4 18h24M10 22h12M13 26h6" stroke="#3d2f2a" stroke-width="2.2" stroke-linecap="round"/><path d="M16 5v3" stroke="#3d2f2a" stroke-width="2.2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Leftover remix</h3>
+          <p>Monday's roast chicken turns into Wednesday's tacos. Ingredients carry over between recipes, so nothing gets wasted.</p>
+        </article>
+
+        <article class="feature">
+          <div class="icon bg-sky" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none"><rect x="6" y="4" width="20" height="24" rx="5" fill="#fff8f0" stroke="#3d2f2a" stroke-width="2.2"/><path d="M11 11l1.5 1.5L15 10M11 17.5l1.5 1.5L15 16.5" stroke="#3f9a6f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 11.5h3.5M18 18h3.5M11 23.5h10.5" stroke="#3d2f2a" stroke-width="2.2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Aisle-sorted lists</h3>
+          <p>Your list is sorted in the order you walk the store. Less wandering means fewer impulse buys.</p>
+        </article>
+
+        <article class="feature">
+          <div class="icon bg-rose" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none"><path d="M5 25V12M12.5 25V7M20 25v-9M27 25V4" stroke="#3d2f2a" stroke-width="2.6" stroke-linecap="round"/><path d="M4 28h24" stroke="#f0715a" stroke-width="2.4" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Savings tracker</h3>
+          <p>Snap your receipt and see how much you saved this week, this month, and since you started.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how">
+      <span class="tag">How it works</span>
+      <h2 class="title">Set it up once in under five minutes.</h2>
+      <p class="sub">After that, each new week takes about two minutes and a cup of coffee.</p>
+      <div class="steps">
+        <div class="step"><div><h3>Tell us about your table</h3><p>How many people you feed, what they won't eat, your weekly budget, and which store you use.</p></div></div>
+        <div class="step"><div><h3>Get a week that fits your wallet</h3><p>We put together dinners (and lunches if you want them) from this week's deals. Swap any meal you don't like with one tap.</p></div></div>
+        <div class="step"><div><h3>Shop once, cook all week</h3><p>Take your sorted list to the store or send it to grocery pickup. Each recipe comes with simple step-by-step instructions.</p></div></div>
+      </div>
+    </section>
+
+    <!-- Calculator -->
+    <section id="calculator">
+      <span class="tag">Do the math</span>
+      <h2 class="title">How much could you save?</h2>
+      <p class="sub">Move the sliders to match your household. Then picture what you'd do with the extra money.</p>
+
+      <div class="calc">
+        <div>
+          <div class="range-row">
+            <label for="people">People at home <output id="people-out" for="people">3</output></label>
+            <input type="range" id="people" min="1" max="8" value="3">
+          </div>
+          <div class="range-row">
+            <label for="spend">Weekly grocery spend <output id="spend-out" for="spend">$150</output></label>
+            <input type="range" id="spend" min="40" max="400" step="10" value="150">
+          </div>
+          <div class="range-row" style="margin-bottom:0">
+            <label for="takeout">Takeout nights per week <output id="takeout-out" for="takeout">2</output></label>
+            <input type="range" id="takeout" min="0" max="7" value="2">
+          </div>
+        </div>
+        <div class="calc-result" aria-live="polite">
+          <small>You could keep about</small>
+          <div class="money" id="yearly">$0</div>
+          <div class="per">a year (<b id="weekly">$0</b> a week)</div>
+          <p class="calc-note">Estimate based on average Basketful member results.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="stories">
+      <span class="tag">Real kitchens</span>
+      <h2 class="title">People are spending less and still eating well.</h2>
+      <p class="sub">A few notes from our early members.</p>
+      <div class="quotes">
+        <figure class="quote">
+          <span class="saved">Saved $52/week</span>
+          <blockquote>"I used to walk out of the store at $200 every time. Now I set a $140 cap and Basketful sticks to it, and my kids haven't noticed anything different."</blockquote>
+          <figcaption class="who"><span class="avatar">MR</span><div><b>Maya R.</b><span>Mom of three, Columbus</span></div></figcaption>
+        </figure>
+        <figure class="quote">
+          <span class="saved">Saved $27/week</span>
+          <blockquote>"The leftover remix feature is genius. One rotisserie chicken now covers three dinners for the two of us."</blockquote>
+          <figcaption class="who"><span class="avatar">DK</span><div><b>Daniel K.</b><span>Grad student, Austin</span></div></figcaption>
+        </figure>
+        <figure class="quote">
+          <span class="saved">Saved $41/week</span>
+          <blockquote>"I stopped throwing out sad, wilted spinach every Sunday. It sounds minor, but over a year that's real money."</blockquote>
+          <figcaption class="who"><span class="avatar">PL</span><div><b>Priya L.</b><span>Nurse, Portland</span></div></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <span class="tag">Questions</span>
+      <h2 class="title">Good questions, honest answers.</h2>
+      <p class="sub">Not seeing yours? Send it to <a href="mailto:hello@basketful.app">hello@basketful.app</a>.</p>
+      <div class="faq">
+        <details open>
+          <summary>Is it really free?</summary>
+          <p>Yes. The free plan includes weekly meal plans, sale-matching for one store, and shopping lists. Basketful Plus ($4/month) adds multi-store price comparison and the receipt savings tracker. Most members say Plus pays for itself in the first week.</p>
+        </details>
+        <details>
+          <summary>How do you know what's on sale near me?</summary>
+          <p>We pull weekly circulars and digital coupons from more than 40 grocery chains. You choose your store when you sign up, and your plan refreshes every Wednesday when the new deals come out.</p>
+        </details>
+        <details>
+          <summary>Can it handle picky eaters or allergies?</summary>
+          <p>Yes. You can set dietary needs, allergies, and a "nope" list for each person. Sale-matching only suggests meals everyone at the table will eat.</p>
+        </details>
+        <details>
+          <summary>Do I have to cook every night?</summary>
+          <p>No. Pick how many nights you want to plan. A lot of members plan four dinners and leave the other nights for leftovers or a night out.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- Closing nudge -->
+    <section class="nudge" aria-label="Get started">
+      <div>
+        <h2>Your next grocery bill can be smaller.</h2>
+        <p>Sign up free in 30 seconds. All you need is an email and a password.</p>
+      </div>
+      <button class="btn-ghost" type="button" id="jump-signup">
+        Create free account
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </section>
+
+    <footer>
+      <span>© 2026 Basketful Inc. Made with love (and coupons).</span>
+      <nav aria-label="Footer">
+        <a href="#">Privacy</a><a href="#">Terms</a><a href="mailto:hello@basketful.app">Contact</a>
+      </nav>
+      <span class="disclaimer">*Average weekly savings reported by Basketful members over their first 8 weeks, compared with their own pre-signup receipts. Your results may vary.</span>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  // ----- Signup form -----
+  const form = document.getElementById('signup-form');
+  const email = document.getElementById('email');
+  const pw = document.getElementById('password');
+  const emailErr = document.getElementById('email-error');
+  const pwErr = document.getElementById('pw-error');
+  const toggle = document.getElementById('pw-toggle');
+  const card = document.getElementById('signup');
+
+  toggle.addEventListener('click', () => {
+    const show = pw.type === 'password';
+    pw.type = show ? 'text' : 'password';
+    toggle.textContent = show ? 'Hide' : 'Show';
+    toggle.setAttribute('aria-pressed', String(show));
+  });
+
+  const validEmail = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+  function check(input, ok, err){
+    input.setAttribute('aria-invalid', ok ? 'false' : 'true');
+    err.classList.toggle('show', !ok);
+    return ok;
+  }
+  email.addEventListener('blur', () => { if (email.value) check(email, validEmail(email.value), emailErr); });
+  pw.addEventListener('input', () => { if (pwErr.classList.contains('show')) check(pw, pw.value.length >= 8, pwErr); });
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const okEmail = check(email, validEmail(email.value), emailErr);
+    const okPw = check(pw, pw.value.length >= 8, pwErr);
+    if (!okEmail) { email.focus(); return; }
+    if (!okPw) { pw.focus(); return; }
+    // Hook up your real signup endpoint here.
+    document.getElementById('success-email').textContent = email.value.trim();
+    card.classList.add('done');
+  });
+
+  // ----- Closing button jumps back to the signup card -----
+  document.getElementById('jump-signup').addEventListener('click', () => {
+    card.scrollIntoView({behavior:'smooth', block:'center'});
+    card.classList.remove('flash'); void card.offsetWidth; card.classList.add('flash');
+    if (!card.classList.contains('done')) setTimeout(() => email.focus({preventScroll:true}), 400);
+  });
+
+  // ----- Savings calculator -----
+  const people = document.getElementById('people');
+  const spend = document.getElementById('spend');
+  const takeout = document.getElementById('takeout');
+  const fmt = n => '$' + Math.round(n).toLocaleString('en-US');
+
+  function calc(){
+    const p = +people.value, s = +spend.value, t = +takeout.value;
+    document.getElementById('people-out').textContent = p;
+    document.getElementById('spend-out').textContent = fmt(s);
+    document.getElementById('takeout-out').textContent = t;
+    // ~17% off groceries from sale-matching and less waste,
+    // plus half of takeout nights replaced at ~$4.50/person net.
+    const weekly = s * 0.17 + (t * 0.5) * p * 4.5;
+    document.getElementById('weekly').textContent = fmt(weekly);
+    document.getElementById('yearly').textContent = fmt(weekly * 52);
+  }
+  [people, spend, takeout].forEach(el => el.addEventListener('input', calc));
+  calc();
+})();
+</script>
+</body>
+</html>

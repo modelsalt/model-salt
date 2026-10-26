@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A white pelican with a golden bill rides a blue cruiser bicycle, seen from the front-left at a three-quarter angle.</desc>
+
+  <rect width="960" height="540" fill="#f1f7f5"/>
+  <ellipse cx="474" cy="493" rx="283" ry="18" fill="#dce8e5"/>
+
+  <g stroke="#293e49" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Wheels recede toward the right. -->
+    <ellipse cx="650" cy="367" rx="62" ry="83" fill="#354852"/>
+    <ellipse cx="650" cy="367" rx="51" ry="72" fill="#f1f7f5"/>
+    <path d="M650 295V439M599 367H701M614 316L686 418M614 418L686 316"
+          fill="none" stroke="#a5b8bc"/>
+    <ellipse cx="650" cy="367" rx="8" ry="10" fill="#dbe4e5"/>
+
+    <ellipse cx="310" cy="408" rx="78" ry="98" fill="#354852"/>
+    <ellipse cx="310" cy="408" rx="66" ry="86" fill="#f1f7f5"/>
+    <path d="M310 322V494M244 408H376M263 347L357 469M263 469L357 347"
+          fill="none" stroke="#a5b8bc"/>
+    <ellipse cx="310" cy="408" rx="9" ry="11" fill="#dbe4e5"/>
+
+    <!-- Far leg and pedal. -->
+    <path d="M546 268L583 309L550 348" fill="none" stroke="#d99a39"/>
+    <path d="M548 340L574 350L546 358L528 352Z" fill="#edb655"/>
+    <path d="M524 371L550 350M537 351L565 347" fill="none"/>
+
+    <!-- Curved blue cruiser frame. -->
+    <path d="M650 367L545 281L524 371Z" fill="none" stroke="#367da3"/>
+    <path d="M370 290C420 339 452 376 524 371"
+          fill="none" stroke="#367da3" stroke-width="15"/>
+    <path d="M380 321C424 389 472 411 524 371"
+          fill="none" stroke="#367da3" stroke-width="15"/>
+    <path d="M524 371L545 281M368 284L310 408"
+          fill="none" stroke="#367da3" stroke-width="12"/>
+    <path d="M388 295L330 410" fill="none" stroke="#8fc3d8"/>
+    <path d="M545 281L551 259" fill="none"/>
+    <path d="M526 255Q548 246 579 251Q586 259 576 265L534 269Q522 266 526 255Z"
+          fill="#775c49"/>
+
+    <!-- Chain guard and crank. -->
+    <path d="M525 354L649 354Q666 365 650 379L525 389Q503 383 503 372Q503 361 525 354Z"
+          fill="#83b7ce"/>
+    <ellipse cx="524" cy="372" rx="17" ry="19" fill="#d8e3e6"/>
+    <path d="M524 372L486 408M470 409L502 405" fill="none"/>
+
+    <!-- Handlebars. -->
+    <path d="M370 290L380 252L352 239M380 252L422 243"
+          fill="none" stroke="#a5b8bc"/>
+    <path d="M337 234L357 242M416 243L436 239" fill="none"/>
+    <path d="M353 243Q331 275 350 307" fill="none"/>
+
+    <!-- Tail, body and raised neck. -->
+    <path d="M590 233L650 217L622 248L651 246L609 277Z" fill="#dce1db"/>
+    <path d="M430 191
+             C457 163 506 174 548 195
+             C585 201 621 226 622 255
+             C622 283 588 302 550 301
+             C504 301 470 280 452 252
+             C430 235 415 218 430 191Z" fill="#fffdf0"/>
+    <path d="M474 241
+             C446 227 421 203 411 175
+             C395 154 385 133 397 111
+             C407 91 437 91 451 107
+             C470 130 453 153 455 170
+             C457 190 485 200 493 218Z" fill="#fffdf0"/>
+
+    <!-- Pelican's long bill and throat pouch. -->
+    <path d="M407 129
+             L231 155
+             Q259 207 311 205
+             Q368 198 419 148Z" fill="#edbd65"/>
+    <path d="M410 125L226 151Q219 155 232 162L417 143Z" fill="#efbd50"/>
+    <path d="M238 160L393 143" fill="none" stroke="#bc8036"/>
+    <path d="M418 111Q430 103 440 113" fill="none"/>
+    <ellipse cx="424" cy="121" rx="5" ry="6" fill="#293e49" stroke="none"/>
+    <circle cx="426" cy="119" r="1.5" fill="white" stroke="none"/>
+
+    <!-- Near wing reaches the handlebars. -->
+    <path d="M533 209
+             C515 202 499 214 482 230
+             L440 251
+             Q421 257 419 246
+             Q421 236 437 231
+             L473 205
+             Q497 188 519 198Z" fill="#e8eade"/>
+    <path d="M529 231Q560 244 588 239M533 243Q559 257 582 253"
+          fill="none" stroke="#adb7af"/>
+
+    <!-- Near leg and webbed foot push the pedal. -->
+    <path d="M531 290L501 335L486 393" fill="none" stroke="#d99a39" stroke-width="11"/>
+    <path d="M483 389
+             L506 400L514 410
+             L489 407L468 416
+             L469 404Z" fill="#edb655"/>
+  </g>
+</svg>

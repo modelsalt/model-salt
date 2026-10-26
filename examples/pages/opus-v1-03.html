@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sprig — Balanced meals, planned for your week</title>
+<meta name="description" content="Sprig plans a week of balanced meals in minutes, with protein, fiber and veg targets built in. Start your free 14-day trial." />
+<style>
+  :root{
+    --green-900:#0f3d2a;
+    --green-800:#145236;
+    --green-700:#1a6b45;
+    --green-600:#218a57;
+    --green-500:#2fa56a;
+    --green-300:#8fd6ad;
+    --green-100:#e3f5ea;
+    --green-50:#f3faf5;
+    --lime:#c8ef6b;
+    --ink:#13221b;
+    --muted:#5a6b62;
+    --line:#dde9e1;
+    --white:#ffffff;
+    --radius:18px;
+    --shadow:0 20px 50px -20px rgba(15,61,42,.28);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    color:var(--ink);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  img,svg{display:block}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-700)}
+  h1,h2,h3{line-height:1.15;letter-spacing:-.02em}
+  h2{font-size:clamp(1.9rem,3.4vw,2.6rem);margin:10px 0 14px}
+  .lead{color:var(--muted);font-size:1.1rem;max-width:620px}
+  .center{text-align:center}
+  .center .lead{margin:0 auto}
+  section{padding:96px 0}
+
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:700;border-radius:999px;padding:15px 26px;font-size:1rem;transition:transform .15s ease,box-shadow .15s ease,background .15s ease;cursor:pointer;border:0}
+  .btn-primary{background:var(--green-600);color:#fff;box-shadow:0 10px 24px -10px rgba(33,138,87,.7)}
+  .btn-primary:hover{background:var(--green-700);transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:var(--green-800);border:1.5px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--green-300);background:var(--green-50)}
+  .btn-light{background:#fff;color:var(--green-800)}
+  .btn-light:hover{transform:translateY(-1px)}
+  .btn svg{width:18px;height:18px}
+
+  /* Nav */
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.88);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
+  header.scrolled{border-color:var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.3rem;color:var(--green-900)}
+  .logo-mark{width:34px;height:34px;border-radius:10px;background:var(--green-600);display:grid;place-items:center}
+  .nav-links{display:flex;gap:30px;font-weight:600;font-size:.95rem;color:var(--muted)}
+  .nav-links a:hover{color:var(--green-700)}
+  .nav-cta{display:flex;gap:12px;align-items:center}
+  .nav-cta .btn{padding:11px 20px;font-size:.92rem}
+  .menu-btn{display:none;background:none;border:0;cursor:pointer;padding:8px}
+
+  /* Hero */
+  .hero{padding:72px 0 96px;background:
+    radial-gradient(900px 500px at 85% 10%,var(--green-100),transparent 60%),
+    radial-gradient(600px 400px at 0% 100%,var(--green-50),transparent 70%);}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .pill{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 6px;font-size:.85rem;font-weight:600;color:var(--green-800)}
+  .pill b{background:var(--green-100);color:var(--green-700);border-radius:999px;padding:3px 10px;font-size:.75rem}
+  .hero h1{font-size:clamp(2.4rem,5.2vw,3.9rem);margin:22px 0 20px;color:var(--green-900)}
+  .hero h1 em{font-style:normal;color:var(--green-600);position:relative;white-space:nowrap}
+  .hero h1 em::after{content:"";position:absolute;left:0;right:0;bottom:.06em;height:.28em;background:var(--lime);z-index:-1;border-radius:4px;opacity:.75}
+  .hero .lead{font-size:1.18rem}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin:32px 0 18px}
+  .fineprint{font-size:.88rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:18px}
+  .fineprint span{display:inline-flex;align-items:center;gap:6px}
+  .fineprint svg{width:16px;height:16px;color:var(--green-600)}
+  .proof{display:flex;align-items:center;gap:14px;margin-top:34px;padding-top:26px;border-top:1px solid var(--line)}
+  .avatars{display:flex}
+  .avatars span{width:36px;height:36px;border-radius:50%;border:3px solid #fff;margin-left:-10px;display:grid;place-items:center;font-size:.75rem;font-weight:700;color:#fff}
+  .avatars span:first-child{margin-left:0}
+  .proof p{font-size:.9rem;color:var(--muted)}
+  .proof strong{color:var(--ink)}
+  .stars{color:#f2b61f;letter-spacing:2px}
+
+  /* Hero mockup */
+  .mock{position:relative}
+  .card{background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}
+  .planner{padding:22px}
+  .planner-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+  .planner-head h4{font-size:1.05rem}
+  .planner-head small{color:var(--muted);font-size:.8rem}
+  .tag{font-size:.72rem;font-weight:700;background:var(--green-100);color:var(--green-700);padding:4px 10px;border-radius:999px}
+  .days{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:16px}
+  .day{text-align:center;padding:8px 0;border-radius:12px;font-size:.75rem;font-weight:700;color:var(--muted);background:var(--green-50)}
+  .day.active{background:var(--green-600);color:#fff}
+  .day i{display:block;font-style:normal;font-size:1rem;margin-top:2px}
+  .meal{display:flex;align-items:center;gap:14px;padding:12px;border-radius:14px;border:1px solid var(--line);margin-bottom:10px}
+  .meal-thumb{width:48px;height:48px;border-radius:12px;flex-shrink:0;display:grid;place-items:center;font-size:1.5rem}
+  .meal-info{flex:1;min-width:0}
+  .meal-info small{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--green-600)}
+  .meal-info p{font-weight:700;font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .meal-time{font-size:.78rem;color:var(--muted);white-space:nowrap}
+  .balance{position:absolute;right:-28px;bottom:-34px;width:250px;padding:18px}
+  .balance h5{font-size:.85rem;margin-bottom:12px;display:flex;justify-content:space-between}
+  .balance h5 span{color:var(--green-600)}
+  .bar{margin-bottom:10px}
+  .bar-label{display:flex;justify-content:space-between;font-size:.75rem;font-weight:600;color:var(--muted);margin-bottom:4px}
+  .bar-track{height:8px;background:var(--green-50);border-radius:99px;overflow:hidden}
+  .bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--green-500),var(--green-300));width:0;transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+  .chip-float{position:absolute;left:-30px;top:40px;padding:12px 16px;display:flex;align-items:center;gap:10px;font-size:.85rem;font-weight:700}
+  .chip-float .dot{width:32px;height:32px;border-radius:10px;background:var(--lime);display:grid;place-items:center}
+
+  /* Logos strip */
+  .strip{padding:34px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff}
+  .strip .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .strip p{font-size:.85rem;color:var(--muted);font-weight:600}
+  .strip-items{display:flex;gap:42px;flex-wrap:wrap;font-weight:800;color:#a7b8ae;font-size:1.05rem;letter-spacing:-.01em}
+
+  /* Features */
+  .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:54px}
+  .feature{padding:30px;border-radius:var(--radius);border:1px solid var(--line);background:#fff;transition:transform .2s,box-shadow .2s,border-color .2s}
+  .feature:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--green-300)}
+  .feature.hero-feature{grid-column:span 2;background:linear-gradient(135deg,var(--green-800),var(--green-600));color:#fff;border:0;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+  .feature.hero-feature p{color:rgba(255,255,255,.82)}
+  .feature.hero-feature .icon{background:rgba(255,255,255,.14);color:var(--lime)}
+  .icon{width:48px;height:48px;border-radius:14px;background:var(--green-100);color:var(--green-700);display:grid;place-items:center;margin-bottom:18px}
+  .icon svg{width:24px;height:24px}
+  .feature h3{font-size:1.2rem;margin-bottom:8px}
+  .feature p{color:var(--muted);font-size:.97rem}
+  .macro-rings{display:flex;gap:16px;justify-content:center}
+  .ring{text-align:center;font-size:.75rem;font-weight:700;color:rgba(255,255,255,.85)}
+  .ring svg{width:78px;height:78px;margin:0 auto 6px}
+
+  /* How it works */
+  .how{background:var(--green-50)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:56px;position:relative}
+  .steps::before{content:"";position:absolute;top:30px;left:16%;right:16%;height:2px;background:repeating-linear-gradient(90deg,var(--green-300) 0 8px,transparent 8px 16px)}
+  .step{text-align:center;position:relative}
+  .step-num{width:60px;height:60px;border-radius:50%;background:#fff;border:2px solid var(--green-500);color:var(--green-700);font-weight:800;font-size:1.3rem;display:grid;place-items:center;margin:0 auto 22px;position:relative;z-index:1}
+  .step h3{font-size:1.2rem;margin-bottom:8px}
+  .step p{color:var(--muted);max-width:300px;margin:0 auto}
+  .step .time{display:inline-block;margin-top:14px;font-size:.78rem;font-weight:700;color:var(--green-700);background:#fff;border:1px solid var(--line);padding:4px 12px;border-radius:99px}
+  .how-cta{text-align:center;margin-top:54px}
+
+  /* Testimonials */
+  .t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:54px}
+  .quote{padding:30px;display:flex;flex-direction:column;gap:20px;border-radius:var(--radius);border:1px solid var(--line);background:#fff}
+  .quote blockquote{font-size:1.02rem;color:var(--ink);flex:1}
+  .quote .stat{font-size:.8rem;font-weight:700;color:var(--green-700);background:var(--green-100);padding:5px 12px;border-radius:99px;align-self:flex-start}
+  .who{display:flex;align-items:center;gap:12px}
+  .who span{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800}
+  .who b{display:block;font-size:.95rem}
+  .who small{color:var(--muted);font-size:.82rem}
+
+  /* Pricing */
+  .pricing{background:linear-gradient(180deg,#fff 0%,var(--green-50) 100%)}
+  .toggle{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px;margin-top:28px}
+  .toggle button{border:0;background:none;padding:10px 20px;border-radius:999px;font-weight:700;font-size:.9rem;color:var(--muted);cursor:pointer;font-family:inherit}
+  .toggle button.on{background:var(--green-600);color:#fff}
+  .toggle .save{font-size:.7rem;background:var(--lime);color:var(--green-900);padding:2px 8px;border-radius:99px;margin-left:6px}
+  .toggle button.on .save{background:#fff}
+  .plans{display:grid;grid-template-columns:repeat(2,minmax(0,380px));gap:24px;justify-content:center;margin-top:44px}
+  .plan{padding:36px;border-radius:24px;background:#fff;border:1px solid var(--line);position:relative}
+  .plan.featured{border:2px solid var(--green-500);box-shadow:var(--shadow)}
+  .plan .badge{position:absolute;top:-14px;left:36px;background:var(--green-600);color:#fff;font-size:.75rem;font-weight:700;padding:5px 14px;border-radius:99px}
+  .plan h3{font-size:1.3rem}
+  .plan .for{color:var(--muted);font-size:.92rem;margin-top:4px}
+  .price{display:flex;align-items:baseline;gap:6px;margin:22px 0 4px}
+  .price b{font-size:2.8rem;letter-spacing:-.03em;color:var(--green-900)}
+  .price span{color:var(--muted);font-weight:600}
+  .billed{font-size:.82rem;color:var(--muted);min-height:1.3em}
+  .plan ul{list-style:none;margin:24px 0 28px;display:grid;gap:12px}
+  .plan li{display:flex;gap:10px;font-size:.95rem}
+  .plan li svg{width:20px;height:20px;flex-shrink:0;color:var(--green-600)}
+  .plan .btn{width:100%}
+  .guarantee{text-align:center;margin-top:26px;color:var(--muted);font-size:.9rem}
+
+  /* FAQ */
+  .faq-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;align-items:start}
+  .faq-list{display:grid;gap:12px}
+  details{border:1px solid var(--line);border-radius:16px;padding:0 22px;background:#fff;transition:border-color .2s}
+  details[open]{border-color:var(--green-300);background:var(--green-50)}
+  summary{list-style:none;cursor:pointer;padding:20px 0;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:16px}
+  summary::-webkit-details-marker{display:none}
+  summary .plus{width:28px;height:28px;border-radius:50%;background:var(--green-100);color:var(--green-700);display:grid;place-items:center;flex-shrink:0;transition:transform .2s}
+  details[open] summary .plus{transform:rotate(45deg);background:var(--green-600);color:#fff}
+  details p{padding:0 0 20px;color:var(--muted)}
+
+  /* Final CTA */
+  .final{padding:0 0 96px}
+  .final-box{background:linear-gradient(135deg,var(--green-900),var(--green-700));border-radius:32px;padding:64px;color:#fff;display:grid;grid-template-columns:1.3fr .7fr;gap:40px;align-items:center;position:relative;overflow:hidden}
+  .final-box::after{content:"";position:absolute;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(200,239,107,.35),transparent 70%);right:-80px;top:-120px}
+  .final-box h2{color:#fff;margin-top:0}
+  .final-box p{color:rgba(255,255,255,.8);font-size:1.08rem}
+  .final-actions{display:flex;flex-direction:column;gap:12px;align-items:flex-start;position:relative;z-index:1}
+  .final-actions small{color:rgba(255,255,255,.7)}
+
+  /* Footer */
+  footer{border-top:1px solid var(--line);padding:60px 0 34px;background:#fff}
+  .foot-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:40px}
+  .foot-grid p{color:var(--muted);font-size:.92rem;margin-top:14px;max-width:280px}
+  .foot-grid h6{font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;color:var(--green-800)}
+  .foot-grid ul{list-style:none;display:grid;gap:10px;font-size:.93rem;color:var(--muted)}
+  .foot-grid a:hover{color:var(--green-700)}
+  .foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:48px;padding-top:24px;border-top:1px solid var(--line);font-size:.85rem;color:var(--muted)}
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+  /* Responsive */
+  @media (max-width:980px){
+    .hero-grid,.faq-wrap,.final-box{grid-template-columns:1fr}
+    .mock{max-width:480px;margin:20px auto 40px}
+    .balance{right:-10px}
+    .chip-float{left:-10px}
+    .features-grid,.t-grid{grid-template-columns:1fr 1fr}
+    .feature.hero-feature{grid-column:span 2}
+    .foot-grid{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:720px){
+    section{padding:72px 0}
+    .nav-links,.nav-cta .btn-ghost{display:none}
+    .menu-btn{display:block}
+    .nav-links.open{display:flex;flex-direction:column;position:absolute;top:72px;left:0;right:0;background:#fff;padding:20px 24px;border-bottom:1px solid var(--line);gap:16px}
+    .features-grid,.t-grid,.steps,.plans{grid-template-columns:1fr}
+    .feature.hero-feature{grid-column:auto;grid-template-columns:1fr}
+    .steps::before{display:none}
+    .balance{position:relative;right:auto;bottom:auto;width:auto;margin-top:14px}
+    .chip-float{display:none}
+    .final-box{padding:40px 28px}
+    .foot-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header id="top">
+  <div class="wrap nav">
+    <a href="#top" class="logo" aria-label="Sprig home">
+      <span class="logo-mark">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V11"/><path d="M12 11c0-4 3-7 8-7 0 5-3 8-8 7z"/><path d="M12 14c0-3-2.5-5.5-7-5.5 0 4 2.5 6.5 7 5.5z"/></svg>
+      </span>
+      Sprig
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#stories">Stories</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#" class="btn btn-ghost">Log in</a>
+      <a href="#pricing" class="btn btn-primary">Start free trial</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill"><b>New</b> Nutrition balance, built into every plan</span>
+      <h1>Eat <em>balanced</em> all week — without doing the math.</h1>
+      <p class="lead">Sprig plans your week of meals so each day hits its protein, fiber and veggie targets. Spend 10 minutes on Sunday and every weeknight dinner is already decided.</p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn btn-primary">
+          Start your free 14-day trial
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#how" class="btn btn-ghost">See how it works</a>
+      </div>
+      <div class="fineprint">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>No card needed to start</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Cancel in two taps</span>
+      </div>
+      <div class="proof">
+        <div class="avatars">
+          <span style="background:#218a57">MK</span>
+          <span style="background:#2fa56a">JR</span>
+          <span style="background:#145236">AL</span>
+          <span style="background:#6fbf8f">+</span>
+        </div>
+        <p><span class="stars">★★★★★</span><br><strong>4.9/5</strong> from 14,000+ busy households</p>
+      </div>
+    </div>
+
+    <div class="mock" aria-hidden="true">
+      <div class="card planner">
+        <div class="planner-head">
+          <div><h4>This week's plan</h4><small>Oct 26 – Oct 30 · 2 people</small></div>
+          <span class="tag">Balanced ✓</span>
+        </div>
+        <div class="days">
+          <div class="day">Mon<i>🥗</i></div>
+          <div class="day active">Tue<i>🍲</i></div>
+          <div class="day">Wed<i>🌮</i></div>
+          <div class="day">Thu<i>🐟</i></div>
+          <div class="day">Fri<i>🍝</i></div>
+        </div>
+        <div class="meal">
+          <div class="meal-thumb" style="background:#fff4dc">🥣</div>
+          <div class="meal-info"><small>Breakfast</small><p>Overnight oats, berries &amp; chia</p></div>
+          <div class="meal-time">5 min</div>
+        </div>
+        <div class="meal">
+          <div class="meal-thumb" style="background:var(--green-100)">🥙</div>
+          <div class="meal-info"><small>Lunch · leftovers</small><p>Chickpea &amp; quinoa power bowl</p></div>
+          <div class="meal-time">0 min</div>
+        </div>
+        <div class="meal">
+          <div class="meal-thumb" style="background:#ffe6df">🍲</div>
+          <div class="meal-info"><small>Dinner</small><p>One-pan lemon chicken &amp; greens</p></div>
+          <div class="meal-time">25 min</div>
+        </div>
+      </div>
+
+      <div class="card chip-float">
+        <span class="dot">🛒</span>
+        <div>Grocery list ready<br><small style="color:var(--muted);font-weight:600">23 items · sorted by aisle</small></div>
+      </div>
+
+      <div class="card balance">
+        <h5>Tuesday balance <span>On track</span></h5>
+        <div class="bar"><div class="bar-label"><span>Protein</span><span>92g / 95g</span></div><div class="bar-track"><div class="bar-fill" data-w="96%"></div></div></div>
+        <div class="bar"><div class="bar-label"><span>Fiber</span><span>30g / 30g</span></div><div class="bar-track"><div class="bar-fill" data-w="100%"></div></div></div>
+        <div class="bar"><div class="bar-label"><span>Veg servings</span><span>5 / 5</span></div><div class="bar-track"><div class="bar-fill" data-w="100%"></div></div></div>
+        <div class="bar" style="margin-bottom:0"><div class="bar-label"><span>Added sugar</span><span>14g / 25g</span></div><div class="bar-track"><div class="bar-fill" data-w="56%"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="wrap">
+    <p>Recipes reviewed by registered dietitians · As featured in</p>
+    <div class="strip-items">
+      <span>Wellnest</span><span>The Daily Plate</span><span>FitWeek</span><span>HomeCook</span>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">Features</span>
+      <h2>Healthy eating that fits your workweek</h2>
+      <p class="lead">You don't need a spreadsheet or a nutrition degree. Sprig balances the meals for you, and you just cook.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature hero-feature reveal">
+        <div>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg></div>
+          <h3>Nutrition balance, built in</h3>
+          <p>Each plan is built around daily targets for protein, fiber, vegetables and added sugar. Swap a meal and Sprig adjusts the rest of the day so you stay on track.</p>
+        </div>
+        <div class="macro-rings">
+          <div class="ring">
+            <svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="4"/><circle cx="18" cy="18" r="15" fill="none" stroke="#c8ef6b" stroke-width="4" stroke-linecap="round" stroke-dasharray="91 94.2" transform="rotate(-90 18 18)"/><text x="18" y="21" text-anchor="middle" fill="#fff" font-size="8" font-weight="700">96%</text></svg>
+            Protein
+          </div>
+          <div class="ring">
+            <svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="4"/><circle cx="18" cy="18" r="15" fill="none" stroke="#8fd6ad" stroke-width="4" stroke-linecap="round" stroke-dasharray="94.2 94.2" transform="rotate(-90 18 18)"/><text x="18" y="21" text-anchor="middle" fill="#fff" font-size="8" font-weight="700">100%</text></svg>
+            Fiber
+          </div>
+          <div class="ring">
+            <svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="4"/><circle cx="18" cy="18" r="15" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-dasharray="85 94.2" transform="rotate(-90 18 18)"/><text x="18" y="21" text-anchor="middle" fill="#fff" font-size="8" font-weight="700">5/5</text></svg>
+            Veg
+          </div>
+        </div>
+      </div>
+
+      <div class="feature reveal">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg></div>
+        <h3>30-minute weeknights</h3>
+        <p>Dinners from Monday to Thursday take 30 minutes or less with no more than 10 ingredients. Longer recipes are kept for the weekend.</p>
+      </div>
+
+      <div class="feature reveal">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="20.5" r="1"/><circle cx="17" cy="20.5" r="1"/></svg></div>
+        <h3>One smart grocery list</h3>
+        <p>The whole week goes on one list, sorted by aisle, with nothing doubled up. You can send it to delivery in one tap or just bring it to the store.</p>
+      </div>
+
+      <div class="feature reveal">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h11a4 4 0 0 1 0 8H8"/><path d="M7 11l-3-4 3-4"/><path d="M20 17H9"/></svg></div>
+        <h3>Leftovers on purpose</h3>
+        <p>Tonight's dinner turns into tomorrow's lunch, so you cook once and eat twice. Less waste, and no sad desk sandwiches.</p>
+      </div>
+
+      <div class="feature reveal">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3l4 4-4 4"/><path d="M21 7H9a4 4 0 0 0-4 4"/><path d="M7 21l-4-4 4-4"/><path d="M3 17h12a4 4 0 0 0 4-4"/></svg></div>
+        <h3>One-tap swaps</h3>
+        <p>Not in the mood for salmon? Swap in another meal with similar nutrition. Your grocery list updates on its own.</p>
+      </div>
+
+      <div class="feature reveal">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-11a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 6.5-7 11-7 11z"/></svg></div>
+        <h3>Fits how you eat</h3>
+        <p>Vegetarian, gluten-free, dairy-free, high-protein, or "no cilantro, ever." Set it once and every plan follows it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>A weekly routine you'll actually keep</h2>
+      <p class="lead">Three short steps, once a week. Sprig takes care of the rest.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <h3>Tell us about your week</h3>
+        <p>Your goals, diet, household size, and which nights are busy. It's a two-minute quiz you only take once.</p>
+        <span class="time">⏱ 2 minutes, once</span>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">2</div>
+        <h3>Approve your balanced plan</h3>
+        <p>Every Sunday a full week of meals shows up, balanced and ready. Swap anything you like, then tap approve.</p>
+        <span class="time">⏱ 5 minutes, Sundays</span>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">3</div>
+        <h3>Shop once, cook easy</h3>
+        <p>One grocery run, then simple step-by-step cooking each night. Your nutrition is tracked automatically.</p>
+        <span class="time">⏱ ~25 min a night</span>
+      </div>
+    </div>
+    <div class="how-cta reveal">
+      <a href="#pricing" class="btn btn-primary">Start your free 14-day trial</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="stories">
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">Stories</span>
+      <h2>Busy people, eating better</h2>
+      <p class="lead">From people who used to open the fridge at 7pm and order takeout.</p>
+    </div>
+    <div class="t-grid">
+      <figure class="quote reveal">
+        <span class="stat">Takeout: 4× → 1× a week</span>
+        <blockquote>"I work 10-hour days. I used to stand in front of the fridge every evening trying to decide what to make. Now dinner is already decided, and it's actually good for me."</blockquote>
+        <figcaption class="who"><span style="background:#218a57">MK</span><div><b>Maya K.</b><small>Product manager, Denver</small></div></figcaption>
+      </figure>
+      <figure class="quote reveal">
+        <span class="stat">Hitting protein 6 of 7 days</span>
+        <blockquote>"I didn't realize how little fiber and protein I was getting until Sprig showed me. It fixes the balance without me having to count anything. That's the whole point for me."</blockquote>
+        <figcaption class="who"><span style="background:#145236">JR</span><div><b>James R.</b><small>Nurse, night shifts, Chicago</small></div></figcaption>
+      </figure>
+      <figure class="quote reveal">
+        <span class="stat">Saves ~$60 a month on groceries</span>
+        <blockquote>"We plan on Sunday over coffee. One grocery run, the leftovers turn into lunches, and almost nothing goes to waste. It's the first routine our family has kept going."</blockquote>
+        <figcaption class="who"><span style="background:#2fa56a">AL</span><div><b>Aisha L.</b><small>Teacher &amp; parent of two, Austin</small></div></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">Pricing</span>
+      <h2>Try every feature free for 14 days</h2>
+      <p class="lead">Pick a plan and start cooking. We'll remind you before your trial ends, so there are no surprise charges.</p>
+      <div class="toggle" role="group" aria-label="Billing period">
+        <button type="button" data-period="monthly">Monthly</button>
+        <button type="button" data-period="yearly" class="on">Yearly <span class="save">Save 30%</span></button>
+      </div>
+    </div>
+
+    <div class="plans">
+      <div class="plan reveal">
+        <h3>Solo</h3>
+        <p class="for">For one person building a healthy routine.</p>
+        <div class="price"><b data-monthly="$8.99" data-yearly="$6.25">$6.25</b><span>/ month</span></div>
+        <p class="billed" data-monthly="Billed monthly" data-yearly="Billed $75 yearly">Billed $75 yearly</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Weekly plans with nutrition balance</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>2,500+ recipes reviewed by dietitians</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Smart grocery list</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Unlimited swaps</li>
+        </ul>
+        <a href="#" class="btn btn-ghost">Start free trial</a>
+      </div>
+
+      <div class="plan featured reveal">
+        <span class="badge">Most popular</span>
+        <h3>Household</h3>
+        <p class="for">For couples and families, with up to 6 people.</p>
+        <div class="price"><b data-monthly="$13.99" data-yearly="$9.75">$9.75</b><span>/ month</span></div>
+        <p class="billed" data-monthly="Billed monthly" data-yearly="Billed $117 yearly">Billed $117 yearly</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Everything in Solo</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Separate nutrition targets for each person</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Shared plan &amp; grocery list</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Kid-friendly versions of recipes</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Grocery delivery sync</li>
+        </ul>
+        <a href="#" class="btn btn-primary">Start free trial</a>
+      </div>
+    </div>
+    <p class="guarantee">14 days free · No card needed to start · Cancel anytime in two taps</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap faq-wrap">
+    <div class="reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2>Questions, answered</h2>
+      <p class="lead">Can't find what you're looking for? Email us at <a href="mailto:hello@sprig.app" style="color:var(--green-700);font-weight:700">hello@sprig.app</a> and a real person will reply within a day.</p>
+    </div>
+    <div class="faq-list reveal">
+      <details open>
+        <summary>How does the "nutrition balance" actually work? <span class="plus">+</span></summary>
+        <p>Every recipe is tagged with its protein, fiber, vegetable servings and added sugar. When Sprig builds your week, it pairs breakfasts, lunches and dinners so each day meets the targets set from your goals. If you swap a meal, it adjusts the rest of that day to stay balanced.</p>
+      </details>
+      <details>
+        <summary>Do I need a credit card for the free trial? <span class="plus">+</span></summary>
+        <p>No. You get all 14 days without entering any payment details. If you decide to stay, you choose a plan at the end. If not, nothing happens and you're never charged.</p>
+      </details>
+      <details>
+        <summary>How much time will this take each week? <span class="plus">+</span></summary>
+        <p>Most people spend about 5 minutes approving their plan on Sunday and do one grocery run. Weeknight dinners take 30 minutes or less, and lunches are often planned leftovers that need no cooking at all.</p>
+      </details>
+      <details>
+        <summary>Can I use it with dietary restrictions or allergies? <span class="plus">+</span></summary>
+        <p>Yes. Sprig supports vegetarian, vegan, pescatarian, gluten-free, dairy-free, nut-free and high-protein plans, and you can exclude any ingredient you don't want. Sprig gives general guidance and isn't a replacement for medical advice.</p>
+      </details>
+      <details>
+        <summary>Is Sprig a calorie-counting app? <span class="plus">+</span></summary>
+        <p>Not really. Calories are shown if you want them, but Sprig focuses on balance, meaning enough protein, fiber and vegetables, and less added sugar. You never have to log a meal by hand.</p>
+      </details>
+      <details>
+        <summary>Can I cancel anytime? <span class="plus">+</span></summary>
+        <p>Yes. Go to Settings → Subscription → Cancel. It takes two taps and there are no "are you sure?" mazes. Yearly plans can be refunded in full within 30 days.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final">
+  <div class="wrap">
+    <div class="final-box reveal">
+      <div>
+        <h2>Next week can be your healthiest yet.</h2>
+        <p>Set it up tonight and your first balanced plan will be waiting on Sunday.</p>
+      </div>
+      <div class="final-actions">
+        <a href="#pricing" class="btn btn-light">
+          Start your free 14-day trial
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <small>No card needed · Cancel anytime</small>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="logo">
+          <span class="logo-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V11"/><path d="M12 11c0-4 3-7 8-7 0 5-3 8-8 7z"/><path d="M12 14c0-3-2.5-5.5-7-5.5 0 4 2.5 6.5 7 5.5z"/></svg></span>
+          Sprig
+        </a>
+        <p>Balanced meal plans for busy weeks. Plan in minutes and eat well every day.</p>
+      </div>
+      <div>
+        <h6>Product</h6>
+        <ul><li><a href="#features">Features</a></li><li><a href="#how">How it works</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#">Recipes</a></li></ul>
+      </div>
+      <div>
+        <h6>Company</h6>
+        <ul><li><a href="#">About</a></li><li><a href="#">Our dietitians</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li></ul>
+      </div>
+      <div>
+        <h6>Support</h6>
+        <ul><li><a href="#faq">FAQ</a></li><li><a href="mailto:hello@sprig.app">Contact</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Sprig Labs, Inc. All rights reserved.</span>
+      <span>Made with 🌱 for busy weeknights</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Sticky header border
+  const header = document.querySelector('header');
+  addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 8), {passive:true});
+
+  // Mobile menu
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open'); menuBtn.setAttribute('aria-expanded', false);
+  }));
+
+  // Pricing toggle
+  document.querySelectorAll('.toggle button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const period = btn.dataset.period;
+      document.querySelectorAll('.toggle button').forEach(b => b.classList.toggle('on', b === btn));
+      document.querySelectorAll('[data-monthly]').forEach(el => el.textContent = el.dataset[period]);
+    });
+  });
+
+  // Reveal on scroll + animate hero bars
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  window.addEventListener('load', () => {
+    setTimeout(() => document.querySelectorAll('.bar-fill').forEach(b => b.style.width = b.dataset.w), 300);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="800" viewBox="0 0 450 800">
+  <title>Pelican riding a bicycle</title>
+  <desc>A geometric white pelican with an orange bill and tucked wings rides a blue step-through bicycle toward the lower left, viewed from above.</desc>
+
+  <rect width="450" height="800" fill="#edf3f6"/>
+  <ellipse cx="233" cy="686" rx="153" ry="35" fill="#d8e2e8"/>
+
+  <!-- Wheels recede toward the upper right. -->
+  <g fill="#f7fafc" stroke="#263746" stroke-width="13">
+    <ellipse cx="310" cy="542" rx="53" ry="99" transform="rotate(19 310 542)"/>
+    <ellipse cx="139" cy="626" rx="58" ry="108" transform="rotate(19 139 626)"/>
+  </g>
+  <g fill="none" stroke="#adbcc7" stroke-width="2.5">
+    <path d="M278 448 342 636 M260 525 360 559 M273 600 347 484 M310 542 292 464 M310 542 327 621"/>
+    <path d="M104 524 174 728 M85 607 193 645 M98 691 180 561 M139 626 120 543 M139 626 158 709"/>
+  </g>
+
+  <!-- Rear stays, chain, and the low descending frame tube. -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M310 542 268 441 234 574Z" stroke="#2678ba" stroke-width="10"/>
+    <path d="M310 542 234 574" stroke="#263746" stroke-width="16"/>
+    <path d="M310 542 234 574" stroke="#a8b6c0" stroke-width="9"/>
+    <path d="M181 466 199 550 234 574 268 441" stroke="#328fd0" stroke-width="16"/>
+    <path d="M181 466 139 626 M194 474 152 629" stroke="#2678ba" stroke-width="9"/>
+    <path d="M268 441 276 409" stroke="#758995" stroke-width="8"/>
+    <path d="M181 466 188 425 160 410" stroke="#758995" stroke-width="8"/>
+    <path d="M130 425 160 410 204 429" stroke="#263746" stroke-width="9"/>
+  </g>
+  <ellipse cx="277" cy="412" rx="32" ry="12" transform="rotate(-15 277 412)" fill="#263746"/>
+  <circle cx="234" cy="574" r="19" fill="#d6e0e6" stroke="#263746" stroke-width="5"/>
+  <path d="M234 574 211 600 M234 574 255 550" stroke="#758995" stroke-width="6"/>
+  <path d="M196 604 225 595 M243 555 268 546" stroke="#263746" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Feet and bent legs reach the pedals. -->
+  <g fill="none" stroke="#e59a37" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M287 400 303 477 255 543"/>
+    <path d="M249 404 229 493 211 591"/>
+  </g>
+  <path d="M255 536 275 548 240 558Z" fill="#efaa48"/>
+  <path d="M211 583 229 598 192 609Z" fill="#f4ad47"/>
+
+  <!-- Elliptical body and two folded wings. -->
+  <path d="M301 361 337 366 303 396Z" fill="#a9bac6"/>
+  <ellipse cx="276" cy="341" rx="59" ry="83" transform="rotate(-16 276 341)" fill="#b8c7d1"/>
+  <ellipse cx="263" cy="339" rx="55" ry="80" transform="rotate(-16 263 339)" fill="#fff"/>
+  <ellipse cx="299" cy="338" rx="23" ry="58" transform="rotate(-13 299 338)" fill="#8fa5b4"/>
+  <ellipse cx="268" cy="346" rx="30" ry="59" transform="rotate(-20 268 346)" fill="#dce5eb"/>
+  <path d="M261 331 281 375 M250 343 269 382" stroke="#b6c6d1" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Upright neck, round head, and the pelican's deep bill pouch. -->
+  <path d="M225 323 208 228 247 218 263 320Z" fill="#fff"/>
+  <ellipse cx="224" cy="219" rx="41" ry="44" fill="#fff"/>
+  <path d="M205 222 92 302 174 310 219 252Z" fill="#e98b32"/>
+  <path d="M196 219 86 298 211 244Z" fill="#ffbd59"/>
+  <path d="M94 297 207 240" stroke="#c7782b" stroke-width="3"/>
+  <circle cx="210" cy="210" r="7" fill="#263746"/>
+  <circle cx="208" cy="208" r="2" fill="#fff"/>
+</svg>

@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <!-- Pelican riding a bicycle: three-quarter front view, pure line art (strokes only, no fills), transparent background -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- ================= BICYCLE (dark) ================= -->
+    <g stroke="#2b2b2b" stroke-width="3">
+      <!-- Rear wheel (further away, foreshortened, smaller) -->
+      <g transform="translate(215 425) rotate(-6)">
+        <ellipse rx="38" ry="76"/>
+        <ellipse rx="31" ry="66" stroke-width="1.5"/>
+        <circle r="4"/>
+        <g stroke-width="1.2">
+          <line x1="0" y1="-66" x2="0" y2="66"/>
+          <line x1="-31" y1="0" x2="31" y2="0"/>
+          <line x1="-22" y1="-47" x2="22" y2="47"/>
+          <line x1="22" y1="-47" x2="-22" y2="47"/>
+          <line x1="-12" y1="-61" x2="12" y2="61"/>
+          <line x1="12" y1="-61" x2="-12" y2="61"/>
+          <line x1="-29" y1="-25" x2="29" y2="25"/>
+          <line x1="29" y1="-25" x2="-29" y2="25"/>
+        </g>
+      </g>
+
+      <!-- Front wheel (nearer, larger, turned slightly toward viewer) -->
+      <g transform="translate(345 470) rotate(-10)">
+        <ellipse rx="56" ry="98"/>
+        <ellipse rx="47" ry="87" stroke-width="1.5"/>
+        <circle r="5"/>
+        <g stroke-width="1.2">
+          <line x1="0" y1="-87" x2="0" y2="87"/>
+          <line x1="-47" y1="0" x2="47" y2="0"/>
+          <line x1="-33" y1="-62" x2="33" y2="62"/>
+          <line x1="33" y1="-62" x2="-33" y2="62"/>
+          <line x1="-18" y1="-80" x2="18" y2="80"/>
+          <line x1="18" y1="-80" x2="-18" y2="80"/>
+          <line x1="-43" y1="-33" x2="43" y2="33"/>
+          <line x1="43" y1="-33" x2="-43" y2="33"/>
+        </g>
+      </g>
+
+      <!-- Frame -->
+      <g stroke-width="4">
+        <!-- fork: head tube down to front hub (two blades for 3/4 view) -->
+        <path d="M338 322 L338 372 L352 468"/>
+        <path d="M338 372 L336 466"/>
+        <!-- head tube -->
+        <line x1="338" y1="300" x2="338" y2="322"/>
+        <!-- down tube -->
+        <line x1="338" y1="322" x2="272" y2="420"/>
+        <!-- top tube -->
+        <line x1="338" y1="304" x2="262" y2="318"/>
+        <!-- seat tube -->
+        <line x1="272" y1="420" x2="258" y2="300"/>
+        <!-- chain stays to rear hub -->
+        <path d="M272 420 L220 428"/>
+        <path d="M272 420 L212 420"/>
+        <!-- seat stays -->
+        <path d="M260 318 L214 425"/>
+        <!-- bottom bracket -->
+        <circle cx="272" cy="420" r="6"/>
+      </g>
+
+      <!-- Handlebars (free — pelican rides no-hands), seen from 3/4 front -->
+      <g stroke-width="3.5">
+        <path d="M338 300 L338 288"/>
+        <path d="M338 288 C300 286 266 290 252 304"/>
+        <path d="M338 288 C376 284 410 288 424 302"/>
+        <!-- grips -->
+        <path d="M252 304 L240 318" stroke-width="6"/>
+        <path d="M424 302 L434 316" stroke-width="6"/>
+      </g>
+
+      <!-- Saddle -->
+      <path d="M232 296 C244 288 270 288 282 296 C272 300 244 302 232 296 Z" stroke-width="3"/>
+      <line x1="258" y1="300" x2="258" y2="296" stroke-width="3"/>
+
+      <!-- Cranks & pedals -->
+      <g stroke-width="3">
+        <line x1="272" y1="420" x2="292" y2="452"/>
+        <line x1="272" y1="420" x2="254" y2="392"/>
+        <rect x="282" y="449" width="22" height="7" rx="2"/>
+        <rect x="241" y="386" width="22" height="7" rx="2"/>
+      </g>
+      <!-- Chain hint -->
+      <path d="M278 430 Q246 440 216 432" stroke-width="1.5" stroke-dasharray="3 3"/>
+    </g>
+
+    <!-- ================= PELICAN ================= -->
+    <!-- Body (white/light grey outline) -->
+    <g stroke="#dcdcdc" stroke-width="3.5">
+      <!-- torso, rounded, seated on saddle -->
+      <path d="M258 298 C222 290 206 246 224 206 C238 176 278 170 300 190 C322 210 322 258 300 288 C290 300 272 302 258 298 Z"/>
+      <!-- tail feathers poking out behind the saddle -->
+      <path d="M232 288 L212 300 M234 294 L216 312 M238 298 L226 318"/>
+      <!-- neck -->
+      <path d="M262 198 C258 170 270 150 286 142"/>
+      <path d="M298 196 C298 168 304 152 312 146"/>
+      <!-- head -->
+      <path d="M286 142 C280 118 300 106 318 110 C334 114 336 136 322 146"/>
+    </g>
+
+    <!-- Grey details: feather shading lines and wing texture -->
+    <g stroke="#8a8a8a" stroke-width="2">
+      <!-- chest feather marks -->
+      <path d="M246 236 q8 6 0 12 M258 252 q8 6 0 12 M244 262 q8 6 0 12"/>
+      <!-- eye -->
+      <circle cx="312" cy="124" r="4"/>
+      <circle cx="313" cy="123" r="1.2" stroke-width="2.5"/>
+      <!-- crest tuft -->
+      <path d="M296 110 q-4 -12 6 -16 M304 108 q0 -12 10 -14"/>
+    </g>
+
+    <!-- LEFT WING — spread wide, no-hands -->
+    <g stroke="#dcdcdc" stroke-width="3.5">
+      <!-- upper edge -->
+      <path d="M232 214 C190 186 130 160 62 156"/>
+      <!-- feathered trailing edge (scalloped primaries) -->
+      <path d="M62 156 C68 170 60 182 50 192 C66 192 76 190 86 198 C96 192 106 196 114 206 C124 200 134 204 142 214 C152 208 162 212 170 222 C182 218 192 224 200 232 C212 228 226 236 236 248 C240 236 236 224 232 214"/>
+    </g>
+    <g stroke="#8a8a8a" stroke-width="1.8">
+      <!-- feather shafts -->
+      <path d="M232 214 L86 198 M232 218 L114 206 M234 226 L142 214 M236 236 L170 222 M236 244 L200 232"/>
+      <path d="M228 212 L50 192" stroke-width="1.2"/>
+    </g>
+
+    <!-- RIGHT WING — spread wide, slightly larger (nearer in 3/4 view) -->
+    <g stroke="#dcdcdc" stroke-width="3.5">
+      <!-- upper edge -->
+      <path d="M312 214 C360 182 430 150 556 150"/>
+      <!-- feathered trailing edge -->
+      <path d="M556 150 C548 166 556 180 568 190 C552 190 540 188 530 198 C520 190 508 194 498 206 C488 198 476 202 466 214 C456 206 444 210 434 222 C422 216 410 222 400 232 C388 226 374 232 362 246 C356 234 358 222 312 214"/>
+    </g>
+    <g stroke="#8a8a8a" stroke-width="1.8">
+      <path d="M312 214 L530 198 M316 220 L498 206 M322 228 L466 214 M330 236 L434 222 M342 244 L400 232"/>
+      <path d="M314 212 L568 190" stroke-width="1.2"/>
+    </g>
+
+    <!-- Legs & webbed feet (yellow-orange) on the pedals -->
+    <g stroke="#f4a300" stroke-width="3.5">
+      <!-- near leg to lower pedal -->
+      <path d="M284 292 C292 318 296 350 294 374 C292 400 296 430 296 450"/>
+      <path d="M284 450 L306 450 M296 450 L288 462 M296 450 L298 464 M296 450 L306 460"/>
+      <!-- far leg to raised pedal -->
+      <path d="M262 296 C258 322 252 356 252 388"/>
+      <path d="M242 388 L262 388 M252 388 L246 398 M252 388 L254 400 M252 388 L260 397"/>
+    </g>
+
+    <!-- Beak — large pelican bill with pouch, angled toward the viewer's right (yellow-orange) -->
+    <g stroke="#f4a300" stroke-width="3.5">
+      <!-- upper mandible -->
+      <path d="M322 128 C352 134 388 148 416 172 C390 170 356 160 326 146"/>
+      <!-- lower mandible + pouch -->
+      <path d="M326 146 C350 158 380 172 412 176 C392 200 350 210 322 194 C314 180 316 160 326 146"/>
+      <!-- hook at the tip -->
+      <path d="M416 172 C420 176 418 182 412 182"/>
+    </g>
+    <g stroke="#c47a00" stroke-width="1.6">
+      <!-- nostril groove & pouch crease -->
+      <path d="M334 134 C356 140 378 150 398 164"/>
+      <path d="M330 170 C352 186 380 192 404 182"/>
+    </g>
+
+  </g>
+</svg>

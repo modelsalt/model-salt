@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 520" width="640" height="520" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A jagged cream and gold pelican pedals a green folding bicycle, viewed from the front left, with both wings holding the handlebars.</desc>
+
+  <g stroke="#173e2b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Wheels, offset in perspective -->
+    <ellipse cx="475" cy="355" rx="57" ry="85" fill="#173e2b"/>
+    <ellipse cx="475" cy="355" rx="46" ry="73" fill="#fff8df"/>
+    <ellipse cx="220" cy="405" rx="66" ry="91" fill="#173e2b"/>
+    <ellipse cx="220" cy="405" rx="54" ry="79" fill="#fff8df"/>
+
+    <g fill="none" stroke-width="2">
+      <path d="M475 282V428M429 355H521M442 303L508 407M443 407L507 303"/>
+      <path d="M220 326V484M166 405H274M182 349L258 461M182 461L258 349"/>
+    </g>
+
+    <!-- Far crank and pedaling leg -->
+    <path d="M355 365L392 333" fill="none"/>
+    <path d="M377 330L412 330" fill="none"/>
+    <path d="M407 257L431 286L399 322" fill="none" stroke="#b58b2c" stroke-width="13"/>
+    <path d="M397 316L419 326L405 335L376 332Z" fill="#173e2b"/>
+
+    <!-- Compact folding frame -->
+    <path d="M475 355L411 304L355 365Z" fill="#4e853b"/>
+    <path d="M411 304L391 261" fill="none"/>
+    <path d="M372 258L416 248L427 258L383 270Z" fill="#173e2b"/>
+    <path d="M260 315L355 365L411 304L402 290L350 343L268 298Z" fill="#4e853b"/>
+    <path d="M261 300L220 405M280 306L238 399" fill="none" stroke="#34683a" stroke-width="10"/>
+
+    <!-- Visible frame hinge -->
+    <path d="M318 326L338 335L329 357L309 347Z" fill="#d4ae44"/>
+    <path d="M324 330L315 350M328 340L342 336" fill="none" stroke-width="2"/>
+    <circle cx="355" cy="365" r="17" fill="#d4ae44"/>
+    <path d="M355 365L324 401M305 402L340 402" fill="none"/>
+
+    <!-- Handlebar stem and angled grips -->
+    <path d="M265 307L278 257L260 238" fill="none" stroke="#d4ae44" stroke-width="9"/>
+    <path d="M238 253L260 238L299 229" fill="none" stroke-width="9"/>
+    <path d="M231 257L248 247M290 231L308 226" fill="none" stroke="#4e853b" stroke-width="10"/>
+
+    <!-- Far wing reaches its grip -->
+    <path d="M380 183L339 190L310 215L294 220L293 233L310 237L326 222L364 218L393 204Z"
+          fill="#9eae6a"/>
+
+    <!-- Asymmetric, angular body and tail -->
+    <path d="M440 218L488 207L473 228L497 226L465 250L439 258Z" fill="#4e853b"/>
+    <path d="M312 173L340 155L374 166L393 187L431 188L459 214L454 242L433 260L394 266L365 252L341 229L320 221L299 198Z"
+          fill="#fff8df"/>
+
+    <!-- Near leg and webbed foot on pedal -->
+    <path d="M386 255L362 291L342 308L329 389" fill="none" stroke="#d4ae44" stroke-width="13"/>
+    <path d="M328 384L346 396L337 406L307 406L302 398Z" fill="#34683a"/>
+
+    <!-- Long neck with broken feather edges -->
+    <path d="M341 225L315 215L287 183L280 151L286 120L307 101L333 105L347 120L340 145L325 154L324 178L346 199L358 214Z"
+          fill="#fff8df"/>
+    <path d="M302 159L307 184L330 208L340 205" fill="none" stroke="#9eae6a" stroke-width="3"/>
+
+    <!-- Pelican's angular head -->
+    <path d="M284 137L274 119L284 99L279 88L297 92L308 80L314 93L334 98L346 119L337 141L309 150Z"
+          fill="#fff8df"/>
+
+    <!-- Broad bill and hanging throat pouch -->
+    <path d="M288 130L113 174L142 186L208 202L256 187L302 147Z" fill="#d4ae44"/>
+    <path d="M288 126L264 121L108 173L119 180L289 145L308 136Z" fill="#edc75c"/>
+    <path d="M130 177L267 148M208 195L258 174L288 150" fill="none" stroke-width="2"/>
+    <path d="M302 113L317 109" fill="none" stroke-width="3"/>
+    <circle cx="306" cy="120" r="4" fill="#173e2b" stroke="none"/>
+
+    <!-- Near wing bends forward to the nearer handlebar -->
+    <path d="M391 197L365 190L346 211L321 224L284 233L249 244L238 251L242 263L259 260L282 250L327 249L357 235L347 247L375 232L368 242L395 222Z"
+          fill="#4e853b"/>
+    <g fill="none" stroke-width="2">
+      <path d="M377 206L354 226L324 238L273 244"/>
+      <path d="M385 215L365 230M355 217L345 234"/>
+      <path d="M419 216L442 228L432 245M403 239L420 247"/>
+    </g>
+
+    <!-- Wheel hubs -->
+    <circle cx="220" cy="405" r="8" fill="#d4ae44"/>
+    <circle cx="475" cy="355" r="7" fill="#d4ae44"/>
+  </g>
+</svg>

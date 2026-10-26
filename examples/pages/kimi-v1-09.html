@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plantry — Dinner, decided.</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍊</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..650;1,9..144,400..650&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#1a1816;
+    --bg-soft:#231f1c;
+    --cream:#f5f1e8;
+    --cream-dim:rgba(245,241,232,.62);
+    --cream-faint:rgba(245,241,232,.38);
+    --ink:#1b1917;
+    --ink-soft:rgba(27,25,23,.55);
+    --accent:#ff4d24;
+    --accent-deep:#e03e18;
+    --line:rgba(245,241,232,.14);
+    --radius:22px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--cream);
+    font-family:"Inter",system-ui,-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--accent);color:var(--cream)}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+  /* ---------- Page shell ---------- */
+  .hero{min-height:100svh;display:flex;flex-direction:column;position:relative}
+
+  /* ---------- Nav ---------- */
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px clamp(20px,5vw,64px);
+  }
+  .logo{
+    font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:1.45rem;letter-spacing:-.01em;
+    display:flex;align-items:center;gap:2px;text-decoration:none;color:var(--cream);
+  }
+  .logo b{color:var(--accent);font-weight:600}
+  .nav-cta{
+    font-size:.85rem;font-weight:600;padding:10px 20px;border-radius:100px;
+    border:1px solid var(--line);transition:.25s;
+  }
+  .nav-cta:hover{background:var(--cream);color:var(--ink);border-color:var(--cream)}
+
+  /* ---------- Hero grid ---------- */
+  .hero-main{
+    flex:1;display:grid;grid-template-columns:1.02fr .98fr;align-items:center;
+    gap:clamp(24px,4vw,48px);
+    padding:0 clamp(20px,5vw,64px) clamp(24px,4vh,48px);
+    max-width:1440px;width:100%;margin:0 auto;
+  }
+
+  /* ---------- Copy ---------- */
+  .copy{max-width:580px}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;
+    font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--cream-dim);border:1px solid var(--line);
+    padding:8px 16px;border-radius:100px;margin-bottom:26px;
+  }
+  .eyebrow i{
+    width:8px;height:8px;border-radius:50%;background:var(--accent);
+    animation:pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,77,36,.5)}50%{box-shadow:0 0 0 7px rgba(255,77,36,0)}}
+
+  h1{
+    font-family:"Fraunces",Georgia,serif;font-weight:560;
+    font-size:clamp(3rem,6.4vw,5.4rem);
+    line-height:1.02;letter-spacing:-.025em;margin-bottom:24px;
+  }
+  h1 em{font-style:italic;color:var(--accent);font-weight:480}
+  .sub{
+    font-size:clamp(1rem,1.35vw,1.18rem);line-height:1.65;color:var(--cream-dim);
+    max-width:46ch;margin-bottom:36px;
+  }
+  .cta-row{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-bottom:16px}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--accent);color:var(--cream);
+    font-size:1rem;font-weight:600;padding:17px 32px;border-radius:100px;
+    transition:transform .22s,box-shadow .22s,background .22s;
+    box-shadow:0 4px 24px rgba(255,77,36,.25);
+  }
+  .btn:hover{transform:translateY(-2px);background:var(--accent-deep);box-shadow:0 10px 34px rgba(255,77,36,.4)}
+  .btn .arrow{transition:transform .22s}
+  .btn:hover .arrow{transform:translateX(4px)}
+  .ghost-link{
+    font-size:.92rem;font-weight:600;color:var(--cream-dim);text-decoration:none;
+    border-bottom:1px solid var(--cream-faint);padding-bottom:2px;transition:.22s;
+  }
+  .ghost-link:hover{color:var(--cream);border-color:var(--accent)}
+  .micro{font-size:.82rem;color:var(--cream-faint);letter-spacing:.02em;margin-bottom:44px}
+
+  .ticks{
+    display:flex;gap:0;border-top:1px solid var(--line);padding-top:22px;
+  }
+  .tick{flex:1;padding-right:18px}
+  .tick + .tick{padding-left:18px;border-left:1px solid var(--line)}
+  .tick strong{display:block;font-size:.92rem;font-weight:600;margin-bottom:3px}
+  .tick span{font-size:.78rem;color:var(--cream-faint);line-height:1.4}
+
+  /* ---------- Stage (phones) ---------- */
+  .stage{
+    position:relative;height:640px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .circle{
+    position:absolute;width:clamp(320px,42vw,540px);aspect-ratio:1;border-radius:50%;
+    background:var(--accent);top:50%;left:50%;transform:translate(-46%,-52%);
+    z-index:0;
+  }
+  .p-layer{will-change:transform}
+  .layer-back{position:absolute;top:0;right:0;z-index:1}
+  .layer-front{position:relative;z-index:2;margin-right:110px}
+  .tilt-b{transform:rotate(7deg) scale(.9)}
+  .tilt-f{transform:rotate(-5deg)}
+  .float-b{animation:floaty 8.5s ease-in-out infinite}
+  .float-f{animation:floaty 7s ease-in-out infinite .8s}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+  .phone{
+    width:min(300px,72vw);background:#262320;border-radius:46px;padding:11px;
+    box-shadow:0 40px 80px -20px rgba(0,0,0,.65),0 0 0 1px rgba(245,241,232,.08);
+  }
+  .screen{
+    background:var(--cream);color:var(--ink);border-radius:36px;
+    padding:20px 16px 18px;min-height:520px;display:flex;flex-direction:column;
+  }
+  .notch{width:90px;height:6px;border-radius:100px;background:rgba(27,25,23,.15);margin:0 auto 14px}
+
+  /* Back phone: recipe card */
+  .back-screen{gap:14px}
+  .recipe-art{
+    background:var(--accent);border-radius:22px;height:170px;
+    display:grid;place-items:center;font-size:64px;
+  }
+  .recipe-art span{animation:floaty 5s ease-in-out infinite}
+  .r-title{font-family:"Fraunces",Georgia,serif;font-size:1.35rem;font-weight:600;letter-spacing:-.01em}
+  .r-tags{display:flex;gap:6px;flex-wrap:wrap}
+  .r-tags i{
+    font-style:normal;font-size:.68rem;font-weight:600;
+    background:rgba(27,25,23,.07);padding:5px 10px;border-radius:100px;
+  }
+  .r-add{
+    margin-top:auto;background:var(--ink);color:var(--cream);font-weight:600;font-size:.85rem;
+    padding:13px;border-radius:14px;transition:.2s;
+  }
+  .r-add:hover{background:var(--accent)}
+
+  /* Front phone: interactive planner */
+  .screen-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
+  .screen-head small{font-size:.68rem;font-weight:600;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em}
+  .screen-head h2{font-family:"Fraunces",Georgia,serif;font-size:1.3rem;font-weight:600;letter-spacing:-.01em}
+
+  .slots{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+  .slot{
+    display:flex;align-items:center;gap:11px;height:46px;
+    border:1.5px dashed rgba(27,25,23,.22);border-radius:13px;padding:0 13px;
+    transition:border-color .2s,background .2s,transform .2s;cursor:pointer;
+    user-select:none;background:transparent;text-align:left;width:100%;
+  }
+  .slot .day{font-size:.62rem;font-weight:700;letter-spacing:.1em;color:var(--ink-soft);width:30px;flex-shrink:0}
+  .slot .meal{font-size:.8rem;font-weight:500;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .slot.over{border-color:var(--accent);background:rgba(255,77,36,.09);border-style:solid;transform:scale(1.02)}
+  .slot.filled{
+    border:1.5px solid var(--ink);background:var(--ink);color:var(--cream);
+    animation:pop .3s cubic-bezier(.34,1.56,.64,1);
+  }
+  .slot.filled .day{color:rgba(245,241,232,.55)}
+  .slot.filled .meal{color:var(--cream);font-weight:600}
+  .slot.filled .clear{
+    margin-left:auto;font-size:.85rem;opacity:0;transition:.18s;flex-shrink:0;
+  }
+  .slot.filled:hover .clear,.slot.filled:focus-visible .clear{opacity:.7}
+  @keyframes pop{0%{transform:scale(.96)}60%{transform:scale(1.02)}100%{transform:scale(1)}}
+
+  .progress{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  .bar{flex:1;height:4px;border-radius:100px;background:rgba(27,25,23,.1);overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:var(--accent);border-radius:100px;transition:width .4s cubic-bezier(.22,1,.36,1)}
+  .count{font-size:.68rem;font-weight:600;color:var(--ink-soft);min-width:66px;text-align:right;transition:.3s}
+  .count.done{color:var(--accent)}
+
+  .tray-label{font-size:.66rem;font-weight:600;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+  .tray-label b{color:var(--accent);font-weight:700}
+  .tray{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{
+    display:inline-flex;align-items:center;gap:6px;
+    background:#fffdf8;border:1.5px solid rgba(27,25,23,.14);
+    font-size:.74rem;font-weight:600;color:var(--ink);
+    padding:8px 12px;border-radius:100px;cursor:grab;
+    transition:transform .18s,border-color .18s,opacity .25s,box-shadow .18s;
+    box-shadow:0 1px 3px rgba(27,25,23,.08);
+  }
+  .chip:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 4px 10px rgba(255,77,36,.18)}
+  .chip:active{cursor:grabbing}
+  .chip.dragging{opacity:.4}
+  .chip.used{display:none}
+
+  /* Stickers */
+  .sticker{
+    position:absolute;background:var(--cream);color:var(--ink);
+    font-size:.78rem;font-weight:600;padding:11px 18px;border-radius:100px;
+    box-shadow:0 14px 34px rgba(0,0,0,.4);z-index:3;white-space:nowrap;
+  }
+  .sticker em{font-style:normal;color:var(--accent)}
+  .s1{top:9%;left:-2%;transform:rotate(-6deg);animation:floaty 6.4s ease-in-out infinite .4s}
+  .s2{bottom:7%;right:1%;transform:rotate(4deg);animation:floaty 7.6s ease-in-out infinite 1.2s}
+
+  .stage.nudge .tilt-f{animation:nudge .7s ease}
+  @keyframes nudge{
+    0%,100%{transform:rotate(-5deg)}
+    25%{transform:rotate(-8deg) translateY(-6px)}
+    55%{transform:rotate(-2deg)}
+    80%{transform:rotate(-6deg)}
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top:1px solid var(--line);
+    padding:20px clamp(20px,5vw,64px);
+    display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+    font-size:.78rem;color:var(--cream-faint);
+  }
+  footer a{color:var(--cream-dim);text-decoration:none;transition:.2s}
+  footer a:hover{color:var(--accent)}
+  .foot-links{display:flex;gap:20px}
+
+  /* ---------- Quiz modal ---------- */
+  .overlay{
+    position:fixed;inset:0;background:rgba(12,10,9,.66);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    display:grid;place-items:center;z-index:50;padding:20px;
+    animation:fadeIn .25s ease;
+  }
+  .overlay[hidden]{display:none}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .modal{
+    background:var(--cream);color:var(--ink);border-radius:26px;
+    width:min(480px,100%);padding:36px 34px 30px;position:relative;
+    box-shadow:0 40px 100px rgba(0,0,0,.5);
+    animation:rise .35s cubic-bezier(.22,1,.36,1);
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
+  .modal-close{
+    position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;
+    font-size:1.25rem;color:var(--ink-soft);display:grid;place-items:center;transition:.2s;
+  }
+  .modal-close:hover{background:rgba(27,25,23,.08);color:var(--ink)}
+  .dots{display:flex;gap:6px;margin-bottom:22px}
+  .dots i{width:22px;height:4px;border-radius:100px;background:rgba(27,25,23,.12);transition:.3s}
+  .dots i.on{background:var(--accent)}
+  .step{display:none}
+  .step.active{display:block;animation:stepIn .3s cubic-bezier(.22,1,.36,1)}
+  @keyframes stepIn{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+  .step h3{
+    font-family:"Fraunces",Georgia,serif;font-size:1.7rem;font-weight:600;
+    letter-spacing:-.015em;margin-bottom:6px;
+  }
+  .step p.hint{font-size:.85rem;color:var(--ink-soft);margin-bottom:22px}
+  .opt{
+    display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+    background:rgba(27,25,23,.05);border:1.5px solid transparent;
+    font-size:.95rem;font-weight:600;color:var(--ink);
+    padding:15px 18px;border-radius:15px;margin-bottom:9px;transition:.18s;
+  }
+  .opt:hover{border-color:var(--accent);background:rgba(255,77,36,.06);transform:translateX(3px)}
+  .opt.on{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+  .opt .e{font-size:1.15rem}
+  .continue{
+    width:100%;background:var(--accent);color:var(--cream);font-size:.95rem;font-weight:700;
+    padding:15px;border-radius:15px;margin-top:8px;transition:.2s;
+  }
+  .continue:hover{background:var(--accent-deep)}
+  .skip{
+    display:block;margin:16px auto 0;font-size:.8rem;font-weight:600;color:var(--ink-soft);
+    border-bottom:1px solid rgba(27,25,23,.25);padding-bottom:1px;transition:.2s;
+  }
+  .skip:hover{color:var(--accent);border-color:var(--accent)}
+  .result-emoji{font-size:2.6rem;margin-bottom:12px;display:block}
+  .result-line{
+    font-size:.95rem;line-height:1.6;color:var(--ink-soft);
+    background:rgba(255,77,36,.08);border:1.5px dashed rgba(255,77,36,.4);
+    border-radius:15px;padding:15px 18px;margin-bottom:20px;
+  }
+  .result-line b{color:var(--ink)}
+  .email-row{display:flex;gap:8px}
+  .email-row input{
+    flex:1;border:1.5px solid rgba(27,25,23,.2);border-radius:13px;
+    padding:14px 16px;font-size:.9rem;font-family:inherit;color:var(--ink);
+    background:#fffdf8;min-width:0;
+  }
+  .email-row input:focus{outline:none;border-color:var(--accent)}
+  .email-row button{
+    background:var(--ink);color:var(--cream);font-weight:700;font-size:.88rem;
+    padding:0 20px;border-radius:13px;transition:.2s;flex-shrink:0;
+  }
+  .email-row button:hover{background:var(--accent)}
+  .email-row.err input{border-color:var(--accent);animation:shake .4s ease}
+  @keyframes shake{0%,100%{transform:none}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+  .thanks{display:none;text-align:center;padding:18px 0 6px}
+  .thanks.show{display:block;animation:stepIn .35s ease}
+  .thanks span{font-size:2.4rem;display:block;margin-bottom:10px}
+  .thanks p{font-size:.95rem;color:var(--ink-soft);line-height:1.6}
+  .thanks b{color:var(--ink)}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:1020px){
+    .hero-main{grid-template-columns:1fr;text-align:center;padding-top:8px}
+    .copy{max-width:640px;margin:0 auto}
+    .sub{margin-left:auto;margin-right:auto}
+    .cta-row{justify-content:center}
+    .ticks{text-align:left}
+    .stage{height:600px;margin-top:8px}
+    .layer-front{margin-right:100px}
+  }
+  @media (max-width:640px){
+    .nav-cta{display:none}
+    .stage{height:auto;min-height:560px;margin-top:16px}
+    .layer-front{margin-right:44px}
+    .layer-back{right:-40px;top:40px}
+    .tilt-b{transform:rotate(9deg) scale(.78)}
+    .sticker{display:none}
+    .circle{width:min(78vw,380px)}
+    .ticks{flex-direction:column;gap:14px}
+    .tick + .tick{border-left:none;padding-left:0;border-top:1px solid var(--line);padding-top:14px}
+    .foot-links{gap:14px}
+    .modal{padding:30px 22px 24px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+
+  <!-- Nav -->
+  <nav class="nav" aria-label="Main">
+    <a class="logo" href="#">plantry<b>.</b></a>
+    <button class="nav-cta" data-open-quiz>Get early access</button>
+  </nav>
+
+  <!-- Hero -->
+  <main class="hero-main">
+
+    <div class="copy">
+      <span class="eyebrow"><i></i>Now cooking in private beta</span>
+      <h1>Dinner, <em>decided.</em></h1>
+      <p class="sub">
+        Plantry learns how you actually eat — then plans your week, writes the
+        grocery list, and keeps Tuesday interesting. You just show up hungry.
+      </p>
+      <div class="cta-row">
+        <button class="btn" data-open-quiz>
+          Build your plan <span class="arrow">→</span>
+        </button>
+        <a class="ghost-link" href="#" id="demoLink">or play with the planner ↓</a>
+      </div>
+      <p class="micro">Free during beta · Takes 2 minutes · No card required</p>
+
+      <div class="ticks">
+        <div class="tick"><strong>5-night plans</strong><span>Built around your taste, time &amp; table</span></div>
+        <div class="tick"><strong>Smart grocery list</strong><span>Auto-written, sorted by aisle</span></div>
+        <div class="tick"><strong>Pantry-first</strong><span>Uses what you already have</span></div>
+      </div>
+    </div>
+
+    <!-- Stage: tilted floating mockups -->
+    <div class="stage" id="stage">
+      <div class="circle" aria-hidden="true"></div>
+
+      <!-- Back phone: recipe card -->
+      <div class="p-layer layer-back" data-depth="14" aria-hidden="true">
+        <div class="tilt-b">
+          <div class="float-b">
+            <div class="phone">
+              <div class="screen back-screen">
+                <div class="notch"></div>
+                <div class="recipe-art"><span>🍲</span></div>
+                <div class="r-title">Sheet-pan gnocchi</div>
+                <div class="r-tags"><i>⏱ 25 min</i><i>🌿 Veggie</i><i>👍 96% repeat</i></div>
+                <button class="r-add" tabindex="-1">Add to week +</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Front phone: interactive week planner -->
+      <div class="p-layer layer-front" data-depth="6">
+        <div class="tilt-f">
+          <div class="float-f">
+            <div class="phone">
+              <div class="screen">
+                <div class="notch"></div>
+                <div class="screen-head">
+                  <h2>This week</h2>
+                  <small>Sun · plan night</small>
+                </div>
+
+                <div class="slots" id="slots" aria-label="Dinner slots, Monday to Friday">
+                  <button class="slot" data-day="MON"><span class="day">MON</span><span class="meal">drop a dinner</span></button>
+                  <button class="slot" data-day="TUE"><span class="day">TUE</span><span class="meal">drop a dinner</span></button>
+                  <button class="slot" data-day="WED"><span class="day">WED</span><span class="meal">drop a dinner</span></button>
+                  <button class="slot" data-day="THU"><span class="day">THU</span><span class="meal">drop a dinner</span></button>
+                  <button class="slot" data-day="FRI"><span class="day">FRI</span><span class="meal">drop a dinner</span></button>
+                </div>
+
+                <div class="progress">
+                  <div class="bar"><i id="barFill"></i></div>
+                  <span class="count" id="count" aria-live="polite">0 of 5</span>
+                </div>
+
+                <div class="tray-label">Tonight's inspo — <b>drag or tap</b> to plan</div>
+                <div class="tray" id="tray">
+                  <button class="chip" draggable="true" data-meal="Crispy tacos" data-emoji="🌮">🌮 Crispy tacos</button>
+                  <button class="chip" draggable="true" data-meal="Lemon ricotta pasta" data-emoji="🍝">🍝 Lemon ricotta pasta</button>
+                  <button class="chip" draggable="true" data-meal="Coconut chickpea curry" data-emoji="🍛">🍛 Coconut chickpea curry</button>
+                  <button class="chip" draggable="true" data-meal="Miso salmon bowl" data-emoji="🐟">🐟 Miso salmon bowl</button>
+                  <button class="chip" draggable="true" data-meal="Margherita flatbread" data-emoji="🍕">🍕 Margherita flatbread</button>
+                  <button class="chip" draggable="true" data-meal="Potsticker fried rice" data-emoji="🥟">🥟 Potsticker fried rice</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sticker s1" data-depth="18">🛒 Groceries: <em>sorted</em></div>
+      <div class="sticker s2" data-depth="18">⭐ 4.9 — 2,100 beta cooks</div>
+    </div>
+
+  </main>
+
+  <!-- Minimal footer -->
+  <footer>
+    <span>© 2025 Plantry Labs</span>
+    <div class="foot-links">
+      <a href="#">Privacy</a>
+      <a href="#">Contact</a>
+      <a href="#">@plantry</a>
+    </div>
+    <span>No junk. Just dinner. 🍊</span>
+  </footer>
+</div>
+
+<!-- Quiz modal -->
+<div class="overlay" id="overlay" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="quizTitle">
+    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    <div class="dots" id="dots"><i class="on"></i><i></i><i></i></div>
+
+    <!-- Step 1 -->
+    <div class="step active" data-step="1">
+      <h3 id="quizTitle">Who's at your table?</h3>
+      <p class="hint">We'll size every recipe to match.</p>
+      <button class="opt" data-q="who" data-val="me"><span class="e">🙋</span>Just me</button>
+      <button class="opt" data-q="who" data-val="two"><span class="e">💑</span>Two of us</button>
+      <button class="opt" data-q="who" data-val="crew"><span class="e">👨‍👩‍👧</span>The whole crew</button>
+      <button class="skip" data-skip>skip →</button>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step" data-step="2">
+      <h3>How do you like to eat?</h3>
+      <p class="hint">Pick any that apply — we'll filter every plan.</p>
+      <button class="opt multi on" data-val="none" data-label=""><span class="e">🍔</span>No rules</button>
+      <button class="opt multi" data-val="veg" data-label="vegetarian"><span class="e">🥦</span>Vegetarian</button>
+      <button class="opt multi" data-val="vegan" data-label="vegan"><span class="e">🌱</span>Vegan</button>
+      <button class="opt multi" data-val="pesc" data-label="pescatarian"><span class="e">🐟</span>Pescatarian</button>
+      <button class="opt multi" data-val="gf" data-label="gluten-free"><span class="e">🌾</span>Gluten-free</button>
+      <button class="continue" id="continueBtn">Continue →</button>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step" data-step="3">
+      <h3>Weeknight energy level?</h3>
+      <p class="hint">Be honest. We won't judge a 15-minute night.</p>
+      <button class="opt" data-q="time" data-val="fast"><span class="e">⚡</span>15-minute rescues</button>
+      <button class="opt" data-q="time" data-val="thirty"><span class="e">🍳</span>A solid 30</button>
+      <button class="opt" data-q="time" data-val="unwind"><span class="e">🍷</span>I cook to unwind</button>
+      <button class="skip" data-skip>skip →</button>
+    </div>
+
+    <!-- Result -->
+    <div class="step" data-step="4">
+      <div id="resultBody">
+        <span class="result-emoji">🔥</span>
+        <h3>Your plan's on the stove.</h3>
+        <p class="hint">Here's what we're simmering for you:</p>
+        <div class="result-line" id="resultLine"></div>
+        <form class="email-row" id="emailForm" novalidate>
+          <input type="email" id="emailInput" placeholder="you@hungry.com" aria-label="Email address" required>
+          <button type="submit">Save my seat</button>
+        </form>
+        <button class="skip" id="closeResult">maybe later</button>
+      </div>
+      <div class="thanks" id="thanks">
+        <span>🎉</span>
+        <p><b>Seat saved.</b><br>Your first plan lands Sunday morning —<br>grocery list included. Go raid the pantry.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ============ Interactive week planner ============ */
+  const slots = Array.from(document.querySelectorAll(".slot"));
+  const chips = Array.from(document.querySelectorAll(".chip"));
+  const barFill = document.getElementById("barFill");
+  const countEl = document.getElementById("count");
+
+  chips.forEach((c,i)=> c.dataset.chipId = "chip-"+i);
+
+  function updateProgress(){
+    const n = slots.filter(s=>s.classList.contains("filled")).length;
+    barFill.style.width = (n/5*100)+"%";
+    if(n===5){
+      countEl.textContent = "Week planned ✨";
+      countEl.classList.add("done");
+    }else{
+      countEl.textContent = n+" of 5";
+      countEl.classList.remove("done");
+    }
+  }
+
+  function setMeal(slot, chip){
+    if(slot.classList.contains("filled")) clearSlot(slot); // swap: old meal goes back
+    slot.classList.add("filled");
+    slot.dataset.chipId = chip.dataset.chipId;
+    slot.querySelector(".meal").innerHTML =
+      chip.dataset.emoji+" "+chip.dataset.meal+'<span class="clear" aria-hidden="true">✕</span>';
+    slot.setAttribute("aria-label", slot.dataset.day+" dinner: "+chip.dataset.meal+". Activate to clear.");
+    chip.classList.add("used");
+    chip.setAttribute("draggable","false");
+    updateProgress();
+  }
+
+  function clearSlot(slot){
+    const chip = chips.find(c=>c.dataset.chipId===slot.dataset.chipId);
+    if(chip){ chip.classList.remove("used"); chip.setAttribute("draggable","true"); }
+    slot.classList.remove("filled");
+    delete slot.dataset.chipId;
+    slot.querySelector(".meal").textContent = "drop a dinner";
+    slot.setAttribute("aria-label", slot.dataset.day+" dinner slot, empty");
+    updateProgress();
+  }
+
+  /* Drag & drop */
+  chips.forEach(chip=>{
+    chip.addEventListener("dragstart", e=>{
+      e.dataTransfer.setData("text/plain", chip.dataset.chipId);
+      e.dataTransfer.effectAllowed = "move";
+      chip.classList.add("dragging");
+    });
+    chip.addEventListener("dragend", ()=> chip.classList.remove("dragging"));
+
+    /* Tap fallback (mobile + click): place into first empty slot */
+    chip.addEventListener("click", ()=>{
+      if(chip.classList.contains("used")) return;
+      const empty = slots.find(s=>!s.classList.contains("filled"));
+      if(empty) setMeal(empty, chip);
+    });
+  });
+
+  slots.forEach(slot=>{
+    slot.setAttribute("aria-label", slot.dataset.day+" dinner slot, empty");
+    slot.addEventListener("dragover", e=>{ e.preventDefault(); slot.classList.add("over"); });
+    slot.addEventListener("dragleave", ()=> slot.classList.remove("over"));
+    slot.addEventListener("drop", e=>{
+      e.preventDefault();
+      slot.classList.remove("over");
+      const chip = chips.find(c=>c.dataset.chipId===e.dataTransfer.getData("text/plain"));
+      if(chip && !chip.classList.contains("used")) setMeal(slot, chip);
+    });
+    slot.addEventListener("click", ()=>{ if(slot.classList.contains("filled")) clearSlot(slot); });
+  });
+
+  updateProgress();
+
+  /* "Play with the planner" nudge */
+  document.getElementById("demoLink").addEventListener("click", e=>{
+    e.preventDefault();
+    const stage = document.getElementById("stage");
+    stage.scrollIntoView({behavior: reduced ? "auto" : "smooth", block:"center"});
+    stage.classList.remove("nudge");
+    void stage.offsetWidth;
+    stage.classList.add("nudge");
+  });
+
+  /* ============ Subtle mouse parallax ============ */
+  const stage = document.getElementById("stage");
+  const layers = document.querySelectorAll(".p-layer, .sticker");
+  if(!reduced && window.matchMedia("(pointer:fine)").matches){
+    let ticking = false;
+    document.querySelector(".hero-main").addEventListener("mousemove", e=>{
+      if(ticking) return;
+      ticking = true;
+      requestAnimationFrame(()=>{
+        const r = stage.getBoundingClientRect();
+        const nx = ((e.clientX - (r.left + r.width/2)) / r.width)  * 2;
+        const ny = ((e.clientY - (r.top  + r.height/2)) / r.height) * 2;
+        layers.forEach(l=>{
+          const d = parseFloat(l.dataset.depth || 8);
+          l.style.translate = (nx*d)+"px "+(ny*d)+"px";
+        });
+        ticking = false;
+      });
+    });
+    document.querySelector(".hero-main").addEventListener("mouseleave", ()=>{
+      layers.forEach(l=> l.style.translate = "0px 0px");
+    });
+  }
+
+  /* ============ Quiz modal ============ */
+  const overlay  = document.getElementById("overlay");
+  const steps    = Array.from(document.querySelectorAll(".step"));
+  const dots     = Array.from(document.querySelectorAll("#dots i"));
+  const state    = { who:null, diet:[], time:null };
+  let lastFocus  = null;
+
+  function showStep(n){
+    steps.forEach(s=> s.classList.toggle("active", +s.dataset.step===n));
+    dots.forEach((d,i)=> d.classList.toggle("on", i < n && n <= 3));
+    document.getElementById("dots").style.display = n<=3 ? "flex" : "none";
+    const active = steps.find(s=>+s.dataset.step===n);
+    const focusable = active.querySelector(".opt, .continue, input, .skip");
+    if(focusable) focusable.focus();
+    if(n===4) buildResult();
+  }
+
+  function openQuiz(){
+    lastFocus = document.activeElement;
+    overlay.hidden = false;
+    document.body.style.overflow = "hidden";
+    showStep(1);
+  }
+  function closeQuiz(){
+    overlay.hidden = true;
+    document.body.style.overflow = "";
+    if(lastFocus) lastFocus.focus();
+  }
+
+  document.querySelectorAll("[data-open-quiz]").forEach(b=> b.addEventListener("click", openQuiz));
+  document.getElementById("modalClose").addEventListener("click", closeQuiz);
+  document.getElementById("closeResult").addEventListener("click", closeQuiz);
+  overlay.addEventListener("click", e=>{ if(e.target===overlay) closeQuiz(); });
+  document.addEventListener("keydown", e=>{
+    if(e.key==="Escape" && !overlay.hidden) closeQuiz();
+  });
+
+  /* Single-choice steps (1 & 3) */
+  document.querySelectorAll('.opt[data-q]').forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      state[btn.dataset.q] = btn.dataset.val;
+      btn.classList.add("on");
+      setTimeout(()=> showStep(+btn.closest(".step").dataset.step + 1), 200);
+    });
+  });
+
+  /* Multi-select step (2) */
+  const multis = Array.from(document.querySelectorAll(".opt.multi"));
+  multis.forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      if(btn.dataset.val==="none"){
+        multis.forEach(b=> b.classList.toggle("on", b===btn));
+      }else{
+        btn.classList.toggle("on");
+        multis.find(b=>b.dataset.val==="none").classList.remove("on");
+        if(!multis.some(b=>b.classList.contains("on"))){
+          multis.find(b=>b.dataset.val==="none").classList.add("on");
+        }
+      }
+    });
+  });
+  document.getElementById("continueBtn").addEventListener("click", ()=>{
+    state.diet = multis
+      .filter(b=>b.classList.contains("on") && b.dataset.val!=="none")
+      .map(b=>b.dataset.label);
+    showStep(3);
+  });
+
+  /* Skips */
+  document.querySelectorAll("[data-skip]").forEach(b=> b.addEventListener("click", ()=> showStep(4)));
+
+  /* Personalised result */
+  function buildResult(){
+    const who  = {me:"just you", two:"two of you", crew:"the whole crew"}[state.who] || "your table";
+    const diet = state.diet.length ? state.diet.join(" + ") : "no food rules";
+    const time = {fast:"ready in 15 minutes", thirty:"done in 30", unwind:"slow, happy cooking"}[state.time] || "your pace, your rules";
+    document.getElementById("resultLine").innerHTML =
+      "Five dinners a week for <b>"+who+"</b> — <b>"+diet+"</b>, "+time+". That's the plan.";
+  }
+
+  /* Email capture */
+  const form = document.getElementById("emailForm");
+  form.addEventListener("submit", e=>{
+    e.preventDefault();
+    const val = document.getElementById("emailInput").value.trim();
+    if(!val.includes("@") || !val.includes(".")){
+      form.classList.remove("err"); void form.offsetWidth; form.classList.add("err");
+      return;
+    }
+    document.getElementById("resultBody").style.display = "none";
+    document.getElementById("thanks").classList.add("show");
+  });
+})();
+</script>
+</body>
+</html>

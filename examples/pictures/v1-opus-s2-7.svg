@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e9d6ae"/>
+      <stop offset="1" stop-color="#f5e9cf"/>
+    </linearGradient>
+    <radialGradient id="vignette" cx="0.5" cy="0.5" r="0.75">
+      <stop offset="0.6" stop-color="#3a2614" stop-opacity="0"/>
+      <stop offset="1" stop-color="#3a2614" stop-opacity="0.45"/>
+    </radialGradient>
+    <pattern id="win" width="16" height="20" patternUnits="userSpaceOnUse">
+      <rect x="4" y="5" width="8" height="10" fill="#8a6440"/>
+    </pattern>
+  </defs>
+
+  <!-- Sky and sun -->
+  <rect width="400" height="400" fill="url(#sky)"/>
+  <circle cx="320" cy="70" r="30" fill="#f8eed6" stroke="#d9bd8a" stroke-width="2"/>
+
+  <!-- City buildings -->
+  <g stroke="#5e4029" stroke-width="2">
+    <rect x="-2" y="120" width="72" height="225" fill="#b8925f"/>
+    <rect x="6" y="130" width="56" height="200" fill="url(#win)" stroke="none"/>
+    <rect x="72" y="175" width="62" height="170" fill="#caa775"/>
+    <rect x="80" y="185" width="48" height="150" fill="url(#win)" stroke="none"/>
+    <rect x="138" y="85" width="84" height="260" fill="#a9824f"/>
+    <rect x="146" y="95" width="68" height="240" fill="url(#win)" stroke="none"/>
+    <line x1="180" y1="85" x2="180" y2="60"/>
+    <circle cx="180" cy="58" r="3" fill="#5e4029"/>
+    <rect x="226" y="150" width="70" height="195" fill="#c3a06d"/>
+    <rect x="234" y="160" width="56" height="175" fill="url(#win)" stroke="none"/>
+    <rect x="300" y="110" width="102" height="235" fill="#b08957"/>
+    <rect x="308" y="120" width="88" height="215" fill="url(#win)" stroke="none"/>
+  </g>
+
+  <!-- Street lamp -->
+  <g stroke="#4e3420" stroke-width="3" fill="#4e3420">
+    <line x1="60" y1="345" x2="60" y2="240"/>
+    <line x1="60" y1="240" x2="78" y2="240"/>
+    <circle cx="80" cy="246" r="6" fill="#f3e3b8"/>
+  </g>
+
+  <!-- Sidewalk and road -->
+  <rect x="0" y="340" width="400" height="12" fill="#d6bb8b" stroke="#5e4029" stroke-width="2"/>
+  <rect x="0" y="352" width="400" height="48" fill="#8d6a45"/>
+  <line x1="0" y1="380" x2="400" y2="380" stroke="#e8d4a8" stroke-width="3" stroke-dasharray="22 16"/>
+
+  <!-- Far leg (behind bike) -->
+  <g stroke="#7a5533" stroke-width="5" stroke-linecap="round" fill="none">
+    <line x1="200" y1="200" x2="218" y2="252"/>
+    <line x1="218" y1="252" x2="185" y2="292"/>
+  </g>
+  <polygon points="176,292 202,287 202,297" fill="#7a5533"/>
+
+  <!-- Bicycle -->
+  <g fill="none" stroke="#2e1e12" stroke-linecap="round">
+    <!-- wheels -->
+    <circle cx="130" cy="300" r="48" stroke-width="6"/>
+    <circle cx="280" cy="300" r="48" stroke-width="6"/>
+    <g stroke-width="1.2" stroke="#4e3420">
+      <line x1="130" y1="252" x2="130" y2="348"/><line x1="82" y1="300" x2="178" y2="300"/>
+      <line x1="96" y1="266" x2="164" y2="334"/><line x1="96" y1="334" x2="164" y2="266"/>
+      <line x1="280" y1="252" x2="280" y2="348"/><line x1="232" y1="300" x2="328" y2="300"/>
+      <line x1="246" y1="266" x2="314" y2="334"/><line x1="246" y1="334" x2="314" y2="266"/>
+    </g>
+    <!-- frame -->
+    <g stroke="#6b4426" stroke-width="5">
+      <line x1="130" y1="300" x2="200" y2="305"/>
+      <line x1="130" y1="300" x2="185" y2="232"/>
+      <line x1="200" y1="305" x2="185" y2="232"/>
+      <line x1="185" y1="232" x2="258" y2="224"/>
+      <line x1="200" y1="305" x2="262" y2="240"/>
+      <line x1="256" y1="218" x2="280" y2="300"/>
+    </g>
+    <!-- seat post, stem, handlebar -->
+    <line x1="185" y1="232" x2="181" y2="214" stroke-width="4"/>
+    <line x1="256" y1="218" x2="260" y2="204" stroke-width="4"/>
+    <line x1="260" y1="204" x2="276" y2="204" stroke-width="4"/>
+    <!-- chainring and crank -->
+    <circle cx="200" cy="305" r="11" stroke-width="3"/>
+    <line x1="185" y1="292" x2="215" y2="318" stroke-width="4"/>
+    <circle cx="130" cy="300" r="4" fill="#2e1e12"/>
+    <circle cx="280" cy="300" r="4" fill="#2e1e12"/>
+  </g>
+  <ellipse cx="180" cy="212" rx="14" ry="4" fill="#2e1e12"/>
+
+  <!-- Pelican body -->
+  <polygon points="152,168 128,158 132,178" fill="#d9c39a" stroke="#4e3420" stroke-width="2"/>
+  <ellipse cx="195" cy="180" rx="46" ry="30" transform="rotate(-10 195 180)"
+           fill="#efe0c0" stroke="#4e3420" stroke-width="2.5"/>
+
+  <!-- Near leg -->
+  <g stroke="#a0683a" stroke-width="5" stroke-linecap="round" fill="none">
+    <line x1="210" y1="202" x2="234" y2="258"/>
+    <line x1="234" y1="258" x2="215" y2="318"/>
+  </g>
+  <polygon points="205,318 236,311 236,324" fill="#c27c43" stroke="#4e3420" stroke-width="1.5"/>
+  <circle cx="215" cy="318" r="3" fill="#2e1e12"/>
+
+  <!-- Wing gripping handlebar -->
+  <ellipse cx="236" cy="186" rx="40" ry="13" transform="rotate(31 236 186)"
+           fill="#cdb284" stroke="#4e3420" stroke-width="2"/>
+  <line x1="216" y1="178" x2="256" y2="200" stroke="#7a5533" stroke-width="1.5"/>
+  <circle cx="270" cy="205" r="7" fill="#b8955f" stroke="#4e3420" stroke-width="2"/>
+
+  <!-- Neck and head -->
+  <line x1="222" y1="162" x2="240" y2="116" stroke="#4e3420" stroke-width="22" stroke-linecap="round"/>
+  <line x1="222" y1="162" x2="240" y2="116" stroke="#efe0c0" stroke-width="17" stroke-linecap="round"/>
+  <circle cx="245" cy="102" r="17" fill="#efe0c0" stroke="#4e3420" stroke-width="2.5"/>
+  <ellipse cx="236" cy="88" rx="9" ry="4" transform="rotate(-25 236 88)" fill="#d9c39a" stroke="#4e3420" stroke-width="1.5"/>
+
+  <!-- Beak and pouch -->
+  <ellipse cx="290" cy="118" rx="38" ry="9" transform="rotate(14 290 118)"
+           fill="#d79a5a" stroke="#4e3420" stroke-width="2"/>
+  <polygon points="252,97 332,115 254,109" fill="#e8b878" stroke="#4e3420" stroke-width="2" stroke-linejoin="round"/>
+  <circle cx="249" cy="97" r="3.5" fill="#2e1e12"/>
+  <circle cx="250" cy="96" r="1" fill="#f5e9cf"/>
+
+  <!-- Vintage vignette -->
+  <rect width="400" height="400" fill="url(#vignette)"/>
+</svg>

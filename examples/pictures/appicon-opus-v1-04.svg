@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- Solid flat background, square corners -->
+  <rect x="0" y="0" width="1024" height="1024" fill="#4A2C17"/>
+
+  <!-- Sun: outer halo ring + disc, cropped off the top and right edges -->
+  <circle cx="690" cy="300" r="450" fill="#9C5A1E"/>
+  <circle cx="690" cy="300" r="360" fill="#E8A33D"/>
+
+  <!-- Cloud: flat union of shapes, bleeding off the right edge -->
+  <g fill="#F3E2C3">
+    <circle cx="330"  cy="640" r="170"/>
+    <circle cx="570"  cy="540" r="235"/>
+    <circle cx="850"  cy="590" r="215"/>
+    <circle cx="1010" cy="660" r="180"/>
+    <rect x="330" y="640" width="780" height="170"/>
+  </g>
+</svg>

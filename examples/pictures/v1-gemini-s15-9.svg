@@ -1,0 +1,266 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+  <defs>
+    <!-- Hand-drawn sketch filter for variable, textured ink lines -->
+    <filter id="sketch-line" x="-15%" y="-15%" width="130%" height="130%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" result="noise" seed="7"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    
+    <!-- Rough fill displacement for off-register screenprint/marker look -->
+    <filter id="rough-fill" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="2" result="noise" seed="19"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+
+    <!-- Diagonal hatching pattern for tropical neon shading -->
+    <pattern id="cyan-hatch" width="10" height="10" patternTransform="rotate(35 0 0)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="10" stroke="#00F5D4" stroke-width="2" stroke-opacity="0.4"/>
+    </pattern>
+    <pattern id="magenta-hatch" width="8" height="8" patternTransform="rotate(-45 0 0)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#FF007F" stroke-width="2" stroke-opacity="0.45"/>
+    </pattern>
+  </defs>
+
+  <!-- Deep Tropical Night Background -->
+  <rect width="100%" height="100%" fill="#0F051D"/>
+
+  <!-- Background Neon Sun / Halo (Off-center) -->
+  <g filter="url(#rough-fill)">
+    <circle cx="480" cy="360" r="240" fill="#FF007F" opacity="0.15"/>
+    <circle cx="460" cy="380" r="170" fill="#00F5D4" opacity="0.12"/>
+  </g>
+
+  <!-- DUTCH-ANGLE TILTED WORLD & SUBJECT (Climbing Steep Uphill) -->
+  <g transform="rotate(-26, 400, 420)">
+
+    <!-- ==================== STEEP HILL / ROAD ==================== -->
+    <g filter="url(#sketch-line)">
+      <!-- Neon road base splash -->
+      <path d="M -250 615 L 1050 615 L 1050 750 L -250 750 Z" fill="url(#magenta-hatch)" filter="url(#rough-fill)"/>
+      
+      <!-- Sketchy road surface lines -->
+      <path d="M -250 612 C 150 618, 550 605, 1050 612" stroke="#00F5D4" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M -250 618 C 200 608, 600 622, 1050 615" stroke="#FF007F" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M -200 630 L 950 630" stroke="#FFE600" stroke-width="2" stroke-dasharray="30 45 15 25" fill="none" stroke-linecap="round"/>
+      
+      <!-- Uphill gravel & strain marks behind wheels -->
+      <path d="M 100 605 L 40 590 M 115 595 L 70 570 M 390 605 L 330 592" stroke="#FFE600" stroke-width="3" stroke-linecap="round"/>
+    </g>
+
+    <!-- ==================== PENNY-FARTHING BICYCLE ==================== -->
+    
+    <!-- FAR PEDAL & CRANK (Behind Wheel) -->
+    <g filter="url(#sketch-line)">
+      <!-- Far Crank Arm (Up and Forward) -->
+      <path d="M 450 420 L 405 355" stroke="#FF007F" stroke-width="8" stroke-linecap="round"/>
+      <path d="M 450 420 L 405 355" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+      <!-- Far Pedal -->
+      <rect x="385" y="346" width="38" height="14" rx="4" fill="#FFE600" stroke="#00F5D4" stroke-width="3"/>
+    </g>
+
+    <!-- FAR LEG OF PELICAN (Pushing down on high forward pedal) -->
+    <g filter="url(#sketch-line)">
+      <!-- Webbed Foot (Far) -->
+      <path d="M 395 348 L 370 335 L 425 335 L 420 352 Z" fill="#FF007F" stroke="#FFE600" stroke-width="2.5" stroke-linejoin="round"/>
+      <!-- Straining Leg (Bent high) -->
+      <path d="M 380 235 L 345 280 L 400 345" stroke="#FF007F" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M 382 235 L 348 280 L 402 345" stroke="#FFE600" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+
+    <!-- REAR SMALL WHEEL -->
+    <g id="rear-wheel" filter="url(#sketch-line)">
+      <!-- Spokes -->
+      <g stroke="#FFE600" stroke-width="1.8" opacity="0.85">
+        <line x1="150" y1="505" x2="150" y2="605"/>
+        <line x1="100" y1="555" x2="200" y2="555"/>
+        <line x1="115" y1="520" x2="185" y2="590"/>
+        <line x1="115" y1="590" x2="185" y2="520"/>
+      </g>
+      <!-- Rim & Tire (Double sketchy pass) -->
+      <circle cx="150" cy="555" r="50" stroke="#00F5D4" stroke-width="7" fill="none"/>
+      <circle cx="152" cy="553" r="51" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+      <circle cx="150" cy="555" r="42" stroke="#FF007F" stroke-width="2.5" fill="none" stroke-dasharray="18 8"/>
+      <!-- Rear Hub -->
+      <circle cx="150" cy="555" r="9" fill="#FF007F" stroke="#FFE600" stroke-width="3"/>
+    </g>
+
+    <!-- HIGH-WHEEL (FRONT PENNY-FARTHING WHEEL) -->
+    <g id="front-high-wheel" filter="url(#sketch-line)">
+      <!-- Wheel Fill Glow -->
+      <circle cx="450" cy="420" r="185" fill="url(#cyan-hatch)" opacity="0.35"/>
+      
+      <!-- Radial Spokes (Hand-drawn sketchy array) -->
+      <g stroke="#FFE600" stroke-width="2" opacity="0.8">
+        <line x1="450" y1="230" x2="450" y2="610"/>
+        <line x1="260" y1="420" x2="640" y2="420"/>
+        <line x1="316" y1="286" x2="584" y2="554"/>
+        <line x1="316" y1="554" x2="584" y2="286"/>
+        <line x1="355" y1="255" x2="545" y2="585"/>
+        <line x1="285" y1="325" x2="615" y2="515"/>
+        <line x1="285" y1="515" x2="615" y2="325"/>
+        <line x1="355" y1="585" x2="545" y2="255"/>
+        <line x1="400" y1="237" x2="500" y2="603"/>
+        <line x1="267" y1="370" x2="633" y2="470"/>
+        <line x1="267" y1="470" x2="633" y2="370"/>
+        <line x1="400" y1="603" x2="500" y2="237"/>
+      </g>
+
+      <!-- Outer Tire & Cyan Neon Rim (Multiple variable-width passes) -->
+      <circle cx="450" cy="420" r="190" stroke="#00F5D4" stroke-width="11" fill="none"/>
+      <circle cx="448" cy="422" r="191" stroke="#0F051D" stroke-width="3" fill="none"/>
+      <circle cx="452" cy="418" r="192" stroke="#FFFFFF" stroke-width="2.5" fill="none"/>
+      <circle cx="450" cy="420" r="178" stroke="#FF007F" stroke-width="3.5" fill="none"/>
+      
+      <!-- Motion/Strain Lines inside the wheel -->
+      <path d="M 310 350 A 155 155 0 0 1 530 285" stroke="#FFFFFF" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="25 15 8 15"/>
+      <path d="M 580 490 A 155 155 0 0 1 350 565" stroke="#00F5D4" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="35 20"/>
+    </g>
+
+    <!-- BICYCLE FRAME (SPINE, FORK, SADDLE) -->
+    <g id="bike-frame" filter="url(#sketch-line)">
+      <!-- Curved Spine Frame from High Headtube to Rear Axle -->
+      <path d="M 432 195 C 330 205, 195 365, 150 555" stroke="#FF007F" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <path d="M 432 195 C 335 208, 200 368, 152 555" stroke="#FFE600" stroke-width="3" fill="none" stroke-linecap="round"/>
+      
+      <!-- Mounting Step above rear wheel -->
+      <path d="M 175 480 L 145 480" stroke="#00F5D4" stroke-width="6" stroke-linecap="round"/>
+
+      <!-- Vintage Leather-style Saddle (Unoccupied - Pelican is standing!) -->
+      <path d="M 335 220 C 350 232, 385 225, 398 210 C 380 205, 350 208, 335 220 Z" fill="#FF007F" stroke="#FFE600" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M 365 222 L 368 238" stroke="#00F5D4" stroke-width="5" stroke-linecap="round"/>
+
+      <!-- Front Vertical Fork -->
+      <path d="M 450 420 L 430 165" stroke="#FFE600" stroke-width="10" stroke-linecap="round"/>
+      <path d="M 453 420 L 433 165" stroke="#FF007F" stroke-width="4" stroke-linecap="round"/>
+      <path d="M 447 420 L 427 165" stroke="#0F051D" stroke-width="2" stroke-linecap="round"/>
+
+      <!-- Center Hub -->
+      <circle cx="450" cy="420" r="16" fill="#FFE600" stroke="#FF007F" stroke-width="5"/>
+      <circle cx="450" cy="420" r="6" fill="#0F051D"/>
+    </g>
+
+    <!-- ==================== THE PELICAN (STRAINING UPHILL) ==================== -->
+
+    <!-- NEAR LEG (Locked out straight, stomping down on bottom pedal) -->
+    <g id="pelican-near-leg" filter="url(#sketch-line)">
+      <!-- Near Crank Arm (Down and Back) -->
+      <path d="M 450 420 L 495 488" stroke="#00F5D4" stroke-width="9" stroke-linecap="round"/>
+      <path d="M 450 420 L 495 488" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+      
+      <!-- Straining Straight Leg -->
+      <path d="M 398 245 L 442 365 L 490 482" stroke="#FFE600" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M 395 245 L 439 365 L 487 482" stroke="#FF007F" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Knee joint lines -->
+      <path d="M 432 362 C 442 358, 450 364, 452 370" stroke="#0F051D" stroke-width="3" fill="none"/>
+
+      <!-- Webbed Foot mashing the pedal -->
+      <path d="M 485 480 L 465 496 L 528 495 L 505 476 Z" fill="#FF007F" stroke="#FFE600" stroke-width="3.5" stroke-linejoin="round"/>
+      <path d="M 488 483 L 480 494 M 495 482 L 502 494" stroke="#FFE600" stroke-width="2"/>
+
+      <!-- Near Pedal -->
+      <rect x="476" y="486" width="42" height="15" rx="4" fill="#00F5D4" stroke="#FF007F" stroke-width="3.5"/>
+      <!-- Pedal strain sparks -->
+      <path d="M 525 500 L 545 512 M 528 488 L 550 490" stroke="#FFE600" stroke-width="3" stroke-linecap="round"/>
+    </g>
+
+    <!-- PELICAN TORSO & TAIL (Hunched forward out of the saddle) -->
+    <g id="pelican-body">
+      <!-- Off-register neon cyan body fill -->
+      <path d="M 355 235 C 330 190, 390 100, 480 115 C 515 120, 505 190, 445 235 C 410 255, 370 255, 355 235 Z" fill="#00F5D4" filter="url(#rough-fill)"/>
+      <path d="M 365 225 C 350 185, 400 120, 475 125 C 495 140, 470 215, 420 235 Z" fill="#FFFFFF" opacity="0.9" filter="url(#rough-fill)"/>
+
+      <!-- Sketchy Tail Feathers (sticking out above the saddle) -->
+      <g filter="url(#sketch-line)">
+        <path d="M 360 220 L 305 205 L 335 190 L 295 172 L 345 170 L 320 150 L 368 162" fill="#00F5D4" stroke="#FF007F" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M 365 230 C 335 190, 385 100, 478 112 C 512 118, 500 195, 440 238 C 405 258, 375 245, 365 230 Z" stroke="#FF007F" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+        <!-- Chest/Belly texture hatch lines -->
+        <path d="M 455 215 L 475 205 M 465 198 L 488 188 M 475 180 L 496 172 M 405 240 L 425 232" stroke="#FF007F" stroke-width="3" stroke-linecap="round"/>
+      </g>
+    </g>
+
+    <!-- PELICAN HEAD, S-NECK, & GIANT STRAINING BEAK -->
+    <g id="pelican-head-beak">
+      <!-- Neon Fill for Pouch & Beak -->
+      <path d="M 520 82 C 585 75, 665 80, 720 92 C 675 155, 575 178, 502 128 Z" fill="#FF007F" filter="url(#rough-fill)"/>
+      <path d="M 525 80 C 595 68, 670 72, 728 85 L 722 98 C 660 92, 585 92, 520 98 Z" fill="#FFE600" filter="url(#rough-fill)"/>
+
+      <g filter="url(#sketch-line)">
+        <!-- Straining Neck & Head Feathers -->
+        <path d="M 465 122 C 475 95, 480 65, 505 55 C 530 45, 548 65, 535 90" fill="#FFFFFF" stroke="#00F5D4" stroke-width="5.5" stroke-linecap="round"/>
+        <!-- Wild windswept crest feathers -->
+        <path d="M 498 56 L 465 38 L 488 35 L 458 18 L 502 28 L 490 10 L 520 35" fill="#FFE600" stroke="#FF007F" stroke-width="3.5" stroke-linejoin="round"/>
+
+        <!-- Upper Mandible (Long, hooked tip) -->
+        <path d="M 530 72 C 595 62, 670 65, 725 78 C 735 80, 735 95, 722 98 C 718 99, 715 92, 712 90 C 655 85, 585 88, 520 95" fill="none" stroke="#FFE600" stroke-width="5" stroke-linejoin="round"/>
+        <path d="M 530 72 C 595 62, 670 65, 728 80" fill="none" stroke="#0F051D" stroke-width="2"/>
+
+        <!-- Distended Gullet Pouch (billowing & straining with effort) -->
+        <path d="M 520 95 C 565 172, 655 162, 712 90" fill="none" stroke="#00F5D4" stroke-width="5" stroke-linecap="round"/>
+        <path d="M 525 98 C 570 165, 650 155, 708 92" fill="none" stroke="#FFE600" stroke-width="2.5" stroke-dasharray="15 8" stroke-linecap="round"/>
+        
+        <!-- Pouch Stretch/Tension Striations -->
+        <path d="M 555 105 C 570 128, 595 135, 615 135" stroke="#FFE600" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M 585 100 C 605 122, 635 125, 665 112" stroke="#00F5D4" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M 482 105 L 495 115 M 478 118 L 492 125" stroke="#FF007F" stroke-width="3" stroke-linecap="round"/>
+
+        <!-- Intense, Bulging Eye & Furrowed Brow -->
+        <circle cx="518" cy="72" r="11" fill="#FFE600" stroke="#0F051D" stroke-width="3"/>
+        <circle cx="521" cy="72" r="4.5" fill="#0F051D"/>
+        <circle cx="519" cy="69" r="2" fill="#FFFFFF"/>
+        <!-- Angry/Determined Eyebrow -->
+        <path d="M 502 58 L 535 68" stroke="#FF007F" stroke-width="5.5" stroke-linecap="round"/>
+        <path d="M 502 58 L 535 68" stroke="#0F051D" stroke-width="2" stroke-linecap="round"/>
+      </g>
+    </g>
+
+    <!-- HANDLEBARS & WING-ARMS GRIPPING TIGHTLY -->
+    <g id="wings-and-bars" filter="url(#sketch-line)">
+      <!-- Far Wing Tip gripping far handlebar -->
+      <path d="M 445 125 C 430 135, 405 142, 392 152" stroke="#00F5D4" stroke-width="10" fill="none" stroke-linecap="round"/>
+
+      <!-- Mustache Handlebar Stem & Bars -->
+      <path d="M 430 165 L 408 152" stroke="#00F5D4" stroke-width="7" stroke-linecap="round"/>
+      <path d="M 392 148 C 415 140, 445 162, 472 178" stroke="#FFE600" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <path d="M 392 148 C 415 140, 445 162, 472 178" stroke="#FF007F" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+      <!-- Muscular Wing-Arm (Arched high at shoulder, white-knuckling the near bar) -->
+      <path d="M 435 135 C 405 110, 390 155, 425 182 C 445 195, 468 192, 475 178 C 470 160, 445 162, 438 168" fill="#FFFFFF" stroke="#FF007F" stroke-width="5" stroke-linejoin="round"/>
+      <!-- Cyan Neon Wing Coverts -->
+      <path d="M 435 135 C 410 120, 400 150, 425 172 C 440 160, 445 148, 435 135 Z" fill="#00F5D4" stroke="#0F051D" stroke-width="2"/>
+      
+      <!-- Feather "Fingers" Clenched Tightly Around Handlebar Grip -->
+      <ellipse cx="465" cy="176" rx="12" ry="9" transform="rotate(-20 465 176)" fill="#00F5D4" stroke="#FFE600" stroke-width="3.5"/>
+      <path d="M 456 172 L 472 169 M 455 177 L 474 175 M 458 182 L 473 181" stroke="#FF007F" stroke-width="2.5" stroke-linecap="round"/>
+      
+      <!-- White-knuckle grip tension bursts -->
+      <path d="M 478 162 L 490 152 M 486 175 L 502 172 M 480 188 L 494 196" stroke="#FFE600" stroke-width="3" stroke-linecap="round"/>
+    </g>
+
+    <!-- ==================== SWEAT DROPS, MOTION & EFFORT LINES ==================== -->
+    <g id="strain-effects" filter="url(#sketch-line)">
+      <!-- Flying Neon Sweat Drops -->
+      <path d="M 495 42 C 480 25, 470 35, 478 46 C 483 52, 495 42, 495 42 Z" fill="#00F5D4" stroke="#FFFFFF" stroke-width="2"/>
+      <path d="M 538 38 C 532 18, 520 22, 525 36 C 528 42, 538 38, 538 38 Z" fill="#FFE600" stroke="#FF007F" stroke-width="2"/>
+      <path d="M 455 68 C 435 58, 430 70, 442 76 C 448 79, 455 68, 455 68 Z" fill="#00F5D4" stroke="#FFFFFF" stroke-width="2"/>
+      <path d="M 565 52 C 578 35, 588 45, 575 55 Z" fill="#FF007F" stroke="#FFE600" stroke-width="2"/>
+
+      <!-- Exertion / Breath puffs from beak tip -->
+      <path d="M 742 75 C 765 65, 775 80, 755 90" stroke="#00F5D4" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M 748 95 C 770 95, 775 112, 752 112" stroke="#FFE600" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+      <!-- Speed & Uphill Resistance Hatch Lines in Air -->
+      <path d="M 280 130 L 160 130 M 300 155 L 210 155 M 240 245 L 120 245" stroke="#FF007F" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M 260 190 L 140 190 M 190 320 L 80 320 M 120 440 L 20 440" stroke="#00F5D4" stroke-width="3" stroke-linecap="round" stroke-dasharray="40 15"/>
+      <path d="M 320 90 L 220 90 M 160 390 L 60 390" stroke="#FFE600" stroke-width="2.5" stroke-linecap="round"/>
+    </g>
+
+  </g>
+
+  <!-- Framing Sketch Vignette Corners (Un-tilted for strong Dutch-angle contrast) -->
+  <g filter="url(#sketch-line)" stroke="#00F5D4" stroke-width="3" fill="none" opacity="0.5">
+    <path d="M 20 60 L 20 20 L 60 20"/>
+    <path d="M 780 60 L 780 20 L 740 20"/>
+    <path d="M 20 740 L 20 780 L 60 780"/>
+    <path d="M 780 740 L 780 780 L 740 780"/>
+  </g>
+</svg>

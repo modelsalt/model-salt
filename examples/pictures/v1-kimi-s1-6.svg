@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-labelledby="t d">
+  <title id="t">Pelican riding a bicycle</title>
+  <desc id="d">A flat single-color silhouette of a cute pelican with an oversized head actively pedaling a bicycle, with motion lines suggesting speed.</desc>
+
+  <defs>
+    <mask id="pelicanEye" maskUnits="userSpaceOnUse" x="0" y="0" width="800" height="600">
+      <rect x="0" y="0" width="800" height="600" fill="#fff"/>
+      <circle cx="492" cy="148" r="8" fill="#000"/>
+    </mask>
+  </defs>
+
+  <!-- Motion lines and road dashes -->
+  <g fill="none" stroke="#0f6772" stroke-linecap="round">
+    <path d="M60 150H190" stroke-width="13"/>
+    <path d="M36 205H156" stroke-width="13"/>
+    <path d="M70 260H200" stroke-width="13"/>
+    <path d="M50 315H140" stroke-width="13"/>
+    <path d="M164 392Q140 430 164 468" stroke-width="11"/>
+    <path d="M196 542H322" stroke-width="11"/>
+    <path d="M468 542H624" stroke-width="11"/>
+  </g>
+
+  <!-- Bicycle -->
+  <g fill="none" stroke="#0f6772" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Wheels -->
+    <circle cx="270" cy="430" r="85" stroke-width="14"/>
+    <circle cx="550" cy="430" r="85" stroke-width="14"/>
+    <!-- Spokes -->
+    <g stroke-width="6">
+      <path d="M270 430L346 430M270 430L308 496M270 430L232 496M270 430L194 430M270 430L232 364M270 430L308 364"/>
+      <path d="M550 430L626 430M550 430L588 496M550 430L512 496M550 430L470 430M550 430L512 364M550 430L588 364"/>
+    </g>
+    <!-- Frame -->
+    <path d="M270 430L395 448L362 322Z" stroke-width="12"/>
+    <path d="M395 448L512 330" stroke-width="12"/>
+    <path d="M362 322L500 312" stroke-width="12"/>
+    <path d="M498 304L514 336" stroke-width="15"/>
+    <path d="M514 334L550 430" stroke-width="11"/>
+    <path d="M500 306L524 266" stroke-width="11"/>
+    <path d="M524 266Q546 258 558 272" stroke-width="11"/>
+    <path d="M362 322L358 298" stroke-width="10"/>
+    <path d="M332 296L386 290" stroke-width="15"/>
+    <!-- Drivetrain -->
+    <circle cx="395" cy="448" r="16" stroke-width="7"/>
+    <path d="M395 448L430 492" stroke-width="9"/>
+    <path d="M395 448L360 404" stroke-width="9"/>
+    <path d="M416 490L446 496" stroke-width="10"/>
+    <path d="M346 402L376 408" stroke-width="10"/>
+  </g>
+  <g fill="#0f6772">
+    <circle cx="270" cy="430" r="9"/>
+    <circle cx="550" cy="430" r="9"/>
+  </g>
+
+  <!-- Pelican -->
+  <g mask="url(#pelicanEye)">
+    <g fill="#0f6772">
+      <!-- Tail -->
+      <path d="M306 244Q276 224 254 208Q258 236 280 252Q262 250 248 250Q264 270 300 280Z"/>
+      <!-- Body -->
+      <ellipse cx="368" cy="256" rx="70" ry="54" transform="rotate(-12 368 256)"/>
+      <!-- Head -->
+      <circle cx="470" cy="165" r="58"/>
+      <!-- Crest tuft -->
+      <path d="M452 110Q446 90 462 86Q458 100 468 110Z"/>
+      <!-- Beak with pouch -->
+      <path d="M503 143Q584 146 656 177Q663 182 656 188Q612 206 566 213Q530 216 510 198Z"/>
+      <!-- Webbed feet -->
+      <path d="M410 480Q436 474 458 488Q452 502 428 502Q412 496 410 480Z"/>
+      <path d="M344 396Q364 388 384 398Q376 412 352 410Z"/>
+      <!-- Wing reaching to handlebar -->
+      <path d="M404 216Q468 222 528 260Q536 266 528 273Q466 246 400 240Q396 226 404 216Z"/>
+    </g>
+    <g fill="none" stroke="#0f6772" stroke-linecap="round">
+      <!-- Neck -->
+      <path d="M398 238Q432 208 452 190" stroke-width="34"/>
+      <!-- Pedaling legs -->
+      <path d="M392 300Q410 372 428 486" stroke-width="20"/>
+      <path d="M362 306Q374 340 360 372Q352 392 366 400" stroke-width="17"/>
+    </g>
+  </g>
+</svg>

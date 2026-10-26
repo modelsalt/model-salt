@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f8f6ef">
+<meta name="description" content="Meet Mise. Personal meal plans, smarter grocery lists, and one less thing on your plate.">
+<title>Mise — Good food. Less thinking.</title>
+<style>
+:root{--cream:#f8f6ef;--ink:#293f33;--muted:#778071;--orange:#dc764f;--line:#dddfd3;--serif:Georgia,'Times New Roman',serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:30px}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+button{cursor:pointer;color:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--orange);outline-offset:5px}
+svg{display:block}
+.wrap{max-width:1280px;padding:0 60px;margin:auto}
+.nav{height:104px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.logo{font: bold 45px var(--serif);letter-spacing:-3px;display:flex;gap:8px;align-items:center}
+.logo svg{width:26px;height:32px}
+.nav-links{display:flex;gap:34px;font-size:12px}
+.nav-links a:hover,.text-link:hover{color:var(--orange)}
+.nav-right{display:flex;align-items:center;gap:25px}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:23px;background:var(--ink);color:white;border:0;border-radius:6px;padding:18px 24px;font-size:12px;font-weight:600;transition:transform .2s,background .2s}
+.button:hover{background:#425d48;transform:translateY(-2px)}
+.button.small{padding:13px 18px;font-size:11px}
+.arrow{font-size:20px;line-height:12px;font-weight:normal}
+.text-link{display:inline-flex;align-items:center;gap:9px;font-size:12px;border:0;background:none;padding:10px 0}
+.menu{display:none;border:0;background:none;font-size:23px}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;padding:65px 0 70px;min-height:650px}
+.eyebrow{font-size:9px;letter-spacing:1.8px;font-weight:600;text-transform:uppercase;display:flex;align-items:center;gap:9px}
+.dot{width:6px;height:6px;background:var(--orange);border-radius:50%}
+h1{font:normal 77px/1.035 var(--serif);letter-spacing:-3.8px;margin:25px 0}
+h1 em{color:var(--orange);font-weight:normal}
+.hero-copy>p{font-size:14px;line-height:1.85;color:var(--muted);max-width:335px;margin:0 0 27px}
+.hero-actions{display:flex;align-items:center;gap:24px}
+.play{display:grid;place-items:center;width:23px;height:23px;border:1px solid #b7bdac;border-radius:50%;font-size:8px;padding-left:2px}
+.subnote{font-size:9px;color:var(--muted);margin:14px 0 28px}
+.proof{display:flex;align-items:center;gap:12px}
+.avatars{display:flex}
+.avatar{border:2px solid var(--cream);margin-left:-7px;width:31px;height:31px;background:#e2c5a6;border-radius:50%;display:grid;place-items:center;font-size:21px;overflow:hidden}
+.avatar:first-child{margin:0}
+.avatar:nth-child(2){background:#cdd2b7}
+.avatar:nth-child(3){background:#d5bda5}
+.avatar:nth-child(4){background:#e0c2af}
+.stars{color:#c8914e;font-size:11px;letter-spacing:2px}
+.proof p{font-size:9px;color:var(--muted);margin:5px 0 0}
+.hero-art{position:relative;height:490px;isolation:isolate}
+.art-back{position:absolute;inset:0 -2% 7% 7%;border-radius:48% 48% 43% 45%;background:#efd9c5;transform:rotate(-9deg);z-index:-1}
+.plate{position:absolute;top:0;left:-5%;width:112%;filter:drop-shadow(0 17px 15px #67543b24);transform:rotate(-7deg)}
+.hand-note{position:absolute;right:-7px;top:7px;font:italic 17px var(--serif);transform:rotate(8deg)}
+.hand-note svg{margin:8px 0 0 42px}
+.week-card{position:absolute;left:-10px;bottom:6px;width:235px;border:1px solid #ebe7dc;background:#fffef9;border-radius:11px;padding:19px;box-shadow:0 15px 35px #4b49331a;transform:rotate(-5deg)}
+.card-heading{display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:bold;margin-bottom:13px}
+.card-heading span{font-size:8px;font-weight:normal;color:#929787}
+.meal-row{display:flex;align-items:center;gap:9px;border-top:1px solid #eeeee5;padding:9px 0}
+.day{font-size:8px;color:#929787;width:21px;text-transform:uppercase}
+.mini-food{display:grid;place-items:center;width:33px;height:33px;border-radius:7px;background:#ece8d5;font-size:21px}
+.meal-row strong{display:block;font-size:9px;margin-bottom:4px}
+.meal-row small{font-size:8px;color:#979c8d}
+.tick{margin-left:auto;font-size:8px;background:#ebefdf;color:#7b9161;border-radius:50%;padding:3px}
+.floating-tag{position:absolute;bottom:72px;right:-8px;background:#fffdf7;border-radius:8px;padding:13px 16px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 25px #66523516;font-size:10px;transform:rotate(5deg)}
+.floating-tag>span{font-size:23px}
+.floating-tag small{display:block;font-size:8px;color:#929787;margin-top:4px}
+.loose-leaf{position:absolute;bottom:0;right:15px;width:82px;transform:rotate(22deg)}
+.benefits{border-block:1px solid var(--line);display:flex;align-items:center;justify-content:space-around;gap:20px;padding:23px 0}
+.benefits div{display:flex;align-items:center;gap:10px;color:#6e7965;font-size:11px}
+.benefits svg{width:19px;height:19px;fill:none;stroke:#7d8a6b;stroke-width:1.5}
+.section{padding:74px 0}
+.section-heading{display:flex;align-items:end;justify-content:space-between;margin-bottom:32px}
+h2{font:normal 39px/1.15 var(--serif);letter-spacing:-1.3px}
+.section-heading h2{margin:14px 0 0}
+.section-heading>p{font-size:12px;line-height:1.8;max-width:267px;color:var(--muted);margin:0 0 2px}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feature{padding:27px 25px 25px;border-radius:11px;background:#eaedde;overflow:hidden}
+.feature:nth-child(2){background:#f2e3d6}
+.feature:nth-child(3){background:#ebe8e0}
+.feature-top{display:flex;align-items:center;justify-content:space-between}
+.feature-num{font:italic 17px var(--serif);color:#929c80}
+.feature-icon{font-size:23px}
+.feature h3{font:normal 25px var(--serif);letter-spacing:-.5px;margin:22px 0 12px}
+.feature>p{font-size:11px;line-height:1.8;color:#767d6d;margin:0;max-width:250px}
+.feature-demo{height:119px;margin-top:25px;background:#fffdf5;border:1px solid #ffffffa0;border-radius:8px;padding:17px 15px;transform:rotate(-2deg);box-shadow:0 7px 15px #3c443006}
+.demo-title{font-size:9px;font-weight:bold;margin-bottom:13px}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{border:1px solid #e0e4d5;border-radius:20px;background:transparent;font-size:8px;padding:8px 9px}
+.chip.active{background:#dfe7cb;border-color:#cbd7b6}
+.shopping{transform:rotate(2deg)}
+.shop-row{display:flex;align-items:center;gap:8px;margin:10px 0;font-size:9px}
+.shop-row input{accent-color:#6b8253;margin:0;width:11px;height:11px}
+.shop-row input:checked+span{text-decoration:line-through;color:#9da38f}
+.shop-row small{margin-left:auto;color:#9ca28f;font-size:8px}
+.recipe-mini{display:flex;align-items:center;gap:12px}
+.recipe-mini .bowl{display:grid;place-items:center;width:65px;height:65px;border-radius:50%;background:#eee0c7;font-size:43px;flex-shrink:0}
+.recipe-mini strong{font:normal 17px/1.2 var(--serif)}
+.recipe-mini small{display:block;margin-top:8px;color:#929986;font-size:8px}
+.recipe-mini button{margin-left:auto;flex-shrink:0;border:0;border-radius:50%;background:#e4ead8;width:28px;height:28px}
+.plan-section{padding:15px 0 73px}
+.plan-panel{display:grid;grid-template-columns:.85fr 1.15fr;border:1px solid var(--line);border-radius:13px;overflow:hidden}
+.plan-copy{background:#efeee5;padding:42px 36px}
+.plan-copy h2{font-size:36px;margin:16px 0}
+.plan-copy p{font-size:12px;line-height:1.8;color:var(--muted);max-width:280px}
+.plan-tabs{display:flex;gap:7px;flex-wrap:wrap;margin:23px 0 17px}
+.plan-tabs button{border:1px solid #d8dccd;border-radius:25px;padding:9px 12px;background:transparent;font-size:10px}
+.plan-tabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:white}
+.plan-detail{font-size:10px;color:#7d8573;line-height:1.6}
+.plan-preview{background:#fcfbf6;padding:30px}
+.preview-head{display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:bold;margin-bottom:22px;gap:10px}
+.preview-head span{font-size:9px;color:#949a88;font-weight:normal}
+.preview-days{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.preview-day{background:white;border:1px solid #e6e7db;border-radius:8px;overflow:hidden}
+.food-art{height:110px;background:#e7ead8;display:grid;place-items:center;font-size:60px}
+.preview-day:nth-child(2) .food-art{background:#f0e0cc}
+.preview-day:nth-child(3) .food-art{background:#e9e2d5}
+.day-copy{padding:12px 10px}
+.day-copy small{font-size:8px;color:#979c88}
+.day-copy h4{font:normal 15px/1.2 var(--serif);margin:8px 0 10px;min-height:36px}
+.day-copy p{font-size:8px;color:#8e9781;margin:0}
+.closing{background:#e7ecdd;border-radius:13px;padding:47px 25px;text-align:center;margin-bottom:50px}
+.closing .eyebrow{justify-content:center;margin-bottom:17px}
+.closing h2{font-size:42px;margin:0 0 14px}
+.closing p{font-size:12px;color:#7c8571;margin:0 0 24px}
+.closing .tiny{font-size:9px;margin:13px 0 0}
+.footer{display:flex;justify-content:space-between;align-items:center;padding-bottom:28px;gap:20px}
+.footer .logo{font-size:34px}
+.footer p{font-size:9px;color:#919785}
+.footer-links{display:flex;gap:22px;font-size:10px}
+.footer-links button{font-size:10px;padding:0}
+dialog{max-width:440px;width:calc(100% - 40px);border:1px solid var(--line);border-radius:16px;background:var(--cream);color:var(--ink);padding:36px;box-shadow:0 20px 80px #20332733}
+dialog::backdrop{background:#20332780;backdrop-filter:blur(4px)}
+dialog h2{font-size:36px;margin:18px 0}
+dialog p{font-size:13px;line-height:1.8;color:var(--muted)}
+.close{position:absolute;right:16px;top:12px;background:none;border:0;font-size:25px;color:#7e8675}
+.form-label{display:block;font-size:11px;margin:22px 0 8px}
+input[type=email]{width:100%;border:1px solid #cfd4c3;border-radius:6px;padding:14px;background:#fffefa;margin-bottom:12px}
+dialog .button{width:100%}
+.success{font-size:14px;line-height:1.8;padding:18px 0}
+[hidden]{display:none!important}
+@media(min-width:1450px){.wrap{max-width:1370px}.hero{gap:50px}h1{font-size:84px}.hero-art{height:520px}}
+@media(max-width:1000px){
+.wrap{padding:0 32px}.nav-links{gap:20px}.nav-right{gap:17px}
+h1{font-size:63px}.hero{min-height:600px}.hero-art{height:415px}
+.week-card{width:210px;left:0;bottom:-5px}.hand-note{right:0;font-size:15px}
+.floating-tag{right:-10px;bottom:60px;padding:10px}
+.feature{padding:23px 18px}.feature h3{font-size:23px}
+.chips{gap:5px}.chip{padding:7px;font-size:8px}
+.recipe-mini .bowl{width:48px;height:48px;font-size:33px}.recipe-mini strong{font-size:14px}
+.plan-copy{padding:32px 25px}.plan-preview{padding:25px 20px}
+.preview-days{gap:7px}.food-art{height:93px;font-size:48px}.day-copy h4{font-size:13px}
+}
+@media(max-width:700px){
+.wrap{padding:0 23px}.nav{height:82px}.logo{font-size:39px}.logo svg{width:23px}
+.nav-links{display:none;position:absolute;top:78px;left:23px;right:23px;z-index:10;background:var(--cream);border:1px solid var(--line);padding:23px;border-radius:10px;box-shadow:0 8px 20px #263d3210}
+.nav-links.open{display:flex;flex-direction:column;align-items:flex-start}
+.nav-right>.text-link{display:none}.nav-right{gap:12px}.menu{display:block}
+.button.small{font-size:10px;padding:12px 14px}
+.hero{display:flex;flex-direction:column;align-items:stretch;gap:24px;padding:40px 0 35px}
+h1{font-size:62px;letter-spacing:-3px;margin:22px 0}
+.hero-copy>p{font-size:14px;max-width:320px}.hero-actions{gap:23px}
+.button{padding:17px 21px;font-size:11px}.subnote{margin-bottom:23px}
+.hero-art{align-self:center;width:100%;max-width:430px;height:420px;margin-top:8px}
+.art-back{inset:0 0 12% 10%}.plate{width:108%}
+.week-card{bottom:0;left:0}.floating-tag{right:0;bottom:50px;font-size:9px}
+.loose-leaf{right:0;width:65px}
+.benefits{display:grid;grid-template-columns:1fr 1fr;gap:22px 15px;padding:25px 0}
+.benefits div{font-size:10px;gap:8px}.benefits svg{width:17px}
+.section{padding:49px 0}.section-heading{display:block;margin-bottom:25px}
+.section-heading h2{font-size:34px}.section-heading>p{margin-top:17px;max-width:300px}
+.features{grid-template-columns:1fr;gap:15px}.feature{padding:25px}
+.feature h3{font-size:26px;margin-top:15px}.feature>p{max-width:100%;font-size:12px}
+.feature-demo{padding:19px;margin-top:23px;height:115px}.chip{font-size:10px;padding:8px 11px}.chips{gap:8px}
+.demo-title{font-size:10px}.shop-row{font-size:10px}
+.recipe-mini .bowl{width:70px;height:70px;font-size:48px}
+.recipe-mini strong{font-size:20px}.recipe-mini small{font-size:10px}
+.recipe-mini button{width:34px;height:34px}
+.plan-section{padding-bottom:42px}.plan-panel{grid-template-columns:1fr}
+.plan-copy{padding:30px 25px}.plan-copy h2{font-size:34px}.plan-preview{padding:25px 15px}
+.food-art{font-size:41px;height:86px}.day-copy{padding:11px 8px}
+.day-copy h4{font-size:13px;min-height:44px}
+.closing{padding:38px 20px;margin-bottom:34px}.closing h2{font-size:35px}
+.closing p{font-size:11px;line-height:1.7}
+.footer{flex-wrap:wrap;gap:15px}.footer p{order:3;width:100%;margin:0}.footer-links{gap:16px}
+.eyebrow{font-size:8px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<symbol id="sprout" viewBox="0 0 30 35">
+<path d="M15 32C14 20 15 12 24 4M15 23C8 22 3 17 3 10C11 9 17 15 15 23M17 16C16 7 21 2 29 2C29 10 25 15 17 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</symbol>
+<symbol id="leaf" viewBox="0 0 100 100">
+<path d="M13 87C47 86 91 66 84 11C29 11 10 51 13 87Z" fill="#7d9259"/>
+<path d="M13 87L71 28M34 65L30 42M48 51L70 52" stroke="#c2cc9a" fill="none" stroke-width="1.5"/>
+</symbol>
+</defs>
+</svg>
+
+<div class="wrap">
+<header class="nav">
+<a href="#" class="logo" aria-label="Mise home">mise<svg><use href="#sprout"/></svg></a>
+<nav class="nav-links" id="navigation" aria-label="Main navigation">
+<a href="#how-it-works">How it works</a>
+<a href="#your-week">Made for you</a>
+<a href="#get-started">Get the app</a>
+</nav>
+<div class="nav-right">
+<button class="text-link" id="about-button">Meet Mise ↗</button>
+<button class="button small" data-signup>Start your free plan ↗</button>
+<button class="menu" aria-label="Toggle navigation" aria-controls="navigation" aria-expanded="false">☰</button>
+</div>
+</header>
+
+<main>
+<section class="hero" aria-labelledby="hero-title">
+<div class="hero-copy">
+<div class="eyebrow"><span class="dot"></span>A little planning. A lot more living.</div>
+<h1 id="hero-title">Good food.<br>Less <em>thinking.</em></h1>
+<p>Meet your new dinner rhythm. Simple meal plans, a smarter grocery list, and one less thing on your plate.</p>
+<div class="hero-actions">
+<button class="button" data-signup>Find your dinner rhythm <span class="arrow" aria-hidden="true">↗</span></button>
+<a class="text-link" href="#your-week"><span class="play" aria-hidden="true">▶</span>Take a peek</a>
+</div>
+<div class="subnote">Free to start. No credit card. Just good food.</div>
+<div class="proof">
+<div class="avatars" aria-hidden="true"><span class="avatar">👩🏽</span><span class="avatar">👨🏻</span><span class="avatar">👩🏾</span><span class="avatar">👨🏼</span></div>
+<div><div class="stars" aria-hidden="true">✦ ✦ ✦ ✦ ✦</div><p>A little less “what’s for dinner?”</p></div>
+</div>
+</div>
+
+<div class="hero-art" role="img" aria-label="Colorful salmon and avocado grain bowl beside a weekly meal plan">
+<div class="art-back"></div>
+<div class="hand-note">a fresh start, every week
+<svg width="65" height="47" viewBox="0 0 65 47"><path d="M4 3C42-1 56 12 42 37M33 29L41 41L52 33" stroke="#64734f" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg>
+</div>
+<svg class="plate" viewBox="0 0 560 510" aria-hidden="true">
+<defs>
+<radialGradient id="plate"><stop stop-color="#fffef7"/><stop offset=".82" stop-color="#f5f1e4"/><stop offset=".88" stop-color="#e5ddcb"/><stop offset=".92" stop-color="#faf7ef"/><stop offset="1" stop-color="#ded5c1"/></radialGradient>
+<linearGradient id="avo" x2="1" y2="1"><stop stop-color="#e1e7ac"/><stop offset="1" stop-color="#a7bd68"/></linearGradient>
+<linearGradient id="salmon" x2="1" y2="1"><stop stop-color="#eea176"/><stop offset="1" stop-color="#c7734b"/></linearGradient>
+<filter id="shadow"><feDropShadow dx="1" dy="4" stdDeviation="3" flood-color="#493d22" flood-opacity=".18"/></filter>
+<pattern id="grain" width="17" height="16" patternUnits="userSpaceOnUse"><rect width="17" height="16" fill="#d5b782"/><ellipse cx="4" cy="3" rx="3" ry="1.6" fill="#f2ddb3" transform="rotate(28 4 3)"/><ellipse cx="12" cy="10" rx="3" ry="1.6" fill="#ede1bc" transform="rotate(-35 12 10)"/><ellipse cx="2" cy="13" rx="2.5" ry="1.4" fill="#bfa170"/></pattern>
+</defs>
+<ellipse cx="289" cy="254" rx="209" ry="207" fill="url(#plate)"/>
+<ellipse cx="289" cy="254" rx="173" ry="171" fill="#e4dcc3"/>
+<path d="M186 129C228 102 283 102 325 130L350 244L235 370L149 299C110 239 131 167 186 129" fill="url(#grain)"/>
+<g fill="#668348" stroke="#4f723c" stroke-width="1" filter="url(#shadow)">
+<path d="M321 135Q326 104 350 117Q362 89 380 114Q411 100 410 128Q444 123 432 152Q461 164 436 184Q455 209 425 218L348 215Z"/>
+<path d="M345 190Q318 174 309 201Q286 203 305 228Q285 249 312 259Q307 284 332 280Q350 298 362 271Q388 280 391 251L411 213Z"/>
+<path d="M196 297Q164 288 164 318Q141 328 164 343Q157 374 186 366Q202 389 218 368Q248 374 244 346L226 310Z"/>
+</g>
+<g stroke="#a2b16a" fill="none" stroke-width="1.5"><path d="M347 139L418 175M365 148L368 125M386 159L406 141M391 161L391 191M337 217L360 255M178 328L215 357"/></g>
+<g filter="url(#shadow)" transform="rotate(24 245 239)">
+<rect x="177" y="184" width="136" height="100" rx="18" fill="url(#salmon)"/>
+<path d="M191 197Q224 218 299 203M185 213Q230 236 306 222M183 232Q237 253 305 241M188 250Q244 271 297 259" stroke="#f7be94" stroke-width="5" fill="none"/>
+<path d="M195 190L207 270M222 187L238 279M252 188L270 277M280 190L295 263" stroke="#955239" stroke-width="2" opacity=".45"/>
+<g fill="#465b34"><ellipse cx="215" cy="211" rx="2" ry="3"/><circle cx="263" cy="227" r="2"/><ellipse cx="240" cy="251" rx="2" ry="3"/><circle cx="285" cy="203" r="2"/><circle cx="195" cy="239" r="2"/></g>
+</g>
+<g fill="#e8aa37" stroke="#bd8729" filter="url(#shadow)">
+<circle cx="307" cy="298" r="10"/><circle cx="330" cy="290" r="9"/><circle cx="316" cy="319" r="10"/><circle cx="340" cy="311" r="10"/><circle cx="329" cy="341" r="9"/><circle cx="353" cy="331" r="10"/><circle cx="349" cy="354" r="9"/><circle cx="372" cy="342" r="10"/><circle cx="297" cy="337" r="9"/><circle cx="314" cy="359" r="8"/><circle cx="375" cy="316" r="9"/>
+</g>
+<g filter="url(#shadow)">
+<path d="M348 228Q405 179 436 224Q462 273 400 310L383 293Q430 263 415 239Q401 218 361 246Z" fill="#63804a"/>
+<path d="M354 231Q404 192 430 225Q452 265 396 304L384 292Q429 261 415 240Q402 221 363 245Z" fill="url(#avo)"/>
+<path d="M367 243L387 297M378 234L400 289M391 228L412 276M405 227L424 260" stroke="#edf0bc" stroke-width="4"/>
+</g>
+<g filter="url(#shadow)">
+<circle cx="259" cy="337" r="19" fill="#d7603e"/><circle cx="274" cy="365" r="18" fill="#e58050"/><circle cx="241" cy="371" r="16" fill="#d7603e"/>
+<path d="M249 325L257 338L270 326M266 354L274 366L285 355M231 362L241 373L249 361" stroke="#f9b17c" fill="none" stroke-width="2"/>
+<g fill="#f2d296"><ellipse cx="252" cy="335" rx="2" ry="3"/><ellipse cx="265" cy="336" rx="2" ry="3"/><ellipse cx="269" cy="363" rx="2" ry="3"/><ellipse cx="280" cy="365" rx="2" ry="3"/></g>
+</g>
+<g transform="rotate(-22 182 169)" filter="url(#shadow)">
+<path d="M147 168A40 40 0 0 1 227 168Z" fill="#e6bd48"/>
+<path d="M152 165A35 35 0 0 1 222 165Z" fill="#fff3b0"/>
+<path d="M158 161A28 28 0 0 1 216 161Z" fill="#edcf62"/>
+<path d="M187 162L174 137M187 162L198 136M187 162L213 150M187 162L160 151" stroke="#fff6c9" stroke-width="2"/>
+</g>
+<g fill="#415e34"><ellipse cx="281" cy="167" rx="9" ry="4" transform="rotate(30 281 167)"/><ellipse cx="289" cy="179" rx="8" ry="4" transform="rotate(-25 289 179)"/><ellipse cx="270" cy="176" rx="9" ry="4" transform="rotate(-30 270 176)"/><path d="M277 190L284 163" stroke="#4c6d37" stroke-width="2"/></g>
+<g fill="#f8f0cb"><ellipse cx="236" cy="200" rx="3" ry="1" transform="rotate(35 236 200)"/><ellipse cx="255" cy="243" rx="3" ry="1"/><ellipse cx="217" cy="229" rx="3" ry="1" transform="rotate(-30 217 229)"/><ellipse cx="391" cy="249" rx="3" ry="1"/><ellipse cx="401" cy="270" rx="3" ry="1"/></g>
+</svg>
+<div class="week-card">
+<div class="card-heading">A good week, planned.<span>JUN 10–16</span></div>
+<div class="meal-row"><span class="day">Mon</span><span class="mini-food">🥑</span><div><strong>Green goddess bowl</strong><small>20 min · Fresh & easy</small></div><span class="tick">✓</span></div>
+<div class="meal-row"><span class="day">Tue</span><span class="mini-food">🍝</span><div><strong>One-pot lemon pasta</strong><small>25 min · Comfort food</small></div><span class="tick">✓</span></div>
+<div class="meal-row"><span class="day">Wed</span><span class="mini-food">🌮</span><div><strong>Sweet potato tacos</strong><small>25 min · Plant-powered</small></div><span class="tick">✓</span></div>
+</div>
+<div class="floating-tag"><span aria-hidden="true">🥕</span><div>Less waste. More taste.<small>Your grocery list is ready.</small></div></div>
+<svg class="loose-leaf" aria-hidden="true"><use href="#leaf"/></svg>
+</div>
+</section>
+
+<div class="benefits">
+<div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3V8Q6 11 9 11V21M12 3V8Q12 11 9 11M9 3V10M18 3V21M18 3Q14 8 18 12"/></svg>Real food, for real life</div>
+<div><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 8V13L15 15M9 2H15"/></svg>Less time figuring it out</div>
+<div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19Q3 5 20 4Q21 20 5 19ZM5 19L15 9"/></svg>A little less food waste</div>
+<div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20S2 14 3 8C4 2 10 4 12 7C14 4 20 2 21 8C22 14 12 20 12 20Z"/></svg>Made around you</div>
+</div>
+
+<section class="section" id="how-it-works">
+<div class="section-heading">
+<div><div class="eyebrow">From “what’s for dinner?” to “that was good.”</div><h2>A small plan.<br>A big weight off your plate.</h2></div>
+<p>No complicated systems. No Sunday spreadsheets. Just a few little steps to a better-fed week.</p>
+</div>
+<div class="features">
+<article class="feature">
+<div class="feature-top"><span class="feature-num">01</span><span class="feature-icon" aria-hidden="true">✳</span></div>
+<h3>Your taste. Your pace.</h3>
+<p>Tell us what you love, how you eat, and how much time you have. We’ll take it from there.</p>
+<div class="feature-demo">
+<div class="demo-title">A little more you.</div>
+<div class="chips" aria-label="Try your food preferences">
+<button class="chip active" aria-pressed="true">🥬 Plant-forward</button>
+<button class="chip active" aria-pressed="true">⏱ Under 30 min</button>
+<button class="chip" aria-pressed="false">🥑 Gluten-free</button>
+<button class="chip" aria-pressed="false">🍳 High protein</button>
+</div>
+</div>
+</article>
+<article class="feature">
+<div class="feature-top"><span class="feature-num">02</span><span class="feature-icon" aria-hidden="true">☷</span></div>
+<h3>One list. All sorted.</h3>
+<p>Your meals become a tidy grocery list. Check your cupboards, grab what’s missing, and you’re set.</p>
+<div class="feature-demo shopping">
+<div class="demo-title">Your list, a little lighter.</div>
+<label class="shop-row"><input type="checkbox" checked><span>Avocados</span><small>2 whole</small></label>
+<label class="shop-row"><input type="checkbox"><span>Cherry tomatoes</span><small>1 punnet</small></label>
+<label class="shop-row"><input type="checkbox"><span>Fresh basil</span><small>1 bunch</small></label>
+</div>
+</article>
+<article class="feature">
+<div class="feature-top"><span class="feature-num">03</span><span class="feature-icon" aria-hidden="true">♡</span></div>
+<h3>Make room for the good.</h3>
+<p>Cook something lovely, find a new favorite, and get back to the rest of your very full life.</p>
+<div class="feature-demo recipe-mini">
+<div class="bowl" aria-hidden="true">🥗</div>
+<div><strong>A feel-good<br>kind of dinner.</strong><small>20 min · 4 simple steps</small></div>
+<button id="favorite" aria-label="Save dinner to favorites" aria-pressed="false">♡</button>
+</div>
+</article>
+</div>
+</section>
+
+<section class="plan-section" id="your-week">
+<div class="plan-panel">
+<div class="plan-copy">
+<div class="eyebrow">Built for your kind of life</div>
+<h2>There’s a good week<br>with your name on it.</h2>
+<p>Busy evenings? Picky eaters? Just cooking for one? Your plan fits around your life.</p>
+<div class="plan-tabs" role="tablist" aria-label="Explore meal plans">
+<button role="tab" id="tab-quick" aria-controls="meal-preview" aria-selected="true" data-plan="quick">Quick & easy</button>
+<button role="tab" id="tab-plant" aria-controls="meal-preview" aria-selected="false" tabindex="-1" data-plan="plant">Plant lovers</button>
+<button role="tab" id="tab-family" aria-controls="meal-preview" aria-selected="false" tabindex="-1" data-plan="family">Family favorites</button>
+</div>
+<div class="plan-detail" id="plan-detail"></div>
+</div>
+<div class="plan-preview" id="meal-preview" role="tabpanel" aria-labelledby="tab-quick" tabindex="0">
+<div class="preview-head">A taste of your week<span>3 dinners · 2 happy people</span></div>
+<div class="preview-days" id="preview-days"></div>
+</div>
+</div>
+</section>
+
+<section class="closing" id="get-started">
+<div class="eyebrow">Let’s make dinner feel good again</div>
+<h2>A little more ease. A lot more yum.</h2>
+<p>Your next good week starts with one small plan.</p>
+<button class="button" data-signup>Find your dinner rhythm <span class="arrow" aria-hidden="true">↗</span></button>
+<p class="tiny">Free to start. Always room at the table.</p>
+</section>
+</main>
+
+<footer class="footer">
+<a href="#" class="logo" aria-label="Mise home">mise<svg><use href="#sprout"/></svg></a>
+<p>© 2026 Mise. Made for the everyday, and the everyday good.</p>
+<div class="footer-links"><a href="#how-it-works">How it works</a><a href="#your-week">Explore plans</a><button class="text-link" data-signup>Get early access ↗</button></div>
+</footer>
+</div>
+
+<dialog id="signup" aria-labelledby="signup-title">
+<button class="close" aria-label="Close dialog">×</button>
+<div class="eyebrow">A seat at the table</div>
+<h2 id="signup-title">Your next good week<br>starts here.</h2>
+<p>Mise is coming soon. Leave your email to try the early access sign-up preview.</p>
+<form id="signup-form">
+<label class="form-label" for="email">Your email address</label>
+<input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+<button class="button" type="submit">Save my interest <span aria-hidden="true">↗</span></button>
+<p style="font-size:10px">Demo only: your email stays on this device. No email is sent.</p>
+</form>
+<div class="success" id="signup-success" role="status" hidden>✓ Your interest is saved on this device. Here’s to good things ahead.</div>
+</dialog>
+
+<dialog id="about" aria-labelledby="about-title">
+<button class="close" aria-label="Close dialog">×</button>
+<div class="eyebrow">Hello, we’re Mise</div>
+<h2 id="about-title">A little space<br>for good food.</h2>
+<p>Inspired by “mise en place” — everything in its place — Mise brings a little calm to the everyday dinner question. Personal meal plans, useful grocery lists, and food you look forward to eating.</p>
+<button class="button" id="about-start">Find your dinner rhythm ↗</button>
+</dialog>
+
+<script>
+const plans = {
+  quick: {
+    detail: 'Big on flavor. Light on effort. All under 30 minutes.',
+    meals: [
+      ['🥗', 'Green goddess bowl', '20 min · Fresh & easy'],
+      ['🍝', 'One-pot lemon pasta', '25 min · One pot'],
+      ['🌮', 'Sweet potato tacos', '25 min · Full of flavor']
+    ]
+  },
+  plant: {
+    detail: 'Colorful, nourishing, and full of good things from the ground.',
+    meals: [
+      ['🥑', 'Avocado grain bowl', '20 min · Plant-powered'],
+      ['🍛', 'Coconut chickpea curry', '30 min · Comforting'],
+      ['🥗', 'Crunchy rainbow salad', '15 min · Fresh & bright']
+    ]
+  },
+  family: {
+    detail: 'Easy wins for little appetites and the grown-ups cooking.',
+    meals: [
+      ['🍝', 'Everyone’s favorite pasta', '25 min · Kid-approved'],
+      ['🍕', 'Make-your-own pizza', '30 min · Cook together'],
+      ['🌮', 'Taco night for everyone', '25 min · Family style']
+    ]
+  }
+};
+
+const tabs = [...document.querySelectorAll('[data-plan]')];
+
+function renderPlan(key) {
+  const plan = plans[key];
+  document.querySelector('#plan-detail').textContent = plan.detail;
+  document.querySelector('#meal-preview').setAttribute('aria-labelledby', 'tab-' + key);
+  document.querySelector('#preview-days').innerHTML = plan.meals.map((meal, i) => `
+    <article class="preview-day">
+      <div class="food-art" aria-hidden="true">${meal[0]}</div>
+      <div class="day-copy">
+        <small>${['MONDAY', 'TUESDAY', 'WEDNESDAY'][i]}</small>
+        <h4>${meal[1]}</h4>
+        <p>${meal[2]}</p>
+      </div>
+    </article>`).join('');
+
+  tabs.forEach(tab => {
+    const selected = tab.dataset.plan === key;
+    tab.setAttribute('aria-selected', String(selected));
+    tab.tabIndex = selected ? 0 : -1;
+  });
+}
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => renderPlan(tab.dataset.plan));
+  tab.addEventListener('keydown', event => {
+    let index = tabs.indexOf(tab);
+    if (event.key === 'ArrowRight') index = (index + 1) % tabs.length;
+    else if (event.key === 'ArrowLeft') index = (index + tabs.length - 1) % tabs.length;
+    else if (event.key === 'Home') index = 0;
+    else if (event.key === 'End') index = tabs.length - 1;
+    else return;
+    event.preventDefault();
+    renderPlan(tabs[index].dataset.plan);
+    tabs[index].focus();
+  });
+});
+renderPlan('quick');
+
+document.querySelectorAll('.chip').forEach(button => {
+  button.addEventListener('click', () => {
+    button.setAttribute('aria-pressed', String(button.classList.toggle('active')));
+  });
+});
+
+document.querySelector('#favorite').addEventListener('click', event => {
+  const button = event.currentTarget;
+  const saved = button.getAttribute('aria-pressed') !== 'true';
+  button.setAttribute('aria-pressed', String(saved));
+  button.textContent = saved ? '♥' : '♡';
+  button.setAttribute('aria-label', saved ? 'Remove dinner from favorites' : 'Save dinner to favorites');
+});
+
+const signup = document.querySelector('#signup');
+const about = document.querySelector('#about');
+
+document.querySelectorAll('[data-signup]').forEach(button => {
+  button.addEventListener('click', () => signup.showModal());
+});
+
+document.querySelectorAll('dialog .close').forEach(button => {
+  button.addEventListener('click', () => button.closest('dialog').close());
+});
+
+document.querySelectorAll('dialog').forEach(dialog => {
+  dialog.addEventListener('click', event => {
+    if (event.target !== dialog) return;
+    const rect = dialog.getBoundingClientRect();
+    if (event.clientX < rect.left || event.clientX > rect.right ||
+        event.clientY < rect.top || event.clientY > rect.bottom) dialog.close();
+  });
+});
+
+document.querySelector('#signup-form').addEventListener('submit', event => {
+  event.preventDefault();
+  const status = document.querySelector('#signup-success');
+  try {
+    localStorage.setItem('mise-interest', JSON.stringify({
+      email: document.querySelector('#email').value,
+      date: new Date().toISOString()
+    }));
+    document.querySelector('#signup-form').hidden = true;
+    status.textContent = '✓ Your interest is saved on this device. Here’s to good things ahead.';
+  } catch {
+    status.textContent = 'This browser couldn’t save your interest. Please enable local storage and try again.';
+  }
+  status.hidden = false;
+});
+
+const menu = document.querySelector('.menu');
+const navigation = document.querySelector('#navigation');
+
+menu.addEventListener('click', () => {
+  const open = navigation.classList.toggle('open');
+  menu.setAttribute('aria-expanded', String(open));
+  menu.textContent = open ? '×' : '☰';
+});
+
+navigation.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navigation.classList.remove('open');
+    menu.setAttribute('aria-expanded', 'false');
+    menu.textContent = '☰';
+  });
+});
+
+document.querySelector('#about-button').addEventListener('click', () => about.showModal());
+document.querySelector('#about-start').addEventListener('click', () => {
+  about.close();
+  signup.showModal();
+});
+</script>
+</body>
+</html>

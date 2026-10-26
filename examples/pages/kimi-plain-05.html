@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Mise — Meal planning that plans itself</title>
+<meta name="description" content="Mise plans your week of meals in seconds, writes the grocery list, and keeps everyone fed. Free to start on iOS and Android."/>
+<meta name="theme-color" content="#FBF7EF"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ---------- Tokens & reset ---------- */
+:root{
+  --bg:#FBF7EF; --paper:#FFFFFF; --ink:#1F2B22; --ink-soft:#5A6859;
+  --pine:#20503C; --pine-deep:#16352A; --leaf:#57A773; --mint:#E3F0E6;
+  --accent:#EE5B25; --accent-deep:#C74312; --accent-soft:#FDE7DB;
+  --gold:#F2B23E; --line:rgba(31,43,34,.1);
+  --shadow-lg:0 30px 60px -30px rgba(31,43,34,.28);
+  --radius:22px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:86px}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--accent-soft)}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.08;letter-spacing:-.02em;font-weight:600}
+h1 em,h2 em{font-style:italic;color:var(--accent);font-weight:500}
+img,svg{display:block}
+a{color:inherit}
+button{font-family:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.container{max-width:1140px;margin:0 auto;padding:0 24px}
+.section{padding:96px 0}
+.section-tint{background:#F3EDE0}
+
+/* ---------- Shared bits ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:15px;padding:13px 26px;border-radius:999px;border:1px solid transparent;cursor:pointer;text-decoration:none;transition:transform .2s,box-shadow .2s,background .2s,color .2s,border-color .2s;white-space:nowrap}
+.btn-accent{background:var(--accent);color:#fff}
+.btn-accent:hover{background:var(--accent-deep);transform:translateY(-2px);box-shadow:0 14px 26px -12px rgba(238,91,37,.55)}
+.btn-primary{background:var(--ink);color:var(--bg)}
+.btn-primary:hover{background:var(--pine-deep);transform:translateY(-2px)}
+.btn-ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--ink);transform:translateY(-2px)}
+.btn-lg{padding:16px 34px;font-size:16px}
+.sec-head{max-width:660px;margin:0 auto 56px;text-align:center}
+.sec-head h2{font-size:clamp(2rem,3.8vw,2.9rem);margin-bottom:14px}
+.sec-head p{color:var(--ink-soft);font-size:17px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-deep);margin-bottom:16px}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--accent);border-radius:2px}
+
+/* ---------- Topbar ---------- */
+.topbar{background:var(--pine);color:#EAF4EC;font-size:13.5px;text-align:center;padding:9px 44px 9px 16px;position:relative}
+.topbar a{color:#FFD2BC;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.topbar button{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:0;color:inherit;font-size:19px;line-height:1;cursor:pointer;opacity:.65;padding:4px}
+.topbar button:hover{opacity:1}
+
+/* ---------- Nav ---------- */
+.nav{position:sticky;top:0;z-index:60;background:rgba(251,247,239,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .3s,box-shadow .3s}
+.nav.scrolled{border-bottom-color:var(--line);box-shadow:0 12px 30px -20px rgba(31,43,34,.3)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px;position:relative}
+.logo{font-family:'Fraunces';font-size:25px;font-weight:700;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:9px;letter-spacing:-.02em}
+.logo-mark{width:35px;height:35px;border-radius:11px;background:var(--pine);color:#fff;display:grid;place-items:center;font-style:italic;font-size:20px;position:relative;box-shadow:0 6px 14px -6px rgba(32,80,60,.6)}
+.logo-mark::after{content:"";position:absolute;top:-3px;right:-3px;width:9px;height:9px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{text-decoration:none;font-size:14.5px;font-weight:500;color:var(--ink-soft);transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-actions{display:flex;align-items:center;gap:12px}
+.nav-cta-mobile{display:none}
+.burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:42px;height:42px;background:none;border:0;cursor:pointer;padding:8px}
+.burger span{height:2px;background:var(--ink);border-radius:2px;transition:transform .3s,opacity .3s}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;padding:76px 0 100px;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.55;pointer-events:none}
+.blob-a{width:520px;height:520px;background:#FFD9BE;top:-180px;right:-140px}
+.blob-b{width:440px;height:440px;background:#CFE8D2;bottom:-200px;left:-160px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;position:relative}
+.pill{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);padding:7px 15px;border-radius:999px;font-size:13px;font-weight:600;color:var(--pine);box-shadow:0 4px 12px -6px rgba(31,43,34,.15)}
+.hero h1{font-size:clamp(3rem,6vw,4.7rem);margin:20px 0 18px}
+.lede{font-size:clamp(1.05rem,1.4vw,1.2rem);color:var(--ink-soft);max-width:52ch}
+.store-row{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+.store-btn{display:flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:11px 20px;border-radius:15px;text-decoration:none;line-height:1.2;transition:transform .2s,background .2s}
+.store-btn:hover{transform:translateY(-2px);background:var(--pine-deep)}
+.store-btn svg{width:23px;height:23px;fill:#fff;flex:none}
+.store-btn small{display:block;font-size:10px;opacity:.75;font-weight:500}
+.store-btn b{font-size:15.5px;font-weight:600}
+.hero-proof{display:flex;align-items:center;gap:10px;margin-top:22px;font-size:14px;color:var(--ink-soft);flex-wrap:wrap}
+.stars{color:var(--gold);letter-spacing:2px;font-size:14px}
+.hero-proof b{color:var(--ink)}
+.demo-link{display:inline-block;margin-top:10px;font-size:14px;font-weight:600;color:var(--pine);text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(32,80,60,.35)}
+.demo-link:hover{color:var(--accent-deep)}
+
+/* Phone mockup */
+.hero-visual{position:relative;display:flex;justify-content:center}
+.phone{width:292px;height:598px;background:#10241B;border-radius:46px;padding:11px;box-shadow:0 44px 90px -34px rgba(16,36,27,.5);position:relative;transform:rotate(2deg);z-index:1}
+.screen{background:var(--bg);height:100%;border-radius:36px;overflow:hidden;padding:46px 15px 15px;position:relative;display:flex;flex-direction:column;gap:11px}
+.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:88px;height:24px;background:#10241B;border-radius:13px}
+.app-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.app-hello{display:block;font-size:10.5px;color:var(--ink-soft)}
+.app-top strong{font-size:13.5px;letter-spacing:-.01em}
+.app-avatar{width:34px;height:34px;flex:none;border-radius:50%;background:var(--accent-soft);color:var(--accent-deep);display:grid;place-items:center;font-weight:700;font-size:14px}
+.app-week{display:flex;justify-content:space-between;background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px 10px}
+.app-week span{width:26px;height:26px;display:grid;place-items:center;font-size:10.5px;font-weight:600;color:var(--ink-soft);border-radius:50%}
+.app-week .on{background:var(--accent);color:#fff;box-shadow:0 4px 10px -3px rgba(238,91,37,.6)}
+.app-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 -2px}
+.app-meal{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:9px 11px}
+.am-ic{width:36px;height:36px;border-radius:11px;background:var(--tint,#eee);display:grid;place-items:center;font-size:17px;flex:none}
+.app-meal b{display:block;font-size:12px;line-height:1.25}
+.app-meal small{color:var(--ink-soft);font-size:10px}
+.app-meal-dark{background:var(--pine);border-color:var(--pine);color:#fff}
+.app-meal-dark small{color:#BFD8C9}
+.cook{margin-left:auto;background:#fff;color:var(--pine);font-size:10px;font-weight:700;padding:6px 11px;border-radius:999px;flex:none}
+.app-ring{margin-top:auto;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px;display:flex;align-items:center;gap:13px}
+.ring{position:relative;width:74px;height:74px;flex:none}
+.ring svg{transform:rotate(-90deg)}
+.ring-txt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring-txt b{font-size:14px;line-height:1}
+.ring-txt small{font-size:8.5px;color:var(--ink-soft);margin-top:2px}
+.ring-macros{display:flex;flex-direction:column;gap:6px;font-size:10.5px;color:var(--ink-soft);font-weight:500}
+.ring-macros i{display:inline-block;width:8px;height:8px;border-radius:3px;background:var(--c);margin-right:7px}
+
+/* Floating cards */
+.float-card{position:absolute;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-lg);padding:14px 16px;font-size:12px;z-index:2;animation:float 6s ease-in-out infinite alternate;animation-delay:var(--d,0s)}
+.fc-gro{left:-34px;top:64px;width:212px}
+.fc-mac{right:-24px;bottom:104px;--d:1.4s}
+@keyframes float{from{transform:translateY(0) rotate(-.5deg)}to{transform:translateY(-14px) rotate(.5deg)}}
+.fc-head{font-weight:700;display:flex;justify-content:space-between;gap:10px;margin-bottom:6px;font-size:12.5px}
+.fc-head span{color:var(--leaf);font-weight:600;white-space:nowrap}
+.fc-row{display:flex;justify-content:space-between;gap:10px;padding:5px 0;color:var(--ink-soft);border-top:1px dashed var(--line)}
+.fc-row b{font-weight:600}
+.fc-row.done{color:#9AA79B;text-decoration:line-through}
+.fc-big{font-family:'Fraunces';font-size:36px;font-weight:600;line-height:1}
+.fc-big small{font-size:15px;color:var(--ink-soft);font-family:'Inter';font-weight:500}
+.fc-sub{color:var(--ink-soft);font-size:11px;margin-top:3px}
+.orb{position:absolute;display:grid;place-items:center;border-radius:50%;background:#fff;border:1px solid var(--line);box-shadow:0 14px 28px -14px rgba(31,43,34,.3);animation:float 7s ease-in-out infinite alternate;animation-delay:var(--d,0s);z-index:2}
+.orb-a{width:52px;height:52px;font-size:24px;top:16px;right:8%;--d:.8s}
+.orb-b{width:44px;height:44px;font-size:20px;bottom:24px;left:6%;--d:2s}
+
+/* ---------- Press strip ---------- */
+.press{padding:34px 0 10px;text-align:center}
+.press p{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:18px;font-weight:600}
+.press-row{display:flex;justify-content:center;align-items:center;gap:46px;flex-wrap:wrap}
+.press-row span{font-family:'Fraunces';font-size:20px;color:var(--ink);opacity:.38;white-space:nowrap}
+.press-row span:nth-child(2){font-family:'Inter';font-weight:700;letter-spacing:.08em;font-size:14px;text-transform:uppercase}
+.press-row span:nth-child(3){font-style:italic}
+.press-row span:nth-child(4){font-family:'Inter';font-weight:800;font-size:17px}
+.press-row span:nth-child(5){font-size:17px;font-weight:500;letter-spacing:.12em}
+
+/* ---------- Features ---------- */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:30px 28px;transition:transform .25s,box-shadow .25s}
+.feat:hover{transform:translateY(-5px);box-shadow:0 26px 48px -24px rgba(31,43,34,.22)}
+.feat-ic{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent-deep);margin-bottom:20px}
+.feat:nth-child(3n+2) .feat-ic{background:var(--mint);color:var(--pine)}
+.feat:nth-child(3n) .feat-ic{background:#FBF0D3;color:#A8741A}
+.feat-ic svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.feat h3{font-size:20px;margin-bottom:9px}
+.feat p{font-size:14.5px;color:var(--ink-soft)}
+
+/* ---------- How it works ---------- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.step{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:34px 28px;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.step:hover{transform:translateY(-5px);box-shadow:0 26px 48px -24px rgba(31,43,34,.22)}
+.step-num{position:absolute;top:14px;right:20px;font-family:'Fraunces';font-style:italic;font-size:58px;font-weight:600;color:rgba(238,91,37,.14);line-height:1}
+.step-ic{width:52px;height:52px;border-radius:16px;background:var(--mint);display:grid;place-items:center;font-size:24px;margin-bottom:20px}
+.step h3{font-size:21px;margin-bottom:9px}
+.step p{font-size:14.5px;color:var(--ink-soft)}
+
+/* ---------- Live demo ---------- */
+.demo-shell{background:var(--paper);border:1px solid var(--line);border-radius:30px;padding:38px;box-shadow:var(--shadow-lg)}
+.chip-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:24px}
+.chip{padding:10px 19px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);font-weight:600;font-size:14px;cursor:pointer;color:var(--ink);transition:all .2s}
+.chip:hover{border-color:var(--pine);transform:translateY(-1px)}
+.chip.on{background:var(--pine);border-color:var(--pine);color:#fff}
+.gen-row{text-align:center;margin-bottom:30px}
+.plan-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:8px}
+.plan-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:12px;min-width:0}
+.day-card{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:13px 10px;text-align:center;position:relative;animation:dayIn .5s cubic-bezier(.2,.9,.3,1.25) both;animation-delay:calc(var(--i,0)*70ms)}
+.day-card .dow{display:block;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+.day-card .emoji{display:block;font-size:30px;margin:10px 0 8px;line-height:1}
+.day-card .name{font-size:12.5px;font-weight:600;line-height:1.3;min-height:33px;display:flex;align-items:center;justify-content:center}
+.day-card .meta{font-size:10.5px;color:var(--ink-soft);margin-top:5px}
+.day-card.empty{border-style:dashed;background:transparent;color:var(--ink-soft)}
+.day-card.empty .name{font-weight:500;color:#A8B2A6}
+.reroll{position:absolute;top:7px;right:7px;width:24px;height:24px;border-radius:8px;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:12px;line-height:1;color:var(--ink-soft);transition:all .25s;padding:0}
+.reroll:hover{color:var(--accent);border-color:var(--accent);transform:rotate(-50deg)}
+@keyframes dayIn{from{opacity:0;transform:translateY(14px) scale(.9)}to{opacity:1;transform:none}}
+.plan-summary{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+.sum-chip{background:var(--mint);color:var(--pine);font-weight:600;font-size:13.5px;padding:10px 18px;border-radius:999px;animation:dayIn .45s both}
+.sum-chip b{font-weight:700}
+.demo-note{text-align:center;font-size:13px;color:var(--ink-soft);margin-top:22px}
+
+/* ---------- Stats & testimonials ---------- */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:70px;text-align:center}
+.stat .num{font-family:'Fraunces';font-size:clamp(2.3rem,4vw,3.3rem);font-weight:600;color:var(--pine);line-height:1.1}
+.stat p{color:var(--ink-soft);font-size:14px;margin-top:6px}
+.t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.t-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:30px 28px;display:flex;flex-direction:column;gap:16px;transition:transform .25s,box-shadow .25s}
+.t-card:hover{transform:translateY(-5px);box-shadow:0 26px 48px -24px rgba(31,43,34,.22)}
+.t-stars{color:var(--gold);letter-spacing:3px;font-size:15px}
+.t-quote{font-size:15.5px;line-height:1.6}
+.t-who{display:flex;align-items:center;gap:12px;margin-top:auto}
+.t-av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-size:14px;background:var(--pine);flex:none}
+.t-av.c2{background:var(--accent)}
+.t-av.c3{background:var(--gold);color:var(--ink)}
+.t-who b{display:block;font-size:14px}
+.t-who small{color:var(--ink-soft);font-size:12.5px}
+
+/* ---------- Pricing ---------- */
+.bill-wrap{text-align:center}
+.bill-toggle{display:inline-flex;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:4px;gap:4px;margin-bottom:46px}
+.bill-toggle button{border:0;background:transparent;padding:9px 22px;border-radius:999px;font-weight:600;font-size:14px;cursor:pointer;color:var(--ink-soft);transition:all .2s}
+.bill-toggle button.on{background:var(--ink);color:#fff}
+.save{background:var(--accent-soft);color:var(--accent-deep);font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;margin-left:6px}
+.bill-toggle button.on .save{background:rgba(255,255,255,.18);color:#FFD2BC}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+.tier{background:var(--paper);border:1px solid var(--line);border-radius:26px;padding:36px 32px;display:flex;flex-direction:column;position:relative}
+.tier h3{font-size:22px}
+.t-sub{color:var(--ink-soft);font-size:14px;margin:7px 0 22px}
+.price{font-family:'Fraunces';font-size:54px;font-weight:600;line-height:1;display:flex;align-items:baseline;gap:3px}
+.price sup{font-size:23px}
+.price .per{font-family:'Inter';font-size:15px;color:var(--ink-soft);font-weight:500}
+.price .amount.flip{animation:flip .35s ease}
+@keyframes flip{0%{opacity:0;transform:translateY(9px)}100%{opacity:1;transform:none}}
+.bill-note{font-size:12.5px;color:var(--ink-soft);margin:7px 0 24px;min-height:19px}
+.tier ul{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:30px}
+.tier li{display:flex;gap:11px;font-size:14.5px;align-items:flex-start}
+.tier li svg{flex:none;margin-top:3px;width:17px;height:17px;stroke:var(--leaf);stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.tier .btn{margin-top:auto}
+.tier-pop{background:var(--pine);color:#fff;border-color:var(--pine);box-shadow:0 38px 70px -32px rgba(22,53,42,.6);transform:scale(1.03)}
+.tier-pop .t-sub,.tier-pop .bill-note,.tier-pop .price .per{color:#BFD8C9}
+.tier-pop li svg{stroke:#8FCFA5}
+.badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:12px;font-weight:700;padding:7px 16px;border-radius:999px;white-space:nowrap;box-shadow:0 8px 16px -6px rgba(238,91,37,.6)}
+.price-foot{text-align:center;font-size:13px;color:var(--ink-soft);margin-top:30px}
+
+/* ---------- FAQ ---------- */
+.faq-wrap{max-width:720px;margin:0 auto}
+.faq-item{border:1px solid var(--line);background:var(--paper);border-radius:18px;margin-bottom:12px;overflow:hidden;transition:border-color .2s}
+.faq-item.open{border-color:rgba(238,91,37,.4)}
+.faq-q{width:100%;background:none;border:0;font-size:16px;font-weight:600;text-align:left;padding:21px 24px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;color:var(--ink)}
+.chev{flex:none;transition:transform .3s;color:var(--ink-soft)}
+.faq-item.open .chev{transform:rotate(180deg);color:var(--accent)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faq-a p{padding:0 24px 22px;color:var(--ink-soft);font-size:15px}
+
+/* ---------- CTA ---------- */
+.cta-panel{background:var(--pine);border-radius:34px;padding:clamp(40px,6vw,76px);display:grid;grid-template-columns:1.15fr 1fr;gap:44px;align-items:center;position:relative;overflow:hidden;color:#fff}
+.cta-panel::before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;background:rgba(255,255,255,.05);top:-200px;right:-120px}
+.cta-panel::after{content:"";position:absolute;width:280px;height:280px;border-radius:50%;background:rgba(238,91,37,.16);bottom:-140px;left:-80px}
+.cta-deco{position:absolute;font-size:52px;opacity:.16;pointer-events:none;user-select:none}
+.cd-a{top:24px;right:28%;transform:rotate(-14deg)}
+.cd-b{bottom:26px;right:8%;transform:rotate(12deg)}
+.cta-copy{position:relative;z-index:1}
+.cta-copy h2{font-size:clamp(2.1rem,3.8vw,3rem);margin-bottom:14px}
+.cta-copy h2 em{color:#FFB694}
+.cta-copy p{color:#BFD8C9;font-size:16.5px}
+.cta-form{background:var(--paper);border-radius:22px;padding:26px;display:flex;flex-direction:column;gap:13px;position:relative;z-index:1;box-shadow:0 30px 60px -26px rgba(0,0,0,.35)}
+.cta-form input{padding:15px 19px;border-radius:13px;border:1.5px solid var(--line);font-size:15px;font-family:inherit;width:100%;color:var(--ink)}
+.cta-form input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(238,91,37,.16)}
+.cta-form small{color:var(--ink-soft);text-align:center;font-size:12.5px}
+.cta-form.error input{border-color:#D64545;box-shadow:0 0 0 3px rgba(214,69,69,.15);animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.cta-success{text-align:center;padding:16px 4px;color:var(--ink)}
+.cta-success .big{font-size:34px;display:block;margin-bottom:10px}
+.cta-success b{font-size:18px}
+.cta-success p{font-size:14px;color:var(--ink-soft);margin-top:6px}
+
+/* ---------- Footer ---------- */
+footer{border-top:1px solid var(--line);padding:64px 0 34px;background:var(--paper)}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:36px;margin-bottom:52px}
+.foot-brand p{color:var(--ink-soft);font-size:14px;margin-top:14px;max-width:30ch}
+.foot-grid h4{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-soft);margin-bottom:16px}
+.foot-grid ul{list-style:none}
+.foot-grid li a{display:inline-block;color:var(--ink);text-decoration:none;font-size:14.5px;padding:5px 0;transition:color .2s}
+.foot-grid li a:hover{color:var(--accent-deep)}
+.foot-bottom{border-top:1px solid var(--line);padding-top:26px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;color:var(--ink-soft);font-size:13.5px}
+
+/* ---------- Reveal on scroll ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease;transition-delay:var(--rd,0s)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- Responsive ---------- */
+@media(max-width:1024px){
+  .hero-grid{grid-template-columns:1fr;text-align:center}
+  .hero-copy{max-width:640px;margin:0 auto}
+  .lede{margin-left:auto;margin-right:auto}
+  .store-row,.hero-proof{justify-content:center}
+  .hero-visual{margin-top:60px}
+  .fc-gro{left:2%}.fc-mac{right:2%}
+  .feat-grid{grid-template-columns:repeat(2,1fr)}
+  .price-grid{grid-template-columns:1fr;max-width:480px;margin:0 auto}
+  .tier-pop{transform:none}
+  .cta-panel{grid-template-columns:1fr;gap:32px}
+  .t-grid,.steps{grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto}
+  .stats-row{grid-template-columns:repeat(2,1fr);gap:36px}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:960px){
+  .plan-grid{grid-template-columns:repeat(7,minmax(148px,1fr))}
+}
+@media(max-width:880px){
+  .nav-actions .btn{display:none}
+  .burger{display:flex}
+  .nav-links{position:absolute;top:68px;left:0;right:0;background:var(--paper);flex-direction:column;align-items:stretch;gap:4px;padding:16px 24px 24px;border-bottom:1px solid var(--line);box-shadow:0 24px 40px -24px rgba(31,43,34,.3);display:none}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:11px 4px;font-size:15.5px;border-bottom:1px solid var(--line)}
+  .nav-cta-mobile{display:flex;margin-top:14px;justify-content:center}
+}
+@media(max-width:640px){
+  .section{padding:72px 0}
+  .hero{padding:52px 0 80px}
+  .feat-grid{grid-template-columns:1fr}
+  .float-card,.orb{display:none}
+  .phone{width:272px;height:556px;transform:rotate(0)}
+  .demo-shell{padding:22px 16px;border-radius:22px}
+  .foot-grid{grid-template-columns:1fr;gap:28px}
+  .press-row{gap:26px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body id="top">
+
+<!-- Promo topbar -->
+<div class="topbar" id="topbar">
+  🎉 Launch week — get 2 months of Mise Pro free. <a href="#download">Claim it →</a>
+  <button id="topbarClose" aria-label="Dismiss announcement">×</button>
+</div>
+
+<!-- Nav -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a class="logo" href="#top"><span class="logo-mark">m</span>mise</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#demo">Live demo</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-accent nav-cta-mobile" href="#download">Get the app</a>
+    </div>
+    <div class="nav-actions">
+      <a class="btn btn-primary" href="#download">Get the app</a>
+      <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<main>
+<!-- Hero -->
+<header class="hero">
+  <div class="blob blob-a"></div><div class="blob blob-b"></div>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="pill">🍳 New · Smart leftover mode</span>
+      <h1>Dinner, <em>decided.</em></h1>
+      <p class="lede">Mise plans your week of meals in seconds, writes the grocery list, and keeps the whole household fed — dietary quirks and all.</p>
+      <div class="store-row">
+        <a class="store-btn" href="#download" aria-label="Download on the App Store">
+          <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+          <span><small>Download on the</small><b>App Store</b></span>
+        </a>
+        <a class="store-btn" href="#download" aria-label="Get it on Google Play">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3.6v16.8c0 .9 1 1.4 1.7.9l13.2-8.4c.7-.4.7-1.4 0-1.8L6.7 2.7C6 2.2 5 2.7 5 3.6z"/></svg>
+          <span><small>Get it on</small><b>Google Play</b></span>
+        </a>
+      </div>
+      <div class="hero-proof">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <span><b>4.9</b> · 120K+ home cooks · Free to start</span>
+      </div>
+      <a class="demo-link" href="#demo">or try the interactive demo ↓</a>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="phone">
+        <div class="screen">
+          <div class="island"></div>
+          <div class="app-top">
+            <div><span class="app-hello">Good morning, Ana 👋</span><strong>Let's plan something tasty.</strong></div>
+            <span class="app-avatar">A</span>
+          </div>
+          <div class="app-week"><span>M</span><span>T</span><span class="on">W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+          <p class="app-label">Today's menu</p>
+          <div class="app-meal"><span class="am-ic" style="--tint:#FDE7DB">🥑</span><div><b>Avocado Toast &amp; Eggs</b><small>Breakfast · 380 kcal</small></div></div>
+          <div class="app-meal"><span class="am-ic" style="--tint:#E3F0E6">🥙</span><div><b>Chicken Shawarma Bowl</b><small>Lunch · 540 kcal</small></div></div>
+          <div class="app-meal app-meal-dark"><span class="am-ic" style="--tint:rgba(255,255,255,.14)">🍝</span><div><b>Pesto Pasta</b><small>Dinner · 610 kcal · 25 min</small></div><span class="cook">Cook →</span></div>
+          <div class="app-ring">
+            <div class="ring">
+              <svg viewBox="0 0 80 80" width="74" height="74">
+                <circle cx="40" cy="40" r="33" fill="none" stroke="#EFE9DC" stroke-width="8"/>
+                <circle cx="40" cy="40" r="33" fill="none" stroke="#57A773" stroke-width="8" stroke-linecap="round" stroke-dasharray="207.3" stroke-dashoffset="26"/>
+              </svg>
+              <div class="ring-txt"><b>1,840</b><small>of 2,100 kcal</small></div>
+            </div>
+            <div class="ring-macros">
+              <span><i style="--c:#EE5B25"></i>Protein · 96g</span>
+              <span><i style="--c:#F2B23E"></i>Carbs · 184g</span>
+              <span><i style="--c:#57A773"></i>Fat · 61g</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="float-card fc-gro" style="--d:.3s">
+        <div class="fc-head">🛒 This week's list <span>14 items</span></div>
+        <div class="fc-row done">🥑 Avocados <b>×3</b></div>
+        <div class="fc-row done">🍋 Lemons <b>×2</b></div>
+        <div class="fc-row">🐟 Salmon fillets <b>400g</b></div>
+        <div class="fc-row">🌿 Fresh basil <b>1 bunch</b></div>
+      </div>
+      <div class="float-card fc-mac">
+        <div class="fc-head">⚡ Dinner ready in</div>
+        <div class="fc-big">25 <small>min</small></div>
+        <div class="fc-sub">Pesto Pasta · one pot · zero stress</div>
+      </div>
+      <div class="orb orb-a">🥕</div>
+      <div class="orb orb-b">🍋</div>
+    </div>
+  </div>
+</header>
+
+<!-- Press -->
+<section class="press">
+  <div class="container">
+    <p>As loved by</p>
+    <div class="press-row"><span>The Daily Fork</span><span>Kitchen Weekly</span><span>TASTE Mag</span><span>FORK &amp; FIELD</span><span>homecook</span></div>
+  </div>
+</section>
+
+<!-- Features -->
+<section id="features" class="section">
+  <div class="container">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">Why Mise</span>
+      <h2>Everything between <em>"I'm hungry"</em> and dinner.</h2>
+      <p>One app for the whole pipeline: deciding, shopping, cooking — and not wasting a single carrot along the way.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat" data-reveal>
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4M8.5 15.5l2.4 2.4 4.6-5"/></svg></div>
+        <h3>Plans that plan themselves</h3>
+        <p>Tell Mise your tastes once. Every Sunday, a fresh week appears — balanced, seasonal, and nothing you're sick of yet.</p>
+      </div>
+      <div class="feat" data-reveal style="--rd:.08s">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M3 4h2.2l2.4 12.2a1.5 1.5 0 0 0 1.5 1.2h8.3a1.5 1.5 0 0 0 1.5-1.2L21 8H6"/></svg></div>
+        <h3>A grocery list that writes itself</h3>
+        <p>Every ingredient, merged across meals and sorted by aisle. Check off what you already own — never double-buy cumin again.</p>
+      </div>
+      <div class="feat" data-reveal style="--rd:.16s">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M5 20v-6M12 20V4M19 20v-9M3 20h18"/></svg></div>
+        <h3>Nutrition without the homework</h3>
+        <p>Calories and macros per meal and per day, automatically balanced across your week. No logging, no guilt math.</p>
+      </div>
+      <div class="feat" data-reveal>
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M4 7h9M19 7h1M4 17h4M14 17h6"/><circle cx="16" cy="7" r="2.3"/><circle cx="11" cy="17" r="2.3"/></svg></div>
+        <h3>Every diet, actually respected</h3>
+        <p>Vegan, keto, gluten-free, low-FODMAP, allergies — filters that truly exclude, not just politely suggest.</p>
+      </div>
+      <div class="feat" data-reveal style="--rd:.08s">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.7 4.7 1.8-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8L12 3z"/><path d="M18.5 15.5l.9 2.3 2.3.9-2.3.9-.9 2.3-.9-2.3-2.3-.9 2.3-.9.9-2.3z"/></svg></div>
+        <h3>Leftover magic</h3>
+        <p>Half a cabbage and despair in the fridge? Mise turns stragglers into tonight's dinner instead of next week's trash.</p>
+      </div>
+      <div class="feat" data-reveal style="--rd:.16s">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3 2.8-4.5 5.5-4.5s4.9 1.5 5.5 4.5"/><circle cx="17" cy="9" r="2.4"/><path d="M16.6 14.6c2.1.3 3.4 1.6 3.9 4"/></svg></div>
+        <h3>Built for households</h3>
+        <p>Sync plans and lists with your people. One person cooks, everyone else stops asking "what's for dinner?"</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section id="how" class="section section-tint">
+  <div class="container">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">How it works</span>
+      <h2>From zero to weekly plan in <em>two minutes.</em></h2>
+      <p>No spreadsheets. No recipe-tab chaos. Just three steps between you and a calm, delicious week.</p>
+    </div>
+    <div class="steps">
+      <div class="step" data-reveal>
+        <span class="step-num">01</span><span class="step-ic">🥣</span>
+        <h3>Set your table</h3>
+        <p>Tell Mise your tastes, diets, goals, and how many mouths you're feeding. It takes two minutes — once.</p>
+      </div>
+      <div class="step" data-reveal style="--rd:.1s">
+        <span class="step-num">02</span><span class="step-ic">🗓️</span>
+        <h3>Get your week</h3>
+        <p>Every Sunday, a full plan lands in your pocket. Not feeling Tuesday's curry? Swap it in one tap.</p>
+      </div>
+      <div class="step" data-reveal style="--rd:.2s">
+        <span class="step-num">03</span><span class="step-ic">🛒</span>
+        <h3>Shop &amp; cook</h3>
+        <p>One merged grocery list, step-by-step recipes, and dinner on the table before the "what should we eat?" debate starts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Live demo -->
+<section id="demo" class="section">
+  <div class="container">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">Live demo</span>
+      <h2>Take the planner <em>for a spin.</em></h2>
+      <p>Pick a vibe, get a week. This is a tiny taste of Mise — the real app learns what you love.</p>
+    </div>
+    <div class="demo-shell" data-reveal>
+      <div class="chip-row" role="group" aria-label="Choose a meal style">
+        <button class="chip on" data-diet="balanced" aria-pressed="true">🍽️ Balanced</button>
+        <button class="chip" data-diet="vegetarian" aria-pressed="false">🥗 Vegetarian</button>
+        <button class="chip" data-diet="vegan" aria-pressed="false">🌱 Vegan</button>
+        <button class="chip" data-diet="keto" aria-pressed="false">🥑 Keto</button>
+        <button class="chip" data-diet="mediterranean" aria-pressed="false">🫒 Mediterranean</button>
+        <button class="chip" data-diet="protein" aria-pressed="false">💪 High-protein</button>
+      </div>
+      <div class="gen-row"><button class="btn btn-accent btn-lg" id="genBtn">✨ Generate my week</button></div>
+      <div class="plan-scroll">
+        <div class="plan-grid" id="planGrid">
+          <div class="day-card empty"><span class="dow">Mon</span><span class="emoji">🍽️</span><div class="name">—</div><div class="meta">waiting…</div></div>
+          <div class="day-card empty"><span class="dow">Tue</span><span class="emoji">🍽️</span><div class="name">—</div><div class="meta">waiting…</div></div>
+          <div class="day-card empty"><span class="dow">Wed</span><span class="emoji">🍽️</span><div class="name">—</div><div class="meta">waiting…</div></div>
+          <div class="day-card empty"><span class="dow">Thu</span><span class="emoji">🍽️</span><div class="name">—</div><div class="meta">waiting…</div></div>
+          <div class="day-card empty"><span class="dow">Fri</span><span class="emoji">🍽️</span><div class="name">—</div><div class="meta">waiting…</div></div>
+          <div class="day-card empty"><span class="dow">Sat</span><span class="emoji">🍽️</span><div class="name">—</div><div class="meta">waiting…</div></div>
+          <div class="day-card empty"><span class="dow">Sun</span><span class="emoji">🍽️</span><div class="name">—</div><div class="meta">waiting…</div></div>
+        </div>
+      </div>
+      <div class="plan-summary" id="planSummary" hidden>
+        <span class="sum-chip">🛒 <b id="sumGro">0</b> items auto-listed</span>
+        <span class="sum-chip">⏱ <b id="sumTime">0</b> total cook time</span>
+        <span class="sum-chip">📊 ~<b id="sumKcal">0</b> kcal per dinner</span>
+      </div>
+      <p class="demo-note">Not feeling one? In the app, every meal has a one-tap swap — try the ↻ button above.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Stats & testimonials -->
+<section id="reviews" class="section section-tint">
+  <div class="container">
+    <div class="stats-row" data-reveal>
+      <div class="stat"><div class="num" data-target="120" data-suffix="K+">0</div><p>home cooks planning with Mise</p></div>
+      <div class="stat"><div class="num" data-target="6" data-suffix="M+">0</div><p>meals planned to date</p></div>
+      <div class="stat"><div class="num" data-target="32">0</div><p>hours saved monthly, on average</p></div>
+      <div class="stat"><div class="num" data-target="4.9" data-decimals="1">0</div><p>average App Store rating</p></div>
+    </div>
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">Wall of love</span>
+      <h2>Cooks who <em>stopped stressing.</em></h2>
+    </div>
+    <div class="t-grid">
+      <div class="t-card" data-reveal>
+        <span class="t-stars" aria-label="5 out of 5 stars">★★★★★</span>
+        <p class="t-quote">"I used to stare into the fridge at 6pm like it owed me money. Now dinner just… happens. My kids think I became a better cook. I just opened the app."</p>
+        <div class="t-who"><span class="t-av">PS</span><div><b>Priya S.</b><small>Parent of two · Austin</small></div></div>
+      </div>
+      <div class="t-card" data-reveal style="--rd:.1s">
+        <span class="t-stars" aria-label="5 out of 5 stars">★★★★★</span>
+        <p class="t-quote">"The grocery list alone is worth it. Everything merged, sorted by aisle, nothing forgotten. We cut our food waste in half within a month."</p>
+        <div class="t-who"><span class="t-av c2">MT</span><div><b>Marcus T.</b><small>Meal-prep Sunday person</small></div></div>
+      </div>
+      <div class="t-card" data-reveal style="--rd:.2s">
+        <span class="t-stars" aria-label="5 out of 5 stars">★★★★★</span>
+        <p class="t-quote">"As someone with celiac, these are the first diet filters I've actually trusted. Gluten never sneaks into my plan — or my cart."</p>
+        <div class="t-who"><span class="t-av c3">ER</span><div><b>Elena R.</b><small>Gluten-free since 2019</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section id="pricing" class="section">
+  <div class="container">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">Pricing</span>
+      <h2>Cheaper than <em>one takeout order.</em></h2>
+      <p>Start free. Upgrade when "leftovers" stops being your whole personality.</p>
+    </div>
+    <div class="bill-wrap" data-reveal>
+      <div class="bill-toggle" role="group" aria-label="Billing period">
+        <button class="on" data-bill="monthly" aria-pressed="true">Monthly</button>
+        <button data-bill="yearly" aria-pressed="false">Yearly<span class="save">save 38%</span></button>
+      </div>
+    </div>
+    <div class="price-grid">
+      <div class="tier" data-reveal>
+        <h3>Free</h3><p class="t-sub">Dip a toe in the sauce.</p>
+        <div class="price"><sup>$</sup><span class="amount" data-monthly="0" data-yearly="0">0</span><span class="per">/mo</span></div>
+        <p class="bill-note" data-monthly="Free forever" data-yearly="Free forever">Free forever</p>
+        <ul>
+          <li><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9"/></svg>3-day meal plans</li>
+          <li><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9"/></svg>1 auto grocery list / week</li>
+          <li><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9"/></svg>200+ starter recipes</li>
+          <li><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9"/></svg>1 profile</li>
+        </ul>
+        <a class="btn btn-ghost" href="#download">Start free</a>
+      </div>
+      <div class="tier tier-pop" data-reveal style="--rd:.1s">
+        <span class="badge">⭐ Most popular</span>
+        <h3>Pro</h3><p class="t-sub">The full week, handled.</p>
+        <div class="price"><sup>$</sup><span class="amount" data-monthly="8" data-yearly="5">8</span><span class="per">/mo</span></div>
+        <p class="bill-note" data-monthly="Billed monthly" data-yearly="Billed yearly · $60/yr">Billed monthly</p>
+        <ul>
+          <li><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9"/></svg>Full 7-day plans, one-tap swaps</li>
+          <li><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9"/></svg>Unlimited smart grocery lists</li>
+          <li><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9"/></svg>Nutrition &amp; macro tracking</li>
+          <li><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9"/></svg>All diet &amp; allergy filters</li>
+          <li><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9"/></svg>Leftover magic mode</li>
+          <li><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9"/></svg>2,000+ recipes</li>
+        </ul>
+        <a class="btn btn-accent" href="#download">Start 14-day trial</a>
+      </div>
+      <div class="tier" data-reveal style="--rd:.2s">
+        <h3>Family</h3><p class="t-sub">Feed the whole crew.</p>
+        <div class="price"><sup>$</sup><span class="amount" data-monthly="13" data-yearly="9">13</span><span class="per">/mo</span></div>
+        <p class="bill-note" data-monthly="Billed monthly" data-yearly="Billed yearly · $108/yr">Billed monthly</p>
+        <ul>
+          <li><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9"/></svg>Everything in Pro</li>
+          <li><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9"/></svg>Up to 5 profiles</li>
+          <li><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9"/></svg>Shared lists with live sync</li>
+          <li><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9"/></svg>"Who's cooking" schedule</li>
+          <li><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9"/></svg>Kid-friendly filters</li>
+        </ul>
+        <a class="btn btn-ghost" href="#download">Feed the household</a>
+      </div>
+    </div>
+    <p class="price-foot" data-reveal>Cancel anytime · No credit card to start · 30-day money-back guarantee</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="section section-tint">
+  <div class="container">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">FAQ</span>
+      <h2>Questions? <em>Plated.</em></h2>
+    </div>
+    <div class="faq-wrap" data-reveal>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How does Mise build my plan?<svg class="chev" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 8l5 5 5-5"/></svg></button>
+        <div class="faq-a"><p>Tell it your tastes, goals, and who's eating — once. Each week it drafts a full plan you can swap, lock, or regenerate in one tap. It learns from every change, so plans get eerily good fast.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What diets and allergies are supported?<svg class="chev" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 8l5 5 5-5"/></svg></button>
+        <div class="faq-a"><p>Vegetarian, vegan, keto, paleo, gluten-free, dairy-free, low-FODMAP, nut allergies, and more. Filters are strict: excluded ingredients never make it into your plan or your list.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Is the grocery list really automatic?<svg class="chev" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 8l5 5 5-5"/></svg></button>
+        <div class="faq-a"><p>Yes. Every ingredient from your week is merged, deduplicated, and sorted by aisle. Check off pantry staples you already own so you never double-buy cumin again.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Can my household share one plan?<svg class="chev" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 8l5 5 5-5"/></svg></button>
+        <div class="faq-a"><p>On the Family plan, up to five people share the week, the list, and the "who's cooking" schedule. Live sync means no more buying milk twice in one day.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What if I don't like a suggestion?<svg class="chev" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 8l5 5 5-5"/></svg></button>
+        <div class="faq-a"><p>Tap swap. That's it. Mise notes what you rejected and why, so suggestions match your taste better every week.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Is there really a free version?<svg class="chev" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 8l5 5 5-5"/></svg></button>
+        <div class="faq-a"><p>Yes — free forever: 3-day plans and one grocery list per week. Pro unlocks full weeks, nutrition tracking, and leftover magic when you're ready.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="download" class="section">
+  <div class="container">
+    <div class="cta-panel" data-reveal>
+      <span class="cta-deco cd-a">🍋</span><span class="cta-deco cd-b">🥑</span>
+      <div class="cta-copy">
+        <h2>Stop winging dinner.<br><em>Start Mise.</em></h2>
+        <p>Free to start. Two minutes to your first week. Zero more "what's for dinner?" standoffs.</p>
+      </div>
+      <form class="cta-form" id="ctaForm" novalidate>
+        <input type="email" placeholder="you@hungry.com" aria-label="Email address" autocomplete="email" required/>
+        <button type="submit" class="btn btn-accent">Get the app →</button>
+        <small>We'll send a download link. No spam, ever.</small>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="logo" href="#top"><span class="logo-mark">m</span>mise</a>
+        <p>Meal planning that plans itself. Made with 🥑 and good intentions in Portland.</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul><li><a href="#features">Features</a></li><li><a href="#demo">Live demo</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#">Changelog</a></li></ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Press kit</a></li><li><a href="#">Contact</a></li></ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul><li><a href="#">Recipe blog</a></li><li><a href="#">Help center</a></li><li><a href="#">Community</a></li><li><a href="#">Privacy &amp; terms</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year">2025</span> Mise Labs, Inc. All rights reserved.</span>
+      <span>🍽️ Dinner, decided.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Footer year */
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* Topbar dismiss */
+  const topbar = document.getElementById('topbar');
+  document.getElementById('topbarClose').addEventListener('click', () => topbar.remove());
+
+  /* Sticky nav state */
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* Mobile menu */
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  const closeMenu = () => { navLinks.classList.remove('open'); burger.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); };
+  burger.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', String(open));
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+  /* Reveal on scroll */
+  const revealEls = document.querySelectorAll('[data-reveal]');
+  revealEls.forEach(el => el.classList.add('reveal'));
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: .12 });
+  revealEls.forEach(el => io.observe(el));
+
+  /* Animated counters */
+  const cio = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target; cio.unobserve(el);
+      const target = parseFloat(el.dataset.target);
+      const dec = parseInt(el.dataset.decimals || 0, 10);
+      const suffix = el.dataset.suffix || '';
+      if (reduced) { el.textContent = target.toFixed(dec) + suffix; return; }
+      const dur = 1400, t0 = performance.now();
+      const tick = now => {
+        const p = Math.min((now - t0) / dur, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = (target * eased).toFixed(dec) + (p === 1 ? suffix : '');
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: .6 });
+  document.querySelectorAll('.num[data-target]').forEach(c => cio.observe(c));
+
+  /* ---------- Live demo: meal plan generator ---------- */
+  const MEALS = {
+    balanced: [
+      { e: '🍋', n: 'Sheet-Pan Lemon Chicken', k: 520, t: 35 },
+      { e: '🍣', n: 'Teriyaki Salmon Bowl', k: 610, t: 25 },
+      { e: '🌮', n: 'Turkey Taco Skillet', k: 480, t: 20 },
+      { e: '🍝', n: 'Pesto Pasta & Chicken', k: 640, t: 30 },
+      { e: '🥦', n: 'Beef & Broccoli Stir-Fry', k: 550, t: 25 },
+      { e: '🐟', n: 'Baked Cod with Quinoa', k: 460, t: 30 },
+      { e: '🥙', n: 'Chicken Shawarma Plate', k: 590, t: 40 },
+      { e: '🍳', n: 'Veggie Fried Rice + Egg', k: 510, t: 20 }
+    ],
+    vegetarian: [
+      { e: '🧀', n: 'Halloumi Grain Bowl', k: 540, t: 25 },
+      { e: '🍕', n: 'Margherita Flatbread', k: 620, t: 20 },
+      { e: '🥟', n: 'Spinach Ricotta Shells', k: 580, t: 35 },
+      { e: '🍜', n: 'Crispy Tofu Pad Thai', k: 560, t: 30 },
+      { e: '🍅', n: 'Caprese Gnocchi', k: 590, t: 25 },
+      { e: '🍄', n: 'Mushroom Risotto', k: 610, t: 40 },
+      { e: '🍆', n: 'Eggplant Parmesan', k: 650, t: 45 },
+      { e: '🍛', n: 'Chickpea Curry & Rice', k: 540, t: 30 }
+    ],
+    vegan: [
+      { e: '🥗', n: 'Buddha Bowl + Tahini', k: 480, t: 25 },
+      { e: '🍝', n: 'Lentil Bolognese', k: 520, t: 35 },
+      { e: '🥖', n: 'Tofu Banh Mi', k: 510, t: 20 },
+      { e: '🍠', n: 'Sweet Potato Curry', k: 560, t: 35 },
+      { e: '🌮', n: 'Black Bean Tacos', k: 490, t: 20 },
+      { e: '🥜', n: 'Cashew Stir-Fry', k: 580, t: 25 },
+      { e: '🫑', n: 'Quinoa Stuffed Peppers', k: 470, t: 40 },
+      { e: '🍜', n: 'Miso Mushroom Ramen', k: 530, t: 30 }
+    ],
+    keto: [
+      { e: '🥩', n: 'Garlic Butter Steak Bites', k: 620, t: 20 },
+      { e: '🍗', n: 'Creamy Tuscan Chicken', k: 580, t: 30 },
+      { e: '🐟', n: 'Salmon & Asparagus', k: 610, t: 25 },
+      { e: '🥓', n: 'Cobb Salad with Bacon', k: 540, t: 15 },
+      { e: '🧀', n: 'Zucchini Lasagna', k: 590, t: 45 },
+      { e: '🍤', n: 'Keto Shrimp Alfredo', k: 630, t: 25 },
+      { e: '🍔', n: 'Cheeseburger Bowls', k: 560, t: 20 },
+      { e: '🍖', n: 'Herb-Crusted Pork Chops', k: 570, t: 30 }
+    ],
+    mediterranean: [
+      { e: '🥙', n: 'Greek Chicken Souvlaki', k: 540, t: 30 },
+      { e: '🍳', n: 'Shakshuka & Feta', k: 480, t: 25 },
+      { e: '🐟', n: 'Grilled Branzino', k: 520, t: 35 },
+      { e: '🧆', n: 'Falafel Mezze Plate', k: 560, t: 30 },
+      { e: '🥬', n: 'Spanakopita & Salad', k: 590, t: 40 },
+      { e: '🍢', n: 'Lamb Kofta Bowls', k: 610, t: 35 },
+      { e: '🍆', n: 'Orzo & Roasted Veg', k: 530, t: 30 },
+      { e: '🥣', n: 'Hummus Chicken Bowl', k: 550, t: 25 }
+    ],
+    protein: [
+      { e: '🍗', n: 'Protein Power Bowl', k: 640, t: 30 },
+      { e: '🍳', n: 'Steak & Egg Plate', k: 680, t: 25 },
+      { e: '🌯', n: 'Buffalo Chicken Wrap', k: 590, t: 20 },
+      { e: '🐟', n: 'Tuna Poke Bowl', k: 560, t: 20 },
+      { e: '🍚', n: 'BBQ Chicken & Rice', k: 620, t: 35 },
+      { e: '🧆', n: 'Turkey Meatballs', k: 580, t: 30 },
+      { e: '🍣', n: 'Salmon Quinoa Bowl', k: 650, t: 30 },
+      { e: '🍝', n: 'High-Protein Pasta', k: 610, t: 25 }
+    ]
+  };
+  const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  const planGrid = document.getElementById('planGrid');
+  const planSummary = document.getElementById('planSummary');
+  const genBtn = document.getElementById('genBtn');
+  const chips = document.querySelectorAll('.chip');
+  let diet = 'balanced';
+  let plan = null;
+
+  const shuffle = arr => { const a = [...arr]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+
+  function updateSummary() {
+    const groceries = plan.reduce((s, m) => s + 5 + (m.n.length % 4), 0);
+    const mins = plan.reduce((s, m) => s + m.t, 0);
+    const kcal = Math.round(plan.reduce((s, m) => s + m.k, 0) / plan.length / 10) * 10;
+    document.getElementById('sumGro').textContent = groceries;
+    document.getElementById('sumTime').textContent = Math.floor(mins / 60) + 'h ' + (mins % 60) + 'm';
+    document.getElementById('sumKcal').textContent = kcal;
+  }
+
+  function renderPlan() {
+    planGrid.innerHTML = plan.map((m, i) => `
+      <div class="day-card" style="--i:${i}">
+        <button class="reroll" data-day="${i}" aria-label="Swap ${DAYS[i]}'s meal" title="Swap this meal">↻</button>
+        <span class="dow">${DAYS[i]}</span>
+        <span class="emoji">${m.e}</span>
+        <div class="name">${m.n}</div>
+        <div class="meta">${m.k} kcal · ${m.t} min</div>
+      </div>`).join('');
+  }
+
+  function generate() {
+    plan = shuffle(MEALS[diet]).slice(0, 7);
+    renderPlan();
+    planSummary.hidden = false;
+    updateSummary();
+    genBtn.textContent = '🔁 Shuffle the whole week';
+  }
+
+  genBtn.addEventListener('click', generate);
+
+  chips.forEach(chip => chip.addEventListener('click', () => {
+    chips.forEach(c => { c.classList.toggle('on', c === chip); c.setAttribute('aria-pressed', String(c === chip)); });
+    diet = chip.dataset.diet;
+    if (plan) generate();
+  }));
+
+  planGrid.addEventListener('click', e => {
+    const btn = e.target.closest('.reroll');
+    if (!btn || !plan) return;
+    const i = +btn.dataset.day;
+    let next;
+    do { next = MEALS[diet][Math.floor(Math.random() * MEALS[diet].length)]; } while (next.n === plan[i].n);
+    plan[i] = next;
+    const card = btn.closest('.day-card');
+    card.style.animation = 'none'; void card.offsetWidth; card.style.animation = '';
+    card.querySelector('.emoji').textContent = next.e;
+    card.querySelector('.name').textContent = next.n;
+    card.querySelector('.meta').textContent = `${next.k} kcal · ${next.t} min`;
+    updateSummary();
+  });
+
+  /* ---------- Pricing toggle ---------- */
+  const billBtns = document.querySelectorAll('.bill-toggle button');
+  billBtns.forEach(b => b.addEventListener('click', () => {
+    billBtns.forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', String(x === b)); });
+    const mode = b.dataset.bill;
+    document.querySelectorAll('.amount').forEach(a => {
+      a.textContent = a.dataset[mode];
+      a.classList.remove('flip'); void a.offsetWidth; a.classList.add('flip');
+    });
+    document.querySelectorAll('.bill-note').forEach(n => { n.textContent = n.dataset[mode]; });
+  }));
+
+  /* ---------- FAQ accordion ---------- */
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o => {
+        o.classList.remove('open');
+        o.querySelector('.faq-a').style.maxHeight = null;
+        o.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+        q.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  /* ---------- Email capture ---------- */
+  const form = document.getElementById('ctaForm');
+  const emailInput = form.querySelector('input');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const val = emailInput.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val)) {
+      form.classList.add('error');
+      emailInput.focus();
+      return;
+    }
+    const safe = val.replace(/[<>&"']/g, '');
+    form.innerHTML = `<div class="cta-success"><span class="big">🎉</span><b>You're in!</b><p>Your download link is on its way to <b>${safe}</b>. Dinner's about to get very easy.</p></div>`;
+  });
+  emailInput.addEventListener('input', () => form.classList.remove('error'));
+});
+</script>
+</body>
+</html>

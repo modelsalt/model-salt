@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+  <!-- Background: Bright Daylight Sky & Sun -->
+  <rect width="800" height="800" fill="#48CAE4"/>
+  <circle cx="650" cy="180" r="70" fill="#FFF3B0"/>
+  
+  <!-- Minimalist Clouds -->
+  <path d="M 80 220 L 210 220 A 25 25 0 0 0 210 170 A 40 40 0 0 0 135 150 A 30 30 0 0 0 80 180 Z" fill="#CAF0F8"/>
+  <path d="M 520 320 L 680 320 A 20 20 0 0 0 680 280 A 35 35 0 0 0 615 260 A 25 25 0 0 0 565 280 L 520 280 Z" fill="#CAF0F8"/>
+
+  <!-- Ground -->
+  <rect y="640" width="800" height="160" fill="#90E0EF"/>
+  <rect y="640" width="800" height="16" fill="#00B4D8"/>
+
+  <!-- Back Leg (Darker Orange) -->
+  <path d="M 320 430 L 395 455 L 350 610" fill="none" stroke="#E06D06" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="350,610 385,610 375,595" fill="#E06D06"/>
+  <!-- Back Pedal -->
+  <rect x="335" y="608" width="36" height="10" rx="5" fill="#1D3557"/>
+
+  <!-- Back Wing (Light Grey-Blue) -->
+  <path d="M 330 290 C 390 290, 440 315, 485 335 C 430 350, 380 335, 330 320 Z" fill="#E2ECE9"/>
+
+  <!-- BICYCLE -->
+  <!-- Wheels -->
+  <g id="wheels">
+    <!-- Rear Wheel -->
+    <circle cx="220" cy="540" r="85" fill="none" stroke="#FFFFFF" stroke-width="12"/>
+    <circle cx="220" cy="540" r="95" fill="none" stroke="#1D3557" stroke-width="16"/>
+    <circle cx="220" cy="540" r="18" fill="#1D3557"/>
+    
+    <!-- Front Wheel -->
+    <circle cx="560" cy="540" r="85" fill="none" stroke="#FFFFFF" stroke-width="12"/>
+    <circle cx="560" cy="540" r="95" fill="none" stroke="#1D3557" stroke-width="16"/>
+    <circle cx="560" cy="540" r="18" fill="#1D3557"/>
+  </g>
+
+  <!-- Stem and Handlebars -->
+  <path d="M 500 400 L 475 330 L 445 330" fill="none" stroke="#A8DADC" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Seatpost -->
+  <line x1="330" y1="430" x2="315" y2="385" stroke="#A8DADC" stroke-width="14" stroke-linecap="round"/>
+
+  <!-- Bicycle Frame (Vibrant Coral Red) -->
+  <g stroke="#FF3366" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Chainstay -->
+    <line x1="220" y1="540" x2="370" y2="540"/>
+    <!-- Seatstay -->
+    <line x1="220" y1="540" x2="330" y2="430"/>
+    <!-- Seat Tube -->
+    <line x1="370" y1="540" x2="330" y2="430"/>
+    <!-- Down Tube -->
+    <line x1="370" y1="540" x2="500" y2="400"/>
+    <!-- Top Tube -->
+    <line x1="330" y1="430" x2="495" y2="400"/>
+    <!-- Front Fork & Head Tube -->
+    <line x1="560" y1="540" x2="490" y2="375"/>
+  </g>
+
+  <!-- Saddle -->
+  <path d="M 280 385 L 350 385 C 350 405, 300 410, 280 385 Z" fill="#1D3557"/>
+
+  <!-- Crankset -->
+  <circle cx="370" cy="540" r="32" fill="#A8DADC"/>
+  <circle cx="370" cy="540" r="16" fill="#FF3366"/>
+  <!-- Back Crank Arm (Behind) -->
+  <line x1="370" y1="540" x2="350" y2="610" stroke="#7F9EB2" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- PELICAN -->
+  <!-- Tail & Upright Torso (Crisp White) -->
+  <!-- Tail Feathers -->
+  <polygon points="295,415 245,390 270,375" fill="#FFFFFF"/>
+  <polygon points="290,400 235,365 275,355" fill="#FFFFFF"/>
+
+  <!-- Body, Neck, and Head Silhouette -->
+  <path d="M 330 135 
+           C 330 95, 390 95, 390 135 
+           C 390 175, 365 225, 365 265 
+           C 365 305, 395 345, 385 395 
+           C 375 445, 300 445, 275 405 
+           C 260 380, 285 335, 305 275 
+           C 325 215, 330 165, 330 135 Z" fill="#FFFFFF"/>
+
+  <!-- Pelican Crest Feathers -->
+  <polygon points="340,108 300,90 330,122" fill="#FFFFFF"/>
+  <polygon points="335,120 295,112 330,132" fill="#FFFFFF"/>
+
+  <!-- Vibrant Yellow & Orange Beak -->
+  <!-- Giant Throat Pouch -->
+  <path d="M 380 140 L 600 140 C 600 245, 455 265, 368 205 Z" fill="#FF9F1C"/>
+  <!-- Upper Mandible -->
+  <path d="M 375 120 L 600 130 L 610 145 L 595 150 L 375 140 Z" fill="#FFBF00"/>
+
+  <!-- Eye -->
+  <circle cx="365" cy="128" r="7" fill="#1D3557"/>
+
+  <!-- Front Leg (Bright Orange) -->
+  <path d="M 335 420 L 435 395 L 390 470" fill="none" stroke="#FF7B00" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="390,470 430,470 415,452" fill="#FF7B00"/>
+
+  <!-- Front Crank Arm & Pedal -->
+  <line x1="370" y1="540" x2="390" y2="470" stroke="#A8DADC" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="370" cy="540" r="6" fill="#1D3557"/>
+  <rect x="375" y="468" width="36" height="10" rx="5" fill="#1D3557"/>
+
+  <!-- Front Wing Grasping Handlebar -->
+  <path d="M 325 285 
+           C 295 320, 345 385, 455 335 
+           C 465 330, 465 315, 445 320 
+           C 385 335, 355 295, 325 285 Z" fill="#FFFFFF"/>
+           
+  <!-- Handlebar Grip (Dark Blue) -->
+  <rect x="435" y="322" width="32" height="16" rx="8" fill="#1D3557"/>
+  
+  <!-- Wingtip Fingers Curled Over Grip -->
+  <circle cx="455" cy="325" r="9" fill="#FFFFFF"/>
+  <circle cx="445" cy="327" r="8" fill="#FFFFFF"/>
+</svg>

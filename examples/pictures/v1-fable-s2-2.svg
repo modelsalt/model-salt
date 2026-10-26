@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <!-- Sky -->
+  <rect width="400" height="300" fill="#cfe3f2"/>
+  <polygon points="0,0 400,0 400,90 0,120" fill="#bcd7ee"/>
+  <polygon points="0,120 400,90 400,170 0,170" fill="#dbe9f4"/>
+
+  <!-- Horizon / distant ground -->
+  <polygon points="0,170 400,170 400,200 0,205" fill="#9ab98a"/>
+  <polygon points="0,205 400,200 400,215 0,222" fill="#86a877"/>
+
+  <!-- Road (slightly high angle: wide, tilted plane) -->
+  <polygon points="0,222 400,215 400,300 0,300" fill="#5c5f66"/>
+  <polygon points="0,222 400,215 400,235 0,245" fill="#6b6e76"/>
+  <polygon points="0,270 400,262 400,300 0,300" fill="#4e5158"/>
+  <!-- Lane dashes -->
+  <polygon points="30,262 70,261 68,266 28,267" fill="#e8d9a0"/>
+  <polygon points="120,260 160,259 158,264 118,265" fill="#e8d9a0"/>
+  <polygon points="250,258 290,257 288,262 248,263" fill="#e8d9a0"/>
+  <polygon points="340,257 380,256 378,261 338,262" fill="#e8d9a0"/>
+
+  <!-- Shadow under bicycle -->
+  <polygon points="90,268 310,262 300,274 100,278" fill="#3f4247" opacity="0.5"/>
+
+  <!-- ===== BICYCLE ===== -->
+  <!-- Rear wheel -->
+  <g>
+    <polygon points="110,222 138,208 162,222 162,252 138,266 110,252" fill="#2b2d33"/>
+    <polygon points="118,225 138,214 156,225 156,249 138,259 118,249" fill="#3b3e46"/>
+    <polygon points="126,229 138,222 150,229 150,245 138,252 126,245" fill="#2b2d33"/>
+    <!-- Spokes -->
+    <polygon points="137,215 139,215 139,258 137,258" fill="#9a9ca3"/>
+    <polygon points="119,236 157,236 157,238 119,238" fill="#9a9ca3"/>
+    <polygon points="122,222 124,221 155,251 153,252" fill="#9a9ca3"/>
+    <polygon points="153,221 155,222 124,252 122,251" fill="#9a9ca3"/>
+    <polygon points="134,233 138,231 142,233 142,241 138,243 134,241" fill="#c9cbd1"/>
+  </g>
+  <!-- Front wheel -->
+  <g>
+    <polygon points="238,222 266,208 290,222 290,252 266,266 238,252" fill="#2b2d33"/>
+    <polygon points="246,225 266,214 284,225 284,249 266,259 246,249" fill="#3b3e46"/>
+    <polygon points="254,229 266,222 278,229 278,245 266,252 254,245" fill="#2b2d33"/>
+    <polygon points="265,215 267,215 267,258 265,258" fill="#9a9ca3"/>
+    <polygon points="247,236 285,236 285,238 247,238" fill="#9a9ca3"/>
+    <polygon points="250,222 252,221 283,251 281,252" fill="#9a9ca3"/>
+    <polygon points="281,221 283,222 252,252 250,251" fill="#9a9ca3"/>
+    <polygon points="262,233 266,231 270,233 270,241 266,243 262,241" fill="#c9cbd1"/>
+  </g>
+
+  <!-- Frame (dark, faceted tubes) -->
+  <!-- Chainstay: rear hub to crank -->
+  <polygon points="138,235 140,232 200,238 198,243" fill="#1f2a3a"/>
+  <!-- Seat tube: crank up to saddle -->
+  <polygon points="196,240 203,240 186,178 180,178" fill="#243247"/>
+  <!-- Down tube: crank to head tube -->
+  <polygon points="196,240 202,236 258,190 262,196" fill="#1f2a3a"/>
+  <!-- Top tube: saddle to head tube -->
+  <polygon points="182,180 186,176 258,186 256,192" fill="#2c3b52"/>
+  <!-- Seat stay: rear hub to saddle -->
+  <polygon points="138,235 141,232 186,180 183,185" fill="#243247"/>
+  <!-- Head tube / fork -->
+  <polygon points="254,184 262,184 268,238 262,240" fill="#1f2a3a"/>
+  <polygon points="258,178 266,176 260,186 254,186" fill="#2c3b52"/>
+  <!-- Handlebar stem and bars -->
+  <polygon points="256,176 264,174 270,164 262,164" fill="#1f2a3a"/>
+  <polygon points="236,166 274,160 276,166 238,172" fill="#2b2d33"/>
+  <!-- Grips -->
+  <polygon points="230,167 238,165 240,172 232,174" fill="#8a4a2a"/>
+  <polygon points="272,159 280,158 282,164 274,166" fill="#8a4a2a"/>
+  <!-- Crank & pedals (coasting, static) -->
+  <polygon points="192,236 199,232 206,236 206,244 199,248 192,244" fill="#3b3e46"/>
+  <polygon points="198,240 202,239 212,256 208,258" fill="#2b2d33"/>
+  <polygon points="205,255 217,253 218,259 206,261" fill="#555860"/>
+  <polygon points="198,240 202,239 190,224 186,226" fill="#2b2d33"/>
+  <polygon points="183,222 195,220 196,226 184,228" fill="#555860"/>
+  <!-- Saddle -->
+  <polygon points="166,172 190,166 204,170 198,178 172,180" fill="#4a2e1e"/>
+  <polygon points="170,172 190,168 198,172 194,176 174,177" fill="#6b4530"/>
+
+  <!-- ===== PELICAN ===== -->
+  <!-- Tail feathers -->
+  <polygon points="150,150 170,140 176,160 158,168" fill="#b9bcc3"/>
+  <polygon points="144,160 160,152 168,168 152,174" fill="#a3a7af"/>
+
+  <!-- Body (faceted) -->
+  <polygon points="166,118 198,104 226,118 230,152 206,172 176,172 160,150" fill="#f2f3f5"/>
+  <polygon points="166,118 198,104 200,132 172,140" fill="#ffffff"/>
+  <polygon points="198,104 226,118 220,140 200,132" fill="#e6e8ec"/>
+  <polygon points="172,140 200,132 206,172 176,172" fill="#dcdfe4"/>
+  <polygon points="200,132 220,140 230,152 206,172" fill="#c9cdd4"/>
+  <polygon points="160,150 172,140 176,172" fill="#c0c4cb"/>
+
+  <!-- Wing folded forward, resting on handlebars -->
+  <polygon points="180,120 214,112 248,150 236,166 202,144" fill="#d4d7dd"/>
+  <polygon points="214,112 248,150 236,166" fill="#b8bcc4"/>
+  <polygon points="202,144 236,166 240,170 206,160" fill="#9ea3ab"/>
+  <!-- Wing tip "hand" on grip -->
+  <polygon points="232,160 246,158 240,170 230,170" fill="#7f848d"/>
+
+  <!-- Legs dangling (not pedaling) -->
+  <polygon points="180,172 188,172 184,206 178,206" fill="#e8a23c"/>
+  <polygon points="172,204 190,202 192,208 170,210" fill="#f0b24a"/>
+  <polygon points="194,172 202,172 200,212 194,212" fill="#d9942f"/>
+  <polygon points="188,210 206,208 208,214 186,216" fill="#e8a23c"/>
+
+  <!-- Neck -->
+  <polygon points="196,104 216,100 232,74 220,70" fill="#f2f3f5"/>
+  <polygon points="216,100 232,74 240,96 226,118" fill="#dcdfe4"/>
+  <polygon points="220,70 232,74 246,52 236,48" fill="#ffffff"/>
+  <polygon points="232,74 246,52 254,70 240,96" fill="#e6e8ec"/>
+
+  <!-- Head -->
+  <polygon points="236,48 262,40 274,54 268,70 254,70 246,52" fill="#f6f7f9"/>
+  <polygon points="262,40 274,54 268,70 258,58" fill="#e0e3e8"/>
+  <polygon points="236,48 246,52 254,70 240,62" fill="#d0d4da"/>
+  <!-- Eye -->
+  <polygon points="258,50 264,48 266,54 260,56" fill="#1a1a1a"/>
+  <polygon points="261,50 263,50 263,52 261,52" fill="#ffffff"/>
+
+  <!-- Beak: long upper mandible -->
+  <polygon points="268,50 340,66 338,72 272,62" fill="#f4b23a"/>
+  <polygon points="268,50 340,66 300,56" fill="#ffc853"/>
+  <!-- Beak pouch (lower) -->
+  <polygon points="272,62 338,72 322,84 282,78" fill="#e8923a"/>
+  <polygon points="272,62 282,78 266,70" fill="#d97f2e"/>
+  <polygon points="300,70 338,72 322,84" fill="#d97f2e"/>
+  <!-- Beak tip hook -->
+  <polygon points="334,64 344,68 340,74 336,72" fill="#c9742a"/>
+
+  <!-- Speed lines (coasting) -->
+  <polygon points="60,130 100,129 100,131 60,132" fill="#ffffff" opacity="0.7"/>
+  <polygon points="48,146 84,145 84,147 48,148" fill="#ffffff" opacity="0.6"/>
+  <polygon points="70,160 96,159 96,161 70,162" fill="#ffffff" opacity="0.5"/>
+</svg>

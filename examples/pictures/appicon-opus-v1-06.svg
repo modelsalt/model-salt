@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <!-- Subtle grain texture -->
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch" result="noise"/>
+      <feColorMatrix in="noise" type="saturate" values="0"/>
+    </filter>
+
+    <!-- Cloud shape, reused for the cloud and its flat shadow -->
+    <g id="cloud">
+      <circle cx="500" cy="565" r="62"/>
+      <circle cx="592" cy="522" r="86"/>
+      <circle cx="672" cy="580" r="56"/>
+      <rect x="432" y="560" width="296" height="82" rx="41"/>
+    </g>
+  </defs>
+
+  <!-- Square background: solid sky blue with grain, sharp corners -->
+  <rect width="1024" height="1024" fill="#3A8DFF"/>
+  <rect width="1024" height="1024" filter="url(#grain)" opacity="0.10" style="mix-blend-mode:soft-light"/>
+
+  <!-- Motif: small and centered, with plenty of space around it -->
+  <g transform="translate(7 60)">
+    <!-- Sun rays -->
+    <g stroke="#FF8A1F" stroke-width="22" stroke-linecap="round">
+      <line x1="470" y1="305" x2="470" y2="268"/>
+      <line x1="470" y1="305" x2="470" y2="268" transform="rotate(30 470 450)"/>
+      <line x1="470" y1="305" x2="470" y2="268" transform="rotate(60 470 450)"/>
+      <line x1="470" y1="305" x2="470" y2="268" transform="rotate(90 470 450)"/>
+      <line x1="470" y1="305" x2="470" y2="268" transform="rotate(120 470 450)"/>
+      <line x1="470" y1="305" x2="470" y2="268" transform="rotate(150 470 450)"/>
+      <line x1="470" y1="305" x2="470" y2="268" transform="rotate(180 470 450)"/>
+      <line x1="470" y1="305" x2="470" y2="268" transform="rotate(210 470 450)"/>
+      <line x1="470" y1="305" x2="470" y2="268" transform="rotate(240 470 450)"/>
+      <line x1="470" y1="305" x2="470" y2="268" transform="rotate(270 470 450)"/>
+      <line x1="470" y1="305" x2="470" y2="268" transform="rotate(300 470 450)"/>
+      <line x1="470" y1="305" x2="470" y2="268" transform="rotate(330 470 450)"/>
+    </g>
+
+    <!-- Sun disc: orange ring with a yellow core -->
+    <circle cx="470" cy="450" r="118" fill="#FF8A1F"/>
+    <circle cx="470" cy="450" r="100" fill="#FFC93C"/>
+
+    <!-- Flat cloud shadow, then the cloud on top -->
+    <use href="#cloud" fill="#1F6BE0" transform="translate(0 16)"/>
+    <use href="#cloud" fill="#F4F9FF"/>
+    <!-- Light blue band along the cloud's base -->
+    <rect x="452" y="612" width="256" height="14" rx="7" fill="#CFE3FF"/>
+  </g>
+</svg>

@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A cheerful white pelican with a huge orange bill pedals a bright coral bicycle, seen from a three-quarter angle against a turquoise background.</desc>
+
+  <rect width="900" height="600" rx="36" fill="#67e5dd"/>
+  <circle cx="730" cy="112" r="53" fill="#fff16c"/>
+  <ellipse cx="457" cy="512" rx="290" ry="28" fill="#28bcb9"/>
+
+  <g stroke="#20334f" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Wheels: narrow ellipses and offset rims establish perspective. -->
+    <g fill="#e9ffff" stroke-width="12">
+      <ellipse cx="265" cy="403" rx="79" ry="104"/>
+      <ellipse cx="602" cy="433" rx="86" ry="111"/>
+    </g>
+    <g fill="none" stroke="#91c8d6" stroke-width="3">
+      <ellipse cx="265" cy="403" rx="63" ry="88"/>
+      <ellipse cx="602" cy="433" rx="70" ry="95"/>
+      <path d="M265 315v176m-63-88h126m-108-62 90 124m-90 0 90-124
+               M602 338v190m-70-95h140m-120-67 100 134m-100 0 100-134"/>
+    </g>
+
+    <!-- Far leg and pedal. -->
+    <path d="M403 287 Q465 315 445 358 L415 407" fill="none" stroke="#ed8c12" stroke-width="18"/>
+    <path d="M414 401q31-4 43 12l-49 6-15-8z" fill="#ffb52e" stroke-width="5"/>
+    <path d="m421 415 34 3" fill="none" stroke-width="8"/>
+
+    <!-- Bicycle frame. -->
+    <g fill="none" stroke="#f34d70" stroke-width="13">
+      <path d="m265 403 111-113 55 143-166-30 91-70 204 14-129 86"/>
+      <path d="m376 290 184 57"/>
+      <path d="m602 433-54-163"/>
+    </g>
+    <path d="m560 347 42 86" fill="none" stroke-width="7"/>
+    <path d="m376 290-8-30" fill="none" stroke-width="10"/>
+    <path d="M336 254q31-13 69 3l-7 13-60-2z" fill="#20334f" stroke-width="5"/>
+    <path d="m548 270-12-34 43-10q18-3 21 13" fill="none" stroke-width="10"/>
+    <path d="m574 226 15-3" fill="none" stroke="#8258e5" stroke-width="15"/>
+    <circle cx="431" cy="433" r="23" fill="#fff16c" stroke-width="6"/>
+    <path d="m431 433-33 25h-22" fill="none" stroke-width="7"/>
+    <g fill="#fff16c" stroke-width="5">
+      <circle cx="265" cy="403" r="9"/>
+      <circle cx="602" cy="433" r="10"/>
+    </g>
+
+    <!-- Tail and plump body. -->
+    <path d="m330 266-65-35 19 35-27-5 47 39" fill="#fff" stroke-width="6"/>
+    <path d="M312 220q31-40 95-22 65 17 75 65 3 34-43 48-64 22-112-9-34-23-15-82z"
+          fill="#fff" stroke-width="6"/>
+    <path d="M326 255q47-35 96-8-9 42-48 40-22-1-48-32z"
+          fill="#dce9fa" stroke-width="5"/>
+    <path d="m346 258 31 13m-10-22 27 14" fill="none" stroke="#a4b7d6" stroke-width="4"/>
+
+    <!-- Long neck curves upward from the body. -->
+    <path d="M425 239q-16-42 1-86 10-29 43-28 34 1 34 30-1 27-31 30-13 25 10 69"
+          fill="#fff" stroke-width="6"/>
+
+    <!-- Near leg, bent toward the forward pedal. -->
+    <path d="M389 301q-28 29-10 62l29 42-13 43" fill="none" stroke="#ffb52e" stroke-width="19"/>
+    <path d="M393 442q21-4 35 13l-48 8-13-10z" fill="#ffb52e" stroke-width="5"/>
+    <path d="m376 465 37-3" fill="none" stroke-width="8"/>
+
+    <!-- Wing reaching toward the handlebars. -->
+    <path d="M425 242q40 3 70-16l53 4q13 6 8 16-4 7-17 1l-40 3q-33 35-67 25"
+          fill="#fff" stroke-width="6"/>
+    <path d="m534 232 6 13m5-13 5 13" fill="none" stroke="#a4b7d6" stroke-width="3"/>
+
+    <!-- Head and oversized pouch, projecting toward the viewer's right. -->
+    <path d="M426 146q-9-26 12-45 22-19 50-4 26 14 20 43l-24 25-44-5z"
+          fill="#fff" stroke-width="6"/>
+    <path d="M490 142 674 164q-40 67-112 49-55-15-72-71z"
+          fill="#ffb52e" stroke-width="6"/>
+    <path d="M489 136q89-4 191 29-83 17-186-9z"
+          fill="#ff751c" stroke-width="6"/>
+    <path d="M518 174q38 30 82 20" fill="none" stroke="#e38a15" stroke-width="4"/>
+
+    <!-- Slightly separated eyes reinforce the three-quarter pose. -->
+    <ellipse cx="487" cy="118" rx="10" ry="15" fill="#fff" stroke-width="4"/>
+    <ellipse cx="459" cy="120" rx="14" ry="18" fill="#fff" stroke-width="4"/>
+    <g fill="#20334f" stroke="none">
+      <ellipse cx="491" cy="121" rx="4" ry="7"/>
+      <ellipse cx="464" cy="123" rx="5" ry="8"/>
+    </g>
+    <path d="m445 95 13-5m23 2 10 5" fill="none" stroke-width="5"/>
+    <path d="m444 94-9-15m14 12 2-17" fill="none" stroke-width="5"/>
+  </g>
+
+  <!-- Small motion marks. -->
+  <g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round">
+    <path d="M150 335h-40m34 26H90m84-52h-28"/>
+    <path d="M710 466h34m-18 24h42"/>
+  </g>
+</svg>

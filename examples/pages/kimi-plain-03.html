@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plateful — Meal planning that actually sticks</title>
+<meta name="description" content="Plateful builds your weekly meal plan, writes your grocery list, and cuts food waste — automatically.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ---------- Design tokens ---------- */
+  :root {
+    --bg: #FDF8F1;
+    --surface: #FFFFFF;
+    --ink: #1C2B23;
+    --ink-soft: #5C6E63;
+    --green: #2F6B4F;
+    --green-dark: #224F3B;
+    --green-soft: #E3F0E8;
+    --accent: #E76F51;
+    --accent-dark: #D45A3C;
+    --accent-soft: #FCEAE3;
+    --gold: #F4A261;
+    --line: #EAE2D6;
+    --radius: 18px;
+    --shadow: 0 20px 50px -20px rgba(28,43,35,.18);
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  img, svg { display: block; }
+  a { text-decoration: none; color: inherit; }
+
+  .container { width: min(1140px, 92%); margin: 0 auto; }
+
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.12; letter-spacing: -.01em; }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--green); background: var(--green-soft);
+    padding: 7px 14px; border-radius: 100px; margin-bottom: 18px;
+  }
+
+  .section { padding: 110px 0; }
+  .section-head { max-width: 640px; margin: 0 auto 64px; text-align: center; }
+  .section-head h2 { font-size: clamp(30px, 4vw, 44px); margin-bottom: 16px; }
+  .section-head p { color: var(--ink-soft); font-size: 17px; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-weight: 600; font-size: 16px; padding: 15px 30px;
+    border-radius: 100px; border: none; cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+  }
+  .btn-primary { background: var(--green); color: #fff; box-shadow: 0 10px 24px -10px rgba(47,107,79,.55); }
+  .btn-primary:hover { background: var(--green-dark); transform: translateY(-2px); }
+  .btn-accent { background: var(--accent); color: #fff; box-shadow: 0 10px 24px -10px rgba(231,111,81,.55); }
+  .btn-accent:hover { background: var(--accent-dark); transform: translateY(-2px); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
+  .btn-ghost:hover { border-color: var(--ink); transform: translateY(-2px); }
+
+  /* ---------- Nav ---------- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    transition: background .3s ease, box-shadow .3s ease, backdrop-filter .3s ease;
+  }
+  nav.scrolled {
+    background: rgba(253,248,241,.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 1px 0 var(--line);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: 22px; }
+  .logo-badge {
+    width: 38px; height: 38px; border-radius: 12px;
+    background: linear-gradient(135deg, var(--green), #4C9670);
+    display: grid; place-items: center; font-size: 19px;
+    box-shadow: 0 6px 14px -6px rgba(47,107,79,.6);
+  }
+  .nav-links { display: flex; gap: 34px; font-size: 15px; font-weight: 500; }
+  .nav-links a { color: var(--ink-soft); transition: color .2s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta { padding: 11px 22px; font-size: 14px; }
+  .hamburger { display: none; background: none; border: none; cursor: pointer; font-size: 24px; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 170px 0 100px; position: relative; }
+  .hero-blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .5; pointer-events: none; }
+  .blob-1 { width: 480px; height: 480px; background: #FBD9C2; top: -120px; right: -100px; }
+  .blob-2 { width: 400px; height: 400px; background: #CFE7D6; bottom: -160px; left: -140px; }
+
+  .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 70px; align-items: center; position: relative; }
+  .hero h1 { font-size: clamp(40px, 5.4vw, 62px); margin-bottom: 22px; }
+  .hero h1 em { font-style: italic; color: var(--green); }
+  .hero-sub { font-size: 18px; color: var(--ink-soft); max-width: 480px; margin-bottom: 34px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 40px; }
+  .hero-proof { display: flex; align-items: center; gap: 14px; font-size: 14px; color: var(--ink-soft); }
+  .avatars { display: flex; }
+  .avatars span {
+    width: 38px; height: 38px; border-radius: 50%; border: 3px solid var(--bg);
+    display: grid; place-items: center; font-size: 15px; margin-left: -10px;
+    background: var(--green-soft);
+  }
+  .avatars span:first-child { margin-left: 0; }
+  .stars { color: var(--gold); letter-spacing: 2px; }
+
+  /* ---------- Phone mockup ---------- */
+  .hero-visual { display: flex; justify-content: center; position: relative; }
+  .phone {
+    width: 300px; border-radius: 44px; background: #12201A;
+    padding: 12px; box-shadow: var(--shadow), 0 0 0 1px rgba(0,0,0,.06);
+    transform: rotate(3deg);
+  }
+  .phone-screen {
+    background: var(--surface); border-radius: 34px; overflow: hidden;
+    height: 600px; display: flex; flex-direction: column;
+  }
+  .phone-status { display: flex; justify-content: space-between; padding: 14px 22px 6px; font-size: 11px; font-weight: 600; color: var(--ink-soft); }
+  .app-header { padding: 10px 20px 14px; display: flex; justify-content: space-between; align-items: center; }
+  .app-header h4 { font-family: var(--font-display); font-size: 19px; }
+  .app-header .hello { font-size: 11px; color: var(--ink-soft); }
+  .app-avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--accent-soft); display: grid; place-items: center; font-size: 15px; }
+  .week-strip { display: flex; gap: 7px; padding: 0 16px 14px; }
+  .day-pill {
+    flex: 1; text-align: center; padding: 8px 0; border-radius: 12px;
+    font-size: 10px; font-weight: 600; color: var(--ink-soft); background: #F6F1E8;
+  }
+  .day-pill b { display: block; font-size: 13px; color: var(--ink); }
+  .day-pill.active { background: var(--green); color: #D9EBE0; }
+  .day-pill.active b { color: #fff; }
+  .meal-list { flex: 1; padding: 4px 16px; overflow: hidden; }
+  .meal-card {
+    display: flex; align-items: center; gap: 12px; padding: 11px 12px;
+    border-radius: 16px; background: #FAF6EF; margin-bottom: 9px;
+  }
+  .meal-emoji { width: 40px; height: 40px; border-radius: 12px; background: #fff; display: grid; place-items: center; font-size: 20px; box-shadow: 0 2px 6px rgba(0,0,0,.05); }
+  .meal-info b { font-size: 12.5px; display: block; }
+  .meal-info small { font-size: 10.5px; color: var(--ink-soft); }
+  .meal-tag { margin-left: auto; font-size: 9px; font-weight: 700; padding: 4px 8px; border-radius: 20px; background: var(--green-soft); color: var(--green); }
+  .meal-tag.dinner { background: var(--accent-soft); color: var(--accent); }
+  .grocery-progress { padding: 12px 20px 14px; }
+  .grocery-progress small { font-size: 11px; font-weight: 600; color: var(--ink-soft); display: flex; justify-content: space-between; margin-bottom: 6px; }
+  .progress-track { height: 7px; border-radius: 10px; background: #F0E9DD; overflow: hidden; }
+  .progress-fill { height: 100%; width: 68%; border-radius: 10px; background: linear-gradient(90deg, var(--green), #57A87E); }
+  .tab-bar { display: flex; justify-content: space-around; padding: 10px 0 16px; border-top: 1px solid var(--line); font-size: 18px; }
+
+  .float-chip {
+    position: absolute; background: #fff; border-radius: 14px; padding: 12px 16px;
+    box-shadow: var(--shadow); display: flex; align-items: center; gap: 10px;
+    font-size: 13px; font-weight: 600;
+  }
+  .float-chip .icon { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; font-size: 15px; }
+  .chip-1 { top: 12%; left: -6%; animation: float 5s ease-in-out infinite; }
+  .chip-2 { bottom: 16%; right: -4%; animation: float 6s ease-in-out 1s infinite; }
+  .chip-1 .icon { background: var(--green-soft); }
+  .chip-2 .icon { background: var(--accent-soft); }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+  /* ---------- Stats ---------- */
+  .stats { background: var(--green); color: #fff; padding: 56px 0; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; text-align: center; }
+  .stat-num { font-family: var(--font-display); font-size: clamp(30px, 3.6vw, 44px); font-weight: 700; }
+  .stat-label { font-size: 14px; color: #C7DFD0; margin-top: 4px; }
+
+  /* ---------- Features ---------- */
+  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  .feature-card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 34px 30px; transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .feature-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+  .feature-icon {
+    width: 52px; height: 52px; border-radius: 15px; display: grid; place-items: center;
+    margin-bottom: 20px; color: var(--green);
+  }
+  .feature-icon svg { width: 26px; height: 26px; }
+  .fi-green { background: var(--green-soft); }
+  .fi-orange { background: var(--accent-soft); color: var(--accent); }
+  .fi-gold { background: #FBEEDA; color: #C77F2B; }
+  .feature-card h3 { font-size: 20px; margin-bottom: 10px; }
+  .feature-card p { font-size: 15px; color: var(--ink-soft); }
+
+  /* ---------- How it works ---------- */
+  .how { background: #F6EFE4; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; counter-reset: step; }
+  .step { text-align: center; position: relative; }
+  .step-num {
+    width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 22px;
+    background: var(--surface); border: 2px dashed var(--gold);
+    display: grid; place-items: center;
+    font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--accent);
+  }
+  .step h3 { font-size: 21px; margin-bottom: 10px; }
+  .step p { font-size: 15px; color: var(--ink-soft); max-width: 300px; margin: 0 auto; }
+
+  /* ---------- Testimonials ---------- */
+  .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  .testi-card {
+    background: var(--surface); border-radius: var(--radius); padding: 32px;
+    border: 1px solid var(--line); display: flex; flex-direction: column; gap: 18px;
+  }
+  .testi-card .stars { font-size: 15px; }
+  .testi-card blockquote { font-size: 15.5px; color: var(--ink); flex: 1; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-author .ava { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; font-size: 18px; }
+  .testi-author b { font-size: 14px; display: block; }
+  .testi-author small { font-size: 12.5px; color: var(--ink-soft); }
+
+  /* ---------- Pricing ---------- */
+  .pricing { background: #F6EFE4; }
+  .toggle-wrap { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 50px; font-weight: 600; font-size: 15px; }
+  .toggle { width: 58px; height: 32px; border-radius: 100px; background: var(--green); border: none; cursor: pointer; position: relative; transition: background .2s; }
+  .toggle::after {
+    content: ''; position: absolute; top: 4px; left: 4px; width: 24px; height: 24px;
+    border-radius: 50%; background: #fff; transition: transform .25s ease;
+  }
+  .toggle.annual::after { transform: translateX(26px); }
+  .save-badge { font-size: 12px; background: var(--accent-soft); color: var(--accent); padding: 4px 10px; border-radius: 20px; font-weight: 700; }
+  .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; align-items: stretch; }
+  .price-card {
+    background: var(--surface); border-radius: var(--radius); padding: 38px 32px;
+    border: 1px solid var(--line); display: flex; flex-direction: column;
+    position: relative; transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .price-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+  .price-card.featured { border: 2px solid var(--green); }
+  .popular-tag {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--green); color: #fff; font-size: 12px; font-weight: 700;
+    padding: 6px 16px; border-radius: 20px; letter-spacing: .04em;
+  }
+  .price-card h3 { font-size: 21px; margin-bottom: 6px; }
+  .price-card .plan-desc { font-size: 14px; color: var(--ink-soft); margin-bottom: 22px; }
+  .price-num { font-family: var(--font-display); font-size: 46px; font-weight: 700; }
+  .price-per { font-size: 14px; color: var(--ink-soft); margin-bottom: 26px; }
+  .price-features { list-style: none; flex: 1; margin-bottom: 28px; }
+  .price-features li { font-size: 14.5px; padding: 7px 0 7px 28px; position: relative; color: var(--ink-soft); }
+  .price-features li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+  .price-card .btn { width: 100%; }
+
+  /* ---------- FAQ ---------- */
+  .faq-list { max-width: 720px; margin: 0 auto; }
+  .faq-item { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; margin-bottom: 14px; overflow: hidden; }
+  .faq-q {
+    width: 100%; background: none; border: none; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    padding: 22px 26px; font-size: 16.5px; font-weight: 600; font-family: var(--font-body);
+    color: var(--ink); text-align: left;
+  }
+  .faq-q .chev { transition: transform .3s ease; color: var(--ink-soft); flex-shrink: 0; }
+  .faq-item.open .chev { transform: rotate(180deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+  .faq-a p { padding: 0 26px 22px; color: var(--ink-soft); font-size: 15px; }
+
+  /* ---------- Final CTA ---------- */
+  .final-cta { padding: 110px 0; }
+  .cta-box {
+    background: linear-gradient(135deg, var(--green) 0%, #1E4A36 100%);
+    border-radius: 28px; padding: 80px 40px; text-align: center; color: #fff;
+    position: relative; overflow: hidden;
+  }
+  .cta-box::before, .cta-box::after {
+    content: ''; position: absolute; border-radius: 50%;
+    background: rgba(255,255,255,.06);
+  }
+  .cta-box::before { width: 300px; height: 300px; top: -150px; right: -80px; }
+  .cta-box::after { width: 220px; height: 220px; bottom: -110px; left: -60px; }
+  .cta-box h2 { font-size: clamp(30px, 4vw, 46px); margin-bottom: 16px; position: relative; }
+  .cta-box p { color: #C7DFD0; font-size: 17px; margin-bottom: 36px; position: relative; }
+  .signup-form { display: flex; gap: 12px; max-width: 480px; margin: 0 auto; position: relative; }
+  .signup-form input {
+    flex: 1; padding: 15px 22px; border-radius: 100px; border: none;
+    font-size: 15px; font-family: var(--font-body); outline: none;
+  }
+  .signup-form input:focus { box-shadow: 0 0 0 3px rgba(244,162,97,.5); }
+  .form-msg { margin-top: 16px; font-size: 14px; min-height: 20px; position: relative; }
+  .form-msg.success { color: #A9E5C3; font-weight: 600; }
+  .form-msg.error { color: #FFB4A0; font-weight: 600; }
+
+  /* ---------- Footer ---------- */
+  footer { border-top: 1px solid var(--line); padding: 50px 0 40px; }
+  .footer-grid { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; flex-wrap: wrap; }
+  .footer-links { display: flex; gap: 60px; flex-wrap: wrap; }
+  .footer-col h5 { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-soft); margin-bottom: 14px; }
+  .footer-col a { display: block; font-size: 14.5px; color: var(--ink-soft); padding: 4px 0; transition: color .2s; }
+  .footer-col a:hover { color: var(--ink); }
+  .footer-bottom { margin-top: 44px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-soft); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+
+  /* ---------- Reveal animation ---------- */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal.d1 { transition-delay: .1s; } .reveal.d2 { transition-delay: .2s; }
+  .reveal.d3 { transition-delay: .3s; } .reveal.d4 { transition-delay: .15s; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 960px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 60px; }
+    .hero-visual { order: 2; }
+    .features-grid, .steps, .testi-grid, .price-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .chip-1 { left: 2%; } .chip-2 { right: 2%; }
+  }
+  @media (max-width: 760px) {
+    .nav-links { display: none; }
+    .hamburger { display: block; }
+    .nav-links.open {
+      display: flex; flex-direction: column; position: absolute; top: 76px; left: 0; right: 0;
+      background: var(--bg); padding: 20px 5%; gap: 18px; box-shadow: 0 10px 20px rgba(0,0,0,.06);
+    }
+    .section { padding: 80px 0; }
+    .signup-form { flex-direction: column; }
+    .signup-form .btn { width: 100%; }
+    .phone { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav id="nav">
+  <div class="container nav-inner">
+    <a href="#" class="logo"><span class="logo-badge">🍽️</span>Plateful</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div style="display:flex;gap:14px;align-items:center;">
+      <a href="#download" class="btn btn-primary nav-cta">Get the app</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-blob blob-1"></div>
+  <div class="hero-blob blob-2"></div>
+  <div class="container hero-grid">
+    <div class="reveal visible">
+      <span class="eyebrow">✨ New: AI pantry suggestions</span>
+      <h1>Never wonder <em>"what's for dinner"</em> again.</h1>
+      <p class="hero-sub">Plateful builds your weekly meal plan, writes your grocery list, and uses up what's in your fridge — all in about two minutes.</p>
+      <div class="hero-actions">
+        <a href="#download" class="btn btn-accent">Start planning free →</a>
+        <a href="#how" class="btn btn-ghost">See how it works</a>
+      </div>
+      <div class="hero-proof">
+        <div class="avatars"><span>🧑🏽‍🍳</span><span>👩🏻‍💼</span><span>👨🏿‍👧</span><span>🧑🏻‍🌾</span></div>
+        <div>
+          <span class="stars">★★★★★</span> <strong>4.9</strong> · Loved by 120,000+ home cooks
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal visible d2">
+      <div class="float-chip chip-1"><span class="icon">🛒</span><div>Grocery list<br><small style="color:var(--ink-soft);font-weight:500;">auto-generated</small></div></div>
+      <div class="float-chip chip-2"><span class="icon">🥑</span><div>Avocados<br><small style="color:var(--ink-soft);font-weight:500;">use by Thursday</small></div></div>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-status"><span>9:41</span><span>●●●</span></div>
+          <div class="app-header">
+            <div><span class="hello">Good evening, Maya</span><h4>This Week</h4></div>
+            <div class="app-avatar">😊</div>
+          </div>
+          <div class="week-strip">
+            <div class="day-pill">M<b>12</b></div>
+            <div class="day-pill">T<b>13</b></div>
+            <div class="day-pill active">W<b>14</b></div>
+            <div class="day-pill">T<b>15</b></div>
+            <div class="day-pill">F<b>16</b></div>
+            <div class="day-pill">S<b>17</b></div>
+          </div>
+          <div class="meal-list">
+            <div class="meal-card">
+              <div class="meal-emoji">🥞</div>
+              <div class="meal-info"><b>Banana Oat Pancakes</b><small>15 min · 380 kcal</small></div>
+              <span class="meal-tag">BREAKFAST</span>
+            </div>
+            <div class="meal-card">
+              <div class="meal-emoji">🥗</div>
+              <div class="meal-info"><b>Chickpea Power Bowl</b><small>20 min · Vegan</small></div>
+              <span class="meal-tag">LUNCH</span>
+            </div>
+            <div class="meal-card">
+              <div class="meal-emoji">🍝</div>
+              <div class="meal-info"><b>Lemon Garlic Pasta</b><small>25 min · Family fave</small></div>
+              <span class="meal-tag dinner">DINNER</span>
+            </div>
+            <div class="meal-card">
+              <div class="meal-emoji">🍪</div>
+              <div class="meal-info"><b>Tahini Choc Cookies</b><small>Snack prep</small></div>
+              <span class="meal-tag dinner">SNACK</span>
+            </div>
+          </div>
+          <div class="grocery-progress">
+            <small><span>🛒 Weekly shop</span><span>68% planned</span></small>
+            <div class="progress-track"><div class="progress-fill"></div></div>
+          </div>
+          <div class="tab-bar"><span>🏠</span><span>📅</span><span>🛒</span><span>👤</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ STATS ============ -->
+<section class="stats">
+  <div class="container stats-grid">
+    <div class="reveal"><div class="stat-num" data-count="120000">0</div><div class="stat-label">Happy home cooks</div></div>
+    <div class="reveal d1"><div class="stat-num" data-count="3400000">0</div><div class="stat-label">Meals planned</div></div>
+    <div class="reveal d2"><div class="stat-num" data-count="38" data-suffix="%">0</div><div class="stat-label">Less food wasted</div></div>
+    <div class="reveal d3"><div class="stat-num" data-count="97" data-prefix="$">0</div><div class="stat-label">Avg. saved monthly</div></div>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">🥕 Why Plateful</span>
+      <h2>Everything dinner should be. Nothing it shouldn't.</h2>
+      <p>One app that replaces your recipe bookmarks, sticky notes, and the nightly 5pm panic.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon fi-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+        <h3>Smart weekly planner</h3>
+        <p>Drag, drop, done. Plateful fills your week with meals matched to your taste, schedule, and how much energy you have on a Tuesday.</p>
+      </div>
+      <div class="feature-card reveal d1">
+        <div class="feature-icon fi-orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div>
+        <h3>Instant grocery lists</h3>
+        <p>Your list writes itself — merged, measured, and sorted by aisle. Share it with your household and check things off together.</p>
+      </div>
+      <div class="feature-card reveal d2">
+        <div class="feature-icon fi-gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <h3>Every diet covered</h3>
+        <p>Vegan, keto, gluten-free, FODMAP, allergies, picky toddlers — filter once and every suggestion respects it, automatically.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon fi-orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.2 2.2M16.2 16.2l2.2 2.2M5.6 18.4l2.2-2.2M16.2 7.8l2.2-2.2"/><circle cx="12" cy="12" r="4"/></svg></div>
+        <h3>AI pantry rescue</h3>
+        <p>Snap a photo of your fridge and get recipes that use what's about to expire — before it becomes expensive compost.</p>
+      </div>
+      <div class="feature-card reveal d1">
+        <div class="feature-icon fi-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Built for households</h3>
+        <p>Different diets under one roof? Plateful finds the overlap and scales portions per person — no more cooking two dinners.</p>
+      </div>
+      <div class="feature-card reveal d2">
+        <div class="feature-icon fi-gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>
+        <h3>Nutrition, minus the math</h3>
+        <p>Macros, fiber, and protein tracked quietly in the background. Set goals, and your plan gently steers you toward them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="section how" id="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">🍳 How it works</span>
+      <h2>From "no idea" to dinner in three steps</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <h3>Tell us your tastes</h3>
+        <p>Two minutes: diets, dislikes, cooking skill, and how much time you actually have on weeknights.</p>
+      </div>
+      <div class="step reveal d1">
+        <div class="step-num">2</div>
+        <h3>Get your week, instantly</h3>
+        <p>A personalized plan appears — swap anything with one tap, or let AI reroll just the meals you don't love.</p>
+      </div>
+      <div class="step reveal d2">
+        <div class="step-num">3</div>
+        <h3>Shop once, cook easy</h3>
+        <p>Your grocery list is ready, recipes are step-by-step, and leftovers are planned into tomorrow's lunch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">💬 Wall of love</span>
+      <h2>Dinner drama, officially cancelled</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"I used to throw away so much produce. Plateful plans around what's in my fridge, and our grocery bill dropped by almost $100 a month."</blockquote>
+        <div class="testi-author"><div class="ava" style="background:var(--green-soft);">👩🏻‍💼</div><div><b>Sarah K.</b><small>Mom of two, Portland</small></div></div>
+      </div>
+      <div class="testi-card reveal d1">
+        <div class="stars">★★★★★</div>
+        <blockquote>"My partner is keto, I'm vegetarian, and somehow we eat the same dinner every night now. I genuinely didn't think that was possible."</blockquote>
+        <div class="testi-author"><div class="ava" style="background:var(--accent-soft);">🧑🏽‍🍳</div><div><b>Marcus &amp; Priya</b><small>Together 6 years, Austin</small></div></div>
+      </div>
+      <div class="testi-card reveal d2">
+        <div class="stars">★★★★★</div>
+        <blockquote>"The 5pm 'what's for dinner' text is gone from my life. Sunday I plan the whole week in ten minutes while drinking my coffee."</blockquote>
+        <div class="testi-author"><div class="ava" style="background:#FBEEDA;">👨🏿‍👧</div><div><b>James O.</b><small>Single dad, Chicago</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="section pricing" id="pricing">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">💛 Pricing</span>
+      <h2>Cheaper than one takeout night</h2>
+      <p>Start free. Upgrade when you're ready. Cancel anytime, keep your recipes forever.</p>
+    </div>
+    <div class="toggle-wrap reveal">
+      <span id="labelMonthly">Monthly</span>
+      <button class="toggle annual" id="billingToggle" aria-label="Toggle annual billing"></button>
+      <span id="labelAnnual">Annual</span>
+      <span class="save-badge">Save 30%</span>
+    </div>
+    <div class="price-grid">
+      <div class="price-card reveal">
+        <h3>Solo</h3>
+        <p class="plan-desc">Dip a toe in.</p>
+        <div class="price-num">$0</div>
+        <div class="price-per">free forever</div>
+        <ul class="price-features">
+          <li>3 planned meals per week</li>
+          <li>Basic grocery list</li>
+          <li>1,000+ starter recipes</li>
+          <li>1 dietary preference</li>
+        </ul>
+        <a href="#download" class="btn btn-ghost">Start free</a>
+      </div>
+      <div class="price-card featured reveal d1">
+        <span class="popular-tag">MOST POPULAR</span>
+        <h3>Plus</h3>
+        <p class="plan-desc">The full weeknight upgrade.</p>
+        <div class="price-num">$<span class="price-value" data-monthly="7" data-annual="4.90">4.90</span></div>
+        <div class="price-per billing-note">per month, billed annually</div>
+        <ul class="price-features">
+          <li>Unlimited meal planning</li>
+          <li>Smart grocery lists by aisle</li>
+          <li>AI pantry &amp; leftover rescue</li>
+          <li>All diets + allergy filters</li>
+          <li>Nutrition goals &amp; tracking</li>
+          <li>Import recipes from any site</li>
+        </ul>
+        <a href="#download" class="btn btn-primary">Try free for 14 days</a>
+      </div>
+      <div class="price-card reveal d2">
+        <h3>Family</h3>
+        <p class="plan-desc">One plan, whole table.</p>
+        <div class="price-num">$<span class="price-value" data-monthly="12" data-annual="8.40">8.40</span></div>
+        <div class="price-per billing-note">per month, billed annually</div>
+        <ul class="price-features">
+          <li>Everything in Plus</li>
+          <li>Up to 6 household profiles</li>
+          <li>Mixed-diet meal matching</li>
+          <li>Shared shopping list</li>
+          <li>Per-person portion scaling</li>
+        </ul>
+        <a href="#download" class="btn btn-ghost">Try free for 14 days</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">❓ FAQ</span>
+      <h2>Good questions, honest answers</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q">Can I import my own recipes?<span class="chev">▾</span></button>
+        <div class="faq-a"><p>Yes! Paste any recipe URL and Plateful extracts the ingredients and steps automatically. Grandma's handwritten cards? Snap a photo and our AI transcribes them into your collection.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Does it really handle multiple dietary restrictions?<span class="chev">▾</span></button>
+        <div class="faq-a"><p>It does. Combine any diets and allergies per household member — vegan + nut allergy + gluten-free is no problem. Plateful only suggests meals everyone can eat, or smart variations that split cleanly.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How does the grocery list work?<span class="chev">▾</span></button>
+        <div class="faq-a"><p>Every meal you plan adds its ingredients to one merged list, scaled to your servings and sorted by store aisle. It syncs live with household members, and integrates with major grocery delivery services.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What if I don't like a suggested meal?<span class="chev">▾</span></button>
+        <div class="faq-a"><p>Tap the reroll button and get a new suggestion that still fits your diet, schedule, and what's already on your list. The more you swap, the smarter suggestions get.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can I cancel anytime?<span class="chev">▾</span></button>
+        <div class="faq-a"><p>Absolutely — cancel in two taps, no emails or phone calls required. You keep your recipe collection and meal history forever, even on the free plan.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="final-cta" id="download">
+  <div class="container">
+    <div class="cta-box reveal">
+      <h2>Tonight's dinner is already decided. 🎉</h2>
+      <p>Join 120,000+ households planning smarter. Free to start — no credit card needed.</p>
+      <form class="signup-form" id="signupForm" novalidate>
+        <input type="email" id="emailInput" placeholder="Enter your email" aria-label="Email address" required>
+        <button type="submit" class="btn btn-accent">Get started</button>
+      </form>
+      <div class="form-msg" id="formMsg"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div style="max-width:260px;">
+        <a href="#" class="logo" style="margin-bottom:14px;"><span class="logo-badge">🍽️</span>Plateful</a>
+        <p style="font-size:14px;color:var(--ink-soft);margin-top:12px;">Meal planning that actually sticks. Made with 🥕 in Vermont.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>Product</h5>
+          <a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#download">Download</a><a href="#">Changelog</a>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <a href="#">About</a><a href="#">Blog</a><a href="#">Careers</a><a href="#">Press kit</a>
+        </div>
+        <div class="footer-col">
+          <h5>Support</h5>
+          <a href="#faq">FAQ</a><a href="#">Help center</a><a href="#">Contact</a><a href="#">Privacy</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Plateful Inc. All rights reserved.</span>
+      <span>iOS · Android · Web</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ---------- Sticky nav ---------- */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 24);
+  }, { passive: true });
+
+  /* ---------- Mobile menu ---------- */
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => navLinks.classList.remove('open'))
+  );
+
+  /* ---------- Scroll reveal ---------- */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* ---------- Animated stat counters ---------- */
+  const formatNum = n => n >= 1e6 ? (n / 1e6).toFixed(1).replace('.0','') + 'M'
+                       : n >= 1e3 ? Math.round(n / 1e3) + 'K' : n;
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = +el.dataset.count;
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || (target >= 1000 ? '+' : '');
+      const duration = 1600;
+      const start = performance.now();
+      const tick = (now) => {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = prefix + formatNum(Math.round(target * eased)) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+      statObserver.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count]').forEach(el => statObserver.observe(el));
+
+  /* ---------- Pricing toggle ---------- */
+  const toggle = document.getElementById('billingToggle');
+  const prices = document.querySelectorAll('.price-value');
+  const notes = document.querySelectorAll('.billing-note');
+  const labelM = document.getElementById('labelMonthly');
+  const labelA = document.getElementById('labelAnnual');
+
+  function setBilling(annual) {
+    toggle.classList.toggle('annual', annual);
+    prices.forEach(p => p.textContent = annual ? p.dataset.annual : p.dataset.monthly);
+    notes.forEach(n => n.textContent = annual ? 'per month, billed annually' : 'per month, billed monthly');
+    labelM.style.color = annual ? 'var(--ink-soft)' : 'var(--ink)';
+    labelA.style.color = annual ? 'var(--ink)' : 'var(--ink-soft)';
+  }
+  toggle.addEventListener('click', () => setBilling(!toggle.classList.contains('annual')));
+  setBilling(true);
+
+  /* ---------- FAQ accordion ---------- */
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', () => {
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o => {
+        o.classList.remove('open');
+        o.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if (!wasOpen) {
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  /* ---------- Signup form ---------- */
+  const form = document.getElementById('signupForm');
+  const email = document.getElementById('emailInput');
+  const msg = document.getElementById('formMsg');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const value = email.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+      msg.textContent = 'Hmm, that email doesn\'t look right — mind checking it?';
+      msg.className = 'form-msg error';
+      email.focus();
+      return;
+    }
+    msg.textContent = `🎉 You're in! Download link sent to ${value}`;
+    msg.className = 'form-msg success';
+    email.value = '';
+  });
+</script>
+</body>
+</html>

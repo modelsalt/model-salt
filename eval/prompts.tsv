@@ -1,0 +1,16 @@
+pelican	svg	tune	Generate an SVG of a pelican riding a bicycle.
+teapot	svg	tune	Generate an SVG of a teapot.
+story	text	tune	Write a 100-word story about a robot.
+game	text	tune	Come up with a name and a one-line pitch for a new casual mobile puzzle game.
+lighthouse	svg	holdout	Generate an SVG of a lighthouse.
+haiku	text	holdout	Write a haiku about autumn.
+site-cafe	text	site	Suggest a name for a neighbourhood coffee shop.
+site-game	text	site	Come up with a name and a one-line pitch for a new casual mobile puzzle game.
+site-haiku	text	site	Write a haiku about autumn.
+site-story	text	site	Write the first line of a short story about a lighthouse keeper.
+site-pelican	svg	site	Generate an SVG of a pelican riding a bicycle.
+site-webdesign	html	site	Design a landing page for a new meal-planning app, as one self-contained HTML file.
+site-icon	svg	site	Design an app icon for a new weather app, as a square SVG with a 1024 by 1024 viewBox.
+site-appicon	svg	site	Design an app icon for a new weather app, square, no round borders.
+trial-webdesign	text	trial	Design a landing page for a new meal-planning app, as one self-contained HTML file.
+trial-icon	svg	trial	Design an app icon for a new weather app, as a square SVG with a 1024 by 1024 viewBox.

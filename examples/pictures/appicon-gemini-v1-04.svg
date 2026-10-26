@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="100%" height="100%">
+  <defs>
+    <!-- Twilight Sky Background Gradient -->
+    <linearGradient id="twilightSky" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#140726" />
+      <stop offset="50%" stop-color="#2E0F47" />
+      <stop offset="100%" stop-color="#541652" />
+    </linearGradient>
+
+    <!-- Outer Atmospheric Wave: Deep Violet to Magenta -->
+    <linearGradient id="frontViolet" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4A1259" />
+      <stop offset="100%" stop-color="#9A1B6E" />
+    </linearGradient>
+
+    <!-- Upper-Mid Atmospheric Wave: Rich Magenta to Coral -->
+    <linearGradient id="frontMagenta" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8C1868" />
+      <stop offset="100%" stop-color="#D93267" />
+    </linearGradient>
+
+    <!-- Lower-Mid Atmospheric Wave: Crimson to Warm Orange -->
+    <linearGradient id="frontCrimson" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C82863" />
+      <stop offset="100%" stop-color="#F25C43" />
+    </linearGradient>
+
+    <!-- Inner Core Wave: Warm Orange to Twilight Gold -->
+    <linearGradient id="frontOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F05641" />
+      <stop offset="100%" stop-color="#FF9B38" />
+    </linearGradient>
+
+    <!-- Precipitation Band Gradient -->
+    <linearGradient id="precipGlow" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF7340" />
+      <stop offset="100%" stop-color="#FFB64D" />
+    </linearGradient>
+  </defs>
+
+  <!-- 1. Sharp Square Base (No rounded borders) -->
+  <rect width="1024" height="1024" fill="url(#twilightSky)" />
+
+  <!-- 2. Abstracted Atmospheric Waves (Cropped & bleeding off Bottom and Right edges) -->
+  
+  <!-- Wave 1: Deep Violet Barometric Trough -->
+  <path d="M 1024 140
+           C 700 140, 740 460, 440 460
+           C 140 460, 180 780, 180 1024
+           L 1024 1024 Z" 
+        fill="url(#frontViolet)" />
+
+  <!-- Wave 2: Rich Magenta Pressure Front -->
+  <path d="M 1024 310
+           C 760 310, 790 580, 540 580
+           C 290 580, 320 840, 320 1024
+           L 1024 1024 Z" 
+        fill="url(#frontMagenta)" />
+
+  <!-- Wave 3: Warm Crimson Thermal Ridge -->
+  <path d="M 1024 490
+           C 820 490, 840 710, 650 710
+           C 460 710, 480 890, 480 1024
+           L 1024 1024 Z" 
+        fill="url(#frontCrimson)" />
+
+  <!-- Wave 4: Bright Orange Warm Front Core -->
+  <path d="M 1024 680
+           C 890 680, 910 830, 770 830
+           C 630 830, 650 940, 650 1024
+           L 1024 1024 Z" 
+        fill="url(#frontOrange)" />
+
+  <!-- 3. Abstracted Precipitation Vectors (Flat 2D solid geometric bands, 45° angle) -->
+  <!-- Bleeding off the right edge and intersecting the atmospheric waves -->
+  <g fill="url(#precipGlow)">
+    <!-- Upper-Left Precipitation Stream -->
+    <polygon points="310,610 274,574 634,214 670,250" />
+    
+    <!-- Long Main Frontal Precipitation Band (Bleeds off right edge) -->
+    <polygon points="400,740 364,704 1024,44 1024,116" />
+    
+    <!-- Mid-Level Precipitation Stream -->
+    <polygon points="210,850 174,814 554,434 590,470" />
+
+    <!-- Lower-Right Heavy Precipitation Band (Bleeds off bottom edge) -->
+    <polygon points="284,1024 212,1024 710,526 746,562" />
+  </g>
+</svg>

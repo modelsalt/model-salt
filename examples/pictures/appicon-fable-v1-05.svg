@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- Solid flat sky-blue background, square, no rounded corners -->
+  <rect width="1024" height="1024" fill="#4FB3F6"/>
+
+  <!-- One rain-cloud glyph: flat white geometric cloud + three white rain drops -->
+  <defs>
+    <g id="raincloud">
+      <!-- cloud body: three circles + a rectangle base -->
+      <circle cx="40" cy="52" r="22" fill="#FFFFFF"/>
+      <circle cx="68" cy="38" r="30" fill="#FFFFFF"/>
+      <circle cx="100" cy="52" r="24" fill="#FFFFFF"/>
+      <rect x="40" y="52" width="60" height="24" fill="#FFFFFF"/>
+      <!-- falling rain: three angled bars -->
+      <rect x="48" y="90" width="10" height="30" rx="0" fill="#FFFFFF" transform="rotate(15 53 105)"/>
+      <rect x="70" y="90" width="10" height="30" rx="0" fill="#FFFFFF" transform="rotate(15 75 105)"/>
+      <rect x="92" y="90" width="10" height="30" rx="0" fill="#FFFFFF" transform="rotate(15 97 105)"/>
+    </g>
+  </defs>
+
+  <!-- Tile the glyph in a 5 x 5 grid, offset every other row for rhythm -->
+  <!-- Row 1 -->
+  <use href="#raincloud" x="32"  y="20"/>
+  <use href="#raincloud" x="232" y="20"/>
+  <use href="#raincloud" x="432" y="20"/>
+  <use href="#raincloud" x="632" y="20"/>
+  <use href="#raincloud" x="832" y="20"/>
+  <!-- Row 2 (offset) -->
+  <use href="#raincloud" x="-68" y="220"/>
+  <use href="#raincloud" x="132" y="220"/>
+  <use href="#raincloud" x="332" y="220"/>
+  <use href="#raincloud" x="532" y="220"/>
+  <use href="#raincloud" x="732" y="220"/>
+  <use href="#raincloud" x="932" y="220"/>
+  <!-- Row 3 -->
+  <use href="#raincloud" x="32"  y="420"/>
+  <use href="#raincloud" x="232" y="420"/>
+  <use href="#raincloud" x="432" y="420"/>
+  <use href="#raincloud" x="632" y="420"/>
+  <use href="#raincloud" x="832" y="420"/>
+  <!-- Row 4 (offset) -->
+  <use href="#raincloud" x="-68" y="620"/>
+  <use href="#raincloud" x="132" y="620"/>
+  <use href="#raincloud" x="332" y="620"/>
+  <use href="#raincloud" x="532" y="620"/>
+  <use href="#raincloud" x="732" y="620"/>
+  <use href="#raincloud" x="932" y="620"/>
+  <!-- Row 5 -->
+  <use href="#raincloud" x="32"  y="820"/>
+  <use href="#raincloud" x="232" y="820"/>
+  <use href="#raincloud" x="432" y="820"/>
+  <use href="#raincloud" x="632" y="820"/>
+  <use href="#raincloud" x="832" y="820"/>
+</svg>

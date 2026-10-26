@@ -1,0 +1,28 @@
+name: A prompt that still repeats
+description: Your model gives the same answer every time, even with Model Salt
+labels: [repeats]
+body:
+  - type: textarea
+    id: prompt
+    attributes:
+      label: The prompt, word for word
+    validations:
+      required: true
+  - type: input
+    id: model
+    attributes:
+      label: Model and client, with versions
+      placeholder: Claude Opus 5.5 in Claude Code 2.1.304
+    validations:
+      required: true
+  - type: textarea
+    id: runs
+    attributes:
+      label: Three or more runs with Model Salt
+      description: Paste the answers, or attach the pictures. A few runs without Model Salt help too.
+    validations:
+      required: true
+  - type: input
+    id: setting
+    attributes:
+      label: Randomness setting, if you asked for one

@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mise — Dinner, decided.</title>
+<meta name="description" content="Mise plans your week of meals in minutes. Recipes you'll actually cook, groceries that organize themselves, zero 5pm panic.">
+<style>
+  /* ---------- Tokens & reset ---------- */
+  :root {
+    --cream: #FBF7EF;
+    --cream-deep: #F3ECDF;
+    --ink: #1C2420;
+    --ink-soft: #5A6660;
+    --green-900: #14342B;
+    --green-700: #1F5C47;
+    --green-500: #2E8B6A;
+    --green-100: #E3F0E9;
+    --accent: #E8622C;
+    --accent-deep: #C94F1F;
+    --accent-soft: #FBE7DA;
+    --card: #FFFFFF;
+    --line: #E7DFD1;
+    --shadow-sm: 0 1px 2px rgba(28,36,32,.06), 0 4px 14px rgba(28,36,32,.06);
+    --shadow-md: 0 8px 30px rgba(28,36,32,.12);
+    --radius: 16px;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img, svg { display: block; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  input { font: inherit; }
+
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 1.25rem; }
+  section { padding: clamp(4rem, 9vw, 6.5rem) 0; }
+
+  h1, h2, h3 { font-family: var(--serif); font-weight: 700; line-height: 1.12; letter-spacing: -.01em; }
+  h2 { font-size: clamp(1.9rem, 4vw, 2.75rem); }
+  .eyebrow {
+    display: inline-block;
+    font-size: .78rem; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--green-700);
+    background: var(--green-100);
+    padding: .35rem .85rem; border-radius: 999px;
+    margin-bottom: 1.1rem;
+  }
+  .section-head { max-width: 640px; margin: 0 auto 3rem; text-align: center; }
+  .section-head p { color: var(--ink-soft); margin-top: .9rem; font-size: 1.08rem; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; gap: .5rem;
+    font-weight: 650; font-size: 1rem;
+    padding: .85rem 1.6rem; border-radius: 999px;
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 6px 18px rgba(232,98,44,.35); }
+  .btn-primary:hover { background: var(--accent-deep); transform: translateY(-2px); }
+  .btn-ghost { background: transparent; color: var(--green-900); border: 1.5px solid var(--line); }
+  .btn-ghost:hover { border-color: var(--green-500); background: #fff; transform: translateY(-2px); }
+  .btn-light { background: #fff; color: var(--green-900); }
+  .btn-light:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .btn:focus-visible, a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible {
+    outline: 3px solid var(--green-500); outline-offset: 2px;
+  }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(251,247,239,.85);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .logo { display: flex; align-items: center; gap: .55rem; font-family: var(--serif); font-size: 1.35rem; font-weight: 700; color: var(--green-900); }
+  .nav-links { display: flex; align-items: center; gap: 2rem; }
+  .nav-links a { font-size: .95rem; font-weight: 550; color: var(--ink-soft); transition: color .15s; }
+  .nav-links a:hover { color: var(--green-900); }
+  .nav-cta { display: flex; align-items: center; gap: 1rem; }
+  .nav-cta .btn { padding: .6rem 1.25rem; font-size: .92rem; }
+  .menu-btn { display: none; padding: .5rem; }
+  .mobile-menu { display: none; border-top: 1px solid var(--line); padding: 1rem 1.25rem 1.5rem; background: var(--cream); }
+  .mobile-menu a { display: block; padding: .65rem 0; font-weight: 600; color: var(--green-900); }
+  .mobile-menu .btn { margin-top: .75rem; width: 100%; justify-content: center; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: clamp(3rem, 7vw, 5.5rem) 0 clamp(4rem, 8vw, 6rem); overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 3.5rem; align-items: center; }
+  .hero h1 { font-size: clamp(2.6rem, 5.5vw, 4.1rem); margin: 1.1rem 0 1.25rem; }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero .lede { font-size: 1.18rem; color: var(--ink-soft); max-width: 30rem; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 2rem; }
+  .hero-proof { display: flex; align-items: center; gap: .6rem; margin-top: 1.6rem; font-size: .9rem; color: var(--ink-soft); }
+  .stars { color: var(--accent); letter-spacing: .1em; font-size: .95rem; }
+
+  /* Phone mockup */
+  .phone-stage { position: relative; display: flex; justify-content: center; }
+  .phone {
+    width: 300px; flex-shrink: 0;
+    background: #101814;
+    border-radius: 46px; padding: 12px;
+    box-shadow: 0 30px 60px rgba(20,52,43,.28), 0 4px 12px rgba(20,52,43,.15);
+    transform: rotate(2deg);
+  }
+  .phone-screen {
+    background: var(--cream); border-radius: 36px;
+    overflow: hidden; min-height: 560px;
+    display: flex; flex-direction: column;
+  }
+  .phone-notch { height: 26px; display: flex; justify-content: center; align-items: flex-start; background: var(--cream); }
+  .phone-notch::after { content: ""; width: 90px; height: 18px; background: #101814; border-radius: 0 0 12px 12px; }
+  .app-head { display: flex; justify-content: space-between; align-items: center; padding: .5rem 1.1rem .8rem; }
+  .app-head strong { font-family: var(--serif); font-size: 1.15rem; color: var(--green-900); }
+  .shuffle-btn {
+    display: inline-flex; align-items: center; gap: .35rem;
+    background: var(--accent-soft); color: var(--accent-deep);
+    font-size: .78rem; font-weight: 700;
+    padding: .4rem .75rem; border-radius: 999px;
+    transition: transform .15s, background .15s;
+  }
+  .shuffle-btn:hover { background: #f6d8c4; transform: scale(1.05); }
+  .shuffle-btn:active { transform: scale(.96); }
+  .day-list { display: flex; flex-direction: column; gap: .55rem; padding: 0 .9rem; flex: 1; }
+  .day-card {
+    display: flex; align-items: center; gap: .7rem;
+    background: #fff; border-radius: 14px; padding: .6rem .8rem;
+    box-shadow: var(--shadow-sm);
+    transition: opacity .2s, transform .2s;
+  }
+  .day-card .emoji {
+    width: 40px; height: 40px; border-radius: 11px;
+    background: var(--green-100);
+    display: grid; place-items: center; font-size: 1.25rem; flex-shrink: 0;
+  }
+  .day-card .dow { font-size: .62rem; font-weight: 800; letter-spacing: .12em; color: var(--ink-soft); text-transform: uppercase; }
+  .day-card .meal { font-size: .85rem; font-weight: 650; color: var(--ink); line-height: 1.3; }
+  .day-card .tag { font-size: .66rem; color: var(--green-700); font-weight: 600; }
+  .day-list.shuffling .day-card { opacity: .3; transform: translateY(4px); }
+  .app-foot {
+    margin: .8rem .9rem .95rem; padding: .7rem .9rem;
+    background: var(--green-900); color: #DCEDE4;
+    border-radius: 14px; font-size: .78rem; font-weight: 600;
+    display: flex; align-items: center; gap: .5rem;
+  }
+  .float-card {
+    position: absolute; z-index: 2;
+    background: #fff; border-radius: 14px; box-shadow: var(--shadow-md);
+    padding: .7rem 1rem; font-size: .8rem; font-weight: 650; color: var(--green-900);
+    display: flex; align-items: center; gap: .5rem;
+    animation: floaty 5s ease-in-out infinite;
+  }
+  .float-card small { display: block; font-weight: 550; color: var(--ink-soft); font-size: .68rem; }
+  .float-1 { top: 14%; left: 0; }
+  .float-2 { bottom: 16%; right: 0; animation-delay: -2.5s; }
+  @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+  /* ---------- Logo strip ---------- */
+  .logos { padding: 2.25rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--cream-deep); }
+  .logos p { text-align: center; font-size: .75rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 1.25rem; }
+  .logo-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 2.5rem 3.5rem; }
+  .logo-row span { font-family: var(--serif); font-size: 1.2rem; font-weight: 700; color: #9A9484; }
+
+  /* ---------- Features ---------- */
+  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+  .feature {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 1.8rem; transition: transform .2s, box-shadow .2s;
+  }
+  .feature:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .feature .icon {
+    width: 48px; height: 48px; border-radius: 13px;
+    background: var(--green-100); color: var(--green-700);
+    display: grid; place-items: center; margin-bottom: 1.1rem;
+  }
+  .feature:nth-child(2) .icon, .feature:nth-child(5) .icon { background: var(--accent-soft); color: var(--accent-deep); }
+  .feature h3 { font-size: 1.18rem; margin-bottom: .5rem; }
+  .feature p { font-size: .95rem; color: var(--ink-soft); }
+
+  /* ---------- How it works ---------- */
+  .how { background: var(--green-900); color: #E9F2ED; }
+  .how .eyebrow { background: rgba(255,255,255,.1); color: #9FD8BE; }
+  .how .section-head p { color: #A9C4B7; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; counter-reset: step; }
+  .step {
+    background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+    border-radius: var(--radius); padding: 1.9rem; position: relative;
+  }
+  .step .num {
+    font-family: var(--serif); font-size: 2.6rem; font-weight: 700;
+    color: var(--accent); line-height: 1; margin-bottom: 1rem;
+  }
+  .step h3 { font-size: 1.2rem; color: #fff; margin-bottom: .5rem; }
+  .step p { font-size: .95rem; color: #A9C4B7; }
+
+  /* ---------- Stats ---------- */
+  .stats { background: var(--cream-deep); border-block: 1px solid var(--line); padding: 3.25rem 0; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
+  .stat .n { font-family: var(--serif); font-size: clamp(1.9rem, 3.5vw, 2.6rem); font-weight: 700; color: var(--green-900); }
+  .stat .l { font-size: .88rem; color: var(--ink-soft); margin-top: .25rem; }
+
+  /* ---------- Testimonials ---------- */
+  .quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+  .quote {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 1.8rem; display: flex; flex-direction: column; gap: 1rem;
+  }
+  .quote .stars { font-size: 1rem; }
+  .quote p { font-size: .98rem; color: var(--ink); flex: 1; }
+  .quote footer { display: flex; align-items: center; gap: .8rem; }
+  .avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    display: grid; place-items: center;
+    font-weight: 700; font-size: .9rem; color: #fff;
+  }
+  .quote footer strong { display: block; font-size: .92rem; }
+  .quote footer small { color: var(--ink-soft); font-size: .8rem; }
+
+  /* ---------- Pricing ---------- */
+  .billing-toggle { display: flex; align-items: center; justify-content: center; gap: .9rem; margin: 0 0 2.75rem; font-weight: 650; font-size: .95rem; }
+  .billing-toggle .opt.annual { color: var(--green-700); }
+  .save-pill { background: var(--accent-soft); color: var(--accent-deep); font-size: .72rem; font-weight: 800; padding: .2rem .55rem; border-radius: 999px; margin-left: .3rem; }
+  .switch {
+    width: 52px; height: 30px; border-radius: 999px;
+    background: var(--line); position: relative; transition: background .2s; flex-shrink: 0;
+  }
+  .switch .knob {
+    position: absolute; top: 3px; left: 3px;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,.2);
+    transition: transform .22s ease;
+  }
+  .switch[aria-checked="true"] { background: var(--green-500); }
+  .switch[aria-checked="true"] .knob { transform: translateX(22px); }
+
+  .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; align-items: stretch; }
+  .plan {
+    background: var(--card); border: 1px solid var(--line); border-radius: 20px;
+    padding: 2rem 1.8rem; display: flex; flex-direction: column;
+  }
+  .plan.featured { border: 2px solid var(--accent); position: relative; box-shadow: var(--shadow-md); }
+  .plan .badge {
+    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+    background: var(--accent); color: #fff;
+    font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+    padding: .3rem .9rem; border-radius: 999px; white-space: nowrap;
+  }
+  .plan h3 { font-size: 1.25rem; }
+  .plan .who { font-size: .88rem; color: var(--ink-soft); margin: .3rem 0 1.4rem; }
+  .plan .price-row { display: flex; align-items: baseline; gap: .25rem; }
+  .plan .price { font-family: var(--serif); font-size: 2.9rem; font-weight: 700; color: var(--green-900); }
+  .plan .per { color: var(--ink-soft); font-size: .95rem; }
+  .plan .billing-note { font-size: .8rem; color: var(--ink-soft); min-height: 1.3em; margin-bottom: 1.4rem; }
+  .plan ul { list-style: none; display: flex; flex-direction: column; gap: .65rem; margin-bottom: 1.8rem; flex: 1; }
+  .plan li { display: flex; gap: .6rem; font-size: .93rem; align-items: flex-start; }
+  .plan li svg { flex-shrink: 0; margin-top: .22rem; color: var(--green-500); }
+  .plan .btn { justify-content: center; }
+
+  /* ---------- FAQ ---------- */
+  .faq-list { max-width: 720px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--line); }
+  .faq-q {
+    width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    padding: 1.35rem .25rem; text-align: left;
+    font-weight: 650; font-size: 1.05rem; color: var(--green-900);
+  }
+  .faq-q .chev { flex-shrink: 0; transition: transform .25s ease; color: var(--ink-soft); }
+  .faq-item.open .faq-q .chev { transform: rotate(180deg); }
+  .faq-a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease; }
+  .faq-a > div { overflow: hidden; }
+  .faq-a p { color: var(--ink-soft); padding: 0 .25rem 1.4rem; max-width: 60ch; }
+  .faq-item.open .faq-a { grid-template-rows: 1fr; }
+
+  /* ---------- CTA banner ---------- */
+  .cta-banner { background: linear-gradient(135deg, var(--green-900), var(--green-700)); border-radius: 24px; padding: clamp(2.5rem, 6vw, 4.5rem); text-align: center; color: #fff; }
+  .cta-banner h2 { color: #fff; }
+  .cta-banner p { color: #B9D4C7; margin: 1rem auto 2rem; max-width: 34rem; }
+  .email-form { display: flex; gap: .6rem; max-width: 460px; margin: 0 auto; }
+  .email-form input {
+    flex: 1; min-width: 0; border: none; border-radius: 999px;
+    padding: .85rem 1.3rem; background: rgba(255,255,255,.12);
+    color: #fff; border: 1.5px solid rgba(255,255,255,.25);
+  }
+  .email-form input::placeholder { color: rgba(255,255,255,.55); }
+  .email-form input:focus { outline: none; border-color: #fff; background: rgba(255,255,255,.18); }
+  .form-success { display: none; font-weight: 650; color: #B9F0D2; font-size: 1.05rem; padding: .85rem; }
+  .fine-print { font-size: .8rem; color: rgba(255,255,255,.5); margin-top: 1.1rem; }
+
+  /* ---------- Footer ---------- */
+  footer.site { background: var(--green-900); color: #A9C4B7; padding: 3.5rem 0 2rem; margin-top: clamp(4rem, 9vw, 6.5rem); }
+  .foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,.1); }
+  .foot-grid .logo { color: #fff; margin-bottom: .8rem; }
+  .foot-grid p { font-size: .9rem; max-width: 26ch; }
+  .foot-grid h4 { color: #fff; font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 1rem; font-family: var(--sans); }
+  .foot-grid ul { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
+  .foot-grid ul a { font-size: .92rem; transition: color .15s; }
+  .foot-grid ul a:hover { color: #fff; }
+  .foot-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding-top: 1.75rem; font-size: .82rem; color: #7E9B8D; }
+
+  /* ---------- Reveal animation ---------- */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1000px) {
+    .float-card { display: none; }
+    .features-grid, .steps, .quotes, .plans { grid-template-columns: repeat(2, 1fr); }
+    .plan.featured { grid-column: 1 / -1; order: -1; }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 880px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .hero .lede { max-width: none; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .nav-links, .nav-cta .btn { display: none; }
+    .menu-btn { display: block; }
+    .mobile-menu.open { display: block; }
+    .features-grid, .steps, .quotes, .plans { grid-template-columns: 1fr; }
+    .email-form { flex-direction: column; }
+    .email-form .btn { justify-content: center; }
+    .phone { width: 280px; transform: none; }
+    .foot-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .float-card { animation: none; }
+    * { transition-duration: .01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Nav ===== -->
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="#" class="logo" aria-label="Mise home">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true">
+        <rect width="32" height="32" rx="9" fill="#14342B"/>
+        <path d="M10 22C10 14 15 9.5 23 9.5c0 7.5-4.5 12.5-13 12.5Z" fill="#E8622C"/>
+        <path d="M10 22c3-5.5 6.5-8.5 10-10" stroke="#FBF7EF" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      </svg>
+      Mise
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-primary" href="#download">Get the app</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#features">Features</a>
+    <a href="#how">How it works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a class="btn btn-primary" href="#download">Get the app</a>
+  </div>
+</header>
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">Meal planning, minus the mental load</span>
+      <h1>Dinner,<br><em>decided.</em></h1>
+      <p class="lede">Mise plans your week of meals in minutes — recipes you'll actually cook, a grocery list that builds itself, and zero 5pm panic.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#download">Start planning free</a>
+        <a class="btn btn-ghost" href="#how">See how it works ↓</a>
+      </div>
+      <div class="hero-proof">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <span><strong>4.9</strong> · 12,400 reviews · Free 14-day trial, no card required</span>
+      </div>
+    </div>
+
+    <div class="phone-stage" aria-hidden="true">
+      <div class="float-card float-1">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2E8B6A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6"/></svg>
+        <span>Grocery list built<small>23 items · sorted by aisle</small></span>
+      </div>
+      <div class="float-card float-2">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8622C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg>
+        <span>Swapped Thursday<small>Too tired to stir-fry? Tap, done.</small></span>
+      </div>
+
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-notch"></div>
+          <div class="app-head">
+            <strong>This Week</strong>
+            <button class="shuffle-btn" id="shuffleBtn" title="Shuffle my week">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg>
+              Shuffle my week
+            </button>
+          </div>
+          <div class="day-list" id="dayList"></div>
+          <div class="app-foot">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 12.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.2L21 8H6"/><circle cx="9.5" cy="20.5" r="1.2"/><circle cx="17.5" cy="20.5" r="1.2"/></svg>
+            <span id="groceryCount">Groceries: 23 items · list ready</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Press strip ===== -->
+<div class="logos">
+  <div class="container">
+    <p>As featured in</p>
+    <div class="logo-row">
+      <span>The Kitchen Times</span>
+      <span>HomeCook Mag</span>
+      <span>Appsty</span>
+      <span>Fork &amp; Data</span>
+      <span>Weeknight</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Features ===== -->
+<section id="features">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Why Mise</span>
+      <h2>Everything between “what’s for dinner?” and dinner.</h2>
+      <p>One app that handles the planning, the list, and the leftovers — so cooking is the only thing left to do.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature reveal">
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
+        <h3>Smart weekly plans</h3>
+        <p>Tell Mise your tastes and schedule. Get a full week of dinners matched to your busiest and laziest days.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 12.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.2L21 8H6"/><circle cx="9.5" cy="20.5" r="1.2"/><circle cx="17.5" cy="20.5" r="1.2"/></svg></div>
+        <h3>Automatic grocery lists</h3>
+        <p>Quantities merged, duplicates removed, sorted by aisle. Export to your favorite store or check off as you shop.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8"/><rect x="6" y="5" width="12" height="16" rx="3"/><path d="M9 12h6"/></svg></div>
+        <h3>Pantry-first suggestions</h3>
+        <p>Log what's already in your kitchen and Mise prioritizes recipes that use it up before it goes sad and limp.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19C5 9 12 4 20 4c0 8-5 15-15 15Z"/><path d="M5 19c3-6 7-9 11-11"/></svg></div>
+        <h3>Every diet, genuinely</h3>
+        <p>Vegan, gluten-free, halal, nut allergies, picky six-year-olds. Filter once and every suggestion respects it.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg></div>
+        <h3>Cook once, eat twice</h3>
+        <p>Mise spots overlap — tonight's roast chicken becomes tomorrow's tacos. Less waste, less cooking, more you time.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20v-6M12 20V6M18 20v-9M3 20h18"/></svg></div>
+        <h3>Nutrition at a glance</h3>
+        <p>Calories, protein, and macros per meal and per week — without turning dinner into a spreadsheet.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== How it works ===== -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>Three steps to a calmer kitchen.</h2>
+      <p>From signup to a fully planned week in under five minutes.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="num">01</div>
+        <h3>Tell us your tastes</h3>
+        <p>Cuisines you love, ingredients you avoid, how many mouths, and how much time you actually have on a Tuesday.</p>
+      </div>
+      <div class="step reveal">
+        <div class="num">02</div>
+        <h3>Get your week, instantly</h3>
+        <p>Mise builds a plan that fits your real schedule — quick meals on late nights, slow ones when you have room to breathe.</p>
+      </div>
+      <div class="step reveal">
+        <div class="num">03</div>
+        <h3>Shop once, cook calm</h3>
+        <p>One consolidated grocery list, organized by aisle. Check items off from your phone while you shop. Done.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Stats ===== -->
+<div class="stats">
+  <div class="container stats-grid">
+    <div class="stat reveal"><div class="n">120k+</div><div class="l">home cooks plan with Mise weekly</div></div>
+    <div class="stat reveal"><div class="n">4.9★</div><div class="l">average App Store rating</div></div>
+    <div class="stat reveal"><div class="n">31 min</div><div class="l">average time to plan a whole week</div></div>
+    <div class="stat reveal"><div class="n">2.3M</div><div class="l">meals planned and counting</div></div>
+  </div>
+</div>
+
+<!-- ===== Testimonials ===== -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Loved at dinner tables everywhere</span>
+      <h2>People who stopped dreading 5pm.</h2>
+    </div>
+    <div class="quotes">
+      <article class="quote reveal">
+        <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+        <p>“I got my Sunday evenings back. I used to spend two hours scrolling recipes and still end up ordering pizza by Wednesday. Now the week just… handles itself.”</p>
+        <footer>
+          <span class="avatar" style="background:#E8622C">PS</span>
+          <div><strong>Priya S.</strong><small>Parent of two, chronic over-scroller</small></div>
+        </footer>
+      </article>
+      <article class="quote reveal">
+        <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+        <p>“The grocery list alone is worth it. It merged four recipes' worth of garlic into one line and sorted everything by aisle. I was in and out of the store in 20 minutes.”</p>
+        <footer>
+          <span class="avatar" style="background:#1F5C47">MT</span>
+          <div><strong>Marcus T.</strong><small>Recovering meal-prep skeptic</small></div>
+        </footer>
+      </article>
+      <article class="quote reveal">
+        <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+        <p>“As someone with celiac, most ‘filters' are an afterthought. Mise's actually work — every suggestion is safe, and nothing feels like a sad substitution.”</p>
+        <footer>
+          <span class="avatar" style="background:#2E8B6A">ER</span>
+          <div><strong>Elena R.</strong><small>Gluten-free, flavor-full</small></div>
+        </footer>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Pricing ===== -->
+<section id="pricing" style="background: var(--cream-deep); border-block: 1px solid var(--line);">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Pricing</span>
+      <h2>Cheaper than one emergency takeout.</h2>
+      <p>Start free. Upgrade when you're ready. Cancel in two taps, no guilt trip.</p>
+    </div>
+
+    <div class="billing-toggle reveal">
+      <span class="opt monthly">Monthly</span>
+      <button class="switch" id="billingToggle" role="switch" aria-checked="false" aria-label="Toggle annual billing">
+        <span class="knob"></span>
+      </button>
+      <span class="opt annual">Annual<span class="save-pill">save 30%</span></span>
+    </div>
+
+    <div class="plans">
+      <div class="plan reveal">
+        <h3>Starter</h3>
+        <p class="who">Dip a toe in.</p>
+        <div class="price-row"><span class="price" data-monthly="$0" data-annual="$0">$0</span><span class="per">/mo</span></div>
+        <p class="billing-note" data-note-monthly="free forever" data-note-annual="free forever">free forever</p>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6"/></svg>7-day meal plans</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6"/></svg>50 starter recipes</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6"/></svg>Basic grocery list</li>
+        </ul>
+        <a class="btn btn-ghost" href="#download">Start free</a>
+      </div>
+
+      <div class="plan featured reveal">
+        <span class="badge">Most popular</span>
+        <h3>Plus</h3>
+        <p class="who">For weeknight regulars.</p>
+        <div class="price-row"><span class="price" data-monthly="$8" data-annual="$5.60">$8</span><span class="per">/mo</span></div>
+        <p class="billing-note" data-note-monthly="billed monthly" data-note-annual="billed annually ($67)">billed monthly</p>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6"/></svg>Unlimited plans &amp; 2,400+ recipes</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6"/></svg>Aisle-sorted grocery lists</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6"/></svg>Pantry tracking &amp; dietary filters</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6"/></svg>Nutrition breakdowns</li>
+        </ul>
+        <a class="btn btn-primary" href="#download">Try Plus free</a>
+      </div>
+
+      <div class="plan reveal">
+        <h3>Family</h3>
+        <p class="who">Feed the whole crew.</p>
+        <div class="price-row"><span class="price" data-monthly="$12" data-annual="$8.40">$12</span><span class="per">/mo</span></div>
+        <p class="billing-note" data-note-monthly="billed monthly" data-note-annual="billed annually ($101)">billed monthly</p>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6"/></svg>Everything in Plus</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6"/></svg>Up to 6 household profiles</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6"/></svg>Per-person dietary needs</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6"/></svg>Shared list, synced live</li>
+        </ul>
+        <a class="btn btn-ghost" href="#download">Try Family free</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2>Good questions.</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How does Mise build my meal plan?
+          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><div><p>During setup you tell Mise your favorite cuisines, dislikes, dietary needs, household size, and how much time you have each night. Mise then matches recipes from its tested library to your actual week — 15-minute meals on your late meeting nights, slower cooking on the weekend.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Can I swap meals I don't like?
+          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><div><p>Always. Tap any meal to see instant alternatives that use similar ingredients (so your grocery list barely changes) — or shuffle the whole week with one tap. You're the boss; Mise is just the very organized assistant.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Does it handle dietary restrictions?
+          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><div><p>Yes — vegan, vegetarian, gluten-free, dairy-free, halal, kosher-style, low-FODMAP, nut and shellfish allergies, and more. On the Family plan, each person gets their own profile and Mise finds meals that work for everyone at the table.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How do the grocery lists work?
+          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><div><p>Mise consolidates every ingredient across your week — merging quantities, removing anything already in your pantry, and sorting by store aisle. Check items off on your phone as you shop, or export to your favorite grocery delivery service.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Can I cancel anytime?
+          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><div><p>Of course. Cancel in two taps from settings — no emails, no phone calls, no dark patterns. You'll keep the free Starter plan and all your saved recipes either way.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section id="download" style="padding-top: 0;">
+  <div class="container">
+    <div class="cta-banner reveal">
+      <h2>Decide dinner once.<br>Enjoy it all week.</h2>
+      <p>Join 120,000+ home cooks who stopped winging it. Get a download link and your first week planned free.</p>
+      <form class="email-form" id="ctaForm" novalidate>
+        <input type="email" id="ctaEmail" placeholder="you@example.com" aria-label="Email address" required>
+        <button class="btn btn-light" type="submit">Get the app</button>
+      </form>
+      <p class="form-success" id="ctaSuccess">🎉 You're in! Check your inbox for a download link.</p>
+      <p class="fine-print">Free 14-day trial of Plus · No credit card required · iOS &amp; Android</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <a href="#" class="logo">
+          <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true">
+            <rect width="32" height="32" rx="9" fill="#FBF7EF"/>
+            <path d="M10 22C10 14 15 9.5 23 9.5c0 7.5-4.5 12.5-13 12.5Z" fill="#E8622C"/>
+            <path d="M10 22c3-5.5 6.5-8.5 10-10" stroke="#14342B" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+          </svg>
+          Mise
+        </a>
+        <p>Meal planning for people who'd rather be eating than deciding.</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#download">Download</a></li>
+          <li><a href="#">Recipe library</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press kit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> Mise Kitchen, Inc. All rights reserved.</span>
+      <span>Made with 🥕 and good intentions.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- Footer year ---------- */
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  /* ---------- Mobile menu ---------- */
+  var menuBtn = document.getElementById("menuBtn");
+  var mobileMenu = document.getElementById("mobileMenu");
+  menuBtn.addEventListener("click", function () {
+    var open = mobileMenu.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", open);
+    menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  });
+  mobileMenu.querySelectorAll("a").forEach(function (a) {
+    a.addEventListener("click", function () {
+      mobileMenu.classList.remove("open");
+      menuBtn.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  /* ---------- Scroll reveal ---------- */
+  var revealEls = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add("visible");
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function (el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add("visible"); });
+  }
+
+  /* ---------- Phone mockup: meal shuffle ---------- */
+  var MEALS = [
+    { name: "Sheet-pan lemon chicken", tag: "One pan · 35 min", emoji: "🍋" },
+    { name: "Mushroom risotto", tag: "Vegetarian · 40 min", emoji: "🍄" },
+    { name: "Black bean tacos", tag: "Vegan · 20 min", emoji: "🌮" },
+    { name: "Salmon + miso greens", tag: "High protein · 25 min", emoji: "🐟" },
+    { name: "Margherita flatbread", tag: "Kid fave · 15 min", emoji: "🍕" },
+    { name: "Thai basil stir-fry", tag: "Spicy · 20 min", emoji: "🌶️" },
+    { name: "Creamy tomato orzo", tag: "One pot · 30 min", emoji: "🍅" },
+    { name: "Honey-garlic tofu bowls", tag: "Vegan · 25 min", emoji: "🍯" },
+    { name: "Chickpea coconut curry", tag: "Gluten-free · 30 min", emoji: "🥥" },
+    { name: "Steak + chimichurri", tag: "Weekend treat · 35 min", emoji: "🥩" },
+    { name: "Pesto gnocchi", tag: "Vegetarian · 15 min", emoji: "🌿" },
+    { name: "Shakshuka + crusty bread", tag: "Brinner · 25 min", emoji: "🍳" },
+    { name: "Vietnamese chicken bowls", tag: "Fresh · 30 min", emoji: "🥢" },
+    { name: "Loaded sweet potatoes", tag: "Vegan · 45 min", emoji: "🍠" },
+    { name: "15-min garlic noodles", tag: "Fastest · 15 min", emoji: "🍜" },
+    { name: "Greek sheet-pan meatballs", tag: "One pan · 30 min", emoji: "🫒" },
+    { name: "Butternut squash soup", tag: "Cozy · 40 min", emoji: "🎃" },
+    { name: "Crispy fish tacos", tag: "Crowd-pleaser · 30 min", emoji: "🐠" },
+    { name: "Caprese chicken skillet", tag: "High protein · 25 min", emoji: "🧀" },
+    { name: "Veggie fried rice", tag: "Uses leftovers · 20 min", emoji: "🍚" }
+  ];
+  var DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+  var dayList = document.getElementById("dayList");
+  var groceryCount = document.getElementById("groceryCount");
+  var shuffleBtn = document.getElementById("shuffleBtn");
+
+  function pickMeals(n) {
+    var pool = MEALS.slice();
+    var out = [];
+    while (out.length < n && pool.length) {
+      out.push(pool.splice(Math.floor(Math.random() * pool.length), 1)[0]);
+    }
+    return out;
+  }
+
+  function renderWeek() {
+    var meals = pickMeals(DAYS.length);
+    dayList.innerHTML = "";
+    DAYS.forEach(function (dow, i) {
+      var m = meals[i];
+      var card = document.createElement("div");
+      card.className = "day-card";
+      card.innerHTML =
+        '<span class="emoji">' + m.emoji + '</span>' +
+        '<span><span class="dow">' + dow + '</span>' +
+        '<span class="meal">' + m.name + '</span><br>' +
+        '<span class="tag">' + m.tag + '</span></span>';
+      dayList.appendChild(card);
+    });
+    groceryCount.textContent = "Groceries: " + (18 + Math.floor(Math.random() * 12)) + " items · list ready";
+  }
+
+  shuffleBtn.addEventListener("click", function () {
+    dayList.classList.add("shuffling");
+    setTimeout(function () {
+      renderWeek();
+      dayList.classList.remove("shuffling");
+    }, 220);
+  });
+
+  renderWeek();
+
+  /* ---------- Pricing toggle ---------- */
+  var billingToggle = document.getElementById("billingToggle");
+  billingToggle.addEventListener("click", function () {
+    var annual = billingToggle.getAttribute("aria-checked") !== "true";
+    billingToggle.setAttribute("aria-checked", annual);
+    document.querySelectorAll(".plan .price").forEach(function (el) {
+      el.textContent = annual ? el.dataset.annual : el.dataset.monthly;
+    });
+    document.querySelectorAll(".plan .billing-note").forEach(function (el) {
+      el.textContent = annual ? el.dataset.noteAnnual : el.dataset.noteMonthly;
+    });
+  });
+
+  /* ---------- FAQ accordion ---------- */
+  document.querySelectorAll(".faq-item").forEach(function (item) {
+    var q = item.querySelector(".faq-q");
+    q.addEventListener("click", function () {
+      var isOpen = item.classList.contains("open");
+      document.querySelectorAll(".faq-item.open").forEach(function (o) {
+        o.classList.remove("open");
+        o.querySelector(".faq-q").setAttribute("aria-expanded", "false");
+      });
+      if (!isOpen) {
+        item.classList.add("open");
+        q.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+
+  /* ---------- CTA form ---------- */
+  var form = document.getElementById("ctaForm");
+  var email = document.getElementById("ctaEmail");
+  var success = document.getElementById("ctaSuccess");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var val = email.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+      email.style.borderColor = "#FF9B7A";
+      email.focus();
+      return;
+    }
+    form.style.display = "none";
+    success.style.display = "block";
+  });
+  email.addEventListener("input", function () {
+    email.style.borderColor = "";
+  });
+})();
+</script>
+</body>
+</html>

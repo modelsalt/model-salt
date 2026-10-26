@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 560" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A cheerful white pelican with a golden beak pedals a turquoise bicycle.</desc>
+
+  <rect width="720" height="560" rx="32" fill="#fff5df"/>
+  <circle cx="548" cy="112" r="49" fill="#ffe19a"/>
+  <ellipse cx="365" cy="510" rx="247" ry="15" fill="#e8dcc3"/>
+
+  <g stroke="#263f48" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Wheels and spokes -->
+    <g fill="none">
+      <g stroke="#c0c9c5" stroke-width="2.5">
+        <path d="M214 322V504M123 413H305M150 349L278 477M150 477L278 349"/>
+        <path d="M520 322V504M429 413H611M456 349L584 477M456 477L584 349"/>
+      </g>
+      <g stroke-width="11">
+        <circle cx="214" cy="413" r="91"/>
+        <circle cx="520" cy="413" r="91"/>
+      </g>
+      <g stroke="#fffdf5" stroke-width="3">
+        <circle cx="214" cy="413" r="81"/>
+        <circle cx="520" cy="413" r="81"/>
+      </g>
+    </g>
+
+    <!-- Far leg -->
+    <path d="M302 274L278 337L325 429" fill="none" stroke="#e7a43b" stroke-width="13"/>
+    <path d="M325 425L343 435L311 438Z" fill="#f9bb49" stroke-width="4"/>
+
+    <!-- Bicycle frame -->
+    <g fill="none" stroke="#279e9d" stroke-width="10">
+      <path d="M214 413L313 320L350 413Z"/>
+      <path d="M313 320H464L350 413"/>
+      <path d="M464 320L520 413"/>
+      <path d="M313 320L303 291"/>
+    </g>
+    <path d="M281 291H326" stroke-width="12"/>
+    <path d="M464 320L453 282L479 267H495" fill="none"/>
+    <path d="M483 267H498" stroke="#b46a44" stroke-width="10"/>
+    <circle cx="214" cy="413" r="7" fill="#263f48" stroke="none"/>
+    <circle cx="520" cy="413" r="7" fill="#263f48" stroke="none"/>
+    <circle cx="350" cy="413" r="19" fill="#fff5df" stroke-width="5"/>
+    <path d="M325 429L375 397" fill="none" stroke-width="5"/>
+    <path d="M312 433H337M365 401H390" stroke-width="6"/>
+
+    <!-- Pelican tail and body -->
+    <path d="M271 239L224 216L243 258L226 268L281 279"
+          fill="#f8fcf8" stroke-width="5"/>
+    <path d="M266 228C279 196 328 187 362 212
+             C386 231 380 269 354 288
+             C325 309 279 296 262 272
+             C252 257 256 242 266 228Z"
+          fill="#fffefa" stroke-width="5"/>
+
+    <!-- Long neck -->
+    <path d="M340 222C354 203 353 170 366 144
+             C377 122 397 109 418 114
+             C439 119 447 137 436 154
+             C427 168 408 168 400 182
+             C391 199 400 223 383 242"
+          fill="#fffefa" stroke-width="5"/>
+
+    <!-- Beak and generous throat pouch -->
+    <path d="M426 146L566 153
+             C552 177 513 199 477 193
+             C451 189 436 173 426 146Z"
+          fill="#ffc65a" stroke-width="5"/>
+    <path d="M427 140C469 136 532 143 574 153L430 157Z"
+          fill="#f1a13b" stroke-width="5"/>
+    <path d="M450 169C469 185 496 188 522 177"
+          fill="none" stroke="#e7a43b" stroke-width="3"/>
+
+    <!-- Face -->
+    <circle cx="414" cy="133" r="5" fill="#263f48" stroke="none"/>
+    <circle cx="416" cy="131" r="1.5" fill="white" stroke="none"/>
+    <path d="M383 116L376 103M391 113L391 100" fill="none" stroke-width="4"/>
+
+    <!-- Near leg and webbed foot -->
+    <path d="M333 284L337 337L375 393"
+          fill="none" stroke="#f3b441" stroke-width="14"/>
+    <path d="M372 387L396 398L366 404L360 398Z"
+          fill="#ffc65a" stroke-width="4"/>
+
+    <!-- Wing reaching for the handlebar -->
+    <path d="M292 234C314 218 344 228 362 247
+             L413 263L481 263
+             L480 275L411 284
+             C377 286 351 273 327 263
+             C310 258 300 249 292 234Z"
+          fill="#e6efeb" stroke-width="5"/>
+    <path d="M310 239C325 243 337 252 346 259M322 235L356 257"
+          fill="none" stroke="#a8bdb7" stroke-width="3"/>
+    <path d="M480 263Q492 264 489 275" fill="none" stroke-width="5"/>
+  </g>
+
+  <!-- A little motion -->
+  <g fill="none" stroke="#cbbf9f" stroke-width="4" stroke-linecap="round">
+    <path d="M109 359H76M101 378H57M112 397H86"/>
+  </g>
+</svg>

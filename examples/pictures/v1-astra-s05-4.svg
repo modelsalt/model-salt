@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="560" viewBox="0 0 720 560" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A round turquoise cartoon pelican with a large orange bill pedals a pink bicycle, shown in side profile.</desc>
+
+  <rect width="720" height="560" rx="32" fill="#fff5d9"/>
+
+  <!-- Bicycle wheels -->
+  <g fill="#fffdf5" stroke="#26324b" stroke-width="9">
+    <circle cx="205" cy="410" r="94"/>
+    <circle cx="525" cy="410" r="94"/>
+  </g>
+  <g fill="none" stroke="#89cacc" stroke-width="3">
+    <circle cx="205" cy="410" r="78"/>
+    <circle cx="525" cy="410" r="78"/>
+    <path d="M205 332v156m-78-78h156m-133-55 110 110m-110 0 110-110
+             M525 332v156m-78-78h156m-133-55 110 110m-110 0 110-110"/>
+  </g>
+
+  <!-- Far leg and pedal -->
+  <path d="m338 278 53 48-40 61" fill="none" stroke="#df792a" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m350 382 28 8-35 8z" fill="#ffb52e" stroke="#26324b" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M338 401h44" stroke="#26324b" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- Frame -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m205 410 76-128 62 128H205l244-128H281m168 0 76 128"
+          stroke="#26324b" stroke-width="15"/>
+    <path d="m205 410 76-128 62 128H205l244-128H281m168 0 76 128"
+          stroke="#f24b87" stroke-width="9"/>
+    <path d="m281 282-13-31m181 31-17-53 35-11q20-5 20 12"
+          stroke="#26324b" stroke-width="9"/>
+    <path d="M245 250h57" stroke="#26324b" stroke-width="14"/>
+  </g>
+
+  <!-- Pelican tail and round body -->
+  <path d="m260 223-63-39 16 54 49 23" fill="#13b9bc" stroke="#26324b" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M252 176c32-28 83-29 119-9l39 51c7 42-26 81-83 81-60 0-99-28-99-64 0-23 9-43 24-59z"
+        fill="#36d4c7" stroke="#26324b" stroke-width="6"/>
+  <path d="M286 254c23 28 77 32 102-1 13-16 17-36 13-51-20 18-35 33-62 39-19 5-35 7-53 13z"
+        fill="#fff5d9"/>
+
+  <!-- Short neck and oversized head -->
+  <path d="M345 211c-9-24-26-42-25-71 1-41 30-70 70-70 42 0 73 30 73 68 0 31-17 54-44 66l-17 35"
+        fill="#36d4c7" stroke="#26324b" stroke-width="6" stroke-linecap="round"/>
+  <path d="m346 79-7-24 25 15 10-22 12 22" fill="#36d4c7" stroke="#26324b" stroke-width="5" stroke-linejoin="round"/>
+
+  <!-- Large bill and hanging throat pouch -->
+  <path d="M435 145h196c-28 28-64 67-114 67-40 0-66-25-82-67z"
+        fill="#ff8c43" stroke="#26324b" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M435 130c61-4 140 5 196 15H435z"
+        fill="#ffce39" stroke="#26324b" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M452 163c18 26 39 34 61 34" fill="none" stroke="#c74d48" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Face -->
+  <ellipse cx="414" cy="116" rx="15" ry="19" fill="#fffdf5"/>
+  <circle cx="420" cy="118" r="7" fill="#26324b"/>
+  <circle cx="422" cy="115" r="2" fill="#fffdf5"/>
+  <path d="M402 88q12-7 23 0" fill="none" stroke="#26324b" stroke-width="5" stroke-linecap="round"/>
+  <ellipse cx="407" cy="147" rx="13" ry="8" fill="#ff76a4"/>
+
+  <!-- Wing reaching the handlebars -->
+  <path d="M276 199c35-10 62 8 86 30l72-10c13-2 19 11 7 17l-77 20c-38 2-70-13-88-35"
+        fill="#159cae" stroke="#26324b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m301 215 38 21m-47-8 30 17" fill="none" stroke="#26324b" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Near leg, crank, and webbed foot -->
+  <path d="m318 292-12 51 63 67" fill="none" stroke="#ffb52e" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="343" cy="410" r="16" fill="#ffce39" stroke="#26324b" stroke-width="6"/>
+  <path d="m343 410 39 27" stroke="#26324b" stroke-width="7" stroke-linecap="round"/>
+  <path d="m369 407 34 20-10 5-39-2z" fill="#ffb52e" stroke="#26324b" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M360 439h46" stroke="#26324b" stroke-width="8" stroke-linecap="round"/>
+
+  <g fill="#ffce39" stroke="#26324b" stroke-width="5">
+    <circle cx="205" cy="410" r="9"/>
+    <circle cx="525" cy="410" r="9"/>
+  </g>
+
+  <!-- Motion marks -->
+  <g stroke="#159cae" stroke-width="5" stroke-linecap="round">
+    <path d="M111 268h47M89 287h53M119 306h30"/>
+  </g>
+</svg>

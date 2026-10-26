@@ -1,0 +1,211 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <!-- Clip path for the wheels to keep everything strictly flat and lineless -->
+    <clipPath id="rear-wheel-clip">
+      <circle cx="220" cy="410" r="95" />
+    </clipPath>
+    <clipPath id="front-wheel-clip">
+      <circle cx="580" cy="410" r="95" />
+    </clipPath>
+  </defs>
+
+  <!-- Background: Warm Retro Cream -->
+  <rect width="800" height="600" fill="#F4EFE6" />
+
+  <!-- Background Sun / Geometric Accent: Muted Ochre -->
+  <circle cx="400" cy="300" r="220" fill="#EFE4CE" />
+  
+  <!-- Ground Plane: Warm Sand -->
+  <path d="M 80 505 C 80 500, 720 500, 720 505 C 720 510, 80 510, 80 505 Z" fill="#E2D3B9" />
+
+  <!-- ==================== FAR SIDE ELEMENTS (SHADOWED) ==================== -->
+  
+  <!-- Far Pedal & Crank -->
+  <path d="M 365 405 L 325 355 L 335 348 L 375 398 Z" fill="#10252A" />
+  <rect x="310" y="346" width="32" height="10" rx="5" fill="#10252A" />
+
+  <!-- Far Leg (Dark Burnt Orange) -->
+  <!-- Thigh -->
+  <path d="M 320 270 L 375 310 L 363 325 L 308 285 Z" fill="#9E3814" />
+  <!-- Lower Leg -->
+  <path d="M 372 315 L 335 352 L 323 342 L 360 305 Z" fill="#9E3814" />
+  <!-- Webbed Foot -->
+  <path d="M 325 346 L 355 348 L 348 358 L 315 355 Z" fill="#9E3814" />
+
+  <!-- Far Wing (Darker Teal-Grey reaching to far handlebar) -->
+  <path d="M 380 185 C 440 185, 515 215, 585 265 C 595 272, 585 282, 575 278 C 510 250, 440 245, 375 225 Z" fill="#234952" />
+
+  <!-- Far Drop Handlebar -->
+  <path d="M 550 225 L 595 225 C 625 225, 625 280, 590 280 L 565 280 L 565 266 L 590 266 C 607 266, 607 239, 595 239 L 550 239 Z" fill="#10252A" />
+  <!-- Far Brake Hood -->
+  <path d="M 605 228 L 622 215 L 627 228 L 612 240 Z" fill="#10252A" />
+
+
+  <!-- ==================== WHEELS ==================== -->
+
+  <!-- Rear Wheel -->
+  <g id="rear-wheel">
+    <!-- Spokes (Flat shapes) -->
+    <g fill="#E2D3B9">
+      <rect x="218" y="315" width="4" height="190" />
+      <rect x="218" y="315" width="4" height="190" transform="rotate(30 220 410)" />
+      <rect x="218" y="315" width="4" height="190" transform="rotate(60 220 410)" />
+      <rect x="218" y="315" width="4" height="190" transform="rotate(90 220 410)" />
+      <rect x="218" y="315" width="4" height="190" transform="rotate(120 220 410)" />
+      <rect x="218" y="315" width="4" height="190" transform="rotate(150 220 410)" />
+    </g>
+    <!-- Tire (Dark Slate Teal) & Deep Aero Rim (Ochre) -->
+    <path d="M 220 315 A 95 95 0 1 0 220 505 A 95 95 0 1 0 220 315 Z M 220 331 A 79 79 0 1 1 220 489 A 79 79 0 1 1 220 331 Z" fill="#162B30" fill-rule="evenodd" />
+    <path d="M 220 331 A 79 79 0 1 0 220 489 A 79 79 0 1 0 220 331 Z M 220 347 A 63 63 0 1 1 220 473 A 63 63 0 1 1 220 347 Z" fill="#D8973C" fill-rule="evenodd" />
+    <!-- Rear Hub / Cassette -->
+    <circle cx="220" cy="410" r="18" fill="#10252A" />
+    <circle cx="220" cy="410" r="10" fill="#D8973C" />
+  </g>
+
+  <!-- Front Wheel -->
+  <g id="front-wheel">
+    <!-- Spokes (Flat shapes) -->
+    <g fill="#E2D3B9">
+      <rect x="578" y="315" width="4" height="190" />
+      <rect x="578" y="315" width="4" height="190" transform="rotate(30 580 410)" />
+      <rect x="578" y="315" width="4" height="190" transform="rotate(60 580 410)" />
+      <rect x="578" y="315" width="4" height="190" transform="rotate(90 580 410)" />
+      <rect x="578" y="315" width="4" height="190" transform="rotate(120 580 410)" />
+      <rect x="578" y="315" width="4" height="190" transform="rotate(150 580 410)" />
+    </g>
+    <!-- Tire (Dark Slate Teal) & Deep Aero Rim (Ochre) -->
+    <path d="M 580 315 A 95 95 0 1 0 580 505 A 95 95 0 1 0 580 315 Z M 580 331 A 79 79 0 1 1 580 489 A 79 79 0 1 1 580 331 Z" fill="#162B30" fill-rule="evenodd" />
+    <path d="M 580 331 A 79 79 0 1 0 580 489 A 79 79 0 1 0 580 331 Z M 580 347 A 63 63 0 1 1 580 473 A 63 63 0 1 1 580 347 Z" fill="#D8973C" fill-rule="evenodd" />
+    <!-- Front Hub -->
+    <circle cx="580" cy="410" r="12" fill="#10252A" />
+  </g>
+
+
+  <!-- ==================== BICYCLE FRAME (MODERN ROAD BIKE) ==================== -->
+
+  <!-- Seatpost & stem (Dark Slate) -->
+  <path d="M 315 268 L 298 220 L 314 220 L 331 268 Z" fill="#162B30" />
+  <path d="M 520 250 L 512 225 L 560 225 L 560 241 L 528 241 L 535 250 Z" fill="#162B30" />
+
+  <!-- Racing Saddle -->
+  <path d="M 265 215 C 265 208, 305 210, 345 218 C 350 220, 345 226, 330 226 C 310 226, 295 232, 275 225 C 268 222, 265 218, 265 215 Z" fill="#10252A" />
+
+  <!-- Main Carbon Aero Frame (Burnt Orange / Terracotta) -->
+  <g fill="#C84B20">
+    <!-- Top Tube (Sloping aero profile) -->
+    <path d="M 318 265 L 532 252 L 536 270 L 324 285 Z" />
+    <!-- Down Tube (Thick aero profile) -->
+    <path d="M 526 265 L 378 415 L 360 400 L 515 252 Z" />
+    <!-- Seat Tube -->
+    <path d="M 312 262 L 332 262 L 380 405 L 360 412 Z" />
+    <!-- Head Tube -->
+    <path d="M 515 242 L 535 238 L 548 282 L 526 286 Z" />
+    <!-- Aero Fork (Bladed) -->
+    <path d="M 526 280 L 547 276 L 588 410 L 574 414 Z" />
+    <!-- Dropped Seat Stays (Modern road bike geometry) -->
+    <path d="M 332 295 L 338 307 L 222 414 L 216 404 Z" />
+    <!-- Chain Stays -->
+    <path d="M 370 398 L 370 415 L 218 416 L 218 404 Z" />
+  </g>
+
+
+  <!-- ==================== PELICAN (SIDE PROFILE FACING RIGHT) ==================== -->
+
+  <!-- Tail Feathers -->
+  <path d="M 255 245 L 195 230 L 210 248 L 190 258 L 220 268 L 265 272 Z" fill="#2A5C6A" />
+
+  <!-- Main Body (Rich Retro Teal) -->
+  <path d="M 250 250 
+           C 235 210, 290 215, 340 205 
+           C 385 195, 425 160, 425 125 
+           C 425 95, 420 85, 455 85 
+           C 465 115, 460 140, 468 175 
+           C 476 210, 445 265, 390 278 
+           C 335 290, 265 285, 250 250 Z" fill="#3B7A8C" />
+
+  <!-- White/Cream Belly Patch -->
+  <path d="M 275 268 C 325 285, 395 280, 440 245 C 425 275, 345 292, 275 268 Z" fill="#F4EFE6" />
+
+  <!-- Head & Crest (Seamless continuation of neck, facing right) -->
+  <path d="M 425 125 
+           C 422 95, 405 85, 392 80 
+           C 408 75, 418 75, 412 68 
+           C 430 65, 455 60, 472 72 
+           C 488 82, 488 105, 468 125 Z" fill="#3B7A8C" />
+
+  <!-- White Face/Cheek Patch -->
+  <circle cx="464" cy="92" r="14" fill="#F4EFE6" />
+
+  <!-- Eye (Solid Dark Slate with a tiny flat highlight) -->
+  <circle cx="467" cy="90" r="6" fill="#10252A" />
+  <circle cx="469" cy="88" r="2" fill="#F4EFE6" />
+
+  <!-- Relaxed Throat Pouch (Deep Burnt Orange / Rust, tucked neatly under closed beak) -->
+  <path d="M 475 102 
+           C 535 102, 625 98, 638 100 
+           C 625 122, 575 152, 520 156 
+           C 480 158, 462 140, 456 120 
+           Z" fill="#B84018" />
+  <!-- Subtle Pouch Fold Shading (Flat) -->
+  <path d="M 475 102 C 520 128, 580 125, 625 105 C 585 138, 525 145, 462 125 Z" fill="#9E3814" />
+
+  <!-- Upper Beak (Warm Ochre, closed neatly) -->
+  <path d="M 474 74 
+           C 525 78, 595 82, 642 87 
+           C 650 88, 653 96, 646 103 
+           L 638 102 
+           C 580 99, 520 102, 470 105 
+           Z" fill="#E8A838" />
+  <!-- Beak Tip Hook (Burnt Orange Accent) -->
+  <path d="M 632 86 C 642 87, 652 90, 647 103 L 637 102 C 640 95, 638 90, 632 86 Z" fill="#C84B20" />
+
+
+  <!-- ==================== FOREGROUND DRIVE & CONTROLS ==================== -->
+
+  <!-- Crankset & Chain (Dark Slate & Ochre) -->
+  <!-- Chain -->
+  <path d="M 220 396 L 370 385 L 370 425 L 220 422 L 220 415 L 365 418 L 365 392 L 220 403 Z" fill="#B5895A" />
+  <!-- Chainring -->
+  <circle cx="370" cy="405" r="24" fill="#10252A" />
+  <circle cx="370" cy="405" r="14" fill="#D8973C" />
+  <!-- Near Crank Arm (Angled down/forward) -->
+  <path d="M 374 400 L 408 455 L 396 462 L 362 408 Z" fill="#162B30" />
+  <!-- Near Pedal -->
+  <rect x="386" y="453" width="34" height="10" rx="5" fill="#10252A" />
+
+  <!-- Near Leg (Extended down to lower pedal, vibrant Burnt Orange) -->
+  <!-- Thigh -->
+  <path d="M 315 272 L 368 352 L 352 362 L 298 282 Z" fill="#DF5A28" />
+  <!-- Knee Joint -->
+  <circle cx="360" cy="357" r="9" fill="#DF5A28" />
+  <!-- Lower Leg -->
+  <path d="M 367 355 L 402 454 L 388 458 L 353 359 Z" fill="#DF5A28" />
+  <!-- Webbed Foot (Planted flat on the pedal) -->
+  <path d="M 388 452 L 428 454 C 432 454, 430 462, 422 462 L 385 460 Z" fill="#DF5A28" />
+
+  <!-- Near Drop Handlebar -->
+  <path d="M 535 232 L 580 232 C 612 232, 612 290, 575 290 L 550 290 L 550 274 L 575 274 C 594 274, 594 248, 580 248 L 535 248 Z" fill="#162B30" />
+  <!-- Near Brake Hood -->
+  <path d="M 592 236 L 610 222 L 616 236 L 600 250 Z" fill="#162B30" />
+
+  <!-- Near Wing (Reaching forward to grip the drop handlebar) -->
+  <!-- Main Wing Mass (Lighter Retro Teal) -->
+  <path d="M 360 195 
+           C 395 180, 445 205, 495 235 
+           C 535 258, 565 268, 588 270 
+           C 596 272, 595 288, 580 288 
+           C 530 288, 470 265, 420 250 
+           C 375 236, 345 220, 360 195 Z" fill="#5299A8" />
+  
+  <!-- Wing Primary Feathers (Darker Teal layered flat at the tip/grip) -->
+  <path d="M 480 267 
+           C 525 278, 560 280, 588 270 
+           C 596 272, 596 282, 584 285 
+           C 592 288, 588 295, 574 293 
+           C 580 298, 572 302, 558 296 
+           C 525 290, 495 278, 480 267 Z" fill="#2A5C6A" />
+  
+  <!-- Secondary Feather Accent Strip (Ochre/Cream) -->
+  <path d="M 372 225 C 415 240, 465 255, 515 265 C 495 268, 425 252, 372 225 Z" fill="#EFE4CE" />
+
+</svg>

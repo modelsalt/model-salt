@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forkast — Meal planning, on autopilot</title>
+<meta name="description" content="Forkast builds your weekly meal plan, writes your grocery list, and tracks your nutrition — so 'what's for dinner?' answers itself.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍴</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #06080c;
+    --bg-2: #0a0e15;
+    --text: #eef2f6;
+    --muted: #93a0b4;
+    --neon: #b8f53d;
+    --neon-soft: rgba(184, 245, 61, .14);
+    --cyan: #67e8f9;
+    --violet: #a78bfa;
+    --card: rgba(255, 255, 255, .045);
+    --border: rgba(255, 255, 255, .09);
+    --radius: 22px;
+    --font-display: 'Sora', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--neon); color: #0a0f05; }
+
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #1e2632; border-radius: 6px; }
+  ::-webkit-scrollbar-thumb:hover { background: #2a3542; }
+
+  h1, h2, h3 { font-family: var(--font-display); line-height: 1.12; letter-spacing: -.02em; }
+
+  a { color: inherit; text-decoration: none; }
+
+  section { scroll-margin-top: 90px; position: relative; }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+
+  /* ---------- shared bits ---------- */
+  .glass {
+    background: linear-gradient(160deg, rgba(255,255,255,.06), rgba(255,255,255,.018));
+    border: 1px solid var(--border);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    border-radius: var(--radius);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--neon);
+    padding: 7px 16px;
+    border: 1px solid rgba(184,245,61,.28);
+    border-radius: 100px;
+    background: var(--neon-soft);
+  }
+
+  .gradient-text {
+    background: linear-gradient(100deg, var(--neon) 10%, var(--cyan) 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-size: .95rem;
+    font-weight: 600;
+    padding: 14px 28px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    white-space: nowrap;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #c9ff52, #8fe63a);
+    color: #0c1204;
+    box-shadow: 0 0 0 1px rgba(198,255,77,.35), 0 10px 34px -8px rgba(163,230,53,.55);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 1px rgba(198,255,77,.5), 0 16px 44px -8px rgba(163,230,53,.7);
+  }
+
+  .btn-ghost {
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+  .btn-ghost:hover { transform: translateY(-2px); border-color: rgba(184,245,61,.45); }
+
+  /* ---------- scroll reveal ---------- */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity .8s cubic-bezier(.22,.61,.36,1) var(--d, 0s),
+                transform .8s cubic-bezier(.22,.61,.36,1) var(--d, 0s);
+    will-change: opacity, transform;
+  }
+  [data-reveal="left"]  { transform: translateX(-46px); }
+  [data-reveal="right"] { transform: translateX(46px); }
+  [data-reveal="scale"] { transform: scale(.92); }
+  [data-reveal].revealed { opacity: 1; transform: none; }
+
+  /* ---------- nav ---------- */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    transition: background .35s ease, border-color .35s ease, box-shadow .35s ease;
+    border-bottom: 1px solid transparent;
+  }
+  .nav.scrolled {
+    background: rgba(6, 8, 12, .72);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+    border-bottom-color: var(--border);
+    box-shadow: 0 10px 40px -20px rgba(0,0,0,.8);
+  }
+  .nav-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .logo { display: flex; align-items: center; gap: 11px; font-family: var(--font-display); font-weight: 700; font-size: 1.18rem; }
+  .logo-mark {
+    width: 36px; height: 36px;
+    display: grid; place-items: center;
+    border-radius: 11px;
+    background: linear-gradient(135deg, #c9ff52, #5cc9e0);
+    font-size: 1.05rem;
+    box-shadow: 0 6px 20px -6px rgba(163,230,53,.6);
+  }
+  .nav-links { display: flex; gap: 34px; font-size: .9rem; color: var(--muted); }
+  .nav-links a { transition: color .2s; position: relative; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a::after {
+    content: '';
+    position: absolute; left: 0; bottom: -6px;
+    width: 0; height: 2px; border-radius: 2px;
+    background: var(--neon);
+    transition: width .25s ease;
+  }
+  .nav-links a:hover::after { width: 100%; }
+  .nav .btn { padding: 11px 22px; font-size: .87rem; }
+
+  /* ---------- dot nav ---------- */
+  .dot-nav {
+    position: fixed;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .dot-nav a {
+    position: relative;
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.16);
+    transition: background .3s, transform .3s, box-shadow .3s;
+  }
+  .dot-nav a:hover { background: rgba(255,255,255,.45); transform: scale(1.25); }
+  .dot-nav a.active {
+    background: var(--neon);
+    transform: scale(1.3);
+    box-shadow: 0 0 0 4px rgba(184,245,61,.18), 0 0 14px rgba(184,245,61,.7);
+  }
+  .dot-nav a::after {
+    content: attr(data-label);
+    position: absolute;
+    right: 26px; top: 50%;
+    transform: translateY(-50%) translateX(6px);
+    font-size: .74rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    color: var(--text);
+    background: rgba(14,18,26,.9);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s, transform .25s;
+  }
+  .dot-nav a:hover::after { opacity: 1; transform: translateY(-50%) translateX(0); }
+
+  /* ---------- hero ---------- */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 150px 0 90px;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px);
+    background-size: 58px 58px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black, transparent 72%);
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black, transparent 72%);
+    pointer-events: none;
+  }
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    pointer-events: none;
+    will-change: transform;
+  }
+  .orb-lime   { width: 480px; height: 480px; background: rgba(163,230,53,.17); top: -140px; right: -80px; }
+  .orb-violet { width: 420px; height: 420px; background: rgba(167,139,250,.13); bottom: -160px; left: -120px; }
+  .orb-cyan   { width: 300px; height: 300px; background: rgba(103,232,249,.10); top: 38%; left: 34%; }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.6rem, 5.6vw, 4.3rem);
+    font-weight: 800;
+    margin: 26px 0 22px;
+  }
+  .hero-sub {
+    font-size: 1.13rem;
+    color: var(--muted);
+    max-width: 480px;
+    margin-bottom: 34px;
+  }
+
+  .pulse-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--neon);
+    box-shadow: 0 0 0 0 rgba(184,245,61,.6);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(184,245,61,.55); }
+    70%  { box-shadow: 0 0 0 9px rgba(184,245,61,0); }
+    100% { box-shadow: 0 0 0 0 rgba(184,245,61,0); }
+  }
+
+  /* waitlist form */
+  .wl-form {
+    display: flex;
+    gap: 10px;
+    max-width: 470px;
+    padding: 7px;
+    border-radius: 17px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    transition: border-color .3s, box-shadow .3s;
+  }
+  .wl-form:focus-within {
+    border-color: rgba(184,245,61,.5);
+    box-shadow: 0 0 0 4px rgba(184,245,61,.09), 0 12px 40px -14px rgba(163,230,53,.35);
+  }
+  .wl-form input {
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: .95rem;
+    padding: 0 12px;
+  }
+  .wl-form input::placeholder { color: #5d6b7f; }
+  .wl-form.shake { animation: shake .45s ease; border-color: rgba(255,110,110,.6); }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20% { transform: translateX(-7px); }
+    40% { transform: translateX(7px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+  }
+  .wl-note { font-size: .8rem; color: #66748a; margin-top: 14px; display: flex; gap: 16px; flex-wrap: wrap; }
+  .wl-note span::before { content: '✓ '; color: var(--neon); font-weight: 700; }
+
+  .form-success {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    max-width: 470px;
+    padding: 18px 22px;
+    animation: pop-in .5s cubic-bezier(.34,1.56,.64,1);
+  }
+  @keyframes pop-in {
+    from { opacity: 0; transform: scale(.9) translateY(10px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .fs-check {
+    flex-shrink: 0;
+    width: 44px; height: 44px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #c9ff52, #8fe63a);
+    color: #0c1204;
+    font-weight: 800;
+    font-size: 1.2rem;
+    box-shadow: 0 0 22px rgba(163,230,53,.55);
+  }
+  .form-success p { font-size: .86rem; color: var(--muted); }
+  .form-success b { font-size: .98rem; }
+
+  .social-proof { display: flex; align-items: center; gap: 15px; margin-top: 38px; }
+  .avatar-stack { display: flex; }
+  .avatar {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: .72rem; font-weight: 700;
+    border: 2px solid var(--bg);
+    margin-left: -10px;
+  }
+  .avatar:first-child { margin-left: 0; }
+  .stars { color: var(--neon); letter-spacing: 2px; font-size: .82rem; }
+  .social-proof small { color: var(--muted); font-size: .83rem; }
+
+  /* hero visual: phone + floating chips */
+  .hero-visual { position: relative; display: flex; justify-content: center; }
+  .parallax-layer { will-change: transform; transform: translate(var(--px,0), var(--py,0)); }
+
+  .phone {
+    width: 300px;
+    border-radius: 42px;
+    padding: 14px;
+    background: linear-gradient(165deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
+    border: 1px solid rgba(255,255,255,.14);
+    box-shadow: 0 40px 90px -30px rgba(0,0,0,.85), 0 0 70px -18px rgba(163,230,53,.28);
+    position: relative;
+    z-index: 3;
+  }
+  .phone-screen {
+    background: #0b0f16;
+    border-radius: 32px;
+    padding: 22px 18px;
+    overflow: hidden;
+  }
+  .phone-notch {
+    width: 92px; height: 7px;
+    border-radius: 6px;
+    background: rgba(255,255,255,.14);
+    margin: 0 auto 18px;
+  }
+  .ph-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .ph-title { font-family: var(--font-display); font-weight: 700; font-size: 1.02rem; display: block; }
+  .ph-sub { font-size: .72rem; color: var(--muted); }
+  .ph-ring {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    background: conic-gradient(var(--neon) 74%, rgba(255,255,255,.09) 0);
+    display: grid; place-items: center;
+    font-size: .62rem; font-weight: 700;
+  }
+  .ph-ring::before {
+    content: '74%';
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: #0b0f16;
+    display: grid; place-items: center;
+    color: var(--neon);
+  }
+  .ph-ring span { display: none; }
+  .ph-days { display: flex; gap: 6px; margin-bottom: 16px; }
+  .ph-day {
+    flex: 1;
+    text-align: center;
+    font-size: .62rem;
+    font-weight: 600;
+    padding: 7px 0;
+    border-radius: 9px;
+    background: rgba(255,255,255,.05);
+    color: var(--muted);
+  }
+  .ph-day.on {
+    background: var(--neon-soft);
+    color: var(--neon);
+    border: 1px solid rgba(184,245,61,.35);
+  }
+  .ph-meal {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 10px;
+    border-radius: 14px;
+    background: rgba(255,255,255,.035);
+    border: 1px solid rgba(255,255,255,.06);
+    margin-bottom: 8px;
+  }
+  .ph-emoji {
+    width: 38px; height: 38px;
+    border-radius: 11px;
+    display: grid; place-items: center;
+    font-size: 1.1rem;
+    background: rgba(255,255,255,.07);
+    flex-shrink: 0;
+  }
+  .ph-meal b { display: block; font-size: .78rem; }
+  .ph-meal span { font-size: .64rem; color: var(--muted); }
+  .ph-check {
+    margin-left: auto;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: .6rem; font-weight: 800;
+    background: var(--neon);
+    color: #0c1204;
+    flex-shrink: 0;
+  }
+  .ph-check.dim { background: rgba(255,255,255,.1); color: var(--muted); }
+  .ph-cta {
+    margin-top: 12px;
+    text-align: center;
+    font-size: .76rem;
+    font-weight: 700;
+    color: #0c1204;
+    padding: 11px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #c9ff52, #8fe63a);
+  }
+
+  .chip-wrap { position: absolute; z-index: 4; }
+  .chip {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 11px 17px;
+    border-radius: 15px;
+    font-size: .8rem;
+    font-weight: 600;
+    box-shadow: 0 18px 44px -14px rgba(0,0,0,.7);
+  }
+  .chip small { display: block; font-weight: 500; color: var(--muted); font-size: .66rem; }
+  .chip-emoji { font-size: 1.15rem; }
+  .cw-1 { top: 6%; left: -4%; }
+  .cw-2 { top: 34%; right: -6%; }
+  .cw-3 { bottom: 10%; left: 2%; }
+  .float-a { animation: bob 5.2s ease-in-out infinite; }
+  .float-b { animation: bob 6.4s ease-in-out .8s infinite; }
+  .float-c { animation: bob 5.8s ease-in-out 1.6s infinite; }
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-13px); }
+  }
+
+  /* ---------- marquee ---------- */
+  .marquee-band {
+    padding: 26px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
+    mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 16px;
+    width: max-content;
+    animation: marquee 34s linear infinite;
+  }
+  .marquee-band:hover .marquee-track { animation-play-state: paused; }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 20px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    font-size: .84rem;
+    font-weight: 500;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  /* ---------- stats ---------- */
+  .stats { padding: 84px 0 20px; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .stat {
+    text-align: center;
+    padding: 34px 18px;
+    transition: transform .3s ease, border-color .3s ease;
+  }
+  .stat:hover { transform: translateY(-5px); border-color: rgba(184,245,61,.35); }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 3.4vw, 2.7rem);
+    font-weight: 800;
+    background: linear-gradient(120deg, var(--neon), var(--cyan));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .stat-label { font-size: .84rem; color: var(--muted); margin-top: 6px; }
+
+  /* ---------- section headers ---------- */
+  .sec-head { text-align: center; max-width: 640px; margin: 0 auto 64px; }
+  .sec-head h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 700; margin: 20px 0 16px; }
+  .sec-head p { color: var(--muted); font-size: 1.04rem; }
+
+  /* ---------- features: alternating splits ---------- */
+  .features { padding: 110px 0 40px; }
+  .feature-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    align-items: center;
+    padding: 56px 0;
+  }
+  .feature-row.flip .fr-text { order: 2; }
+  .feature-row.flip .fr-visual { order: 1; }
+  .fr-icon {
+    width: 52px; height: 52px;
+    display: grid; place-items: center;
+    border-radius: 15px;
+    font-size: 1.35rem;
+    background: var(--neon-soft);
+    border: 1px solid rgba(184,245,61,.3);
+    margin-bottom: 22px;
+  }
+  .fr-text h3 { font-size: clamp(1.5rem, 2.6vw, 2.05rem); font-weight: 700; margin-bottom: 16px; }
+  .fr-text > p { color: var(--muted); margin-bottom: 24px; }
+  .fr-list { list-style: none; display: grid; gap: 13px; }
+  .fr-list li { display: flex; gap: 12px; align-items: flex-start; font-size: .94rem; color: #c4cdd9; }
+  .fr-list .tick {
+    flex-shrink: 0;
+    width: 21px; height: 21px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--neon-soft);
+    border: 1px solid rgba(184,245,61,.4);
+    color: var(--neon);
+    font-size: .62rem;
+    font-weight: 800;
+    margin-top: 2px;
+  }
+  .fr-visual { position: relative; }
+  .fr-visual .mock { padding: 26px; box-shadow: 0 34px 80px -32px rgba(0,0,0,.8); }
+  .mock-glow {
+    position: absolute; inset: 8% 6%;
+    background: radial-gradient(ellipse at center, rgba(163,230,53,.14), transparent 70%);
+    filter: blur(36px);
+    z-index: -1;
+  }
+
+  /* mock: week grid */
+  .week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-top: 14px; }
+  .wg-cell {
+    border-radius: 12px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.06);
+    padding: 12px 4px;
+    text-align: center;
+    position: relative;
+  }
+  .wg-cell .e { font-size: 1.25rem; display: block; }
+  .wg-cell .d { font-size: .58rem; color: var(--muted); font-weight: 600; letter-spacing: .05em; }
+  .wg-cell.hot { border-color: rgba(184,245,61,.5); background: var(--neon-soft); }
+  .wg-swap {
+    position: absolute;
+    top: -9px; right: -9px;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #c9ff52, #8fe63a);
+    color: #0c1204;
+    display: grid; place-items: center;
+    font-size: .6rem;
+    font-weight: 800;
+    box-shadow: 0 0 12px rgba(163,230,53,.6);
+  }
+  .mock-label { font-size: .74rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .12em; }
+  .mock-head-row { display: flex; justify-content: space-between; align-items: center; }
+  .mock-badge { font-size: .68rem; color: var(--neon); background: var(--neon-soft); padding: 4px 11px; border-radius: 100px; border: 1px solid rgba(184,245,61,.3); }
+
+  /* mock: grocery list */
+  .g-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 4px;
+    font-size: .88rem;
+    border-bottom: 1px solid rgba(255,255,255,.05);
+  }
+  .g-item:last-of-type { border-bottom: none; }
+  .g-box {
+    width: 19px; height: 19px;
+    border-radius: 6px;
+    border: 1.5px solid rgba(255,255,255,.22);
+    display: grid; place-items: center;
+    font-size: .58rem;
+    color: #0c1204;
+    flex-shrink: 0;
+  }
+  .g-item.done .g-box { background: var(--neon); border-color: var(--neon); font-weight: 800; }
+  .g-item.done span { color: #5d6b7f; text-decoration: line-through; }
+  .g-cat { font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--neon); margin: 16px 0 4px; }
+  .g-progress { margin-top: 18px; }
+  .g-progress-bar { height: 7px; border-radius: 6px; background: rgba(255,255,255,.07); overflow: hidden; }
+  .g-progress-fill {
+    height: 100%;
+    width: 68%;
+    border-radius: 6px;
+    background: linear-gradient(90deg, var(--neon), var(--cyan));
+    box-shadow: 0 0 12px rgba(163,230,53,.5);
+  }
+  .g-progress small { display: block; margin-top: 8px; font-size: .72rem; color: var(--muted); }
+
+  /* mock: macro rings */
+  .rings-row { display: flex; justify-content: space-around; gap: 14px; margin-top: 22px; }
+  .ring-wrap { text-align: center; }
+  .ring {
+    width: 92px; height: 92px;
+    border-radius: 50%;
+    background: conic-gradient(var(--rc, var(--neon)) calc(var(--p) * 1%), rgba(255,255,255,.08) 0);
+    display: grid; place-items: center;
+    margin: 0 auto 10px;
+    position: relative;
+  }
+  .ring::before {
+    content: '';
+    position: absolute;
+    inset: 9px;
+    border-radius: 50%;
+    background: #0c1018;
+  }
+  .ring b { position: relative; font-family: var(--font-display); font-size: 1.02rem; }
+  .ring-wrap span { font-size: .74rem; color: var(--muted); }
+  .ring-note {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 13px 16px;
+    border-radius: 13px;
+    background: var(--neon-soft);
+    border: 1px solid rgba(184,245,61,.25);
+    font-size: .8rem;
+    color: #d8e6c0;
+  }
+
+  /* ---------- how it works ---------- */
+  .how { padding: 110px 0; }
+  .how-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 70px; align-items: start; }
+  .how-left { position: sticky; top: 120px; }
+  .how-left h2 { font-size: clamp(1.9rem, 3.6vw, 2.7rem); font-weight: 700; margin: 20px 0 18px; }
+  .how-left p { color: var(--muted); margin-bottom: 30px; max-width: 400px; }
+  .how-steps { display: grid; gap: 22px; position: relative; }
+  .how-steps::before {
+    content: '';
+    position: absolute;
+    left: 33px; top: 40px; bottom: 40px;
+    width: 2px;
+    background: linear-gradient(180deg, rgba(184,245,61,.5), rgba(103,232,249,.3), transparent);
+  }
+  .step {
+    display: flex;
+    gap: 24px;
+    padding: 28px;
+    position: relative;
+    transition: transform .3s ease, border-color .3s ease;
+  }
+  .step:hover { transform: translateX(8px); border-color: rgba(184,245,61,.35); }
+  .step-num {
+    flex-shrink: 0;
+    width: 66px; height: 66px;
+    border-radius: 19px;
+    display: grid; place-items: center;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--neon);
+    background: var(--neon-soft);
+    border: 1px solid rgba(184,245,61,.35);
+    position: relative;
+    z-index: 2;
+  }
+  .step h3 { font-size: 1.18rem; margin-bottom: 8px; }
+  .step p { color: var(--muted); font-size: .93rem; }
+
+  /* ---------- testimonials ---------- */
+  .voices { padding: 110px 0; }
+  .voice-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .voice-card {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+  }
+  .voice-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(184,245,61,.35);
+    box-shadow: 0 30px 60px -28px rgba(0,0,0,.85), 0 0 40px -18px rgba(163,230,53,.3);
+  }
+  .voice-card .stars { font-size: .95rem; }
+  .voice-card blockquote { font-size: .98rem; color: #d3dae4; flex: 1; }
+  .voice-who { display: flex; align-items: center; gap: 13px; }
+  .voice-who .avatar { width: 44px; height: 44px; margin: 0; font-size: .82rem; border: none; }
+  .voice-who b { display: block; font-size: .92rem; }
+  .voice-who span { font-size: .78rem; color: var(--muted); }
+
+  /* ---------- pricing ---------- */
+  .pricing { padding: 110px 0; }
+  .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
+  .price-card {
+    padding: 38px 32px;
+    display: flex;
+    flex-direction: column;
+    transition: transform .3s ease, border-color .3s ease;
+    position: relative;
+  }
+  .price-card:hover { transform: translateY(-8px); }
+  .price-card.hot {
+    border-color: rgba(184,245,61,.55);
+    background: linear-gradient(165deg, rgba(184,245,61,.09), rgba(255,255,255,.02));
+    box-shadow: 0 0 60px -18px rgba(163,230,53,.4), 0 34px 70px -30px rgba(0,0,0,.85);
+    transform: scale(1.04);
+  }
+  .price-card.hot:hover { transform: scale(1.04) translateY(-8px); }
+  .hot-badge {
+    position: absolute;
+    top: -14px; left: 50%;
+    transform: translateX(-50%);
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #0c1204;
+    background: linear-gradient(135deg, #c9ff52, #8fe63a);
+    padding: 6px 18px;
+    border-radius: 100px;
+    box-shadow: 0 6px 20px -4px rgba(163,230,53,.6);
+    white-space: nowrap;
+  }
+  .price-name { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; }
+  .price-desc { font-size: .84rem; color: var(--muted); margin: 6px 0 24px; }
+  .price-amount { font-family: var(--font-display); font-size: 2.9rem; font-weight: 800; }
+  .price-amount small { font-size: .95rem; font-weight: 500; color: var(--muted); }
+  .price-list { list-style: none; display: grid; gap: 12px; margin: 28px 0 32px; flex: 1; }
+  .price-list li { display: flex; gap: 11px; font-size: .9rem; color: #c4cdd9; align-items: flex-start; }
+  .price-list li::before { content: '✓'; color: var(--neon); font-weight: 800; flex-shrink: 0; }
+  .price-card .btn { width: 100%; }
+
+  /* ---------- final CTA ---------- */
+  .cta { padding: 60px 0 120px; }
+  .cta-panel {
+    position: relative;
+    text-align: center;
+    padding: 84px 40px;
+    overflow: hidden;
+  }
+  .cta-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 55% 70% at 50% 0%, rgba(163,230,53,.15), transparent 70%),
+      radial-gradient(ellipse 40% 60% at 85% 100%, rgba(103,232,249,.09), transparent 70%);
+    pointer-events: none;
+  }
+  .cta-panel h2 { font-size: clamp(2rem, 4.4vw, 3.1rem); font-weight: 800; margin-bottom: 18px; position: relative; }
+  .cta-panel > p { color: var(--muted); max-width: 460px; margin: 0 auto 36px; position: relative; }
+  .cta-panel .wl-form, .cta-panel .form-success { margin: 0 auto; position: relative; }
+  .cta-panel .wl-note { justify-content: center; position: relative; }
+
+  /* ---------- footer ---------- */
+  footer { border-top: 1px solid var(--border); padding: 70px 0 36px; background: rgba(255,255,255,.012); }
+  .foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 54px; }
+  .foot-grid p { color: var(--muted); font-size: .88rem; margin-top: 16px; max-width: 280px; }
+  .foot-col h4 { font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text); margin-bottom: 18px; }
+  .foot-col a { display: block; color: var(--muted); font-size: .88rem; margin-bottom: 11px; transition: color .2s; }
+  .foot-col a:hover { color: var(--neon); }
+  .foot-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: .8rem;
+    color: #5d6b7f;
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 1100px) {
+    .dot-nav { display: none; }
+  }
+  @media (max-width: 980px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 80px; text-align: center; }
+    .hero-sub { margin-left: auto; margin-right: auto; }
+    .wl-form, .form-success { margin-left: auto; margin-right: auto; }
+    .wl-note { justify-content: center; }
+    .social-proof { justify-content: center; }
+    .feature-row, .feature-row.flip { grid-template-columns: 1fr; gap: 40px; }
+    .feature-row.flip .fr-text { order: 1; }
+    .feature-row.flip .fr-visual { order: 2; }
+    .fr-text { text-align: center; max-width: 560px; margin: 0 auto; }
+    .fr-list li { text-align: left; }
+    .fr-icon { margin-left: auto; margin-right: auto; }
+    .how-grid { grid-template-columns: 1fr; gap: 50px; }
+    .how-left { position: static; text-align: center; }
+    .how-left p { margin-left: auto; margin-right: auto; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .voice-grid, .price-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+    .price-card.hot { transform: none; }
+    .price-card.hot:hover { transform: translateY(-8px); }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .phone { width: 268px; }
+    .cw-1 { left: -2%; top: 2%; }
+    .cw-2 { right: -2%; }
+    .chip { padding: 9px 13px; font-size: .72rem; }
+    .wl-form { flex-direction: column; padding: 10px; }
+    .wl-form input { padding: 12px; }
+    .rings-row { flex-wrap: wrap; }
+    .cta-panel { padding: 60px 24px; }
+    .foot-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    html { scroll-behavior: auto; }
+    [data-reveal] { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="logo"><span class="logo-mark">🍴</span>Forkast</a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#voices">Reviews</a>
+        <a href="#pricing">Pricing</a>
+      </div>
+      <a href="#cta" class="btn btn-primary">Join waitlist</a>
+    </div>
+  </nav>
+
+  <!-- ============ DOT NAV ============ -->
+  <nav class="dot-nav" aria-label="Section navigation">
+    <a href="#hero" data-label="Home" class="active"></a>
+    <a href="#features" data-label="Features"></a>
+    <a href="#how" data-label="How it works"></a>
+    <a href="#voices" data-label="Reviews"></a>
+    <a href="#pricing" data-label="Pricing"></a>
+    <a href="#cta" data-label="Join waitlist"></a>
+  </nav>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <div class="orb orb-lime" data-speed="0.08"></div>
+      <div class="orb orb-violet" data-speed="-0.05"></div>
+      <div class="orb orb-cyan" data-speed="0.12"></div>
+
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow" data-reveal><span class="pulse-dot"></span>Now accepting early access</span>
+          <h1 data-reveal style="--d:.1s">Dinner decisions,<br><span class="gradient-text">done for you.</span></h1>
+          <p class="hero-sub" data-reveal style="--d:.2s">Forkast builds your weekly meal plan, writes your grocery list, and tracks your nutrition — so “what's for dinner?” answers itself.</p>
+
+          <div data-reveal style="--d:.3s">
+            <form class="wl-form" id="hero-form" novalidate>
+              <label for="hero-email" class="sr-only" style="position:absolute;left:-9999px;">Email address</label>
+              <input type="email" id="hero-email" placeholder="you@example.com" autocomplete="email">
+              <button type="submit" class="btn btn-primary">Get early access →</button>
+            </form>
+            <div class="wl-note">
+              <span>Free during beta</span>
+              <span>No credit card</span>
+              <span>Cancel anytime</span>
+            </div>
+          </div>
+
+          <div class="social-proof" data-reveal style="--d:.4s">
+            <div class="avatar-stack">
+              <div class="avatar" style="background:linear-gradient(135deg,#f9a8d4,#c084fc)">JM</div>
+              <div class="avatar" style="background:linear-gradient(135deg,#67e8f9,#34d399)">TK</div>
+              <div class="avatar" style="background:linear-gradient(135deg,#fdba74,#fb7185)">AS</div>
+              <div class="avatar" style="background:linear-gradient(135deg,#c9ff52,#4ade80)">+</div>
+            </div>
+            <div>
+              <div class="stars">★★★★★</div>
+              <small>4.9 from 2,300+ beta cooks</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual" data-reveal="scale" style="--d:.25s">
+          <div class="chip-wrap cw-1 parallax-layer" data-depth="1.4">
+            <div class="chip glass float-a"><span class="chip-emoji">🥑</span><div>+18g healthy fats<small>vs. last week</small></div></div>
+          </div>
+          <div class="chip-wrap cw-2 parallax-layer" data-depth="2">
+            <div class="chip glass float-b"><span class="chip-emoji">🛒</span><div>List ready<small>24 items · 4 stores</small></div></div>
+          </div>
+          <div class="chip-wrap cw-3 parallax-layer" data-depth="1.1">
+            <div class="chip glass float-c"><span class="chip-emoji">🔥</span><div>12-day streak<small>home-cooked dinners</small></div></div>
+          </div>
+
+          <div class="phone parallax-layer" data-depth="0.5">
+            <div class="phone-screen">
+              <div class="phone-notch"></div>
+              <div class="ph-head">
+                <div><span class="ph-title">This Week</span><span class="ph-sub">Oct 14 – 20</span></div>
+                <div class="ph-ring"><span>74%</span></div>
+              </div>
+              <div class="ph-days">
+                <div class="ph-day">M</div><div class="ph-day">T</div><div class="ph-day on">W</div>
+                <div class="ph-day">T</div><div class="ph-day">F</div><div class="ph-day">S</div><div class="ph-day">S</div>
+              </div>
+              <div class="ph-meal"><div class="ph-emoji">🥗</div><div><b>Harvest Grain Bowl</b><span>512 kcal · 24g protein</span></div><div class="ph-check">✓</div></div>
+              <div class="ph-meal"><div class="ph-emoji">🍜</div><div><b>Ginger Miso Ramen</b><span>640 kcal · 31g protein</span></div><div class="ph-check">✓</div></div>
+              <div class="ph-meal"><div class="ph-emoji">🌮</div><div><b>Chipotle Fish Tacos</b><span>485 kcal · 28g protein</span></div><div class="ph-check dim">○</div></div>
+              <div class="ph-cta">✨ Generate next week</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee-band" aria-hidden="true">
+      <div class="marquee-track" id="marquee-track">
+        <span class="tag">🌮 Taco Tuesday</span><span class="tag">🥑 Keto-friendly</span>
+        <span class="tag">🍜 Asian fusion</span><span class="tag">🥗 Plant-based</span>
+        <span class="tag">🍝 Italian classics</span><span class="tag">🫙 Pantry-first</span>
+        <span class="tag">🍛 Curry night</span><span class="tag">🥪 Meal prep</span>
+        <span class="tag">🍣 Poke bowls</span><span class="tag">🥘 One-pot wonders</span>
+        <span class="tag">🌯 Tex-Mex</span><span class="tag">🍲 Slow cooker</span>
+      </div>
+    </div>
+
+    <!-- ============ STATS ============ -->
+    <section class="stats">
+      <div class="wrap stats-grid">
+        <div class="stat glass" data-reveal><div class="stat-num" data-count="42000" data-suffix="+">0</div><div class="stat-label">cooks on the waitlist</div></div>
+        <div class="stat glass" data-reveal style="--d:.1s"><div class="stat-num" data-count="1.4" data-decimals="1" data-suffix="M">0</div><div class="stat-label">meals planned</div></div>
+        <div class="stat glass" data-reveal style="--d:.2s"><div class="stat-num" data-count="31" data-suffix=" min">0</div><div class="stat-label">saved daily, on average</div></div>
+        <div class="stat glass" data-reveal style="--d:.3s"><div class="stat-num" data-count="4.9" data-decimals="1" data-suffix="★">0</div><div class="stat-label">average beta rating</div></div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURES ============ -->
+    <section class="features" id="features">
+      <div class="wrap">
+        <div class="sec-head" data-reveal>
+          <span class="eyebrow">Features</span>
+          <h2>Everything dinner,<br><span class="gradient-text">handled.</span></h2>
+          <p>Three tools that work as one: a plan you'll actually follow, a list that writes itself, and nutrition you never have to think about.</p>
+        </div>
+
+        <!-- Feature 1 -->
+        <div class="feature-row">
+          <div class="fr-text" data-reveal="left">
+            <div class="fr-icon">🗓️</div>
+            <h3>A plan that actually fits your week</h3>
+            <p>Forkast learns your tastes, schedule, and what's already in your kitchen — then drafts a week of meals in seconds. Don't love Tuesday? Swap it with one tap.</p>
+            <ul class="fr-list">
+              <li><span class="tick">✓</span>Leftover-aware planning cuts food waste by up to 40%</li>
+              <li><span class="tick">✓</span>30-minute and 5-ingredient filters for busy nights</li>
+              <li><span class="tick">✓</span>Handles allergies, dislikes, and 20+ diet styles</li>
+            </ul>
+          </div>
+          <div class="fr-visual" data-reveal="right">
+            <div class="mock-glow"></div>
+            <div class="mock glass">
+              <div class="mock-head-row"><span class="mock-label">Your week</span><span class="mock-badge">✨ Auto-planned</span></div>
+              <div class="week-grid">
+                <div class="wg-cell"><span class="e">🥗</span><span class="d">MON</span></div>
+                <div class="wg-cell"><span class="e">🍝</span><span class="d">TUE</span></div>
+                <div class="wg-cell hot"><span class="e">🌮</span><span class="d">WED</span><span class="wg-swap">⇄</span></div>
+                <div class="wg-cell"><span class="e">🍛</span><span class="d">THU</span></div>
+                <div class="wg-cell"><span class="e">🍕</span><span class="d">FRI</span></div>
+                <div class="wg-cell"><span class="e">🥘</span><span class="d">SAT</span></div>
+                <div class="wg-cell"><span class="e">🍲</span><span class="d">SUN</span></div>
+              </div>
+              <div class="ring-note">💡 Wednesday reuses Monday's quinoa — nothing goes to waste.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-row flip">
+          <div class="fr-text" data-reveal="right">
+            <div class="fr-icon">🛒</div>
+            <h3>Your grocery list writes itself</h3>
+            <p>Every ingredient from your plan, consolidated, deduplicated, and sorted by aisle. Check items off as you shop — or send the whole list to delivery in one tap.</p>
+            <ul class="fr-list">
+              <li><span class="tick">✓</span>Smart quantities — never buy a third jar of cumin again</li>
+              <li><span class="tick">✓</span>Shared lists sync in real time with your household</li>
+              <li><span class="tick">✓</span>Works with Instacart, Amazon Fresh, and more</li>
+            </ul>
+          </div>
+          <div class="fr-visual" data-reveal="left">
+            <div class="mock-glow"></div>
+            <div class="mock glass">
+              <div class="mock-head-row"><span class="mock-label">Grocery list</span><span class="mock-badge">24 items</span></div>
+              <div class="g-cat">Produce</div>
+              <div class="g-item done"><span class="g-box">✓</span><span>Avocados × 3</span></div>
+              <div class="g-item done"><span class="g-box">✓</span><span>Baby spinach, 5 oz</span></div>
+              <div class="g-item"><span class="g-box"></span><span>Cherry tomatoes, 1 pint</span></div>
+              <div class="g-cat">Pantry</div>
+              <div class="g-item done"><span class="g-box">✓</span><span>Quinoa, 1 bag</span></div>
+              <div class="g-item"><span class="g-box"></span><span>Miso paste</span></div>
+              <div class="g-item"><span class="g-box"></span><span>Chipotle peppers in adobo</span></div>
+              <div class="g-progress">
+                <div class="g-progress-bar"><div class="g-progress-fill"></div></div>
+                <small>16 of 24 items collected · sorted by aisle</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-row">
+          <div class="fr-text" data-reveal="left">
+            <div class="fr-icon">⚡</div>
+            <h3>Nutrition on autopilot</h3>
+            <p>Macros, calories, and micronutrients are calculated for every meal before it ever hits your plan. Set a goal once — Forkast quietly steers every week toward it.</p>
+            <ul class="fr-list">
+              <li><span class="tick">✓</span>Protein, calorie, or macro targets built into every plan</li>
+              <li><span class="tick">✓</span>Gentle nudges, never guilt trips</li>
+              <li><span class="tick">✓</span>Weekly trends you can actually understand</li>
+            </ul>
+          </div>
+          <div class="fr-visual" data-reveal="right">
+            <div class="mock-glow"></div>
+            <div class="mock glass">
+              <div class="mock-head-row"><span class="mock-label">Today so far</span><span class="mock-badge">On track</span></div>
+              <div class="rings-row">
+                <div class="ring-wrap"><div class="ring" style="--p:82;--rc:#b8f53d"><b>82%</b></div><span>Protein</span></div>
+                <div class="ring-wrap"><div class="ring" style="--p:64;--rc:#67e8f9"><b>64%</b></div><span>Carbs</span></div>
+                <div class="ring-wrap"><div class="ring" style="--p:71;--rc:#a78bfa"><b>71%</b></div><span>Fats</span></div>
+              </div>
+              <div class="ring-note">🎯 Dinner's ramen lands you 6g over your protein goal. Nice.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section class="how" id="how">
+      <div class="wrap how-grid">
+        <div class="how-left" data-reveal="left">
+          <span class="eyebrow">How it works</span>
+          <h2>Zero to planned<br>in <span class="gradient-text">3 steps</span></h2>
+          <p>No recipe hoarding, no spreadsheet gymnastics. Tell us about your table once, and Forkast does the weekly heavy lifting from then on.</p>
+          <a href="#cta" class="btn btn-ghost">Start planning free →</a>
+        </div>
+        <div class="how-steps">
+          <div class="step glass" data-reveal>
+            <div class="step-num">01</div>
+            <div>
+              <h3>Tell us your tastes</h3>
+              <p>A 90-second quiz covers diets, allergies, dislikes, cooking time, and how many mouths you're feeding. Forkast builds your flavor profile.</p>
+            </div>
+          </div>
+          <div class="step glass" data-reveal style="--d:.12s">
+            <div class="step-num">02</div>
+            <div>
+              <h3>Get your weekly plan</h3>
+              <p>Every Sunday, a fresh week of meals lands in your inbox — breakfast through dinner. Swap anything with one tap and the whole week rebalances.</p>
+            </div>
+          </div>
+          <div class="step glass" data-reveal style="--d:.24s">
+            <div class="step-num">03</div>
+            <div>
+              <h3>Shop, cook, repeat</h3>
+              <p>Your consolidated grocery list is ready when you are. Cook along with step-by-step mode, log what you loved, and next week gets even better.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TESTIMONIALS ============ -->
+    <section class="voices" id="voices">
+      <div class="wrap">
+        <div class="sec-head" data-reveal>
+          <span class="eyebrow">Loved by beta cooks</span>
+          <h2>Don't take our<br><span class="gradient-text">word for it.</span></h2>
+          <p>Thousands of households already let Forkast answer the hardest question of the day.</p>
+        </div>
+        <div class="voice-grid">
+          <div class="voice-card glass" data-reveal>
+            <div class="stars">★★★★★</div>
+            <blockquote>“I used to spend my Sunday stressed over a Pinterest board with 400 saved recipes. Now my week is planned before my coffee's done. The grocery list alone is worth it.”</blockquote>
+            <div class="voice-who">
+              <div class="avatar" style="background:linear-gradient(135deg,#f9a8d4,#c084fc)">JM</div>
+              <div><b>Jess M.</b><span>Parent of three · Beta since March</span></div>
+            </div>
+          </div>
+          <div class="voice-card glass" data-reveal style="--d:.12s">
+            <div class="stars">★★★★★</div>
+            <blockquote>“As someone tracking protein for the first time, this is the only app that made it feel effortless. It plans around my goal instead of making me do math at 7pm.”</blockquote>
+            <div class="voice-who">
+              <div class="avatar" style="background:linear-gradient(135deg,#67e8f9,#34d399)">TK</div>
+              <div><b>Tom K.</b><span>Marathon trainee · Pro member</span></div>
+            </div>
+          </div>
+          <div class="voice-card glass" data-reveal style="--d:.24s">
+            <div class="stars">★★★★★</div>
+            <blockquote>“The leftover-aware thing is genuinely magic. Our food waste dropped so much that the app paid for itself in the first month. Also: the chipotle fish tacos. Wow.”</blockquote>
+            <div class="voice-who">
+              <div class="avatar" style="background:linear-gradient(135deg,#fdba74,#fb7185)">AS</div>
+              <div><b>Amara S.</b><span>Home cook · Beta since January</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PRICING ============ -->
+    <section class="pricing" id="pricing">
+      <div class="wrap">
+        <div class="sec-head" data-reveal>
+          <span class="eyebrow">Pricing</span>
+          <h2>Cheaper than<br><span class="gradient-text">one takeout night.</span></h2>
+          <p>Every plan starts with a free 14-day Pro trial. No credit card required, cancel in two taps.</p>
+        </div>
+        <div class="price-grid">
+          <div class="price-card glass" data-reveal>
+            <div class="price-name">Starter</div>
+            <div class="price-desc">Dip a toe in the water</div>
+            <div class="price-amount">$0<small>/forever</small></div>
+            <ul class="price-list">
+              <li>3 dinners planned per week</li>
+              <li>Basic grocery lists</li>
+              <li>1 profile</li>
+              <li>500+ recipe library</li>
+            </ul>
+            <a href="#cta" class="btn btn-ghost">Join waitlist</a>
+          </div>
+          <div class="price-card glass hot" data-reveal style="--d:.12s">
+            <div class="hot-badge">Most popular</div>
+            <div class="price-name">Pro</div>
+            <div class="price-desc">The full week, handled</div>
+            <div class="price-amount">$6<small>/month</small></div>
+            <ul class="price-list">
+              <li>Unlimited meal plans, all meals</li>
+              <li>Smart lists + delivery integrations</li>
+              <li>Full nutrition tracking &amp; goals</li>
+              <li>Leftover-aware planning</li>
+              <li>2 profiles</li>
+            </ul>
+            <a href="#cta" class="btn btn-primary">Get early access</a>
+          </div>
+          <div class="price-card glass" data-reveal style="--d:.24s">
+            <div class="price-name">Family</div>
+            <div class="price-desc">Feed the whole crew</div>
+            <div class="price-amount">$10<small>/month</small></div>
+            <ul class="price-list">
+              <li>Everything in Pro</li>
+              <li>Up to 6 profiles with own tastes</li>
+              <li>Kid-friendly &amp; picky-eater filters</li>
+              <li>Shared real-time grocery lists</li>
+              <li>Weekly budget tracking</li>
+            </ul>
+            <a href="#cta" class="btn btn-ghost">Join waitlist</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA ============ -->
+    <section class="cta" id="cta">
+      <div class="wrap">
+        <div class="cta-panel glass" data-reveal="scale">
+          <h2>Be first at <span class="gradient-text">the table.</span></h2>
+          <p>Join 42,000+ cooks on the waitlist. Invites go out weekly — launch is this fall on iOS &amp; Android.</p>
+          <form class="wl-form" id="cta-form" novalidate>
+            <label for="cta-email" style="position:absolute;left:-9999px;">Email address</label>
+            <input type="email" id="cta-email" placeholder="you@example.com" autocomplete="email">
+            <button type="submit" class="btn btn-primary">Reserve my spot →</button>
+          </form>
+          <div class="wl-note">
+            <span>Free during beta</span>
+            <span>Invites sent weekly</span>
+            <span>Unsubscribe anytime</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <a href="#hero" class="logo"><span class="logo-mark">🍴</span>Forkast</a>
+          <p>Meal planning on autopilot. Plan the week, shop once, cook happy.</p>
+        </div>
+        <div class="foot-col">
+          <h4>Product</h4>
+          <a href="#features">Features</a>
+          <a href="#how">How it works</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#cta">Waitlist</a>
+        </div>
+        <div class="foot-col">
+          <h4>Company</h4>
+          <a href="#">About</a>
+          <a href="#">Blog</a>
+          <a href="#">Careers</a>
+          <a href="#">Press kit</a>
+        </div>
+        <div class="foot-col">
+          <h4>Legal</h4>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2025 Forkast, Inc. All rights reserved.</span>
+        <span>Made with 🥑 and very little food waste.</span>
+      </div>
+    </div>
+  </footer>
+
+<script>
+(function () {
+  'use strict';
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- nav scrolled state ---------- */
+  var nav = document.getElementById('nav');
+  function onNavScroll() {
+    nav.classList.toggle('scrolled', window.scrollY > 24);
+  }
+  window.addEventListener('scroll', onNavScroll, { passive: true });
+  onNavScroll();
+
+  /* ---------- scroll-triggered reveals ---------- */
+  var revealEls = document.querySelectorAll('[data-reveal]');
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    var revealIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealIO.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function (el) { revealIO.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('revealed'); });
+  }
+
+  /* ---------- side dot nav: active section ---------- */
+  var dots = document.querySelectorAll('.dot-nav a');
+  var sectionIds = ['hero', 'features', 'how', 'voices', 'pricing', 'cta'];
+  var sections = sectionIds.map(function (id) { return document.getElementById(id); });
+
+  if ('IntersectionObserver' in window) {
+    var dotIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var idx = sections.indexOf(entry.target);
+          dots.forEach(function (d, i) { d.classList.toggle('active', i === idx); });
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+    sections.forEach(function (s) { if (s) dotIO.observe(s); });
+  }
+
+  /* ---------- animated counters ---------- */
+  function animateCount(el) {
+    var target = parseFloat(el.dataset.count);
+    var decimals = parseInt(el.dataset.decimals || '0', 10);
+    var suffix = el.dataset.suffix || '';
+    var duration = 1700;
+    var start = null;
+    function frame(t) {
+      if (!start) start = t;
+      var p = Math.min((t - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      var v = target * eased;
+      el.textContent = (decimals ? v.toFixed(decimals) : Math.round(v).toLocaleString('en-US')) + suffix;
+      if (p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+  var counters = document.querySelectorAll('[data-count]');
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    var countIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          countIO.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(function (c) { countIO.observe(c); });
+  } else {
+    counters.forEach(function (c) {
+      var decimals = parseInt(c.dataset.decimals || '0', 10);
+      var v = parseFloat(c.dataset.count);
+      c.textContent = (decimals ? v.toFixed(decimals) : Math.round(v).toLocaleString('en-US')) + (c.dataset.suffix || '');
+    });
+  }
+
+  /* ---------- light parallax: hero mouse + orb scroll ---------- */
+  var layers = document.querySelectorAll('.parallax-layer');
+  var orbs = document.querySelectorAll('.orb');
+  var hero = document.getElementById('hero');
+  var mx = 0, my = 0, cx = 0, cy = 0, ticking = false;
+
+  if (!reduceMotion) {
+    hero.addEventListener('mousemove', function (e) {
+      var r = hero.getBoundingClientRect();
+      mx = (e.clientX - r.left) / r.width - 0.5;
+      my = (e.clientY - r.top) / r.height - 0.5;
+    });
+    hero.addEventListener('mouseleave', function () { mx = 0; my = 0; });
+
+    function parallaxTick() {
+      cx += (mx - cx) * 0.055;
+      cy += (my - cy) * 0.055;
+      layers.forEach(function (el) {
+        var d = parseFloat(el.dataset.depth || '1');
+        el.style.setProperty('--px', (cx * d * 34).toFixed(2) + 'px');
+        el.style.setProperty('--py', (cy * d * 34).toFixed(2) + 'px');
+      });
+      requestAnimationFrame(parallaxTick);
+    }
+    requestAnimationFrame(parallaxTick);
+
+    function orbTick() {
+      var y = window.scrollY;
+      orbs.forEach(function (o) {
+        o.style.transform = 'translate3d(0,' + (y * parseFloat(o.dataset.speed || '0')).toFixed(1) + 'px,0)';
+      });
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { requestAnimationFrame(orbTick); ticking = true; }
+    }, { passive: true });
+  }
+
+  /* ---------- waitlist forms ---------- */
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  function setupForm(formId) {
+    var form = document.getElementById(formId);
+    if (!form) return;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var input = form.querySelector('input[type="email"]');
+      var email = input.value.trim();
+      if (!EMAIL_RE.test(email)) {
+        form.classList.remove('shake');
+        void form.offsetWidth; /* restart animation */
+        form.classList.add('shake');
+        input.focus();
+        return;
+      }
+      var success = document.createElement('div');
+      success.className = 'form-success glass';
+      success.innerHTML =
+        '<div class="fs-check">✓</div>' +
+        '<div><b>You\'re on the list! 🎉</b>' +
+        '<p>We\'ll email <b></b> the moment your invite is ready.</p></div>';
+      success.querySelector('p b').textContent = email;
+      form.replaceWith(success);
+    });
+  }
+  setupForm('hero-form');
+  setupForm('cta-form');
+
+  /* ---------- marquee: duplicate track for seamless loop ---------- */
+  var track = document.getElementById('marquee-track');
+  if (track) track.innerHTML += track.innerHTML;
+})();
+</script>
+</body>
+</html>

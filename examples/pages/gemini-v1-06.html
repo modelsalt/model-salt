@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VERDURE — Artisanal Meal Planning & Sommelier Pairings</title>
+  <!-- Clean Sans-Serif Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      /* Fresh Organic Minimalism Palette */
+      --bg-cream: #FBF9F5;
+      --card-cream: #F3EFE6;
+      --card-white: #FFFFFF;
+      --sage-tint: #E6EFE9;
+      --sage-mid: #A3BFA8;
+      --leaf-green: #2C5E3B;
+      --deep-forest: #163020;
+      --botanical-accent: #4A8B5B;
+      --warm-sand: #E2DBC9;
+      --text-dark: #16261C;
+      --text-muted: #5A6B5E;
+      --wine-berry: #6E2E3A;
+      --wine-tint: #F7ECEE;
+      --border-subtle: rgba(22, 48, 32, 0.09);
+      --shadow-soft: 0 12px 32px -8px rgba(22, 48, 32, 0.06);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-pill: 999px;
+      --transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 4rem;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Top Minimal Navbar */
+    header {
+      padding: 1.5rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(251, 249, 245, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 2rem;
+    }
+
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--deep-forest);
+      font-weight: 800;
+      font-size: 1.35rem;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: var(--deep-forest);
+      color: var(--bg-cream);
+      display: grid;
+      place-items: center;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--deep-forest);
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    /* Buttons & Badges */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.92rem;
+      padding: 0.75rem 1.35rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background-color: var(--deep-forest);
+      color: var(--bg-cream);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--leaf-green);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background-color: var(--card-white);
+      color: var(--deep-forest);
+      border-color: var(--border-subtle);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--deep-forest);
+      background-color: var(--sage-tint);
+    }
+
+    /* Store Badges */
+    .store-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .store-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--deep-forest);
+      color: var(--bg-cream);
+      padding: 0.65rem 1.2rem;
+      border-radius: 14px;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .store-badge:hover {
+      background: var(--leaf-green);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px -6px rgba(22, 48, 32, 0.25);
+    }
+
+    .store-badge svg {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    .badge-text {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      line-height: 1.15;
+    }
+
+    .badge-sub {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      opacity: 0.8;
+      font-weight: 500;
+    }
+
+    .badge-main {
+      font-size: 0.98rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .qr-trigger-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      background: var(--sage-tint);
+      color: var(--deep-forest);
+      padding: 0.65rem 1.15rem;
+      border-radius: 14px;
+      border: 1px solid rgba(44, 94, 59, 0.2);
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: var(--transition);
+      height: 54px;
+    }
+
+    .qr-trigger-btn:hover {
+      background: var(--sage-mid);
+      color: var(--deep-forest);
+      transform: translateY(-2px);
+    }
+
+    /* Unified Bento-Box Modular Grid Layout */
+    .bento-dashboard {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: minmax(min-content, auto);
+      gap: 1.25rem;
+    }
+
+    .bento-tile {
+      background: var(--card-white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      padding: 2rem;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+       justify-content: space-between;
+      transition: var(--transition);
+    }
+
+    .bento-tile:hover {
+      border-color: rgba(44, 94, 59, 0.22);
+    }
+
+    /* Tag Pill */
+    .eyebrow-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.38rem 0.85rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      background: var(--sage-tint);
+      color: var(--leaf-green);
+      width: fit-content;
+      margin-bottom: 1.1rem;
+    }
+
+    .eyebrow-pill.wine {
+      background: var(--wine-tint);
+      color: var(--wine-berry);
+    }
+
+    /* Tile 1: Main Hero Tile (8 cols) */
+    .tile-hero {
+      grid-column: span 8;
+      background: linear-gradient(135deg, #FFFFFF 0%, #F4F7F4 100%);
+      padding: 2.75rem;
+      min-height: 440px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.1rem, 3.8vw, 3.35rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+      color: var(--deep-forest);
+      margin-bottom: 1.15rem;
+      max-width: 18ch;
+    }
+
+    .hero-title span {
+      color: var(--leaf-green);
+      background: linear-gradient(120deg, var(--sage-tint) 0%, var(--sage-tint) 100%);
+      padding: 0 0.3rem;
+      border-radius: 10px;
+    }
+
+    .hero-sub {
+      font-size: 1.08rem;
+      color: var(--text-muted);
+      max-width: 54ch;
+      margin-bottom: 2rem;
+      font-weight: 400;
+    }
+
+    /* Tile 2: Live Dish & Sommelier Spotlight (4 cols) */
+    .tile-spotlight {
+      grid-column: span 4;
+      background: var(--deep-forest);
+      color: var(--bg-cream);
+      padding: 2rem;
+      position: relative;
+    }
+
+    .spotlight-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.12);
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-pill);
+      color: #D4E7D8;
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      background: #68D391;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #68D391;
+    }
+
+    .dish-visual {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .dish-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+      letter-spacing: -0.02em;
+    }
+
+    .dish-meta {
+      font-size: 0.83rem;
+      color: var(--sage-mid);
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .pairing-card {
+      background: rgba(22, 48, 32, 0.65);
+      border-left: 3px solid #D98A98;
+      padding: 0.85rem 1rem;
+      border-radius: 10px;
+      font-size: 0.86rem;
+    }
+
+    .pairing-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #E8B4BC;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    /* Tile 3: Interactive Quiz & 3-Day Gourmet Generator (8 cols) */
+    .tile-interactive-quiz {
+      grid-column: span 8;
+      grid-row: span 2;
+      background: var(--card-white);
+      padding: 2.25rem;
+    }
+
+    .quiz-header {
+      display: flex;
+       flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .quiz-title {
+      font-size: 1.55rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--deep-forest);
+    }
+
+    .quiz-controls {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .control-group {
+      background: var(--bg-cream);
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .control-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.65rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .pill-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .quiz-option {
+      text-align: left;
+      background: var(--card-white);
+      border: 1px solid var(--border-subtle);
+      padding: 0.55rem 0.8rem;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .quiz-option:hover {
+      border-color: var(--leaf-green);
+    }
+
+    .quiz-option.active {
+      background: var(--deep-forest);
+      color: var(--bg-cream);
+      border-color: var(--deep-forest);
+    }
+
+    .quiz-option.active::after {
+      content: "✓";
+      font-size: 0.78rem;
+      color: var(--sage-mid);
+    }
+
+    /* Generated 3-Day Menu Output */
+    .plan-output-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .plan-summary-badge {
+      font-size: 0.83rem;
+      font-weight: 600;
+      color: var(--leaf-green);
+      background: var(--sage-tint);
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-pill);
+    }
+
+    .three-day-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .day-card {
+      background: var(--bg-cream);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition);
+      animation: fadeIn 0.35s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0.4; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .day-card:hover {
+      background: var(--sage-tint);
+      border-color: var(--sage-mid);
+    }
+
+    .day-num {
+      font-size: 0.73rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--leaf-green);
+      margin-bottom: 0.4rem;
+    }
+
+    .day-course {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--deep-forest);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .day-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .day-footer {
+      border-top: 1px dashed rgba(22, 48, 32, 0.14);
+      padding-top: 0.75rem;
+      margin-top: auto;
+    }
+
+    .wine-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.45rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--wine-berry);
+    }
+
+    .prep-tag {
+      display: inline-block;
+      margin-top: 0.45rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.7);
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+    }
+
+    /* Tile 4: Culinary Metrics Tile (4 cols) */
+    .tile-metrics {
+      grid-column: span 4;
+      background: var(--card-cream);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+      margin-top: 1rem;
+    }
+
+    .metric-box {
+      background: var(--card-white);
+      padding: 1.15rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .metric-val {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--deep-forest);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .metric-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+      font-weight: 500;
+    }
+
+    /* Tile 5: Sommelier Algorithm Feature (4 cols) */
+    .tile-sommelier {
+      grid-column: span 4;
+      background: linear-gradient(180deg, #FBF9F5 0%, #F5EBEF 100%);
+    }
+
+    .aroma-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 1rem;
+    }
+
+    .aroma-tag {
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 0.35rem 0.7rem;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--wine-berry);
+      border: 1px solid rgba(110, 46, 58, 0.15);
+    }
+
+    /* Tile 6: Zero-Waste Artisanal Grocer List (4 cols) */
+    .tile-pantry {
+      grid-column: span 4;
+      background: var(--sage-tint);
+    }
+
+    .Checklist-demo {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .check-item {
+      background: var(--card-white);
+      padding: 0.65rem 0.9rem;
+      border-radius: 12px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--deep-forest);
+    }
+
+    .check-item span.aisle {
+      font-size: 0.72rem;
+      color: var(--leaf-green);
+      background: var(--sage-tint);
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+    }
+
+    /* Tile 7: Chef Technique & Mise-en-Place Timers (4 cols) */
+    .tile-technique {
+      grid-column: span 4;
+      background: var(--card-white);
+    }
+
+    .timeline-steps {
+      margin-top: 1rem;
+      border-left: 2px solid var(--sage-mid);
+      padding-left: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .t-step {
+      font-size: 0.83rem;
+    }
+
+    .t-step strong {
+      display: block;
+      color: var(--deep-forest);
+      font-size: 0.85rem;
+    }
+
+    /* Tile 8: Bottom Conversion Banner (4 cols) */
+    .tile-download-cta {
+      grid-column: span 4;
+      background: var(--deep-forest);
+      color: var(--bg-cream);
+    }
+
+    .tile-download-cta h3 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .tile-download-cta p {
+      font-size: 0.88rem;
+      color: var(--sage-mid);
+      margin-bottom: 1.25rem;
+    }
+
+    /* QR Code Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(22, 48, 32, 0.6);
+      backdrop-filter: blur(6px);
+      display: none;
+      place-items: center;
+      z-index: 100;
+      padding: 1.5rem;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .modal-backdrop.open {
+      display: grid;
+      opacity: 1;
+    }
+
+    .qr-modal {
+      background: var(--bg-cream);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      max-width: 420px;
+      width: 100%;
+      padding: 2.25rem;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 24px 48px rgba(0,0,0,0.2);
+      transform: scale(0.95);
+      transition: var(--transition);
+    }
+
+    .modal-backdrop.open .qr-modal {
+      transform: scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border-subtle);
+      background: var(--card-white);
+      color: var(--deep-forest);
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+    }
+
+    .qr-frame {
+      background: var(--card-white);
+      padding: 1.5rem;
+      border-radius: 22px;
+      border: 2px solid var(--sage-mid);
+      width: 210px;
+      height: 210px;
+      margin: 1.25rem auto;
+      display: grid;
+      place-items: center;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1080px) {
+      .tile-hero,
+      .tile-spotlight,
+      .tile-interactive-quiz,
+      .tile-metrics,
+      .tile-sommelier,
+      .tile-pantry,
+      .tile-technique,
+      .tile-download-cta {
+        grid-column: span 12;
+      }
+      .quiz-controls,
+      .three-day-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-links {
+        display: none;
+      }
+      .tile-hero {
+        padding: 1.75rem;
+      }
+      .store-badges {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .store-badge, .qr-trigger-btn {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Minimalist Sticky Header -->
+  <header>
+    <div class="container nav-bar">
+      <a href="#" class="brand">
+        <div class="brand-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+          </svg>
+        </div>
+        VERDURE
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#interactive-planner">Interactive Tasting Quiz</a></li>
+        <li><a href="#sommelier-engine">Wine Pairings</a></li>
+        <li><a href="#artisanal-pantry">Seasonal Sourcing</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <button class="btn btn-outline" onclick="openQRModal()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+          </svg>
+          Scan QR
+        </button>
+        <a href="#interactive-planner" class="btn btn-primary">Build Sample Menu</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Unified Bento-Box Modular Grid Dashboard -->
+  <main class="container">
+    <div class="bento-dashboard">
+
+      <!-- TILE 1: HERO & APP STORE CONVERSION (8 Columns) -->
+      <section class="bento-tile tile-hero">
+        <div>
+          <div class="eyebrow-pill">
+            <span>●</span> Culinary Architecture for Home Cooks
+          </div>
+          <h1 class="hero-title">
+            Elevate weeknight cooking into an <span>artisanal tasting</span> table.
+          </h1>
+          <p class="hero-sub">
+            Designed for gourmet home cooks seeking seasonal culinary inspiration, chef-tested technique timelines, and sommelier-curated wine pairings that harmonize with your pantry.
+          </p>
+        </div>
+
+        <div>
+          <div class="store-badges">
+            <!-- iOS App Store Badge -->
+            <button class="store-badge" onclick="openQRModal('iOS App Store')">
+              <svg viewBox="0 0 384 512">
+                <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+              </svg>
+              <div class="badge-text">
+                <span class="badge-sub">Download on the</span>
+                <span class="badge-main">App Store</span>
+              </div>
+            </button>
+
+            <!-- Google Play Store Badge -->
+            <button class="store-badge" onclick="openQRModal('Google Play')">
+              <svg viewBox="0 0 512 512">
+                <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/>
+              </svg>
+              <div class="badge-text">
+                <span class="badge-sub">Get it on</span>
+                <span class="badge-main">Google Play</span>
+              </div>
+            </button>
+
+            <!-- Scan-to-Download Modal Trigger -->
+            <button class="qr-trigger-btn" onclick="openQRModal()">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/>
+                <rect x="7" y="7" width="3" height="3"/><rect x="14" y="7" width="3" height="3"/><rect x="7" y="14" width="3" height="3"/><rect x="14" y="14" width="3" height="3"/>
+              </svg>
+              Scan-to-Download QR
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- TILE 2: TONIGHT'S CELLAR & TABLE SPOTLIGHT (4 Columns) -->
+      <aside class="bento-tile tile-spotlight">
+        <div>
+          <div class="spotlight-header">
+            <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.75; font-weight: 700;">Tonight's Dispatch</span>
+            <span class="live-badge"><span class="live-dot"></span> Peak Autumn Harvest</span>
+          </div>
+
+          <div class="dish-visual">
+            <div class="dish-title">Charred Maitake & Black Garlic Risotto</div>
+            <div class="dish-meta">
+              <span>⏱ 38 mins active</span>
+              <span>•</span>
+              <span>🔥 Acquerello Carnaroli</span>
+            </div>
+            <div class="pairing-card">
+              <span class="pairing-label">🍷 Sommelier Pairing Note</span>
+              <strong>2021 Jura Trousseau or Barbaresco</strong> — Earthy forest-floor tannins cut through the aged Parmigiano crema.
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; color: var(--sage-mid); padding-top: 0.5rem;">
+          <span>Shared Ingredient Overlap: 84%</span>
+          <span style="color: #fff; font-weight: 600;">Recipe #409 →</span>
+        </div>
+      </aside>
+
+      <!-- TILE 3: INTERACTIVE DIETARY & PALATE QUIZ (8 Columns, 2 Rows) -->
+      <section id="interactive-planner" class="bento-tile tile-interactive-quiz">
+        <div>
+          <div class="quiz-header">
+            <div>
+              <div class="eyebrow-pill" style="margin-bottom: 0.5rem;">Interactive Menu Curator</div>
+              <h2 class="quiz-title">Configure Your 3-Day Artisanal Tasting Plan</h2>
+            </div>
+            <span id="active-profile-tag" class="plan-summary-badge">24 Combinations • Instant Pairing</span>
+          </div>
+
+          <!-- Clickable 3-Step Quiz Controls -->
+          <div class="quiz-controls" role="region" aria-label="Dietary and Culinary Preference Quiz">
+            <!-- Step 1: Dietary Ethos -->
+            <div class="control-group">
+              <div class="control-label">
+                <span>01. Dietary Foundation</span>
+              </div>
+              <div class="pill-options" data-category="diet">
+                <button type="button" class="quiz-option active" data-val="omnivore">Artisanal Omnivore</button>
+                <button type="button" class="quiz-option" data-val="pescatarian">Coastal Pescatarian</button>
+                <button type="button" class="quiz-option" data-val="botanical">Botanical Plant-Forward</button>
+              </div>
+            </div>
+
+            <!-- Step 2: Culinary Mood -->
+            <div class="control-group">
+              <div class="control-label">
+                <span>02. Culinary Direction</span>
+              </div>
+              <div class="pill-options" data-category="mood">
+                <button type="button" class="quiz-option active" data-val="bistro">Rustic French & Alpine</button>
+                <button type="button" class="quiz-option" data-val="mediterranean">Sun-Drenched Levant & Med</button>
+                <button type="button" class="quiz-option" data-val="nordic">Kyoto-Nordic Umami</button>
+              </div>
+            </div>
+
+            <!-- Step 3: Cellar Preference -->
+            <div class="control-group">
+              <div class="control-label">
+                <span>03. Cellar Pairing Style</span>
+              </div>
+              <div class="pill-options" data-category="wine">
+                <button type="button" class="quiz-option active" data-val="oldworld">Old World & Structured</button>
+                <button type="button" class="quiz-option" data-val="natty">Low-Intervention & Crisp</button>
+                <button type="button" class="quiz-option" data-val="botanicalZero">Botanical Zero-Proof Ferments</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamically Generated 3-Day Sample Meal Plan -->
+        <div>
+          <div class="plan-output-header">
+            <span style="font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted);">
+              Your Custom 3-Evening Menu & Cellar Schedule
+            </span>
+            <button class="btn btn-outline" style="padding: 0.4rem 0.9rem; font-size: 0.78rem;" onclick="openQRModal('Export 3-Day Plan to Mobile')">
+              Send Plan to App →
+            </button>
+          </div>
+
+          <div id="three-day-container" class="three-day-grid">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- TILE 4: GOURMET METRICS (4 Columns) -->
+      <section class="bento-tile tile-metrics">
+        <div>
+          <div class="eyebrow-pill">Curated Excellence</div>
+          <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--deep-forest);">No crowd-sourced clutter. Every dish tested in our kitchen.</h3>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-box">
+            <div class="metric-val">1,450+</div>
+            <div class="metric-label">Chef-Authored Seasonal Recipes</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-val">98.4%</div>
+            <div class="metric-label">Pantry Cross-Utilization</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-val">320+</div>
+            <div class="metric-label">Varietal & Zero-Proof Pairings</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-val">4.9 ★</div>
+            <div class="metric-label">App Store Culinary Rating</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TILE 5: SOMMELIER ENGINE (4 Columns) -->
+      <section id="sommelier-engine" class="bento-tile tile-sommelier">
+        <div>
+          <div class="eyebrow-pill wine">Sommelier Intelligence</div>
+          <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--deep-forest); margin-bottom: 0.5rem;">
+            Acid, Fat, & Aromatic Bridge Mapping
+          </h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">
+            Verdure analyzes reduction sauces, Maillard sear levels, and herbal garnishes to recommend exact bottle styles or house-made shrubs.
+          </p>
+
+          <div class="aroma-tags">
+            <span class="aroma-tag">Saline Assyrtiko</span>
+            <span class="aroma-tag">Aged Nebbiolo</span>
+            <span class="aroma-tag">Skin-Contact Friulano</span>
+            <span class="aroma-tag">Smoked Oolong Kombucha</span>
+            <span class="aroma-tag">Cool-Climate Syrah</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- TILE 6: ARTISANAL GROCER & ZERO WASTE (4 Columns) -->
+      <section id="artisanal-pantry" class="bento-tile tile-pantry">
+        <div>
+          <div class="eyebrow-pill">Smart Provisioning</div>
+          <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--deep-forest); margin-bottom: 0.35rem;">
+            Grouped by Farmers Market & Specialty Aisle
+          </h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">
+            Buy one bunch of lovage or jar of preserved Meyer lemon and use every gram across three distinct dinners.
+          </p>
+
+          <div class="Checklist-demo">
+            <div class="check-item">
+              <span>✓ 2 Bunches Heirloom Tardivo Radicchio</span>
+              <span class="aisle">Peak Produce</span>
+            </div>
+            <div class="check-item">
+              <span>✓ 120g Cultured Normandy Butter</span>
+              <span class="aisle">Fromagerie</span>
+            </div>
+            <div class="check-item">
+              <span>✓ 1 Bottle Loire Valley Chenin Blanc</span>
+              <span class="aisle">Cellar & Deglaze</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TILE 7: SYNCHRONIZED MISE-EN-PLACE (4 Columns) -->
+      <section class="bento-tile tile-technique">
+        <div>
+          <div class="eyebrow-pill">Precision Flow</div>
+          <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--deep-forest); margin-bottom: 0.35rem;">
+            Multi-Course Prep Choreography
+          </h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">
+            Interactive timelines interleave wine decanting, resting proteins, and sauce emulsification so everything hits the table warm.
+          </p>
+
+          <div class="timeline-steps">
+            <div class="t-step">
+              <strong>T-Minus 40m • Cellar & Mise</strong>
+              Uncork Pinot Noir to 58°F; salt duck breasts for dry-skin rendering.
+            </div>
+            <div class="t-step">
+              <strong>T-Minus 12m • Pan Sear & Glaze</strong>
+              Render cold pan 8 mins; mount cherry gastrique with cold butter.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TILE 8: DIRECT MOBILE CONVERSION CARD (4 Columns) -->
+      <section class="bento-tile tile-download-cta">
+        <div>
+          <div class="eyebrow-pill" style="background: rgba(255,255,255,0.14); color: #fff;">Start Cooking Tonight</div>
+          <h3>Carry Your Personal Sommelier & Sous-Chef</h3>
+          <p>Includes a complimentary 14-day seasonal tasting pass on iOS and Android.</p>
+        </div>
+        <div style="display: flex; gap: 0.65rem; flex-wrap: wrap;">
+          <button class="btn btn-primary" style="background: var(--sage-mid); color: var(--deep-forest); flex: 1;" onclick="openQRModal()">
+            Scan QR to Install
+          </button>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Minimalist Footer -->
+    <footer>
+      <div>
+        <strong>VERDURE CULINARY LABS</strong> — Crafted for discerning home kitchens.
+      </div>
+      <div style="display: flex; gap: 1.5rem;">
+        <a href="#interactive-planner" style="color: inherit; text-decoration: none;">Sample Menus</a>
+        <a href="#sommelier-engine" style="color: inherit; text-decoration: none;">Wine Methodology</a>
+        <a href="javascript:void(0)" onclick="openQRModal()" style="color: inherit; text-decoration: none;">iOS & Android App</a>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Scan-to-Download QR Code Modal -->
+  <div id="qr-modal-backdrop" class="modal-backdrop" onclick="handleBackdropClick(event)" aria-hidden="true">
+    <div class="qr-modal" role="dialog" aria-labelledby="modal-title">
+      <button class="modal-close" onclick="closeQRModal()" aria-label="Close modal">✕</button>
+      <div class="eyebrow-pill" style="margin: 0 auto 0.75rem;">Instant Mobile Handoff</div>
+      <h3 id="modal-title" style="font-size: 1.4rem; font-weight: 800; color: var(--deep-forest);">
+        Scan to Download VERDURE
+      </h3>
+      <p id="modal-subtitle" style="font-size: 0.88rem; color: var(--text-muted); margin-top: 0.35rem;">
+        Point your iPhone or Android camera at the code below to install the app and load your custom 3-day tasting menu.
+      </p>
+
+      <!-- Crisp SVG QR Code -->
+      <div class="qr-frame">
+        <svg width="160" height="160" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="120" height="120" rx="8" fill="#FFFFFF"/>
+          <!-- Top-Left Finder -->
+          <rect x="10" y="10" width="28" height="28" rx="4" stroke="#163020" stroke-width="5"/>
+          <rect x="18" y="18" width="12" height="12" rx="2" fill="#2C5E3B"/>
+          <!-- Top-Right Finder -->
+          <rect x="82" y="10" width="28" height="28" rx="4" stroke="#163020" stroke-width="5"/>
+          <rect x="90" y="18" width="12" height="12" rx="2" fill="#2C5E3B"/>
+          <!-- Bottom-Left Finder -->
+          <rect x="10" y="82" width="28" height="28" rx="4" stroke="#163020" stroke-width="5"/>
+          <rect x="18" y="90" width="12" height="12" rx="2" fill="#2C5E3B"/>
+          <!-- Data Modules -->
+          <rect x="46" y="10" width="6" height="12" rx="2" fill="#163020"/>
+          <rect x="58" y="16" width="12" height="6" rx="2" fill="#163020"/>
+          <rect x="46" y="28" width="12" height="6" rx="2" fill="#2C5E3B"/>
+          <rect x="64" y="28" width="6" height="14" rx="2" fill="#163020"/>
+          <rect x="10" y="46" width="14" height="6" rx="2" fill="#163020"/>
+          <rect x="30" y="46" width="8" height="14" rx="2" fill="#2C5E3B"/>
+          <rect x="46" y="46" width="28" height="28" rx="6" fill="#E6EFE9" stroke="#2C5E3B" stroke-width="2"/>
+          <!-- Leaf Center Emblem -->
+          <path d="M56 66C56 58 65 54 66 54C66 54 66 63 58 66Z" fill="#2C5E3B"/>
+          <rect x="82" y="46" width="12" height="6" rx="2" fill="#163020"/>
+          <rect x="100" y="46" width="10" height="14" rx="2" fill="#163020"/>
+          <rect x="82" y="58" width="6" height="16" rx="2" fill="#2C5E3B"/>
+          <rect x="10" y="58" width="6" height="14" rx="2" fill="#163020"/>
+          <rect x="22" y="64" width="12" height="8" rx="2" fill="#163020"/>
+          <rect x="46" y="82" width="12" height="6" rx="2" fill="#163020"/>
+          <rect x="64" y="82" width="8" height="16" rx="2" fill="#2C5E3B"/>
+          <rect x="82" y="82" width="16" height="8" rx="2" fill="#163020"/>
+          <rect x="102" y="82" width="8" height="28" rx="2" fill="#163020"/>
+          <rect x="46" y="96" width="12" height="14" rx="2" fill="#163020"/>
+          <rect x="78" y="96" width="18" height="14" rx="2" fill="#2C5E3B"/>
+        </svg>
+      </div>
+
+      <div style="display: flex; justify-content: center; gap: 0.6rem; margin-top: 1rem;">
+        <span style="font-size: 0.78rem; font-weight: 600; background: var(--sage-tint); color: var(--leaf-green); padding: 0.35rem 0.75rem; border-radius: 99px;">
+          ✓ iOS 16+ & Android 13+
+        </span>
+        <span style="font-size: 0.78rem; font-weight: 600; background: var(--wine-tint); color: var(--wine-berry); padding: 0.35rem 0.75rem; border-radius: 99px;">
+          ✓ Syncs Quiz Selections
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Quiz & Modal Logic -->
+  <script>
+    // State for the interactive dietary & culinary quiz
+    const state = {
+      diet: 'omnivore',
+      mood: 'bistro',
+      wine: 'oldworld'
+    };
+
+    // Curated gourmet database for the 3-day generator
+    const menuDatabase = {
+      omnivore: {
+        bistro: [
+          {
+            day: "Evening 01 • Friday",
+            course: "Pan-Roasted Duck Breast with Morel & Vin Jaune Jus",
+            desc: "Crispy scored skin over parsnip silk and charred tardivo.",
+            prep: "35 mins • 1-Pan Reduction"
+          },
+          {
+            day: "Evening 02 • Saturday",
+            course: "Herb-Crusted Rack of Lamb & Pommes Anna",
+            desc: "Dijon-tarragon crust using leftover duck jus aromatics.",
+            prep: "45 mins • Dinner Party Ready"
+          },
+          {
+            day: "Evening 03 • Sunday",
+            course: "Brown Butter Confit Chicken Thighs & Lentils du Puy",
+            desc: "Slow-braised shallots and thyme with crispy sage leaves.",
+            prep: "30 mins • Comfort Classic"
+          }
+        ],
+        mediterranean: [
+          {
+            day: "Evening 01 • Friday",
+            course: "Saffron & Preserved Lemon Braised Chicken Tagine",
+            desc: "Castelvetrano olives, toasted almonds, and herbed couscous.",
+            prep: "40 mins • Dutch Oven"
+          },
+          {
+            day: "Evening 02 • Saturday",
+            course: "Charred Lamb Kofta with Whipped Tahini & Pomegranate",
+            desc: "Spiced with urfa biber over blistered heirloom peppers.",
+            prep: "25 mins • High-Heat Sear"
+          },
+          {
+            day: "Evening 03 • Sunday",
+            course: "Crisp Pork Belly & Fennel Pollen Orzotto",
+            desc: "Deglazed with dry vermouth, shaved pecorino, and orange zest.",
+            prep: "35 mins • Artisanal Grain"
+          }
+        ],
+        nordic: [
+          {
+            day: "Evening 01 • Friday",
+            course: "Miso-Glazed Duck & Charred Maitake Dashi Broth",
+            desc: "Silky soba noodles, pickled spruce tips, and soft-poached egg.",
+            prep: "30 mins • Umami Infusion"
+          },
+          {
+            day: "Evening 02 • Saturday",
+            course: "Koji-Cured Ribeye with Black Garlic & Burnt Leek Butter",
+            desc: "Served alongside Crispy smashed sunchokes and sea buckthorn.",
+            prep: "35 mins • Cast-Iron Sear"
+          },
+          {
+            day: "Evening 03 • Sunday",
+            course: "Caramelized Cabbage & Juniper Pork Meatballs",
+            desc: "Lingonberry gastrique and browned cultured cream sauce.",
+            prep: "30 mins • Zero-Waste Trim"
+          }
+        ]
+      },
+      pescatarian: {
+        bistro: [
+          {
+            day: "Evening 01 • Friday",
+            course: "Butter-Poached Halibut & Champagne Chive Beurre Blanc",
+            desc: "Served over melted leeks and crispy caperberries.",
+            prep: "25 mins • Precision Poach"
+          },
+          {
+            day: "Evening 02 • Saturday",
+            course: "Seared Sea Scallops over Cauliflower & Truffle Velouté",
+            desc: "Golden brown crust with toasted hazelnut gremolata.",
+            prep: "20 mins • High-Heat Sear"
+          },
+          {
+            day: "Evening 03 • Sunday",
+            course: "Provencal Bouillabaisse with Saffron Rouille Crostini",
+            desc: "Rich fennel-tomato fumet with mussels and flaky cod.",
+            prep: "40 mins • One-Pot Hearth"
+          }
+        ],
+        mediterranean: [
+          {
+            day: "Evening 01 • Friday",
+            course: "Charred Octopus with Crispy Gigante Beans & Chorizo Oil",
+            desc: "Smoky paprika infusion, celery heart salad, and lemon.",
+            prep: "35 mins • Coastal Taverna"
+          },
+          {
+            day: "Evening 02 • Saturday",
+            course: "Whole Roasted Branzino Stuffed with Fennel & Blood Orange",
+            desc: "Finished with early-harvest olive oil and flaky sea salt.",
+            prep: "30 mins • Sheet-Pan Roast"
+          },
+          {
+            day: "Evening 03 • Sunday",
+            course: "Handmade Squid Ink Tonnarelli & Sea Urchin Emulsion",
+            desc: "Toasted pangrattato crumbs and Calabrian chili warmth.",
+            prep: "25 mins • Pasta Fresca"
+          }
+        ],
+        nordic: [
+          {
+            day: "Evening 01 • Friday",
+            course: "Cedar-Roasted King Salmon with White Miso & Dill Oil",
+            desc: "Quick-pickled cucumber ribbons and horseradish crème.",
+            prep: "25 mins • Aromatic Roast"
+          },
+          {
+            day: "Evening 02 • Saturday",
+            course: "Hokkaido Scallop Crudo & Warm Kombu Butter Toast",
+            desc: "Paired with roasted honeynut squash and finger lime.",
+            prep: "20 mins • Raw & Warm Contrast"
+          },
+          {
+            day: "Evening 03 • Sunday",
+            course: "Smoked Trout & Crispy Rice Donabe with Ikura",
+            desc: "Nori furikake, charred scallions, and brown butter soy.",
+            prep: "35 mins • Claypot Crisp"
+          }
+        ]
+      },
+      botanical: {
+        bistro: [
+          {
+            day: "Evening 01 • Friday",
+            course: "Caramelized Shallot & Gruyère Galette with Thyme Honey",
+            desc: "Flaky rye-butter pastry alongside bitter greens vinaigrette.",
+            prep: "40 mins • Artisanal Pastry"
+          },
+          {
+            day: "Evening 02 • Saturday",
+            course: "Braised Celery Root Steak with Périgord Truffle Jus",
+            desc: "Basted in herb butter over chestnut and parsnip purée.",
+            prep: "35 mins • Pan-Basted"
+          },
+          {
+            day: "Evening 03 • Sunday",
+            course: "Wild Chanterelle & Aged Comté Polenta Tartine",
+            desc: "Deglazed with dry sherry and topped with poached farm egg.",
+            prep: "25 mins • Forest Forage"
+          }
+        ],
+        mediterranean: [
+          {
+            day: "Evening 01 • Friday",
+            course: "Whole Roasted Cauliflower Shawarma & Pistachio Dukkah",
+            desc: "Golden tahini drizzle, pomegranate molasses, and herbs.",
+            prep: "40 mins • Spice-Crusted"
+          },
+          {
+            day: "Evening 02 • Saturday",
+            course: "Charred Eggplant & Black Truffle Burrata Panzerotti",
+            desc: "San Marzano tomato conserva and crispy basil leaves.",
+            prep: "30 mins • Southern Italian"
+          },
+          {
+            day: "Evening 03 • Sunday",
+            course: "Crispy Artichoke & Saffron Bomba Rice Paella",
+            desc: "Deeply caramelized socarrat crust with smoked pimentón.",
+            prep: "35 mins • Open Pan"
+          }
+        ],
+        nordic: [
+          {
+            day: "Evening 01 • Friday",
+            course: "Glazed Lion's Mane Mushroom Steak & Fermented Black Bean",
+            desc: "Served over smoked celeriac mash and crispy kale.",
+            prep: "30 mins • Umami Sear"
+          },
+          {
+            day: "Evening 02 • Saturday",
+            course: "Roasted Koji Kabocha Squash with Matcha Sesame Tare",
+            desc: "Toasted buckwheat groats and pickled ginger blossoms.",
+            prep: "35 mins • Sweet & Savory"
+          },
+          {
+            day: "Evening 03 • Sunday",
+            course: "Charred Cabbage Wedge with Nori Butter & Hazelnut Miso",
+            desc: "Finished with crispy shallots and yuzu kosho vinaigrette.",
+            prep: "25 mins • High-Heat Char"
+          }
+        ]
+      }
+    };
+
+    const winePairings = {
+      oldworld: [
+        "🍷 2019 Côte-Rôtie Syrah or Aged Cru Beaujolais",
+        "🍷 2018 Left-Bank Bordeaux or Brunello di Montalcino",
+        "🍷 2020 White Burgundy (Meursault) or Chinon Cab Franc"
+      ],
+      natty: [
+        "🍷 Unfiltered Jura Poulsard (Chilled Red, 56°F)",
+        "🍷 Georgian Amber Rkatsiteli (Qvevri Skin-Contact)",
+        "🍷 Loire Pét-Nat Chenin or Etna Rosso Contrada"
+      ],
+      botanicalZero: [
+        "🥂 Roasted Fig Leaf & Verjus Sparkling Infusion",
+        "🥂 Smoked Lapsang, Tart Cherry & Gentian Bitters Shrub",
+        "🥂 Fermented White Pine Needle & Yuzu Kombucha Cuvée"
+      ]
+    };
+
+    function renderPlan() {
+      const container = document.getElementById('three-day-container');
+      const days = menuDatabase[state.diet][state.mood];
+      const wines = winePairings[state.wine];
+
+      container.innerHTML = days.map((item, idx) => `
+        <article class="day-card">
+          <div>
+            <div class="day-num">${item.day}</div>
+            <h4 class="day-course">${item.course}</h4>
+            <p class="day-desc">${item.desc}</p>
+          </div>
+          <div class="day-footer">
+            <div class="wine-row">
+              <span>${wines[idx]}</span>
+            </div>
+            <span class="prep-tag">⏱ ${item.prep}</span>
+          </div>
+        </article>
+      `).join('');
+
+      // Update summary badge
+      const dietNames = { omnivore: 'Omnivore', pescatarian: 'Pescatarian', botanical: 'Botanical' };
+      const moodNames = { bistro: 'French Alpine', mediterranean: 'Levant & Med', nordic: 'Kyoto-Nordic' };
+      document.getElementById('active-profile-tag').textContent =
+        `${dietNames[state.diet]} • ${moodNames[state.mood]} • 94% Shared Pantry`;
+    }
+
+    // Attach click listeners to quiz buttons
+    document.querySelectorAll('.pill-options').forEach(group => {
+      const category = group.getAttribute('data-category');
+      group.querySelectorAll('.quiz-option').forEach(btn => {
+        btn.addEventListener('click', () => {
+          group.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          state[category] = btn.getAttribute('data-val');
+          renderPlan();
+        });
+      });
+    });
+
+    // Modal Functions
+    function openQRModal(sourceLabel) {
+      const backdrop = document.getElementById('qr-modal-backdrop');
+      const subtitle = document.getElementById('modal-subtitle');
+      if (sourceLabel) {
+        subtitle.textContent = `Selected: ${sourceLabel}. Scan with your phone camera to install VERDURE and preload your custom 3-day tasting menu.`;
+      } else {
+        subtitle.textContent = `Point your iPhone or Android camera at the code below to install the app and load your custom 3-day tasting menu.`;
+      }
+      backdrop.classList.add('open');
+      backdrop.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeQRModal() {
+      const backdrop = document.getElementById('qr-modal-backdrop');
+      backdrop.classList.remove('open');
+      backdrop.setAttribute('aria-hidden', 'true');
+    }
+
+    function handleBackdropClick(e) {
+      if (e.target.id === 'qr-modal-backdrop') {
+        closeQRModal();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeQRModal();
+    });
+
+    // Initial render
+    renderPlan();
+  </script>
+</body>
+</html>

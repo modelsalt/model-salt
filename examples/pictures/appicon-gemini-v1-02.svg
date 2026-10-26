@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="100%" height="100%">
+  <defs>
+    <!-- Sharp-edged square clip path to guarantee no rounded borders or overflow -->
+    <clipPath id="sharp-square">
+      <rect x="0" y="0" width="1024" height="1024" />
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#sharp-square)">
+    <!-- Background: Deep Midnight Indigo -->
+    <rect x="0" y="0" width="1024" height="1024" fill="#0B092B" />
+
+    <!-- Secondary Atmospheric Layer: Deeper Indigo organic wave -->
+    <circle cx="950" cy="150" r="750" fill="#131142" />
+
+    <!-- THE SUN: Oversized, playful, bulbous rays & core in glowing neon accents -->
+    <g id="neon-sun">
+      <!-- Outer bulbous ray blobs (Neon Magenta/Coral) -->
+      <circle cx="820" cy="240" r="440" fill="#FF1E6B" />
+      <circle cx="400" cy="120" r="180" fill="#FF1E6B" />
+      <circle cx="290" cy="310" r="150" fill="#FF1E6B" />
+      <circle cx="430" cy="520" r="160" fill="#FF1E6B" />
+      <circle cx="940" cy="670" r="170" fill="#FF1E6B" />
+      <circle cx="650" cy="60" r="190" fill="#FF1E6B" />
+
+      <!-- Mid-layer organic sun body (Neon Orange-Gold) -->
+      <circle cx="800" cy="260" r="370" fill="#FF851B" />
+      <circle cx="520" cy="230" r="190" fill="#FF851B" />
+      <circle cx="720" cy="480" r="180" fill="#FF851B" />
+
+      <!-- Inner glowing sun core (Electric Neon Yellow) -->
+      <circle cx="820" cy="240" r="290" fill="#FFF01F" />
+      <circle cx="630" cy="260" r="150" fill="#FFF01F" />
+    </g>
+
+    <!-- Drop Shadow on Cloud Base (Midnight Indigo cut) -->
+    <circle cx="480" cy="680" r="350" fill="#0B092B" />
+
+    <!-- THE CLOUD: Tightly cropped, oversized, bulbous cumulus in Slate Grey with a Neon Cyan rim -->
+    <g id="cumulus-cloud">
+      <!-- Electric Neon Cyan Rim Light (peeking from the top-right edges of the cloud) -->
+      <circle cx="200" cy="700" r="295" fill="#00F5D4" />
+      <circle cx="475" cy="595" r="325" fill="#00F5D4" />
+      <circle cx="790" cy="755" r="265" fill="#00F5D4" />
+      <circle cx="585" cy="870" r="250" fill="#00F5D4" />
+
+      <!-- Main Cloud Body (Medium Slate Grey) -->
+      <circle cx="170" cy="730" r="295" fill="#4A5568" />
+      <circle cx="450" cy="625" r="320" fill="#4A5568" />
+      <circle cx="765" cy="785" r="260" fill="#4A5568" />
+      <circle cx="550" cy="890" r="260" fill="#4A5568" />
+      <rect x="0" y="750" width="1024" height="300" fill="#4A5568" />
+
+      <!-- Playful Inner Bulbous Volume (Deep Slate Grey) -->
+      <circle cx="80" cy="920" r="260" fill="#2D3748" />
+      <circle cx="380" cy="850" r="270" fill="#2D3748" />
+      <circle cx="710" cy="940" r="240" fill="#2D3748" />
+      <circle cx="960" cy="980" r="210" fill="#2D3748" />
+      <rect x="0" y="900" width="1024" height="150" fill="#2D3748" />
+
+      <!-- Extra Chubby Highlight Puff (Lighter Slate to accentuate the rounded proportions) -->
+      <circle cx="430" cy="560" r="210" fill="#64748B" />
+      <circle cx="210" cy="670" r="160" fill="#64748B" />
+    </g>
+  </g>
+</svg>

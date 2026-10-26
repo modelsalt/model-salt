@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0E4E8A"/>
+      <stop offset="100%" stop-color="#6BB8F0"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.42" cy="0.38" r="0.65">
+      <stop offset="0%" stop-color="#FFE98A"/>
+      <stop offset="100%" stop-color="#FFB302"/>
+    </radialGradient>
+    <linearGradient id="cloudFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#D9E8F6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Square background, sharp corners -->
+  <rect width="512" height="512" fill="url(#sky)"/>
+
+  <!-- Small distant cloud -->
+  <g fill="#FFFFFF" opacity="0.35">
+    <rect x="78" y="116" width="104" height="28"/>
+    <circle cx="100" cy="118" r="22"/>
+    <circle cx="132" cy="104" r="28"/>
+    <circle cx="162" cy="120" r="20"/>
+  </g>
+
+  <!-- Sun glow -->
+  <circle cx="340" cy="172" r="112" fill="#FFD54F" opacity="0.25"/>
+
+  <!-- Sun rays -->
+  <g stroke="#FFD54F" stroke-width="14" stroke-linecap="round">
+    <line x1="435" y1="172" x2="462" y2="172"/>
+    <line x1="407.2" y1="239.2" x2="426.3" y2="258.3"/>
+    <line x1="340" y1="267" x2="340" y2="294"/>
+    <line x1="272.8" y1="239.2" x2="253.7" y2="258.3"/>
+    <line x1="245" y1="172" x2="218" y2="172"/>
+    <line x1="272.8" y1="104.8" x2="253.7" y2="85.7"/>
+    <line x1="340" y1="77" x2="340" y2="50"/>
+    <line x1="407.2" y1="104.8" x2="426.3" y2="85.7"/>
+  </g>
+
+  <!-- Sun -->
+  <circle cx="340" cy="172" r="74" fill="url(#sun)"/>
+
+  <!-- Cloud shadow -->
+  <g fill="#0A2A50" opacity="0.15" transform="translate(0,12)">
+    <rect x="110" y="290" width="282" height="70"/>
+    <circle cx="168" cy="302" r="58"/>
+    <circle cx="255" cy="270" r="80"/>
+    <circle cx="336" cy="304" r="56"/>
+  </g>
+
+  <!-- Main cloud -->
+  <g fill="url(#cloudFill)">
+    <rect x="110" y="290" width="282" height="70"/>
+    <circle cx="168" cy="302" r="58"/>
+    <circle cx="255" cy="270" r="80"/>
+    <circle cx="336" cy="304" r="56"/>
+  </g>
+
+  <!-- Rain streaks -->
+  <g stroke="#CFE8FF" stroke-width="13" stroke-linecap="round" opacity="0.9">
+    <line x1="170" y1="392" x2="156" y2="426"/>
+    <line x1="228" y1="392" x2="214" y2="426"/>
+    <line x1="286" y1="392" x2="272" y2="426"/>
+  </g>
+</svg>

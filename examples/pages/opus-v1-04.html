@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sorted — Dinner, decided.</title>
+<meta name="description" content="Sorted plans your week of dinners for you. No more 5pm 'what's for dinner?' panic. Join the waitlist.">
+<style>
+  :root{
+    --green-900:#0f3d24;
+    --green-700:#16773f;
+    --green-600:#1e9150;
+    --green-500:#2bb36a;
+    --green-100:#e6f6ec;
+    --green-50:#f3fbf6;
+    --ink:#14211a;
+    --muted:#5c6b63;
+    --line:#e3ebe6;
+    --white:#ffffff;
+    --radius:16px;
+    --shadow:0 20px 50px -20px rgba(15,61,36,.25);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",Arial,sans-serif;
+    color:var(--ink);background:var(--white);line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+  /* ---------- Nav ---------- */
+  nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.88);
+      backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.25rem;text-decoration:none;letter-spacing:-.02em}
+  .logo-mark{width:30px;height:30px;border-radius:9px;background:var(--green-600);position:relative}
+  .logo-mark::after{content:"";position:absolute;left:8px;top:6px;width:8px;height:14px;
+      border:solid #fff;border-width:0 3px 3px 0;transform:rotate(45deg)}
+  nav ul{display:flex;gap:28px;list-style:none;font-size:.95rem;color:var(--muted)}
+  nav ul a{text-decoration:none}
+  nav ul a:hover{color:var(--green-700)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+       background:var(--green-600);color:#fff;border:0;border-radius:999px;
+       padding:12px 22px;font-weight:650;font-size:.95rem;text-decoration:none;cursor:pointer;
+       transition:background .2s, transform .2s}
+  .btn:hover{background:var(--green-700);transform:translateY(-1px)}
+  .btn-sm{padding:9px 18px;font-size:.9rem}
+
+  /* ---------- Hero ---------- */
+  .hero{background:linear-gradient(180deg,var(--green-50) 0%,var(--white) 100%);overflow:hidden}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;padding-top:72px;padding-bottom:96px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--green-100);color:var(--green-700);
+           font-weight:650;font-size:.82rem;padding:6px 14px;border-radius:999px;letter-spacing:.02em}
+  .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green-500);
+           box-shadow:0 0 0 4px rgba(43,179,106,.2)}
+  h1{font-size:clamp(2.4rem,5vw,3.8rem);line-height:1.05;letter-spacing:-.035em;margin:22px 0 20px;font-weight:800}
+  h1 .strike{position:relative;color:var(--muted);font-weight:700;white-space:nowrap}
+  h1 .strike::after{content:"";position:absolute;left:-2%;right:-2%;top:54%;height:5px;background:var(--green-500);
+           border-radius:3px;transform:rotate(-3deg)}
+  h1 em{font-style:normal;color:var(--green-600)}
+  .lede{font-size:1.18rem;color:var(--muted);max-width:520px}
+
+  /* ---------- Waitlist form ---------- */
+  .waitlist{margin-top:32px;max-width:500px}
+  .field{display:flex;background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:6px;
+         box-shadow:0 6px 24px -12px rgba(15,61,36,.2);transition:border-color .2s, box-shadow .2s}
+  .field:focus-within{border-color:var(--green-500);box-shadow:0 0 0 4px rgba(43,179,106,.15)}
+  .field input{flex:1;border:0;outline:0;background:transparent;padding:0 18px;font-size:1rem;color:var(--ink);min-width:0}
+  .field input::placeholder{color:#9aa8a0}
+  .hint{margin-top:12px;font-size:.88rem;color:var(--muted);display:flex;gap:18px;flex-wrap:wrap}
+  .hint span::before{content:"✓ ";color:var(--green-600);font-weight:700}
+  /* CSS-only validity feedback */
+  .field input:not(:placeholder-shown):invalid{color:#b4462e}
+  .field:has(input:not(:placeholder-shown):valid){border-color:var(--green-500)}
+  /* CSS-only "thank you": the form navigates to #joined, :target reveals it */
+  .thanks{display:none;margin-top:32px;max-width:500px;background:var(--green-600);color:#fff;
+          border-radius:var(--radius);padding:18px 22px;font-weight:600}
+  .thanks small{display:block;font-weight:400;opacity:.85;margin-top:2px}
+  #joined:target{display:block}
+  #joined:target ~ .waitlist{display:none}
+
+  .social-proof{display:flex;align-items:center;gap:12px;margin-top:28px;font-size:.92rem;color:var(--muted)}
+  .avatars{display:flex}
+  .avatars i{width:32px;height:32px;border-radius:50%;border:2px solid #fff;margin-left:-8px;display:block}
+  .avatars i:first-child{margin-left:0}
+  .avatars i:nth-child(1){background:#bfe8cf}.avatars i:nth-child(2){background:#7fd1a2}
+  .avatars i:nth-child(3){background:#2bb36a}.avatars i:nth-child(4){background:#16773f}
+  .social-proof b{color:var(--ink)}
+
+  /* ---------- Phone mockup ---------- */
+  .phone-stage{position:relative;display:flex;justify-content:center}
+  .phone-stage::before{content:"";position:absolute;width:440px;height:440px;border-radius:50%;
+           background:radial-gradient(circle,var(--green-100) 0%,rgba(230,246,236,0) 70%);top:50%;left:50%;transform:translate(-50%,-50%)}
+  .phone{position:relative;width:300px;height:610px;background:#0e1712;border-radius:48px;padding:12px;
+         box-shadow:var(--shadow),0 0 0 2px #26332c inset;transform:rotate(-3deg)}
+  .phone::before{content:"";position:absolute;right:-3px;top:140px;width:3px;height:64px;background:#26332c;border-radius:0 3px 3px 0}
+  .screen{position:relative;width:100%;height:100%;background:#fff;border-radius:38px;overflow:hidden;
+          display:flex;flex-direction:column}
+  .island{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:90px;height:26px;background:#0e1712;border-radius:20px;z-index:2}
+  .status{display:flex;justify-content:space-between;padding:14px 26px 0;font-size:.72rem;font-weight:700;height:40px}
+  .status .bars{display:flex;gap:2px;align-items:flex-end}
+  .status .bars i{display:block;width:3px;background:var(--ink);border-radius:1px}
+  .status .bars i:nth-child(1){height:4px}.status .bars i:nth-child(2){height:6px}
+  .status .bars i:nth-child(3){height:8px}.status .bars i:nth-child(4){height:10px}
+  .app-head{padding:8px 20px 12px}
+  .app-head small{color:var(--muted);font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+  .app-head h3{font-size:1.35rem;letter-spacing:-.02em;line-height:1.2}
+  .week-strip{display:flex;justify-content:space-between;padding:0 16px 12px}
+  .week-strip span{display:flex;flex-direction:column;align-items:center;width:32px;padding:6px 0;border-radius:12px;
+          font-size:.6rem;color:var(--muted);font-weight:600}
+  .week-strip span b{font-size:.82rem;color:var(--ink)}
+  .week-strip span.today{background:var(--green-600);color:#d6f3e2}
+  .week-strip span.today b{color:#fff}
+  .meals{flex:1;padding:4px 14px 0;display:flex;flex-direction:column;gap:8px;overflow:hidden}
+  .meal{display:flex;align-items:center;gap:12px;padding:10px 12px;border:1px solid var(--line);border-radius:14px;background:#fff}
+  .meal .thumb{width:40px;height:40px;border-radius:11px;flex-shrink:0;position:relative;overflow:hidden}
+  .meal .thumb::after{content:"";position:absolute;inset:9px;border-radius:50%;background:rgba(255,255,255,.55)}
+  .t1{background:linear-gradient(135deg,#f4c27a,#e98a4f)}
+  .t2{background:linear-gradient(135deg,#9fe0b6,#2bb36a)}
+  .t3{background:linear-gradient(135deg,#f6a5a0,#d9534f)}
+  .t4{background:linear-gradient(135deg,#f7e08a,#e2b53c)}
+  .t5{background:linear-gradient(135deg,#b8d8f0,#5b9bd5)}
+  .meal .info{flex:1;min-width:0}
+  .meal .day{font-size:.6rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+  .meal .name{font-size:.82rem;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .meal .time{font-size:.66rem;color:var(--muted);font-weight:600;white-space:nowrap}
+  .meal.tonight{background:var(--green-50);border-color:var(--green-500);box-shadow:0 6px 18px -10px rgba(30,145,80,.6)}
+  .meal.tonight .day{color:var(--green-700)}
+  .grocery-bar{margin:10px 14px 14px;background:var(--ink);color:#fff;border-radius:16px;padding:12px 14px;
+          display:flex;align-items:center;justify-content:space-between;font-size:.76rem;font-weight:600}
+  .grocery-bar .pill{background:var(--green-500);border-radius:999px;padding:4px 10px;font-size:.7rem}
+  .home-ind{height:4px;width:110px;background:var(--ink);border-radius:4px;margin:0 auto 8px;opacity:.85}
+
+  .float-card{position:absolute;background:#fff;border-radius:14px;padding:12px 16px;box-shadow:var(--shadow);
+          font-size:.82rem;font-weight:600;display:flex;align-items:center;gap:10px;border:1px solid var(--line)}
+  .float-card .dot{width:28px;height:28px;border-radius:50%;background:var(--green-100);position:relative;flex-shrink:0}
+  .float-card .dot::after{content:"";position:absolute;left:10px;top:6px;width:6px;height:11px;border:solid var(--green-600);border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+  .float-card small{display:block;color:var(--muted);font-weight:500;font-size:.72rem}
+  .fc-1{top:70px;left:-10px}
+  .fc-2{bottom:90px;right:-20px}
+
+  /* ---------- Sections ---------- */
+  section{padding:96px 0}
+  .section-head{max-width:640px;margin:0 auto 56px;text-align:center}
+  .kicker{color:var(--green-600);font-weight:700;font-size:.82rem;text-transform:uppercase;letter-spacing:.12em}
+  h2{font-size:clamp(1.9rem,3.6vw,2.7rem);letter-spacing:-.03em;line-height:1.12;margin:10px 0 14px}
+  .section-head p{color:var(--muted);font-size:1.08rem}
+
+  /* Problem */
+  .problem{background:var(--white);border-top:1px solid var(--line)}
+  .clock-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .clock{border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+  .clock .t{font-size:1.5rem;font-weight:800;letter-spacing:-.02em;color:var(--muted)}
+  .clock p{margin-top:6px;color:var(--muted);font-size:.95rem}
+  .clock.resolved{background:var(--green-600);border-color:var(--green-600);color:#fff}
+  .clock.resolved .t,.clock.resolved p{color:#fff}
+
+  /* Steps */
+  .steps{background:var(--green-50)}
+  .step-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;counter-reset:step}
+  .step{background:#fff;border-radius:var(--radius);padding:32px;border:1px solid var(--line);position:relative}
+  .step::before{counter-increment:step;content:counter(step);display:flex;align-items:center;justify-content:center;
+          width:40px;height:40px;border-radius:12px;background:var(--green-100);color:var(--green-700);font-weight:800;margin-bottom:20px}
+  .step h3{font-size:1.2rem;letter-spacing:-.01em;margin-bottom:8px}
+  .step p{color:var(--muted)}
+
+  /* Features */
+  .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
+          border:1px solid var(--line);border-radius:20px;overflow:hidden}
+  .feature{background:#fff;padding:32px}
+  .feature .ic{width:44px;height:44px;border-radius:12px;background:var(--green-600);margin-bottom:18px;position:relative}
+  .ic-clock::before{content:"";position:absolute;inset:10px;border:2.5px solid #fff;border-radius:50%}
+  .ic-clock::after{content:"";position:absolute;left:21px;top:14px;width:2.5px;height:9px;background:#fff;box-shadow:3px 7px 0 -0px transparent}
+  .ic-list::before{content:"";position:absolute;left:12px;right:12px;top:14px;height:2.5px;background:#fff;box-shadow:0 7px 0 #fff,0 14px 0 #fff}
+  .ic-swap::before,.ic-swap::after{content:"";position:absolute;left:11px;right:11px;height:2.5px;background:#fff}
+  .ic-swap::before{top:16px}.ic-swap::after{top:26px}
+  .ic-leaf::before{content:"";position:absolute;inset:11px;background:#fff;border-radius:0 60% 0 60%}
+  .ic-people::before{content:"";position:absolute;left:14px;top:10px;width:10px;height:10px;border-radius:50%;background:#fff;box-shadow:10px 0 0 rgba(255,255,255,.6)}
+  .ic-people::after{content:"";position:absolute;left:10px;top:23px;width:18px;height:10px;border-radius:10px 10px 0 0;background:#fff;box-shadow:10px 0 0 rgba(255,255,255,.6)}
+  .ic-coin::before{content:"$";position:absolute;inset:9px;border:2.5px solid #fff;border-radius:50%;color:#fff;
+          font-weight:800;font-size:.85rem;display:flex;align-items:center;justify-content:center}
+  .feature h3{font-size:1.08rem;margin-bottom:6px}
+  .feature p{color:var(--muted);font-size:.96rem}
+
+  /* Quote */
+  .quote{padding:40px 0 96px}
+  blockquote{max-width:760px;margin:0 auto;text-align:center;font-size:clamp(1.3rem,2.4vw,1.75rem);
+          line-height:1.4;letter-spacing:-.015em;font-weight:600}
+  blockquote::before{content:"“";display:block;font-size:4rem;line-height:1;color:var(--green-500);margin-bottom:-6px}
+  cite{display:block;margin-top:20px;font-style:normal;font-size:.95rem;color:var(--muted);font-weight:500}
+
+  /* FAQ */
+  .faq{background:var(--green-50)}
+  .faq-list{max-width:760px;margin:0 auto}
+  details{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:12px;padding:0 24px}
+  summary{list-style:none;cursor:pointer;padding:20px 0;font-weight:650;display:flex;justify-content:space-between;align-items:center;gap:16px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-size:1.5rem;font-weight:400;color:var(--green-600);transition:transform .2s;line-height:1}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p{color:var(--muted);padding-bottom:20px;margin-top:-4px}
+
+  /* Final CTA */
+  .final{padding:96px 0}
+  .final-card{background:var(--green-700);border-radius:28px;padding:72px 40px;text-align:center;color:#fff;position:relative;overflow:hidden}
+  .final-card::before,.final-card::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.06)}
+  .final-card::before{width:380px;height:380px;top:-160px;right:-120px}
+  .final-card::after{width:260px;height:260px;bottom:-140px;left:-60px}
+  .final-card h2{color:#fff;position:relative}
+  .final-card p{color:#cdeedb;max-width:520px;margin:0 auto;position:relative}
+  .final-card .waitlist{margin:32px auto 0;position:relative}
+  .final-card .field{border-color:transparent}
+  .final-card .btn{background:var(--green-900)}
+  .final-card .btn:hover{background:#0a2c1a}
+
+  footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-size:.9rem}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+  footer nav{position:static;background:none;border:0;backdrop-filter:none}
+  footer ul{display:flex;gap:22px;list-style:none}
+  footer a{text-decoration:none}
+  footer a:hover{color:var(--green-700)}
+
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:900px){
+    .hero .wrap{grid-template-columns:1fr;text-align:center;padding-top:48px}
+    .lede,.waitlist,.thanks{margin-left:auto;margin-right:auto}
+    .hint,.social-proof{justify-content:center}
+    .clock-row{grid-template-columns:repeat(2,1fr)}
+    .step-grid,.feature-grid{grid-template-columns:1fr}
+    nav ul{display:none}
+    .fc-1{left:0}.fc-2{right:0}
+  }
+  @media (max-width:520px){
+    .field{flex-direction:column;border-radius:20px;gap:6px}
+    .field input{padding:12px 14px}
+    .field .btn{width:100%}
+    .clock-row{grid-template-columns:1fr}
+    .float-card{display:none}
+    section{padding:72px 0}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<nav aria-label="Main">
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="logo-mark" aria-hidden="true"></span>Sorted</a>
+    <ul>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="btn btn-sm" href="#join">Join waitlist</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Launching early 2027 · Waitlist open</span>
+      <h1>
+        <span class="strike">“What’s for dinner?”</span><br>
+        <em>Already decided.</em>
+      </h1>
+      <p class="lede">Sorted plans your whole week of dinners around your tastes, your schedule and what’s already in your fridge. You don’t have to decide anything at 5pm. Just open the app and start cooking.</p>
+
+      <div class="thanks" id="joined" role="status">
+        You’re on the list. 🎉
+        <small>We’ll email you the moment Sorted opens — first come, first fed.</small>
+      </div>
+
+      <form class="waitlist" action="#joined" method="get" id="join">
+        <label class="sr-only" for="email-hero">Email address</label>
+        <div class="field">
+          <input id="email-hero" type="email" name="email" placeholder="you@email.com" required autocomplete="email">
+          <button class="btn" type="submit">Get early access</button>
+        </div>
+        <div class="hint"><span>Free for 3 months at launch</span><span>No spam, ever</span></div>
+      </form>
+
+      <div class="social-proof">
+        <div class="avatars" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <span><b>4,200+ households</b> are already waiting</span>
+      </div>
+    </div>
+
+    <div class="phone-stage" aria-label="Sorted app showing this week's meal plan" role="img">
+      <div class="phone">
+        <div class="screen">
+          <div class="island"></div>
+          <div class="status">
+            <span>5:02</span>
+            <span class="bars"><i></i><i></i><i></i><i></i></span>
+          </div>
+          <div class="app-head">
+            <small>Week of Oct 19</small>
+            <h3>This week’s dinners</h3>
+          </div>
+          <div class="week-strip">
+            <span>M<b>19</b></span><span>T<b>20</b></span><span>W<b>21</b></span>
+            <span class="today">T<b>22</b></span><span>F<b>23</b></span><span>S<b>24</b></span><span>S<b>25</b></span>
+          </div>
+          <div class="meals">
+            <div class="meal tonight">
+              <div class="thumb t1"></div>
+              <div class="info"><div class="day">Tonight · Thu</div><div class="name">Honey-garlic salmon bowls</div></div>
+              <div class="time">25 min</div>
+            </div>
+            <div class="meal">
+              <div class="thumb t2"></div>
+              <div class="info"><div class="day">Fri</div><div class="name">Pesto gnocchi &amp; peas</div></div>
+              <div class="time">15 min</div>
+            </div>
+            <div class="meal">
+              <div class="thumb t3"></div>
+              <div class="info"><div class="day">Sat</div><div class="name">Sheet-pan chicken fajitas</div></div>
+              <div class="time">30 min</div>
+            </div>
+            <div class="meal">
+              <div class="thumb t4"></div>
+              <div class="info"><div class="day">Sun</div><div class="name">Slow-cooker chickpea curry</div></div>
+              <div class="time">10 min</div>
+            </div>
+            <div class="meal">
+              <div class="thumb t5"></div>
+              <div class="info"><div class="day">Mon</div><div class="name">Leftover curry wraps</div></div>
+              <div class="time">10 min</div>
+            </div>
+          </div>
+          <div class="grocery-bar">
+            <span>Grocery list ready</span>
+            <span class="pill">18 items</span>
+          </div>
+          <div class="home-ind"></div>
+        </div>
+      </div>
+      <div class="float-card fc-1"><span class="dot"></span><span>Week planned<small>in 0 decisions</small></span></div>
+      <div class="float-card fc-2"><span class="dot"></span><span>Uses your spinach<small>before it wilts</small></span></div>
+    </div>
+  </div>
+</header>
+
+<section class="problem">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">The 5pm problem</span>
+      <h2>You make dozens of small food decisions every week. We take them off your plate.</h2>
+      <p>Cooking usually isn't the hard part. Deciding what to cook, every single night, is.</p>
+    </div>
+    <div class="clock-row">
+      <div class="clock"><div class="t">4:45pm</div><p>“Should I take something out of the freezer?”</p></div>
+      <div class="clock"><div class="t">5:30pm</div><p>Staring into the fridge, hoping for an idea.</p></div>
+      <div class="clock"><div class="t">6:15pm</div><p>Takeout again. Third time this week.</p></div>
+      <div class="clock resolved"><div class="t">With Sorted</div><p>Tonight’s dinner was chosen on Sunday. Ingredients are in. Done.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="steps" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">How it works</span>
+      <h2>Two minutes on Sunday. Seven dinners decided.</h2>
+    </div>
+    <div class="step-grid">
+      <div class="step">
+        <h3>Tell us how you eat</h3>
+        <p>Diets, dislikes, how many people you're feeding, and how much time you really have on a Tuesday.</p>
+      </div>
+      <div class="step">
+        <h3>Get your week, decided</h3>
+        <p>Sorted builds a balanced week of dinners. If you don't like one, swap it with a single tap. Otherwise you never have to choose.</p>
+      </div>
+      <div class="step">
+        <h3>Shop once, cook easy</h3>
+        <p>You get one grocery list, sorted by store aisle, and step-by-step recipes that show up right when you need them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Features</span>
+      <h2>Designed so you never have to think about dinner.</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature"><div class="ic ic-clock"></div><h3>Fits your real schedule</h3><p>Busy nights get 15-minute meals. Slower Sundays get the recipes worth the time.</p></div>
+      <div class="feature"><div class="ic ic-list"></div><h3>Automatic grocery lists</h3><p>Ingredients are combined across the week and grouped by aisle. Items you already have are left off.</p></div>
+      <div class="feature"><div class="ic ic-swap"></div><h3>One-tap swaps</h3><p>Not feeling fish? Tap to swap in a similar meal, and your grocery list updates to match.</p></div>
+      <div class="feature"><div class="ic ic-leaf"></div><h3>Less food waste</h3><p>Meals that share ingredients get planned in the same week, so that half bunch of cilantro gets used.</p></div>
+      <div class="feature"><div class="ic ic-people"></div><h3>Built for households</h3><p>Picky kids, a vegetarian partner and a gluten-free guest can all be covered by one plan.</p></div>
+      <div class="feature"><div class="ic ic-coin"></div><h3>Budget-aware</h3><p>Set a weekly food budget and Sorted plans around it. Seasonal ingredients come first.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="quote">
+  <div class="wrap">
+    <blockquote>
+      I didn’t realize how much the dinner question was draining me until it just… stopped being a question.
+      <cite>— Priya M., beta tester, parent of two</cite>
+    </blockquote>
+  </div>
+</div>
+
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">FAQ</span>
+      <h2>Good questions.</h2>
+    </div>
+    <div class="faq-list">
+      <details open>
+        <summary>When does Sorted launch?</summary>
+        <p>We’re opening to waitlist members in waves starting early 2027. The earlier you join, the earlier you get in.</p>
+      </details>
+      <details>
+        <summary>How much will it cost?</summary>
+        <p>Waitlist members get their first 3 months free. After that it’s planned at $5.99/month per household. You can cancel anytime.</p>
+      </details>
+      <details>
+        <summary>Does it handle allergies and dietary preferences?</summary>
+        <p>Yes. Vegetarian, vegan, gluten-free, dairy-free, halal, low-FODMAP and more are supported, and you can set them per person within your household.</p>
+      </details>
+      <details>
+        <summary>What if I don’t like a meal it picks?</summary>
+        <p>Swap it with one tap. Sorted learns from every swap, so your plans keep getting closer to what you’d have chosen yourself.</p>
+      </details>
+      <details>
+        <summary>Will it work with grocery delivery?</summary>
+        <p>At launch you’ll be able to send your list to major delivery services in one tap. You can also just take the list to the store.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <div class="final-card">
+      <h2>Never decide dinner again.</h2>
+      <p>Join the waitlist and be one of the first households to get their week decided for them.</p>
+      <form class="waitlist" action="#joined" method="get">
+        <label class="sr-only" for="email-final">Email address</label>
+        <div class="field">
+          <input id="email-final" type="email" name="email" placeholder="you@email.com" required autocomplete="email">
+          <button class="btn" type="submit">Join the waitlist</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="logo-mark" aria-hidden="true"></span>Sorted</a>
+    <span>© 2026 Sorted Labs. Dinner, decided.</span>
+    <ul>
+      <li><a href="#">Privacy</a></li>
+      <li><a href="#">Terms</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7CC9FF"/>
+      <stop offset="1" stop-color="#1A7BDC"/>
+    </linearGradient>
+    <radialGradient id="sun" gradientUnits="userSpaceOnUse" cx="380" cy="360" r="260">
+      <stop offset="0" stop-color="#FFF0B3"/>
+      <stop offset="0.55" stop-color="#FFD54F"/>
+      <stop offset="1" stop-color="#FF9F1C"/>
+    </radialGradient>
+    <linearGradient id="cloud" gradientUnits="userSpaceOnUse" x1="0" y1="450" x2="0" y2="790">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#D5E7F7"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sharp square background, no rounded corners -->
+  <rect width="1024" height="1024" fill="url(#sky)"/>
+  <circle cx="512" cy="280" r="430" fill="#FFFFFF" opacity="0.07"/>
+
+  <!-- Sun rays -->
+  <g stroke="#FFC93C" stroke-width="30" stroke-linecap="round">
+    <line x1="420" y1="100" x2="420" y2="175"/>
+    <line x1="632.1" y1="187.9" x2="579.1" y2="240.9"/>
+    <line x1="720" y1="400" x2="645" y2="400"/>
+    <line x1="632.1" y1="612.1" x2="579.1" y2="559.1"/>
+    <line x1="420" y1="700" x2="420" y2="625"/>
+    <line x1="207.9" y1="612.1" x2="260.9" y2="559.1"/>
+    <line x1="120" y1="400" x2="195" y2="400"/>
+    <line x1="207.9" y1="187.9" x2="260.9" y2="240.9"/>
+  </g>
+
+  <!-- Sun -->
+  <circle cx="420" cy="400" r="180" fill="url(#sun)"/>
+
+  <!-- Soft ground shadow -->
+  <ellipse cx="570" cy="815" rx="290" ry="34" fill="#0B4C86" opacity="0.16"/>
+
+  <!-- Cloud -->
+  <g fill="url(#cloud)">
+    <circle cx="580" cy="600" r="150"/>
+    <circle cx="430" cy="650" r="110"/>
+    <circle cx="720" cy="660" r="110"/>
+    <rect x="300" y="640" width="540" height="150" rx="75"/>
+  </g>
+
+  <!-- Subtle sky sparkles -->
+  <circle cx="880" cy="230" r="9" fill="#FFFFFF" opacity="0.55"/>
+  <circle cx="925" cy="300" r="5.5" fill="#FFFFFF" opacity="0.4"/>
+</svg>

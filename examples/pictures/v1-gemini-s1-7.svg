@@ -1,0 +1,192 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#F6F0E2" />
+  
+  <!-- Vintage Sun -->
+  <circle cx="480" cy="300" r="210" fill="#EBD7B7" />
+  
+  <!-- Distant Clouds (Flat Geometric) -->
+  <path d="M 100 220 C 100 195 140 195 150 210 C 165 180 215 180 230 210 C 250 200 270 210 270 220 Z" fill="#FDF9F1" />
+  <path d="M 620 150 C 620 130 650 130 660 142 C 675 120 710 120 725 142 C 745 135 760 142 760 150 Z" fill="#FDF9F1" />
+
+  <!-- Ground Plane -->
+  <rect x="60" y="511" width="680" height="8" rx="4" fill="#DECEB4" />
+
+  <!-- ==================== FAR SIDE (LEFT LIMBS) ==================== -->
+  <!-- Far Arm/Wing -->
+  <path d="M 330 210 L 405 260 L 478 242 L 485 256 L 398 278 L 315 228 Z" fill="#DFD5C3" />
+
+  <!-- Far Leg & Pedal -->
+  <rect x="405" y="395" width="32" height="10" rx="5" fill="#46534C" />
+  <!-- Thigh (From Hip 280,295 to Knee 385,315) -->
+  <path d="M 285 280 L 390 302 L 380 328 L 270 310 Z" fill="#C76953" />
+  <circle cx="385" cy="315" r="13" fill="#C76953" />
+  <!-- Calf (From Knee 385,315 to Foot 415,392) -->
+  <path d="M 396 312 L 424 390 L 408 394 L 374 318 Z" fill="#C76953" />
+  <!-- Webbed Foot -->
+  <path d="M 412 385 L 452 396 L 402 398 Z" fill="#C76953" />
+
+
+  <!-- ==================== CRUISER BICYCLE (REAR & WHEELS) ==================== -->
+  <!-- Rear Wheel (Center: 220, 420) -->
+  <g transform="translate(220, 420)">
+    <!-- Spokes -->
+    <g fill="#DFD5C3">
+      <rect x="-82" y="-2" width="164" height="4" />
+      <rect x="-82" y="-2" width="164" height="4" transform="rotate(30)" />
+      <rect x="-82" y="-2" width="164" height="4" transform="rotate(60)" />
+      <rect x="-82" y="-2" width="164" height="4" transform="rotate(90)" />
+      <rect x="-82" y="-2" width="164" height="4" transform="rotate(120)" />
+      <rect x="-82" y="-2" width="164" height="4" transform="rotate(150)" />
+    </g>
+    <!-- Tire (Dark Sage/Slate) & Whitewall (Cream) & Rim -->
+    <path d="M 0 -92 A 92 92 0 1 0 0 92 A 92 92 0 1 0 0 -92 Z M 0 -78 A 78 78 0 1 1 0 78 A 78 78 0 1 1 0 -78 Z" fill="#46534C" fill-rule="evenodd" />
+    <path d="M 0 -78 A 78 78 0 1 0 0 78 A 78 78 0 1 0 0 -78 Z M 0 -68 A 68 68 0 1 1 0 68 A 68 68 0 1 1 0 -68 Z" fill="#FDF9F1" fill-rule="evenodd" />
+    <path d="M 0 -68 A 68 68 0 1 0 0 68 A 68 68 0 1 0 0 -68 Z M 0 -64 A 64 64 0 1 1 0 64 A 64 64 0 1 1 0 -64 Z" fill="#9BB09D" fill-rule="evenodd" />
+  </g>
+
+  <!-- Front Wheel (Center: 580, 420) -->
+  <g transform="translate(580, 420)">
+    <!-- Spokes -->
+    <g fill="#DFD5C3">
+      <rect x="-82" y="-2" width="164" height="4" />
+      <rect x="-82" y="-2" width="164" height="4" transform="rotate(30)" />
+      <rect x="-82" y="-2" width="164" height="4" transform="rotate(60)" />
+      <rect x="-82" y="-2" width="164" height="4" transform="rotate(90)" />
+      <rect x="-82" y="-2" width="164" height="4" transform="rotate(120)" />
+      <rect x="-82" y="-2" width="164" height="4" transform="rotate(150)" />
+    </g>
+    <!-- Tire & Whitewall & Rim -->
+    <path d="M 0 -92 A 92 92 0 1 0 0 92 A 92 92 0 1 0 0 -92 Z M 0 -78 A 78 78 0 1 1 0 78 A 78 78 0 1 1 0 -78 Z" fill="#46534C" fill-rule="evenodd" />
+    <path d="M 0 -78 A 78 78 0 1 0 0 78 A 78 78 0 1 0 0 -78 Z M 0 -68 A 68 68 0 1 1 0 68 A 68 68 0 1 1 0 -68 Z" fill="#FDF9F1" fill-rule="evenodd" />
+    <path d="M 0 -68 A 68 68 0 1 0 0 68 A 68 68 0 1 0 0 -68 Z M 0 -64 A 64 64 0 1 1 0 64 A 64 64 0 1 1 0 -64 Z" fill="#9BB09D" fill-rule="evenodd" />
+  </g>
+
+
+  <!-- ==================== CRUISER BICYCLE FRAME (SAGE GREEN) ==================== -->
+  <!-- Seat Post & Handlebar Stem (Cream/Silver) -->
+  <polygon points="301,275 317,275 330,320 314,320" fill="#DFD5C3" />
+  <path d="M 521 268 L 508 220 L 535 212 L 540 226 L 522 231 L 534 265 Z" fill="#DFD5C3" />
+
+  <!-- Cruiser Frame Tubes -->
+  <!-- Chainstay -->
+  <polygon points="220,413 380,413 380,427 220,427" fill="#7D9982" />
+  <!-- Seatstay -->
+  <polygon points="215,415 318,308 328,318 225,425" fill="#7D9982" />
+  <!-- Seat Tube -->
+  <polygon points="312,305 328,305 388,420 372,420" fill="#7D9982" />
+  <!-- Curved Down Tube -->
+  <path d="M 374 426 C 430 416 490 365 524 295 L 540 301 C 504 378 438 432 378 430 Z" fill="#7D9982" />
+  <!-- Curved Top Tube (Double Bar Cruiser Style) -->
+  <path d="M 318 303 C 380 262 455 262 527 271 L 525 289 C 455 280 385 280 325 317 Z" fill="#7D9982" />
+  <path d="M 328 332 C 385 302 450 302 531 293 L 529 305 C 450 314 390 314 333 343 Z" fill="#9BB09D" />
+  
+  <!-- Head Tube -->
+  <polygon points="517,264 535,259 547,308 529,313" fill="#7D9982" />
+  <rect x="515" y="260" width="22" height="6" rx="2" transform="rotate(-14 526 263)" fill="#DFD5C3" />
+  <rect x="528" y="308" width="22" height="6" rx="2" transform="rotate(-14 539 311)" fill="#DFD5C3" />
+
+  <!-- Front Fork -->
+  <path d="M 530 310 C 542 365 558 398 575 424 L 586 416 C 570 392 556 360 546 306 Z" fill="#7D9982" />
+
+  <!-- Fenders (Ducktail Vintage Cruiser Style) -->
+  <!-- Rear Fender -->
+  <path d="M 118 430 A 102 102 0 0 1 312 375 L 300 381 A 90 90 0 0 0 130 430 Z" fill="#9BB09D" />
+  <!-- Front Fender -->
+  <path d="M 488 375 A 102 102 0 0 1 678 395 L 666 400 A 90 90 0 0 0 500 381 Z" fill="#9BB09D" />
+
+  <!-- Wheel Hubs -->
+  <circle cx="220" cy="420" r="12" fill="#46534C" />
+  <circle cx="220" cy="420" r="5" fill="#FDF9F1" />
+  <circle cx="580" cy="420" r="12" fill="#46534C" />
+  <circle cx="580" cy="420" r="5" fill="#FDF9F1" />
+
+  <!-- Chain &Chainguard -->
+  <polygon points="220,412 380,400 380,435 220,428" fill="#46534C" />
+  <path d="M 210 420 C 210 400 235 395 385 388 A 34 34 0 0 1 416 422 L 416 428 L 210 422 Z" fill="#9BB09D" />
+  <circle cx="380" cy="420" r="22" fill="#7D9982" />
+
+  <!-- Wide Sprung Saddle -->
+  <!-- Springs -->
+  <g fill="#46534C">
+    <rect x="268" y="280" width="24" height="6" rx="3" />
+    <rect x="266" y="290" width="28" height="6" rx="3" />
+    <rect x="268" y="300" width="24" height="6" rx="3" />
+    <path d="M 280 306 L 320 306 L 320 312 L 280 312 Z" />
+  </g>
+  <!-- Saddle Cushion -->
+  <path d="M 248 265 C 248 248 285 255 348 266 C 362 268 362 280 345 282 C 305 286 248 288 248 265 Z" fill="#C76953" />
+  <path d="M 255 268 C 255 258 285 262 342 271 C 350 272 350 277 340 278 C 305 281 255 281 255 268 Z" fill="#DF826B" />
+
+
+  <!-- ==================== PELICAN CYCLIST ==================== -->
+  <!-- Body & Tail Feathers -->
+  <path d="M 350 185 C 385 225 365 295 305 300 C 265 304 235 285 215 268 L 185 270 L 202 252 L 178 244 L 208 235 C 232 235 260 225 292 185 Z" fill="#FDF9F1" />
+  <!-- Subtle Underbelly Shadow -->
+  <path d="M 355 255 C 345 285 325 298 305 300 C 265 304 235 285 215 268 L 185 270 L 195 260 C 230 275 265 288 305 285 C 330 283 345 270 355 255 Z" fill="#EAE0CE" />
+
+  <!-- Neck & Head -->
+  <path d="M 292 195 C 288 150 305 115 305 85 C 305 55 335 45 362 52 C 385 58 392 78 385 98 C 375 128 345 155 352 195 Z" fill="#FDF9F1" />
+  <!-- Tuft of Feathers on Crown -->
+  <path d="M 318 52 L 295 45 L 312 62 L 288 62 L 308 74 Z" fill="#DFD5C3" />
+
+  <!-- Giant Pelican Beak & Pouch (Facing Right) -->
+  <!-- Throat Pouch (Muted Coral) -->
+  <path d="M 378 92 L 588 92 C 570 175 455 202 358 142 Z" fill="#DF826B" />
+  <!-- Pouch Depth Shading -->
+  <path d="M 395 100 L 575 96 C 555 158 465 182 375 135 Z" fill="#C76953" />
+  <!-- Upper Mandible (Soft Golden/Cream-Orange) -->
+  <path d="M 380 68 C 445 72 525 74 592 76 C 602 76 606 86 598 94 C 592 99 585 95 582 92 L 375 94 Z" fill="#E8A56B" />
+
+  <!-- Eye & Cheek -->
+  <circle cx="358" cy="74" r="10" fill="#EAE0CE" />
+  <circle cx="358" cy="74" r="6" fill="#46534C" />
+  <circle cx="360" cy="72" r="2" fill="#FDF9F1" />
+  <ellipse cx="348" cy="92" rx="8" ry="5" fill="#DF826B" opacity="0.6" />
+
+  <!-- Retro Cycling Cap (Sage Green) -->
+  <path d="M 312 58 C 320 32 365 34 378 58 Z" fill="#7D9982" />
+  <path d="M 365 50 L 402 44 C 406 44 405 52 398 54 L 372 58 Z" fill="#9BB09D" />
+  <circle cx="344" cy="40" r="4" fill="#FDF9F1" />
+
+
+  <!-- ==================== NEAR SIDE (RIGHT LEG & CRANK) ==================== -->
+  <!-- Crankset -->
+  <circle cx="380" cy="420" r="14" fill="#DFD5C3" />
+  <!-- Crank Arm (To Near Pedal at 350, 445) -->
+  <path d="M 376 414 L 346 440 L 354 450 L 384 426 Z" fill="#DFD5C3" />
+  <circle cx="380" cy="420" r="6" fill="#46534C" />
+
+  <!-- Near Leg (Human-Proportioned Cyclist Anatomy) -->
+  <!-- Thigh (Hip 285,288 to Knee 355,345) -->
+  <path d="M 295 274 L 366 335 L 344 355 L 270 302 Z" fill="#DF826B" />
+  <!-- Knee Joint -->
+  <circle cx="355" cy="345" r="14" fill="#DF826B" />
+  <!-- Calf/Shin (Knee 355,345 to Ankle 338,438) -->
+  <path d="M 369 346 L 346 440 L 330 438 L 341 344 Z" fill="#DF826B" />
+  <!-- Webbed Foot on Pedal -->
+  <path d="M 332 432 L 382 444 L 330 446 Z" fill="#DF826B" />
+  <!-- Near Pedal Block -->
+  <rect x="335" y="444" width="34" height="10" rx="5" fill="#46534C" />
+
+
+  <!-- ==================== SWEPT-BACK HANDLEBARS & NEAR WING ==================== -->
+  <!-- Swept-back Cruiser Handlebars (From Stem 532,218 sweeping back to 450,255) -->
+  <path d="M 532 212 C 512 212 495 248 450 248 L 450 262 C 502 262 518 226 532 226 Z" fill="#DFD5C3" />
+
+  <!-- Near Arm/Wing (Bendable Arm-like Wing) -->
+  <!-- Upper Wing & Shoulder -->
+  <path d="M 322 200 C 310 200 302 212 310 226 L 378 278 C 388 285 400 278 395 262 L 335 205 Z" fill="#EAE0CE" />
+  <!-- Forearm Wing & Feathers -->
+  <path d="M 378 278 L 455 262 L 452 246 L 385 256 Z" fill="#EAE0CE" />
+  <!-- Wing Trim/Flight Feathers Accent (Sage/Slate tint) -->
+  <path d="M 312 224 L 378 278 L 440 265 L 438 258 L 382 268 L 320 218 Z" fill="#DFD5C3" />
+
+  <!-- Handlebar Grip (Coral) -->
+  <rect x="432" y="246" width="30" height="18" rx="9" fill="#C76953" />
+  
+  <!-- Wing "Hand" Feather Tips Curled Over Grip -->
+  <path d="M 442 246 C 452 242 462 248 458 260 C 454 268 444 265 440 258 Z" fill="#FDF9F1" />
+  <path d="M 450 248 C 458 245 466 250 462 260 C 459 266 452 264 448 258 Z" fill="#EAE0CE" />
+
+</svg>

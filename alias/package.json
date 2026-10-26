@@ -1,0 +1,43 @@
+{
+  "name": "model-salt",
+  "version": "1.0.0",
+  "description": "The short name for @modelsalt/model-salt: an MCP server that gives your model randomness from outside it, so one prompt gives different answers.",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "llm",
+    "randomness",
+    "claude-code",
+    "codex",
+    "gemini-cli",
+    "kimi"
+  ],
+  "homepage": "https://modelsalt.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/modelsalt/model-salt.git",
+    "directory": "alias"
+  },
+  "bugs": {
+    "url": "https://github.com/modelsalt/model-salt/issues"
+  },
+  "license": "MIT",
+  "author": "Chris Benjaminsen (https://chrisbenjaminsen.com)",
+  "type": "module",
+  "bin": {
+    "model-salt": "bin.mjs"
+  },
+  "files": [
+    "bin.mjs"
+  ],
+  "dependencies": {
+    "@modelsalt/model-salt": "^1.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

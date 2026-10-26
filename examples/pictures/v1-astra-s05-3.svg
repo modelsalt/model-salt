@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 540" width="640" height="540" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A black and white pelican seen from the side, leaning forward with both wings on the handlebars and webbed feet on the pedals.</desc>
+
+  <rect width="640" height="540" fill="white"/>
+
+  <g stroke="black" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Wheels -->
+    <g fill="white">
+      <circle cx="170" cy="425" r="82"/>
+      <circle cx="470" cy="425" r="82"/>
+    </g>
+    <g fill="none" stroke-width="3">
+      <circle cx="170" cy="425" r="70"/>
+      <circle cx="470" cy="425" r="70"/>
+      <path d="M170 355V495M100 425H240M120 375L220 475M120 475L220 375
+               M470 355V495M400 425H540M420 375L520 475M420 475L520 375"/>
+    </g>
+
+    <!-- Bicycle frame -->
+    <g fill="none">
+      <path d="M170 425L245 320L310 425ZM245 320H425L310 425M425 320L470 425"/>
+      <path d="M245 320L234 293M425 320L411 279L435 266"/>
+    </g>
+    <path d="M212 291Q230 283 260 290L260 299H212Z" fill="black"/>
+    <path d="M427 265H447" fill="none" stroke-width="9"/>
+
+    <!-- Far leg and foot -->
+    <path d="M278 301L318 338L339 381" fill="none"/>
+    <path d="M338 373L358 383L366 394H331Z" fill="white"/>
+    <path d="M327 397H367" fill="none" stroke-width="8"/>
+
+    <!-- Far wing reaches the handlebar -->
+    <path d="M289 232Q348 212 393 249L436 264
+             Q444 272 433 278L385 268L301 260Z" fill="white"/>
+
+    <!-- Tail and body, leaning forward -->
+    <path d="M216 253L166 232L184 271L159 270
+             Q196 309 250 310
+             Q304 312 330 275
+             L370 208
+             Q382 186 401 179
+             Q424 170 421 148
+             Q420 124 395 121
+             Q365 117 353 143
+             Q342 165 345 190
+             L311 225
+             Q256 203 216 253Z" fill="white"/>
+
+    <!-- Long bill and hanging throat pouch -->
+    <path d="M414 150L578 171
+             Q551 194 510 207
+             Q450 224 414 173Z" fill="white"/>
+    <path d="M414 150L582 168L578 177L414 170Z" fill="white"/>
+    <path d="M431 179Q452 202 479 203" fill="none" stroke-width="3"/>
+
+    <!-- Eye -->
+    <circle cx="396" cy="146" r="5" fill="black" stroke="none"/>
+
+    <!-- Near wing reaches the handlebar -->
+    <path d="M242 245
+             Q279 231 318 256
+             Q359 280 427 276
+             Q442 275 441 285
+             Q437 296 416 296
+             Q349 311 290 289
+             Q258 279 242 245Z" fill="white"/>
+    <path d="M270 255Q307 282 370 285" fill="none" stroke-width="3"/>
+
+    <!-- Near leg and webbed foot -->
+    <path d="M260 305L276 352L285 410" fill="none"/>
+    <path d="M284 402L298 414L314 419L306 426H272L276 411Z" fill="white"/>
+
+    <!-- Crank and pedals -->
+    <circle cx="310" cy="425" r="12" fill="white"/>
+    <path d="M310 425L290 433M310 425L347 397" fill="none"/>
+    <path d="M270 434H310" fill="none" stroke-width="8"/>
+    <circle cx="170" cy="425" r="7" fill="black"/>
+    <circle cx="470" cy="425" r="7" fill="black"/>
+  </g>
+</svg>

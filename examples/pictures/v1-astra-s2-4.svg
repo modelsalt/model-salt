@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a folding bicycle</title>
+  <desc id="desc">A long-necked pelican pedals left on a small-wheeled folding bicycle, illustrated in angular violet, lavender, muted gold, and ivory facets.</desc>
+  <rect width="800" height="400" fill="#faf7eb"/>
+  <path d="M226 360H602L566 369H270Z" fill="#e4daed"/>
+
+  <!-- Small wheels -->
+  <g stroke="#493261" stroke-width="9" fill="#faf7eb">
+    <circle cx="292" cy="307" r="47"/>
+    <circle cx="536" cy="307" r="47"/>
+  </g>
+  <g fill="none" stroke="#c2acd7" stroke-width="2">
+    <path d="M245 307H339M292 260V354M259 274L325 340M259 340L325 274"/>
+    <path d="M489 307H583M536 260V354M503 274L569 340M503 340L569 274"/>
+  </g>
+
+  <!-- Far leg and pedal -->
+  <path d="M460 214L474 247L437 272L425 264L457 241L444 222Z" fill="#9f874c"/>
+  <path d="M424 262L447 273L417 276L408 270Z" fill="#bca265"/>
+  <path d="M410 278H443" stroke="#493261" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Folding frame, steering stem and seat -->
+  <path d="M292 307L316 231L323 185L305 179" fill="none" stroke="#765394" stroke-width="10" stroke-linejoin="bevel"/>
+  <path d="M291 178H323" stroke="#493261" stroke-width="8" stroke-linecap="round"/>
+  <path d="M317 237L420 269L478 251L536 307L420 291L461 221" fill="none" stroke="#765394" stroke-width="12" stroke-linejoin="bevel"/>
+  <path d="M319 233L421 265L478 247" fill="none" stroke="#bca5d2" stroke-width="4"/>
+  <path d="M461 222L470 202" stroke="#493261" stroke-width="8"/>
+  <path d="M445 197L482 197L491 204L478 209L447 207Z" fill="#493261"/>
+  <path d="M409 259L426 264L424 282L407 277Z" fill="#bca265"/>
+  <path d="M415 262V277M420 269L434 261" fill="none" stroke="#6e573c" stroke-width="3"/>
+  <g fill="#493261">
+    <circle cx="292" cy="307" r="6"/>
+    <circle cx="536" cy="307" r="6"/>
+    <circle cx="420" cy="291" r="17"/>
+  </g>
+  <circle cx="420" cy="291" r="11" fill="#bca5d2"/>
+  <path d="M420 291L445 315H464" fill="none" stroke="#493261" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Faceted pelican body and long curved neck -->
+  <path d="M535 177L566 157L551 190L511 211L457 219L412 199L388 174L370 148L367 109L350 87L324 82L309 64L319 44L345 38L366 51L381 78L387 121L408 151L460 157L501 170Z" fill="#e3d8ec"/>
+  <path d="M319 44L345 38L358 53L343 68L324 82L309 64Z" fill="#faf7eb"/>
+  <path d="M343 68L366 51L381 78L387 121L408 151L388 174L370 148L367 109L350 87Z" fill="#c0a7d3"/>
+  <path d="M343 68L356 78L373 132L395 160L388 174L370 148L367 109L350 87Z" fill="#faf7eb"/>
+  <path d="M408 151L460 157L501 170L480 192L430 190L388 174Z" fill="#faf7eb"/>
+  <path d="M388 174L430 190L480 192L511 211L457 219L412 199Z" fill="#b399c7"/>
+  <path d="M480 192L535 177L566 157L551 190L511 211Z" fill="#765394"/>
+
+  <!-- Long bill and pelican throat pouch -->
+  <path d="M321 65L171 88L207 112L271 113L321 82L337 69Z" fill="#bca265"/>
+  <path d="M171 88L271 98L321 82L271 113L207 112Z" fill="#99804b"/>
+  <path d="M321 65L171 88L286 87L337 69Z" fill="#d6c18c"/>
+  <path d="M171 88L286 87L324 74" fill="none" stroke="#765394" stroke-width="2"/>
+  <path d="M327 54L334 51L339 57L333 63L327 60Z" fill="#493261"/>
+  <circle cx="332" cy="55" r="1.7" fill="#faf7eb"/>
+
+  <!-- Wing reaches the handlebar -->
+  <path d="M473 169L434 163L393 173L347 178L311 174L307 182L347 190L401 190L447 184Z" fill="#9b7bb5"/>
+  <path d="M473 169L434 163L393 173L347 178L401 181L445 176Z" fill="#c9b5db"/>
+  <path d="M311 174L304 176L302 185L316 187L324 182Z" fill="#765394"/>
+
+  <!-- Near leg and webbed foot on pedal -->
+  <path d="M457 212L440 238L416 259L448 302L459 299L433 261L459 243L474 215Z" fill="#c7ae70"/>
+  <path d="M457 212L440 238L416 259L448 302L452 292L427 259L452 239L465 215Z" fill="#a28a53"/>
+  <path d="M448 298L459 299L477 313L460 311L452 315L435 311Z" fill="#bca265"/>
+</svg>

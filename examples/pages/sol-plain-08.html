@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Meet Sprout: delicious meal plans, simple grocery lists, and a little more room for living.">
+<title>Sprout — Good food. Less figuring it out.</title>
+<style>
+:root{--paper:#f8f7f2;--ink:#263e34;--muted:#767e72;--orange:#e77b4c;--line:#e1e5da}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+button{cursor:pointer}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--orange);outline-offset:5px}
+.wrap{max-width:1240px;margin:auto;padding:0 52px}
+header{height:105px;display:flex;justify-content:space-between;align-items:center;gap:25px}
+.brand{display:inline-flex;align-items:center;gap:8px;font-size:30px;font-weight:750;letter-spacing:-1.5px}
+.brand svg{width:32px;height:36px}
+.brand b{color:var(--orange)}
+nav{display:flex;gap:32px;font-size:13px}
+nav a:hover{color:var(--orange)}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:24px;border:0;border-radius:7px;padding:17px 24px;background:var(--orange);color:white;font-size:12px;font-weight:600;transition:transform .2s,background .2s}
+.button:hover{background:#d46b3e;transform:translateY(-2px)}
+.button.dark{background:var(--ink);padding:13px 19px}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;padding:40px 0 60px;min-height:630px}
+.eyebrow{display:flex;align-items:center;gap:9px;font-size:9px;font-weight:bold;letter-spacing:1.9px}
+.dot{width:7px;height:7px;background:var(--orange);border-radius:50%}
+h1{font-family:Georgia,serif;font-size:78px;font-weight:400;line-height:1.03;letter-spacing:-3.8px;margin:26px 0}
+h1 em{color:var(--orange)}
+.intro{max-width:350px;font-size:14px;line-height:1.85;color:var(--muted);margin-bottom:28px}
+.fine{font-size:10px;color:var(--muted);margin:14px 0 29px}
+.proof{display:flex;align-items:center;gap:12px}
+.faces{display:flex;padding-left:6px}
+.faces span{display:grid;place-items:center;border:2px solid var(--paper);border-radius:50%;width:31px;height:31px;font-size:23px;background:#c9d0b7;overflow:hidden;margin-left:-6px}
+.faces span:nth-child(2){background:#dfc0a2}
+.faces span:nth-child(3){background:#dbb6ac}
+.stars{color:#d6a05c;font-size:11px;letter-spacing:2px}
+.proof p{font-size:9px;color:var(--muted);margin:5px 0 0}
+.proof strong{color:var(--ink)}
+.visual{position:relative;height:510px;isolation:isolate}
+.blob{position:absolute;inset:25px -5px 12px 10px;background:#e8ecdd;border-radius:48% 49% 44% 45%;transform:rotate(-9deg);z-index:-1}
+.bowl{position:absolute;width:112%;height:100%;left:-6%;filter:drop-shadow(0 22px 15px #253e351c)}
+.card{position:absolute;background:#fffefa;border:1px solid #e7e8dd;border-radius:11px;box-shadow:0 12px 30px #263e3510}
+.week{top:20px;left:0;width:195px;padding:17px;transform:rotate(-5deg)}
+.card-title{font-size:12px;display:flex;justify-content:space-between;font-weight:bold}
+.card-sub{font-size:9px;color:var(--muted);margin:7px 0 15px}
+.days{display:flex;justify-content:space-between}
+.days div{display:grid;justify-items:center;gap:9px;font-size:8px;color:#8a9380}
+.days i{display:grid;place-items:center;font-style:normal;width:24px;height:24px;background:#eef0e5;border-radius:50%;color:#66825d}
+.days .active i{background:var(--orange);color:white}
+.recipe{right:-8px;bottom:22px;padding:16px;width:206px;transform:rotate(5deg)}
+.recipe small{font-size:8px;letter-spacing:1.2px;color:#839075}
+.recipe h3{font-family:Georgia,serif;font-size:21px;font-weight:400;line-height:1.2;margin:11px 0}
+.recipe p{font-size:9px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:0}
+.check{position:absolute;left:-6px;bottom:62px;background:#fffefa;border-radius:7px;box-shadow:0 6px 20px #263e3510;font-size:10px;padding:14px 16px;transform:rotate(-5deg)}
+.check span{color:#779064;margin-right:7px}
+.note{position:absolute;right:3px;top:20px;font:italic 17px Georgia,serif;color:#7d896e;transform:rotate(9deg)}
+.note svg{display:block;margin:5px 0 0 25px}
+.press{display:flex;justify-content:space-between;align-items:center;gap:20px;border-block:1px solid var(--line);padding:25px 0;color:#8b9383}
+.press p{font-size:10px;line-height:1.5;margin:0;color:var(--muted)}
+.press span{font:bold 24px Georgia,serif;letter-spacing:-1px}
+.press .well{font-style:italic}
+.press .kitchn{font-family:Arial,sans-serif;font-weight:400;letter-spacing:-1.5px}
+.press .goop{font-size:30px;letter-spacing:-2px}
+.benefits{padding:70px 0}
+.center{text-align:center}
+.center .eyebrow{justify-content:center;color:#849075}
+h2{font:400 40px/1.15 Georgia,serif;letter-spacing:-1.3px;margin:16px 0}
+.center>p{font-size:12px;color:var(--muted);line-height:1.8}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:35px;margin-top:39px}
+.feature{display:flex;align-items:flex-start;gap:14px}
+.icon{flex:0 0 43px;height:43px;background:#edf0e5;border-radius:11px;display:grid;place-items:center}
+.icon svg{width:23px;height:23px;fill:none;stroke:#6c7e58;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.feature h3{font-size:13px;margin:3px 0 10px}
+.feature p{font-size:11px;line-height:1.85;color:var(--muted);margin:0}
+.explore{border-top:1px solid var(--line);padding:55px 0 65px;display:grid;grid-template-columns:1fr 1.1fr;gap:75px;align-items:center}
+.explore .eyebrow{color:#859073}
+.explore h2{font-size:39px}
+.explore p{font-size:13px;line-height:1.85;color:var(--muted);max-width:315px}
+.text-link{display:inline-block;font-weight:bold;font-size:12px;margin-top:12px}
+.plan{background:#edf0e5;padding:24px;border-radius:16px}
+.plan-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:18px}
+.plan-head strong{font-size:12px}
+.plan-head small{font-size:9px;color:var(--muted)}
+.meal{display:grid;grid-template-columns:31px 35px 1fr 27px;align-items:center;gap:10px;background:#fffefa;border-radius:8px;margin-top:8px;padding:13px 11px}
+.day{font-size:8px;text-transform:uppercase;color:#929a84}
+.food{font-size:25px}
+.meal strong{display:block;font-size:10px}
+.meal small{display:block;font-size:9px;color:var(--muted);margin-top:5px}
+.swap{padding:4px;border:0;background:transparent;color:#879577;border-radius:5px;font-size:21px}
+.swap:hover{background:#eef0e5}
+.plan .hint{font-size:9px;text-align:center;max-width:none;margin:15px 0 0}
+.cta{background:#e8edde;padding:40px 20px;border-radius:17px;text-align:center;margin-bottom:45px}
+.cta h2{font-size:35px;margin-top:0}
+.cta p{font-size:12px;color:var(--muted);margin-bottom:25px}
+footer{border-top:1px solid var(--line);padding:26px 0;display:flex;align-items:center;justify-content:space-between;gap:20px}
+footer .brand{font-size:23px}
+footer .brand svg{width:24px;height:27px}
+footer p{font-size:9px;color:var(--muted)}
+dialog{width:410px;max-width:calc(100% - 32px);padding:35px;border:1px solid var(--line);border-radius:17px;background:var(--paper);color:var(--ink);box-shadow:0 25px 90px #1b302a40}
+dialog::backdrop{background:#263e3570;backdrop-filter:blur(5px)}
+dialog h2{font-size:32px}
+dialog p{font-size:13px;color:var(--muted);line-height:1.8}
+.close{position:absolute;right:15px;top:10px;border:0;background:none;color:var(--muted);font-size:25px}
+label{display:block;font-size:11px;margin:20px 0 8px}
+input{width:100%;border:1px solid #cbd1c2;background:#fffefa;color:var(--ink);border-radius:7px;padding:14px}
+form .button{width:100%;margin-top:13px}
+dialog .disclaimer{font-size:10px}
+@media(min-width:1400px){.hero{min-height:680px}.visual{height:550px}h1{font-size:84px}}
+@media(max-width:1000px){.wrap{padding:0 30px}nav{gap:20px}h1{font-size:63px}.visual{height:440px}.week{width:173px}.recipe{width:182px;right:0}.note{font-size:14px;right:0}.check{font-size:9px;bottom:40px}.hero{min-height:570px}.features{gap:20px}.explore{gap:35px}}
+@media(max-width:720px){.wrap{padding:0 23px}header{height:85px}nav{display:none}.brand{font-size:27px}.button.dark{font-size:10px;padding:12px 15px}.hero{grid-template-columns:1fr;gap:30px;padding:30px 0}.hero-copy{text-align:center}.eyebrow{justify-content:center;font-size:8px}h1{font-size:65px;letter-spacing:-3px}.intro{margin-inline:auto}.proof{justify-content:center}.visual{width:100%;max-width:440px;margin:auto;height:440px}.blob{inset:25px 12px}.week{left:5px}.recipe{right:5px}.note{right:10px}.check{left:3px}.press{flex-wrap:wrap;justify-content:center;gap:20px 26px}.press p{width:100%;text-align:center}.press p br{display:none}.press span{font-size:19px}.press .goop{font-size:25px}.benefits{padding:48px 0}h2{font-size:33px}.features{grid-template-columns:1fr;gap:27px;max-width:350px;margin:32px auto 0}.feature p{font-size:12px}.feature h3{font-size:14px}.explore{grid-template-columns:1fr;gap:20px;padding:42px 0}.explore-copy{text-align:center}.explore h2{font-size:34px}.explore p{margin-inline:auto}.plan{padding:19px}.cta h2{font-size:30px}.cta{margin-bottom:30px}footer p{font-size:8px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<symbol id="sprout" viewBox="0 0 36 40">
+<path d="M18 35V18" fill="none" stroke="currentColor" stroke-width="2.5"/>
+<path d="M18 23C5 24 2 15 3 8c10-1 17 4 15 15ZM18 17C17 7 23 2 33 3c1 9-5 16-15 14Z" fill="currentColor"/>
+</symbol>
+<symbol id="leaf" viewBox="0 0 60 30">
+<path d="M1 16C13-3 42-6 59 12 46 33 19 35 1 16Z" fill="currentColor"/>
+<path d="m5 16 47-3M22 15l9-10M30 15l11 9" stroke="#ffffff55" fill="none"/>
+</symbol>
+</defs>
+</svg>
+<div class="wrap">
+<header>
+<a href="#" class="brand" aria-label="Sprout home"><svg aria-hidden="true"><use href="#sprout"/></svg>sprout<b>.</b></a>
+<nav aria-label="Main navigation"><a href="#how">How it works</a><a href="#explore">Explore the app</a><a href="#start">Get started</a></nav>
+<button class="button dark" data-start>Try Sprout free <span>↗</span></button>
+</header>
+<main>
+<section class="hero" aria-labelledby="hero-title">
+<div class="hero-copy">
+<div class="eyebrow"><span class="dot"></span>A LITTLE PLANNING. A LOT MORE LIVING.</div>
+<h1 id="hero-title">Good food.<br>Less <em>figuring</em><br><em>it out.</em></h1>
+<p class="intro">Meet your new dinner routine. Delicious meal plans, a ready-to-go grocery list, and one less thing on your plate.</p>
+<button class="button" data-start>Make room for better meals <span>↗</span></button>
+<p class="fine">Free to get started &nbsp; · &nbsp; No credit card needed</p>
+<div class="proof">
+<div class="faces" aria-hidden="true"><span>👩🏻</span><span>👨🏽</span><span>👩🏾</span><span>👨🏻</span></div>
+<div><div class="stars" aria-hidden="true">✦ ✦ ✦ ✦ ✦</div><p>For people with <strong>full lives & hungry bellies.</strong></p></div>
+</div>
+</div>
+<div class="visual">
+<div class="blob"></div>
+<svg class="bowl" viewBox="0 0 600 560" role="img" aria-label="An illustrated salmon bowl with avocado, rice, greens, and tomatoes">
+<defs>
+<radialGradient id="plate"><stop stop-color="#fffdf1"/><stop offset=".8" stop-color="#faf8e9"/><stop offset=".91" stop-color="#e5e5d6"/><stop offset=".96" stop-color="#fffef7"/><stop offset="1" stop-color="#d9ddcd"/></radialGradient>
+<linearGradient id="salmon" x2="1" y2="1"><stop stop-color="#f2aa79"/><stop offset=".6" stop-color="#e77f4e"/><stop offset="1" stop-color="#b95230"/></linearGradient>
+<linearGradient id="avo"><stop stop-color="#dce596"/><stop offset=".55" stop-color="#adc561"/><stop offset="1" stop-color="#577f3b"/></linearGradient>
+<pattern id="rice" width="24" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(15)">
+<rect width="24" height="22" fill="#e5d8b7"/>
+<g fill="#fff3d6" stroke="#cfbf99" stroke-width=".4"><ellipse cx="5" cy="5" rx="5" ry="2" transform="rotate(30 5 5)"/><ellipse cx="17" cy="15" rx="5" ry="2" transform="rotate(-30 17 15)"/><ellipse cx="4" cy="20" rx="4" ry="2"/></g>
+</pattern>
+<filter id="food-shadow"><feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="#304123" flood-opacity=".2"/></filter>
+</defs>
+<g transform="translate(20 24) rotate(-12 280 260)">
+<circle cx="280" cy="260" r="213" fill="url(#plate)"/>
+<circle cx="280" cy="260" r="179" fill="#78904c"/>
+<path d="M125 180q50-70 145-70t100 100l-70 170-161-10Z" fill="url(#rice)"/>
+<g color="#3f703f">
+<use href="#leaf" x="115" y="272" width="85" height="50"/>
+<use href="#leaf" x="124" y="310" width="97" height="50" transform="rotate(-24 170 330)"/>
+<use href="#leaf" x="151" y="350" width="85" height="45" transform="rotate(14 180 370)"/>
+<use href="#leaf" x="106" y="232" width="75" height="45" transform="rotate(-35 140 250)"/>
+<use href="#leaf" x="200" y="377" width="85" height="45"/>
+</g>
+<g color="#789a4b">
+<use href="#leaf" x="121" y="283" width="80" height="40" transform="rotate(-40 160 300)"/>
+<use href="#leaf" x="139" y="340" width="80" height="40" transform="rotate(45 170 360)"/>
+<use href="#leaf" x="195" y="351" width="80" height="40" transform="rotate(-30 225 370)"/>
+</g>
+<g transform="rotate(25 300 260)" filter="url(#food-shadow)">
+<path d="m228 178 119-5 28 145-125 21q-18-60-22-161" fill="url(#salmon)"/>
+<path d="m237 192 106-8m-104 24 107-9m-104 25 106-9m-103 27 106-10m-103 29 106-11m-102 28 105-13m-101 29 104-13m-100 29 101-15" stroke="#ffcea0" stroke-width="4" opacity=".7"/>
+<path d="m243 197 88-9m-87 49 94-10m-85 54 92-12m-84 44 92-14" stroke="#a95231" stroke-width="3" stroke-dasharray="6 12 19 8" opacity=".6"/>
+</g>
+<g fill="url(#avo)" stroke="#678744" stroke-width="2" filter="url(#food-shadow)">
+<path d="M305 112q85 1 129 94l-25 28q-39-78-114-91Z"/>
+<path d="M300 133q80 4 116 94l-26 26q-32-77-104-91Z"/>
+<path d="M288 154q79 6 113 93l-27 26q-30-76-100-90Z"/>
+<path d="M276 176q73 7 109 89l-27 23q-29-71-97-84Z"/>
+</g>
+<g fill="#e96739" stroke="#ce502c" stroke-width="2" filter="url(#food-shadow)">
+<circle cx="399" cy="298" r="22"/><circle cx="410" cy="340" r="20"/><circle cx="374" cy="365" r="22"/><circle cx="347" cy="391" r="18"/>
+</g>
+<g fill="#f6ad62">
+<path d="m400 282 3 14 11-5-10 12 9 8-15-6-6 10 2-16-10-4 12-1Z"/>
+<path d="m411 326 2 11 10-2-9 8 6 10-12-7-6 8 1-13-8-5 12 1Z"/>
+<path d="m373 350 2 13 12-3-10 9 5 12-12-8-6 7 2-13-8-5 11 1Z"/>
+</g>
+<g fill="#dbe5ac" stroke="#82a160" stroke-width="4">
+<ellipse cx="294" cy="400" rx="19" ry="25" transform="rotate(-30 294 400)"/>
+<ellipse cx="324" cy="380" rx="19" ry="25" transform="rotate(-30 324 380)"/>
+</g>
+<g color="#2e663b">
+<use href="#leaf" x="236" y="231" width="46" height="26" transform="rotate(35 250 240)"/>
+<use href="#leaf" x="266" y="256" width="39" height="25" transform="rotate(-35 280 265)"/>
+<use href="#leaf" x="249" y="268" width="35" height="24" transform="rotate(50 265 280)"/>
+</g>
+<g fill="#443f29">
+<ellipse cx="274" cy="219" rx="1.2" ry="3"/><ellipse cx="308" cy="257" rx="1.2" ry="3"/><ellipse cx="270" cy="302" rx="1.2" ry="3"/><ellipse cx="327" cy="283" rx="1.2" ry="3"/><ellipse cx="300" cy="318" rx="1.2" ry="3"/>
+</g>
+</g>
+<g transform="translate(473 355) rotate(23)" fill="#c6bba2">
+<path d="M0 0v127q0 8 5 8t5-8V0"/>
+<path d="M-7-32v26q0 14 12 14T17-6v-26h-4v24h-4v-24H5v24H1v-24Z"/>
+</g>
+</svg>
+<div class="card week">
+<div class="card-title">Your week, sorted <span style="color:#91a47e">✦</span></div>
+<div class="card-sub">A little plan. A fresh start.</div>
+<div class="days"><div>M<i>✓</i></div><div>T<i>✓</i></div><div class="active">W<i>✓</i></div><div>T<i>✓</i></div><div>F<i>✓</i></div></div>
+</div>
+<div class="note">a feel-good kind<br>of dinner
+<svg width="45" height="36" viewBox="0 0 45 36" fill="none" aria-hidden="true"><path d="M4 2q30-2 28 27m-7-7 7 8 9-7" stroke="currentColor" stroke-width="1.3"/></svg>
+</div>
+<div class="check"><span>✓</span> Grocery list? Already done.</div>
+<div class="card recipe"><small>ON THE MENU TONIGHT</small><h3>The feel-good<br>salmon bowl</h3><p><span>◷ 25 min</span><span>Fresh & balanced ✦</span></p></div>
+</div>
+</section>
+<div class="press" aria-label="Inspired by a fresh approach to everyday wellbeing">
+<p>A fresh take on the<br> everyday dinner dilemma.</p>
+<span>Fresh thinking.</span><span class="well">Real ingredients.</span><span class="kitchn">less food waste</span><span class="goop">more joy.</span>
+</div>
+<section class="benefits" id="how">
+<div class="center">
+<div class="eyebrow">LESS MENTAL LOAD. MORE MMMMM.</div>
+<h2>A good week starts with a little Sprout.</h2>
+<p>From “what’s for dinner?” to “that was delicious.” We make the in-between easy.</p>
+</div>
+<div class="features">
+<article class="feature">
+<div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="16" rx="3"/><path d="M8 3v4m8-4v4M4 10h16m-11 5 2 2 4-4"/></svg></div>
+<div><h3>A plan that gets you</h3><p>Your tastes, your schedule, your kind of food. A flexible weekly plan that fits real life.</p></div>
+</article>
+<article class="feature">
+<div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l2 13H4L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2m-6 6 2 2 4-4"/></svg></div>
+<div><h3>One list. One less thing.</h3><p>All your ingredients, neatly in one grocery list. Less wandering. Less waste.</p></div>
+</article>
+<article class="feature">
+<div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14h16a8 8 0 0 1-16 0Zm-1 0h18M8 4c-3 3 3 3 0 6m5-7c-3 3 3 3 0 6m5-5c-3 3 3 3 0 6"/></svg></div>
+<div><h3>More joy at the table</h3><p>Simple, seriously tasty recipes that make cooking feel like the good part of your day.</p></div>
+</article>
+</div>
+</section>
+<section class="explore" id="explore">
+<div class="explore-copy">
+<div class="eyebrow">MADE FOR YOUR KIND OF EVERYDAY</div>
+<h2>Your week.<br>With a little more flavor.</h2>
+<p>Quick Monday? Meat-free Wednesday? Make it yours. Swap a meal and find your new favorite.</p>
+<a href="#start" class="text-link">Find your dinner rhythm &nbsp; ↗</a>
+</div>
+<div class="plan">
+<div class="plan-head"><strong>A delicious week ahead</strong><small>3 meals · 2 people</small></div>
+<div class="meal"><span class="day">Mon</span><span class="food" aria-hidden="true">🥙</span><div><strong>Green goddess grain bowl</strong><small>20 min · Plant-powered</small></div><button class="swap" aria-label="Swap Monday's meal">↻</button></div>
+<div class="meal"><span class="day">Tue</span><span class="food" aria-hidden="true">🍝</span><div><strong>Roasted tomato & basil pasta</strong><small>25 min · Comfort food</small></div><button class="swap" aria-label="Swap Tuesday's meal">↻</button></div>
+<div class="meal"><span class="day">Wed</span><span class="food" aria-hidden="true">🥑</span><div><strong>Crispy sweet potato tacos</strong><small>30 min · Family favorite</small></div><button class="swap" aria-label="Swap Wednesday's meal">↻</button></div>
+<p class="hint" aria-live="polite">A change of plans? Tap ↻ to try something new.</p>
+</div>
+</section>
+<section class="cta" id="start">
+<h2>Good things are on the menu.</h2>
+<p>A calmer week. A happier kitchen. Let’s start with dinner.</p>
+<button class="button" data-start>Try Sprout free <span>↗</span></button>
+</section>
+</main>
+<footer>
+<a class="brand" href="#" aria-label="Sprout home"><svg aria-hidden="true"><use href="#sprout"/></svg>sprout<b>.</b></a>
+<p>A little planning. A lot more living. &nbsp; © <span id="year">2026</span> Sprout</p>
+</footer>
+</div>
+<dialog id="signup" aria-labelledby="signup-title">
+<button class="close" aria-label="Close signup">×</button>
+<div id="signup-content">
+<div class="eyebrow">LET’S MAKE DINNER EASIER</div>
+<h2 id="signup-title">Your fresh start awaits.</h2>
+<p>Join the launch list for a little more inspiration and a lot less dinner indecision.</p>
+<form id="signup-form">
+<label for="email">Email address</label>
+<input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+<button class="button" type="submit">Preview signup <span>↗</span></button>
+<p class="disclaimer">This is a demo. Your email stays in this browser tab and won’t be submitted.</p>
+</form>
+</div>
+</dialog>
+<script>
+const modal=document.getElementById('signup');
+let trigger;
+document.querySelectorAll('[data-start]').forEach(button=>{
+  button.addEventListener('click',()=>{
+    trigger=button;
+    modal.showModal();
+  });
+});
+function closeModal(){
+  modal.close();
+  trigger?.focus();
+}
+document.querySelector('.close').addEventListener('click',closeModal);
+modal.addEventListener('click',event=>{
+  if(event.target!==modal)return;
+  const r=modal.getBoundingClientRect();
+  if(event.clientX<r.left||event.clientX>r.right||
+     event.clientY<r.top||event.clientY>r.bottom)closeModal();
+});
+document.getElementById('signup-form').addEventListener('submit',event=>{
+  event.preventDefault();
+  document.getElementById('signup-content').innerHTML=`
+    <div class="eyebrow">A LITTLE TASTE OF WHAT’S NEXT</div>
+    <h2 id="signup-title">Dinner, with less indecision.</h2>
+    <p>That’s how easy signup will be. This preview hasn’t saved or submitted your email. Explore the sample plan and find something delicious.</p>
+    <button class="button" id="back-to-plan">Explore the meal plan ↗</button>`;
+  document.getElementById('back-to-plan').addEventListener('click',()=>{
+    closeModal();
+    document.getElementById('explore').scrollIntoView();
+  });
+});
+const meals=[
+  ['🥗','Lemony chickpea & couscous salad','15 min · Bright & fresh'],
+  ['🍜','Ginger sesame noodle bowl','20 min · Weeknight favorite'],
+  ['🍛','Cozy coconut & lentil curry','30 min · Plant-powered'],
+  ['🥦','Crispy broccoli & tahini bowl','25 min · Full of greens'],
+  ['🥘','One-pan lemon herb chicken','30 min · Easy cleanup'],
+  ['🌮','Black bean & avocado tacos','20 min · Family favorite']
+];
+let nextMeal=0;
+document.querySelectorAll('.swap').forEach(button=>{
+  button.addEventListener('click',()=>{
+    const row=button.closest('.meal');
+    const meal=meals[nextMeal++%meals.length];
+    row.querySelector('.food').textContent=meal[0];
+    row.querySelector('strong').textContent=meal[1];
+    row.querySelector('small').textContent=meal[2];
+    document.querySelector('.hint').textContent=
+      'Swapped! '+meal[1]+' is on the menu.';
+  });
+});
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>

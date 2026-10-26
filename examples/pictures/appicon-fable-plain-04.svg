@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <!-- Sky background -->
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1E6FE0"/>
+      <stop offset="100%" stop-color="#5FB2FF"/>
+    </linearGradient>
+    <!-- Sun -->
+    <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFE27A"/>
+      <stop offset="100%" stop-color="#FFB224"/>
+    </radialGradient>
+    <!-- Cloud shading -->
+    <linearGradient id="cloud" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#DCE9F7"/>
+    </linearGradient>
+    <!-- Soft drop shadow -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="18"/>
+      <feOffset dy="20" result="off"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.25"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- Sun glow -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="30"/>
+    </filter>
+  </defs>
+
+  <!-- Square background, no rounded corners -->
+  <rect width="1024" height="1024" fill="url(#sky)"/>
+
+  <!-- Subtle light haze in the top-left for atmosphere -->
+  <circle cx="200" cy="140" r="420" fill="#FFFFFF" opacity="0.08"/>
+
+  <!-- Sun rays -->
+  <g transform="translate(620 380)" stroke="#FFD24A" stroke-width="40" stroke-linecap="round" opacity="0.95">
+    <line x1="0" y1="-250" x2="0" y2="-310"/>
+    <line x1="177" y1="-177" x2="219" y2="-219"/>
+    <line x1="250" y1="0" x2="310" y2="0"/>
+    <line x1="177" y1="177" x2="219" y2="219"/>
+    <line x1="-177" y1="-177" x2="-219" y2="-219"/>
+    <line x1="-250" y1="0" x2="-310" y2="0"/>
+  </g>
+
+  <!-- Sun glow + body -->
+  <circle cx="620" cy="380" r="200" fill="#FFD24A" opacity="0.5" filter="url(#glow)"/>
+  <circle cx="620" cy="380" r="190" fill="url(#sun)"/>
+
+  <!-- Cloud -->
+  <g filter="url(#shadow)">
+    <path fill="url(#cloud)" d="
+      M 250 760
+      H 690
+      A 115 115 0 0 0 690 530
+      A 60 60 0 0 0 672 532
+      A 165 165 0 0 0 365 500
+      A 90 90 0 0 0 350 498
+      A 131 131 0 0 0 250 760
+      Z"/>
+  </g>
+</svg>

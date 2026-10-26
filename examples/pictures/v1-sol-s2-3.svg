@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a penny-farthing</title>
+  <desc id="desc">A white pelican viewed from above its left side rides a red penny-farthing. Its wings arch upward and curve down to the blue handlebars. Yellow feet rest on the pedals.</desc>
+
+  <rect width="600" height="900" fill="#fff"/>
+  <ellipse cx="312" cy="809" rx="225" ry="29" fill="#edf2fc"/>
+
+  <!-- Wheels and spokes -->
+  <g fill="white" stroke="#1746a2">
+    <ellipse cx="139" cy="744" rx="57" ry="65" stroke-width="12"/>
+    <ellipse cx="376" cy="626" rx="155" ry="178" stroke-width="17"/>
+  </g>
+  <g fill="none" stroke="#a7bcec" stroke-width="3">
+    <path d="M139 684V804M86 723L192 765M86 765L192 723M103 694L175 794M103 794L175 694"/>
+    <path d="M376 454V798M226 626H526M270 500L482 752M270 752L482 500
+             M236 560L516 692M236 692L516 560M320 462L432 790M320 790L432 462"/>
+  </g>
+  <g fill="none" stroke="#1746a2" stroke-width="3">
+    <ellipse cx="376" cy="626" rx="143" ry="166"/>
+    <ellipse cx="139" cy="744" rx="46" ry="54"/>
+  </g>
+
+  <!-- Curved frame and front fork -->
+  <path d="M139 744L222 573Q244 521 287 463L314 431"
+        fill="none" stroke="#ec3346" stroke-width="17" stroke-linecap="round"/>
+  <path d="M376 626L395 438L404 398"
+        fill="none" stroke="#ec3346" stroke-width="15" stroke-linecap="round"/>
+  <path d="M395 438Q354 420 312 442"
+        fill="none" stroke="#ec3346" stroke-width="13" stroke-linecap="round"/>
+  <path d="M292 431L300 405" stroke="#1746a2" stroke-width="10"/>
+  <path d="M265 404Q293 393 330 403Q339 410 328 416L271 417Q259 415 265 404"
+        fill="#1746a2"/>
+
+  <!-- Far leg -->
+  <path d="M318 389Q356 447 399 478L408 566"
+        fill="none" stroke="#e8ab00" stroke-width="15" stroke-linecap="round"/>
+  <path d="M408 556L435 566L449 581L407 578Q397 569 408 556"
+        fill="#ffd331"/>
+
+  <!-- Tail and body -->
+  <path d="M253 342L179 326L203 371L175 379L237 401Z" fill="#1746a2"/>
+  <path d="M222 322Q246 287 290 298Q347 311 355 359
+           Q366 402 328 422Q278 441 236 409Q208 385 222 322Z"
+        fill="#edf2fc"/>
+  <path d="M232 319Q261 302 288 311Q328 324 331 366
+           Q327 402 293 411Q257 413 236 388Q217 365 232 319Z"
+        fill="#fff"/>
+
+  <!-- Far wing: raised arch, tip on handlebar -->
+  <path d="M299 324Q309 252 347 181Q363 150 380 170
+           Q416 216 430 282Q443 347 429 399
+           L414 400Q419 337 404 285Q389 239 366 219
+           Q345 283 331 345Z"
+        fill="#dce6fb"/>
+
+  <!-- Neck, head and unmistakable bill pouch -->
+  <path d="M280 333Q310 311 304 275Q295 232 317 205
+           Q335 185 358 195Q380 204 378 227
+           Q376 244 352 256Q341 281 355 316
+           Q366 346 340 371Z"
+        fill="#fff"/>
+  <path d="M360 231L532 257Q508 298 448 313Q400 322 356 265Z"
+        fill="#ffd331"/>
+  <path d="M359 226Q410 229 533 254L538 264L359 247Z"
+        fill="#f5b900"/>
+  <path d="M374 251L521 261" fill="none" stroke="#e8ab00" stroke-width="3"/>
+  <ellipse cx="347" cy="221" rx="12" ry="13" fill="#edf2fc"/>
+  <circle cx="350" cy="222" r="6" fill="#1746a2"/>
+  <circle cx="352" cy="220" r="2" fill="#fff"/>
+
+  <!-- Handlebar seen from above -->
+  <path d="M404 405L383 393M373 394Q398 384 425 397L444 412"
+        fill="none" stroke="#1746a2" stroke-width="10" stroke-linecap="round"/>
+  <path d="M442 411Q456 423 448 436" fill="none"
+        stroke="#1746a2" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- Near wing arches high, then reaches down to the bar -->
+  <path d="M245 357Q204 293 203 219Q203 178 224 170
+           Q243 167 261 205Q298 280 382 393
+           Q388 403 378 408Q368 410 360 398
+           Q275 304 234 237Q238 302 278 350
+           Q284 372 266 377Q254 376 245 357Z"
+        fill="#fff"/>
+  <path d="M220 199Q227 241 250 278"
+        fill="none" stroke="#dce6fb" stroke-width="7" stroke-linecap="round"/>
+  <path d="M360 391L375 407L388 401L379 389Z" fill="#1746a2"/>
+  <path d="M417 389L414 403L431 407L433 394Z" fill="#1746a2"/>
+
+  <!-- Near leg and direct-drive crank -->
+  <path d="M277 409Q268 457 313 498L335 637"
+        fill="none" stroke="#ffd331" stroke-width="17" stroke-linecap="round"/>
+  <path d="M335 627Q351 629 365 644L365 653L322 650Q317 639 335 627"
+        fill="#ffd331"/>
+  <path d="M341 651L376 626L412 575"
+        fill="none" stroke="#1746a2" stroke-width="8" stroke-linecap="round"/>
+  <g fill="#1746a2">
+    <rect x="320" y="648" width="47" height="10" rx="5"/>
+    <rect x="393" y="575" width="47" height="10" rx="5"/>
+    <ellipse cx="139" cy="744" rx="9" ry="10"/>
+  </g>
+  <ellipse cx="376" cy="626" rx="14" ry="16" fill="#ec3346"/>
+  <ellipse cx="376" cy="626" rx="6" ry="7" fill="#ffd331"/>
+</svg>

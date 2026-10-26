@@ -1,0 +1,425 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+  <defs>
+    <!-- Retro Mid-Century Palette Styles -->
+    <style>
+      .bg-cream-1 { fill: #F4EFE0; }
+      .bg-cream-2 { fill: #EAE2CC; }
+      .bg-cream-3 { fill: #DFD5B8; }
+      
+      .mustard-1 { fill: #E8B130; }
+      .mustard-2 { fill: #D49B1A; }
+      .mustard-3 { fill: #B37E08; }
+      
+      .orange-1 { fill: #D96528; }
+      .orange-2 { fill: #BF4F16; }
+      .orange-3 { fill: #993909; }
+      
+      .olive-1 { fill: #7D8C38; }
+      .olive-2 { fill: #627022; }
+      .olive-3 { fill: #465211; }
+      .olive-4 { fill: #2C3507; }
+      
+      .cream-1 { fill: #FDFBF7; }
+      .cream-2 { fill: #EFE8D5; }
+      .cream-3 { fill: #D6CCB2; }
+      .cream-4 { fill: #B8AD91; }
+      
+      /* Crisp edge alignment for low-poly triangles */
+      polygon {
+        stroke-linejoin: round;
+        stroke-width: 0.4px;
+      }
+      .bg-cream-1 { stroke: #F4EFE0; }
+      .bg-cream-2 { stroke: #EAE2CC; }
+      .bg-cream-3 { stroke: #DFD5B8; }
+      .mustard-1 { stroke: #E8B130; }
+      .mustard-2 { stroke: #D49B1A; }
+      .mustard-3 { stroke: #B37E08; }
+      .orange-1 { stroke: #D96528; }
+      .orange-2 { stroke: #BF4F16; }
+      .orange-3 { stroke: #993909; }
+      .olive-1 { stroke: #7D8C38; }
+      .olive-2 { stroke: #627022; }
+      .olive-3 { stroke: #465211; }
+      .olive-4 { stroke: #2C3507; }
+      .cream-1 { stroke: #FDFBF7; }
+      .cream-2 { stroke: #EFE8D5; }
+      .cream-3 { stroke: #D6CCB2; }
+      .cream-4 { stroke: #B8AD91; }
+    </style>
+  </defs>
+
+  <!-- ================= BACKGROUND LOW-POLY MESH ================= -->
+  <g id="background">
+    <!-- Top & Left Sky Facets -->
+    <polygon points="0,0 320,0 160,240" class="bg-cream-1"/>
+    <polygon points="320,0 640,0 460,190" class="bg-cream-2"/>
+    <polygon points="640,0 800,0 800,300" class="bg-cream-1"/>
+    <polygon points="320,0 460,190 160,240" class="bg-cream-3"/>
+    <polygon points="640,0 800,300 460,190" class="bg-cream-3"/>
+    <polygon points="0,0 160,240 0,480" class="bg-cream-2"/>
+    
+    <!-- Dynamic Speed Ray Facets (Mid-Ground) -->
+    <polygon points="160,240 460,190 340,440" class="bg-cream-1"/>
+    <polygon points="460,190 800,300 590,460" class="bg-cream-2"/>
+    <polygon points="460,190 590,460 340,440" class="bg-cream-3"/>
+    <polygon points="0,480 160,240 340,440" class="bg-cream-3"/>
+    
+    <!-- Diagonal Action Stripe (Mustard & Burnt Orange Shards) -->
+    <polygon points="0,680 340,440 210,590" class="mustard-1" opacity="0.25"/>
+    <polygon points="340,440 800,140 590,330" class="mustard-2" opacity="0.2"/>
+    <polygon points="45,420 210,330 140,400" class="orange-1"/>
+    <polygon points="70,390 190,340 160,375" class="mustard-1"/>
+    <polygon points="650,150 780,80 710,140" class="mustard-2"/>
+    <polygon points="670,170 760,120 730,160" class="orange-2"/>
+    <polygon points="80,620 200,550 150,600" class="olive-1"/>
+
+    <!-- Lower Background Facets -->
+    <polygon points="0,480 340,440 170,660" class="bg-cream-1"/>
+    <polygon points="340,440 590,460 470,680" class="bg-cream-2"/>
+    <polygon points="590,460 800,300 800,620" class="bg-cream-1"/>
+    <polygon points="590,460 800,620 470,680" class="bg-cream-3"/>
+    <polygon points="0,480 170,660 0,800" class="bg-cream-3"/>
+    <polygon points="170,660 340,440 470,680" class="bg-cream-3"/>
+    <polygon points="0,800 170,660 390,800" class="bg-cream-2"/>
+    <polygon points="170,660 470,680 390,800" class="bg-cream-1"/>
+    <polygon points="470,680 800,620 660,800" class="bg-cream-2"/>
+    <polygon points="470,680 660,800 390,800" class="bg-cream-3"/>
+    <polygon points="800,620 800,800 660,800" class="bg-cream-1"/>
+  </g>
+
+  <!-- ================= DUTCH ANGLE SCENE (-14 DEG TILT) ================= -->
+  <g id="dutch-angle-scene" transform="rotate(-14, 400, 420)">
+
+    <!-- 1. GROUND & SHADOW TRACK (Triangulated) -->
+    <g id="ground-plane">
+      <polygon points="20,655 240,650 130,685" class="olive-2"/>
+      <polygon points="240,650 130,685 350,680" class="olive-3"/>
+      <polygon points="240,650 480,650 350,680" class="olive-4"/>
+      <polygon points="480,650 350,680 610,675" class="olive-3"/>
+      <polygon points="480,650 740,655 610,675" class="olive-4"/>
+      <polygon points="740,655 610,675 790,670" class="olive-1"/>
+      <polygon points="130,685 350,680 260,700" class="mustard-3"/>
+      <polygon points="350,680 610,675 490,705" class="mustard-2"/>
+    </g>
+
+    <!-- 2. BACK ELEMENTS (Left Wing, Back Leg, Far Pedal, Far Handlebar) -->
+    <g id="far-side-elements">
+      <!-- Far Handlebar Horn (Left) -->
+      <polygon points="455,255 465,260 405,225" class="olive-3"/>
+      <polygon points="405,225 415,215 465,260" class="olive-2"/>
+      <!-- Far Grip (Burnt Orange) -->
+      <polygon points="405,225 415,215 390,205" class="orange-3"/>
+      <polygon points="390,205 382,215 405,225" class="orange-2"/>
+
+      <!-- Pelican Left Wing (Reaching to Far Grip) -->
+      <polygon points="315,280 375,245 345,230" class="cream-3"/>
+      <polygon points="345,230 375,245 405,225" class="cream-4"/>
+      <polygon points="375,245 405,225 395,245" class="olive-2"/>
+      <!-- Left Wingtip Feathers Wrapping Far Grip -->
+      <polygon points="405,225 390,205 415,210" class="cream-3"/>
+      <polygon points="390,205 382,215 402,228" class="cream-4"/>
+
+      <!-- Far Crank Arm & Pedal (Up-Back Position) -->
+      <polygon points="495,500 503,495 450,435" class="olive-4"/>
+      <polygon points="450,435 460,430 503,495" class="olive-3"/>
+      <!-- Far Pedal Block -->
+      <polygon points="435,435 470,435 452,425" class="mustard-3"/>
+      <polygon points="435,435 470,435 452,445" class="orange-3"/>
+
+      <!-- Pelican Left Leg & Webbed Foot on Far Pedal -->
+      <polygon points="325,365 345,355 405,405" class="orange-3"/>
+      <polygon points="345,355 415,395 405,405" class="orange-2"/>
+      <polygon points="405,405 415,395 452,430" class="orange-3"/>
+      <!-- Left Webbed Foot -->
+      <polygon points="452,430 435,435 460,418" class="orange-2"/>
+      <polygon points="460,418 435,435 472,432" class="orange-3"/>
+    </g>
+
+    <!-- 3. PENNY-FARTHING BICYCLE (3/4 Profile) -->
+    <g id="penny-farthing">
+      
+      <!-- TINY REAR WHEEL (Center ~ 210, 595, R=55) -->
+      <g id="rear-wheel">
+        <!-- Spokes (Thin elongated triangles) -->
+        <polygon points="210,595 208,540 212,540" class="cream-3"/>
+        <polygon points="210,595 208,650 212,650" class="cream-3"/>
+        <polygon points="210,595 155,593 155,597" class="cream-3"/>
+        <polygon points="210,595 265,593 265,597" class="cream-3"/>
+        <polygon points="210,595 170,555 174,558" class="cream-3"/>
+        <polygon points="210,595 250,635 246,632" class="cream-3"/>
+        <polygon points="210,595 250,555 246,558" class="cream-3"/>
+        <polygon points="210,595 170,635 174,632" class="cream-3"/>
+
+        <!-- Rear Wheel Tire (8-sided faceted ring) -->
+        <!-- N to NE -->
+        <polygon points="210,535 252,553 210,547" class="olive-4"/>
+        <polygon points="252,553 244,561 210,547" class="olive-3"/>
+        <!-- NE to E -->
+        <polygon points="252,553 270,595 244,561" class="olive-4"/>
+        <polygon points="270,595 258,595 244,561" class="olive-3"/>
+        <!-- E to SE -->
+        <polygon points="270,595 252,637 258,595" class="olive-4"/>
+        <polygon points="252,637 244,629 258,595" class="olive-3"/>
+        <!-- SE to S -->
+        <polygon points="252,637 210,655 244,629" class="olive-4"/>
+        <polygon points="210,655 210,643 244,629" class="olive-3"/>
+        <!-- S to SW -->
+        <polygon points="210,655 168,637 210,643" class="olive-4"/>
+        <polygon points="168,637 176,629 210,643" class="olive-3"/>
+        <!-- SW to W -->
+        <polygon points="168,637 150,595 176,629" class="olive-4"/>
+        <polygon points="150,595 162,595 176,629" class="olive-3"/>
+        <!-- W to NW -->
+        <polygon points="150,595 168,553 162,595" class="olive-4"/>
+        <polygon points="168,553 176,561 162,595" class="olive-3"/>
+        <!-- NW to N -->
+        <polygon points="168,553 210,535 176,561" class="olive-4"/>
+        <polygon points="210,535 210,547 176,561" class="olive-3"/>
+
+        <!-- Rear Hub -->
+        <polygon points="210,585 220,595 210,605" class="orange-2"/>
+        <polygon points="210,585 200,595 210,605" class="orange-3"/>
+      </g>
+
+      <!-- OVERSIZED FRONT WHEEL (3/4 Ellipse: Center 500,500, Rx=135, Ry=155) -->
+      <g id="front-wheel">
+        <!-- Far Flange Spokes (Converging to 485, 505) -->
+        <polygon points="485,505 498,355 502,355" class="cream-4"/>
+        <polygon points="485,505 565,375 568,378" class="cream-4"/>
+        <polygon points="485,505 612,428 614,432" class="cream-4"/>
+        <polygon points="485,505 628,498 628,502" class="cream-4"/>
+        <polygon points="485,505 612,572 610,575" class="cream-4"/>
+        <polygon points="485,505 565,625 562,627" class="cream-4"/>
+        <polygon points="485,505 498,645 502,645" class="cream-4"/>
+        <polygon points="485,505 435,625 432,622" class="cream-4"/>
+        <polygon points="485,505 388,572 386,568" class="cream-4"/>
+        <polygon points="485,505 372,498 372,502" class="cream-4"/>
+        <polygon points="485,505 388,428 390,425" class="cream-4"/>
+        <polygon points="485,505 435,375 438,372" class="cream-4"/>
+
+        <!-- Near Flange Spokes (Converging to 512, 495) -->
+        <polygon points="512,495 533,360 536,362" class="cream-2"/>
+        <polygon points="512,495 592,400 595,403" class="cream-2"/>
+        <polygon points="512,495 625,462 626,466" class="cream-2"/>
+        <polygon points="512,495 625,538 624,542" class="cream-2"/>
+        <polygon points="512,495 592,600 589,603" class="cream-2"/>
+        <polygon points="512,495 533,640 530,641" class="cream-2"/>
+        <polygon points="512,495 467,640 464,638" class="cream-2"/>
+        <polygon points="512,495 408,600 405,597" class="cream-2"/>
+        <polygon points="512,495 375,538 374,534" class="cream-2"/>
+        <polygon points="512,495 375,462 376,458" class="cream-2"/>
+        <polygon points="512,495 408,400 411,397" class="cream-2"/>
+        <polygon points="512,495 467,360 470,359" class="cream-2"/>
+
+        <!-- 12-Segment Low-Poly Tire & Mustard Inner Rim -->
+        <!-- Seg 1 (12 to 1 o'clock) -->
+        <polygon points="500,345 568,366 500,358" class="olive-4"/>
+        <polygon points="568,366 559,377 500,358" class="olive-3"/>
+        <polygon points="500,358 559,377 500,365" class="mustard-2"/>
+        <polygon points="559,377 553,384 500,365" class="mustard-1"/>
+        <!-- Seg 2 (1 to 2 o'clock) -->
+        <polygon points="568,366 617,422 559,377" class="olive-3"/>
+        <polygon points="617,422 602,431 559,377" class="olive-2"/>
+        <polygon points="559,377 602,431 553,384" class="mustard-1"/>
+        <polygon points="602,431 595,436 553,384" class="mustard-2"/>
+        <!-- Seg 3 (2 to 3 o'clock) -->
+        <polygon points="617,422 635,500 602,431" class="olive-4"/>
+        <polygon points="635,500 618,500 602,431" class="olive-3"/>
+        <polygon points="602,431 618,500 595,436" class="mustard-2"/>
+        <polygon points="618,500 610,500 595,436" class="mustard-3"/>
+        <!-- Seg 4 (3 to 4 o'clock) -->
+        <polygon points="635,500 617,578 618,500" class="olive-3"/>
+        <polygon points="617,578 602,569 618,500" class="olive-4"/>
+        <polygon points="618,500 602,569 610,500" class="mustard-3"/>
+        <polygon points="602,569 595,564 610,500" class="mustard-2"/>
+        <!-- Seg 5 (4 to 5 o'clock) -->
+        <polygon points="617,578 568,634 602,569" class="olive-4"/>
+        <polygon points="568,634 559,623 602,569" class="olive-3"/>
+        <polygon points="602,569 559,623 595,564" class="mustard-2"/>
+        <polygon points="559,623 553,616 595,564" class="mustard-1"/>
+        <!-- Seg 6 (5 to 6 o'clock) -->
+        <polygon points="568,634 500,655 559,623" class="olive-3"/>
+        <polygon points="500,655 500,642 559,623" class="olive-4"/>
+        <polygon points="559,623 500,642 553,616" class="mustard-1"/>
+        <polygon points="500,642 500,635 553,616" class="mustard-3"/>
+        <!-- Seg 7 (6 to 7 o'clock) -->
+        <polygon points="500,655 432,634 500,642" class="olive-4"/>
+        <polygon points="432,634 441,623 500,642" class="olive-3"/>
+        <polygon points="500,642 441,623 500,635" class="mustard-3"/>
+        <polygon points="441,623 447,616 500,635" class="mustard-2"/>
+        <!-- Seg 8 (7 to 8 o'clock) -->
+        <polygon points="432,634 383,578 441,623" class="olive-3"/>
+        <polygon points="383,578 398,569 441,623" class="olive-2"/>
+        <polygon points="441,623 398,569 447,616" class="mustard-2"/>
+        <polygon points="398,569 405,564 447,616" class="mustard-1"/>
+        <!-- Seg 9 (8 to 9 o'clock) -->
+        <polygon points="383,578 365,500 398,569" class="olive-4"/>
+        <polygon points="365,500 382,500 398,569" class="olive-3"/>
+        <polygon points="398,569 382,500 405,564" class="mustard-1"/>
+        <polygon points="382,500 390,500 405,564" class="mustard-2"/>
+        <!-- Seg 10 (9 to 10 o'clock) -->
+        <polygon points="365,500 383,422 382,500" class="olive-3"/>
+        <polygon points="383,422 398,431 382,500" class="olive-4"/>
+        <polygon points="382,500 398,431 390,500" class="mustard-2"/>
+        <polygon points="398,431 405,436 390,500" class="mustard-3"/>
+        <!-- Seg 11 (10 to 11 o'clock) -->
+        <polygon points="383,422 432,366 398,431" class="olive-4"/>
+        <polygon points="432,366 441,377 398,431" class="olive-2"/>
+        <polygon points="398,431 441,377 405,436" class="mustard-3"/>
+        <polygon points="441,377 447,384 405,436" class="mustard-1"/>
+        <!-- Seg 12 (11 to 12 o'clock) -->
+        <polygon points="432,366 500,345 441,377" class="olive-3"/>
+        <polygon points="500,345 500,358 441,377" class="olive-2"/>
+        <polygon points="441,377 500,358 447,384" class="mustard-1"/>
+        <polygon points="500,358 500,365 447,384" class="mustard-2"/>
+      </g>
+
+      <!-- FRAME: CURVED SPINE & FRONT FORK (Mustard Yellow & Olive) -->
+      <g id="bicycle-frame">
+        <!-- Spine sweeping from Headtube (465, 290) to Rear Axle (210, 595) -->
+        <polygon points="465,290 475,305 375,315" class="mustard-1"/>
+        <polygon points="475,305 375,315 390,330" class="mustard-2"/>
+        <polygon points="375,315 390,330 295,380" class="mustard-1"/>
+        <polygon points="390,330 295,380 312,395" class="mustard-3"/>
+        <polygon points="295,380 312,395 240,480" class="mustard-2"/>
+        <polygon points="312,395 240,480 256,492" class="mustard-3"/>
+        <polygon points="240,480 256,492 205,595" class="mustard-1"/>
+        <polygon points="256,492 205,595 216,595" class="mustard-3"/>
+
+        <!-- Vintage Leather Saddle (Burnt Orange at 345, 340) -->
+        <polygon points="340,345 370,335 355,322" class="olive-4"/>
+        <polygon points="310,332 355,322 340,345" class="orange-3"/>
+        <polygon points="355,322 385,325 340,345" class="orange-2"/>
+        <polygon points="310,332 355,322 330,315" class="orange-1"/>
+        <polygon points="355,322 385,325 330,315" class="orange-2"/>
+
+        <!-- Front Fork & Steering Head (455,255 down to Hub 500,500) -->
+        <polygon points="455,255 472,255 465,295" class="olive-1"/>
+        <polygon points="472,255 480,295 465,295" class="olive-2"/>
+        <polygon points="465,295 480,295 482,400" class="mustard-1"/>
+        <polygon points="480,295 496,398 482,400" class="mustard-2"/>
+        <polygon points="482,400 496,398 495,500" class="mustard-1"/>
+        <polygon points="496,398 508,500 495,500" class="mustard-3"/>
+
+        <!-- Center Hub Cap -->
+        <polygon points="485,500 500,485 500,515" class="orange-1"/>
+        <polygon points="515,500 500,485 500,515" class="orange-2"/>
+        <polygon points="493,500 500,493 507,500" class="cream-1"/>
+        <polygon points="493,500 500,507 507,500" class="cream-3"/>
+      </g>
+    </g>
+
+    <!-- 4. PELICAN BODY, HEAD, CLOSED UPRIGHT POUCH, & FRONT LIMBS -->
+    <g id="pelican-rider">
+      
+      <!-- Tail Feathers (Cantilevered behind saddle) -->
+      <polygon points="265,330 220,315 255,305" class="cream-3"/>
+      <polygon points="255,305 220,315 230,290" class="cream-1"/>
+      <polygon points="265,330 220,315 240,340" class="olive-2"/>
+
+      <!-- Torso & Belly (Cream & Warm Grey-Cream Facets) -->
+      <polygon points="265,330 315,345 285,285" class="cream-2"/>
+      <polygon points="315,345 365,345 325,295" class="cream-3"/>
+      <polygon points="285,285 325,295 315,345" class="cream-1"/>
+      <polygon points="325,295 385,295 365,345" class="cream-2"/>
+      <polygon points="365,345 385,295 405,325" class="cream-3"/>
+      <polygon points="315,345 365,345 340,365" class="cream-4"/>
+      <polygon points="285,285 345,245 325,295" class="cream-1"/>
+      <polygon points="325,295 345,245 385,295" class="cream-2"/>
+      <polygon points="345,245 395,245 385,295" class="cream-1"/>
+
+      <!-- Upright Neck & Chest -->
+      <polygon points="345,245 395,245 365,190" class="cream-2"/>
+      <polygon points="395,245 412,195 365,190" class="cream-1"/>
+      <polygon points="365,190 412,195 375,140" class="cream-2"/>
+      <polygon points="412,195 415,145 375,140" class="cream-1"/>
+
+      <!-- Head & Crown (Tilted alertly forward) -->
+      <polygon points="375,140 415,145 390,102" class="cream-1"/>
+      <polygon points="415,145 442,115 390,102" class="cream-2"/>
+      <!-- Jaunty Rear Crest Feathers -->
+      <polygon points="375,140 390,102 355,115" class="cream-3"/>
+      <polygon points="375,140 355,115 345,132" class="cream-2"/>
+      <!-- Cheek & Eye Patch -->
+      <polygon points="415,145 442,115 452,135" class="cream-3"/>
+      <!-- Eye (Sharp dark olive diamond with cream glint) -->
+      <polygon points="424,120 434,115 431,126" class="olive-4"/>
+      <polygon points="424,120 431,126 422,126" class="olive-3"/>
+      <polygon points="426,118 430,117 428,121" class="cream-1"/>
+
+      <!-- Upper Beak (Long, faceted Mustard Yellow & Orange tip, Closed) -->
+      <polygon points="442,115 452,135 535,142" class="mustard-1"/>
+      <polygon points="442,115 535,142 520,122" class="mustard-2"/>
+      <polygon points="520,122 535,142 605,148" class="mustard-1"/>
+      <polygon points="520,122 605,148 595,132" class="orange-1"/>
+      <!-- Hooked Beak Tip -->
+      <polygon points="595,132 605,148 618,145" class="orange-2"/>
+      <polygon points="605,148 618,145 612,158" class="orange-3"/>
+
+      <!-- Closed Throat Pouch Resting Upright Against Upper Neck -->
+      <polygon points="452,135 535,142 485,172" class="orange-1"/>
+      <polygon points="535,142 605,148 545,165" class="orange-2"/>
+      <polygon points="535,142 545,165 485,172" class="orange-2"/>
+      <polygon points="452,135 485,172 415,145" class="orange-2"/>
+      <polygon points="415,145 485,172 445,192" class="orange-3"/>
+      <polygon points="415,145 445,192 412,195" class="orange-2"/>
+      <polygon points="485,172 545,165 445,192" class="orange-3"/>
+
+      <!-- Near Pedal & Crank Arm (Down-Forward Position) -->
+      <polygon points="495,500 508,500 552,568" class="olive-2"/>
+      <polygon points="495,500 552,568 540,572" class="olive-3"/>
+
+      <!-- Pelican Right Leg (Stepping down onto Near Pedal) -->
+      <!-- Thigh -->
+      <polygon points="340,355 375,345 435,435" class="orange-1"/>
+      <polygon points="340,355 435,435 412,445" class="orange-2"/>
+      <!-- Lower Leg -->
+      <polygon points="412,445 435,435 545,555" class="orange-1"/>
+      <polygon points="412,445 545,555 532,562" class="orange-3"/>
+      <!-- Right Webbed Foot Spread on Near Pedal -->
+      <polygon points="532,562 545,555 582,558" class="orange-1"/>
+      <polygon points="532,562 582,558 565,572" class="orange-2"/>
+      <polygon points="532,562 565,572 542,578" class="orange-3"/>
+      <!-- Near Pedal Platform -->
+      <polygon points="525,572 575,572 550,584" class="mustard-2"/>
+      <polygon points="525,572 550,564 575,572" class="mustard-1"/>
+
+      <!-- Near Handlebar Stem & Horn (Sweeping Toward Viewer) -->
+      <polygon points="455,255 472,255 442,278" class="olive-1"/>
+      <polygon points="472,255 455,285 442,278" class="olive-2"/>
+      <!-- Near Handlebar Grip (Burnt Orange) -->
+      <polygon points="442,278 455,285 428,302" class="orange-1"/>
+      <polygon points="428,302 415,292 442,278" class="orange-2"/>
+
+      <!-- Pelican Right Wing (Sweeping Forward to Grip Near Handlebar) -->
+      <!-- Upper Wing Shoulder -->
+      <polygon points="325,265 375,255 355,310" class="cream-1"/>
+      <polygon points="375,255 405,295 355,310" class="cream-2"/>
+      <polygon points="355,310 405,295 380,322" class="cream-3"/>
+      <!-- Mid Wing Coverts (Olive & Mustard Accents) -->
+      <polygon points="355,310 380,322 340,325" class="olive-1"/>
+      <polygon points="380,322 405,295 418,312" class="mustard-1"/>
+      <!-- Forewing Extending to Handlebar -->
+      <polygon points="405,295 438,275 418,312" class="cream-1"/>
+      <polygon points="418,312 438,275 452,292" class="cream-2"/>
+      <!-- Primary Wingtips Curled Around Near Handlebar Grip -->
+      <polygon points="438,275 460,282 445,298" class="cream-1"/>
+      <polygon points="445,298 425,308 418,292" class="cream-3"/>
+      <polygon points="438,275 445,298 418,292" class="cream-2"/>
+      <polygon points="425,308 445,298 438,312" class="olive-2"/>
+    </g>
+
+    <!-- 5. FOREGROUND MOTION SHARDS (Playful Speed Polygons) -->
+    <g id="speed-lines">
+      <polygon points="60,570 140,562 110,582" class="mustard-1"/>
+      <polygon points="85,545 135,540 115,552" class="orange-1"/>
+      <polygon points="30,615 115,608 85,625" class="olive-1"/>
+      <polygon points="155,440 225,432 195,450" class="cream-1"/>
+      <polygon points="175,458 215,452 200,464" class="mustard-2"/>
+      <polygon points="655,465 735,458 695,478" class="orange-2"/>
+      <polygon points="675,485 755,478 715,495" class="mustard-1"/>
+    </g>
+
+  </g>
+</svg>

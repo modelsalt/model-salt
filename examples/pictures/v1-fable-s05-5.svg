@@ -1,0 +1,210 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 440" width="640" height="440">
+  <defs>
+    <!-- Pelican body: white to soft grey shading -->
+    <radialGradient id="bodyGrad" cx="40%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="60%" stop-color="#e9e9ea"/>
+      <stop offset="100%" stop-color="#b8babe"/>
+    </radialGradient>
+    <linearGradient id="wingGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f4f4f5"/>
+      <stop offset="55%" stop-color="#cfd1d4"/>
+      <stop offset="100%" stop-color="#8f9297"/>
+    </linearGradient>
+    <linearGradient id="headGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#d9dadc"/>
+    </linearGradient>
+    <!-- Bill: orange with warm shading -->
+    <linearGradient id="billGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffb347"/>
+      <stop offset="50%" stop-color="#f28c1e"/>
+      <stop offset="100%" stop-color="#c9640c"/>
+    </linearGradient>
+    <linearGradient id="pouchGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f7a24a"/>
+      <stop offset="100%" stop-color="#d4761b"/>
+    </linearGradient>
+    <!-- Legs/feet -->
+    <linearGradient id="legGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5a5f66"/>
+      <stop offset="50%" stop-color="#8a9099"/>
+      <stop offset="100%" stop-color="#4a4e54"/>
+    </linearGradient>
+    <!-- Bicycle frame: dark steel with highlight -->
+    <linearGradient id="frameGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4a4f57"/>
+      <stop offset="45%" stop-color="#23262b"/>
+      <stop offset="100%" stop-color="#0f1114"/>
+    </linearGradient>
+    <linearGradient id="tireGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3a3a3a"/>
+      <stop offset="100%" stop-color="#121212"/>
+    </linearGradient>
+    <linearGradient id="rimGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e6e8ea"/>
+      <stop offset="50%" stop-color="#9ea3a9"/>
+      <stop offset="100%" stop-color="#d7d9db"/>
+    </linearGradient>
+    <radialGradient id="hubGrad" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#d0d3d6"/>
+      <stop offset="100%" stop-color="#55595e"/>
+    </radialGradient>
+    <linearGradient id="saddleGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6b4a2b"/>
+      <stop offset="100%" stop-color="#3a2614"/>
+    </linearGradient>
+    <radialGradient id="eyeGrad" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#6b6b6b"/>
+      <stop offset="40%" stop-color="#1a1a1a"/>
+      <stop offset="100%" stop-color="#000"/>
+    </radialGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feOffset dx="1" dy="2" result="o"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.35"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- ================= BICYCLE ================= -->
+  <g id="bicycle" filter="url(#softShadow)">
+    <!-- Rear wheel -->
+    <g transform="translate(150 330)">
+      <circle r="72" fill="none" stroke="url(#tireGrad)" stroke-width="12"/>
+      <circle r="62" fill="none" stroke="url(#rimGrad)" stroke-width="5"/>
+      <g stroke="#b9bdc2" stroke-width="1.6" opacity="0.9">
+        <line x1="0" y1="-60" x2="0" y2="60"/>
+        <line x1="-60" y1="0" x2="60" y2="0"/>
+        <line x1="-42.4" y1="-42.4" x2="42.4" y2="42.4"/>
+        <line x1="-42.4" y1="42.4" x2="42.4" y2="-42.4"/>
+        <line x1="-23" y1="-55.4" x2="23" y2="55.4"/>
+        <line x1="-55.4" y1="-23" x2="55.4" y2="23"/>
+        <line x1="23" y1="-55.4" x2="-23" y2="55.4"/>
+        <line x1="55.4" y1="-23" x2="-55.4" y2="23"/>
+      </g>
+      <circle r="9" fill="url(#hubGrad)" stroke="#2b2e32" stroke-width="1.5"/>
+    </g>
+
+    <!-- Front wheel -->
+    <g transform="translate(490 330)">
+      <circle r="72" fill="none" stroke="url(#tireGrad)" stroke-width="12"/>
+      <circle r="62" fill="none" stroke="url(#rimGrad)" stroke-width="5"/>
+      <g stroke="#b9bdc2" stroke-width="1.6" opacity="0.9" transform="rotate(12)">
+        <line x1="0" y1="-60" x2="0" y2="60"/>
+        <line x1="-60" y1="0" x2="60" y2="0"/>
+        <line x1="-42.4" y1="-42.4" x2="42.4" y2="42.4"/>
+        <line x1="-42.4" y1="42.4" x2="42.4" y2="-42.4"/>
+        <line x1="-23" y1="-55.4" x2="23" y2="55.4"/>
+        <line x1="-55.4" y1="-23" x2="55.4" y2="23"/>
+        <line x1="23" y1="-55.4" x2="-23" y2="55.4"/>
+        <line x1="55.4" y1="-23" x2="-55.4" y2="23"/>
+      </g>
+      <circle r="9" fill="url(#hubGrad)" stroke="#2b2e32" stroke-width="1.5"/>
+    </g>
+
+    <!-- Frame -->
+    <g fill="none" stroke="url(#frameGrad)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+      <!-- chainstay: rear hub to bottom bracket -->
+      <line x1="150" y1="330" x2="310" y2="335"/>
+      <!-- seat tube -->
+      <line x1="310" y1="335" x2="270" y2="200"/>
+      <!-- seat stay -->
+      <line x1="150" y1="330" x2="270" y2="200"/>
+      <!-- down tube -->
+      <line x1="310" y1="335" x2="445" y2="215"/>
+      <!-- top tube -->
+      <line x1="270" y1="200" x2="445" y2="215"/>
+      <!-- head tube / fork -->
+      <line x1="445" y1="215" x2="490" y2="330"/>
+      <line x1="440" y1="185" x2="445" y2="215"/>
+    </g>
+    <!-- frame highlight lines -->
+    <g fill="none" stroke="#7d838c" stroke-width="1.5" stroke-linecap="round" opacity="0.6">
+      <line x1="312" y1="331" x2="440" y2="214"/>
+      <line x1="272" y1="197" x2="440" y2="211"/>
+    </g>
+
+    <!-- Seat post + saddle -->
+    <line x1="270" y1="200" x2="262" y2="172" stroke="#3a3e44" stroke-width="6" stroke-linecap="round"/>
+    <path d="M232 170 Q262 160 294 170 Q280 182 258 180 Q240 180 232 170 Z" fill="url(#saddleGrad)" stroke="#231608" stroke-width="1.5"/>
+
+    <!-- Handlebar stem & bars -->
+    <line x1="440" y1="185" x2="436" y2="165" stroke="#3a3e44" stroke-width="6" stroke-linecap="round"/>
+    <path d="M410 165 Q436 158 470 170" fill="none" stroke="url(#frameGrad)" stroke-width="7" stroke-linecap="round"/>
+    <!-- grips -->
+    <circle cx="409" cy="165" r="5" fill="#3a2614"/>
+    <circle cx="470" cy="170" r="5" fill="#3a2614"/>
+
+    <!-- Crank & chainring -->
+    <circle cx="310" cy="335" r="22" fill="none" stroke="#2a2d31" stroke-width="5"/>
+    <circle cx="310" cy="335" r="16" fill="none" stroke="#8c9196" stroke-width="1.5" stroke-dasharray="3 3"/>
+    <circle cx="310" cy="335" r="6" fill="url(#hubGrad)"/>
+    <!-- chain -->
+    <line x1="150" y1="320" x2="310" y2="313" stroke="#45494e" stroke-width="2.5"/>
+    <line x1="150" y1="340" x2="310" y2="357" stroke="#45494e" stroke-width="2.5"/>
+    <!-- crank arms + pedals -->
+    <line x1="310" y1="335" x2="334" y2="362" stroke="#2a2d31" stroke-width="6" stroke-linecap="round"/>
+    <rect x="326" y="358" width="22" height="8" rx="2" fill="#1c1e21"/>
+    <line x1="310" y1="335" x2="286" y2="308" stroke="#2a2d31" stroke-width="6" stroke-linecap="round"/>
+    <rect x="272" y="303" width="22" height="8" rx="2" fill="#1c1e21"/>
+  </g>
+
+  <!-- ================= PELICAN ================= -->
+  <g id="pelican" filter="url(#softShadow)">
+    <!-- Far leg (behind frame, on back pedal) -->
+    <path d="M268 190 Q250 250 284 306" fill="none" stroke="#5a5f66" stroke-width="9" stroke-linecap="round"/>
+    <path d="M276 306 L296 304 L300 311 L282 313 Z" fill="#5a5f66"/>
+
+    <!-- Tail feathers -->
+    <path d="M208 180 Q170 172 152 196 Q178 196 196 206 Q180 212 168 226 Q200 222 224 206 Z" fill="url(#wingGrad)" stroke="#8d9196" stroke-width="1.2"/>
+
+    <!-- Body -->
+    <ellipse cx="275" cy="175" rx="82" ry="52" fill="url(#bodyGrad)" stroke="#a7aaae" stroke-width="1.5" transform="rotate(-8 275 175)"/>
+
+    <!-- Near leg (on front pedal) -->
+    <path d="M292 210 Q300 260 336 360" fill="none" stroke="url(#legGrad)" stroke-width="10" stroke-linecap="round"/>
+    <!-- webbed foot on pedal -->
+    <path d="M322 358 L352 356 L358 364 L326 368 Z" fill="#6c7279" stroke="#44484e" stroke-width="1"/>
+    <path d="M330 358 L336 367 M340 357 L346 366 M348 356 L354 364" stroke="#44484e" stroke-width="1" fill="none"/>
+
+    <!-- Wing (folded, reaching toward handlebars) -->
+    <path d="M250 150 Q300 120 360 150 Q395 168 416 168 Q400 182 370 180 Q330 200 282 196 Q242 188 250 150 Z" fill="url(#wingGrad)" stroke="#8d9196" stroke-width="1.5"/>
+    <!-- feather lines -->
+    <g fill="none" stroke="#9ea2a7" stroke-width="1.2" opacity="0.8">
+      <path d="M270 166 Q310 150 356 160"/>
+      <path d="M270 178 Q320 165 372 172"/>
+      <path d="M290 190 Q330 178 380 178"/>
+    </g>
+    <!-- wingtip "hand" gripping bar -->
+    <path d="M404 160 Q416 160 418 168 Q412 174 402 170 Z" fill="#cfd1d4" stroke="#8d9196" stroke-width="1"/>
+
+    <!-- Neck -->
+    <path d="M318 142 Q330 100 362 72 Q380 56 394 60 Q392 90 372 118 Q352 142 334 150 Z" fill="url(#headGrad)" stroke="#a7aaae" stroke-width="1.5"/>
+    <!-- neck shading -->
+    <path d="M330 146 Q348 118 374 92" fill="none" stroke="#c8cacd" stroke-width="5" stroke-linecap="round" opacity="0.6"/>
+
+    <!-- Head -->
+    <ellipse cx="398" cy="58" rx="30" ry="24" fill="url(#headGrad)" stroke="#a7aaae" stroke-width="1.5"/>
+    <!-- crest feathers at back of head -->
+    <path d="M372 46 Q362 36 370 28 Q376 40 384 38 Z" fill="#e6e7e9" stroke="#a7aaae" stroke-width="1"/>
+
+    <!-- Pouch (lower bill, sagging) -->
+    <path d="M418 66 Q470 80 526 82 Q500 110 448 100 Q420 92 416 72 Z" fill="url(#pouchGrad)" stroke="#b55e0c" stroke-width="1.2"/>
+    <!-- pouch shading -->
+    <path d="M430 84 Q470 100 510 90" fill="none" stroke="#b85f12" stroke-width="2" opacity="0.5"/>
+
+    <!-- Upper bill -->
+    <path d="M414 54 Q480 56 540 72 Q544 78 536 80 Q470 76 416 68 Z" fill="url(#billGrad)" stroke="#a85209" stroke-width="1.2"/>
+    <!-- bill highlight -->
+    <path d="M420 58 Q478 60 528 72" fill="none" stroke="#ffd79a" stroke-width="2" opacity="0.7" stroke-linecap="round"/>
+    <!-- bill hook tip -->
+    <path d="M536 72 Q546 76 540 84 Q536 80 532 78 Z" fill="#c9640c"/>
+
+    <!-- Eye -->
+    <circle cx="408" cy="52" r="6" fill="url(#eyeGrad)"/>
+    <circle cx="406" cy="50" r="1.8" fill="#fff"/>
+    <!-- eye ring -->
+    <circle cx="408" cy="52" r="7.5" fill="none" stroke="#e8b06a" stroke-width="1.2"/>
+  </g>
+</svg>

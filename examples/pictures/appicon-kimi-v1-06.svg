@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#79AEE0"/>
+      <stop offset="1" stop-color="#4E84C2"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.38" cy="0.34" r="0.85">
+      <stop offset="0" stop-color="#FBD66E"/>
+      <stop offset="1" stop-color="#EEA42C"/>
+    </radialGradient>
+    <linearGradient id="cloud" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F8FBFD"/>
+      <stop offset="1" stop-color="#CDDAE8"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="sunClip"><circle cx="196" cy="214" r="78"/></clipPath>
+    <clipPath id="cloudClip">
+      <circle cx="240" cy="300" r="58"/>
+      <circle cx="310" cy="288" r="70"/>
+      <circle cx="382" cy="304" r="54"/>
+      <rect x="186" y="300" width="244" height="58" rx="29"/>
+    </clipPath>
+  </defs>
+
+  <!-- Square sky, sharp corners -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <ellipse cx="256" cy="252" rx="210" ry="170" fill="url(#glow)"/>
+
+  <!-- Sun rays: fine secondary cue, first to drop out at small sizes -->
+  <g stroke="#F7C968" stroke-width="12" stroke-linecap="round" opacity="0.95">
+    <line x1="288" y1="214" x2="310" y2="214"/>
+    <line x1="261" y1="149" x2="277" y2="133"/>
+    <line x1="196" y1="122" x2="196" y2="100"/>
+    <line x1="131" y1="149" x2="115" y2="133"/>
+    <line x1="104" y1="214" x2="82" y2="214"/>
+    <line x1="131" y1="279" x2="115" y2="295"/>
+    <line x1="196" y1="306" x2="196" y2="328"/>
+    <line x1="261" y1="279" x2="277" y2="295"/>
+  </g>
+
+  <!-- Sun -->
+  <circle cx="196" cy="214" r="78" fill="url(#sun)"/>
+  <!-- Soft shadow where the cloud tucks over the sun -->
+  <g clip-path="url(#sunClip)">
+    <ellipse cx="252" cy="272" rx="62" ry="30" transform="rotate(-25 252 272)" fill="#C9801B" opacity="0.3"/>
+  </g>
+
+  <!-- Cloud -->
+  <g fill="url(#cloud)">
+    <circle cx="240" cy="300" r="58"/>
+    <circle cx="310" cy="288" r="70"/>
+    <circle cx="382" cy="304" r="54"/>
+    <rect x="186" y="300" width="244" height="58" rx="29"/>
+  </g>
+  <g clip-path="url(#cloudClip)">
+    <!-- One clean facet -->
+    <polygon points="206,250 326,216 268,358 206,358" fill="#FFFFFF" opacity="0.3"/>
+    <!-- Underside shading -->
+    <rect x="186" y="340" width="244" height="18" rx="9" fill="#AFC4D8" opacity="0.5"/>
+  </g>
+</svg>

@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <!-- Sky gradient: deep blue top to lighter blue bottom -->
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1E5BC6"/>
+      <stop offset="1" stop-color="#5FB2F5"/>
+    </linearGradient>
+    <!-- Sun gradient -->
+    <radialGradient id="sun" cx="0.4" cy="0.4" r="0.7">
+      <stop offset="0" stop-color="#FFF3A8"/>
+      <stop offset="0.6" stop-color="#FFC93C"/>
+      <stop offset="1" stop-color="#FF9F1C"/>
+    </radialGradient>
+    <!-- Cloud gradient: white to soft blue-grey underside -->
+    <linearGradient id="cloud" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#DCE8F5"/>
+    </linearGradient>
+    <!-- Soft shadow under cloud -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="18"/>
+      <feOffset dx="0" dy="22" result="off"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.28"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- Sun glow -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="28"/>
+    </filter>
+  </defs>
+
+  <!-- Square background, sharp corners -->
+  <rect x="0" y="0" width="1024" height="1024" fill="url(#sky)"/>
+
+  <!-- Subtle horizon band for depth -->
+  <rect x="0" y="0" width="1024" height="1024" fill="#FFFFFF" opacity="0.06"/>
+
+  <!-- Sun glow halo -->
+  <circle cx="640" cy="380" r="200" fill="#FFD75E" opacity="0.45" filter="url(#glow)"/>
+
+  <!-- Sun rays (8, short and bold) -->
+  <g stroke="#FFD75E" stroke-width="34" stroke-linecap="round" opacity="0.95">
+    <line x1="640" y1="110" x2="640" y2="170"/>
+    <line x1="640" y1="590" x2="640" y2="650"/>
+    <line x1="370" y1="380" x2="430" y2="380"/>
+    <line x1="850" y1="380" x2="910" y2="380"/>
+    <line x1="449" y1="189" x2="491" y2="231"/>
+    <line x1="789" y1="529" x2="831" y2="571"/>
+    <line x1="449" y1="571" x2="491" y2="529"/>
+    <line x1="789" y1="231" x2="831" y2="189"/>
+  </g>
+
+  <!-- Sun disc -->
+  <circle cx="640" cy="380" r="150" fill="url(#sun)"/>
+
+  <!-- Cloud (overlapping the sun's lower-left) -->
+  <g filter="url(#shadow)">
+    <path fill="url(#cloud)" d="
+      M 300 740
+      H 690
+      A 95 95 0 0 0 690 550
+      A 135 135 0 0 0 440 505
+      A 110 110 0 0 0 300 555
+      A 92 92 0 0 0 300 740
+      Z"/>
+  </g>
+
+  <!-- Rain drops beneath the cloud -->
+  <g stroke="#FFFFFF" stroke-width="30" stroke-linecap="round" opacity="0.92">
+    <line x1="400" y1="810" x2="372" y2="880"/>
+    <line x1="500" y1="810" x2="472" y2="880"/>
+    <line x1="600" y1="810" x2="572" y2="880"/>
+  </g>
+</svg>

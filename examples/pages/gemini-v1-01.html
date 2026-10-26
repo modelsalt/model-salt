@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RATION // 00 — Zero-Waste Pantry & Batch-Cooking OS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            electric: '#0055FF',
+            electricDark: '#0040C1',
+            slateSurface: '#F8FAFC',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom Swiss Clinical Accents & Range Slider */
+    body {
+      background-color: #FFFFFF;
+      color: #0F172A;
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    }
+    .swiss-grid-bg {
+      background-size: 24px 24px;
+      background-image: 
+        linear-gradient(to right, rgba(226, 232, 240, 0.5) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(226, 232, 240, 0.5) 1px, transparent 1px);
+    }
+    input[type=range] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      background: transparent;
+    }
+    input[type=range]:focus {
+      outline: none;
+    }
+    input[type=range]::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 6px;
+      cursor: pointer;
+      background: #E2E8F0;
+      border-radius: 0px;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      height: 22px;
+      width: 14px;
+      background: #0055FF;
+      cursor: pointer;
+      -webkit-appearance: none;
+      margin-top: -8px;
+      border: 2px solid #FFFFFF;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      transition: transform 0.1s ease, background-color 0.15s ease;
+    }
+    input[type=range]::-webkit-slider-thumb:hover {
+      background: #0040C1;
+      transform: scale(1.08);
+    }
+    .bento-card {
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .bento-card:hover {
+      border-color: #94A3B8;
+    }
+    /* Crosshair registration marks on major intersections */
+    .crosshair-tl::before {
+      content: "+";
+      position: absolute;
+      top: -11px;
+      left: -6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: #94A3B8;
+      pointer-events: none;
+      z-index: 20;
+    }
+    .crosshair-tr::after {
+      content: "+";
+      position: absolute;
+      top: -11px;
+      right: -6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: #94A3B8;
+      pointer-events: none;
+      z-index: 20;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-electric selection:text-white">
+
+  <!-- TOP TELEMETRY BAR -->
+  <div class="border-b border-slate-200 bg-slate-900 text-slate-300 text-[11px] font-mono py-2 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+      <div class="flex items-center space-x-3">
+        <span class="inline-block w-2 h-2 bg-electric animate-pulse"></span>
+        <span>SYS.VER // 4.2.0-CLINICAL</span>
+        <span class="hidden sm:inline text-slate-600">|</span>
+        <span class="hidden sm:inline">PROTOCOL: ZERO_SPOILAGE_BATCH_ENGINE</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <span>AVG HOUSEHOLD RECOVERY: <strong class="text-white">$2,480/YR</strong></span>
+        <span class="text-slate-600">|</span>
+        <a href="#pricing" class="text-white underline hover:text-electric transition-colors">INITIATE FREE TIER &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SWISS GRID CONTAINER -->
+  <div class="max-w-7xl mx-auto border-x border-slate-200">
+
+    <!-- STICKY NAVIGATION -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200">
+      <div class="grid grid-cols-12 items-center">
+        <!-- Brand Logo -->
+        <div class="col-span-6 sm:col-span-3 p-4 sm:px-6 border-r border-slate-200 flex items-center justify-between">
+          <a href="#" class="flex items-center space-x-2.5 group">
+            <div class="w-5 h-5 bg-slate-900 group-hover:bg-electric transition-colors flex items-center justify-center text-white font-mono text-[10px] font-bold">
+              R0
+            </div>
+            <span class="font-mono font-bold tracking-tight text-sm text-slate-900">RATION<span class="text-electric">//</span>00</span>
+          </a>
+          <span class="text-[10px] font-mono uppercase px-1.5 py-0.5 bg-slate-100 text-slate-600 border border-slate-200">OS</span>
+        </div>
+
+        <!-- Nav Links -->
+        <nav class="hidden md:flex md:col-span-6 px-6 items-center space-x-8 text-xs font-mono uppercase tracking-wider text-slate-600">
+          <a href="#bento-architecture" class="hover:text-electric transition-colors">[01] Architecture</a>
+          <a href="#roi-calculator" class="hover:text-electric transition-colors">[02] ROI Telemetry</a>
+          <a href="#batch-matrix" class="hover:text-electric transition-colors">[03] Batch Matrix</a>
+          <a href="#pricing" class="hover:text-electric transition-colors">[04] Licensing</a>
+        </nav>
+
+        <!-- Nav CTA -->
+        <div class="col-span-6 sm:col-span-9 md:col-span-3 p-3 sm:px-6 md:border-l border-slate-200 flex justify-end items-center space-x-3">
+          <button onclick="openOnboardingModal('Free Basic')" class="w-full sm:w-auto px-4 py-2 bg-electric hover:bg-electricDark text-white font-mono text-xs uppercase tracking-wider font-medium transition-colors flex items-center justify-center space-x-2">
+            <span>Deploy Free</span>
+            <span>&rarr;</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- SECTION 00: HERO + PRIMARY BENTO SYSTEM -->
+    <section id="bento-architecture" class=" relative crosshair-tl crosshair-tr">
+      <!-- Top Hero Header Row -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 border-b border-slate-200">
+        <div class="lg:col-span-8 p-6 sm:p-10 lg:p-12 border-b lg:border-b-0 lg:border-r border-slate-200 flex flex-col justify-between swiss-grid-bg">
+          <div>
+            <div class="inline-flex items-center space-x-2 px-2.5 py-1 bg-slate-100 border border-slate-300 text-slate-800 text-xs font-mono mb-6">
+              <span class="w-1.5 h-1.5 bg-electric"></span>
+              <span>FIFO INVENTORY CONTROL &amp; THERMAL BATCH OPTIMIZATION</span>
+            </div>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 leading-[1.04] mb-6">
+              Eliminate Domestic Spoilage. <span class="text-electric">Algorithmic</span> Batch-Cooking.
+            </h1>
+            <p class="text-base sm:text-lg text-slate-600 max-w-2xl font-normal leading-relaxed">
+              The average household discards 31.9% of purchased produce before preparation. RATION//00 tracks real-time pantry half-lives and compiles 90-minute Sunday prep protocols that seal in savings and zero out waste.
+            </p>
+          </div>
+
+          <div class="mt-10 pt-6 border-t border-slate-200/80 flex flex-col sm:flex-row sm:items-center gap-4">
+            <button onclick="openOnboardingModal('Free Basic')" class="px-6 py-3.5 bg-slate-900 hover:bg-electric text-white font-mono text-xs uppercase tracking-widest font-semibold transition-colors">
+              Initialize Free Basic Plan
+            </button>
+            <a href="#roi-calculator" class="px-6 py-3.5 bg-white hover:bg-slate-50 text-slate-900 border border-slate-300 font-mono text-xs uppercase tracking-widest font-semibold transition-colors text-center">
+              Calculate Household Savings
+            </a>
+            <div class="sm:ml-auto text-left sm:text-right font-mono text-[11px] text-slate-500">
+              <div>NO CREDIT CARD REQUIRED</div>
+              <div class="text-slate-900 font-semibold">iOS / ANDROID / WEB CLI</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Right: Live Spoilage Telemetry Card -->
+        <div class="lg:col-span-4 p-6 sm:p-8 bg-slateSurface flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between border-b border-slate-200 pb-3 mb-5">
+              <span class="font-mono text-xs font-semibold uppercase tracking-wider text-slate-500">FIG 0.1 // DECAY INTERCEPTION</span>
+              <span class="font-mono text-[11px] text-electric bg-blue-50 px-2 py-0.5 border border-blue-200 font-semibold">ACTIVE SCAN</span>
+            </div>
+
+            <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+              Ingredients are ranked by <span class="font-mono text-slate-900 font-medium">Ethylene Sensitivity</span> and moisture loss rate. Click below to simulate an automated Sunday batch intervention:
+            </p>
+
+            <!-- Interactive Pantry Queue List -->
+            <div id="pantry-queue" class="space-y-2.5 font-mono text-xs">
+              <!-- Populated/Updated via JS or static initial -->
+              <div class="pantry-item p-3 bg-white border border-slate-200 flex items-center justify-between transition-all" data-fresh="98" data-risk="18">
+                <div>
+                  <div class="font-bold text-slate-900">BABY SPINACH (240g)</div>
+                  <div class="text-[11px] text-slate-500 status-label">EXPIRES: 19 HOURS</div>
+                </div>
+                <div class="text-right">
+                  <span class="badge inline-block px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-300 text-[10px] font-bold">CRITICAL: 18%</span>
+                  <div class="text-[10px] text-slate-400 mt-0.5">$4.20 AT RISK</div>
+                </div>
+              </div>
+
+              <div class="pantry-item p-3 bg-white border border-slate-200 flex items-center justify-between transition-all" data-fresh="96" data-risk="32">
+                <div>
+                  <div class="font-bold text-slate-900">FRESH CILANTRO + LIME</div>
+                  <div class="text-[11px] text-slate-500 status-label">EXPIRES: 36 HOURS</div>
+                </div>
+                <div class="text-right">
+                  <span class="badge inline-block px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-300 text-[10px] font-bold">DECAY: 32%</span>
+                  <div class="text-[10px] text-slate-400 mt-0.5">$3.50 AT RISK</div>
+                </div>
+              </div>
+
+              <div class="pantry-item p-3 bg-white border border-slate-200 flex items-center justify-between transition-all" data-fresh="99" data-risk="54">
+                <div>
+                  <div class="font-bold text-slate-900">BONE-IN CHICKEN THIGHS</div>
+                  <div class="text-[11px] text-slate-500 status-label">EXPIRES: 48 HOURS</div>
+                </div>
+                <div class="text-right">
+                  <span class="badge inline-block px-2 py-0.5 bg-slate-100 text-slate-700 border border-slate-300 text-[10px] font-bold">WINDOW: 54%</span>
+                  <div class="text-[10px] text-slate-400 mt-0.5">$11.80 AT RISK</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-slate-200">
+            <div class="flex items-center justify-between text-xs font-mono mb-3">
+              <span class="text-slate-500">UNSEALED VALUE AT RISK:</span>
+              <span id="risk-readout" class="font-bold text-slate-900 text-sm">$19.50 / WK</span>
+            </div>
+            <button id="seal-btn" onclick="toggleSealBatch()" class="w-full py-2.5 px-4 bg-electric hover:bg-electricDark text-white font-mono text-xs uppercase tracking-wider font-semibold transition-all flex items-center justify-center space-x-2">
+              <span id="seal-btn-text">[EXECUTE BATCH SEAL PROTOCOL]</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODULAR BENTO-BOX CAPABILITIES GRID (12-Column Swiss Interlocking Layout) -->
+      <div class="grid grid-cols-1 md:grid-cols-12">
+
+        <!-- BENTO CARD 1: Thermal Batch Sequencer (5 Cols) -->
+        <div class="md:col-span-5 p-6 sm:p-8 border-b md:border-r border-slate-200 flex flex-col justify-between bento-card">
+          <div>
+            <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-4">
+              <span>MOD // 01</span>
+              <span>PARALLEL COOKING GANTT</span>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 tracking-tight mb-2">
+              Single-Session Thermal Multiplexing
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed mb-6">
+              Instead of cooking 14 separate meals, RATION//00 interleaves oven roasting, induction simmering, and passive cooling into one 85-minute choreographed block.
+            </p>
+          </div>
+
+          <!-- Compact Gantt Chart UI -->
+          <div class="bg-slateSurface border border-slate-200 p-4 font-mono text-[11px]">
+            <div class="flex justify-between text-slate-400 border-b border-slate-200 pb-1.5 mb-3">
+              <span>00:00</span>
+              <span>00:30</span>
+              <span>01:00</span>
+              <span>01:25</span>
+            </div>
+            <div class="space-y-2.5">
+              <div>
+                <div class="flex justify-between text-slate-700 mb-1">
+                  <span>OVEN 425°F // SHEET PROTEINS</span>
+                  <span class="text-electric font-bold">45m</span>
+                </div>
+                <div class="w-full bg-slate-200 h-2">
+                  <div class="bg-electric h-2 w-[65%]"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-slate-700 mb-1">
+                  <span>BURNER 01 // GRAIN BASE MATRIX</span>
+                  <span class="text-slate-900 font-bold">35m</span>
+                </div>
+                <div class="w-full bg-slate-200 h-2 pl-[15%]">
+                  <div class="bg-slate-800 h-2 w-[55%]"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-slate-700 mb-1">
+                  <span>BLENDER // EMULSIFIED HERB STABILIZER</span>
+                  <span class="text-slate-900 font-bold">12m</span>
+                </div>
+                <div class="w-full bg-slate-200 h-2 pl-[50%]">
+                  <div class="bg-electric h-2 w-[25%]"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-slate-700 mb-1">
+                  <span>VACUUM / PORTION SEALING</span>
+                  <span class="text-slate-900 font-bold">15m</span>
+                </div>
+                <div class="w-full bg-slate-200 h-2 pl-[75%]">
+                  <div class="bg-slate-900 h-2 w-[25%]"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BENTO CARD 2: Culinary Visual & Container Telemetry (4 Cols) -->
+        <div class="md:col-span-4 p-6 sm:p-8 border-b md:border-r border-slate-200 flex flex-col justify-between bento-card">
+          <div>
+            <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-4">
+              <span>MOD // 02</span>
+              <span>OPTICAL PORTION INDEX</span>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 tracking-tight mb-2">
+              Modular Component Assembly
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed mb-5">
+              Pre-portioned base components recombine into distinct culinary profiles in under 4 minutes on weeknights—zero palate fatigue.
+            </p>
+          </div>
+
+          <!-- Clinical Culinary Visual Card -->
+          <div class="relative border border-slate-200 bg-slate-900 overflow-hidden group">
+            <img 
+              src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=80" 
+              alt="Precision prepped culinary meal components" 
+              class="w-full h-48 object-cover opacity-90 group-hover:scale-105 transition-transform duration-500 filter contrast-105"
+            >
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent"></div>
+            <div class="absolute top-3 left-3 right-3 flex justify-between items-center font-mono text-[10px]">
+              <span class="bg-slate-900/90 text-white px-2 py-0.5 border border-slate-700">CONTAINER #B04</span>
+              <span class="bg-electric text-white px-2 py-0.5 font-semibold">+9.5 DAYS SHELF LIFE</span>
+            </div>
+            <div class="absolute bottom-3 left-3 right-3 font-mono text-white">
+              <div class="text-xs font-bold">MISO-GLAZED SALMON &amp; CHARRED BROCCOLINI</div>
+              <div class="flex justify-between text-[10px] text-slate-300 mt-1">
+                <span>540 KCAL // 42G PROTEIN</span>
+                <span>COST: $3.18 / SERVING</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BENTO CARD 3: Zero-Spoilage Telemetry Stat Stack (3 Cols) -->
+        <div class="md:col-span-3 border-b border-slate-200 flex flex-col justify-between bg-slateSurface bento-card">
+          <div class="p-6 border-b border-slate-200">
+            <div class="font-mono text-xs text-slate-400 mb-2">MOD // 03 — METRICS</div>
+            <div class="text-4xl font-mono font-bold text-electric tracking-tight">-94.2%</div>
+            <div class="text-xs font-semibold uppercase tracking-wider text-slate-900 mt-1">Organic Bin Mass</div>
+            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+              Verified reduction in discarded produce after 21 days of FIFO pantry enforcement.
+            </p>
+          </div>
+
+          <div class="p-6 border-b border-slate-200">
+            <div class="text-4xl font-mono font-bold text-slate-900 tracking-tight">$3.12</div>
+            <div class="text-xs font-semibold uppercase tracking-wider text-slate-900 mt-1">Median Meal Cost</div>
+            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+              Down from $14.80 ad-hoc grocery &amp; takeout baseline across 18,400 tracked kitchens.
+            </p>
+          </div>
+
+          <div class="p-6 bg-white">
+            <div class="flex items-center justify-between text-xs font-mono">
+              <span class="text-slate-500">PANTRY UTILIZATION</span>
+              <span class="text-electric font-bold">98.4%</span>
+            </div>
+            <div class="w-full bg-slate-100 h-2 mt-2 border border-slate-200">
+              <div class="bg-electric h-full w-[98.4%]"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BENTO CARD 4: Receipt OCR & Mass-Balance Ledger (6 Cols) -->
+        <div class="md:col-span-6 p-6 sm:p-8 border-b md:border-b-0 md:border-r border-slate-200 flex flex-col justify-between bento-card">
+          <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-4">
+            <span>MOD // 04</span>
+            <span>OPTICAL RECEIPT INGESTION &amp; GRAM LEDGER</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
+            <div class="sm:col-span-6">
+              <h3 class="text-xl font-bold text-slate-900 tracking-tight mb-2">
+                Automatic Partial-Ingredient Cross-Allocation
+              </h3>
+              <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                When a recipe requires Half a Red Cabbage (350g), RATION//00 never orphans the remaining 350g. It automatically schedules a high-acid quick-pickle or slaw into Thursday's batch matrix.
+              </p>
+              <div class="inline-flex items-center space-x-2 text-xs font-mono text-electric font-semibold">
+                <span>ZERO ORPHANED SKUS</span>
+                <span>&rarr;</span>
+              </div>
+            </div>
+
+            <!-- Simulated Ledger Table -->
+            <div class="sm:col-span-6 bg-slateSurface border border-slate-200 p-3.5 font-mono text-[11px]">
+              <div class="text-slate-400 border-b border-slate-200 pb-1.5 mb-2 flex justify-between">
+                <span>INGESTED SKU</span>
+                <span>ALLOCATION</span>
+              </div>
+              <div class="space-y-2">
+                <div class="flex justify-between items-center">
+                  <span class="text-slate-800 font-medium"> Greek Yogurt (900g)</span>
+                  <span class="px-1.5 py-0.5 bg-blue-50 text-electric border border-blue-200">3 RECIPES // 0g LEFT</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-slate-800 font-medium">Red Cabbage (700g)</span>
+                  <span class="px-1.5 py-0.5 bg-blue-50 text-electric border border-blue-200">2 RECIPES // 0g LEFT</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-slate-800 font-medium">Tahini Paste (450g)</span>
+                  <span class="px-1.5 py-0.5 bg-slate-200 text-slate-700">PANTRY STABLE // 180d</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-slate-800 font-medium">Flat Parsley (1 bunch)</span>
+                  <span class="px-1.5 py-0.5 bg-blue-50 text-electric border border-blue-200">CHIMICHURRI // 100%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BENTO CARD 5: Freezer & Cryo-Inventory Index (6 Cols) -->
+        <div class="md:col-span-6 p-6 sm:p-8 flex flex-col justify-between bento-card">
+          <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-4">
+            <span>MOD // 05</span>
+            <span>CRYO-STASIS ROTATION ENGINE</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
+            <div class="sm:col-span-6">
+              <h3 class="text-xl font-bold text-slate-900 tracking-tight mb-2">
+                QR-Indexed Freezer Vaults
+              </h3>
+              <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                Stop losing batch-cooked chili to freezer burn. Generate 1-click thermal labels or log container slots with automated thaw-alerts 24 hours before your busiest workdays.
+              </p>
+              <div class="flex items-center space-x-3 font-mono text-xs">
+                <span class="px-2 py-1 bg-slate-100 border border-slate-200 text-slate-700">THAW ALERT: TUE 07:30</span>
+                <span class="px-2 py-1 bg-slate-100 border border-slate-200 text-slate-700">0% BURN LOSS</span>
+              </div>
+            </div>
+
+            <div class="sm:col-span-6">
+              <div class="border border-slate-200 p-4 bg-white">
+                <div class="flex items-center justify-between border-b border-slate-200 pb-2 mb-3">
+                  <div>
+                    <div class="font-mono text-xs font-bold text-slate-900">VAULT SLOT // FZ-09</div>
+                    <div class="font-mono text-[10px] text-slate-500">BLACK BEAN &amp; CHORIZO SOUP (4 PORTIONS)</div>
+                  </div>
+                  <div class="w-8 h-8 border border-slate-900 flex items-center justify-center font-mono text-[10px] font-bold bg-slate-900 text-white">
+                    QR
+                  </div>
+                </div>
+                <div class="grid grid-cols-3 gap-2 font-mono text-[10px] text-center">
+                  <div class="p-1.5 bg-slateSurface border border-slate-200">
+                    <div class="text-slate-400">SEALED</div>
+                    <div class="font-bold text-slate-800 mt-0.5">14d AGO</div>
+                  </div>
+                  <div class="p-1.5 bg-slateSurface border border-slate-200">
+                    <div class="text-slate-400">OPTIMAL</div>
+                    <div class="font-bold text-electric mt-0.5">76d LEFT</div>
+                  </div>
+                  <div class="p-1.5 bg-slateSurface border border-slate-200">
+                    <div class="text-slate-400">REHEAT</div>
+                    <div class="font-bold text-slate-800 mt-0.5">6m 180°F</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 02: INTERACTIVE HOUSEHOLD ROI & WASTE CALCULATOR -->
+    <section id="roi-calculator" class="border-t border-slate-200 relative crosshair-tl crosshair-tr">
+      <!-- Section Header -->
+      <div class="p-6 sm:px-10 sm:py-8 border-b border-slate-200 bg-slateSurface flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div class="font-mono text-xs text-electric font-semibold uppercase tracking-wider mb-1">
+            [02] INTERACTIVE TELEMETRY // HOUSEHOLD EFFICIENCY SIMULATOR
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+            Quantify Your Weekly Capital &amp; Time Recovery
+          </h2>
+        </div>
+        <div class="font-mono text-xs text-slate-500 border border-slate-300 bg-white px-3 py-2">
+          MODEL: USDA SPOILAGE BENCHMARK v2025
+        </div>
+      </div>
+
+      <!-- Calculator Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12">
+        
+        <!-- Left Column: Input Controls (5 Cols) -->
+        <div class="lg:col-span-5 p-6 sm:p-10 border-b lg:border-b-0 lg:border-r border-slate-200 flex flex-col justify-between">
+          <div class="space-y-8">
+            
+            <!-- Control 1: Household Size Slider -->
+            <div>
+              <div class="flex justify-between items-baseline mb-2">
+                <label for="household-slider" class="font-mono text-xs uppercase font-bold text-slate-900 tracking-wider">
+                  01. Household Size (Adults / Teens)
+                </label>
+                <span class="font-mono text-2xl font-bold text-electric" id="household-display">2 Persons</span>
+              </div>
+              <input 
+                type="range" 
+                id="household-slider" 
+                min="1" 
+                max="8" 
+                value="2" 
+                step="1"
+                oninput="updateROICalculator()"
+              >
+              <div class="flex justify-between font-mono text-[10px] text-slate-400 mt-1.5">
+                <span>1 (SOLO)</span>
+                <span>2 (COUPLE)</span>
+                <span>4 (FAMILY)</span>
+                <span>6</span>
+                <span>8 (LARGE)</span>
+              </div>
+            </div>
+
+            <!-- Control 2: Current Weekly Grocery + Ad-Hoc Spend -->
+            <div>
+              <div class="flex justify-between items-baseline mb-2">
+                <label for="spend-slider" class="font-mono text-xs uppercase font-bold text-slate-900 tracking-wider">
+                  02. Weekly Food &amp; Grocery Spend
+                </label>
+                <span class="font-mono text-2xl font-bold text-slate-900" id="spend-display">$220 / wk</span>
+              </div>
+              <input 
+                type="range" 
+                id="spend-slider" 
+                min="80" 
+                max="650" 
+                value="220" 
+                step="10"
+                oninput="updateROICalculator()"
+              >
+              <div class="flex justify-between font-mono text-[10px] text-slate-400 mt-1.5">
+                <span>$80/WK</span>
+                <span>$220/WK</span>
+                <span>$400/WK</span>
+                <span>$650/WK</span>
+              </div>
+            </div>
+
+            <!-- Control 3: Batch Protocol Intensity -->
+            <div>
+              <label class="block font-mono text-xs uppercase font-bold text-slate-900 tracking-wider mb-3">
+                03. Batch-Cooking Optimization Mode
+              </label>
+              <div class="grid grid-cols-3 gap-2 font-mono text-xs" id="mode-selector">
+                <button type="button" onclick="setBatchMode('light', this)" class="mode-btn py-2.5 px-2 border border-slate-300 bg-white text-slate-700 hover:border-slate-900 transition-colors text-center">
+                  <div class="font-bold">HYBRID</div>
+                  <div class="text-[10px] text-slate-400">3 NIGHTS/WK</div>
+                </button>
+                <button type="button" onclick="setBatchMode('standard', this)" class="mode-btn py-2.5 px-2 border-2 border-electric bg-blue-50/40 text-electric font-bold transition-colors text-center">
+                  <div>CLINICAL</div>
+                  <div class="text-[10px] text-electric">5 NIGHTS/WK</div>
+                </button>
+                <button type="button" onclick="setBatchMode('max', this)" class="mode-btn py-2.5 px-2 border border-slate-300 bg-white text-slate-700 hover:border-slate-900 transition-colors text-center">
+                  <div class="font-bold">FULL SEAL</div>
+                  <div class="text-[10px] text-slate-400">7 NIGHTS/WK</div>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-slate-200 flex items-center justify-between text-xs font-mono text-slate-500">
+            <span>QUICK PRESETS:</span>
+            <div class="space-x-2">
+              <button onclick="applyPreset(1, 130)" class="underline hover:text-electric">Solo ($130)</button>
+              <span>/</span>
+              <button onclick="applyPreset(2, 220)" class="underline hover:text-electric">Couple ($220)</button>
+              <span>/</span>
+              <button onclick="applyPreset(4, 380)" class="underline hover:text-electric">Family of 4 ($380)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Live Calculated Telemetry Output (7 Cols) -->
+        <div class="lg:col-span-7 p-6 sm:p-10 bg-white flex flex-col justify-between swiss-grid-bg">
+          <div>
+            <div class="flex items-center justify-between border-b border-slate-200 pb-3 mb-6">
+              <span class="font-mono text-xs uppercase text-slate-500 font-semibold">CALCULATED WEEKLY &amp; ANNUAL DIVIDEND</span>
+              <span class="font-mono text-xs text-electric font-bold">CONFIDENCE INTERVAL: 94.8%</span>
+            </div>
+
+            <!-- Primary Output Bento Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+              
+              <!-- Weekly Money Saved -->
+              <div class="p-6 bg-slate-900 text-white border border-slate-900">
+                <div class="flex justify-between items-center font-mono text-xs text-slate-400 mb-2">
+                  <span>WEEKLY CAPITAL SAVED</span>
+                  <span class="text-electric bg-white/10 px-1.5 py-0.5">SPOILAGE + AD-HOC</span>
+                </div>
+                <div class="text-4xl sm:text-5xl font-mono font-bold tracking-tight text-white my-2" id="out-weekly-money">
+                  $68.40
+                </div>
+                <div class="font-mono text-xs text-slate-300 mt-3 pt-3 border-t border-slate-800 flex justify-between">
+                  <span>ANNUAL RECOVERY:</span>
+                  <strong class="text-electric text-sm" id="out-annual-money">$3,556 / YR</strong>
+                </div>
+              </div>
+
+              <!-- Weekly Hours Saved -->
+              <div class="p-6 bg-white border-2 border-electric">
+                <div class="flex justify-between items-center font-mono text-xs text-slate-500 mb-2">
+                  <span>WEEKLY LABOR RECLAIMED</span>
+                  <span class="text-electric font-bold">PREP + CLEANUP</span>
+                </div>
+                <div class="text-4xl sm:text-5xl font-mono font-bold tracking-tight text-slate-900 my-2" id="out-weekly-hours">
+                  5.4 hrs
+                </div>
+                <div class="font-mono text-xs text-slate-600 mt-3 pt-3 border-t border-slate-200 flex justify-between">
+                  <span>ANNUAL TIME DIVIDEND:</span>
+                  <strong class="text-slate-900 text-sm" id="out-annual-hours">281 HRS / YR</strong>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Secondary Environmental & Pantry Telemetry Bar -->
+            <div class="grid grid-cols-3 gap-4 bg-slateSurface border border-slate-200 p-4 font-mono">
+              <div>
+                <div class="text-[10px] text-slate-500 uppercase">PREVENTED FOOD SPOILAGE</div>
+                <div class="text-lg sm:text-xl font-bold text-slate-900 mt-1" id="out-waste-kg">3.6 kg / wk</div>
+              </div>
+              <div class="border-l border-slate-200 pl-4">
+                <div class="text-[10px] text-slate-500 uppercase">SEALED CONTAINERS / WK</div>
+                <div class="text-lg sm:text-xl font-bold text-electric mt-1" id="out-containers">10 units</div>
+              </div>
+              <div class="border-l border-slate-200 pl-4">
+                <div class="text-[10px] text-slate-500 uppercase">DISHWASHER CYCLES SAVED</div>
+                <div class="text-lg sm:text-xl font-bold text-slate-900 mt-1" id="out-dishes">4.5 / wk</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Conversion Trigger inside Calculator -->
+          <div class="mt-8 pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white p-4 border border-slate-200">
+            <div>
+              <div class="text-xs font-mono uppercase text-electric font-bold">RECOMMENDED CONFIGURATION</div>
+              <div class="text-sm font-semibold text-slate-900 mt-0.5" id="calc-rec-text">
+                Pro Monthly Plan pays for itself in 2.1 days of prevented spoilage.
+              </div>
+            </div>
+            <a href="#pricing" class="shrink-0 px-5 py-2.5 bg-electric hover:bg-electricDark text-white font-mono text-xs uppercase tracking-wider font-semibold transition-colors">
+              Lock In Savings &rarr;
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 03: SUNDAY BATCH MATRIX PREVIEW -->
+    <section id="batch-matrix" class="border-t border-slate-200">
+      <div class="grid grid-cols-1 lg:grid-cols-12">
+        <div class="lg:col-span-4 p-6 sm:p-10 border-b lg:border-b-0 lg:border-r border-slate-200 bg-slateSurface flex flex-col justify-between">
+          <div>
+            <div class="font-mono text-xs text-electric font-semibold uppercase tracking-wider mb-2">
+              [03] EXECUTION WORKFLOW
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 mb-4">
+              How 12 Raw SKUs Become 18 Sealed Meals.
+            </h2>
+            <p class="text-sm text-slate-600 leading-relaxed mb-6">
+              Traditional meal-planning apps hand you 7 disconnected recipes and a bloated 45-item grocery list. RATION//00 compiles shared base matrices so every stem, grain, and roast pan works across multiple meals.
+            </p>
+          </div>
+
+          <div class="space-y-3 font-mono text-xs">
+            <div class="p-3 bg-white border border-slate-200 flex items-center space-x-3">
+              <span class="w-6 h-6 bg-slate-900 text-white flex items-center justify-center font-bold">1</span>
+              <span>AUDIT PANTRY DECAY QUEUE (2 MIN)</span>
+            </div>
+            <div class="p-3 bg-white border border-slate-200 flex items-center space-x-3">
+              <span class="w-6 h-6 bg-slate-900 text-white flex items-center justify-center font-bold">2</span>
+              <span>EXECUTE UNIFIED 85-MIN THERMAL PREP</span>
+            </div>
+            <div class="p-3 bg-white border border-electric flex items-center space-x-3 text-electric font-bold">
+              <span class="w-6 h-6 bg-electric text-white flex items-center justify-center font-bold">3</span>
+              <span>SEAL &amp; LOG CONTAINERS FOR 4-MIN ASSEMBLY</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-8 p-6 sm:p-10 grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <!-- Matrix Step 1 -->
+          <div class="border border-slate-200 flex flex-col justify-between">
+            <div>
+              <div class="h-40 bg-slate-100 overflow-hidden relative border-b border-slate-200">
+                <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80" alt="Raw pantry produce" class="w-full h-full object-cover filter contrast-105">
+                <span class="absolute top-2 left-2 bg-slate-900 text-white font-mono text-[10px] px-2 py-0.5">INPUT // RAW</span>
+              </div>
+              <div class="p-4">
+                <div class="font-mono text-[11px] text-electric font-semibold">PHASE 01 // CONSOLIDATION</div>
+                <h4 class="font-bold text-slate-900 mt-1">Zero-Overlap Grocery Pull</h4>
+                <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                  Subtracts exact gram weights already inside your pantry and fridge before generating store-aisle routes.
+                </p>
+              </div>
+            </div>
+            <div class="px-4 py-2.5 bg-slateSurface border-t border-slate-200 font-mono text-[11px] text-slate-500 flex justify-between">
+              <span>AVG CART REDUCTION</span>
+              <strong class="text-slate-900">-28.4%</strong>
+            </div>
+          </div>
+
+          <!-- Matrix Step 2 -->
+          <div class="border border-slate-200 flex flex-col justify-between">
+            <div>
+              <div class="h-40 bg-slate-100 overflow-hidden relative border-b border-slate-200">
+                <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80" alt="Batch cooking stainless steel" class="w-full h-full object-cover filter contrast-105">
+                <span class="absolute top-2 left-2 bg-electric text-white font-mono text-[10px] px-2 py-0.5">PROCESS // 85 MIN</span>
+              </div>
+              <div class="p-4">
+                <div class="font-mono text-[11px] text-electric font-semibold">PHASE 02 // MULTIPLEXING</div>
+                <h4 class="font-bold text-slate-900 mt-1">Synchronized Prep Prompts</h4>
+                <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                  Hands-free audio and tablet timers alert you when to drop aromatics, pull sheet pans, and deglaze.
+                </p>
+              </div>
+            </div>
+            <div class="px-4 py-2.5 bg-slateSurface border-t border-slate-200 font-mono text-[11px] text-slate-500 flex justify-between">
+              <span>ACTIVE KNIFE TIME</span>
+              <strong class="text-slate-900">22 MIN</strong>
+            </div>
+          </div>
+
+          <!-- Matrix Step 3 -->
+          <div class="border border-slate-200 flex flex-col justify-between">
+            <div>
+              <div class="h-40 bg-slate-100 overflow-hidden relative border-b border-slate-200">
+                <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80" alt="Sealed nutritious bowls" class="w-full h-full object-cover filter contrast-105">
+                <span class="absolute top-2 left-2 bg-slate-900 text-white font-mono text-[10px] px-2 py-0.5">OUTPUT // SEALED</span>
+              </div>
+              <div class="p-4">
+                <div class="font-mono text-[11px] text-electric font-semibold">PHASE 03 // PRESERVATION</div>
+                <h4 class="font-bold text-slate-900 mt-1">Hermetic Shelf-Life Tracking</h4>
+                <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                  Sauces and dressings stay separated until serving so greens stay crisp through Friday night.
+                </p>
+              </div>
+            </div>
+            <div class="px-4 py-2.5 bg-slateSurface border-t border-slate-200 font-mono text-[11px] text-slate-500 flex justify-between">
+              <span>SPOILAGE RATE</span>
+              <strong class="text-electric">0.0%</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 04: TIERED FREEMIUM PRICING & COMPARISON MATRIX -->
+    <section id="pricing" class="border-t border-slate-200 relative crosshair-tl crosshair-tr">
+      <!-- Pricing Header -->
+      <div class="p-6 sm:px-10 sm:py-10 border-b border-slate-200 bg-slateSurface flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div>
+          <div class="font-mono text-xs text-electric font-semibold uppercase tracking-wider mb-2">
+            [04] LICENSING &amp; ONBOARDING COMMITMENT
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
+            Start Zero-Waste for $0. Upgrade When You Scale.
+          </h2>
+        </div>
+        <div class="font-mono text-xs text-slate-600 bg-white border border-slate-300 px-4 py-2.5">
+          30-DAY SPOILAGE GUARANTEE: SAVE 4X YOUR SUBSCRIPTION OR FULL REFUND
+        </div>
+      </div>
+
+      <!-- 3-Tier Cards Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 border-b border-slate-200">
+
+        <!-- TIER 1: FREE BASIC PLAN -->
+        <div class="p-6 sm:p-10 border-b lg:border-b-0 lg:border-r border-slate-200 flex flex-col justify-between bg-white">
+          <div>
+            <div class="flex justify-between items-center font-mono text-xs mb-4">
+              <span class="px-2 py-0.5 bg-slate-100 border border-slate-300 text-slate-800 font-bold">TIER 01 // STARTER</span>
+              <span class="text-slate-400">SOLO &amp; TRIAL</span>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-900">Free Basic</h3>
+            <p class="text-xs text-slate-500 mt-1">Core FIFO pantry tracking &amp; weekly 3-recipe batch builder.</p>
+
+            <div class="my-6 pb-6 border-b border-slate-200 flex items-baseline space-x-2">
+              <span class="text-4xl sm:text-5xl font-mono font-bold text-slate-900">$0</span>
+              <span class="font-mono text-xs text-slate-500 uppercase">/ FOREVER</span>
+            </div>
+
+            <ul class="space-y-3 text-sm text-slate-700 font-normal mb-8">
+              <li class="flex items-start space-x-2.5">
+                <span class="font-mono text-electric font-bold">[+]</span>
+                <span>Up to <strong>45 active pantry SKUs</strong> with expiration alerts</span>
+              </li>
+              <li class="flex items-start space-x-2.5">
+                <span class="font-mono text-electric font-bold">[+]</span>
+                <span><strong>1 weekly batch session</strong> (up to 6 sealed portions)</span>
+              </li>
+              <li class="flex items-start space-x-2.5">
+                <span class="font-mono text-electric font-bold">[+]</span>
+                <span>Manual barcode &amp; gram-weight inventory entry</span>
+              </li>
+              <li class="flex items-start space-x-2.5">
+                <span class="font-mono text-electric font-bold">[+]</span>
+                <span>Consolidated aisle-sorted grocery list</span>
+              </li>
+            </ul>
+          </div>
+
+          <button onclick="openOnboardingModal('Free Basic ($0/mo)')" class="w-full py-3.5 px-4 bg-white hover:bg-slate-900 hover:text-white text-slate-900 border-2 border-slate-900 font-mono text-xs uppercase tracking-widest font-bold transition-colors">
+            Deploy Free Basic &rarr;
+          </button>
+        </div>
+
+        <!-- TIER 2: PRO MONTHLY (HIGHLIGHTED) -->
+        <div class="p-6 sm:p-10 border-b lg:border-b-0 lg:border-r border-slate-200 flex flex-col justify-between bg-slateSurface relative ring-2 ring-electric ring-inset">
+          <div>
+            <div class="flex justify-between items-center font-mono text-xs mb-4">
+              <span class="px-2 py-0.5 bg-electric text-white font-bold">TIER 02 // OPTIMAL ROI</span>
+              <span class="text-electric font-bold">MOST DEPLOYED</span>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-900">Pro Monthly</h3>
+            <p class="text-xs text-slate-600 mt-1">Full optical receipt OCR, parallel thermal Gantt &amp; cryo-tracking.</p>
+
+            <div class="my-6 pb-6 border-b border-slate-200 flex items-baseline space-x-2">
+              <span class="text-4xl sm:text-5xl font-mono font-bold text-electric">$9</span>
+              <span class="font-mono text-xs text-slate-500 uppercase">/ MONTH (BILLED MONTHLY)</span>
+            </div>
+
+            <ul class="space-y-3 text-sm text-slate-800 font-normal mb-8">
+              <li class="flex items-start space-x-2.5">
+                <span class="font-mono text-electric font-bold">[+]</span>
+                <span><strong>Unlimited pantry, fridge &amp; freezer SKUs</strong></span>
+              </li>
+              <li class="flex items-start space-x-2.5">
+                <span class="font-mono text-electric font-bold">[+]</span>
+                <span><strong>Instant Receipt OCR</strong> &amp; Instacart / Whole Foods sync</span>
+              </li>
+              <li class="flex items-start space-x-2.5">
+                <span class="font-mono text-electric font-bold">[+]</span>
+                <span><strong>Multi-burner Gantt Sequencer</strong> for 85-min Sunday prep</span>
+              </li>
+              <li class="flex items-start space-x-2.5">
+                <span class="font-mono text-electric font-bold">[+]</span>
+                <span><strong>Zero-Orphan Engine</strong> auto- pairs leftover half-ingredients</span>
+              </li>
+              <li class="flex items-start space-x-2.5">
+                <span class="font-mono text-electric font-bold">[+]</span>
+                <span>Custom macro &amp; caloric targets per container</span>
+              </li>
+            </ul>
+          </div>
+
+          <button onclick="openOnboardingModal('Pro Monthly ($9/mo)')" class="w-full py-3.5 px-4 bg-electric hover:bg-electricDark text-white font-mono text-xs uppercase tracking-widest font-bold transition-colors shadow-sm">
+            Start 14-Day Pro Trial &rarr;
+          </button>
+        </div>
+
+        <!-- TIER 3: FAMILY ANNUAL -->
+        <div class="p-6 sm:p-10 flex flex-col justify-between bg-white">
+          <div>
+            <div class="flex justify-between items-center font-mono text-xs mb-4">
+              <span class="px-2 py-0.5 bg-slate-900 text-white font-bold">TIER 03 // MULTI-USER</span>
+              <span class="text-electric font-bold">SAVE 36% ANNUALLY</span>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-900">Family Annual</h3>
+            <p class="text-xs text-slate-500 mt-1">Shared household sync, split dietary profiles &amp; bulk-warehouse scaling.</p>
+
+            <div class="my-6 pb-6 border-b border-slate-200 flex items-baseline space-x-2">
+              <span class="text-4xl sm:text-5xl font-mono font-bold text-slate-900">$69</span>
+              <span class="font-mono text-xs text-slate-500 uppercase">/ YEAR ($5.75/MO EQUIV)</span>
+            </div>
+
+            <ul class="space-y-3 text-sm text-slate-700 font-normal mb-8">
+              <li class="flex items-start space-x-2.5">
+                <span class="font-mono text-electric font-bold">[+]</span>
+                <span><strong>Everything in Pro Monthly</strong> for up to 6 household members</span>
+              </li>
+              <li class="flex items-start space-x-2.5">
+                <span class="font-mono text-electric font-bold">[+]</span>
+                <span><strong>Real-time multi-phone sync</strong> (live grocery checkoffs)</span>
+              </li>
+              <li class="flex items-start space-x-2.5">
+                <span class="font-mono text-electric font-bold">[+]</span>
+                <span><strong>Split-Palate Sub-Routines</strong> (kid-friendly + adult spice forks)</span>
+              </li>
+              <li class="flex items-start space-x-2.5">
+                <span class="font-mono text-electric font-bold">[+]</span>
+                <span><strong>Costco / Bulk-Case Partitioning</strong> &amp; deep-freezer QR labels</span>
+              </li>
+              <li class="flex items-start space-x-2.5">
+                <span class="font-mono text-electric font-bold">[+]</span>
+                <span>Annual PDF Household Waste &amp; Financial Ledger</span>
+              </li>
+            </ul>
+          </div>
+
+          <button onclick="openOnboardingModal('Family Annual ($69/yr)')" class="w-full py-3.5 px-4 bg-slate-900 hover:bg-electric text-white font-mono text-xs uppercase tracking-widest font-bold transition-colors">
+            Initialize Family Annual &rarr;
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Technical Feature Comparison Matrix Table -->
+      <div class="p-6 sm:p-10 bg-white overflow-x-auto">
+        <div class="font-mono text-xs uppercase text-slate-500 font-bold mb-4">
+          SPECIFICATION COMPARISON MATRIX // v4.2
+        </div>
+        <table class="w-full text-left border-collapse font-mono text-xs">
+          <thead>
+            <tr class="border-y border-slate-300 bg-slateSurface text-slate-700">
+              <th class="py-3 px-4 font-bold">SYSTEM CAPABILITY</th>
+              <th class="py-3 px-4 font-bold text-center">FREE BASIC</th>
+              <th class="py-3 px-4 font-bold text-center text-electric">PRO MONTHLY</th>
+              <th class="py-3 px-4 font-bold text-center">FAMILY ANNUAL</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200 text-slate-700">
+            <tr>
+              <td class="py-3 px-4 font-sans font-medium">FIFO Expiration &amp; Ethylene Decay Tracking</td>
+              <td class="py-3 px-4 text-center">45 SKUs Max</td>
+              <td class="py-3 px-4 text-center text-electric font-bold">Unlimited</td>
+              <td class="py-3 px-4 text-center font-bold">Unlimited</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 font-sans font-medium">Optical Receipt &amp; Grocery Delivery Ingestion</td>
+              <td class="py-3 px-4 text-center text-slate-400">—</td>
+              <td class="py-3 px-4 text-center text-electric font-bold">Included</td>
+              <td class="py-3 px-4 text-center font-bold">Included</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 font-sans font-medium">Parallel Multi-Appliance Gantt Sequencer</td>
+              <td class="py-3 px-4 text-center">Basic Timer</td>
+              <td class="py-3 px-4 text-center text-electric font-bold">Full Multiplexing</td>
+              <td class="py-3 px-4 text-center font-bold">Full + Dual-Cook</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 font-sans font-medium">Orphaned Half-Ingredient Auto-Pairing</td>
+              <td class="py-3 px-4 text-center text-slate-400">—</td>
+              <td class="py-3 px-4 text-center text-electric font-bold">Automatic</td>
+              <td class="py-3 px-4 text-center font-bold">Automatic</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 font-sans font-medium">Cryo-Freezer QR Vault &amp; Thaw Push Alerts</td>
+              <td class="py-3 px-4 text-center">3 Slots</td>
+              <td class="py-3 px-4 text-center text-electric font-bold">Unlimited</td>
+              <td class="py-3 px-4 text-center font-bold">Unlimited + Print</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 font-sans font-medium">Synced Household Devices &amp; Kid/Allergy Forks</td>
+              <td class="py-3 px-4 text-center">1 Device</td>
+              <td class="py-3 px-4 text-center text-electric font-bold">2 Devices</td>
+              <td class="py-3 px-4 text-center font-bold">Up to 6 Users</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-200 bg-slate-900 text-slate-400 font-mono text-xs">
+      <div class="grid grid-cols-1 md:grid-cols-12 border-b border-slate-800">
+        <div class="md:col-span-6 p-6 sm:p-10 border-b md:border-b-0 md:border-r border-slate-800">
+          <div class="flex items-center space-x-2.5 mb-3">
+            <div class="w-5 h-5 bg-electric flex items-center justify-center text-white font-bold text-[10px]">
+              R0
+            </div>
+            <span class="font-bold text-white tracking-tight text-sm">RATION<span class="text-electric">//</span>00</span>
+          </div>
+          <p class="text-slate-400 font-sans text-xs max-w-sm leading-relaxed">
+            Clinical domestic logistics software. Designed to eliminate household food spoilage and compress weekly culinary labor into one precision batch session.
+          </p>
+        </div>
+        <div class="md:col-span-3 p-6 sm:p-10 border-b md:border-b-0 md:border-r border-slate-800 space-y-2">
+          <div class="text-white font-bold uppercase mb-3">MODULES</div>
+          <div><a href="#bento-architecture" class="hover:text-white">FIFO Pantry Ledger</a></div>
+          <div><a href="#roi-calculator" class="hover:text-white">ROI Telemetry Simulator</a></div>
+          <div><a href="#batch-matrix" class="hover:text-white">Thermal Gantt Engine</a></div>
+          <div><a href="#pricing" class="hover:text-white">Tiered Licensing</a></div>
+        </div>
+        <div class="md:col-span-3 p-6 sm:p-10 space-y-2">
+          <div class="text-white font-bold uppercase mb-3">SYSTEM STATUS</div>
+          <div class="flex items-center space-x-2 text-emerald-400">
+            <span class="w-2 h-2 bg-emerald-400 rounded-full"></span>
+            <span>OCR INGESTION: 99.98%</span>
+          </div>
+          <div>USDA NUTRIENT DB: REV 2025.4</div>
+          <div>LATENCY: 14ms</div>
+        </div>
+      </div>
+      <div class="p-6 sm:px-10 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-slate-500">
+        <div>&copy; 2025 RATION//00 SYSTEMS INC. ALL RIGHTS RESERVED.</div>
+        <div>SWISS GRID CLINICAL PRODUCTIVITY EDITION</div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- INTERACTIVE ONBOARDING MODAL -->
+  <div id="onboarding-modal" class="fixed inset-0 z-50 hidden bg-slate-900/70 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white border-2 border-slate-900 max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
+      <div class="flex justify-between items-center border-b border-slate-200 pb-3 mb-5">
+        <div class="font-mono text-xs font-bold text-electric uppercase" id="modal-plan-badge">
+          INITIALIZING: FREE BASIC
+        </div>
+        <button onclick="closeOnboardingModal()" class="font-mono text-xs text-slate-400 hover:text-slate-900 font-bold">
+          [ESC / X]
+        </button>
+      </div>
+
+      <h3 class="text-xl font-bold text-slate-900 mb-2">Deploy Your Pantry Instance</h3>
+      <p class="text-xs text-slate-600 mb-6 leading-relaxed">
+        Enter your primary email to generate your kitchen workspace and import your pre-calculated household parameters.
+      </p>
+
+      <form onsubmit="handleOnboardingSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block font-mono text-[11px] uppercase font-bold text-slate-700 mb-1">
+            Workspace Email
+          </label>
+          <input 
+            type="email" 
+            required 
+            placeholder="chef@household.org" 
+            class="w-full px-3.5 py-2.5 border border-slate-300 focus:border-electric focus:outline-none font-mono text-xs"
+          >
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 font-mono text-[11px] bg-slateSurface p-3 border border-slate-200">
+          <div>
+            <span class="text-slate-400 block">SYNCED HOUSEHOLD:</span>
+            <strong class="text-slate-900" id="modal-household-sync">2 Persons</strong>
+          </div>
+          <div>
+            <span class="text-slate-400 block">EST. RECOVERY:</span>
+            <strong class="text-electric" id="modal-savings-sync">$3,556 / YR</strong>
+          </div>
+        </div>
+
+        <button type="submit" id="modal-submit-btn" class="w-full py-3 bg-electric hover:bg-electricDark text-white font-mono text-xs uppercase tracking-widest font-bold transition-colors">
+          Provision Workspace &rarr;
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- CLIENT-SIDE INTERACTIVITY SCRIPT -->
+  <script>
+    // State for ROI Calculator
+    let currentBatchMode = 'standard'; // 'light', 'standard', 'max'
+    let isBatchSealed = false;
+
+    const modeMultipliers = {
+      light: { moneyRate: 0.22, hoursPerPerson: 0.9, baseHours: 2.2, containersPerPerson: 3 },
+      standard: { moneyRate: 0.31, hoursPerPerson: 1.2, baseHours: 3.0, containersPerPerson: 5 },
+      max: { moneyRate: 0.38, hoursPerPerson: 1.5, baseHours: 3.8, containersPerPerson: 7 }
+    };
+
+    function updateROICalculator() {
+      const householdSize = parseInt(document.getElementById('household-slider').value, 10);
+      const weeklySpend = parseInt(document.getElementById('spend-slider').value, 10);
+      const mult = modeMultipliers[currentBatchMode];
+
+      // Update input labels
+      document.getElementById('household-display').textContent = 
+        householdSize === 1 ? '1 Person' : `${householdSize} Persons`;
+      document.getElementById('spend-display').textContent = `$${weeklySpend} / wk`;
+
+      // Calculate weekly money saved (spoilage elimination + impulse takeout avoidance)
+      const householdScaleBonus = 1 + (householdSize * 0.025);
+      const weeklyMoneySaved = (weeklySpend * mult.moneyRate * householdScaleBonus);
+      const annualMoneySaved = Math.round(weeklyMoneySaved * 52);
+
+      // Calculate weekly hours saved (consolidated prep + single cleanup + fewer store runs)
+      const weeklyHoursSaved = mult.baseHours + (householdSize * mult.hoursPerPerson);
+      const annualHoursSaved = Math.round(weeklyHoursSaved * 52);
+
+      // Secondary metrics
+      const wasteKg = (householdSize * 1.45 * (mult.moneyRate / 0.28)).toFixed(1);
+      const containers = householdSize * mult.containersPerPerson;
+      const dishCycles = (2.5 + householdSize * 1.0).toFixed(1);
+
+      // Render outputs
+      document.getElementById('out-weekly-money').textContent = `$${weeklyMoneySaved.toFixed(2)}`;
+      document.getElementById('out-annual-money').textContent = `$${annualMoneySaved.toLocaleString()} / YR`;
+      document.getElementById('out-weekly-hours').textContent = `${weeklyHoursSaved.toFixed(1)} hrs`;
+      document.getElementById('out-annual-hours').textContent = `${annualHoursSaved.toLocaleString()} HRS / YR`;
+      document.getElementById('out-waste-kg').textContent = `${wasteKg} kg / wk`;
+      document.getElementById('out-containers').textContent = `${containers} units`;
+      document.getElementById('out-dishes').textContent = `${dishCycles} / wk`;
+
+      // Dynamic recommendation line
+      const paybackDays = Math.max(0.6, (9 / (weeklyMoneySaved / 7))).toFixed(1);
+      const recEl = document.getElementById('calc-rec-text');
+      if (householdSize >= 3) {
+        recEl.textContent = `Family Annual Plan ($5.75/mo) pays for itself in ${paybackDays} days of prevented spoilage.`;
+      } else {
+        recEl.textContent = `Pro Monthly Plan ($9/mo) pays for itself in ${paybackDays} days of prevented spoilage.`;
+      }
+
+      // Sync modal preview values
+      document.getElementById('modal-household-sync').textContent = 
+        householdSize === 1 ? '1 Person' : `${householdSize} Persons`;
+      document.getElementById('modal-savings-sync').textContent = 
+        `$${annualMoneySaved.toLocaleString()} / YR`;
+    }
+
+    function setBatchMode(mode, btnEl) {
+      currentBatchMode = mode;
+      const buttons = document.querySelectorAll('#mode-selector .mode-btn');
+      buttons.forEach(btn => {
+        btn.className = 'mode-btn py-2.5 px-2 border border-slate-300 bg-white text-slate-700 hover:border-slate-900 transition-colors text-center';
+      });
+      btnEl.className = 'mode-btn py-2.5 px-2 border-2 border-electric bg-blue-50/40 text-electric font-bold transition-colors text-center';
+      updateROICalculator();
+    }
+
+    function applyPreset(size, spend) {
+      document.getElementById('household-slider').value = size;
+      document.getElementById('spend-slider').value = spend;
+      updateROICalculator();
+    }
+
+    // Hero Interactive Spoilage Seal Simulation
+    function toggleSealBatch() {
+      isBatchSealed = !isBatchSealed;
+      const items = document.querySelectorAll('#pantry-queue .pantry-item');
+      const riskReadout = document.getElementById('risk-readout');
+      const btnText = document.getElementById('seal-btn-text');
+      const btn = document.getElementById('seal-btn');
+
+      if (isBatchSealed) {
+        items.forEach((item, idx) => {
+          item.classList.replace('border-slate-200', 'border-electric');
+          const badge = item.querySelector('.badge');
+          const status = item.querySelector('.status-label');
+          badge.className = 'badge inline-block px-2 py-0.5 bg-blue-50 text-electric border border-blue-300 text-[10px] font-bold';
+          badge.textContent = 'SEALED // +9 DAYS';
+          status.textContent = `BATCH ALLOCATED: CONTAINER #0${idx + 1}`;
+        });
+        riskReadout.textContent = '$0.00 AT RISK (100% SEALED)';
+        riskReadout.classList.add('text-electric');
+        btnText.textContent = '[RESET DECAY SIMULATION]';
+        btn.classList.replace('bg-electric', 'bg-slate-900');
+      } else {
+        const defaults = [
+          { exp: 'EXPIRES: 19 HOURS', badge: 'CRITICAL: 18%', style: 'bg-amber-50 text-amber-800 border-amber-300' },
+          { exp: 'EXPIRES: 36 HOURS', badge: 'DECAY: 32%', style: 'bg-amber-50 text-amber-800 border-amber-300' },
+          { exp: 'EXPIRES: 48 HOURS', badge: 'WINDOW: 54%', style: 'bg-slate-100 text-slate-700 border-slate-300' }
+        ];
+        items.forEach((item, idx) => {
+          item.classList.replace('border-electric', 'border-slate-200');
+          const badge = item.querySelector('.badge');
+          const status = item.querySelector('.status-label');
+          badge.className = `badge inline-block px-2 py-0.5 border text-[10px] font-bold ${defaults[idx].style}`;
+          badge.textContent = defaults[idx].badge;
+          status.textContent = defaults[idx].exp;
+        });
+        riskReadout.textContent = '$19.50 / WK';
+        riskReadout.classList.remove('text-electric');
+        btnText.textContent = '[EXECUTE BATCH SEAL PROTOCOL]';
+        btn.classList.replace('bg-slate-900', 'bg-electric');
+      }
+    }
+
+    // Modal Onboarding Controls
+    function openOnboardingModal(planName) {
+      document.getElementById('modal-plan-badge').textContent = `INITIALIZING // ${planName.toUpperCase()}`;
+      document.getElementById('onboarding-modal').classList.remove('hidden');
+    }
+
+    function closeOnboardingModal() {
+      document.getElementById('onboarding-modal').classList.add('hidden');
+    }
+
+    function handleOnboardingSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('modal-submit-btn');
+      btn.textContent = 'WORKSPACE PROVISIONED // CHECK INBOX';
+      btn.classList.replace('bg-electric', 'bg-slate-900');
+      setTimeout(() => {
+        closeOnboardingModal();
+        btn.textContent = 'Provision Workspace →';
+        btn.classList.replace('bg-slate-900', 'bg-electric');
+      }, 1400);
+    }
+
+    // Initialize calculator on load
+    document.addEventListener('DOMContentLoaded', updateROICalculator);
+  </script>
+</body>
+</html>

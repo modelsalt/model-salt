@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <!-- Pastel multicolor gradient for the sun disc -->
+    <radialGradient id="sunCore" cx="42%" cy="38%" r="70%">
+      <stop offset="0%"   stop-color="#FFF6D6"/>
+      <stop offset="35%"  stop-color="#FFD9A8"/>
+      <stop offset="70%"  stop-color="#FFB8C6"/>
+      <stop offset="100%" stop-color="#C9B6F2"/>
+    </radialGradient>
+
+    <!-- Outer glow halo -->
+    <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+      <stop offset="55%"  stop-color="#FFE3B8" stop-opacity="0.55"/>
+      <stop offset="80%"  stop-color="#FFC9D9" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#C9B6F2" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Pastel gradient for rays -->
+    <linearGradient id="rayGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#FFD9A8"/>
+      <stop offset="50%"  stop-color="#FFC1CF"/>
+      <stop offset="100%" stop-color="#BFD8F7"/>
+    </linearGradient>
+
+    <!-- Glass highlight on upper-left of the disc -->
+    <linearGradient id="glassHi" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%"   stop-color="#FFFFFF" stop-opacity="0.85"/>
+      <stop offset="60%"  stop-color="#FFFFFF" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Soft inner shadow at the lower rim for depth -->
+    <radialGradient id="innerShade" cx="50%" cy="50%" r="50%">
+      <stop offset="78%"  stop-color="#B89BE0" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#B89BE0" stop-opacity="0.35"/>
+    </radialGradient>
+
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <filter id="rayBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+  </defs>
+
+  <!-- Solid flat single-color background, square, sharp corners -->
+  <rect width="1024" height="1024" fill="#E9EEF9"/>
+
+  <!-- Centered sun with generous even margins (~22% on each side) -->
+  <g transform="translate(512 512)">
+
+    <!-- Ambient glow behind everything -->
+    <circle r="300" fill="url(#halo)" filter="url(#softGlow)"/>
+
+    <!-- Twelve soft pill-shaped rays -->
+    <g fill="url(#rayGrad)" opacity="0.9" filter="url(#rayBlur)">
+      <rect x="-22" y="-290" width="44" height="96" rx="22" transform="rotate(0)"/>
+      <rect x="-22" y="-290" width="44" height="96" rx="22" transform="rotate(30)"/>
+      <rect x="-22" y="-290" width="44" height="96" rx="22" transform="rotate(60)"/>
+      <rect x="-22" y="-290" width="44" height="96" rx="22" transform="rotate(90)"/>
+      <rect x="-22" y="-290" width="44" height="96" rx="22" transform="rotate(120)"/>
+      <rect x="-22" y="-290" width="44" height="96" rx="22" transform="rotate(150)"/>
+      <rect x="-22" y="-290" width="44" height="96" rx="22" transform="rotate(180)"/>
+      <rect x="-22" y="-290" width="44" height="96" rx="22" transform="rotate(210)"/>
+      <rect x="-22" y="-290" width="44" height="96" rx="22" transform="rotate(240)"/>
+      <rect x="-22" y="-290" width="44" height="96" rx="22" transform="rotate(270)"/>
+      <rect x="-22" y="-290" width="44" height="96" rx="22" transform="rotate(300)"/>
+      <rect x="-22" y="-290" width="44" height="96" rx="22" transform="rotate(330)"/>
+    </g>
+
+    <!-- Sun disc: pastel gradient fill -->
+    <circle r="160" fill="url(#sunCore)"/>
+    <!-- Inner rim shading for a rounded glass feel -->
+    <circle r="160" fill="url(#innerShade)"/>
+    <!-- Glass highlight sweep -->
+    <ellipse cx="-30" cy="-70" rx="105" ry="62" fill="url(#glassHi)"/>
+    <!-- Small specular glint -->
+    <circle cx="-62" cy="-92" r="14" fill="#FFFFFF" opacity="0.9"/>
+    <!-- Thin glassy edge -->
+    <circle r="160" fill="none" stroke="#FFFFFF" stroke-opacity="0.6" stroke-width="3"/>
+  </g>
+</svg>

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a cargo bicycle</title>
+  <desc id="desc">A cheerful white pelican, seen in left-facing profile, pedals an orange cargo bicycle with an empty front platform.</desc>
+
+  <rect width="900" height="600" fill="#fff"/>
+  <ellipse cx="447" cy="518" rx="335" ry="15" fill="#ededeb"/>
+
+  <!-- Wheels -->
+  <g stroke="#292b2c" fill="#fff" stroke-width="10">
+    <circle cx="205" cy="435" r="77"/>
+    <circle cx="660" cy="435" r="77"/>
+  </g>
+  <g fill="none" stroke="#c0c2c2" stroke-width="2">
+    <circle cx="205" cy="435" r="64"/>
+    <circle cx="660" cy="435" r="64"/>
+    <path d="M205 369v132m-66-66h132m-113-47 94 94m0-94-94 94
+             M660 369v132m-66-66h132m-113-47 94 94m0-94-94 94"/>
+  </g>
+
+  <!-- Far leg and pedal -->
+  <path d="M560 316 592 355 538 405" fill="none" stroke="#b57825" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m539 400-31 8 33 7 13-8Z" fill="#e9a437" stroke="#292b2c" stroke-width="4"/>
+  <path d="M506 418h44" stroke="#292b2c" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Cargo bicycle frame and empty load platform -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M205 435 238 344M238 354 408 354 473 435 660 435 590 340 473 435"
+          stroke="#e58a27" stroke-width="12"/>
+    <path d="M408 354 435 305M590 340 584 320" stroke="#292b2c" stroke-width="9"/>
+    <path d="M435 305 433 279 407 279" stroke="#292b2c" stroke-width="8"/>
+    <path d="M148 334H351" stroke="#292b2c" stroke-width="11"/>
+    <path d="M155 327H344" stroke="#e7b052" stroke-width="10"/>
+    <path d="M169 343 218 366h126l-14-23" stroke="#929697" stroke-width="5"/>
+    <path d="M563 318h49" stroke="#292b2c" stroke-width="13"/>
+    <path d="m205 435 203-81" stroke="#929697" stroke-width="4"/>
+  </g>
+  <circle cx="473" cy="435" r="24" fill="#ddd" stroke="#292b2c" stroke-width="5"/>
+  <circle cx="473" cy="435" r="8" fill="#292b2c"/>
+  <path d="m473 435 40 28" stroke="#292b2c" stroke-width="7" stroke-linecap="round"/>
+  <path d="M497 469h39" stroke="#292b2c" stroke-width="8" stroke-linecap="round"/>
+  <g fill="#292b2c">
+    <circle cx="205" cy="435" r="8"/>
+    <circle cx="660" cy="435" r="8"/>
+  </g>
+
+  <!-- Rounded pelican body and tail -->
+  <path d="M605 258q39 6 62-13-4 35-49 51Z" fill="#393d3f" stroke="#292b2c" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M477 217c24-21 84-25 120 5 27 23 29 63 5 83-25 23-87 23-122-6-25-21-27-59-3-82Z"
+        fill="#fff" stroke="#292b2c" stroke-width="5"/>
+  <path d="M498 287q45 31 103 0c-13 31-73 43-103 0Z" fill="#e4e5e3"/>
+
+  <!-- Neck and head -->
+  <path d="M515 256c-48 8-72-11-74-43l-1-36c-25 3-44-11-43-32 1-24 21-39 44-35 32 5 40 35 33 63-8 30-1 45 26 47"
+        fill="#fff" stroke="#292b2c" stroke-width="5" stroke-linecap="round"/>
+  <path d="M452 181q-10 48 28 62" fill="none" stroke="#dedfdd" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- Bill and elastic throat pouch -->
+  <path d="M410 158 263 158c22 40 72 71 116 46 17-9 25-26 31-46Z"
+        fill="#efb747" stroke="#292b2c" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M410 145 252 153q-13 2-10 9l169 1Z"
+        fill="#f6ce59" stroke="#292b2c" stroke-width="5" stroke-linejoin="round"/>
+  <path d="m263 163 121 3" stroke="#de8d2d" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="432" cy="141" r="11" fill="#efbb48"/>
+  <circle cx="430" cy="140" r="5" fill="#252829"/>
+  <circle cx="428" cy="138" r="1.7" fill="#fff"/>
+  <path d="m424 119 12-2" stroke="#292b2c" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Wing reaching the handlebars -->
+  <path d="M553 238c-26-10-50 3-69 16l-52 25c-10 5-18 3-23-1-5-5-12 0-9 6 8 17 28 20 45 14l71-22"
+        fill="#eceeec" stroke="#292b2c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m493 269 35-15m-29 25 35-15" fill="none" stroke="#b9bdbb" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Near leg and webbed foot on the pedal -->
+  <path d="m551 315-26 52-24 66" fill="none" stroke="#292b2c" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m551 315-26 52-24 66" fill="none" stroke="#e9a437" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m501 430-12 25 46 7-12-16Z" fill="#f0b244" stroke="#292b2c" stroke-width="4" stroke-linejoin="round"/>
+  <path d="m501 444 15 11" stroke="#cd8a2b" stroke-width="3" stroke-linecap="round"/>
+</svg>

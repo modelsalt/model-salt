@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+  <!-- Sky Background -->
+  <rect width="800" height="800" fill="#B5D8E5" />
+
+  <!-- Tilted Dutch Angle World Group -->
+  <g transform="rotate(-18 400 400)">
+    
+    <!-- Distant Cloud Shapes (Flat solid fills, no outlines) -->
+    <path d="M -100,220 Q -40,180 20,210 Q 80,160 150,200 Q 200,190 230,230 Z" fill="#D6ECF3" />
+    <path d="M 450,120 Q 520,70 590,110 Q 650,80 710,120 Q 750,110 780,140 Z" fill="#D6ECF3" />
+    <path d="M 150,360 Q 190,330 240,350 Q 280,330 320,360 Z" fill="#D6ECF3" />
+
+    <!-- Wind / Speed Lines (Flat Rectangles) -->
+    <rect x="60" y="250" width="90" height="4" rx="2" fill="#EBF6FA" />
+    <rect x="20" y="290" width="140" height="6" rx="3" fill="#EBF6FA" />
+    <rect x="110" y="420" width="80" height="4" rx="2" fill="#EBF6FA" />
+
+    <!-- Sloped Ground & Road -->
+    <rect x="-400" y="610" width="1600" height="600" fill="#7D9976" />
+    <rect x="-400" y="610" width="1600" height="35" fill="#98A39B" />
+    <rect x="-400" y="610" width="1600" height="10" fill="#B4B0A8" />
+    
+    <!-- Road Shadow -->
+    <ellipse cx="380" cy="618" rx="220" ry="7" fill="#78827B" />
+
+    <!-- ==================== FAR PELICAN LEG & CRANK ==================== -->
+    <!-- Far Crank Arm -->
+    <path d="M 465,442 L 420,408 L 426,400 L 471,434 Z" fill="#525D63" />
+    <!-- Far Pedal -->
+    <rect x="408" y="398" width="24" height="10" rx="3" fill="#2A3033" />
+    <!-- Far Pelican Leg (Upstroke) -->
+    <path d="M 335,280 L 415,350 L 430,398 L 405,405 L 442,402 L 432,342 L 350,270 Z" fill="#D97218" />
+
+
+    <!-- ==================== PENNY-FARTHING BICYCLE ==================== -->
+    
+    <!-- GIANT FRONT WHEEL (Center: 468, 438 | Outer R: 175) -->
+    <g id="front-wheel">
+      <!-- Spokes (Flat thin polygons) -->
+      <g fill="#B5BFC4">
+        <rect x="466.5" y="268" width="3" height="340" />
+        <rect x="298" y="436.5" width="340" height="3" />
+        <rect x="466.5" y="268" width="3" height="340" transform="rotate(22.5 468 438)" />
+        <rect x="466.5" y="268" width="3" height="340" transform="rotate(45 468 438)" />
+        <rect x="466.5" y="268" width="3" height="340" transform="rotate(67.5 468 438)" />
+        <rect x="466.5" y="268" width="3" height="340" transform="rotate(112.5 468 438)" />
+        <rect x="466.5" y="268" width="3" height="340" transform="rotate(135 468 438)" />
+        <rect x="466.5" y="268" width="3" height="340" transform="rotate(157.5 468 438)" />
+      </g>
+      <!-- Outer Rubber Tire (Compound path for hole without strokes) -->
+      <path d="M 468,263 A 175,175 0 1,0 468,613 A 175,175 0 1,0 468,263 Z M 468,275 A 163,163 0 1,1 468,601 A 163,163 0 1,1 468,275 Z" fill="#2A3033" fill-rule="evenodd" />
+      <!-- Metallic Inner Rim -->
+      <path d="M 468,275 A 163,163 0 1,0 468,601 A 163,163 0 1,0 468,275 Z M 468,283 A 155,155 0 1,1 468,593 A 155,155 0 1,1 468,283 Z" fill="#7D8B91" fill-rule="evenodd" />
+    </g>
+
+    <!-- TINY REAR WHEEL (Center: 195, 558 | Outer R: 55) -->
+    <g id="rear-wheel">
+      <!-- Spokes -->
+      <g fill="#B5BFC4">
+        <rect x="193.5" y="508" width="3" height="100" />
+        <rect x="145" y="556.5" width="100" height="3" />
+        <rect x="193.5" y="508" width="3" height="100" transform="rotate(45 195 558)" />
+        <rect x="193.5" y="508" width="3" height="100" transform="rotate(135 195 558)" />
+      </g>
+      <!-- Outer Rubber Tire -->
+      <path d="M 195,503 A 55,55 0 1,0 195,613 A 55,55 0 1,0 195,503 Z M 195,512 A 46,46 0 1,1 195,604 A 46,46 0 1,1 195,512 Z" fill="#2A3033" fill-rule="evenodd" />
+      <!-- Metallic Inner Rim -->
+      <path d="M 195,512 A 46,46 0 1,0 195,604 A 46,46 0 1,0 195,512 Z M 195,517 A 41,41 0 1,1 195,599 A 41,41 0 1,1 195,517 Z" fill="#7D8B91" fill-rule="evenodd" />
+      <!-- Rear Hub -->
+      <circle cx="195" cy="558" r="9" fill="#525D63" />
+    </g>
+
+    <!-- BICYCLE FRAME (Tubular metallic shapes via solid fills) -->
+    <!-- Curved Spine Tube -->
+    <path d="M 432,240 C 310,240 245,370 190,558 L 202,558 C 257,380 318,254 432,254 Z" fill="#8C9BA1" />
+    <!-- Rear Wheel Mounting Step -->
+    <rect x="202" y="510" width="18" height="6" rx="2" fill="#525D63" />
+    
+    <!-- Seat Post & Vintage Leather Saddle -->
+    <polygon points="348,272 355,250 365,253 358,275" fill="#525D63" />
+    <path d="M 325,250 Q 355,258 382,248 Q 388,245 385,255 Q 355,272 322,258 Z" fill="#6E3F24" />
+
+    <!-- Front Fork & Steering Column -->
+    <polygon points="463,438 473,438 438,215 426,215" fill="#9EADB3" />
+    <!-- Steering Head Joint -->
+    <rect x="423" y="232" width="18" height="24" rx="3" fill="#637075" transform="rotate(-10 432 244)" />
+    
+    <!-- Brass Bell -->
+    <circle cx="436" cy="202" r="7" fill="#D9A33A" />
+
+    <!-- Handlebars (Swept forward and down) -->
+    <path d="M 426,215 Q 455,208 468,232 L 458,236 Q 448,218 428,223 Z" fill="#B5BFC4" />
+    <!-- Wooden/Leather Handle Grip -->
+    <path d="M 456,232 L 470,228 L 478,248 L 464,252 Z" fill="#54301A" />
+
+    <!-- Front Hub Center -->
+    <circle cx="468" cy="438" r="14" fill="#637075" />
+    <circle cx="468" cy="438" r="7" fill="#D9A33A" />
+
+
+    <!-- ==================== PELICAN (RACING CROUCH) ==================== -->
+    
+    <!-- Tail Feathers (Streamlined back) -->
+    <polygon points="270,235 215,248 255,222" fill="#8C99A0" />
+    <polygon points="265,225 205,228 255,210" fill="#B8C2C7" />
+    <polygon points="270,215 218,210 265,200" fill="#FFFFFF" />
+
+    <!-- Main Body (Hunched low and horizontal over the frame) -->
+    <path d="M 250,215 C 275,160 390,155 465,195 C 455,248 395,272 340,265 C 295,260 260,242 250,215 Z" fill="#FFFFFF" />
+    <!-- Underbelly Shadow (Grey-white tone) -->
+    <path d="M 255,225 C 295,252 385,255 460,205 C 445,248 395,272 340,265 C 295,260 262,242 255,225 Z" fill="#DCE2E6" />
+
+    <!-- Long Neck Extended Forward (Aerodynamic S-Curve) -->
+    <path d="M 435,205 C 470,215 510,215 540,185 C 555,172 560,152 560,145 L 525,145 C 520,162 495,180 445,175 Z" fill="#FFFFFF" />
+    <!-- Neck Underside Shading -->
+    <path d="M 435,205 C 470,215 510,215 540,185 C 555,172 560,152 560,145 L 550,145 C 545,165 510,198 440,195 Z" fill="#DCE2E6" />
+
+    <!-- Pelican Head & Tuft -->
+    <!-- Feathered Crest (Blowing back in the wind) -->
+    <path d="M 522,125 L 488,128 L 512,136 L 492,144 L 525,146 Z" fill="#DCE2E6" />
+    <!-- Skull Cap -->
+    <path d="M 515,145 C 515,115 558,112 580,128 L 560,152 Z" fill="#FFFFFF" />
+    <!-- Subtle Golden Crown Patch -->
+    <path d="M 528,124 C 542,118 560,120 572,128 C 558,132 540,132 528,124 Z" fill="#F2D06B" />
+
+    <!-- Giant Pelican Beak & Gular Pouch (Pointing sharply forward) -->
+    <!-- Soft Gular Pouch (Inflated/Streamlined under beak) -->
+    <path d="M 550,146 C 595,198 675,182 745,142 L 568,140 Z" fill="#E07A24" />
+    <!-- Deeper Pouch Shadow Fold -->
+    <path d="M 558,152 C 595,185 655,175 720,146 C 655,162 595,168 558,152 Z" fill="#C96412" />
+    <!-- Upper Mandible (Long, flat, aerodynamic) -->
+    <path d="M 568,126 L 748,132 C 755,132 758,138 753,144 L 743,146 L 741,141 L 560,145 Z" fill="#F5AC27" />
+    <!-- Reddish-Orange Beak Hook Tip -->
+    <path d="M 738,132 L 748,132 C 755,132 758,138 753,144 L 743,148 L 738,141 Z" fill="#D94518" />
+
+    <!-- Pelican Eye (Focused racing glare) -->
+    <circle cx="556" cy="134" r="8" fill="#F5AC27" />
+    <circle cx="556" cy="134" r="5" fill="#FFFFFF" />
+    <circle cx="558" cy="134" r="3" fill="#1E2326" />
+    <!-- Determined Eyebrow Ridge -->
+    <polygon points="546,126 567,131 566,127 548,123" fill="#DCE2E6" />
+
+
+    <!-- ==================== NEAR PELICAN LEG, CRANK & WING ==================== -->
+    
+    <!-- Near Pelican Leg (Power Downstroke) -->
+    <path d="M 355,255 L 448,370 L 498,465 L 485,468 L 430,380 L 340,262 Z" fill="#F28522" />
+    <!-- Near Webbed Foot Mashed on Pedal -->
+    <polygon points="485,465 532,462 518,476 478,472" fill="#F28522" />
+
+    <!-- Near Crank Arm & Pedal (Overlapping wheel & foot base) -->
+    <path d="M 463,441 L 502,475 L 510,467 L 471,433 Z" fill="#8C9BA1" />
+    <rect x="492" y="466" width="28" height="10" rx="3" fill="#2A3033" />
+
+    <!-- Near Wing (Bent forward gripping the handlebars, streamlined feathers back) -->
+    <!-- Dark Grey Primary Flight Feathers (Tucked/sweeping back) -->
+    <path d="M 380,190 L 235,198 L 265,212 L 245,222 L 285,228 L 395,215 Z" fill="#525D63" />
+    <!-- Mid-Grey Secondary Feathers -->
+    <path d="M 410,185 L 285,192 L 310,206 L 295,215 L 425,212 Z" fill="#8C99A0" />
+    <!-- Main White Wing Shoulder & Forearm (Reaching to handlebar grip) -->
+    <path d="M 395,175 C 435,175 462,198 474,242 C 455,248 438,235 422,216 C 385,218 335,205 315,192 C 345,180 375,175 395,175 Z" fill="#FFFFFF" />
+    <!-- Wing Wingtip Feathers Curled Around Handlebar Grip -->
+    <path d="M 460,232 C 472,230 482,236 478,248 C 472,254 460,250 456,240 Z" fill="#DCE2E6" />
+
+  </g>
+</svg>

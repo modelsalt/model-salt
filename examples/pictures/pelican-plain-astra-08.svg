@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A cheerful white pelican with a golden bill pedals a teal bicycle beside the sea.</desc>
+
+  <rect width="640" height="480" rx="28" fill="#fff6e6"/>
+  <circle cx="515" cy="91" r="42" fill="#ffd884"/>
+  <path d="M0 329 Q160 305 320 329 T640 329 V420 H0Z" fill="#d5ece8"/>
+  <path d="M0 398H640" stroke="#a8cec6" stroke-width="3"/>
+  <ellipse cx="320" cy="421" rx="242" ry="13" fill="#234b50" opacity=".09"/>
+
+  <!-- Wheels and spokes -->
+  <g fill="none" stroke-linecap="round">
+    <g stroke="#294650" stroke-width="9">
+      <circle cx="175" cy="343" r="76"/>
+      <circle cx="465" cy="343" r="76"/>
+    </g>
+    <g stroke="#fff" stroke-width="3">
+      <circle cx="175" cy="343" r="65"/>
+      <circle cx="465" cy="343" r="65"/>
+    </g>
+    <g stroke="#88aaa9" stroke-width="2">
+      <path d="M175 272V414M104 343H246M125 293L225 393M125 393L225 293"/>
+      <path d="M465 272V414M394 343H536M415 293L515 393M415 393L515 293"/>
+    </g>
+
+    <!-- Bicycle frame -->
+    <g stroke="#168b8b" stroke-width="9" stroke-linejoin="round">
+      <path d="M175 343L251 237L300 343Z"/>
+      <path d="M251 237H408L300 343"/>
+      <path d="M398 211L465 343"/>
+      <path d="M251 237L242 213"/>
+    </g>
+    <path d="M221 211H266" stroke="#294650" stroke-width="12"/>
+    <path d="M398 211L390 190H422" stroke="#294650" stroke-width="7"/>
+    <path d="M416 190H431" stroke="#d98048" stroke-width="10"/>
+    <circle cx="300" cy="343" r="17" fill="#fff6e6" stroke="#294650" stroke-width="5"/>
+    <path d="M300 343L326 360M300 343L274 326" stroke="#294650" stroke-width="5"/>
+    <path d="M314 361H340M263 325H285" stroke="#294650" stroke-width="6"/>
+  </g>
+
+  <!-- Far leg -->
+  <path d="M283 229L263 278L278 320" fill="none"
+        stroke="#d38a36" stroke-width="12" stroke-linecap="round"/>
+  <path d="M278 314L260 323Q273 332 294 324Z" fill="#e9a442"/>
+
+  <!-- Tail and body -->
+  <path d="M226 184L160 160L184 207L159 210L221 239Z"
+        fill="#e3e9e5" stroke="#294650" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M212 170
+           C173 197 190 247 247 255
+           C288 263 323 242 340 212
+           C356 183 350 147 371 123
+           L344 102
+           C314 126 323 164 298 179
+           C271 158 237 156 212 170Z"
+        fill="#fffefa" stroke="#294650" stroke-width="4"/>
+
+  <!-- Wing -->
+  <path d="M218 187Q261 174 303 213Q274 241 231 225Q212 216 218 187Z"
+        fill="#e6eeea" stroke="#294650" stroke-width="3"/>
+  <path d="M230 198Q255 196 279 215M229 209Q247 214 262 216"
+        fill="none" stroke="#b1c9c3" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Near leg and webbed foot -->
+  <path d="M301 241L331 280L321 347" fill="none"
+        stroke="#efa83f" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M321 342L309 357Q327 366 353 357L336 350Z"
+        fill="#ffbd4d" stroke="#294650" stroke-width="3" stroke-linejoin="round"/>
+
+  <!-- Wing reaching for the handlebar -->
+  <path d="M310 187Q345 220 418 190"
+        fill="none" stroke="#294650" stroke-width="15" stroke-linecap="round"/>
+  <path d="M310 187Q345 220 418 190"
+        fill="none" stroke="#fffefa" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- Head -->
+  <path d="M333 111
+           C319 90 332 64 357 62
+           C383 60 398 80 392 104
+           L376 132
+           Q349 133 333 111Z"
+        fill="#fffefa" stroke="#294650" stroke-width="4"/>
+  <path d="M340 68L332 54M349 64L347 49" stroke="#294650" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Long bill and hanging pouch -->
+  <path d="M380 104L526 109Q485 157 423 154Q395 151 380 104Z"
+        fill="#f4b866" stroke="#294650" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M382 91Q454 92 536 109L381 112Z"
+        fill="#ffc74f" stroke="#294650" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M404 122Q430 147 466 137" fill="none" stroke="#db9445" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="368" cy="87" r="6" fill="#294650"/>
+  <circle cx="370" cy="85" r="2" fill="#fff"/>
+  <ellipse cx="365" cy="105" rx="8" ry="5" fill="#f2b5a0"/>
+
+  <!-- A little momentum -->
+  <g fill="none" stroke="#8db6ad" stroke-width="4" stroke-linecap="round">
+    <path d="M82 223H133M65 240H119M89 257H128"/>
+  </g>
+</svg>

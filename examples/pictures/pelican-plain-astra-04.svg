@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A cheerful white pelican with a long orange bill pedals a teal bicycle beneath a sunny sky.</desc>
+  <rect width="800" height="640" rx="32" fill="#f8f2e4"/>
+  <circle cx="654" cy="112" r="48" fill="#f4cc67"/>
+  <ellipse cx="403" cy="558" rx="290" ry="19" fill="#ded9c7"/>
+
+  <!-- Bicycle wheels -->
+  <g fill="#f8f2e4" stroke="#263e46" stroke-width="12">
+    <circle cx="225" cy="451" r="103"/>
+    <circle cx="581" cy="451" r="103"/>
+  </g>
+  <g stroke="#b6c4bd" stroke-width="3">
+    <path d="M225 354V548M128 451H322M156 382L294 520M156 520L294 382"/>
+    <path d="M581 354V548M484 451H678M512 382L650 520M512 520L650 382"/>
+  </g>
+  <g fill="none" stroke="#278c89" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M225 451L310 310L392 451H225L344 337H539L392 451"/>
+    <path d="M581 451L529 291L516 259"/>
+  </g>
+  <path d="M529 291L550 268H584" fill="none" stroke="#263e46" stroke-width="10" stroke-linecap="round"/>
+  <path d="M310 310L301 284" stroke="#263e46" stroke-width="9"/>
+  <path d="M275 282H329" stroke="#704d3d" stroke-width="15" stroke-linecap="round"/>
+  <g fill="#263e46">
+    <circle cx="225" cy="451" r="9"/>
+    <circle cx="581" cy="451" r="9"/>
+    <circle cx="392" cy="451" r="18"/>
+  </g>
+  <path d="M392 451L430 477M392 451L359 425" fill="none" stroke="#263e46" stroke-width="7" stroke-linecap="round"/>
+  <path d="M416 479H448M344 423H372" stroke="#704d3d" stroke-width="9" stroke-linecap="round"/>
+
+  <!-- Far leg -->
+  <path d="M345 285L327 349L359 415" fill="none" stroke="#d58735" stroke-width="14" stroke-linecap="round"/>
+  <path d="M358 409L380 423H344Z" fill="#e6a245"/>
+
+  <!-- Tail, body, and curving neck -->
+  <path d="M290 254L235 215L249 272L222 258Q248 304 291 300" fill="#e5e9df" stroke="#263e46" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M279 240
+           C303 213 350 219 382 237
+           C412 253 430 231 425 204
+           C416 165 419 123 450 106
+           C478 90 510 107 511 136
+           C513 157 497 170 478 173
+           C464 190 479 223 466 253
+           C451 291 407 316 351 313
+           C303 312 272 290 279 240Z"
+        fill="#fffdf5" stroke="#263e46" stroke-width="5" stroke-linejoin="round"/>
+
+  <!-- Folded wing -->
+  <path d="M297 250Q341 229 391 270Q369 302 316 282L330 273L310 271L321 262Z"
+        fill="#dce3db" stroke="#263e46" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- Bill and throat pouch -->
+  <path d="M493 146L670 161Q610 225 523 194Q500 185 493 146Z"
+        fill="#efb451" stroke="#263e46" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M494 139Q585 139 683 158Q689 161 679 166L495 160Z"
+        fill="#f18a39" stroke="#263e46" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M522 175Q571 195 619 178" fill="none" stroke="#d78f36" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Face -->
+  <circle cx="478" cy="131" r="7" fill="#263e46"/>
+  <circle cx="480" cy="129" r="2" fill="white"/>
+  <path d="M461 115Q470 109 480 114" fill="none" stroke="#263e46" stroke-width="3" stroke-linecap="round"/>
+  <path d="M446 105L436 91M454 102L450 86" stroke="#263e46" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Near leg and webbed foot -->
+  <path d="M378 304L409 356L406 453" fill="none" stroke="#eea142" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M405 448L431 463L445 476L402 474L392 466Z"
+        fill="#efab48" stroke="#263e46" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- Scarf streaming in the breeze -->
+  <path d="M431 201Q452 212 475 205L475 220Q450 229 433 216Z" fill="#d65b48"/>
+  <path d="M438 213Q398 232 365 202L375 227L357 233Q408 252 448 221Z" fill="#d65b48"/>
+
+  <!-- Motion marks -->
+  <g stroke="#a7b9ae" stroke-width="5" stroke-linecap="round">
+    <path d="M111 341H155M92 362H133M107 383H123"/>
+  </g>
+</svg>

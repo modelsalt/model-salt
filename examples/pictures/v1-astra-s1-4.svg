@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">An angular white pelican stretches its neck over the handlebars of a teal diamond-frame bicycle, seen from the side.</desc>
+
+  <rect width="900" height="600" fill="#f7eedc"/>
+  <path d="M120 533H739L793 545H155Z" fill="#e3d7bd"/>
+
+  <defs>
+    <g id="wheel">
+      <path d="M0-100 50-87 87-50 100 0 87 50 50 87 0 100-50 87-87 50-100 0-87-50-50-87Z"
+            fill="#eee5d3" stroke="#253d45" stroke-width="12"/>
+      <path d="M0-88V88M-88 0H88M-44-76 44 76M-76-44 76 44M-76 44 76-44M-44 76 44-76"
+            fill="none" stroke="#a4b5b0" stroke-width="2"/>
+      <path d="m0-9 9 9-9 9-9-9Z" fill="#253d45"/>
+    </g>
+  </defs>
+
+  <use href="#wheel" x="230" y="430"/>
+  <use href="#wheel" x="630" y="430"/>
+
+  <!-- Far foot and pedal -->
+  <path d="m363 294 43 43-27 65" fill="none" stroke="#bb782f" stroke-width="13"/>
+  <path d="m377 391-24 15 43 5 9-12Z" fill="#d7983e"/>
+  <path d="M355 411H397" stroke="#253d45" stroke-width="8"/>
+
+  <!-- Diamond frame -->
+  <g fill="none" stroke-linejoin="miter">
+    <path d="m230 430 121-119 69 119H230m121-119h195L420 430"
+          stroke="#247f7c" stroke-width="12"/>
+    <path d="m351 311-13-39m208 39-12-40m12 40 84 119"
+          stroke="#253d45" stroke-width="9"/>
+    <path d="m534 271 12-24h49l13 14h-28"
+          stroke="#253d45" stroke-width="8"/>
+  </g>
+  <path d="m305 265 58 3 13 12-72 1-9-8Z" fill="#253d45"/>
+  <path d="m420 413 17 17-17 17-17-17Z" fill="#e2b75d" stroke="#253d45" stroke-width="5"/>
+  <path d="m420 430 36 28" stroke="#253d45" stroke-width="7"/>
+  <path d="M438 461H480" stroke="#253d45" stroke-width="8"/>
+
+  <!-- Pelican tail and body -->
+  <path d="m286 228-78-42 29 68 72 20Z" fill="#b5c9c5" stroke="#253d45" stroke-width="4"/>
+  <path d="m250 218 66-39 92 9 52 45-24 48-76 21-80-27Z"
+        fill="#fffdf2" stroke="#253d45" stroke-width="4"/>
+  <path d="m250 218 38 50 72 34 76-21-80-14Z" fill="#d7e2d8"/>
+  <path d="m312 198 83 8 34 34-61 37-70-20-26-25Z" fill="#b5ccc8"/>
+  <path d="m312 198 56 79 61-37-46 6Z" fill="#91afad"/>
+  <path d="m283 234 44 13 41 30-70-20Z" fill="#6b9696"/>
+
+  <!-- Neck extended forward over the handlebars -->
+  <path d="m401 206 48-43 91-29 51 5 29 24-10 40-36 13-33-28-69 22-36 58-31-29Z"
+        fill="#fffdf2" stroke="#253d45" stroke-width="4"/>
+  <path d="m405 239 31 29 36-58 69-22 33 28 16-16-43-31-91 27Z"
+        fill="#d7e2d8"/>
+  <path d="m540 134 51 5 29 24-47-6Z" fill="#e9e9d6"/>
+
+  <!-- Long bill and unmistakable throat pouch -->
+  <path d="m606 180 183 29-80 43-68-7-45-43Z"
+        fill="#e9ad46" stroke="#253d45" stroke-width="4"/>
+  <path d="m606 194 183 15-80 43-34-22Z" fill="#d48a36"/>
+  <path d="m607 174 184 35-185-12Z"
+        fill="#ffd16a" stroke="#253d45" stroke-width="4"/>
+  <path d="m579 161 9-2 6 7-5 9-10-3Z" fill="#253d45"/>
+  <path d="m582 163 4-1 1 4-4 1Z" fill="#fffdf2"/>
+
+  <!-- Wing tip resting on the handlebar -->
+  <path d="m402 219 46 8 44 30 56-9-5 15-60 11-59-27Z"
+        fill="#fffdf2" stroke="#253d45" stroke-width="4"/>
+  <path d="m424 247 59 27 60-11-49-3-43-22Z" fill="#b5ccc8"/>
+
+  <!-- Near leg and webbed foot on the pedal -->
+  <path d="m370 290 60 51-8 56 31 51"
+        fill="none" stroke="#253d45" stroke-width="17" stroke-linejoin="miter"/>
+  <path d="m370 290 60 51-8 56 31 51"
+        fill="none" stroke="#efb34e" stroke-width="10" stroke-linejoin="miter"/>
+  <path d="m449 435-8 23 47 1-12-12-12 1Z"
+        fill="#efb34e" stroke="#253d45" stroke-width="3"/>
+</svg>

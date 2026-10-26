@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640" viewBox="0 0 640 640" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A pelican in side view rides to the right, seated upright with both wings on the handlebars and both feet on the pedals. Black and orange with smooth gradient shading.</desc>
+  <defs>
+    <linearGradient id="black" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#383838"/>
+      <stop offset="1" stop-color="#050505"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0" y1="0" x2="0.7" y2="1">
+      <stop stop-color="#ffad52"/>
+      <stop offset="1" stop-color="#ee740d"/>
+    </linearGradient>
+    <linearGradient id="wing" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#484848"/>
+      <stop offset="1" stop-color="#111"/>
+    </linearGradient>
+    <radialGradient id="shadow">
+      <stop stop-opacity=".17"/>
+      <stop offset="1" stop-opacity="0"/>
+    </radialGradient>
+    <g id="wheel">
+      <path fill="url(#black)" fill-rule="evenodd"
+        d="M0-91a91 91 0 1 1 0 182A91 91 0 0 1 0-91Zm0 11a80 80 0 1 0 0 160A80 80 0 0 0 0-80Z"/>
+      <g fill="#111" opacity=".38">
+        <path id="spoke" d="M-1-79h2V79h-2Z"/>
+        <use href="#spoke" transform="rotate(30)"/>
+        <use href="#spoke" transform="rotate(60)"/>
+        <use href="#spoke" transform="rotate(90)"/>
+        <use href="#spoke" transform="rotate(120)"/>
+        <use href="#spoke" transform="rotate(150)"/>
+      </g>
+      <circle r="9" fill="url(#black)"/>
+    </g>
+  </defs>
+
+  <ellipse cx="323" cy="562" rx="252" ry="19" fill="url(#shadow)"/>
+
+  <!-- Wheels and bicycle frame -->
+  <use href="#wheel" transform="translate(166 462)"/>
+  <use href="#wheel" transform="translate(474 462)"/>
+  <g fill="url(#orange)">
+    <path d="m162 459 98-128 8 6-98 128Z"/>
+    <path d="m163 457 146 1v10H163Z"/>
+    <path d="m257 335 10-3 47 129-10 4Z"/>
+    <path d="m263 331 171 8-1 10-171-8Z"/>
+    <path d="m305 458 125-117 7 8-125 117Z"/>
+    <path d="m426 334 10-3 43 130-10 4Z"/>
+  </g>
+  <g fill="url(#black)">
+    <path d="m249 309 9-3 13 38-9 3Z"/>
+    <path d="M231 302c12-4 36-3 49 1 7 2 6 9-2 11l-42 1c-13 0-16-9-5-13Z"/>
+    <path d="m425 341-10-43 9-2 11 43Z"/>
+    <path d="M414 302v-17c0-16 12-26 27-26h22v10h-22c-10 0-17 6-17 16v17Z"/>
+    <rect x="447" y="256" width="28" height="15" rx="7"/>
+    <circle cx="309" cy="463" r="18"/>
+    <path d="m305 461 8-4 24 44-8 4Z"/>
+    <path d="m305 466-27-42 8-5 27 42Z"/>
+    <rect x="319" y="499" width="34" height="9" rx="4"/>
+    <rect x="266" y="416" width="33" height="9" rx="4"/>
+  </g>
+
+  <!-- Far leg and far wing -->
+  <path fill="url(#orange)" d="M281 300c12 10 19 29 16 49l-13 64 13 4-1 8h-30l6-13 10-66-22-31Z"/>
+  <path fill="#101010" d="M295 218c34 0 62 15 87 28l62 11c11 1 19 7 17 13-2 5-10 6-18 3l-69-9-80-27Z"/>
+
+  <!-- Tail, body, and upright neck -->
+  <path fill="url(#black)" d="M224 269c-22 4-41-1-61-15 8 25 27 43 55 48Z"/>
+  <path fill="url(#black)" d="M220 300c-22-24-22-60-2-85 16-20 38-24 58-24 9-23 7-49 2-70-5-24 3-48 24-58 23-11 48-2 57 20 8 20 1 39-17 52-15 12-16 28-14 51 3 30 9 53-1 79-11 31-33 48-64 48-17 0-31-5-43-13Z"/>
+
+  <!-- Long bill and hanging throat pouch -->
+  <path fill="url(#orange)" d="M337 98c38 1 95 10 151 24 12 3 23 6 30 10-42 3-107 2-171-5Z"/>
+  <path fill="url(#orange)" d="M340 126c37 5 78 7 119 7-24 10-46 34-71 44-20 8-38-6-48-27Z"/>
+  <path fill="#000" opacity=".2" d="M342 128c33 5 74 7 110 6-33 6-60 13-84 21-13 4-21-10-26-27Z"/>
+  <circle cx="328" cy="91" r="7" fill="#000"/>
+  <circle cx="330" cy="89" r="2" fill="#fff"/>
+
+  <!-- Near wing reaches the handlebar -->
+  <path fill="url(#wing)" d="M254 219c14-9 34-4 47 8 24 21 50 43 77 47l68-14c11-2 20 1 20 7 0 7-9 10-18 11l-65 16c-12 3-25 0-37-6l-82-40c-14-7-20-20-10-29Z"/>
+
+  <!-- Near leg and webbed foot on the forward pedal -->
+  <path fill="url(#orange)" d="M280 301c21 7 39 21 46 38 5 13 4 25 1 40l-9 48 21 68 13 5-1 8h-34l7-13-22-65 9-58c2-18-8-29-30-36Z"/>
+</svg>

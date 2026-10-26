@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <!-- Sky background -->
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#1B3B8F"/>
+      <stop offset="55%"  stop-color="#2F7BDB"/>
+      <stop offset="100%" stop-color="#5FC4F2"/>
+    </linearGradient>
+
+    <!-- Sun -->
+    <radialGradient id="sun" cx="40%" cy="38%" r="70%">
+      <stop offset="0%"   stop-color="#FFF4B8"/>
+      <stop offset="55%"  stop-color="#FFC63A"/>
+      <stop offset="100%" stop-color="#FF9A1F"/>
+    </radialGradient>
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#FFD15A" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#FFD15A" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Cloud -->
+    <linearGradient id="cloud" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#DDE8F5"/>
+    </linearGradient>
+    <linearGradient id="cloudShade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#B9CCE4" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#9DB4D2" stop-opacity="0.6"/>
+    </linearGradient>
+
+    <!-- Raindrop -->
+    <linearGradient id="drop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#BFEFFF"/>
+      <stop offset="100%" stop-color="#4FB8F0"/>
+    </linearGradient>
+
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="22"/>
+      <feOffset dy="26"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.35"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="blur"><feGaussianBlur stdDeviation="40"/></filter>
+  </defs>
+
+  <!-- Square background, no rounding -->
+  <rect width="1024" height="1024" fill="url(#sky)"/>
+
+  <!-- Subtle horizon haze -->
+  <ellipse cx="512" cy="1040" rx="700" ry="260" fill="#8EDBFF" opacity="0.25" filter="url(#blur)"/>
+
+  <!-- Sun glow -->
+  <circle cx="640" cy="360" r="320" fill="url(#sunGlow)"/>
+
+  <!-- Sun rays -->
+  <g stroke="#FFD15A" stroke-width="34" stroke-linecap="round" opacity="0.9">
+    <line x1="640" y1="60"  x2="640" y2="130"/>
+    <line x1="852" y1="148" x2="802" y2="198"/>
+    <line x1="940" y1="360" x2="870" y2="360"/>
+    <line x1="852" y1="572" x2="802" y2="522"/>
+    <line x1="428" y1="148" x2="478" y2="198"/>
+  </g>
+
+  <!-- Sun body -->
+  <circle cx="640" cy="360" r="190" fill="url(#sun)"/>
+
+  <!-- Cloud -->
+  <g filter="url(#softShadow)">
+    <path fill="url(#cloud)" d="
+      M 240 740
+      C 150 740 110 670 140 600
+      C 170 530 250 520 290 540
+      C 310 420 440 360 540 420
+      C 600 330 760 340 800 450
+      C 880 440 950 500 940 590
+      C 930 690 860 740 790 740
+      Z"/>
+    <!-- Underside shading -->
+    <path fill="url(#cloudShade)" d="
+      M 240 740
+      C 150 740 110 670 140 600
+      C 200 650 300 660 400 640
+      C 520 620 700 620 800 580
+      C 880 570 940 540 940 590
+      C 930 690 860 740 790 740
+      Z"/>
+  </g>
+
+  <!-- Raindrops -->
+  <g fill="url(#drop)">
+    <path d="M 380 800 C 380 800 330 870 330 905 A 50 50 0 0 0 430 905 C 430 870 380 800 380 800 Z"/>
+    <path d="M 560 830 C 560 830 510 900 510 935 A 50 50 0 0 0 610 935 C 610 900 560 830 560 830 Z"/>
+    <path d="M 740 800 C 740 800 690 870 690 905 A 50 50 0 0 0 790 905 C 790 870 740 800 740 800 Z"/>
+  </g>
+  <!-- Drop highlights -->
+  <g fill="#FFFFFF" opacity="0.7">
+    <ellipse cx="362" cy="900" rx="10" ry="18" transform="rotate(-20 362 900)"/>
+    <ellipse cx="542" cy="930" rx="10" ry="18" transform="rotate(-20 542 930)"/>
+    <ellipse cx="722" cy="900" rx="10" ry="18" transform="rotate(-20 722 900)"/>
+  </g>
+</svg>

@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="130 40 520 500" width="520" height="500">
+  <defs>
+    <!-- low-poly 12-gon wheel, small folding-bike size -->
+    <g id="wheel">
+      <polygon points="58,0 50.2,29 29,50.2 0,58 -29,50.2 -50.2,29 -58,0 -50.2,-29 -29,-50.2 0,-58 29,-50.2 50.2,-29"
+               fill="none" stroke="#2a2a2a" stroke-width="10" stroke-linejoin="miter"/>
+      <polygon points="46,0 39.8,23 23,39.8 0,46 -23,39.8 -39.8,23 -46,0 -39.8,-23 -23,-39.8 0,-46 23,-39.8 39.8,-23"
+               fill="none" stroke="#b0b0b0" stroke-width="3"/>
+      <g stroke="#999" stroke-width="1.5">
+        <line x1="0" y1="0" x2="46" y2="0"/><line x1="0" y1="0" x2="-46" y2="0"/>
+        <line x1="0" y1="0" x2="0" y2="46"/><line x1="0" y1="0" x2="0" y2="-46"/>
+        <line x1="0" y1="0" x2="39.8" y2="23"/><line x1="0" y1="0" x2="-39.8" y2="-23"/>
+        <line x1="0" y1="0" x2="-39.8" y2="23"/><line x1="0" y1="0" x2="39.8" y2="-23"/>
+        <line x1="0" y1="0" x2="23" y2="39.8"/><line x1="0" y1="0" x2="-23" y2="-39.8"/>
+        <line x1="0" y1="0" x2="-23" y2="39.8"/><line x1="0" y1="0" x2="23" y2="-39.8"/>
+      </g>
+      <polygon points="9,0 4.5,7.8 -4.5,7.8 -9,0 -4.5,-7.8 4.5,-7.8" fill="#555"/>
+    </g>
+  </defs>
+
+  <!-- far leg (behind frame): bent, pedal at top of stroke -->
+  <polygon points="460,290 482,302 448,348 432,338" fill="#d8d8d8"/>
+  <polygon points="432,338 450,346 448,404 434,404" fill="#cf7430"/>
+  <polygon points="424,396 460,394 458,405 426,407" fill="#cf7430"/>
+  <line x1="430" y1="440" x2="440" y2="400" stroke="#333" stroke-width="6"/>
+  <rect x="425" y="396" width="30" height="8" fill="#222"/>
+
+  <!-- wheels -->
+  <use href="#wheel" x="200" y="460"/>
+  <use href="#wheel" x="560" y="460"/>
+
+  <!-- folding frame: low main tube with hinge, tall stem and seat post -->
+  <polygon points="194,458 206,458 232,382 220,380" fill="#21857a"/>
+  <polygon points="232,392 250,382 438,428 436,452" fill="#2a9d8f"/>
+  <polygon points="328,392 352,392 356,428 324,428" fill="#444"/>
+  <circle cx="340" cy="410" r="4" fill="#999"/>
+  <polygon points="430,448 560,454 560,466 430,456" fill="#21857a"/>
+  <polygon points="440,326 452,330 566,456 556,462" fill="#2a9d8f"/>
+  <polygon points="424,440 440,440 476,306 464,302" fill="#2a9d8f"/>
+  <polygon points="440,300 500,294 506,306 448,310" fill="#222"/>
+  <polygon points="220,382 236,384 255,202 241,200" fill="#2a9d8f"/>
+  <polygon points="232,196 262,196 262,208 232,208" fill="#222"/>
+
+  <!-- drivetrain -->
+  <line x1="430" y1="418" x2="560" y2="450" stroke="#555" stroke-width="3"/>
+  <line x1="430" y1="462" x2="560" y2="470" stroke="#555" stroke-width="3"/>
+  <polygon points="452,440 441,459 419,459 408,440 419,421 441,421" fill="#333"/>
+  <polygon points="570,460 565,468.7 555,468.7 550,460 555,451.3 565,451.3" fill="#333"/>
+
+  <!-- pelican body, lifted off the saddle and leaning forward -->
+  <g transform="translate(-10,-55)">
+    <polygon points="500,290 560,320 480,350" fill="#bfbfbf"/>
+    <polygon points="480,350 540,330 520,370" fill="#c8c8c8"/>
+    <polygon points="350,250 430,230 400,300" fill="#f4f4f4"/>
+    <polygon points="430,230 500,290 400,300" fill="#e6e6e6"/>
+    <polygon points="500,290 480,350 400,300" fill="#d9d9d9"/>
+    <polygon points="400,300 480,350 410,360" fill="#cfcfcf"/>
+    <polygon points="350,250 400,300 360,320" fill="#ececec"/>
+    <polygon points="360,320 400,300 410,360" fill="#dcdcdc"/>
+  </g>
+
+  <!-- near leg: fully extended, driving the pedal down -->
+  <polygon points="448,282 482,298 452,392 436,388" fill="#f0f0f0"/>
+  <polygon points="437,388 452,392 427,482 413,480" fill="#f08c3a"/>
+  <line x1="430" y1="440" x2="420" y2="480" stroke="#333" stroke-width="6"/>
+  <rect x="405" y="478" width="35" height="8" fill="#222"/>
+  <polygon points="398,478 442,476 438,487 402,489" fill="#f08c3a"/>
+
+  <!-- wing gripping the handlebar, neck, head, beak -->
+  <g transform="translate(-10,-55)">
+    <polygon points="395,245 430,290 290,280" fill="#d4d4d4"/>
+    <polygon points="395,245 290,280 252,252" fill="#e2e2e2"/>
+    <polygon points="290,280 252,252 262,282" fill="#333"/>
+    <polygon points="335,240 385,255 330,170" fill="#e8e8e8"/>
+    <polygon points="335,240 330,170 295,165" fill="#f6f6f6"/>
+    <polygon points="295,165 330,170 325,130" fill="#f8f8f8"/>
+    <polygon points="295,165 325,130 280,135" fill="#ebebeb"/>
+    <polygon points="280,135 325,130 300,115" fill="#f0f0f0"/>
+    <polygon points="282,138 298,158 165,178" fill="#f7b733"/>
+    <polygon points="298,158 290,170 240,190 165,178" fill="#e8901c"/>
+    <polygon points="290,170 275,200 230,195 240,190" fill="#d97d14"/>
+    <polygon points="296,143 306,152 300,156 294,150" fill="#111"/>
+  </g>
+</svg>

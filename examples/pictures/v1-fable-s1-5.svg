@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <!-- Sky -->
+  <rect width="800" height="500" fill="#dff1fb"/>
+
+  <!-- Horizon ground line -->
+  <line x1="0" y1="420" x2="800" y2="420" stroke="#2b2b2b" stroke-width="6" stroke-linecap="round"/>
+
+  <g stroke="#2b2b2b" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+
+    <!-- ===== BICYCLE ===== -->
+    <!-- Rear wheel -->
+    <circle cx="220" cy="350" r="70" fill="#f3f3f3"/>
+    <circle cx="220" cy="350" r="55" fill="none" stroke-width="4"/>
+    <g stroke-width="3">
+      <line x1="220" y1="295" x2="220" y2="405"/>
+      <line x1="165" y1="350" x2="275" y2="350"/>
+      <line x1="181" y1="311" x2="259" y2="389"/>
+      <line x1="259" y1="311" x2="181" y2="389"/>
+    </g>
+    <circle cx="220" cy="350" r="9" fill="#2b2b2b"/>
+
+    <!-- Front wheel -->
+    <circle cx="580" cy="350" r="70" fill="#f3f3f3"/>
+    <circle cx="580" cy="350" r="55" fill="none" stroke-width="4"/>
+    <g stroke-width="3">
+      <line x1="580" y1="295" x2="580" y2="405"/>
+      <line x1="525" y1="350" x2="635" y2="350"/>
+      <line x1="541" y1="311" x2="619" y2="389"/>
+      <line x1="619" y1="311" x2="541" y2="389"/>
+    </g>
+    <circle cx="580" cy="350" r="9" fill="#2b2b2b"/>
+
+    <!-- Frame -->
+    <path d="M220 350 L330 230 L480 230 L540 350 Z" fill="#e8513a"/>
+    <path d="M220 350 L400 350 L330 230" fill="#e8513a"/>
+    <line x1="400" y1="350" x2="480" y2="230"/>
+    <line x1="480" y1="230" x2="580" y2="350"/>
+    <line x1="480" y1="230" x2="465" y2="200"/>
+
+    <!-- Handlebar stem and handlebars -->
+    <line x1="465" y1="200" x2="470" y2="185"/>
+    <path d="M440 185 Q470 175 500 190" fill="none"/>
+    <line x1="440" y1="185" x2="430" y2="193"/>
+
+    <!-- Seat post and saddle -->
+    <line x1="330" y1="230" x2="320" y2="195"/>
+    <path d="M290 195 Q320 180 355 195 Q320 202 290 195 Z" fill="#2b2b2b"/>
+
+    <!-- Crank and pedals -->
+    <circle cx="400" cy="350" r="18" fill="#c9c9c9"/>
+    <line x1="400" y1="350" x2="425" y2="385"/>
+    <line x1="400" y1="350" x2="375" y2="315"/>
+    <rect x="415" y="380" width="26" height="10" fill="#2b2b2b"/>
+    <rect x="359" y="310" width="26" height="10" fill="#2b2b2b"/>
+
+    <!-- Chain -->
+    <path d="M220 335 Q310 320 400 332" fill="none" stroke-width="4"/>
+    <path d="M220 365 Q310 380 400 368" fill="none" stroke-width="4"/>
+
+    <!-- ===== PELICAN ===== -->
+    <!-- Legs -->
+    <path d="M320 240 L345 290 L372 312" fill="none" stroke="#f0a030" stroke-width="12"/>
+    <path d="M320 240 L345 290 L372 312" fill="none" stroke-width="4"/>
+    <path d="M360 310 L390 312 L372 322 Z" fill="#f0a030"/>
+
+    <!-- Tail -->
+    <path d="M265 210 L220 235 L250 185 Z" fill="#f7f7f7"/>
+
+    <!-- Body -->
+    <ellipse cx="330" cy="200" rx="80" ry="55" fill="#ffffff"/>
+
+    <!-- Left wing (far side, spread back-up) -->
+    <path d="M300 190 L160 110 L185 150 L120 140 L150 180 L225 215 Z" fill="#e5e5e5"/>
+
+    <!-- Right wing (near side, spread forward-up) -->
+    <path d="M360 185 L500 95 L470 140 L540 125 L505 170 L410 210 Z" fill="#ffffff"/>
+
+    <!-- Neck -->
+    <path d="M375 175 Q400 130 405 95" fill="none" stroke="#ffffff" stroke-width="30"/>
+    <path d="M375 175 Q400 130 405 95" fill="none" stroke-width="6"/>
+    <path d="M360 185 Q385 140 390 100" fill="none" stroke="#ffffff" stroke-width="18" stroke-linecap="round"/>
+
+    <!-- Head -->
+    <circle cx="405" cy="80" r="32" fill="#ffffff"/>
+
+    <!-- Beak (big pelican bill) -->
+    <path d="M425 78 L540 88 L520 100 L425 100 Z" fill="#f5b942"/>
+    <!-- Pouch -->
+    <path d="M425 100 L520 100 Q480 130 440 118 Z" fill="#f29f3d"/>
+    <line x1="425" y1="90" x2="535" y2="90" stroke-width="3"/>
+
+    <!-- Eye -->
+    <circle cx="412" cy="72" r="7" fill="#ffffff"/>
+    <circle cx="414" cy="72" r="3.5" fill="#2b2b2b" stroke="none"/>
+
+    <!-- Head tuft -->
+    <path d="M385 55 Q380 40 392 45 Q390 30 402 40" fill="none" stroke-width="4"/>
+  </g>
+</svg>

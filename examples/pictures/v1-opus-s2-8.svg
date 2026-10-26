@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200"
+     fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5">
+  <title>Pelican riding a bicycle</title>
+
+  <!-- Background: sun and rolling hills -->
+  <circle cx="160" cy="38" r="14" stroke="#F7E3A1"/>
+  <path d="M0 118 Q35 92 75 112 T150 104 T200 100" stroke="#C9E4CA"/>
+  <path d="M0 140 Q50 118 105 136 T200 128" stroke="#B5D8C0"/>
+
+  <!-- Bicycle -->
+  <!-- rear wheel (farther away, so smaller) -->
+  <ellipse cx="136" cy="136" rx="13" ry="20" stroke="#B9D7EA"/>
+  <!-- front wheel (closer, so larger) -->
+  <ellipse cx="78" cy="150" rx="17" ry="26" stroke="#B9D7EA"/>
+  <!-- frame: head tube → bottom bracket → rear hub → seat → head tube -->
+  <path d="M86 110 L110 142 L136 136 L122 102 L86 110 M110 142 L122 102" stroke="#D7C4EC"/>
+  <!-- fork -->
+  <path d="M86 110 L78 150" stroke="#D7C4EC"/>
+  <!-- handlebar -->
+  <path d="M86 110 L84 100 M72 102 Q84 96 98 99" stroke="#D7C4EC"/>
+  <!-- saddle -->
+  <path d="M114 100 L130 98" stroke="#F4C7C3"/>
+  <!-- crank + pedals -->
+  <path d="M104 136 L116 148 M101 135 L107 137 M113 149 L119 147" stroke="#F4C7C3"/>
+
+  <!-- Pelican -->
+  <!-- tail -->
+  <path d="M136 84 L150 78 L144 90" stroke="#E6E1F0"/>
+  <!-- body -->
+  <ellipse cx="120" cy="84" rx="19" ry="15" stroke="#E6E1F0"/>
+  <!-- wing reaching to the handlebar -->
+  <path d="M128 78 Q112 74 104 86 Q96 96 90 100" stroke="#D7C4EC"/>
+  <!-- legs down to the pedals -->
+  <path d="M114 98 L106 120 L104 136" stroke="#FAD4A6"/>
+  <path d="M124 98 L120 124 L116 148" stroke="#FAD4A6"/>
+  <!-- neck -->
+  <path d="M108 74 Q100 62 104 50" stroke="#E6E1F0"/>
+  <!-- head -->
+  <circle cx="104" cy="44" r="9" stroke="#E6E1F0"/>
+  <!-- eye -->
+  <circle cx="102" cy="42" r="1.6" stroke="#9FB4C7" stroke-width="1.5"/>
+  <!-- upper bill -->
+  <path d="M97 45 L62 60 L70 62" stroke="#FAD4A6"/>
+  <!-- throat pouch -->
+  <path d="M98 50 Q86 72 70 62" stroke="#F4C7C3"/>
+</svg>

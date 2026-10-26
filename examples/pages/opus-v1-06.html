@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pennypot — Eat like an adult. Spend like a student.</title>
+<meta name="description" content="Pennypot plans a week of real meals for about the price of a takeaway. Join the pre-launch waitlist.">
+<style>
+  :root{
+    --green-900:#0f3d2a; --green-700:#16794c; --green-600:#1f9a5f; --green-500:#2bb673;
+    --green-100:#e6f6ec; --green-50:#f4fbf6; --ink:#16241c; --muted:#5d6f64;
+    --line:#e3ece6; --white:#fff; --radius:18px;
+    --shadow:0 1px 2px rgba(15,61,42,.06),0 8px 30px rgba(15,61,42,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+       color:var(--ink);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  img,svg{display:block}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  section{padding:120px 0}
+  .eyebrow{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green-700);margin-bottom:14px}
+  h1,h2,h3{line-height:1.12;letter-spacing:-.02em;color:var(--green-900)}
+  h1{font-size:clamp(2.6rem,5.6vw,4.4rem);font-weight:800}
+  h2{font-size:clamp(2rem,3.6vw,2.9rem);font-weight:800}
+  h3{font-size:1.2rem;font-weight:700}
+  .lead{font-size:1.2rem;color:var(--muted);max-width:560px}
+  .center{text-align:center}.center .lead{margin:0 auto}
+  .squiggle{background:linear-gradient(transparent 62%,var(--green-100) 62%);padding:0 .1em}
+
+  /* Nav */
+  nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.88);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .2s}
+  nav.scrolled{border-color:var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.25rem;color:var(--green-900);text-decoration:none}
+  .logo-mark{width:34px;height:34px;border-radius:10px;background:var(--green-600);display:grid;place-items:center}
+  .nav-links{display:flex;gap:32px;list-style:none}
+  .nav-links a{text-decoration:none;color:var(--muted);font-weight:500;font-size:.95rem}
+  .nav-links a:hover{color:var(--green-700)}
+
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;cursor:pointer;font:inherit;font-weight:700;
+       padding:14px 24px;border-radius:999px;text-decoration:none;transition:transform .15s,background .15s,box-shadow .15s}
+  .btn-primary{background:var(--green-600);color:#fff;box-shadow:0 6px 18px rgba(31,154,95,.28)}
+  .btn-primary:hover{background:var(--green-700);transform:translateY(-1px)}
+  .btn-ghost{background:var(--green-50);color:var(--green-700)}
+  .btn-ghost:hover{background:var(--green-100)}
+  .btn-sm{padding:10px 18px;font-size:.92rem}
+
+  /* Hero */
+  .hero{padding:96px 0 120px;background:radial-gradient(1000px 500px at 85% 10%,var(--green-50),transparent 70%)}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+  .hero h1{margin-bottom:24px}
+  .pill{display:inline-flex;align-items:center;gap:8px;background:var(--green-50);border:1px solid var(--green-100);color:var(--green-700);
+        font-weight:600;font-size:.88rem;padding:6px 14px 6px 8px;border-radius:999px;margin-bottom:28px}
+  .pill b{background:var(--green-600);color:#fff;border-radius:999px;padding:2px 10px;font-size:.75rem}
+  .waitlist{display:flex;gap:10px;margin-top:36px;max-width:500px}
+  .waitlist input{flex:1;min-width:0;font:inherit;padding:14px 20px;border:1.5px solid var(--line);border-radius:999px;outline:none;background:#fff;transition:border-color .15s,box-shadow .15s}
+  .waitlist input:focus{border-color:var(--green-500);box-shadow:0 0 0 4px var(--green-100)}
+  .form-note{margin-top:14px;font-size:.9rem;color:var(--muted)}
+  .form-note.ok{color:var(--green-700);font-weight:600}
+  .form-note.err{color:#b4412b}
+  .proof{display:flex;align-items:center;gap:14px;margin-top:36px;color:var(--muted);font-size:.93rem}
+  .avatars{display:flex}
+  .avatars span{width:34px;height:34px;border-radius:50%;border:3px solid #fff;margin-left:-10px;display:grid;place-items:center;font-size:.8rem;font-weight:700;color:#fff}
+  .avatars span:first-child{margin-left:0}
+
+  /* Phone mockup */
+  .phone{width:320px;margin:0 auto;background:#fff;border-radius:40px;padding:14px;box-shadow:0 30px 80px rgba(15,61,42,.18),0 0 0 1px var(--line);position:relative}
+  .screen{background:var(--green-50);border-radius:28px;padding:22px 18px;min-height:560px}
+  .screen-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+  .screen-top h4{font-size:1.05rem;color:var(--green-900)}
+  .screen-top small{color:var(--muted);font-size:.75rem}
+  .budget{background:#fff;border-radius:16px;padding:14px 16px;margin:14px 0 16px;box-shadow:var(--shadow)}
+  .budget-row{display:flex;justify-content:space-between;font-size:.82rem;color:var(--muted)}
+  .budget-row b{color:var(--green-900);font-size:1.3rem}
+  .bar{height:8px;background:var(--green-100);border-radius:99px;margin-top:10px;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:var(--green-500);border-radius:99px;transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+  .meal{display:flex;align-items:center;gap:12px;background:#fff;border-radius:14px;padding:10px 12px;margin-bottom:10px}
+  .meal .emoji{width:42px;height:42px;border-radius:12px;background:var(--green-50);display:grid;place-items:center;font-size:1.35rem}
+  .meal div{flex:1}
+  .meal strong{display:block;font-size:.88rem;color:var(--ink)}
+  .meal small{color:var(--muted);font-size:.74rem}
+  .meal em{font-style:normal;font-weight:700;font-size:.85rem;color:var(--green-700)}
+  .float{position:absolute;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:var(--shadow);font-size:.82rem;font-weight:600;display:flex;align-items:center;gap:8px;animation:bob 4s ease-in-out infinite}
+  .float.a{left:-70px;top:120px}
+  .float.b{right:-60px;bottom:110px;animation-delay:-2s}
+  @keyframes bob{50%{transform:translateY(-8px)}}
+
+  /* Logos strip */
+  .strip{padding:40px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .strip p{text-align:center;color:var(--muted);font-size:.9rem;margin-bottom:18px}
+  .strip ul{display:flex;justify-content:center;flex-wrap:wrap;gap:16px 48px;list-style:none;color:#9bb0a3;font-weight:700;font-size:1.05rem}
+
+  /* Features */
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:64px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:32px;transition:transform .2s,box-shadow .2s}
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .icon{width:52px;height:52px;border-radius:14px;background:var(--green-50);display:grid;place-items:center;font-size:1.5rem;margin-bottom:20px}
+  .card h3{margin-bottom:10px}
+  .card p{color:var(--muted)}
+
+  /* How it works */
+  .how{background:var(--green-50)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:64px;counter-reset:step}
+  .step{position:relative}
+  .step::before{counter-increment:step;content:counter(step);display:grid;place-items:center;width:48px;height:48px;border-radius:50%;
+       background:var(--green-600);color:#fff;font-weight:800;font-size:1.15rem;margin-bottom:22px}
+  .step:not(:last-child)::after{content:"";position:absolute;top:24px;left:64px;right:-24px;border-top:2px dashed #b8dcc6}
+  .step h3{margin-bottom:8px}
+  .step p{color:var(--muted)}
+
+  /* Testimonials */
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:64px}
+  .quote{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:32px;display:flex;flex-direction:column}
+  .quote blockquote{font-size:1.05rem;color:var(--ink);flex:1}
+  .quote blockquote::before{content:"“";display:block;font-size:3.2rem;line-height:.8;color:var(--green-500);font-family:Georgia,serif}
+  .who{display:flex;align-items:center;gap:12px;margin-top:24px}
+  .who span{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700}
+  .who b{display:block;font-size:.95rem}
+  .who small{color:var(--muted)}
+  .saved{display:inline-block;margin-top:14px;font-size:.8rem;font-weight:700;color:var(--green-700);background:var(--green-50);padding:4px 10px;border-radius:999px;align-self:flex-start}
+
+  /* Pricing */
+  .pricing{background:linear-gradient(var(--white),var(--green-50))}
+  .plans{display:grid;grid-template-columns:repeat(2,minmax(0,380px));gap:28px;justify-content:center;margin-top:64px}
+  .plan{background:#fff;border:1px solid var(--line);border-radius:24px;padding:40px;position:relative}
+  .plan.featured{border:2px solid var(--green-500);box-shadow:0 20px 60px rgba(31,154,95,.15)}
+  .badge{position:absolute;top:-14px;left:40px;background:var(--green-600);color:#fff;font-size:.78rem;font-weight:700;padding:5px 12px;border-radius:999px}
+  .price{font-size:3rem;font-weight:800;color:var(--green-900);margin:14px 0 2px;letter-spacing:-.03em}
+  .price small{font-size:1rem;font-weight:500;color:var(--muted)}
+  .price s{font-size:1.3rem;color:#a7b6ad;font-weight:600;margin-right:6px}
+  .plan > p{color:var(--muted);font-size:.95rem}
+  .plan ul{list-style:none;margin:28px 0 32px}
+  .plan li{padding:8px 0 8px 30px;position:relative;font-size:.97rem}
+  .plan li::before{content:"";position:absolute;left:0;top:12px;width:18px;height:18px;border-radius:50%;
+      background:var(--green-100) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%231f9a5f'%3E%3Cpath d='M8.2 13.6 4.6 10l1.2-1.2 2.4 2.4 6-6 1.2 1.2z'/%3E%3C/svg%3E") center/14px no-repeat}
+  .plan .btn{width:100%}
+  .fine{text-align:center;color:var(--muted);font-size:.9rem;margin-top:28px}
+
+  /* FAQ */
+  .faq-list{max-width:760px;margin:56px auto 0}
+  details{border-bottom:1px solid var(--line);padding:22px 0}
+  summary{cursor:pointer;list-style:none;font-weight:700;font-size:1.08rem;color:var(--green-900);display:flex;justify-content:space-between;gap:20px;align-items:center}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";flex:none;width:30px;height:30px;border-radius:50%;background:var(--green-50);color:var(--green-700);display:grid;place-items:center;font-size:1.3rem;font-weight:500;transition:transform .2s}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p{color:var(--muted);margin-top:12px;max-width:680px}
+
+  /* Final CTA */
+  .final{padding:0 0 120px}
+  .final-box{background:var(--green-700);border-radius:32px;padding:80px 40px;text-align:center;color:#fff;position:relative;overflow:hidden}
+  .final-box::before,.final-box::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.06)}
+  .final-box::before{width:360px;height:360px;top:-160px;left:-100px}
+  .final-box::after{width:280px;height:280px;bottom:-140px;right:-60px}
+  .final-box h2{color:#fff;margin-bottom:14px;position:relative}
+  .final-box p{color:#cdebd9;font-size:1.15rem;position:relative}
+  .final-box .waitlist{margin:36px auto 0;position:relative}
+  .final-box .waitlist input{border-color:transparent}
+  .final-box .btn-primary{background:var(--green-900);box-shadow:none}
+  .final-box .btn-primary:hover{background:#0a2b1d}
+  .final-box .form-note{color:#cdebd9;position:relative}
+  .final-box .form-note.ok{color:#fff}
+
+  /* Footer */
+  footer{border-top:1px solid var(--line);padding:56px 0 40px;color:var(--muted);font-size:.93rem}
+  .foot{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+  .foot h5{color:var(--green-900);font-size:.92rem;margin-bottom:14px}
+  .foot ul{list-style:none}
+  .foot li{margin-bottom:8px}
+  .foot a{text-decoration:none}
+  .foot a:hover{color:var(--green-700)}
+  .foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:48px;padding-top:24px;border-top:1px solid var(--line);font-size:.85rem}
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+  /* Responsive */
+  @media (max-width:960px){
+    section{padding:88px 0}
+    .hero-grid{grid-template-columns:1fr;gap:72px}
+    .grid-3,.quotes{grid-template-columns:1fr 1fr}
+    .steps{grid-template-columns:1fr;gap:36px}
+    .step:not(:last-child)::after{display:none}
+    .foot{grid-template-columns:1fr 1fr}
+    .nav-links{display:none}
+  }
+  @media (max-width:640px){
+    .grid-3,.quotes,.plans{grid-template-columns:1fr}
+    .waitlist{flex-direction:column}
+    .float{display:none}
+    .phone{width:290px}
+    .final-box{padding:60px 22px}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap nav-in">
+    <a href="#" class="logo" aria-label="Pennypot home">
+      <span class="logo-mark">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16v3a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6v-3z"/><path d="M2 11h20"/><circle cx="12" cy="5.5" r="2.5"/></svg>
+      </span>
+      Pennypot
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="#join" class="btn btn-primary btn-sm">Join the waitlist</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="join">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill"><b>Soon</b> Launching January 2027 — waitlist open now</span>
+      <h1>Eat like an adult.<br><span class="squiggle">Spend like a student.</span></h1>
+      <p class="lead">Pennypot plans a full week of real, tasty meals for <strong>about £25</strong>, writes the shopping list for you, and makes sure that half a bag of spinach actually gets eaten this time.</p>
+
+      <form class="waitlist" data-waitlist novalidate>
+        <label for="email-hero" class="sr" style="position:absolute;left:-9999px">Email address</label>
+        <input id="email-hero" type="email" placeholder="you@uni-email.ac.uk" autocomplete="email" required>
+        <button class="btn btn-primary" type="submit">Join the waitlist →</button>
+      </form>
+      <p class="form-note" aria-live="polite">Free forever plan. No spam — we're too broke to afford a marketing team.</p>
+
+      <div class="proof">
+        <div class="avatars">
+          <span style="background:#2bb673">A</span><span style="background:#16794c">J</span><span style="background:#7cc79c">M</span><span style="background:#0f3d2a">+</span>
+        </div>
+        <span><strong id="count" style="color:var(--green-900)">4,812</strong> hungry people already in line</span>
+      </div>
+    </div>
+
+    <div style="position:relative">
+      <div class="phone" aria-hidden="true">
+        <div class="screen">
+          <div class="screen-top"><h4>This week</h4><small>Mon 26 – Sun 1</small></div>
+          <div class="budget">
+            <div class="budget-row"><span>Weekly budget</span><span>£30.00</span></div>
+            <div class="budget-row" style="margin-top:4px;align-items:baseline"><b>£23.40</b><span>£6.60 left for snacks 🍪</span></div>
+            <div class="bar"><i id="bar"></i></div>
+          </div>
+          <div class="meal"><span class="emoji">🍝</span><div><strong>One-pot lentil bolognese</strong><small>Mon · 25 min · serves 4</small></div><em>£0.92</em></div>
+          <div class="meal"><span class="emoji">🌮</span><div><strong>Leftover bolognese tacos</strong><small>Tue · 10 min · uses Mon</small></div><em>£0.64</em></div>
+          <div class="meal"><span class="emoji">🍛</span><div><strong>Chickpea & spinach curry</strong><small>Wed · 30 min · freezes</small></div><em>£1.10</em></div>
+          <div class="meal"><span class="emoji">🍳</span><div><strong>Fancy-ish fried rice</strong><small>Thu · 15 min · fridge raid</small></div><em>£0.78</em></div>
+          <div class="meal"><span class="emoji">🥔</span><div><strong>Loaded jacket potatoes</strong><small>Fri · 8 min (microwave)</small></div><em>£0.85</em></div>
+        </div>
+        <div class="float a">🛒 Shopping list ready</div>
+        <div class="float b">♻️ 0 g food wasted</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="wrap">
+    <p>Beta-tested in kitchens (and questionable shared flats) at</p>
+    <ul><li>Leeds</li><li>Glasgow</li><li>Bristol</li><li>Manchester</li><li>Cardiff</li><li>UCL</li></ul>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">Features</span>
+      <h2>Everything your nan would do,<br>if your nan had an algorithm.</h2>
+      <p class="lead" style="margin-top:18px">Built for tiny budgets, tiny kitchens and a total lack of time.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card reveal"><div class="icon">💷</div><h3>Budget-first planning</h3><p>Tell us what you've got to spend. We build a week of meals that fits, using live supermarket prices, and leave some change for a meal deal.</p></div>
+      <div class="card reveal"><div class="icon">🔁</div><h3>Cook once, eat thrice</h3><p>Monday's chilli turns up again as Wednesday's burrito. Clever leftovers, not sad ones in a Tupperware.</p></div>
+      <div class="card reveal"><div class="icon">🧺</div><h3>Fridge-raid mode</h3><p>Pop in the random stuff you already have (one egg, a lonely pepper) and get a dinner, not a lecture.</p></div>
+      <div class="card reveal"><div class="icon">🛒</div><h3>One-tap shopping list</h3><p>Sorted by supermarket aisle, merged across recipes and scaled for exactly what you need. No more three jars of cumin.</p></div>
+      <div class="card reveal"><div class="icon">🍳</div><h3>Tiny-kitchen friendly</h3><p>Filter by gear: one hob, a microwave, a kettle and a dream. Every recipe takes 30 minutes or less.</p></div>
+      <div class="card reveal"><div class="icon">👯</div><h3>Flatmate split</h3><p>Plan meals together and split the bill automatically. No more passive-aggressive notes on the fridge.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>Three steps. Zero meal-prep influencers.</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><h3>Set your budget & vibe</h3><p>Weekly spend, dietary stuff, how much you actually like cooking. Be honest, we won't judge your toastie habit.</p></div>
+      <div class="step reveal"><h3>Get your week, sorted</h3><p>Pennypot builds a plan in about 4 seconds. Swap anything you don't fancy and the costs update as you go.</p></div>
+      <div class="step reveal"><h3>Shop, cook, smugly save</h3><p>Follow the list, cook along with step-by-step mode, then watch your savings tracker go up. Very satisfying.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">From our beta testers</span>
+      <h2>Reviews from people who<br>used to live on instant noodles</h2>
+    </div>
+    <div class="quotes">
+      <figure class="quote reveal">
+        <blockquote>I used to spend £60 a week and still eat cereal for dinner. Now it's £27 and I made a curry my flatmates asked for <em>twice</em>.</blockquote>
+        <span class="saved">Saves ~£33/week</span>
+        <figcaption class="who"><span style="background:#2bb673">A</span><div><b>Aisha, 20</b><small>History student, Leeds</small></div></figcaption>
+      </figure>
+      <figure class="quote reveal">
+        <blockquote>The leftover thing is witchcraft. My fridge used to be a science experiment. Now it's just… a fridge. Kind of boring, honestly. Love it.</blockquote>
+        <span class="saved">Food waste down 80%</span>
+        <figcaption class="who"><span style="background:#16794c">J</span><div><b>Jonah, 23</b><small>Junior designer, Bristol</small></div></figcaption>
+      </figure>
+      <figure class="quote reveal">
+        <blockquote>My mum asked who's been feeding me. I said an app. She was offended, but she also asked for the lentil bolognese recipe.</blockquote>
+        <span class="saved">Mum-approved</span>
+        <figcaption class="who"><span style="background:#0f3d2a">M</span><div><b>Mei, 19</b><small>Engineering, Glasgow</small></div></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">Pricing</span>
+      <h2>Cheaper than one sad sandwich</h2>
+      <p class="lead" style="margin-top:18px">It'd be a bit rich to charge you a lot for an app that helps you save money.</p>
+    </div>
+    <div class="plans">
+      <div class="plan reveal">
+        <h3>Free</h3>
+        <div class="price">£0 <small>/ forever</small></div>
+        <p>All the basics, no card needed.</p>
+        <ul>
+          <li>Weekly budget meal plans</li>
+          <li>Smart shopping lists</li>
+          <li>200+ recipes under £1.50</li>
+          <li>Fridge-raid mode (3 a week)</li>
+        </ul>
+        <a href="#join" class="btn btn-ghost">Join the waitlist</a>
+      </div>
+      <div class="plan featured reveal">
+        <span class="badge">Waitlist perk: 50% off for life</span>
+        <h3>Pennypot Plus</h3>
+        <div class="price"><s>£3.99</s>£1.99 <small>/ month</small></div>
+        <p>Less than a meal deal. Way more meals.</p>
+        <ul>
+          <li>Everything in Free</li>
+          <li>Live supermarket price matching</li>
+          <li>Unlimited fridge-raid mode</li>
+          <li>Flatmate bill-splitting</li>
+          <li>Batch-cook & freezer planner</li>
+        </ul>
+        <a href="#join" class="btn btn-primary">Join & lock in 50% off</a>
+      </div>
+    </div>
+    <p class="fine">Got a student email? You'll also get your first 3 months of Plus free.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2>Questions, answered (cheaply)</h2>
+    </div>
+    <div class="faq-list reveal">
+      <details open><summary>When does Pennypot launch?</summary><p>We're aiming for January 2027, just in time for the post-Christmas money panic. Waitlisters get in up to two weeks early, in batches.</p></details>
+      <details><summary>Is it really possible to eat well on £25 a week?</summary><p>Yep. Our beta testers averaged £24.80 a week for 3 meals a day, all with actual vegetables. The trick is cooking smart, buying smart and making leftovers into new dishes.</p></details>
+      <details><summary>I can barely boil an egg. Will this work for me?</summary><p>Absolutely. Every recipe has a difficulty rating, step-by-step cooking mode and timers. Plenty of our recipes need nothing more than a microwave and some confidence.</p></details>
+      <details><summary>Does it handle vegan, halal, gluten-free, or picky eating?</summary><p>Yes to all of the above. You can also ban specific ingredients forever, so if mushrooms are your enemy, they'll never show up.</p></details>
+      <details><summary>Which supermarkets do you support?</summary><p>At launch: Tesco, Sainsbury's, Asda, Aldi, Lidl and Morrisons, with more on the way. Prices update daily so your budget stays honest.</p></details>
+      <details><summary>What happens to my email?</summary><p>We'll use it to tell you when you're in, plus the odd recipe. That's it. We never sell your data, and you can unsubscribe in one click.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<div class="final">
+  <div class="wrap">
+    <div class="final-box reveal">
+      <h2>Your future self is hungry.<br>And slightly richer.</h2>
+      <p>Join the waitlist for early access, plus 50% off Plus for life.</p>
+      <form class="waitlist" data-waitlist novalidate>
+        <label for="email-final" style="position:absolute;left:-9999px">Email address</label>
+        <input id="email-final" type="email" placeholder="you@uni-email.ac.uk" autocomplete="email" required>
+        <button class="btn btn-primary" type="submit">Save my spot</button>
+      </form>
+      <p class="form-note" aria-live="polite">Takes 5 seconds. Faster than a microwave.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a href="#" class="logo" style="margin-bottom:14px">
+          <span class="logo-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16v3a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6v-3z"/><path d="M2 11h20"/><circle cx="12" cy="5.5" r="2.5"/></svg></span>
+          Pennypot
+        </a>
+        <p style="max-width:280px">Good food for small budgets. Made in a very small kitchen in Manchester.</p>
+      </div>
+      <div><h5>Product</h5><ul><li><a href="#features">Features</a></li><li><a href="#how">How it works</a></li><li><a href="#pricing">Pricing</a></li></ul></div>
+      <div><h5>Company</h5><ul><li><a href="#">About</a></li><li><a href="#">Blog</a></li><li><a href="#">Press kit</a></li></ul></div>
+      <div><h5>Say hi</h5><ul><li><a href="#">Instagram</a></li><li><a href="#">TikTok</a></li><li><a href="mailto:hello@pennypot.app">hello@pennypot.app</a></li></ul></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Pennypot Ltd. All rights reserved.</span>
+      <span><a href="#">Privacy</a> · <a href="#">Terms</a> · No beans were harmed (only eaten).</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Sticky nav border
+  const nav = document.getElementById('nav');
+  addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 10), {passive:true});
+
+  // Budget bar animation
+  setTimeout(() => document.getElementById('bar').style.width = '78%', 400);
+
+  // Reveal on scroll
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), {threshold:.12});
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 3) * 80 + 'ms';
+    io.observe(el);
+  });
+
+  // Waitlist forms (demo: stores locally)
+  const countEl = document.getElementById('count');
+  let count = 4812 + (JSON.parse(localStorage.getItem('pp-waitlist') || '[]')).length;
+  countEl.textContent = count.toLocaleString();
+
+  document.querySelectorAll('[data-waitlist]').forEach(form => {
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const input = form.querySelector('input');
+      const note = form.nextElementSibling;
+      const email = input.value.trim();
+      note.classList.remove('ok','err');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        note.textContent = "Hmm, that email looks undercooked. Try again?";
+        note.classList.add('err'); input.focus(); return;
+      }
+      const list = JSON.parse(localStorage.getItem('pp-waitlist') || '[]');
+      if (list.includes(email)) {
+        note.textContent = "You're already in line. Patience, young chef. 🧑‍🍳";
+        note.classList.add('ok'); return;
+      }
+      list.push(email);
+      localStorage.setItem('pp-waitlist', JSON.stringify(list));
+      count++;
+      countEl.textContent = count.toLocaleString();
+      note.textContent = `You're in! You're #${count.toLocaleString()} in line. We'll email you before the pasta's boiled. 🍝`;
+      note.classList.add('ok');
+      form.querySelector('button').textContent = "You're on the list ✓";
+      input.value = '';
+    });
+  });
+</script>
+</body>
+</html>

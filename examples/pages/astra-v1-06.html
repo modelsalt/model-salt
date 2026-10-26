@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f3e9">
+<meta name="description" content="Meet Tableful: meal planning that fits your household. Choose your meals, adjust your portions, and make a little room for dinner.">
+<title>Tableful — A little planning. A fuller table.</title>
+<style>
+:root{--paper:#f7f3e9;--ink:#293a2b;--muted:#677061;--orange:#b94f2d;--line:#d7d9ca;--sage:#e5e9da;--white:#fffdf7}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6}
+button,a{-webkit-tap-highlight-color:transparent}
+button,input{font:inherit}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--orange);outline-offset:5px}
+.wrap{width:min(1160px,calc(100% - 64px));margin:auto}
+header{height:104px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);gap:24px}
+.logo{font:700 31px Georgia,serif;letter-spacing:-1.5px;display:flex;align-items:center;gap:10px}
+.logo svg{width:32px;height:34px}
+nav{display:flex;gap:32px;font-size:13px}
+.nav-cta{font-size:13px;border-bottom:1px solid var(--ink);padding-bottom:4px}
+.arrow{margin-left:15px}
+.hero{display:grid;grid-template-columns:1.04fr 1fr;align-items:center;gap:30px;padding:70px 0 64px}
+.eyebrow{text-transform:uppercase;font-size:10px;font-weight:700;letter-spacing:2.2px;display:flex;align-items:center;gap:10px;margin:0 0 24px}
+.eyebrow:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--orange)}
+h1,h2,h3,p{margin-top:0}
+h1,h2,h3{font-family:Georgia,'Times New Roman',serif;font-weight:400}
+h1{font-size:clamp(54px,5.9vw,80px);line-height:1.04;letter-spacing:-4px;margin-bottom:25px}
+h1 em{color:var(--orange);font-weight:400}
+.intro{max-width:375px;color:var(--muted);font-size:16px;line-height:1.8;margin-bottom:30px}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:25px;background:var(--ink);color:var(--white);padding:15px 23px;border:1px solid var(--ink);border-radius:4px;font-size:13px;transition:background .2s,transform .2s}
+.button:hover{background:#44513b;transform:translateY(-2px)}
+.fine{font-size:11px;color:var(--muted);margin:12px 0 0}
+.hero-art{position:relative;min-height:480px;display:flex;align-items:center;justify-content:center}
+.hero-art:before{content:"";position:absolute;inset:15px 12px 30px;background:#e6e9d9;border-radius:48% 48% 42% 42%;transform:rotate(-9deg)}
+.plate-art{position:relative;width:100%;height:auto;filter:drop-shadow(0 15px 15px #293a2b12)}
+.art-label{position:absolute;right:9px;top:9px;border:1px solid #809073;border-radius:50%;width:93px;height:93px;display:grid;place-content:center;text-align:center;font-size:10px;letter-spacing:1.5px;line-height:1.6;transform:rotate(12deg)}
+.art-label span{font:italic 27px Georgia,serif;letter-spacing:0}
+.portion-note{position:absolute;bottom:16px;left:9px;background:var(--white);border:1px solid var(--line);padding:18px 22px;transform:rotate(-5deg);box-shadow:0 8px 20px #293a2b0b;min-width:218px}
+.portion-note small{font-size:9px;letter-spacing:1.7px;text-transform:uppercase}
+.portion-note p{font:23px Georgia,serif;margin:5px 0 9px}
+.note-line{border-top:1px dashed var(--line);padding-top:9px;font-size:10px;color:var(--muted)}
+.strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;padding:19px 0;font-size:11px;color:var(--muted)}
+.strip span:before{content:"✳";margin-right:12px;color:var(--orange)}
+section{padding:80px 0}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:35px}
+h2{font-size:clamp(34px,4vw,49px);line-height:1.12;letter-spacing:-1.7px;margin-bottom:0}
+.section-head p{max-width:290px;font-size:13px;color:var(--muted);margin:0}
+.section-head .eyebrow{margin-bottom:15px}
+.story{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.story-card{min-width:0}
+.scene{height:272px;background:var(--sage);border:1px solid #dfe2d5;border-radius:8px;padding:22px}
+.scene-title{font-size:10px;display:flex;justify-content:space-between;margin-bottom:18px;font-weight:700}
+.scene-title span{color:var(--muted);font-weight:400}
+.recipe{display:flex;gap:12px;align-items:center;padding:11px;background:var(--white);border:1px solid var(--line);border-radius:5px;margin-bottom:9px}
+.mini-dish{width:48px;height:48px;flex-shrink:0;border-radius:50%;background:radial-gradient(ellipse at 40% 40%,#e9b875 0 14%,transparent 15%),radial-gradient(ellipse at 65% 60%,#d89451 0 18%,transparent 19%),radial-gradient(ellipse at 35% 70%,#5d7541 0 13%,transparent 14%),radial-gradient(circle,#99a36e 0 49%,#ece6d5 50% 62%,#d5cdb5 63% 66%,#f8f5eb 67%)}
+.mini-dish.pasta{filter:hue-rotate(330deg)}
+.recipe b{font-size:11px;display:block}
+.recipe small{font-size:9px;color:var(--muted)}
+.check{margin-left:auto;color:var(--ink);font-size:12px;border:1px solid var(--line);border-radius:50%;width:19px;height:19px;text-align:center;line-height:17px;flex-shrink:0}
+.calendar-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;font-size:10px}
+.calendar-row>span{width:27px;color:var(--muted)}
+.calendar-row b{font-weight:400;padding:11px 12px;background:var(--white);border-radius:4px;border-left:3px solid #8e9f77;flex:1}
+.calendar-row:nth-child(3) b{border-left-color:#c68b61}
+.calendar-row:nth-child(4) b{border-left-color:#c4ae70}
+.calendar-foot{font-size:9px;text-align:center;color:var(--muted);margin-top:14px}
+.household{display:flex;align-items:center;justify-content:space-between;background:var(--white);padding:12px;border-radius:4px;font-size:11px}
+.stepper{display:flex;align-items:center;gap:13px}
+.stepper button{width:27px;height:27px;background:transparent;border:1px solid var(--line);border-radius:50%;color:var(--ink);line-height:1}
+.stepper button:hover{background:var(--sage)}
+.stepper button:disabled{opacity:.3;cursor:default}
+.summary-row{display:flex;justify-content:space-between;border-bottom:1px solid #ced4c3;padding:13px 0;font-size:11px}
+.ready{font-size:10px;text-align:center;padding:12px 0;color:#48633a}
+.caption{display:flex;gap:12px;margin-top:21px}
+.number{font:italic 18px Georgia,serif;color:var(--orange)}
+.caption h3{font-size:21px;letter-spacing:-.5px;margin:0 0 7px}
+.caption p{font-size:12px;color:var(--muted);line-height:1.7;margin:0}
+.benefits{background:var(--ink);color:var(--paper);position:relative}
+.benefit-layout{display:grid;grid-template-columns:1fr 1.3fr;gap:80px}
+.benefits .eyebrow{color:#c4ceb6}
+.benefits h2{font-size:44px}
+.benefits h2 em{color:#d9b989}
+.benefit-items{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+.benefit-items h3{font-size:23px;margin:13px 0 9px}
+.benefit-items p{font-size:12px;color:#c4cdbd;margin:0;line-height:1.8}
+.symbol{color:#d9b989;font:26px Georgia,serif}
+.workflow{display:grid;grid-template-columns:1fr 1.1fr;gap:100px;align-items:start;border-bottom:1px solid var(--line)}
+.workflow h2{max-width:350px}
+.workflow-list{list-style:none;margin:0;padding:0}
+.workflow-list li{display:grid;grid-template-columns:30px 1fr;gap:15px;padding:23px 0;border-bottom:1px solid var(--line)}
+.workflow-list li:first-child{padding-top:0}
+.workflow-list li:last-child{border:0;padding-bottom:0}
+.workflow-list h3{font-size:23px;margin:0 0 7px}
+.workflow-list p{font-size:13px;color:var(--muted);margin:0}
+.faq{display:grid;grid-template-columns:1fr 1.1fr;gap:100px}
+details{border-bottom:1px solid var(--line);padding:18px 0}
+details:first-child{padding-top:0}
+summary{font-size:14px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:20px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";font-size:20px;line-height:1}
+details[open] summary:after{content:"−"}
+details p{font-size:13px;color:var(--muted);margin:14px 24px 0 0}
+.closing{background:#e6e9d9;padding:55px 30px;text-align:center;border-radius:8px;margin-bottom:65px}
+.closing .eyebrow{justify-content:center;margin-bottom:16px}
+.closing h2{margin-bottom:18px}
+.closing p{font-size:13px;color:var(--muted);margin-bottom:24px}
+footer{border-top:1px solid var(--line);padding:27px 0 35px;display:flex;align-items:center;justify-content:space-between;gap:25px}
+footer .logo{font-size:25px}
+footer small{font-size:10px;color:var(--muted)}
+footer a:last-child{font-size:11px}
+@media(min-width:1400px){.hero{padding-top:90px;padding-bottom:85px}}
+@media(max-width:850px){.wrap{width:calc(100% - 40px)}header{height:85px}nav{gap:18px}.hero{gap:10px}h1{font-size:58px}.hero-art{min-height:380px}.art-label{width:75px;height:75px;font-size:8px}.portion-note{bottom:0;padding:13px 16px;min-width:185px}.scene{padding:14px;height:255px}.recipe{padding:8px;gap:7px}.mini-dish{width:35px;height:35px}.benefit-layout,.workflow,.faq{gap:40px}.benefits h2{font-size:37px}}
+@media(max-width:640px){.wrap{width:calc(100% - 36px)}header{height:78px}.logo{font-size:28px}nav{display:none}.nav-cta{font-size:11px}.hero{grid-template-columns:1fr;padding:42px 0 36px;gap:24px}h1{font-size:62px;max-width:430px}.hero-art{max-width:410px;width:100%;margin:auto;min-height:370px}.intro{max-width:340px}.strip{justify-content:center;flex-wrap:wrap;gap:10px 20px;font-size:10px}.strip span:last-child{display:none}section{padding:55px 0}.section-head{display:block}.section-head p{margin-top:18px;max-width:320px}.story{grid-template-columns:1fr;gap:29px}.scene{height:260px;padding:22px}.mini-dish{width:46px;height:46px}.recipe{padding:11px}.recipe b{font-size:12px}.caption{margin-top:15px}.benefit-layout,.workflow,.faq{grid-template-columns:1fr;gap:32px}.benefit-items{gap:25px}.benefits h2{font-size:40px}.workflow h2{max-width:none}.closing{padding:40px 18px;margin-bottom:40px}footer{flex-wrap:wrap}footer small{order:3;width:100%}footer a:last-child{margin-left:auto}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <a class="logo" href="#" aria-label="Tableful home">
+    <svg viewBox="0 0 32 34" fill="none" aria-hidden="true"><path d="M6 3v10m5-10v10M1 3v10c0 4 10 4 10 0M6 17v14M23 3c-7 8-7 16 0 16V3Zm0 16v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    tableful
+  </a>
+  <nav aria-label="Main navigation"><a href="#preview">The app</a><a href="#how-it-works">How it works</a><a href="#faq">Good questions</a></nav>
+  <a class="nav-cta" href="#preview">Find your table <span class="arrow">↗</span></a>
+</header>
+
+<main>
+<div class="hero">
+  <div>
+    <p class="eyebrow">A little planning. A fuller table.</p>
+    <h1>Good food.<br>Just the <em>right</em><br>amount.</h1>
+    <p class="intro">Dinner for two? A table for five? Meet the meal planner that makes room for everyone, with portions that fit your household.</p>
+    <a class="button" href="#preview">Make yourself a plan <span aria-hidden="true">↗</span></a>
+    <p class="fine">Try a sample week. No account needed.</p>
+  </div>
+  <div class="hero-art">
+    <svg class="plate-art" viewBox="0 0 520 470" role="img" aria-labelledby="meal-title">
+      <title id="meal-title">An illustrated plate of lemon chicken, grains and leafy greens</title>
+      <defs>
+        <radialGradient id="ceramic"><stop stop-color="#fffdf2"/><stop offset=".73" stop-color="#f5edda"/><stop offset=".76" stop-color="#e3d8bd"/><stop offset=".80" stop-color="#fff9e9"/><stop offset="1" stop-color="#eee5d0"/></radialGradient>
+        <linearGradient id="chicken" x2="1" y2="1"><stop stop-color="#e3aa62"/><stop offset="1" stop-color="#ae6736"/></linearGradient>
+        <pattern id="grains" width="16" height="15" patternUnits="userSpaceOnUse" patternTransform="rotate(20)"><rect width="16" height="15" fill="#c9a56c"/><ellipse cx="4" cy="5" rx="4" ry="2" fill="#eed4a0"/><ellipse cx="12" cy="12" rx="4" ry="2.5" fill="#e3c28c"/></pattern>
+      </defs>
+      <g transform="rotate(-17 260 235)">
+        <rect x="65" y="36" width="324" height="395" rx="8" fill="#c3caaa"/>
+        <path d="M84 37v392M93 37v392M366 37v392M375 37v392" stroke="#e0e3cb" stroke-width="2"/>
+      </g>
+      <circle cx="264" cy="235" r="183" fill="#576044" opacity=".12"/>
+      <circle cx="257" cy="226" r="183" fill="url(#ceramic)"/>
+      <circle cx="257" cy="226" r="166" fill="none" stroke="#a6a68a" stroke-width="1" opacity=".5"/>
+      <circle cx="257" cy="226" r="141" fill="none" stroke="#cfc4a9" stroke-width="1"/>
+      <path d="M153 181c34-47 100-63 151-18 25 23 29 80-3 114s-91 46-128 13-47-73-20-109" fill="url(#grains)"/>
+      <g fill="#536d3a" stroke="#435b31" stroke-width="1">
+        <path d="M270 126q27-39 45-4 47-15 39 21 41 13 11 40 37 31 0 46-37 13-55-29-48 3-38-30-24-11-2-44"/>
+        <path d="M326 226q44-29 47 9 42 7 15 37 24 32-15 37-3 45-35 17-39 22-38-17-36-7-11-34-14-31 37-49"/>
+      </g>
+      <g fill="#7f9553">
+        <ellipse cx="302" cy="139" rx="13" ry="29" transform="rotate(-35 302 139)"/>
+        <ellipse cx="340" cy="169" rx="14" ry="29" transform="rotate(30 340 169)"/>
+        <ellipse cx="344" cy="277" rx="15" ry="34" transform="rotate(-32 344 277)"/>
+        <ellipse cx="369" cy="251" rx="11" ry="22" transform="rotate(40 369 251)"/>
+      </g>
+      <g transform="rotate(-30 232 247)">
+        <path d="M182 171q40-29 75 8 34 39 25 91-4 42-38 49-30 2-49-38-35-67-13-110" fill="url(#chicken)" stroke="#b57742" stroke-width="2"/>
+        <g stroke="#f4d5a2" stroke-width="4"><path d="m179 202 87 8m-84 18 91 8m-85 18 89 8m-78 18 71 8"/></g>
+        <g stroke="#8e552f" stroke-width="2" opacity=".65"><path d="m185 205 77 8m-76 18 83 8m-77 18 77 8m-66 18 59 8"/></g>
+      </g>
+      <g fill="#b94f2d"><circle cx="308" cy="307" r="16"/><circle cx="325" cy="207" r="14"/><circle cx="282" cy="134" r="12"/></g>
+      <g fill="#e58d57"><path d="M309 295a12 12 0 0 1 0 24Z"/><path d="M326 197a10 10 0 0 1 0 20Z"/></g>
+      <g transform="translate(157 313) rotate(25)"><path d="M-40 0a40 40 0 0 0 80 0Z" fill="#dfb953" stroke="#f4df8e" stroke-width="7"/><path d="m0 0-26 24M0 0v34M0 0l26 24" stroke="#faedb4" stroke-width="2"/></g>
+      <g fill="#435f36"><ellipse cx="221" cy="197" rx="5" ry="12" transform="rotate(-40 221 197)"/><ellipse cx="240" cy="258" rx="4" ry="10" transform="rotate(50 240 258)"/><ellipse cx="192" cy="240" rx="4" ry="9" transform="rotate(20 192 240)"/><ellipse cx="275" cy="278" rx="4" ry="10" transform="rotate(-40 275 278)"/></g>
+      <g fill="#f8e6bb"><circle cx="299" cy="171" r="3"/><circle cx="341" cy="242" r="3"/><circle cx="311" cy="270" r="3"/><circle cx="222" cy="214" r="2"/><circle cx="249" cy="285" r="2"/></g>
+    </svg>
+    <div class="art-label">MADE FOR<span>your</span>TABLE</div>
+    <div class="portion-note"><small>Tonight, sorted</small><p>Lemon & herb chicken</p><div class="note-line">2 happy plates <span style="float:right">30 minutes</span></div></div>
+  </div>
+</div>
+
+<div class="strip"><span>Your people, your portions</span><span>A week that works for you</span><span>More cooking. Less guesswork.</span></div>
+
+<section id="preview" aria-labelledby="preview-title">
+  <div class="section-head">
+    <div><p class="eyebrow">A peek inside</p><h2 id="preview-title">From “what’s for dinner?”<br>to “come and get it.”</h2></div>
+    <p>A few good meals. A little room to shuffle. A plan with your people in mind.</p>
+  </div>
+  <div class="story">
+    <article class="story-card">
+      <div class="scene">
+        <div class="scene-title">Your recipe shortlist <span>02 selected</span></div>
+        <div class="recipe"><div class="mini-dish"></div><div><b>Lemon & herb chicken</b><small>30 min · Bright & comforting</small></div><span class="check">✓</span></div>
+        <div class="recipe"><div class="mini-dish pasta"></div><div><b>Roasted tomato pasta</b><small>25 min · A weeknight favorite</small></div><span class="check">✓</span></div>
+        <p class="calendar-foot">A familiar favorite. Something a little new.</p>
+      </div>
+      <div class="caption"><span class="number">01</span><div><h3>Pick what sounds good.</h3><p>Start with meals you’ll look forward to. Keep your favorites close.</p></div></div>
+    </article>
+    <article class="story-card">
+      <div class="scene">
+        <div class="scene-title">A little shape to your week <span>MON–FRI</span></div>
+        <div class="calendar-row"><span>MON</span><b>Lemon & herb chicken</b></div>
+        <div class="calendar-row"><span>WED</span><b>Roasted tomato pasta</b></div>
+        <div class="calendar-row"><span>FRI</span><b>Chickpea & greens bowls</b></div>
+        <p class="calendar-foot">Leave a little space for life in between.</p>
+      </div>
+      <div class="caption"><span class="number">02</span><div><h3>Give dinner a place.</h3><p>A quick meal for a busy evening. Something slower when there’s time.</p></div></div>
+    </article>
+    <article class="story-card">
+      <div class="scene">
+        <div class="scene-title">Your plan, portioned <span>TRY IT ↓</span></div>
+        <div class="household"><span>People at your table</span><div class="stepper"><button type="button" id="minus" aria-label="Remove one person">−</button><strong id="people">2</strong><button type="button" id="plus" aria-label="Add one person">+</button></div></div>
+        <div aria-live="polite" aria-atomic="true">
+          <div class="summary-row"><span>Meals this week</span><strong>3 dinners</strong></div>
+          <div class="summary-row"><span>Total portions</span><strong id="portions">6 portions</strong></div>
+          <div class="ready" id="ready">✓ A little plan for your table of 2</div>
+        </div>
+      </div>
+      <div class="caption"><span class="number">03</span><div><h3>Make just enough.</h3><p>Adjust your household size and see your portions fall into place.</p></div></div>
+    </article>
+  </div>
+</section>
+</div>
+
+<section class="benefits" aria-labelledby="benefits-title">
+  <div class="wrap benefit-layout">
+    <div><p class="eyebrow">Room for everyone</p><h2 id="benefits-title">Big table.<br>Small table.<br><em>Your table.</em></h2></div>
+    <div class="benefit-items">
+      <div><span class="symbol" aria-hidden="true">◒</span><h3>Portions with purpose.</h3><p>Plan around how many people are eating, so the amount you make starts with the people you feed.</p></div>
+      <div><span class="symbol" aria-hidden="true">↗</span><h3>Life changes. So can dinner.</h3><p>An extra guest or a night out? Adjust the numbers before you reach for the chopping board.</p></div>
+      <div><span class="symbol" aria-hidden="true">✳</span><h3>A little less left over.</h3><p>Give ingredients a place in your week and shop with a clearer idea of what you’ll use.</p></div>
+      <div><span class="symbol" aria-hidden="true">♡</span><h3>Keep the good bits.</h3><p>Make space for your dependable favorites and the new recipes that become regulars.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+<section class="workflow" id="how-it-works" aria-labelledby="workflow-title">
+  <div><p class="eyebrow">Your Sunday, simplified</p><h2 id="workflow-title">A small ritual.<br>A smoother week.</h2></div>
+  <ol class="workflow-list">
+    <li><span class="number">01</span><div><h3>Count the chairs.</h3><p>Start with your household size. In the preview above, use + or − to set a table for one to eight.</p></div></li>
+    <li><span class="number">02</span><div><h3>Take a look at the week.</h3><p>Our sample leaves room between three dinners for leftovers, evenings out, and whatever comes up.</p></div></li>
+    <li><span class="number">03</span><div><h3>Keep your plan handy.</h3><p>Download your sample with a portion count and a starter ingredient list scaled to your table.</p></div></li>
+  </ol>
+</section>
+
+<section class="faq" id="faq" aria-labelledby="faq-title">
+  <div><p class="eyebrow">Good questions</p><h2 id="faq-title">Before we<br>set the table.</h2></div>
+  <div>
+    <details open><summary>Can I try it without signing up?</summary><p>Yes. Adjust the household size in the preview, then download your sample week below. This page works entirely in your browser and doesn’t ask for personal information.</p></details>
+    <details><summary>What counts as a portion?</summary><p>The preview counts one standard portion per person, per dinner. Appetites vary, so treat the ingredient quantities as a starting point and adjust for your household.</p></details>
+    <details><summary>What if I want leftovers?</summary><p>Add extra people to the sample portion count. For example, choose four portions when cooking for two if you’d like another meal for the next day.</p></details>
+    <details><summary>Is this the full app?</summary><p>This is an interactive preview of Tableful. It includes a fixed three-meal week, adjustable portions, and a downloadable starter plan. Recipe browsing and saved accounts aren’t part of this demo.</p></details>
+  </div>
+</section>
+
+<section class="closing" aria-labelledby="closing-title">
+  <p class="eyebrow">There’s a place for you</p>
+  <h2 id="closing-title">Let’s put something good on the table.</h2>
+  <p id="download-description">Your sample week is set for 2 people. Make it yours.</p>
+  <button class="button" id="download" type="button">Download my sample week <span aria-hidden="true">↓</span></button>
+  <p id="download-status" role="status" style="margin:12px 0 0;font-size:11px">A simple text file. Ready for your fridge, or your phone.</p>
+</section>
+</main>
+
+<footer>
+  <a href="#" class="logo">tableful</a>
+  <small>© <span id="year">2026</span> Tableful. Made for the everyday dinner.</small>
+  <a href="#preview">Back to your table ↑</a>
+</footer>
+</div>
+
+<script>
+(() => {
+  let people = 2;
+  const get = id => document.getElementById(id);
+  function render() {
+    get('people').textContent = people;
+    get('portions').textContent = `${people * 3} portions`;
+    get('ready').textContent = `✓ A little plan for your table of ${people}`;
+    get('download-description').textContent =
+      `Your sample week is set for ${people} ${people === 1 ? 'person' : 'people'}. Make it yours.`;
+    get('minus').disabled = people === 1;
+    get('plus').disabled = people === 8;
+  }
+  get('minus').addEventListener('click', () => { people = Math.max(1, people - 1); render(); });
+  get('plus').addEventListener('click', () => { people = Math.min(8, people + 1); render(); });
+  get('download').addEventListener('click', () => {
+    const plan = `TABLEFUL — YOUR SAMPLE WEEK
+A little planning. A fuller table.
+
+Your table: ${people} ${people === 1 ? 'person' : 'people'}
+3 dinners · ${people * 3} total portions
+
+MONDAY — Lemon & herb chicken
+${people * 150} g chicken
+${people * 60} g dry grains
+${people * 80} g leafy greens
+${Math.ceil(people / 2)} lemon(s)
+Herbs, olive oil, salt and pepper to taste.
+
+WEDNESDAY — Roasted tomato pasta
+${people * 90} g dry pasta
+${people * 200} g tomatoes
+${Math.ceil(people / 2)} garlic clove(s)
+Basil and olive oil to taste.
+
+FRIDAY — Chickpea & greens bowls
+${people * 150} g drained cooked chickpeas
+${people * 60} g dry grains
+${people * 80} g leafy greens
+${Math.ceil(people / 2)} lemon(s)
+Olive oil and seasonings to taste.
+
+YOUR STARTER SHOPPING LIST
+Chicken: ${people * 150} g
+Dry grains: ${people * 120} g
+Leafy greens: ${people * 160} g
+Lemons: ${Math.ceil(people / 2) * 2}
+Dry pasta: ${people * 90} g
+Tomatoes: ${people * 200} g
+Garlic: ${Math.ceil(people / 2)} clove(s)
+Drained cooked chickpeas: ${people * 150} g
+Herbs, basil, olive oil, salt and pepper
+
+These are sample ingredient quantities, not complete recipes.
+Adjust for your appetite and check your pantry before shopping.
+Leave Tuesday and Thursday open for whatever life brings.
+
+Made for your table. — Tableful
+`;
+    const url = URL.createObjectURL(new Blob([plan], {type:'text/plain;charset=utf-8'}));
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `tableful-week-for-${people}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    get('download-status').textContent = 'Your sample plan is ready. Happy cooking!';
+  });
+  get('year').textContent = new Date().getFullYear();
+  render();
+})();
+</script>
+</body>
+</html>

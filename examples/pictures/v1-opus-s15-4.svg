@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <!-- Sky -->
+  <rect width="800" height="270" fill="#00A8FF"/>
+  <!-- Sun -->
+  <circle cx="680" cy="90" r="50" fill="#FFE600"/>
+  <!-- Clouds (flat) -->
+  <g fill="#FFFFFF">
+    <ellipse cx="140" cy="80" rx="55" ry="18"/>
+    <ellipse cx="175" cy="68" rx="35" ry="20"/>
+    <ellipse cx="520" cy="60" rx="45" ry="14"/>
+  </g>
+
+  <!-- Ocean -->
+  <rect y="260" width="800" height="160" fill="#0033CC"/>
+  <rect y="260" width="800" height="14" fill="#0055FF"/>
+  <!-- Wave crests -->
+  <g fill="#00E5FF">
+    <path d="M40 310 q20 -12 40 0 q-20 -5 -40 0z"/>
+    <path d="M180 345 q22 -13 44 0 q-22 -5 -44 0z"/>
+    <path d="M600 300 q20 -12 40 0 q-20 -5 -40 0z"/>
+    <path d="M700 360 q22 -13 44 0 q-22 -5 -44 0z"/>
+    <path d="M560 385 q18 -10 36 0 q-18 -4 -36 0z"/>
+  </g>
+
+  <!-- Boardwalk railing -->
+  <rect y="388" width="800" height="12" fill="#FF1744"/>
+  <g fill="#FF1744">
+    <rect x="20"  y="388" width="14" height="120"/>
+    <rect x="200" y="388" width="14" height="120"/>
+    <rect x="380" y="388" width="14" height="120"/>
+    <rect x="560" y="388" width="14" height="120"/>
+    <rect x="740" y="388" width="14" height="120"/>
+  </g>
+  <rect y="440" width="800" height="8" fill="#FF1744"/>
+
+  <!-- Boardwalk deck -->
+  <rect y="505" width="800" height="95" fill="#FF6D00"/>
+  <rect y="505" width="800" height="10" fill="#FFAB00"/>
+  <g fill="#BF360C">
+    <rect y="540" width="800" height="5"/>
+    <rect y="572" width="800" height="5"/>
+    <rect x="95"  y="515" width="5" height="85"/>
+    <rect x="265" y="515" width="5" height="85"/>
+    <rect x="455" y="515" width="5" height="85"/>
+    <rect x="640" y="515" width="5" height="85"/>
+  </g>
+
+  <!-- Far leg (behind bike) -->
+  <path d="M345 300 L330 380 L360 420 L352 426 L318 384 L333 298 Z" fill="#E65100"/>
+  <path d="M345 418 l30 2 l0 10 l-34 0 z" fill="#E65100"/>
+
+  <!-- Wheels (rings via even-odd) -->
+  <g fill="#111111" fill-rule="evenodd">
+    <path d="M175 420 a85 85 0 1 0 170 0 a85 85 0 1 0 -170 0 Z M188 420 a72 72 0 1 0 144 0 a72 72 0 1 0 -144 0 Z"/>
+    <path d="M435 420 a85 85 0 1 0 170 0 a85 85 0 1 0 -170 0 Z M448 420 a72 72 0 1 0 144 0 a72 72 0 1 0 -144 0 Z"/>
+  </g>
+  <!-- Spokes -->
+  <g stroke="#FFFFFF" stroke-width="3">
+    <path d="M260 348 V492 M188 420 H332 M209 369 L311 471 M311 369 L209 471"/>
+    <path d="M520 348 V492 M448 420 H592 M469 369 L571 471 M571 369 L469 471"/>
+  </g>
+  <circle cx="260" cy="420" r="10" fill="#FFE600"/>
+  <circle cx="520" cy="420" r="10" fill="#FFE600"/>
+
+  <!-- Bike frame -->
+  <g stroke="#00C853" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M260 420 L370 430 L340 320 Z"/>
+    <path d="M340 320 L490 310 L370 430"/>
+    <path d="M490 300 L520 420"/>
+    <path d="M490 300 L482 262"/>
+  </g>
+  <!-- Handlebar -->
+  <path d="M470 258 L508 252" stroke="#111111" stroke-width="10" stroke-linecap="round"/>
+  <!-- Seat -->
+  <path d="M310 312 Q340 300 365 312 L360 320 L315 320 Z" fill="#111111"/>
+  <!-- Chainring & crank -->
+  <circle cx="370" cy="430" r="20" fill="#FFE600"/>
+  <path d="M370 430 L395 460" stroke="#111111" stroke-width="8" stroke-linecap="round"/>
+  <rect x="385" y="456" width="26" height="8" fill="#111111"/>
+
+  <!-- Waving far wing (raised behind head) -->
+  <path d="M330 250 Q300 190 300 120 L285 95 L305 105 L300 80 L320 100 L322 72 L338 102 Q355 160 375 235 Z" fill="#D9D9D9"/>
+  <!-- Wave motion marks -->
+  <g fill="#FFFFFF">
+    <path d="M262 92 q-12 18 0 36 q-6 -18 0 -36z"/>
+    <path d="M246 82 q-16 28 0 56 q-8 -28 0 -56z"/>
+  </g>
+
+  <!-- Body -->
+  <ellipse cx="350" cy="265" rx="78" ry="52" fill="#FFFFFF"/>
+  <!-- Tail -->
+  <path d="M278 250 L240 238 L250 262 L278 278 Z" fill="#FFFFFF"/>
+  <!-- Neck -->
+  <path d="M395 240 Q410 200 425 160 L455 165 Q440 210 425 255 Z" fill="#FFFFFF"/>
+  <!-- Head -->
+  <circle cx="442" cy="158" r="24" fill="#FFFFFF"/>
+  <!-- Crest -->
+  <path d="M428 138 L415 125 L438 134 Z" fill="#FFE600"/>
+  <!-- Pouch -->
+  <path d="M458 168 Q520 215 575 180 L460 176 Z" fill="#FFB300"/>
+  <!-- Upper bill -->
+  <path d="M455 150 L585 172 L580 180 L458 172 Z" fill="#FF6D00"/>
+  <path d="M585 172 L594 182 L580 180 Z" fill="#FF1744"/>
+  <!-- Eye -->
+  <circle cx="448" cy="153" r="5" fill="#111111"/>
+  <circle cx="450" cy="151" r="1.6" fill="#FFFFFF"/>
+
+  <!-- Near leg (pedaling) -->
+  <path d="M370 300 L415 375 L400 460 L388 458 L400 378 L355 308 Z" fill="#FF6D00"/>
+  <path d="M385 456 l34 0 l4 12 l-40 0 z" fill="#FF6D00"/>
+
+  <!-- Steering near wing reaching handlebar -->
+  <path d="M320 245 Q380 225 430 245 L490 250 L498 262 L480 266 Q420 280 340 285 Z" fill="#EDEDED"/>
+  <path d="M345 270 Q390 268 430 262 L420 272 Q385 280 350 282 Z" fill="#D9D9D9"/>
+</svg>

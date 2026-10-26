@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" width="600" height="500">
+  <g stroke="#3b2f25" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+
+    <!-- REAR WHEEL (farther away, slightly smaller: three-quarter view) -->
+    <ellipse cx="190" cy="350" rx="60" ry="82" fill="none" stroke="#4a3f35" stroke-width="12"/>
+    <ellipse cx="190" cy="350" rx="60" ry="82" fill="none"/>
+    <ellipse cx="190" cy="350" rx="53" ry="75" fill="none" stroke-width="3"/>
+    <g stroke-width="2.5">
+      <line x1="243" y1="350" x2="137" y2="350"/>
+      <line x1="190" y1="275" x2="190" y2="425"/>
+      <line x1="227.5" y1="297" x2="152.5" y2="403"/>
+      <line x1="152.5" y1="297" x2="227.5" y2="403"/>
+    </g>
+    <circle cx="190" cy="350" r="7" fill="#8a7a62"/>
+
+    <!-- FAR LEG (flung out backward, off the pedal) -->
+    <polyline points="272,226 238,268 214,284" fill="none" stroke-width="13"/>
+    <polyline points="272,226 238,268 214,284" fill="none" stroke="#c98a4b" stroke-width="7"/>
+    <path d="M216,280 L188,276 L196,290 L186,300 L214,292 Z" fill="#c98a4b"/>
+
+    <!-- CHAIN + CHAINRING -->
+    <ellipse cx="300" cy="375" rx="17" ry="22" fill="#8a7a62"/>
+    <path d="M300,353 L190,343 M300,397 L190,357" fill="none" stroke="#5a4c3e" stroke-width="3"/>
+
+    <!-- FRAME -->
+    <g fill="none" stroke-width="13">
+      <path d="M190,350 L300,375 L270,240 Z"/>
+      <path d="M270,240 L395,228 L405,265 L300,375"/>
+    </g>
+    <g fill="none" stroke="#9c5b3c" stroke-width="7">
+      <path d="M190,350 L300,375 L270,240 Z"/>
+      <path d="M270,240 L395,228 L405,265 L300,375"/>
+    </g>
+
+    <!-- FRONT WHEEL -->
+    <ellipse cx="430" cy="370" rx="70" ry="92" fill="none" stroke="#4a3f35" stroke-width="12"/>
+    <ellipse cx="430" cy="370" rx="70" ry="92" fill="none"/>
+    <ellipse cx="430" cy="370" rx="62" ry="84" fill="none" stroke-width="3"/>
+    <g stroke-width="2.5">
+      <line x1="492" y1="370" x2="368" y2="370"/>
+      <line x1="430" y1="286" x2="430" y2="454"/>
+      <line x1="474" y1="311" x2="386" y2="429"/>
+      <line x1="386" y1="311" x2="474" y2="429"/>
+    </g>
+    <circle cx="430" cy="370" r="8" fill="#8a7a62"/>
+
+    <!-- FORK -->
+    <line x1="400" y1="240" x2="430" y2="370" stroke-width="13"/>
+    <line x1="400" y1="240" x2="430" y2="370" stroke="#9c5b3c" stroke-width="7"/>
+
+    <!-- EMPTY PEDALS (feet are off them!) -->
+    <line x1="300" y1="375" x2="326" y2="398" stroke-width="7"/>
+    <rect x="316" y="396" width="26" height="9" rx="2" fill="#6b6b47"/>
+    <line x1="300" y1="375" x2="278" y2="354" stroke-width="5"/>
+    <rect x="262" y="347" width="22" height="8" rx="2" fill="#6b6b47"/>
+
+    <!-- SEAT -->
+    <line x1="270" y1="240" x2="266" y2="222" stroke-width="7"/>
+    <path d="M238,218 Q262,208 294,216 Q290,228 262,228 Q242,228 238,218 Z" fill="#6b6b47"/>
+
+    <!-- TAIL FEATHERS -->
+    <path d="M222,182 L178,170 L190,186 L172,196 L196,200 L188,214 L228,204 Z" fill="#b8a888"/>
+
+    <!-- BODY -->
+    <ellipse cx="285" cy="188" rx="78" ry="48" transform="rotate(-14 285 188)" fill="#e8dcc4"/>
+
+    <!-- FOLDED WING -->
+    <path d="M232,176 Q276,148 330,166 Q312,206 262,212 Q236,206 232,176 Z" fill="#b8a888"/>
+    <path d="M252,196 Q276,192 300,180 M260,184 Q284,178 310,170" fill="none" stroke-width="3"/>
+
+    <!-- NECK -->
+    <path d="M326,170 Q338,126 358,98 L388,100 Q368,132 362,180 Z" fill="#e8dcc4"/>
+
+    <!-- HEAD -->
+    <circle cx="375" cy="86" r="23" fill="#e8dcc4"/>
+    <!-- crest -->
+    <path d="M362,68 Q352,52 344,56 Q356,60 360,72 M370,64 Q366,46 358,46 Q368,54 368,66" fill="#b8a888" stroke-width="3"/>
+    <!-- eye -->
+    <circle cx="380" cy="78" r="5" fill="#3b2f25" stroke="none"/>
+    <circle cx="381.5" cy="76.5" r="1.6" fill="#e8dcc4" stroke="none"/>
+
+    <!-- OPEN BEAK (mid-squawk) -->
+    <path d="M392,88 L490,93 L484,104 L392,97 Z" fill="#6e3b2e"/>
+    <path d="M388,72 L494,86 Q500,91 490,94 L393,89 Z" fill="#d4a55a"/>
+    <path d="M392,97 L484,104 Q472,142 422,134 Q398,128 390,108 Z" fill="#c9953f"/>
+    <path d="M410,112 Q440,124 470,112" fill="none" stroke-width="3"/>
+
+    <!-- SQUAWK LINES -->
+    <g fill="none" stroke-width="4">
+      <path d="M508,72 L526,60"/>
+      <path d="M512,92 L536,92"/>
+      <path d="M508,112 L526,124"/>
+    </g>
+
+    <!-- NEAR LEG (kicked out forward, off the pedal) -->
+    <polyline points="300,226 334,264 366,282" fill="none" stroke-width="13"/>
+    <polyline points="300,226 334,264 366,282" fill="none" stroke="#c98a4b" stroke-width="7"/>
+    <path d="M362,278 L392,270 L386,284 L398,294 L368,292 Z" fill="#c98a4b"/>
+
+    <!-- HANDLEBARS -->
+    <line x1="395" y1="228" x2="392" y2="206" stroke-width="7"/>
+    <path d="M372,214 L392,206 L414,196" fill="none" stroke-width="12"/>
+    <path d="M372,214 L392,206 L414,196" fill="none" stroke="#9c5b3c" stroke-width="6"/>
+    <line x1="364" y1="218" x2="376" y2="212" stroke="#6b6b47" stroke-width="10"/>
+
+    <!-- WING TIP GRIPPING THE BAR -->
+    <path d="M318,172 Q352,180 374,206 Q362,222 346,210 Q330,196 312,188 Z" fill="#b8a888"/>
+  </g>
+</svg>

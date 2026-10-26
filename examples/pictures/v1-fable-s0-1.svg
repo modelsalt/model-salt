@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 400" width="520" height="400">
+  <defs>
+    <style>
+      .ln { stroke: #1a1a1a; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+  </defs>
+
+  <!-- ===== BICYCLE ===== -->
+  <!-- Rear wheel -->
+  <circle cx="120" cy="300" r="70" fill="none" class="ln" stroke-width="7"/>
+  <circle cx="120" cy="300" r="56" fill="none" class="ln" stroke-width="3"/>
+  <g class="ln" stroke-width="3">
+    <line x1="120" y1="244" x2="120" y2="356"/>
+    <line x1="64" y1="300" x2="176" y2="300"/>
+    <line x1="80" y1="260" x2="160" y2="340"/>
+    <line x1="160" y1="260" x2="80" y2="340"/>
+  </g>
+  <circle cx="120" cy="300" r="9" fill="#555" class="ln"/>
+
+  <!-- Front wheel -->
+  <circle cx="400" cy="300" r="70" fill="none" class="ln" stroke-width="7"/>
+  <circle cx="400" cy="300" r="56" fill="none" class="ln" stroke-width="3"/>
+  <g class="ln" stroke-width="3">
+    <line x1="400" y1="244" x2="400" y2="356"/>
+    <line x1="344" y1="300" x2="456" y2="300"/>
+    <line x1="360" y1="260" x2="440" y2="340"/>
+    <line x1="440" y1="260" x2="360" y2="340"/>
+  </g>
+  <circle cx="400" cy="300" r="9" fill="#555" class="ln"/>
+
+  <!-- Frame -->
+  <g fill="none" class="ln" stroke="#d62828" stroke-width="9">
+    <polyline points="120,300 220,190 350,190 400,300"/>
+    <polyline points="120,300 250,300 220,190"/>
+    <line x1="250" y1="300" x2="350" y2="190"/>
+    <line x1="350" y1="190" x2="372" y2="150"/>
+    <line x1="220" y1="190" x2="210" y2="150"/>
+  </g>
+  <!-- Frame outline (dark edge) -->
+  <g fill="none" class="ln" stroke-width="3" opacity="0.9">
+    <polyline points="120,300 220,190 350,190 400,300"/>
+    <polyline points="120,300 250,300 220,190"/>
+    <line x1="250" y1="300" x2="350" y2="190"/>
+  </g>
+
+  <!-- Handlebars -->
+  <path d="M372 150 L372 135 L395 128" fill="none" class="ln" stroke-width="6"/>
+  <circle cx="397" cy="127" r="5" fill="#1a1a1a"/>
+
+  <!-- Seat -->
+  <path d="M190 148 L235 148 L228 138 L198 138 Z" fill="#333" class="ln"/>
+
+  <!-- Crank & pedals -->
+  <circle cx="250" cy="300" r="16" fill="#777" class="ln"/>
+  <line x1="250" y1="300" x2="272" y2="325" class="ln" stroke-width="5"/>
+  <line x1="250" y1="300" x2="228" y2="275" class="ln" stroke-width="5"/>
+  <rect x="264" y="321" width="20" height="8" fill="#333" class="ln" stroke-width="3"/>
+  <rect x="216" y="269" width="20" height="8" fill="#333" class="ln" stroke-width="3"/>
+  <!-- Chain -->
+  <path d="M120 300 Q185 282 250 284 M120 300 Q185 318 250 316" fill="none" class="ln" stroke-width="3" stroke-dasharray="5,3"/>
+
+  <!-- ===== PELICAN ===== -->
+  <!-- Tail -->
+  <path d="M190 190 L150 175 L160 200 L145 215 L190 212 Z" fill="#f4f4f4" class="ln"/>
+
+  <!-- Body -->
+  <ellipse cx="240" cy="190" rx="70" ry="48" fill="#f8f8f8" class="ln"/>
+
+  <!-- Wing -->
+  <path d="M225 165 Q290 150 310 200 Q275 215 230 205 Q210 195 225 165 Z" fill="#e3e3e3" class="ln"/>
+
+  <!-- Legs -->
+  <path d="M248 228 L240 255 L228 273" fill="none" class="ln" stroke="#f0a020" stroke-width="7"/>
+  <path d="M248 228 L240 255 L228 273" fill="none" class="ln" stroke-width="2.5"/>
+  <path d="M258 230 L268 290 L272 323" fill="none" class="ln" stroke="#f0a020" stroke-width="7"/>
+  <path d="M258 230 L268 290 L272 323" fill="none" class="ln" stroke-width="2.5"/>
+  <!-- Feet -->
+  <path d="M216 273 L240 273 L234 280 Z" fill="#f0a020" class="ln" stroke-width="3"/>
+  <path d="M260 323 L286 323 L280 330 Z" fill="#f0a020" class="ln" stroke-width="3"/>
+
+  <!-- Neck -->
+  <path d="M290 165 Q330 130 325 90 Q320 60 340 55 L352 85 Q335 110 318 140 Q310 160 295 175 Z" fill="#f8f8f8" class="ln"/>
+
+  <!-- Head -->
+  <circle cx="348" cy="72" r="30" fill="#f8f8f8" class="ln"/>
+
+  <!-- Wing-arm to handlebar -->
+  <path d="M290 175 Q340 160 372 140" fill="none" class="ln" stroke="#e3e3e3" stroke-width="10"/>
+  <path d="M290 175 Q340 160 372 140" fill="none" class="ln" stroke-width="3"/>
+
+  <!-- Beak (upper) -->
+  <path d="M372 65 L470 78 L372 88 Z" fill="#f7b733" class="ln"/>
+  <!-- Pouch (lower beak) -->
+  <path d="M372 88 L465 80 Q440 125 385 110 Q372 100 372 88 Z" fill="#f08a24" class="ln"/>
+
+  <!-- Eye -->
+  <circle cx="358" cy="62" r="7" fill="#fff" class="ln" stroke-width="3"/>
+  <circle cx="360" cy="62" r="3" fill="#1a1a1a"/>
+
+  <!-- Head tuft -->
+  <path d="M330 48 Q325 32 338 40 Q336 28 350 42" fill="none" class="ln" stroke-width="4"/>
+</svg>

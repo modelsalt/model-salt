@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-labelledby="t">
+  <title id="t">A pelican riding a bicycle, front view, watercolor style</title>
+
+  <defs>
+    <!-- halftone dot backdrop -->
+    <pattern id="halftone" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="7" cy="7" r="3" fill="#c9d8df"/>
+      <circle cx="21" cy="21" r="2.4" fill="#c9d8df"/>
+    </pattern>
+
+    <!-- fades dots near subject and edges -->
+    <radialGradient id="vignette" cx="50%" cy="48%" r="75%">
+      <stop offset="0%"  stop-color="#f7f2e8" stop-opacity="0.85"/>
+      <stop offset="50%" stop-color="#f7f2e8" stop-opacity="0.15"/>
+      <stop offset="80%" stop-color="#f7f2e8" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#f7f2e8" stop-opacity="0.9"/>
+    </radialGradient>
+
+    <radialGradient id="bodyGrad" cx="45%" cy="32%" r="80%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="70%" stop-color="#efeee8"/>
+      <stop offset="100%" stop-color="#d4d9d4"/>
+    </radialGradient>
+
+    <radialGradient id="headGrad" cx="45%" cy="35%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e7e8e2"/>
+    </radialGradient>
+
+    <linearGradient id="beakGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"  stop-color="#f2b45e"/>
+      <stop offset="100%" stop-color="#dd8c3c"/>
+    </linearGradient>
+
+    <!-- soft watercolor edges -->
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.2"/>
+    </filter>
+    <filter id="softer" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+
+    <!-- faint paper grain -->
+    <filter id="paper">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="n"/>
+      <feColorMatrix in="n" type="matrix"
+        values="0 0 0 0 0.55  0 0 0 0 0.50  0 0 0 0 0.44  0 0 0 0.07 0"/>
+    </filter>
+  </defs>
+
+  <!-- backdrop -->
+  <rect width="600" height="600" fill="#f7f2e8"/>
+  <rect width="600" height="600" fill="url(#halftone)"/>
+  <rect width="600" height="600" fill="url(#vignette)"/>
+
+  <!-- ground shadow -->
+  <ellipse cx="300" cy="472" rx="150" ry="20" fill="#b3c1b5" opacity="0.55" filter="url(#softer)"/>
+
+  <g filter="url(#soft)">
+    <!-- spin motion hints -->
+    <path d="M246 352 q-16 40 0 80" stroke="#a9b6ba" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.6"/>
+    <path d="M354 352 q16 40 0 80" stroke="#a9b6ba" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.6"/>
+
+    <!-- front wheel -->
+    <ellipse cx="300" cy="392" rx="30" ry="64" fill="none" stroke="#45494d" stroke-width="11"/>
+    <path d="M300 336 L300 448 M272 392 L328 392" stroke="#9aa0a4" stroke-width="3" opacity="0.8"/>
+    <circle cx="300" cy="392" r="6" fill="#6b7176"/>
+
+    <!-- fork, head tube, handlebar -->
+    <path d="M300 392 L286 268 M300 392 L314 268" stroke="#b85450" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <path d="M300 268 L300 248" stroke="#b85450" stroke-width="9" stroke-linecap="round"/>
+    <path d="M212 248 Q300 236 388 248" stroke="#b85450" stroke-width="9" fill="none" stroke-linecap="round"/>
+    <rect x="194" y="241" width="24" height="13" rx="6" fill="#4c4642"/>
+    <rect x="382" y="241" width="24" height="13" rx="6" fill="#4c4642"/>
+
+    <!-- cranks and pedals (one up, one down — mid-pedal) -->
+    <path d="M300 412 L264 388 M300 412 L336 434" stroke="#5a5f63" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="300" cy="412" r="7" fill="#5a5f63"/>
+    <rect x="250" y="383" width="28" height="10" rx="4" fill="#45494d"/>
+    <rect x="322" y="429" width="28" height="10" rx="4" fill="#45494d"/>
+
+    <!-- wings resting on the grips -->
+    <path d="M252 172 C216 186 205 216 208 248 C209 258 219 260 225 251 C229 221 239 201 264 187 Z" fill="#e3e7ea"/>
+    <path d="M348 172 C384 186 395 216 392 248 C391 258 381 260 375 251 C371 221 361 201 336 187 Z" fill="#e3e7ea"/>
+    <ellipse cx="211" cy="250" rx="9" ry="7" fill="#b9c0c5"/>
+    <ellipse cx="389" cy="250" rx="9" ry="7" fill="#b9c0c5"/>
+
+    <!-- legs and feet on pedals -->
+    <path d="M282 326 L263 374 M318 326 L336 420" stroke="#d98d4c" stroke-width="6" stroke-linecap="round"/>
+    <ellipse cx="263" cy="378" rx="15" ry="9" fill="#d98d4c" transform="rotate(-6 263 378)"/>
+    <ellipse cx="336" cy="424" rx="15" ry="9" fill="#d98d4c" transform="rotate(6 336 424)"/>
+
+    <!-- body -->
+    <ellipse cx="300" cy="240" rx="86" ry="96" fill="url(#bodyGrad)"/>
+
+    <!-- head with little crest -->
+    <circle cx="300" cy="130" r="48" fill="url(#headGrad)"/>
+    <path d="M296 84 Q300 68 313 64 Q306 77 308 88 Z" fill="#d8dcd9"/>
+
+    <!-- pouch, then foreshortened beak hanging toward viewer -->
+    <path d="M282 168 C280 200 288 224 300 224 C312 224 320 200 318 168 C310 178 290 178 282 168 Z" fill="#f0c08e" opacity="0.9"/>
+    <path d="M278 150 Q300 140 322 150 C318 176 312 196 300 204 C288 196 282 176 278 150 Z" fill="url(#beakGrad)"/>
+    <circle cx="300" cy="202" r="4.5" fill="#cf8338"/>
+
+    <!-- eyes -->
+    <circle cx="278" cy="124" r="4.5" fill="#33373a"/>
+    <circle cx="322" cy="124" r="4.5" fill="#33373a"/>
+    <circle cx="279.5" cy="122.5" r="1.4" fill="#ffffff"/>
+    <circle cx="323.5" cy="122.5" r="1.4" fill="#ffffff"/>
+  </g>
+
+  <!-- paper grain over everything -->
+  <rect width="600" height="600" filter="url(#paper)" opacity="0.6"/>
+</svg>

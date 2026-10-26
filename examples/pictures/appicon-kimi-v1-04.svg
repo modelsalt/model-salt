@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8FD4F8"/>
+      <stop offset="0.55" stop-color="#3FA7EE"/>
+      <stop offset="1" stop-color="#1B84E2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Square background — no rounded corners -->
+  <rect width="512" height="512" fill="url(#sky)"/>
+
+  <!-- One bold centered symbol: sun peeking from behind a cloud -->
+  <g transform="translate(2,5)">
+    <!-- Sun disc -->
+    <circle cx="205" cy="208" r="64" fill="#FFFFFF"/>
+
+    <!-- Sun rays -->
+    <g stroke="#FFFFFF" stroke-width="15" stroke-linecap="round">
+      <line x1="205" y1="128" x2="205" y2="102"/>
+      <line x1="205" y1="128" x2="205" y2="102" transform="rotate(45 205 208)"/>
+      <line x1="205" y1="128" x2="205" y2="102" transform="rotate(90 205 208)"/>
+      <line x1="205" y1="128" x2="205" y2="102" transform="rotate(135 205 208)"/>
+      <line x1="205" y1="128" x2="205" y2="102" transform="rotate(180 205 208)"/>
+      <line x1="205" y1="128" x2="205" y2="102" transform="rotate(225 205 208)"/>
+      <line x1="205" y1="128" x2="205" y2="102" transform="rotate(270 205 208)"/>
+      <line x1="205" y1="128" x2="205" y2="102" transform="rotate(315 205 208)"/>
+    </g>
+
+    <!-- Cloud in front (partially covers the sun's lower rays) -->
+    <g fill="#FFFFFF">
+      <rect x="140" y="336" width="256" height="64" rx="32"/>
+      <circle cx="210" cy="328" r="54"/>
+      <circle cx="288" cy="296" r="76"/>
+      <circle cx="360" cy="334" r="48"/>
+    </g>
+  </g>
+</svg>

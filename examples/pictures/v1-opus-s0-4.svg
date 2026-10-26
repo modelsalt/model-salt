@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" width="600" height="500">
+  <!-- Background -->
+  <rect width="600" height="500" fill="#bfe6f5"/>
+  <circle cx="520" cy="80" r="40" fill="#ffe27a" stroke="#222" stroke-width="4"/>
+  <path d="M60 90 q20 -25 45 -8 q20 -20 42 2 q22 0 18 20 h-112 q-12 -10 7 -14z" fill="#fff" stroke="#222" stroke-width="4" stroke-linejoin="round"/>
+  <rect x="0" y="448" width="600" height="52" fill="#9bd27a" stroke="#222" stroke-width="4"/>
+
+  <g stroke="#222" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Wheels (equal size) -->
+    <g fill="none">
+      <circle cx="170" cy="370" r="78" stroke-width="10"/>
+      <circle cx="170" cy="370" r="66" stroke="#777" stroke-width="3"/>
+      <circle cx="430" cy="370" r="78" stroke-width="10"/>
+      <circle cx="430" cy="370" r="66" stroke="#777" stroke-width="3"/>
+      <g stroke="#888" stroke-width="2">
+        <path d="M170 304 V436 M104 370 H236 M123 323 L217 417 M217 323 L123 417"/>
+        <path d="M430 304 V436 M364 370 H496 M383 323 L477 417 M477 323 L383 417"/>
+      </g>
+    </g>
+    <circle cx="170" cy="370" r="7" fill="#ccc" stroke-width="3"/>
+    <circle cx="430" cy="370" r="7" fill="#ccc" stroke-width="3"/>
+
+    <!-- Far leg + far pedal -->
+    <line x1="290" y1="380" x2="268" y2="345" stroke-width="7" stroke="#555"/>
+    <rect x="256" y="340" width="26" height="8" rx="2" fill="#555" stroke-width="3"/>
+    <path d="M262 232 L292 290 L270 340" fill="none" stroke-width="13"/>
+    <path d="M262 232 L292 290 L270 340" fill="none" stroke="#d9822b" stroke-width="7"/>
+    <path d="M258 340 l12 -8 l14 8 z" fill="#d9822b" stroke-width="3"/>
+
+    <!-- Chain -->
+    <path d="M290 357 L170 361 M290 403 L170 379" fill="none" stroke="#555" stroke-width="3"/>
+
+    <!-- Diamond frame: outline, then red paint -->
+    <g fill="none" stroke-width="9">
+      <path d="M170 370 L290 380 L252 258 Z"/>
+      <path d="M252 258 L398 252 L407 292 L290 380"/>
+      <path d="M407 292 L430 370"/>
+      <path d="M398 252 L393 232"/>
+    </g>
+    <g fill="none" stroke="#e23c3c" stroke-width="5">
+      <path d="M170 370 L290 380 L252 258 Z"/>
+      <path d="M252 258 L398 252 L407 292 L290 380"/>
+      <path d="M407 292 L430 370"/>
+      <path d="M398 252 L393 232"/>
+    </g>
+    <!-- Handlebars -->
+    <path d="M380 232 L405 226 Q424 222 426 240" fill="none" stroke-width="7"/>
+    <!-- Saddle -->
+    <path d="M226 250 Q250 240 276 248 L270 256 Q248 254 230 258 Z" fill="#333" stroke-width="3"/>
+    <!-- Chainring -->
+    <circle cx="290" cy="380" r="23" fill="#ddd" stroke-width="4"/>
+    <circle cx="290" cy="380" r="6" fill="#222" stroke-width="2"/>
+
+    <!-- Tail -->
+    <path d="M215 215 L180 238 L192 242 L178 255 L222 238 Z" fill="#e8e8e8" stroke-width="4"/>
+
+    <!-- Body (sitting upright) -->
+    <ellipse cx="252" cy="195" rx="44" ry="60" fill="#fafafa" stroke-width="5" transform="rotate(10 252 195)"/>
+
+    <!-- Near leg + near pedal -->
+    <path d="M268 238 L318 300 L312 410" fill="none" stroke-width="13"/>
+    <path d="M268 238 L318 300 L312 410" fill="none" stroke="#f39a3a" stroke-width="7"/>
+    <line x1="290" y1="380" x2="312" y2="415" stroke-width="7"/>
+    <rect x="298" y="411" width="28" height="8" rx="2" fill="#333" stroke-width="3"/>
+    <path d="M298 411 l14 -10 l18 10 z" fill="#f39a3a" stroke-width="3"/>
+
+    <!-- Neck -->
+    <path d="M238 148 C228 108 262 78 292 74 L316 102 C292 108 274 122 282 152 Z" fill="#fafafa" stroke-width="5"/>
+
+    <!-- Wing reaching to the handlebars -->
+    <path d="M238 160 C290 158 350 186 392 214 L418 222 L410 234 L395 232 C350 224 292 220 250 210 Z" fill="#e6e6e6" stroke-width="5"/>
+    <path d="M300 186 L338 214 M330 194 L365 222 M270 182 L305 210" fill="none" stroke="#999" stroke-width="3"/>
+    <!-- Wingtip feathers gripping the bar -->
+    <path d="M395 214 Q418 214 428 226 Q430 240 418 242 Q408 238 404 232 Z" fill="#3a3a3a" stroke-width="4"/>
+    <path d="M412 222 Q424 230 418 240" fill="none" stroke="#777" stroke-width="2"/>
+
+    <!-- Head with tufts -->
+    <circle cx="300" cy="90" r="25" fill="#fafafa" stroke-width="5"/>
+    <path d="M288 66 Q282 52 292 48 M298 65 Q298 50 308 50" fill="none" stroke-width="4"/>
+
+    <!-- Beak: pouch + upper mandible with hooked tip -->
+    <path d="M316 100 L440 118 Q390 168 320 116 Z" fill="#f07c3a" stroke-width="5"/>
+    <path d="M318 82 L440 110 Q450 116 440 122 L314 102 Z" fill="#f7b733" stroke-width="5"/>
+    <path d="M440 110 Q452 112 448 124" fill="none" stroke-width="4"/>
+
+    <!-- Eye -->
+    <circle cx="303" cy="84" r="6" fill="#222" stroke="none"/>
+    <circle cx="305" cy="82" r="2" fill="#fff" stroke="none"/>
+    <path d="M295 76 Q303 72 311 77" fill="none" stroke-width="3"/>
+  </g>
+</svg>

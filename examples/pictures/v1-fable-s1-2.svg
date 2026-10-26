@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <!-- Pelican body: soft white-to-grey shading -->
+    <radialGradient id="bodyGrad" cx="40%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="60%" stop-color="#e9ecef"/>
+      <stop offset="100%" stop-color="#b8bec6"/>
+    </radialGradient>
+    <!-- Wing: slightly darker grey -->
+    <linearGradient id="wingGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#dfe3e8"/>
+      <stop offset="100%" stop-color="#9aa3ad"/>
+    </linearGradient>
+    <!-- Beak: orange-yellow -->
+    <linearGradient id="beakGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffc247"/>
+      <stop offset="100%" stop-color="#e8831a"/>
+    </linearGradient>
+    <!-- Pouch: warmer, fleshier orange -->
+    <linearGradient id="pouchGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f7a94a"/>
+      <stop offset="100%" stop-color="#d96f1e"/>
+    </linearGradient>
+    <!-- Bicycle frame: dark steel -->
+    <linearGradient id="frameGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4a4f57"/>
+      <stop offset="100%" stop-color="#1f2328"/>
+    </linearGradient>
+    <!-- Tyre shading -->
+    <radialGradient id="tyreGrad" cx="35%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#555a60"/>
+      <stop offset="100%" stop-color="#15181b"/>
+    </radialGradient>
+  </defs>
+
+  <!-- ===== BICYCLE ===== -->
+  <!-- Rear wheel (right side, since pelican rides left) -->
+  <g id="rearWheel">
+    <circle cx="150" cy="150" r="30" fill="none" stroke="url(#tyreGrad)" stroke-width="6"/>
+    <circle cx="150" cy="150" r="27" fill="none" stroke="#c9ccd1" stroke-width="1"/>
+    <g stroke="#b5b9bf" stroke-width="1">
+      <line x1="150" y1="123" x2="150" y2="177"/>
+      <line x1="123" y1="150" x2="177" y2="150"/>
+      <line x1="131" y1="131" x2="169" y2="169"/>
+      <line x1="169" y1="131" x2="131" y2="169"/>
+      <line x1="140" y1="125" x2="160" y2="175"/>
+      <line x1="160" y1="125" x2="140" y2="175"/>
+      <line x1="125" y1="140" x2="175" y2="160"/>
+      <line x1="125" y1="160" x2="175" y2="140"/>
+    </g>
+    <circle cx="150" cy="150" r="4" fill="#2b2f34"/>
+  </g>
+
+  <!-- Front wheel (left side) -->
+  <g id="frontWheel">
+    <circle cx="50" cy="150" r="30" fill="none" stroke="url(#tyreGrad)" stroke-width="6"/>
+    <circle cx="50" cy="150" r="27" fill="none" stroke="#c9ccd1" stroke-width="1"/>
+    <g stroke="#b5b9bf" stroke-width="1">
+      <line x1="50" y1="123" x2="50" y2="177"/>
+      <line x1="23" y1="150" x2="77" y2="150"/>
+      <line x1="31" y1="131" x2="69" y2="169"/>
+      <line x1="69" y1="131" x2="31" y2="169"/>
+      <line x1="40" y1="125" x2="60" y2="175"/>
+      <line x1="60" y1="125" x2="40" y2="175"/>
+      <line x1="25" y1="140" x2="75" y2="160"/>
+      <line x1="25" y1="160" x2="75" y2="140"/>
+    </g>
+    <circle cx="50" cy="150" r="4" fill="#2b2f34"/>
+  </g>
+
+  <!-- Frame -->
+  <g stroke="url(#frameGrad)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Chainstay: rear hub to bottom bracket -->
+    <line x1="150" y1="150" x2="100" y2="152"/>
+    <!-- Seat tube: bottom bracket up to seat -->
+    <line x1="100" y1="152" x2="112" y2="105"/>
+    <!-- Seat stay: rear hub to seat cluster -->
+    <line x1="150" y1="150" x2="112" y2="105"/>
+    <!-- Down tube: bottom bracket to head tube -->
+    <line x1="100" y1="152" x2="62" y2="110"/>
+    <!-- Top tube: seat cluster to head tube -->
+    <line x1="112" y1="105" x2="66" y2="100"/>
+    <!-- Head tube / fork -->
+    <line x1="68" y1="96" x2="50" y2="150"/>
+    <!-- Handlebar stem and bars -->
+    <line x1="68" y1="96" x2="64" y2="86"/>
+    <path d="M 56 84 Q 64 80 72 84"/>
+  </g>
+  <!-- Seat post + saddle -->
+  <line x1="112" y1="105" x2="114" y2="94" stroke="#2b2f34" stroke-width="3"/>
+  <path d="M 104 93 Q 114 88 126 93 Q 114 97 104 93 Z" fill="#2b2f34"/>
+  <!-- Crank + pedals -->
+  <circle cx="100" cy="152" r="6" fill="#2b2f34"/>
+  <line x1="100" y1="152" x2="92" y2="164" stroke="#2b2f34" stroke-width="3" stroke-linecap="round"/>
+  <line x1="100" y1="152" x2="108" y2="140" stroke="#2b2f34" stroke-width="3" stroke-linecap="round"/>
+  <rect x="86" y="162" width="10" height="4" rx="1" fill="#3a3f45"/>
+  <rect x="104" y="137" width="10" height="4" rx="1" fill="#3a3f45"/>
+
+  <!-- ===== PELICAN ===== -->
+  <!-- Legs down to pedals (dark grey-orange) -->
+  <g stroke="#c0791c" stroke-width="3.5" stroke-linecap="round" fill="none">
+    <path d="M 106 100 Q 98 120 92 162"/>
+    <path d="M 110 100 Q 112 120 108 139"/>
+  </g>
+  <!-- Webbed feet -->
+  <path d="M 86 162 l -4 4 l 12 0 l -2 -4 Z" fill="#d98a22"/>
+  <path d="M 104 139 l -4 4 l 12 0 l -2 -4 Z" fill="#d98a22"/>
+
+  <!-- Body -->
+  <ellipse cx="112" cy="88" rx="30" ry="20" fill="url(#bodyGrad)" transform="rotate(-8 112 88)"/>
+  <!-- Tail feathers -->
+  <path d="M 138 86 Q 152 80 156 92 Q 146 92 140 95 Z" fill="#aeb5bd"/>
+  <!-- Wing, folded along the body -->
+  <path d="M 104 78 Q 128 70 146 86 Q 128 94 108 92 Q 100 86 104 78 Z" fill="url(#wingGrad)"/>
+  <path d="M 112 82 Q 128 78 140 86" fill="none" stroke="#8d969f" stroke-width="1" opacity="0.6"/>
+  <path d="M 114 87 Q 128 84 138 90" fill="none" stroke="#8d969f" stroke-width="1" opacity="0.5"/>
+
+  <!-- Neck: curves forward and up to the head -->
+  <path d="M 96 76 Q 82 66 78 48 Q 80 40 86 40 Q 90 58 102 72 Z" fill="url(#bodyGrad)"/>
+
+  <!-- Head -->
+  <circle cx="80" cy="40" r="11" fill="url(#bodyGrad)"/>
+  <!-- Crest tuft -->
+  <path d="M 84 30 Q 90 26 92 32 Q 88 31 86 34 Z" fill="#d7dce1"/>
+
+  <!-- Beak, pointing left -->
+  <path d="M 72 38 L 28 46 Q 26 48 30 50 L 72 44 Z" fill="url(#beakGrad)"/>
+  <!-- Pouch hanging beneath beak -->
+  <path d="M 72 44 L 30 50 Q 40 62 58 60 Q 70 56 74 48 Z" fill="url(#pouchGrad)"/>
+  <!-- Beak ridge highlight -->
+  <path d="M 70 39 L 32 46" stroke="#ffe08a" stroke-width="1" opacity="0.7"/>
+  <!-- Beak hook tip -->
+  <path d="M 28 46 Q 24 49 29 51" fill="none" stroke="#c45f12" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Eye -->
+  <circle cx="76" cy="38" r="3" fill="#ffffff"/>
+  <circle cx="75.5" cy="38.3" r="2" fill="#2b1a0e"/>
+  <circle cx="74.8" cy="37.5" r="0.7" fill="#ffffff"/>
+
+  <!-- Wing (near side) gripping handlebar -->
+  <path d="M 100 84 Q 86 86 70 86 Q 66 86 66 84 Q 80 80 98 78 Z" fill="#d3d8dd"/>
+  <path d="M 66 84 Q 60 84 58 85" stroke="#b0b7bf" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+</svg>

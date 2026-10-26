@@ -1,0 +1,222 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <defs>
+    <!-- Soft shading helpers -->
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+    <filter id="softer" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+
+    <!-- Gradients -->
+    <radialGradient id="tyreGrad" cx="40%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#6a6a6a"/>
+      <stop offset="0.7" stop-color="#2b2b2b"/>
+      <stop offset="1" stop-color="#101010"/>
+    </radialGradient>
+    <linearGradient id="rimGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f2f2f2"/>
+      <stop offset="0.5" stop-color="#b9bcc0"/>
+      <stop offset="1" stop-color="#6f7378"/>
+    </linearGradient>
+    <linearGradient id="frameGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff6a5a"/>
+      <stop offset="0.5" stop-color="#d93a2e"/>
+      <stop offset="1" stop-color="#7e1a12"/>
+    </linearGradient>
+    <linearGradient id="chromeGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.5" stop-color="#9aa0a6"/>
+      <stop offset="1" stop-color="#4d5257"/>
+    </linearGradient>
+    <linearGradient id="saddleGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6b4f3a"/>
+      <stop offset="1" stop-color="#1f140c"/>
+    </linearGradient>
+    <radialGradient id="bodyGrad" cx="38%" cy="30%" r="75%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.55" stop-color="#e9e5dc"/>
+      <stop offset="1" stop-color="#a8a196"/>
+    </radialGradient>
+    <linearGradient id="wingGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbfaf6"/>
+      <stop offset="0.6" stop-color="#d4cfc4"/>
+      <stop offset="1" stop-color="#8f877b"/>
+    </linearGradient>
+    <linearGradient id="tailGrad" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d9d4c9"/>
+      <stop offset="1" stop-color="#5f5850"/>
+    </linearGradient>
+    <linearGradient id="beakGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffe066"/>
+      <stop offset="0.6" stop-color="#f7a92a"/>
+      <stop offset="1" stop-color="#c7651a"/>
+    </linearGradient>
+    <linearGradient id="pouchGrad" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0" stop-color="#ffc9a3"/>
+      <stop offset="0.6" stop-color="#f08a5e"/>
+      <stop offset="1" stop-color="#b9553a"/>
+    </linearGradient>
+    <linearGradient id="legGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffcf6a"/>
+      <stop offset="1" stop-color="#a8641a"/>
+    </linearGradient>
+    <radialGradient id="eyeGrad" cx="35%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#6b6b6b"/>
+      <stop offset="0.5" stop-color="#1a1a1a"/>
+      <stop offset="1" stop-color="#000"/>
+    </radialGradient>
+  </defs>
+
+  <!-- ===== Ground shadow (soft) ===== -->
+  <path d="M110,540 C180,520 460,520 540,545 C470,570 180,570 110,540 Z"
+        fill="#000" opacity="0.18" filter="url(#softer)"/>
+
+  <!-- ===== Rear wheel (far, foreshortened) ===== -->
+  <path d="M227,445 C227,484.8 203.7,517 175,517 C146.3,517 123,484.8 123,445 C123,405.2 146.3,373 175,373 C203.7,373 227,405.2 227,445 Z"
+        fill="url(#tyreGrad)"/>
+  <path d="M219,445 C219,479.2 199.3,507 175,507 C150.7,507 131,479.2 131,445 C131,410.8 150.7,383 175,383 C199.3,383 219,410.8 219,445 Z"
+        fill="none" stroke="url(#rimGrad)" stroke-width="5"/>
+  <path d="M175,386 L175,504 M134,445 L216,445 M147,402 L203,488 M203,402 L147,488 M139,420 L211,470 M211,420 L139,470"
+        stroke="#c9ccd0" stroke-width="1.4" opacity="0.85"/>
+  <circle cx="175" cy="445" r="7" fill="url(#chromeGrad)"/>
+
+  <!-- ===== Frame (rear portion) ===== -->
+  <!-- Chain stay -->
+  <path d="M178,445 C215,452 265,458 305,462" fill="none" stroke="url(#frameGrad)" stroke-width="7" stroke-linecap="round"/>
+  <!-- Seat stay -->
+  <path d="M178,443 C205,395 235,340 262,300" fill="none" stroke="url(#frameGrad)" stroke-width="7" stroke-linecap="round"/>
+  <!-- Seat tube -->
+  <path d="M262,296 C275,350 290,410 305,462" fill="none" stroke="url(#frameGrad)" stroke-width="9" stroke-linecap="round"/>
+  <!-- Top tube -->
+  <path d="M262,300 C300,302 350,304 392,302" fill="none" stroke="url(#frameGrad)" stroke-width="9" stroke-linecap="round"/>
+  <!-- Down tube -->
+  <path d="M400,335 C370,372 335,420 305,462" fill="none" stroke="url(#frameGrad)" stroke-width="10" stroke-linecap="round"/>
+  <!-- Head tube -->
+  <path d="M390,290 C394,305 398,322 402,338" fill="none" stroke="url(#frameGrad)" stroke-width="11" stroke-linecap="round"/>
+  <!-- Chainring + crank (bottom bracket) -->
+  <path d="M331,462 C331,476.4 319.4,488 305,488 C290.6,488 279,476.4 279,462 C279,447.6 290.6,436 305,436 C319.4,436 331,447.6 331,462 Z"
+        fill="none" stroke="url(#chromeGrad)" stroke-width="5"/>
+  <circle cx="305" cy="462" r="6" fill="url(#chromeGrad)"/>
+  <!-- Chain -->
+  <path d="M305,436 C260,432 210,418 175,418 M305,488 C260,486 215,474 175,472" fill="none" stroke="#3a3a3a" stroke-width="2.5" stroke-dasharray="3 2"/>
+
+  <!-- ===== Tail feathers ===== -->
+  <path d="M232,288 C205,296 182,312 168,336 C184,334 200,322 214,312 C222,306 230,298 232,288 Z"
+        fill="url(#tailGrad)"/>
+  <path d="M226,300 C202,310 186,326 176,344 C192,338 210,326 228,312 Z"
+        fill="#fff" opacity="0.35" filter="url(#soft)"/>
+
+  <!-- ===== Far leg (to the lower, rear pedal) ===== -->
+  <path d="M262,310 C256,340 250,370 252,395 C256,430 266,460 278,482"
+        fill="none" stroke="url(#legGrad)" stroke-width="9" stroke-linecap="round"/>
+  <!-- Far pedal + webbed foot -->
+  <path d="M305,462 C296,470 288,478 280,486" fill="none" stroke="#2a2a2a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M262,484 C270,480 290,478 302,484 C294,490 272,492 262,488 Z" fill="#222"/>
+  <path d="M278,482 C266,486 254,492 246,500 C258,498 270,496 284,492 C286,488 284,484 278,482 Z"
+        fill="url(#legGrad)"/>
+
+  <!-- ===== Saddle ===== -->
+  <path d="M232,288 C244,280 272,278 292,286 C298,290 296,298 290,300 C270,304 246,302 234,298 C228,296 228,291 232,288 Z"
+        fill="url(#saddleGrad)"/>
+  <path d="M256,292 C262,290 272,290 278,292" fill="none" stroke="#fff" stroke-width="2" opacity="0.4" filter="url(#soft)"/>
+  <!-- Seat post -->
+  <path d="M263,300 C263,296 263,292 262,288" fill="none" stroke="url(#chromeGrad)" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- ===== Body ===== -->
+  <path d="M278,162 C322,168 340,215 334,262 C329,300 306,320 274,318 C240,316 214,288 218,246 C222,200 240,156 278,162 Z"
+        fill="url(#bodyGrad)"/>
+  <!-- belly highlight -->
+  <path d="M260,205 C285,210 300,240 294,270 C275,268 258,245 260,205 Z"
+        fill="#fff" opacity="0.6" filter="url(#softer)"/>
+  <!-- shoulder shadow -->
+  <path d="M310,180 C330,205 338,240 330,275 C320,245 316,210 310,180 Z"
+        fill="#6a645b" opacity="0.35" filter="url(#softer)"/>
+
+  <!-- ===== Near leg (to the forward, upper pedal) ===== -->
+  <path d="M292,312 C296,345 300,375 306,400 C312,422 322,436 332,440"
+        fill="none" stroke="url(#legGrad)" stroke-width="10" stroke-linecap="round"/>
+  <!-- Near pedal crank + pedal -->
+  <path d="M305,462 C314,455 324,448 334,440" fill="none" stroke="#2a2a2a" stroke-width="5" stroke-linecap="round"/>
+  <path d="M316,438 C326,432 346,432 358,438 C348,446 326,446 316,442 Z" fill="#222"/>
+  <!-- Webbed foot -->
+  <path d="M332,440 C346,436 360,438 372,446 C358,448 346,448 334,450 C330,448 330,443 332,440 Z"
+        fill="url(#legGrad)"/>
+  <path d="M340,440 L366,444 M338,445 L360,448" stroke="#8a5212" stroke-width="1.2" opacity="0.7"/>
+
+  <!-- ===== Neck ===== -->
+  <path d="M262,186 C268,150 286,132 292,108 L322,112 C318,142 306,168 304,196 C292,200 276,196 262,186 Z"
+        fill="url(#bodyGrad)"/>
+  <path d="M276,180 C280,152 290,135 296,116" fill="none" stroke="#fff" stroke-width="7" opacity="0.5" filter="url(#soft)"/>
+  <path d="M312,120 C310,145 306,165 304,190" fill="none" stroke="#7a736a" stroke-width="5" opacity="0.35" filter="url(#soft)"/>
+
+  <!-- ===== Head ===== -->
+  <path d="M333,102 C333,116 320,126 306,126 C292,126 278,116 278,102 C278,86 290,74 306,76 C321,78 333,88 333,102 Z"
+        fill="url(#bodyGrad)"/>
+  <!-- crest tuft -->
+  <path d="M282,86 C276,78 278,70 286,66 C284,74 288,80 292,82 Z M292,78 C290,68 296,62 304,62 C298,68 298,74 300,78 Z"
+        fill="#e4dfd5"/>
+  <!-- head highlight -->
+  <path d="M292,86 C300,80 312,82 318,88 C310,86 300,88 292,86 Z" fill="#fff" opacity="0.7" filter="url(#soft)"/>
+
+  <!-- ===== Beak & pouch ===== -->
+  <!-- Pouch -->
+  <path d="M318,108 C342,120 372,130 404,136 C394,154 366,176 340,170 C320,164 310,140 318,108 Z"
+        fill="url(#pouchGrad)"/>
+  <path d="M326,122 C340,134 350,148 352,160" fill="none" stroke="#fff" stroke-width="5" opacity="0.35" filter="url(#soft)"/>
+  <!-- Lower mandible edge -->
+  <path d="M318,108 C346,124 376,132 406,136" fill="none" stroke="#b8591a" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Upper mandible -->
+  <path d="M320,88 C352,90 386,108 408,134 C400,139 372,130 346,122 C334,118 324,110 318,102 Z"
+        fill="url(#beakGrad)"/>
+  <path d="M326,94 C352,96 380,112 398,128" fill="none" stroke="#fff6c0" stroke-width="3" opacity="0.5" filter="url(#soft)"/>
+  <!-- Hook at beak tip -->
+  <path d="M402,128 C408,132 410,138 406,142 C402,138 400,134 398,132 Z" fill="#c7651a"/>
+
+  <!-- ===== Eye ===== -->
+  <circle cx="318" cy="96" r="5.5" fill="#fff4d6"/>
+  <circle cx="319" cy="97" r="3.6" fill="url(#eyeGrad)"/>
+  <circle cx="317.5" cy="95.5" r="1.2" fill="#fff"/>
+
+  <!-- ===== Handlebars (behind wing tips) ===== -->
+  <path d="M390,290 C389,284 389,278 388,272" fill="none" stroke="url(#chromeGrad)" stroke-width="7" stroke-linecap="round"/>
+  <path d="M344,300 C356,278 420,274 458,302" fill="none" stroke="url(#chromeGrad)" stroke-width="6" stroke-linecap="round"/>
+  <!-- Grips -->
+  <path d="M338,296 C342,300 346,306 350,310" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round"/>
+  <path d="M452,298 C456,302 460,308 464,314" fill="none" stroke="#222" stroke-width="9" stroke-linecap="round"/>
+
+  <!-- ===== Wings on the handlebars ===== -->
+  <!-- Viewer's left wing -->
+  <path d="M242,198 C224,228 238,270 288,292 C308,300 328,304 346,302 L342,312 C320,314 298,310 278,302 C246,290 222,262 220,232 C220,216 228,204 242,198 Z"
+        fill="url(#wingGrad)"/>
+  <path d="M250,214 C244,240 258,268 292,284" fill="none" stroke="#fff" stroke-width="5" opacity="0.5" filter="url(#soft)"/>
+  <!-- feather notches -->
+  <path d="M300,298 C304,304 304,310 300,314 M316,303 C320,308 320,314 316,318 M330,305 C334,310 334,316 330,320"
+        fill="none" stroke="#8f877b" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Viewer's right wing -->
+  <path d="M322,204 C346,226 380,256 412,282 C432,296 446,302 460,304 L456,316 C438,316 418,308 398,294 C366,272 336,246 322,226 C316,218 316,210 322,204 Z"
+        fill="url(#wingGrad)"/>
+  <path d="M332,218 C354,240 384,266 410,284" fill="none" stroke="#fff" stroke-width="5" opacity="0.45" filter="url(#soft)"/>
+  <path d="M410,300 C412,306 412,312 408,316 M426,306 C428,312 428,318 424,322 M442,309 C444,315 444,321 440,325"
+        fill="none" stroke="#8f877b" stroke-width="1.5" opacity="0.6"/>
+  <!-- wing shadow onto body -->
+  <path d="M322,212 C340,232 360,250 380,270 C356,256 334,236 322,212 Z"
+        fill="#5a544c" opacity="0.3" filter="url(#softer)"/>
+
+  <!-- ===== Front fork ===== -->
+  <path d="M402,338 C410,378 420,420 430,465" fill="none" stroke="url(#frameGrad)" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- ===== Front wheel (near, larger) ===== -->
+  <path d="M502,465 C502,515.8 469.8,557 430,557 C390.2,557 358,515.8 358,465 C358,414.2 390.2,373 430,373 C469.8,373 502,414.2 502,465 Z"
+        fill="url(#tyreGrad)"/>
+  <path d="M492,465 C492,509.2 464.2,545 430,545 C395.8,545 368,509.2 368,465 C368,420.8 395.8,385 430,385 C464.2,385 492,420.8 492,465 Z"
+        fill="none" stroke="url(#rimGrad)" stroke-width="6"/>
+  <path d="M430,388 L430,542 M371,465 L489,465 M392,410 L468,520 M468,410 L392,520 M378,436 L482,494 M482,436 L378,494 M378,494 L482,436"
+        stroke="#d6d9dd" stroke-width="1.5" opacity="0.85"/>
+  <circle cx="430" cy="465" r="8" fill="url(#chromeGrad)"/>
+  <!-- Near fork blade over wheel -->
+  <path d="M408,345 C416,385 424,428 432,462" fill="none" stroke="url(#frameGrad)" stroke-width="6" stroke-linecap="round" opacity="0.9"/>
+  <!-- tyre highlight -->
+  <path d="M386,398 C404,382 426,378 446,384" fill="none" stroke="#fff" stroke-width="4" opacity="0.3" filter="url(#soft)"/>
+</svg>

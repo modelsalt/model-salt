@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#E8F4F8"/>
+  
+  <!-- Decorative Sun -->
+  <circle cx="150" cy="140" r="55" fill="#FDE68A"/>
+  
+  <!-- Minimalist Clouds (Flat geometric shapes, no outlines) -->
+  <path d="M 550 130 A 25 25 0 0 1 590 110 A 30 30 0 0 1 645 115 A 20 20 0 0 1 670 135 L 540 135 A 15 15 0 0 1 550 130 Z" fill="#FFFFFF"/>
+  <path d="M 80 240 A 20 20 0 0 1 115 225 A 25 25 0 0 1 160 230 A 15 15 0 0 1 180 245 L 70 245 A 10 10 0 0 1 80 240 Z" fill="#FFFFFF"/>
+
+  <!-- Ground Plane & Shadow -->
+  <rect y="505" width="800" height="95" fill="#D1E5EC"/>
+  <rect x="130" y="500" width="540" height="10" rx="5" fill="#B6D5E1"/>
+
+  <!-- ==================== FAR SIDE ELEMENTS ==================== -->
+  <!-- Back Wing (Reaching to handlebars) -->
+  <path d="M 320 220 C 375 210, 440 235, 488 262 C 440 280, 385 280, 320 265 Z" fill="#CBD5E1"/>
+
+  <!-- Far Pedal & Crank -->
+  <polygon points="363,406 377,414 397,369 383,361" fill="#64748B"/>
+  <rect x="372" y="357" width="36" height="12" rx="6" fill="#334155"/>
+
+  <!-- Far Leg & Webbed Foot (Raised) -->
+  <polygon points="315,300 333,300 398,358 380,364" fill="#D97706"/>
+  <polygon points="382,358 416,358 408,368 378,368" fill="#D97706"/>
+
+  <!-- ==================== BICYCLE ==================== -->
+  <!-- Rear Wheel (Equally sized standard road wheel) -->
+  <g id="rear-wheel">
+    <!-- Spokes -->
+    <polygon points="247,320 253,320 253,500 247,500" fill="#CBD5E1"/>
+    <polygon points="160,407 340,407 340,413 160,413" fill="#CBD5E1"/>
+    <polygon points="184,348 188,344 316,472 312,476" fill="#CBD5E1"/>
+    <polygon points="312,344 316,348 188,476 184,472" fill="#CBD5E1"/>
+    <!-- Tire (Donut shape) -->
+    <path d="M 250 315 A 95 95 0 1 0 250 505 A 95 95 0 1 0 250 315 Z M 250 331 A 79 79 0 1 1 250 489 A 79 79 0 1 1 250 331 Z" fill="#1E293B" fill-rule="evenodd"/>
+    <!-- Inner Rim -->
+    <path d="M 250 331 A 79 79 0 1 0 250 489 A 79 79 0 1 0 250 331 Z M 250 337 A 73 73 0 1 1 250 483 A 73 73 0 1 1 250 337 Z" fill="#94A3B8" fill-rule="evenodd"/>
+  </g>
+
+  <!-- Front Wheel (Equally sized standard road wheel) -->
+  <g id="front-wheel">
+    <!-- Spokes -->
+    <polygon points="547,320 553,320 553,500 547,500" fill="#CBD5E1"/>
+    <polygon points="460,407 640,407 640,413 460,413" fill="#CBD5E1"/>
+    <polygon points="484,348 488,344 616,472 612,476" fill="#CBD5E1"/>
+    <polygon points="612,344 616,348 488,476 484,472" fill="#CBD5E1"/>
+    <!-- Tire (Donut shape) -->
+    <path d="M 550 315 A 95 95 0 1 0 550 505 A 95 95 0 1 0 550 315 Z M 550 331 A 79 79 0 1 1 550 489 A 79 79 0 1 1 550 331 Z" fill="#1E293B" fill-rule="evenodd"/>
+    <!-- Inner Rim -->
+    <path d="M 550 331 A 79 79 0 1 0 550 489 A 79 79 0 1 0 550 331 Z M 550 337 A 73 73 0 1 1 550 483 A 73 73 0 1 1 550 337 Z" fill="#94A3B8" fill-rule="evenodd"/>
+  </g>
+
+  <!-- Seat Post & Stem -->
+  <polygon points="309,280 323,280 336,315 322,315" fill="#94A3B8"/>
+  <polygon points="487,255 501,255 516,300 502,300" fill="#94A3B8"/>
+  <!-- Handlebar Neck -->
+  <rect x="466" y="253" width="35" height="14" rx="7" fill="#94A3B8"/>
+
+  <!-- Classic Diamond Frame (Solid Coral Red Blocks) -->
+  <g id="bike-frame" fill="#EF4444">
+    <!-- Top Tube -->
+    <polygon points="330,303 512,303 512,319 330,319"/>
+    <!-- Seat Tube -->
+    <polygon points="322,311 338,305 378,407 362,413"/>
+    <!-- Down Tube -->
+    <polygon points="503,310 517,320 377,415 363,405"/>
+    <!-- Chain Stay -->
+    <polygon points="250,403 370,403 370,417 250,417"/>
+    <!-- Seat Stay -->
+    <polygon points="325,305 335,317 255,416 245,404"/>
+    <!-- Front Fork -->
+    <polygon points="500,295 516,290 558,408 542,413"/>
+    <!-- Head Tube -->
+    <polygon points="498,295 514,290 524,322 508,327"/>
+    <!-- Frame Joints (Rounded Caps) -->
+    <circle cx="250" cy="410" r="10"/>
+    <circle cx="550" cy="410" r="8"/>
+    <circle cx="330" cy="311" r="8"/>
+  </g>
+
+  <!-- Bicycle Saddle -->
+  <path d="M 280 278 C 280 266, 345 270, 355 280 C 345 292, 290 292, 280 278 Z" fill="#1E293B"/>
+
+  <!-- Crankset & Chainring -->
+  <circle cx="370" cy="410" r="24" fill="#94A3B8"/>
+  <circle cx="370" cy="410" r="14" fill="#CBD5E1"/>
+
+  <!-- ==================== PELICAN (SIDE PROFILE) ==================== -->
+  <!-- Tail Feathers -->
+  <polygon points="245,270 210,250 225,245 205,230 260,240" fill="#CBD5E1"/>
+
+  <!-- Main Body & Neck (Unshaded Solid White Block) -->
+  <path d="M 380 120 
+           C 380 82, 438 82, 438 120 
+           C 438 140, 422 155, 412 185 
+           C 402 215, 398 250, 382 275 
+           C 365 300, 330 305, 295 295 
+           C 260 285, 238 268, 235 245 
+           C 265 235, 295 215, 355 212 
+           C 375 210, 382 185, 385 160 
+           C 388 135, 380 130, 380 120 Z" fill="#FFFFFF"/>
+
+  <!-- Head Tuft / Crest Feathers -->
+  <polygon points="385,102 355,92 372,110 350,112 380,122" fill="#CBD5E1"/>
+
+  <!-- Iconic Pelican Gular Pouch (Deep Golden Amber) -->
+  <path d="M 432 122 
+           L 595 130 
+           C 585 205, 515 225, 455 200 
+           C 425 188, 415 165, 415 152 Z" fill="#F59E0B"/>
+
+  <!-- Long Upper Beak (Bright Yellow-Orange) -->
+  <path d="M 430 105 
+           L 600 116 
+           C 606 116, 608 125, 602 135 
+           L 592 135 
+           L 590 130 
+           L 426 123 Z" fill="#FBBF24"/>
+
+  <!-- Eye (Clean Geometric Concentric Circles) -->
+  <circle cx="415" cy="112" r="9" fill="#FEF08A"/>
+  <circle cx="417" cy="112" r="5" fill="#1E293B"/>
+
+  <!-- ==================== NEAR SIDE ELEMENTS ==================== -->
+  <!-- Near Leg (Extended Down to Low Pedal) -->
+  <polygon points="305,288 325,288 358,455 340,458" fill="#F59E0B"/>
+  
+  <!-- Near Webbed Foot -->
+  <polygon points="340,452 382,452 372,464 336,464" fill="#F59E0B"/>
+
+  <!-- Near Crank Arm & Pedal -->
+  <polygon points="363,407 377,413 357,463 343,457" fill="#475569"/>
+  <rect x="332" y="456" width="38" height="12" rx="6" fill="#1E293B"/>
+
+  <!-- Near Wing (Extended Forward to Grip Handlebars) -->
+  <!-- Main Wing Block -->
+  <path d="M 315 225 
+           C 375 215, 435 235, 488 262 
+           C 445 288, 375 292, 315 268 Z" fill="#E2E8F0"/>
+  <!-- Primary Wing Tips (Dark Slate) -->
+  <path d="M 430 242 
+           C 455 248, 475 255, 492 262 
+           C 470 274, 445 280, 420 280 
+           C 430 268, 432 255, 430 242 Z" fill="#475569"/>
+
+  <!-- Handlebar Grip (Overlapping Wing Tip) -->
+  <rect x="462" y="253" width="34" height="14" rx="7" fill="#1E293B"/>
+</svg>

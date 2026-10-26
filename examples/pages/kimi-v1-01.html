@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dinnerbell — Family meal planning with built-in nutrition &amp; macro tracking</title>
+<meta name="description" content="Dinnerbell plans a week of family dinners and tracks nutrition & macros automatically. Take the 60-second quiz."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF7F0;
+    --paper:#FFFFFF;
+    --ink:#29241F;
+    --muted:#6E665C;
+    --line:#EDE4D6;
+    --terra:#D96C4A;
+    --terra-dark:#C05A39;
+    --sage:#6E8F6B;
+    --sage-soft:#E8EFE4;
+    --honey:#E4A853;
+    --blush:#F7E8DC;
+    --radius:24px;
+    --shadow:0 24px 60px rgba(43,36,31,.08);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{font-family:'Fraunces',Georgia,serif;font-weight:500;letter-spacing:-.015em;line-height:1.12}
+  img{max-width:100%}
+  a{color:inherit}
+  .container{max-width:1120px;margin:0 auto;padding:0 24px}
+  section{scroll-margin-top:96px}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+    font-family:'Inter',sans-serif;font-weight:600;font-size:1rem;
+    border-radius:999px;padding:.95rem 1.9rem;cursor:pointer;border:1.5px solid transparent;
+    text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,background .2s ease,border-color .2s ease;
+  }
+  .btn-primary{background:var(--terra);color:#FFF8F1;box-shadow:0 10px 26px rgba(217,108,74,.30)}
+  .btn-primary:hover{background:var(--terra-dark);transform:translateY(-2px);box-shadow:0 14px 32px rgba(217,108,74,.36)}
+  .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn-ghost:hover{border-color:var(--ink);transform:translateY(-2px)}
+  .btn-sm{padding:.62rem 1.25rem;font-size:.9rem}
+  .btn:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--terra);outline-offset:3px}
+
+  /* ---------- Nav ---------- */
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .3s ease,border-color .3s ease;border-bottom:1px solid transparent}
+  nav.scrolled{background:rgba(251,247,240,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom-color:var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:600;text-decoration:none}
+  .logo em{font-style:normal;color:var(--terra)}
+  .nav-links{display:flex;gap:2rem}
+  .nav-links a{text-decoration:none;font-size:.94rem;font-weight:500;color:var(--muted);transition:color .2s}
+  .nav-links a:hover{color:var(--ink)}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:10.5rem 0 6rem;
+    background:
+      radial-gradient(900px 500px at 85% -10%, rgba(228,168,83,.14), transparent 60%),
+      radial-gradient(700px 480px at -10% 30%, rgba(110,143,107,.12), transparent 60%),
+      var(--cream);
+  }
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:4rem;align-items:center}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:.55rem;
+    background:var(--blush);color:#A8562F;font-size:.8rem;font-weight:600;
+    letter-spacing:.06em;text-transform:uppercase;padding:.42rem 1rem;border-radius:999px;margin-bottom:1.4rem;
+  }
+  .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--terra);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(217,108,74,.45)}70%{box-shadow:0 0 0 9px rgba(217,108,74,0)}100%{box-shadow:0 0 0 0 rgba(217,108,74,0)}}
+  .hero h1{font-size:clamp(2.7rem,5.2vw,4.1rem);margin-bottom:1.3rem}
+  .hero h1 em{font-style:italic;color:var(--terra)}
+  .hero p.lead{font-size:1.16rem;color:var(--muted);max-width:34rem;margin-bottom:2.1rem}
+  .hero-ctas{display:flex;gap:.9rem;flex-wrap:wrap;margin-bottom:1.4rem}
+  .micro-trust{font-size:.85rem;color:var(--muted)}
+  .micro-trust span{margin-right:1.1rem;white-space:nowrap}
+
+  /* ---------- Hero visual ---------- */
+  .hero-visual{position:relative;height:540px}
+  .hv-card{
+    position:absolute;background:var(--paper);border:1px solid var(--line);
+    border-radius:22px;box-shadow:var(--shadow);padding:1.4rem 1.5rem;
+  }
+  .hv-main{left:0;top:48px;width:340px;animation:floatC 7s ease-in-out infinite alternate}
+  .hv-grocery{right:0;top:0;width:246px;transform:rotate(3deg);animation:floatA 6s ease-in-out infinite alternate}
+  .hv-balance{right:14px;bottom:0;width:264px;transform:rotate(-2deg);animation:floatB 8s ease-in-out infinite alternate}
+  @keyframes floatA{from{transform:rotate(3deg) translateY(0)}to{transform:rotate(3deg) translateY(-9px)}}
+  @keyframes floatB{from{transform:rotate(-2deg) translateY(0)}to{transform:rotate(-2deg) translateY(-11px)}}
+  @keyframes floatC{from{transform:translateY(0)}to{transform:translateY(-8px)}}
+  .hv-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.7rem}
+  .hv-tag{font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--sage);background:var(--sage-soft);padding:.28rem .7rem;border-radius:999px}
+  .hv-kcal{font-size:.85rem;font-weight:600;color:var(--muted)}
+  .hv-title{font-size:1.34rem;margin-bottom:.25rem}
+  .hv-meta{font-size:.82rem;color:var(--muted)}
+  .hv-donuts{display:flex;justify-content:space-between;margin:1.15rem 0 1rem}
+  .mini-donut{display:flex;flex-direction:column;align-items:center;gap:.35rem;text-align:center}
+  .mini-donut strong{display:block;font-size:.92rem}
+  .mini-donut span{font-size:.72rem;color:var(--muted)}
+  .donut-svg{width:52px;height:52px;transform:rotate(-90deg)}
+  .donut-svg .ring{fill:none;stroke:var(--line);stroke-width:6}
+  .donut-svg .val{fill:none;stroke:var(--c);stroke-width:6;stroke-linecap:round;stroke-dasharray:0 100;transition:stroke-dasharray 1.3s cubic-bezier(.22,.61,.36,1) .3s}
+  .in .donut-svg .val{stroke-dasharray:var(--p) 100}
+  .hv-foot{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--muted);border-top:1px dashed var(--line);padding-top:.85rem}
+  .hv-check{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--sage-soft);color:var(--sage);font-size:.72rem;font-weight:700}
+  .hv-card-title{font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:.8rem}
+  .hv-list{list-style:none}
+  .hv-list li{position:relative;font-size:.88rem;padding:.3rem 0 .3rem 1.7rem;color:var(--ink)}
+  .hv-list li::before{
+    content:"";position:absolute;left:0;top:.5rem;width:15px;height:15px;
+    border-radius:5px;border:1.5px solid var(--line);background:var(--paper);
+  }
+  .hv-list li.done{color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(110,143,107,.6)}
+  .hv-list li.done::before{content:"✓";background:var(--sage);border-color:var(--sage);color:#fff;font-size:.62rem;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:1}
+  .bar-row{display:grid;grid-template-columns:64px 1fr 36px;align-items:center;gap:.6rem;margin-bottom:.6rem;font-size:.8rem}
+  .bar-row em{font-style:normal;text-align:right;color:var(--muted);font-size:.76rem}
+  .bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+  .bar-fill{display:block;height:100%;width:0;border-radius:99px;background:var(--c);transition:width 1.3s cubic-bezier(.22,.61,.36,1) .4s}
+  .in .bar-fill{width:var(--w)}
+  .hv-note{font-size:.8rem;color:var(--sage);font-weight:600;margin-top:.5rem}
+
+  /* ---------- Stats strip ---------- */
+  .stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper)}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;padding:2.6rem 0;text-align:center}
+  .stat strong{display:block;font-family:'Fraunces',serif;font-size:2.1rem;font-weight:600;color:var(--terra)}
+  .stat span{font-size:.88rem;color:var(--muted)}
+
+  /* ---------- Sections ---------- */
+  .section{padding:clamp(4.5rem,9vw,7.5rem) 0}
+  .section-head{max-width:640px;margin:0 auto 3.4rem;text-align:center}
+  .section-head h2{font-size:clamp(2rem,4vw,2.85rem);margin-bottom:1rem}
+  .section-head p{color:var(--muted);font-size:1.06rem}
+
+  /* ---------- How it works ---------- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem}
+  .step{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:2.2rem 2rem}
+  .step .num{font-family:'Fraunces',serif;font-size:2.6rem;color:var(--honey);font-weight:600;line-height:1}
+  .step h3{font-size:1.32rem;margin:.9rem 0 .6rem}
+  .step p{color:var(--muted);font-size:.96rem}
+
+  /* ---------- Features ---------- */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;align-items:center;margin-bottom:4.5rem}
+  .split h2{font-size:clamp(1.9rem,3.4vw,2.6rem);margin-bottom:1rem}
+  .split > div > p{color:var(--muted);margin-bottom:1.6rem;font-size:1.04rem}
+  .check-list{list-style:none;display:flex;flex-direction:column;gap:1.1rem}
+  .check-list li{display:flex;gap:.9rem;align-items:flex-start;font-size:.97rem;color:var(--muted)}
+  .check-list strong{color:var(--ink)}
+  .check{flex-shrink:0;width:22px;height:22px;margin-top:.15rem}
+  .feature-visual{background:var(--paper);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:2rem}
+  .fv-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.4rem}
+  .fv-head h3{font-size:1.25rem}
+  .fv-head span{font-size:.8rem;color:var(--muted)}
+  .fv-person{display:flex;align-items:center;gap:1rem;padding:1rem 0;border-top:1px dashed var(--line)}
+  .fv-person:first-of-type{border-top:none}
+  .avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;flex-shrink:0}
+  .av-terra{background:var(--blush);color:#A8562F}
+  .av-sage{background:var(--sage-soft);color:#4C6B49}
+  .av-honey{background:#F8EEDB;color:#A4762B}
+  .fv-person .who{flex:1}
+  .fv-person .who strong{display:block;font-size:.94rem}
+  .fv-person .who span{font-size:.78rem;color:var(--muted)}
+  .fv-person .nums{font-size:.82rem;font-weight:600;color:var(--sage);white-space:nowrap}
+  .fv-foot{margin-top:1.2rem;background:var(--cream);border-radius:16px;padding:1rem 1.2rem;font-size:.86rem;color:var(--muted)}
+  .fv-foot strong{color:var(--ink)}
+  .feature-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem}
+  .fcard{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:2rem}
+  .fcard .icon{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.2rem}
+  .ic-sage{background:var(--sage-soft)}.ic-blush{background:var(--blush)}.ic-honey{background:#F8EEDB}
+  .fcard h3{font-size:1.24rem;margin-bottom:.55rem}
+  .fcard p{color:var(--muted);font-size:.95rem}
+
+  /* ---------- Quiz ---------- */
+  .quiz-section{
+    background:
+      radial-gradient(700px 400px at 50% 0%, rgba(217,108,74,.08), transparent 65%),
+      var(--paper);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .quiz-card{
+    max-width:720px;margin:0 auto;background:var(--paper);
+    border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);
+    padding:clamp(1.8rem,4.5vw,3.2rem);
+  }
+  .quiz-progress{height:6px;border-radius:99px;background:var(--line);overflow:hidden;margin-bottom:1.8rem}
+  .quiz-progress-fill{display:block;height:100%;background:var(--sage);border-radius:99px;transition:width .45s ease}
+  .quiz-step-label{font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--sage);margin-bottom:.5rem}
+  .quiz-q{font-size:clamp(1.5rem,3vw,2rem);margin-bottom:1.6rem}
+  .quiz-options{display:flex;flex-direction:column;gap:.8rem}
+  .quiz-opt{
+    width:100%;text-align:left;font-family:'Inter',sans-serif;font-size:1.02rem;font-weight:500;color:var(--ink);
+    background:#FFFDF9;border:1.5px solid var(--line);border-radius:16px;padding:1.05rem 1.3rem;cursor:pointer;
+    transition:transform .18s ease,border-color .18s ease,background .18s ease;
+  }
+  .quiz-opt:hover{border-color:var(--terra);transform:translateY(-2px)}
+  .quiz-opt.selected{border-color:var(--terra);background:var(--blush)}
+  .quiz-result{text-align:center}
+  .result-badge{display:inline-block;background:var(--sage-soft);color:#4C6B49;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.4rem 1rem;border-radius:999px;margin-bottom:1rem}
+  .plan-name{font-size:clamp(1.9rem,4vw,2.7rem);margin-bottom:.9rem}
+  .plan-blurb{color:var(--muted);max-width:34rem;margin:0 auto 1.4rem;font-size:1.02rem}
+  .chip-row{display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center;margin-bottom:1.8rem}
+  .chip{background:var(--sage-soft);color:#4C6B49;font-size:.82rem;font-weight:600;padding:.42rem .95rem;border-radius:999px}
+  .chip:nth-child(even){background:var(--blush);color:#A8562F}
+  .plan-form{display:flex;gap:.7rem;max-width:480px;margin:0 auto}
+  .plan-form input{
+    flex:1;font-family:'Inter',sans-serif;font-size:1rem;color:var(--ink);
+    border:1.5px solid var(--line);border-radius:999px;padding:.9rem 1.35rem;background:#FFFDF9;min-width:0;
+  }
+  .plan-form input::placeholder{color:#B4AB9E}
+  .plan-form input:focus{outline:none;border-color:var(--terra)}
+  .form-error{color:#C0462B;font-size:.86rem;margin-top:.7rem}
+  .fine{font-size:.82rem;color:var(--muted);margin-top:1rem}
+  .linkish{background:none;border:none;font-family:'Inter',sans-serif;font-size:.88rem;color:var(--muted);cursor:pointer;margin-top:1.1rem;text-decoration:underline;text-underline-offset:3px}
+  .linkish:hover{color:var(--ink)}
+  .plan-success{padding:1rem 0 .4rem}
+  .success-icon{width:60px;height:60px;border-radius:50%;background:var(--sage);color:#fff;font-size:1.6rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 1.1rem}
+  .plan-success h4{font-family:'Fraunces',serif;font-size:1.7rem;font-weight:500;margin-bottom:.5rem}
+  .plan-success p{color:var(--muted)}
+
+  /* ---------- Testimonials ---------- */
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem}
+  .quote{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:2rem;display:flex;flex-direction:column;gap:1.1rem}
+  .stars{color:var(--honey);letter-spacing:.15em;font-size:.9rem}
+  .quote blockquote{font-family:'Fraunces',serif;font-style:italic;font-size:1.08rem;line-height:1.5;flex:1}
+  .quote footer{font-size:.85rem;color:var(--muted)}
+  .quote footer strong{color:var(--ink)}
+
+  /* ---------- Final CTA ---------- */
+  .cta-band{
+    background:linear-gradient(135deg,#F9EADB,#F3E3D2);
+    border-radius:32px;text-align:center;padding:clamp(3rem,7vw,5rem) clamp(1.5rem,5vw,4rem);
+  }
+  .cta-band .bell{font-size:2rem;display:block;margin-bottom:.8rem}
+  .cta-band h2{font-size:clamp(2rem,4.5vw,3.2rem);margin-bottom:1rem}
+  .cta-band p{color:#7A6A5B;max-width:32rem;margin:0 auto 2rem;font-size:1.05rem}
+
+  /* ---------- Footer ---------- */
+  footer.site{border-top:1px solid var(--line);padding:2.6rem 0;margin-top:5rem}
+  .foot-inner{display:flex;flex-wrap:wrap;gap:1.4rem;align-items:center;justify-content:space-between}
+  .foot-inner .tag{font-size:.88rem;color:var(--muted)}
+  .foot-links{display:flex;gap:1.6rem}
+  .foot-links a{font-size:.86rem;color:var(--muted);text-decoration:none}
+  .foot-links a:hover{color:var(--ink)}
+  .copyright{font-size:.8rem;color:#B4AB9E;text-align:center;margin-top:1.8rem}
+
+  /* ---------- Reveal animation ---------- */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,.61,.36,1)}
+  .reveal.in{opacity:1;transform:none}
+  .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:960px){
+    .nav-links{display:none}
+    .hero-grid{grid-template-columns:1fr;gap:3.4rem}
+    .hero{padding-top:8.5rem}
+    .hero-visual{height:auto;display:grid;gap:1.1rem}
+    .hv-card{position:static;width:100%;animation:none;transform:none}
+    .split{grid-template-columns:1fr;gap:2.6rem}
+    .steps,.feature-cards,.quotes{grid-template-columns:1fr}
+    .stats-grid{grid-template-columns:repeat(2,1fr);gap:1.8rem}
+  }
+  @media (max-width:560px){
+    .plan-form{flex-direction:column}
+    .plan-form .btn{width:100%}
+    .hero-ctas .btn{width:100%}
+    .micro-trust span{display:block;margin-bottom:.2rem}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none}
+    .donut-svg .val{stroke-dasharray:var(--p) 100}
+    .bar-fill{width:var(--w)}
+  }
+</style>
+</head>
+<body id="top">
+
+  <!-- ============ NAV ============ -->
+  <nav id="nav">
+    <div class="container nav-inner">
+      <a class="logo" href="#top">Dinnerbell<em>.</em></a>
+      <div class="nav-links">
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#stories">Families</a>
+      </div>
+      <a href="#quiz" class="btn btn-primary btn-sm">Take the quiz</a>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="container hero-grid">
+      <div class="reveal">
+        <span class="eyebrow"><span class="dot"></span> New · Built-in nutrition &amp; macro tracking</span>
+        <h1>Dinner, planned. Macros, counted. <em>Sanity, intact.</em></h1>
+        <p class="lead">Dinnerbell plans a week of meals your whole family will actually eat — and quietly tallies the protein, carbs, fats, and calories for every plate. The 5 p.m. “what’s for dinner?” panic is officially off the menu.</p>
+        <div class="hero-ctas">
+          <a href="#quiz" class="btn btn-primary">Take the 60-second quiz</a>
+          <a href="#how" class="btn btn-ghost">See how it works ↓</a>
+        </div>
+        <p class="micro-trust">
+          <span>✓ Free 14-day trial</span>
+          <span>✓ No credit card</span>
+          <span>✓ Cancel with one tap</span>
+        </p>
+      </div>
+
+      <div class="hero-visual reveal d2" aria-hidden="true">
+        <div class="hv-card hv-main">
+          <div class="hv-top">
+            <span class="hv-tag">Tonight · 6:30</span>
+            <span class="hv-kcal">582 kcal</span>
+          </div>
+          <h3 class="hv-title">Sheet-Pan Lemon Herb Chicken</h3>
+          <p class="hv-meta">Kid-approved ★★★★☆ · 30 min · one pan</p>
+          <div class="hv-donuts">
+            <div class="mini-donut">
+              <svg class="donut-svg" style="--p:78;--c:var(--sage)" viewBox="0 0 44 44">
+                <circle class="ring" cx="22" cy="22" r="18"/><circle class="val" cx="22" cy="22" r="18" pathLength="100"/>
+              </svg>
+              <div><strong>34 g</strong><span>protein</span></div>
+            </div>
+            <div class="mini-donut">
+              <svg class="donut-svg" style="--p:55;--c:var(--honey)" viewBox="0 0 44 44">
+                <circle class="ring" cx="22" cy="22" r="18"/><circle class="val" cx="22" cy="22" r="18" pathLength="100"/>
+              </svg>
+              <div><strong>41 g</strong><span>carbs</span></div>
+            </div>
+            <div class="mini-donut">
+              <svg class="donut-svg" style="--p:40;--c:var(--terra)" viewBox="0 0 44 44">
+                <circle class="ring" cx="22" cy="22" r="18"/><circle class="val" cx="22" cy="22" r="18" pathLength="100"/>
+              </svg>
+              <div><strong>14 g</strong><span>fat</span></div>
+            </div>
+          </div>
+          <div class="hv-foot"><span class="hv-check">✓</span> Macros logged for the whole family</div>
+        </div>
+
+        <div class="hv-card hv-grocery">
+          <p class="hv-card-title">Groceries — auto-sorted</p>
+          <ul class="hv-list">
+            <li class="done">Chicken thighs, 2 lb</li>
+            <li class="done">Lemons × 3</li>
+            <li>Baby potatoes</li>
+            <li>Broccolini</li>
+            <li>Feta block</li>
+          </ul>
+        </div>
+
+        <div class="hv-card hv-balance">
+          <p class="hv-card-title">This week’s balance</p>
+          <div class="bar-row"><span>Protein</span><div class="bar"><span class="bar-fill" style="--w:72%;--c:var(--sage)"></span></div><em>72%</em></div>
+          <div class="bar-row"><span>Veggies</span><div class="bar"><span class="bar-fill" style="--w:86%;--c:var(--honey)"></span></div><em>86%</em></div>
+          <div class="bar-row"><span>Budget</span><div class="bar"><span class="bar-fill" style="--w:64%;--c:var(--terra)"></span></div><em>64%</em></div>
+          <p class="hv-note">Right on target 🎯</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ STATS ============ -->
+  <section class="stats">
+    <div class="container stats-grid">
+      <div class="stat reveal"><strong>12,400+</strong><span>families at the table</span></div>
+      <div class="stat reveal d1"><strong>4.9 ★</strong><span>from 3,100 busy parents</span></div>
+      <div class="stat reveal d2"><strong>6 hrs</strong><span>saved every single week</span></div>
+      <div class="stat reveal d3"><strong>92%</strong><span>of dinners actually get eaten</span></div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="section" id="how">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Easy as Sunday morning</span>
+        <h2>How Dinnerbell works</h2>
+        <p>Three small steps between you and a week where dinner is simply… handled.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="num">01</div>
+          <h3>Tell us about your table</h3>
+          <p>Seats, appetites, allergies, the kid who only eats beige food — we take it all in, no judgment. It takes about a minute.</p>
+        </div>
+        <div class="step reveal d1">
+          <div class="num">02</div>
+          <h3>Get a week that works</h3>
+          <p>Every Monday, a fresh plan lands in your lap — meals matched to your time and tastes, with nutrition and macros tracked automatically.</p>
+        </div>
+        <div class="step reveal d2">
+          <div class="num">03</div>
+          <h3>Shop once, cook easy</h3>
+          <p>One tap turns your week into a grocery list sorted by aisle. Then just cook, serve, and take the credit. We won’t tell.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES ============ -->
+  <section class="section" id="features" style="background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="container">
+      <div class="split">
+        <div class="reveal">
+          <span class="eyebrow">Our pride &amp; joy</span>
+          <h2>Nutrition &amp; macro tracking, baked right in</h2>
+          <p>No spreadsheets. No label math at the stove. Every recipe comes with its numbers already counted — for you, your partner, and the growing humans at the table.</p>
+          <ul class="check-list">
+            <li>
+              <svg class="check" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#E8EFE4"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="#5F7F5C" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div><strong>Per-person targets.</strong> Different goals for grown-ups and growing kids — set once, tracked forever.</div>
+            </li>
+            <li>
+              <svg class="check" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#E8EFE4"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="#5F7F5C" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div><strong>Protein, carbs, fat &amp; fiber</strong> on every plate, portioned to who’s actually eating it.</div>
+            </li>
+            <li>
+              <svg class="check" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#E8EFE4"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="#5F7F5C" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div><strong>Weekly balance view.</strong> See the whole week at a glance and know everyone’s getting what they need.</div>
+            </li>
+          </ul>
+        </div>
+        <div class="feature-visual reveal d2">
+          <div class="fv-head"><h3>The Miller table</h3><span>Week of Mar 3</span></div>
+          <div class="fv-person">
+            <div class="avatar av-terra">A</div>
+            <div class="who"><strong>Alex</strong><span>Goal: high protein · 2,100 kcal</span></div>
+            <div class="nums">128 g protein ✓</div>
+          </div>
+          <div class="fv-person">
+            <div class="avatar av-sage">J</div>
+            <div class="who"><strong>Jordan</strong><span>Goal: balanced · 1,800 kcal</span></div>
+            <div class="nums">On target ✓</div>
+          </div>
+          <div class="fv-person">
+            <div class="avatar av-honey">W</div>
+            <div class="who"><strong>Wren, age 6</strong><span>Growing kid · iron &amp; calcium focus</span></div>
+            <div class="nums">+2 veggies this week</div>
+          </div>
+          <div class="fv-foot"><strong>Nice week.</strong> Everyone hit their targets — and Thursday’s tacos did most of the heavy lifting. 🌮</div>
+        </div>
+      </div>
+
+      <div class="feature-cards">
+        <div class="fcard reveal">
+          <div class="icon ic-sage">🛒</div>
+          <h3>A grocery list that writes itself</h3>
+          <p>Your whole week, sorted by aisle and de-duplicated. Pantry-aware, so you never buy a third jar of cumin again.</p>
+        </div>
+        <div class="fcard reveal d1">
+          <div class="icon ic-blush">🍽️</div>
+          <h3>Picky-eater peace treaty</h3>
+          <p>One meal for the whole table, with “same meal, their way” tweaks — sauce on the side, no green bits, everyone wins.</p>
+        </div>
+        <div class="fcard reveal d2">
+          <div class="icon ic-honey">🍲</div>
+          <h3>Leftovers on purpose</h3>
+          <p>Cook once, eat twice. Sunday’s roast chicken becomes Tuesday’s soup, and nobody suspects a thing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="section quiz-section" id="quiz">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">60-second quiz</span>
+        <h2>Find your family’s plan</h2>
+        <p>Four quick questions. One week of dinners that actually fits your table — nutrition counted, groceries sorted.</p>
+      </div>
+      <div class="quiz-card reveal" id="quizCard" aria-live="polite"><!-- rendered by JS --></div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section class="section" id="stories">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">From our tables</span>
+        <h2>Families who eat well now</h2>
+        <p>Real parents. Real kitchens. Considerably less 5 p.m. panic.</p>
+      </div>
+      <div class="quotes">
+        <div class="quote reveal">
+          <div class="stars">★★★★★</div>
+          <blockquote>“I used to stand in front of the fridge at 5:15 doing panic math. Now I just look at my phone and dinner basically makes itself. The macro tracking sold my husband; the quiet sold me.”</blockquote>
+          <footer><strong>Maya R.</strong> — mom of 3 · Austin</footer>
+        </div>
+        <div class="quote reveal d1">
+          <div class="stars">★★★★★</div>
+          <blockquote>“Our 7-year-old eats salmon now. SALMON. The ‘same meal, their way’ tweaks are the only reason we survived the beige-food era.”</blockquote>
+          <footer><strong>The Okafor family</strong> — 5 seats, one vegetarian</footer>
+        </div>
+        <div class="quote reveal d2">
+          <div class="stars">★★★★★</div>
+          <blockquote>“We hit our protein goals without a single sad desk salad. The kids get their mac and cheese, we get our numbers, everybody wins.”</blockquote>
+          <footer><strong>Dan &amp; Priya</strong> — twin toddlers, zero spare time</footer>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="cta-band reveal">
+        <span class="bell">🔔</span>
+        <h2>Pull up a chair — dinner’s handled.</h2>
+        <p>Answer four little questions and we’ll send your first personalized week of family dinners, macros and all.</p>
+        <a href="#quiz" class="btn btn-primary">Take the 60-second quiz</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site">
+    <div class="container">
+      <div class="foot-inner">
+        <a class="logo" href="#top">Dinnerbell<em>.</em></a>
+        <span class="tag">Made with love and leftovers.</span>
+        <div class="foot-links">
+          <a href="#how">How it works</a>
+          <a href="#features">Features</a>
+          <a href="#quiz">Quiz</a>
+          <a href="#">Privacy</a>
+        </div>
+      </div>
+      <p class="copyright">© <span id="year"></span> Dinnerbell. Come hungry.</p>
+    </div>
+  </footer>
+
+<script>
+  /* ---------- Nav shadow on scroll ---------- */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  }, { passive: true });
+
+  /* ---------- Scroll reveal ---------- */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ---------- Quiz ---------- */
+  const quizData = [
+    { q: "How many seats at your table?",
+      options: ["Just the two of us", "3–4 hungry humans", "5+ — a full house"] },
+    { q: "Any picky eaters in the mix?",
+      options: ["One very selective critic", "Several strong opinions", "Nope — they eat it all"] },
+    { q: "How much weeknight cooking time do you really have?",
+      options: ["15 minutes, tops", "About 30 minutes", "I don’t mind lingering at the stove"] },
+    { q: "What would make dinner feel like a win?",
+      options: ["Balanced macros for everyone", "Veggies the kids actually eat", "A smaller grocery bill", "Never hearing “this again?”"] }
+  ];
+
+  const card = document.getElementById('quizCard');
+  let answers = [];
+  let step = 0;
+
+  function buildPlan(a) {
+    const names = ["The 15-Minute Lifeline", "The Calm Weeknight", "The Slow & Savory"];
+    const seats = ["two plates", "a table of 3–4", "a full house"];
+    const seatChips = ["2 seats", "3–4 seats", "5+ seats"];
+    const times = ["ready in about 15 minutes flat", "on the table in around 30 minutes", "worth a slow evening at the stove"];
+    const timeChips = ["15-min recipes", "30-min recipes", "Slow-cook favorites"];
+    const picky = [
+      "Your selective critic gets a built-in “same meal, their way” tweak at every dinner.",
+      "With several strong opinions to feed, we deconstruct dishes so everyone builds a plate they like.",
+      "No negotiations needed — the whole menu is fair game."
+    ];
+    const wins = [
+      ["Protein, carbs, fats, and fiber are tallied for every plate and balanced across the week.", "Macro-balanced", "≈35% protein"],
+      ["We fold vegetables into sauces, pastas, and favorites until they happily disappear.", "Veggie-stealth mode", "5-a-day, quietly"],
+      ["Pantry-first recipes and smart ingredient overlap keep your weekly shop lean.", "Pantry-first", "Smart overlaps"],
+      ["A no-repeat rotation keeps every week feeling brand new.", "No-repeat rotation", "52 weeks of variety"]
+    ];
+    const win = wins[a[3]];
+    return {
+      name: names[a[2]],
+      blurb: `A week of dinners for ${seats[a[0]]}, ${times[a[2]]}. ${picky[a[1]]} ${win[0]}`,
+      chips: [seatChips[a[0]], timeChips[a[2]], win[1], win[2]]
+    };
+  }
+
+  function renderStep() {
+    const total = quizData.length;
+    const pct = Math.round((step / total) * 100);
+    const d = quizData[step];
+    card.innerHTML = `
+      <div class="quiz-progress"><span class="quiz-progress-fill" style="width:${pct}%"></span></div>
+      <p class="quiz-step-label">Question ${step + 1} of ${total}</p>
+      <h3 class="quiz-q">${d.q}</h3>
+      <div class="quiz-options">
+        ${d.options.map((o, i) => `<button type="button" class="quiz-opt" data-i="${i}">${o}</button>`).join("")}
+      </div>`;
+    card.querySelectorAll('.quiz-opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        answers[step] = parseInt(btn.dataset.i, 10);
+        btn.classList.add('selected');
+        setTimeout(() => {
+          step++;
+          step < quizData.length ? renderStep() : renderResult();
+        }, 300);
+      });
+    });
+  }
+
+  function renderResult() {
+    const plan = buildPlan(answers);
+    card.innerHTML = `
+      <div class="quiz-progress"><span class="quiz-progress-fill" style="width:100%"></span></div>
+      <div class="quiz-result">
+        <span class="result-badge">Your match</span>
+        <h3 class="plan-name">${plan.name}</h3>
+        <p class="plan-blurb">${plan.blurb}</p>
+        <div class="chip-row">${plan.chips.map(c => `<span class="chip">${c}</span>`).join("")}</div>
+        <form class="plan-form" id="planForm" novalidate>
+          <input type="email" id="planEmail" placeholder="you@example.com" aria-label="Your email address" required>
+          <button type="submit" class="btn btn-primary">Send me my plan</button>
+        </form>
+        <p class="form-error" id="formError" hidden>Hmm — that email doesn’t look quite right. Mind checking it?</p>
+        <p class="fine">Free 14-day trial · No credit card · Your plan, your inbox, tonight.</p>
+        <button type="button" class="linkish" id="restartQuiz">← Retake the quiz</button>
+      </div>`;
+
+    document.getElementById('restartQuiz').addEventListener('click', () => {
+      answers = []; step = 0; renderStep();
+    });
+
+    document.getElementById('planForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('planEmail').value.trim();
+      const err = document.getElementById('formError');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { err.hidden = false; return; }
+      err.hidden = true;
+      e.target.outerHTML = `
+        <div class="plan-success">
+          <div class="success-icon">✓</div>
+          <h4>It’s on its way!</h4>
+          <p>Check your inbox — your first week of <strong>${plan.name}</strong> dinners is warming up on the stove.</p>
+        </div>`;
+    });
+  }
+
+  renderStep();
+
+  /* ---------- Footer year ---------- */
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

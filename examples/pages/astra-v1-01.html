@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f8f4">
+<title>Gather — A little planning. More family time.</title>
+<style>
+:root{--paper:#f7f8f4;--white:#fff;--ink:#233c32;--muted:#718078;--green:#38664e;--light:#e8eee5;--line:#dce2d9}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit}
+button,a,input,select{-webkit-tap-highlight-color:transparent}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #73977d;outline-offset:5px}
+.wrap{max-width:1180px;margin:auto;padding:0 32px}
+nav{height:100px;display:flex;align-items:center;justify-content:space-between;gap:25px}
+.brand{display:inline-flex;align-items:center;gap:9px;font-weight:750;font-size:29px;letter-spacing:-1.3px}
+.brand svg{width:31px;height:35px}
+.navlinks{display:flex;gap:34px;font-size:13px;color:#506158}
+.button{border:1px solid var(--green);border-radius:6px;padding:15px 23px;background:var(--green);color:white;font-weight:600;font-size:13px;display:inline-flex;align-items:center;justify-content:center;gap:24px;transition:background .2s,transform .2s}
+.button:hover{background:#294e3b;transform:translateY(-2px)}
+.button.small{padding:12px 17px}
+.button.secondary{background:transparent;color:var(--ink);border-color:var(--line)}
+.button.secondary:hover{background:var(--light)}
+.hero{text-align:center;padding:72px 0 52px}
+.eyebrow{font-size:10px;letter-spacing:2px;font-weight:700;text-transform:uppercase}
+.hero .eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:25px}
+.dot{height:6px;width:6px;background:var(--green);border-radius:50%}
+h1{font-size:clamp(42px,5.7vw,73px);font-weight:500;line-height:1.06;letter-spacing:-3.5px;margin:0 0 25px}
+h1 span{color:#77917b}
+.hero p{font-size:16px;line-height:1.8;color:var(--muted);margin:0 auto 26px;max-width:460px}
+.hero-actions{display:flex;justify-content:center;gap:12px}
+.micro{font-size:11px;color:var(--muted);margin-top:15px}
+.preview{position:relative;padding:16px;background:#e8ece3;border-radius:12px;margin:12px auto 0}
+.dashboard{background:white;border:1px solid #d9e0d5;border-radius:7px;display:grid;grid-template-columns:165px 1fr;overflow:hidden;box-shadow:0 14px 34px #263c3210;text-align:left}
+.sidebar{border-right:1px solid var(--line);padding:26px 17px;display:flex;flex-direction:column;gap:7px}
+.sidebar .brand{font-size:21px;margin:0 0 34px 8px}
+.sidebar .brand svg{width:22px;height:26px}
+.sideitem{padding:11px 12px;font-size:11px;color:var(--muted);display:flex;align-items:center;gap:10px;border-radius:4px}
+.sideitem.active{background:var(--light);color:var(--green);font-weight:600}
+.sideicon{font-size:17px;width:17px;text-align:center}
+.household{margin-top:auto;border-top:1px solid var(--line);padding:20px 6px 0;font-size:11px;display:flex;gap:9px;align-items:center}
+.avatar{width:30px;height:30px;background:var(--light);border-radius:50%;display:grid;place-items:center;font-size:10px}
+.household small{display:block;color:var(--muted);margin-top:4px;font-size:9px}
+.main{padding:29px}
+.dash-top{display:flex;justify-content:space-between;align-items:center}
+.dash-top h2{font-size:22px;font-weight:500;letter-spacing:-.7px;margin:0 0 7px}
+.dash-top p{font-size:10px;color:var(--muted);margin:0}
+.sample{color:var(--muted);font-size:9px;border:1px solid var(--line);border-radius:20px;padding:6px 10px}
+.weekbar{display:flex;align-items:center;justify-content:space-between;margin:26px 0 16px;font-size:11px;font-weight:600}
+.quiet{background:white;border:1px solid var(--line);color:var(--ink);border-radius:4px;font-size:10px;padding:8px 11px}
+.quiet:hover{background:var(--light)}
+.days{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.day{border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.day.selected{border-color:var(--green);box-shadow:0 0 0 1px var(--green)}
+.day button{width:100%;border:0;background:white;text-align:left;padding:0;color:inherit;height:100%;display:flex;flex-direction:column}
+.dayname{font-size:9px;padding:12px 10px;display:flex;justify-content:space-between;width:100%;color:var(--muted)}
+.selected .dayname{color:var(--green);background:#f1f5ef}
+.food{width:100%;height:102px;background:#f1f2eb;display:block}
+.food.two{background:#eaede5}
+.food.three{background:#e1e8de}
+.mealcopy{padding:12px 10px;display:flex;flex-direction:column;flex:1}
+.mealcopy strong{font-size:11px;line-height:1.5;font-weight:600}
+.mealcopy small{font-size:9px;color:var(--muted);margin-top:auto;padding-top:10px}
+.lower{display:grid;grid-template-columns:1.2fr 1fr;gap:15px;margin-top:20px}
+.note{background:#f1f5ee;border-radius:5px;padding:18px}
+.note-label{font-size:9px;font-weight:600;letter-spacing:.4px}
+.note h3{font-size:15px;font-weight:500;line-height:1.5;margin:10px 0 6px}
+.note p{color:var(--muted);font-size:10px;line-height:1.7;margin:0}
+.grocery{border:1px solid var(--line);border-radius:5px;padding:16px}
+.groceryhead{display:flex;justify-content:space-between;font-size:10px;margin-bottom:10px}
+.groceryhead span{color:var(--muted);font-size:9px}
+.check{font-size:10px;display:flex;gap:8px;align-items:center;margin-top:9px;cursor:pointer}
+.check input{accent-color:var(--green);margin:0;width:12px;height:12px}
+.check:has(input:checked) span{text-decoration:line-through;color:var(--muted)}
+.preview-caption{text-align:center;font-size:10px;color:var(--muted);padding:17px 0 0}
+.benefits{display:grid;grid-template-columns:repeat(3,1fr);padding:45px 0 64px;border-bottom:1px solid var(--line);gap:45px}
+.benefit{display:flex;gap:13px}
+.benefit-icon{font-size:19px;line-height:25px}
+.benefit h3{font-size:13px;margin:0 0 8px;font-weight:600}
+.benefit p{font-size:12px;line-height:1.7;color:var(--muted);margin:0}
+.features{padding:87px 0}
+.sectionhead{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:40px}
+.sectionhead h2{font-size:39px;font-weight:500;letter-spacing:-1.6px;line-height:1.15;margin:15px 0 0}
+.sectionhead>p{font-size:13px;line-height:1.8;color:var(--muted);max-width:285px;margin:0}
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:35px}
+.feature{border-top:1px solid var(--line);padding-top:23px}
+.number{font-size:11px;color:var(--muted)}
+.feature h3{font-size:19px;font-weight:500;margin:24px 0 12px;letter-spacing:-.4px}
+.feature p{font-size:13px;line-height:1.85;color:var(--muted);margin:0}
+.cta{background:var(--light);border-radius:8px;text-align:center;padding:60px 25px;margin-bottom:70px}
+.cta h2{font-size:39px;font-weight:500;letter-spacing:-1.6px;margin:15px 0}
+.cta p{font-size:14px;color:var(--muted);margin:0 0 26px;line-height:1.7}
+footer{border-top:1px solid var(--line);padding:27px 0 35px;display:flex;justify-content:space-between;align-items:center}
+footer .brand{font-size:22px}
+footer p{font-size:10px;color:var(--muted)}
+dialog{border:1px solid var(--line);border-radius:12px;padding:32px;max-width:420px;width:calc(100% - 32px);color:var(--ink);background:var(--paper)}
+dialog::backdrop{background:#142a2266;backdrop-filter:blur(4px)}
+dialog h2{font-size:29px;font-weight:500;letter-spacing:-1px;margin:14px 0}
+dialog p{font-size:13px;color:var(--muted);line-height:1.7}
+dialog label{display:block;font-size:12px;margin:20px 0 8px}
+dialog select{width:100%;padding:12px;background:white;border:1px solid var(--line);border-radius:5px;color:var(--ink)}
+dialog .button{width:100%;margin-top:24px}
+.close{float:right;background:transparent;border:0;color:var(--muted);font-size:24px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+@media(min-width:1100px){.preview{max-width:1050px}}
+@media(max-width:800px){
+.wrap{padding:0 22px}.hero{padding-top:45px}h1{letter-spacing:-2px}
+.sidebar{display:none}.dashboard{grid-template-columns:1fr}.main{padding:22px}
+.navlinks{gap:20px}.benefits{gap:22px}.sectionhead{align-items:start}
+.sectionhead h2,.cta h2{font-size:33px}.feature-grid{gap:22px}
+}
+@media(max-width:560px){
+nav{height:80px}.brand{font-size:25px}.navlinks{display:none}
+.hero{padding:40px 0}.hero p{font-size:14px}.hero-actions{gap:8px}
+.button{padding:14px 17px;gap:12px}.preview{padding:8px}
+.main{padding:17px}.dash-top h2{font-size:20px}.sample{font-size:8px}
+.days{grid-template-columns:repeat(5,132px);overflow:auto;padding:2px 2px 9px;scroll-snap-type:x mandatory}
+.day{scroll-snap-align:start}.lower{grid-template-columns:1fr}.grocery{padding:18px}
+.check{font-size:12px;margin-top:13px}.benefits{grid-template-columns:1fr;padding:35px 0;gap:27px}
+.features{padding:55px 0}.sectionhead{display:block}.sectionhead>p{margin-top:20px;max-width:100%}
+.feature-grid{grid-template-columns:1fr;gap:30px}.feature h3{margin-top:15px}
+.cta{padding:40px 20px;margin-bottom:40px}.cta h2{font-size:30px}
+footer{gap:20px}footer p{text-align:right;max-width:150px;line-height:1.6}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+<defs>
+<symbol id="leaf" viewBox="0 0 34 38">
+<path d="M17 34V17" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M17 24C4 24 2 14 3 7c10 0 15 5 14 17ZM18 17C17 7 23 3 31 3c0 9-4 15-13 14Z" fill="currentColor"/>
+</symbol>
+<symbol id="plate" viewBox="0 0 160 110">
+<ellipse cx="82" cy="98" rx="46" ry="5" fill="#233c32" opacity=".09"/>
+<circle cx="80" cy="54" r="46" fill="#fff"/>
+<circle cx="80" cy="54" r="37" fill="#eff1e8" stroke="#e1e5d9"/>
+<g fill="#799067">
+<ellipse cx="64" cy="37" rx="11" ry="8" transform="rotate(-32 64 37)"/>
+<ellipse cx="53" cy="51" rx="11" ry="8" transform="rotate(35 53 51)"/>
+<ellipse cx="62" cy="64" rx="12" ry="8" transform="rotate(-30 62 64)"/>
+<ellipse cx="77" cy="30" rx="9" ry="7"/>
+</g>
+<g fill="#c0cba8">
+<circle cx="83" cy="66" r="6"/><circle cx="91" cy="76" r="6"/>
+<circle cx="77" cy="78" r="5"/><circle cx="100" cy="66" r="6"/>
+<circle cx="89" cy="58" r="5"/><circle cx="104" cy="77" r="4"/>
+</g>
+<path d="M84 34Q95 27 109 43L103 58Q90 60 79 46Z" fill="#b8ac85"/>
+<path d="m89 35 14 12m-19-6 16 12" stroke="#8b8568" stroke-width="2" stroke-linecap="round"/>
+<g fill="#385d43"><ellipse cx="70" cy="49" rx="3" ry="6" transform="rotate(35 70 49)"/><ellipse cx="96" cy="34" rx="3" ry="5" transform="rotate(-40 96 34)"/></g>
+</symbol>
+</defs>
+</svg>
+
+<div class="wrap">
+<nav aria-label="Main navigation">
+<a class="brand" href="#" aria-label="Gather home"><svg aria-hidden="true"><use href="#leaf"/></svg>gather</a>
+<div class="navlinks"><a href="#benefits">Why gather</a><a href="#how">How it works</a><a href="#planner">A look inside</a></div>
+<button class="button small" data-start>Make your first plan <span aria-hidden="true">↗</span></button>
+</nav>
+
+<main>
+<section class="hero">
+<div class="eyebrow"><span class="dot"></span> Less planning. More living.</div>
+<h1>Good meals.<br><span>One less thing to juggle.</span></h1>
+<p>A week of family meals, a ready-to-go shopping list, and a little more room for the moments that matter.</p>
+<div class="hero-actions">
+<button class="button" data-start>Plan our week <span aria-hidden="true">↗</span></button>
+<a class="button secondary" href="#planner">Take a look inside <span aria-hidden="true">↓</span></a>
+</div>
+<div class="micro">Try a sample plan. No account needed.</div>
+</section>
+
+<section class="preview" id="planner" aria-label="Interactive meal planner preview">
+<div class="dashboard">
+<aside class="sidebar" aria-label="Preview sidebar">
+<div class="brand"><svg aria-hidden="true"><use href="#leaf"/></svg>gather</div>
+<div class="sideitem active"><span class="sideicon" aria-hidden="true">▦</span>Our week</div>
+<div class="sideitem"><span class="sideicon" aria-hidden="true">♡</span>Family favorites</div>
+<div class="sideitem"><span class="sideicon" aria-hidden="true">☷</span>Shopping list</div>
+<div class="household"><span class="avatar" aria-hidden="true">G</span><div>Your household<small id="household-size">4 people at the table</small></div></div>
+</aside>
+<div class="main">
+<div class="dash-top"><div><h2>A good week starts here.</h2><p>Little effort. Lots to look forward to.</p></div><span class="sample">Interactive preview</span></div>
+<div class="weekbar"><span>This week's dinners <span style="color:var(--muted);font-weight:400"> / Mon–Fri</span></span><button class="quiet" id="shuffle">↻ &nbsp; Mix it up</button></div>
+<div class="days" id="days" aria-label="Choose a dinner to preview"></div>
+<div class="lower">
+<div class="note" aria-live="polite"><div class="note-label">ON THE MENU · <span id="selected-day">MONDAY</span></div><h3 id="meal-detail">Lemon chicken bowls</h3><p id="meal-tip">Serve everything separately so little eaters can build their own bowl.</p></div>
+<div class="grocery"><div class="groceryhead"><strong>A head start on shopping</strong><span id="list-count">0 / 3 packed</span></div><div id="grocery-items"></div></div>
+</div>
+</div>
+</div>
+<div class="preview-caption">A little taste of your week. Pick a dinner, swap the menu, or check off your list.</div>
+</section>
+
+<section class="benefits" id="benefits" aria-label="Benefits">
+<div class="benefit"><span class="benefit-icon" aria-hidden="true">◷</span><div><h3>Your evenings, back.</h3><p>Spend less time deciding what’s for dinner and more time around the table.</p></div></div>
+<div class="benefit"><span class="benefit-icon" aria-hidden="true">♡</span><div><h3>Something for everyone.</h3><p>Flexible family meals, with room for small appetites and big opinions.</p></div></div>
+<div class="benefit"><span class="benefit-icon" aria-hidden="true">✓</span><div><h3>Shop with a plan.</h3><p>Know what you need before you go. Give every ingredient a place in your week.</p></div></div>
+</section>
+
+<section class="features" id="how">
+<div class="sectionhead"><div><div class="eyebrow">A lighter kind of routine</div><h2>From “what’s for dinner?”<br>to “come and get it.”</h2></div><p>Family life is full enough. Let a few simple tools take dinner off your mental list.</p></div>
+<div class="feature-grid">
+<article class="feature"><span class="number">01 / FIND YOUR FAVORITES</span><h3>Meals your family gets.</h3><p>Start with approachable recipes and easy serving ideas. Keep familiar favorites in the mix, with a little room to try something new.</p></article>
+<article class="feature"><span class="number">02 / MAKE ROOM FOR LIFE</span><h3>A week that bends with you.</h3><p>Put quick dinners on busy days. Swap a meal when plans change. Build a rhythm that fits school nights, late meetings, and everything between.</p></article>
+<article class="feature"><span class="number">03 / GET SET TO SHOP</span><h3>One list. A clearer head.</h3><p>Bring your meals together in a shopping list. Check what’s already in the kitchen, then take just what you need to the store.</p></article>
+</div>
+</section>
+
+<section class="cta">
+<div class="eyebrow">More time for your people</div>
+<h2>Make a little room at the table.</h2>
+<p>Your next week of family dinners can start right here.</p>
+<button class="button" data-start>Make our first plan <span aria-hidden="true">↗</span></button>
+</section>
+</main>
+
+<footer><a class="brand" href="#"><svg width="23" height="27" aria-hidden="true"><use href="#leaf"/></svg>gather</a><p>Less on your mind. More around your table.</p></footer>
+</div>
+
+<dialog id="setup" aria-labelledby="setup-title">
+<button class="close" aria-label="Close planner setup" id="close">×</button>
+<div class="eyebrow">Let’s set your table</div>
+<h2 id="setup-title">A plan for your people.</h2>
+<p>Choose your household size and try a five-day sample menu. Your selections stay in this page.</p>
+<form id="setup-form">
+<label for="people">How many people are eating?</label>
+<select id="people"><option value="2">2 people</option><option value="3">3 people</option><option value="4" selected>4 people</option><option value="5">5 people</option><option value="6">6 people</option></select>
+<label for="menu">What sounds good?</label>
+<select id="menu"><option value="0">A little of everything</option><option value="1">Vegetarian favorites</option></select>
+<button class="button" type="submit">Show our week <span aria-hidden="true">↗</span></button>
+</form>
+</dialog>
+<div class="sr-only" role="status" id="status"></div>
+
+<script>
+const menus=[
+[
+{name:"Lemon chicken bowls",time:25,tip:"Serve everything separately so little eaters can build their own bowl.",items:["Chicken breasts","Brown rice","Broccoli"]},
+{name:"Creamy green pasta",time:20,tip:"Blend peas into the sauce and leave extra grated cheese on the table.",items:["Pasta","Frozen peas","Cream cheese"]},
+{name:"Build-your-own tacos",time:25,tip:"Set out the fillings and let everyone choose their own combination.",items:["Tortillas","Black beans","Avocados"]},
+{name:"Sheet-pan salmon",time:30,tip:"Cut potatoes into small pieces so they cook alongside the salmon.",items:["Salmon fillets","Baby potatoes","Green beans"]},
+{name:"Friday flatbreads",time:20,tip:"Give everyone a flatbread to top. Add a simple salad on the side.",items:["Flatbreads","Mozzarella","Tomato sauce"]}
+],
+[
+{name:"Crispy chickpea bowls",time:25,tip:"Keep the dressing on the side and let everyone build their own bowl.",items:["Chickpeas","Brown rice","Cucumber"]},
+{name:"Pea & lemon pasta",time:20,tip:"Reserve a little pasta water to help the lemon sauce coat every bite.",items:["Pasta","Frozen peas","Lemons"]},
+{name:"Black bean tacos",time:20,tip:"Mash some of the beans for an easy-to-scoop filling for younger eaters.",items:["Black beans","Tortillas","Avocados"]},
+{name:"Pesto potato traybake",time:35,tip:"Roast the potatoes first, then add the vegetables for the final 15 minutes.",items:["Baby potatoes","Zucchini","Vegetarian pesto"]},
+{name:"Garden flatbreads",time:20,tip:"Set out sliced vegetables and let everyone decorate their own dinner.",items:["Flatbreads","Mozzarella","Bell peppers"]}
+]
+];
+const dayNames=["Monday","Tuesday","Wednesday","Thursday","Friday"];
+let menuIndex=0,selected=0,offset=0;
+const days=document.getElementById("days");
+function mealAt(i){return menus[menuIndex][(i+offset)%5]}
+function selectDay(i){
+selected=i;
+days.querySelectorAll("button").forEach((b,n)=>{b.setAttribute("aria-pressed",n===i);b.parentElement.classList.toggle("selected",n===i)});
+const meal=mealAt(i);
+document.getElementById("selected-day").textContent=dayNames[i].toUpperCase();
+document.getElementById("meal-detail").textContent=meal.name;
+document.getElementById("meal-tip").textContent=meal.tip;
+const list=document.getElementById("grocery-items");
+list.replaceChildren();
+meal.items.forEach(item=>{
+const label=document.createElement("label");label.className="check";
+const input=document.createElement("input");input.type="checkbox";
+const span=document.createElement("span");span.textContent=item;
+input.addEventListener("change",()=>{document.getElementById("list-count").textContent=`${list.querySelectorAll(":checked").length} / 3 packed`});
+label.append(input,span);list.append(label);
+});
+document.getElementById("list-count").textContent="0 / 3 packed";
+}
+function render(){
+days.replaceChildren();
+dayNames.forEach((day,i)=>{
+const meal=mealAt(i),card=document.createElement("div");card.className="day";
+const button=document.createElement("button");button.type="button";
+button.setAttribute("aria-label",`${day}: ${meal.name}, ${meal.time} minutes`);
+button.innerHTML=`<span class="dayname">${day.slice(0,3).toUpperCase()}<span>0${i+1}</span></span><svg class="food ${i%3===1?"two":i%3===2?"three":""}" viewBox="0 0 160 110" aria-hidden="true"><use href="#plate" transform="rotate(${i*35} 80 54)"/></svg><span class="mealcopy"><strong>${meal.name}</strong><small>${meal.time} min · Family-friendly</small></span>`;
+button.addEventListener("click",()=>selectDay(i));card.append(button);days.append(card);
+});
+selectDay(selected);
+}
+document.getElementById("shuffle").addEventListener("click",()=>{
+offset=(offset+1)%5;render();
+document.getElementById("status").textContent="Your dinners have been rearranged.";
+});
+const dialog=document.getElementById("setup");
+document.querySelectorAll("[data-start]").forEach(button=>button.addEventListener("click",()=>dialog.showModal()));
+document.getElementById("close").addEventListener("click",()=>dialog.close());
+document.getElementById("setup-form").addEventListener("submit",event=>{
+event.preventDefault();
+menuIndex=Number(document.getElementById("menu").value);offset=0;selected=0;
+document.getElementById("household-size").textContent=`${document.getElementById("people").value} people at the table`;
+render();dialog.close();
+document.getElementById("planner").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});
+days.querySelector("button").focus({preventScroll:true});
+document.getElementById("status").textContent="Your sample family meal plan is ready.";
+});
+render();
+</script>
+</body>
+</html>

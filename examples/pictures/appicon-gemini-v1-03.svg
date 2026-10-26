@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Strict Square Clip Path (No Round Borders) -->
+    <clipPath id="sharp-square">
+      <rect width="512" height="512" rx="0" ry="0" />
+    </clipPath>
+
+    <!-- Background Radial Glow emanating from behind the focal point -->
+    <radialGradient id="bg-radial-glow" cx="52%" cy="45%" r="65%" fx="52%" fy="45%">
+      <stop offset="0%" stop-color="#BDF0FF" />
+      <stop offset="35%" stop-color="#48B2F8" />
+      <stop offset="100%" stop-color="#0F68D8" />
+    </radialGradient>
+
+    <!-- Warm Ambient Sun Glow -->
+    <radialGradient id="sun-atmosphere" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFE875" stop-opacity="0.75" />
+      <stop offset="50%" stop-color="#FFC72C" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#FFAE00" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- 3D Claymorphic Sun Gradient -->
+    <radialGradient id="clay-sun" cx="35%" cy="30%" r="68%">
+      <stop offset="0%" stop-color="#FFF7B2" />
+      <stop offset="22%" stop-color="#FFDF40" />
+      <stop offset="68%" stop-color="#FFA800" />
+      <stop offset="100%" stop-color="#E06D00" />
+    </radialGradient>
+
+    <!-- Sun Specular Gloss Highlight -->
+    <linearGradient id="gloss-shine" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.75" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- 3D Claymorphic Cloud Puffs (Main Crisp White) -->
+    <radialGradient id="clay-cloud-light" cx="38%" cy="28%" r="70%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="55%" stop-color="#F6FAFF" />
+      <stop offset="85%" stop-color="#D6E6F9" />
+      <stop offset="100%" stop-color="#B8D2F0" />
+    </radialGradient>
+
+    <!-- 3D Claymorphic Cloud Puffs (With Warm Golden Sun Bounce) -->
+    <radialGradient id="clay-cloud-warm" cx="32%" cy="24%" r="72%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="20%" stop-color="#FFFDF5" />
+      <stop offset="60%" stop-color="#F3F7FD" />
+      <stop offset="88%" stop-color="#D0E2F8" />
+      <stop offset="100%" stop-color="#B2CDF0" />
+    </radialGradient>
+
+    <!-- Soft Shadow for Cloud Cast onto Sun -->
+    <filter id="cloud-drop-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="-8" dy="-10" stdDeviation="16" flood-color="#073B82" flood-opacity="0.28" />
+    </filter>
+
+    <!-- Soft Shadow between Individual Cloud Volumes -->
+    <filter id="puff-depth" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="4" dy="10" stdDeviation="10" flood-color="#87AEDB" flood-opacity="0.35" />
+    </filter>
+
+    <!-- Blur for Specular Highlights -->
+    <filter id="soft-gloss" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" />
+    </filter>
+  </defs>
+
+  <!-- Main Icon Canvas (Strictly Clipped to a Sharp Square) -->
+  <g clip-path="url(#sharp-square)">
+    
+    <!-- 1. Square Background with Radial Glow -->
+    <rect width="512" height="512" fill="url(#bg-radial-glow)" />
+
+    <!-- 2. Atmospheric Glow Behind the Sun -->
+    <circle cx="255" cy="225" r="240" fill="url(#sun-atmosphere)" />
+
+    <!-- 3. Golden 3D Clay Sun -->
+    <g>
+      <!-- Base Clay Sphere -->
+      <circle cx="255" cy="225" r="142" fill="url(#clay-sun)" />
+      
+      <!-- Top-Left Glossy Clay Rim Highlight -->
+      <ellipse cx="205" cy="145" rx="68" ry="34" transform="rotate(-32 205 145)" fill="url(#gloss-shine)" filter="url(#soft-gloss)" />
+      
+      <!-- Tiny Secondary Specular Pip -->
+      <circle cx="150" cy="195" r="10" fill="#FFFFFF" fill-opacity="0.45" filter="url(#soft-gloss)" />
+    </g>
+
+    <!-- 4. Oversized Cumulus Cloud (Cropped by Bottom & Right Sharp Edges) -->
+    <g filter="url(#cloud-drop-shadow)">
+      
+      <!-- Back/Upper-Right Cloud Puff (Cropped by Right Edge) -->
+      <circle cx="495" cy="340" r="125" fill="url(#clay-cloud-light)" />
+
+      <!-- Mid-Left Cloud Puff -->
+      <circle cx="220" cy="425" r="125" fill="url(#clay-cloud-warm)" filter="url(#puff-depth)" />
+
+      <!-- Main Hero Central Dome (Receives Warm Golden Rim Light from Sun) -->
+      <circle cx="355" cy="315" r="148" fill="url(#clay-cloud-warm)" filter="url(#puff-depth)" />
+      <!-- Specular Gloss on Central Dome -->
+      <ellipse cx="315" cy="215" rx="72" ry="32" transform="rotate(-22 315 215)" fill="url(#gloss-shine)" filter="url(#soft-gloss)" />
+
+      <!-- Far-Right Foreground Puff (Bleeds off Right & Bottom Edges) -->
+      <circle cx="515" cy="465" r="140" fill="url(#clay-cloud-light)" filter="url(#puff-depth)" />
+      <!-- Specular Gloss on Far-Right Puff -->
+      <ellipse cx="475" cy="370" rx="55" ry="24" transform="rotate(-25 475 370)" fill="url(#gloss-shine)" filter="url(#soft-gloss)" />
+
+      <!-- Bottom-Center Plump Base Puff (Bleeds off Bottom Edge) -->
+      <circle cx="345" cy="495" r="150" fill="url(#clay-cloud-light)" filter="url(#puff-depth)" />
+      <!-- Specular Gloss on Bottom-Center Puff -->
+      <ellipse cx="310" cy="395" rx="65" ry="26" transform="rotate(-15 310 395)" fill="url(#gloss-shine)" filter="url(#soft-gloss)" />
+
+      <!-- Specular Gloss on Mid-Left Puff -->
+      <ellipse cx="185" cy="345" rx="52" ry="24" transform="rotate(-30 185 345)" fill="url(#gloss-shine)" filter="url(#soft-gloss)" />
+    </g>
+
+  </g>
+</svg>

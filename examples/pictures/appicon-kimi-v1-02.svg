@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Weather app icon: cloud with raindrops over a sunset gradient">
+  <defs>
+    <!-- Background: smooth vertical gradient, light at top, deepening downward -->
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE3B3"/>
+      <stop offset="0.35" stop-color="#FF9E8C"/>
+      <stop offset="0.7" stop-color="#E56BA0"/>
+      <stop offset="1" stop-color="#5E4B9B"/>
+    </linearGradient>
+    <!-- Soft atmospheric glow for gradient-blended depth -->
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FFF3D6" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#FFF3D6" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Cloud body gradient -->
+    <linearGradient id="cloud" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F7D9E8"/>
+    </linearGradient>
+    <!-- Raindrop gradient -->
+    <linearGradient id="drop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#DFF1FF"/>
+      <stop offset="1" stop-color="#9CC8F5"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Square field, no rounded borders -->
+  <rect width="512" height="512" fill="url(#sky)"/>
+
+  <!-- Atmospheric glow behind the hero motif -->
+  <circle cx="205" cy="185" r="150" fill="url(#glow)"/>
+
+  <!-- Hero motif: cloud with falling raindrops, off-center on a diagonal -->
+  <g>
+    <path d="M118 238
+             C118 206 146 186 176 190
+             C186 158 222 142 254 154
+             C278 142 312 156 320 186
+             C348 190 364 214 356 238
+             C350 258 332 268 312 268
+             L160 268
+             C136 268 118 258 118 238 Z"
+          fill="url(#cloud)"/>
+    <!-- Drops staggered along the diagonal, tilted to suggest motion -->
+    <g fill="url(#drop)">
+      <path transform="translate(168 316) rotate(18)"
+            d="M0 -17 C7 -8 10 -1 10 5 A10 10 0 1 1 -10 5 C-10 -1 -7 -8 0 -17 Z"/>
+      <path transform="translate(226 352) rotate(18)"
+            d="M0 -17 C7 -8 10 -1 10 5 A10 10 0 1 1 -10 5 C-10 -1 -7 -8 0 -17 Z"/>
+      <path transform="translate(284 388) rotate(18)"
+            d="M0 -17 C7 -8 10 -1 10 5 A10 10 0 1 1 -10 5 C-10 -1 -7 -8 0 -17 Z"/>
+    </g>
+  </g>
+</svg>

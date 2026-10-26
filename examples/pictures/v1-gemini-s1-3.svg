@@ -1,0 +1,573 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1000" width="100%" height="100%">
+  <defs>
+    <!-- Asphalt & Environment Gradients -->
+    <radialGradient id="asphaltGrad" cx="50%" cy="50%" r="70%" fx="30%" fy="30%">
+      <stop offset="0%" stop-color="#3a4454" />
+      <stop offset="50%" stop-color="#262d38" />
+      <stop offset="100%" stop-color="#151921" />
+    </radialGradient>
+
+    <linearGradient id="speedLineGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0" />
+      <stop offset="50%" stop-color="#a3d5ff" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </linearGradient>
+
+    <linearGradient id="shadowGrad" x1="30%" y1="30%" x2="80%" y2="80%">
+      <stop offset="0%" stop-color="#0a0d12" stop-opacity="0.75" />
+      <stop offset="70%" stop-color="#0a0d12" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#0a0d12" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Bicycle Frame & Component Gradients -->
+    <linearGradient id="carbonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1d24" />
+      <stop offset="40%" stop-color="#333947" />
+      <stop offset="50%" stop-color="#4c5569" />
+      <stop offset="60%" stop-color="#222630" />
+      <stop offset="100%" stop-color="#0f1116" />
+    </linearGradient>
+
+    <linearGradient id="aeroRedGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#800016" />
+      <stop offset="30%" stop-color="#d90429" />
+      <stop offset="55%" stop-color="#ff2a4b" />
+      <stop offset="75%" stop-color="#fff0f3" />
+      <stop offset="85%" stop-color="#d90429" />
+      <stop offset="100%" stop-color="#59000f" />
+    </linearGradient>
+
+    <linearGradient id="aeroCyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00b4d8" />
+      <stop offset="50%" stop-color="#90e0ef" />
+      <stop offset="100%" stop-color="#03045e" />
+    </linearGradient>
+
+    <linearGradient id="tireGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141619" />
+      <stop offset="50%" stop-color="#2b3038" />
+      <stop offset="100%" stop-color="#0c0d0f" />
+    </linearGradient>
+
+    <linearGradient id="chromeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7d8597" />
+      <stop offset="30%" stop-color="#e0e4eb" />
+      <stop offset="50%" stop-color="#ffffff" />
+      <stop offset="65%" stop-color="#5c6475" />
+      <stop offset="100%" stop-color="#adb5bd" />
+    </linearGradient>
+
+    <!-- Pelican Plumage & Anatomy Gradients -->
+    <radialGradient id="bodyPlumageGrad" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="45%" stop-color="#f4f6f9" />
+      <stop offset="75%" stop-color="#d5dfe8" />
+      <stop offset="92%" stop-color="#9eb1c2" />
+      <stop offset="100%" stop-color="#7c90a3" />
+    </radialGradient>
+
+    <linearGradient id="wingCovertsGrad" x1="20%" y1="10%" x2="80%" y2="90%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="40%" stop-color="#e3eaf2" />
+      <stop offset="80%" stop-color="#b0c0d0" />
+      <stop offset="100%" stop-color="#8496a8" />
+    </linearGradient>
+
+    <linearGradient id="primariesGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2b303a" />
+      <stop offset="45%" stop-color="#1a1d24" />
+      <stop offset="85%" stop-color="#0d0f12" />
+      <stop offset="100%" stop-color="#050608" />
+    </linearGradient>
+
+    <linearGradient id="neckGrad" x1="15%" y1="15%" x2="85%" y2="85%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="35%" stop-color="#f7f4e9" />
+      <stop offset="65%" stop-color="#d4dce6" />
+      <stop offset="90%" stop-color="#8f9fb0" />
+      <stop offset="100%" stop-color="#6c7d8f" />
+    </linearGradient>
+
+    <radialGradient id="headCrownGrad" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#fffdf5" />
+      <stop offset="45%" stop-color="#fae596" />
+      <stop offset="80%" stop-color="#d4b76a" />
+      <stop offset="100%" stop-color="#9c8959" />
+    </radialGradient>
+
+    <!-- Beak & Gular Pouch Gradients -->
+    <linearGradient id="upperMandibleGrad" x1="15%" y1="90%" x2="85%" y2="10%">
+      <stop offset="0%" stop-color="#e07a5f" />
+      <stop offset="25%" stop-color="#f4a261" />
+      <stop offset="55%" stop-color="#e9c46a" />
+      <stop offset="85%" stop-color="#ff595e" />
+      <stop offset="100%" stop-color="#c9182b" />
+    </linearGradient>
+
+    <linearGradient id="beakRidgeSpecular" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.1" />
+      <stop offset="35%" stop-color="#fff8d6" stop-opacity="0.75" />
+      <stop offset="75%" stop-color="#ffccd5" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.95" />
+    </linearGradient>
+
+    <linearGradient id="gularPouchGrad" x1="20%" y1="20%" x2="80%" y2="80%">
+      <stop offset="0%" stop-color="#ff9f80" />
+      <stop offset="30%" stop-color="#f26457" />
+      <stop offset="65%" stop-color="#c93b4b" />
+      <stop offset="90%" stop-color="#8c1d40" />
+      <stop offset="100%" stop-color="#590d22" />
+    </linearGradient>
+
+    <!-- Webbed Feet Gradients -->
+    <linearGradient id="webbedFootGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffb703" />
+      <stop offset="35%" stop-color="#fb8500" />
+      <stop offset="75%" stop-color="#d64500" />
+      <stop offset="100%" stop-color="#8f2500" />
+    </linearGradient>
+
+    <filter id="dropShadow" x="-20%" y="-20%" width="150%" height="150%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="12" />
+      <feOffset dx="35" dy="45" result="offsetblur" />
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.55" />
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="softBlur" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="5" />
+    </filter>
+  </defs>
+
+  <!-- 1. ROAD SURFACE & AERIAL ENVIRONMENT -->
+  <rect width="900" height="1000" fill="url(#asphaltGrad)" />
+
+  <!-- Road Lane Markings (Diagonal perspective from top-right to bottom-left) -->
+  <g opacity="0.85">
+    <!-- White Shoulder Racing Line -->
+    <path d="M -100,680 L 680,-100 L 710,-100 L -100,710 Z" fill="#e2e8f0" opacity="0.3" />
+    <path d="M -100,665 L 665,-100 L 673,-100 L -100,673 Z" fill="#f8fafc" opacity="0.5" />
+    
+    <!-- Dashed Yellow Centerline -->
+    <g fill="#ffb703" opacity="0.75">
+      <polygon points="620,980 740,860 756,876 636,996" />
+      <polygon points="820,780 940,660 956,676 836,796" />
+      <polygon points="420,1180 540,1060 556,1076 436,1196" />
+    </g>
+
+    <!-- Subtle Motion Speed Lines -->
+    <path d="M 120,880 L 780,220" stroke="url(#speedLineGrad)" stroke-width="3" stroke-linecap="round" />
+    <path d="M 60,720 L 650,130" stroke="url(#speedLineGrad)" stroke-width="2" stroke-linecap="round" />
+    <path d="M 320,920 L 860,380" stroke="url(#speedLineGrad)" stroke-width="4" stroke-linecap="round" />
+    <path d="M 50,480 L 490,40" stroke="url(#speedLineGrad)" stroke-width="1.5" stroke-linecap="round" />
+  </g>
+
+  <!-- 2. CAST SHADOW ON ASPHALT (Overhead sunlight from top-left casts shadow to bottom-right) -->
+  <g filter="url(#softBlur)" opacity="0.85">
+    <!-- Rear Wheel Shadow -->
+    <ellipse cx="275" cy="845" rx="32" ry="135" transform="rotate(42 275 845)" fill="url(#shadowGrad)" />
+    <!-- Front Wheel Shadow -->
+    <ellipse cx="675" cy="405" rx="32" ry="135" transform="rotate(48 675 405)" fill="url(#shadowGrad)" />
+    <!-- Frame & Handlebars Shadow -->
+    <path d="M 275,845 L 495,605 L 685,400 L 620,340 L 750,460 L 685,400" stroke="#090c10" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" opacity="0.55" />
+    <!-- Pelican Body & Wings Shadow -->
+    <ellipse cx="445" cy="675" rx="135" ry="185" transform="rotate(42 445 675)" fill="url(#shadowGrad)" />
+    <!-- Pelican Neck, Head & Beak Shadow -->
+    <path d="M 490,610 C 560,550 630,430 695,355 C 720,330 675,295 645,320 C 580,380 510,500 445,575 Z" fill="url(#shadowGrad)" />
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- 3. SLEEK AERODYNAMIC ROAD RACING BICYCLE (Elevated Foreshortened View)    -->
+  <!-- ========================================================================= -->
+  <g id="road-bicycle">
+    
+    <!-- REAR WHEEL (Bottom-Left, aligned along ~42 deg axis) -->
+    <g transform="translate(225, 795) rotate(42)">
+      <!-- Spokes (Foreshortened ellipse distribution) -->
+      <g stroke="url(#chromeGrad)" stroke-width="1.2" opacity="0.75">
+        <line x1="-12" y1="0" x2="26" y2="-122" />
+        <line x1="-12" y1="0" x2="31" y2="-85" />
+        <line x1="-12" y1="0" x2="34" y2="-40" />
+        <line x1="-12" y1="0" x2="35" y2="0" />
+        <line x1="-12" y1="0" x2="34" y2="40" />
+        <line x1="-12" y1="0" x2="31" y2="85" />
+        <line x1="-12" y1="0" x2="26" y2="122" />
+        <line x1="12" y1="0" x2="-26" y2="-122" />
+        <line x1="12" y1="0" x2="-31" y2="-85" />
+        <line x1="12" y1="0" x2="-34" y2="-40" />
+        <line x1="12" y1="0" x2="-35" y2="0" />
+        <line x1="12" y1="0" x2="-34" y2="40" />
+        <line x1="12" y1="0" x2="-31" y2="85" />
+        <line x1="12" y1="0" x2="-26" y2="122" />
+      </g>
+      <!-- Deep-Section Carbon Aero Rim -->
+      <ellipse cx="0" cy="0" rx="34" ry="132" fill="none" stroke="url(#carbonGrad)" stroke-width="14" />
+      <!-- Aero Rim Red Racing Decal -->
+      <path d="M 28,-75 A 34,132 0 0,1 34,0" fill="none" stroke="url(#aeroRedGrad)" stroke-width="8" stroke-linecap="round" />
+      <path d="M -28,75 A 34,132 0 0,1 -34,0" fill="none" stroke="url(#aeroRedGrad)" stroke-width="8" stroke-linecap="round" />
+      <!-- Thin High-Pressure Road Tire -->
+      <ellipse cx="0" cy="0" rx="39" ry="138" fill="none" stroke="url(#tireGrad)" stroke-width="9" />
+      <!-- Tire Specular Highlight -->
+      <path d="M -38,-35 A 39,138 0 0,1 0,-138 A 39,138 0 0,1 35,-60" fill="none" stroke="#6c757d" stroke-width="2" opacity="0.6" />
+      <!-- Rear Hub & Cassette -->
+      <rect x="-18" y="-8" width="36" height="16" rx="4" fill="url(#chromeGrad)" />
+      <ellipse cx="10" cy="0" rx="6" ry="15" fill="#2b2d42" stroke="url(#chromeGrad)" stroke-width="1.5" />
+      <ellipse cx="6" cy="0" rx="4" ry="12" fill="#8d99ae" />
+    </g>
+
+    <!-- FRONT WHEEL (Top-Right, slightly steered into turn at ~48 deg) -->
+    <g transform="translate(625, 355) rotate(48)">
+      <!-- Spokes -->
+      <g stroke="url(#chromeGrad)" stroke-width="1.2" opacity="0.75">
+        <line x1="-14" y1="0" x2="26" y2="-122" />
+        <line x1="-14" y1="0" x2="31" y2="-80" />
+        <line x1="-14" y1="0" x2="34" y2="-35" />
+        <line x1="-14" y1="0" x2="34" y2="35" />
+        <line x1="-14" y1="0" x2="31" y2="80" />
+        <line x1="-14" y1="0" x2="26" y2="122" />
+        <line x1="14" y1="0" x2="-26" y2="-122" />
+        <line x1="14" y1="0" x2="-31" y2="-80" />
+        <line x1="14" y1="0" x2="-34" y2="-35" />
+        <line x1="14" y1="0" x2="-34" y2="35" />
+        <line x1="14" y1="0" x2="-31" y2="80" />
+        <line x1="14" y1="0" x2="-26" y2="122" />
+      </g>
+      <!-- Front Brake Rotor -->
+      <ellipse cx="-10" cy="0" rx="8" ry="26" fill="none" stroke="url(#chromeGrad)" stroke-width="3" stroke-dasharray="6 3" />
+      <!-- Deep-Section Carbon Aero Rim -->
+      <ellipse cx="0" cy="0" rx="34" ry="132" fill="none" stroke="url(#carbonGrad)" stroke-width="14" />
+      <!-- Aero Rim Red Racing Decal -->
+      <path d="M 28,-75 A 34,132 0 0,1 34,0" fill="none" stroke="url(#aeroRedGrad)" stroke-width="8" stroke-linecap="round" />
+      <path d="M -28,75 A 34,132 0 0,1 -34,0" fill="none" stroke="url(#aeroRedGrad)" stroke-width="8" stroke-linecap="round" />
+      <!-- Thin High-Pressure Road Tire -->
+      <ellipse cx="0" cy="0" rx="39" ry="138" fill="none" stroke="url(#tireGrad)" stroke-width="9" />
+      <!-- Tire Specular Highlight -->
+      <path d="M -36,-45 A 39,138 0 0,1 0,-138 A 39,138 0 0,1 36,-45" fill="none" stroke="#adb5bd" stroke-width="2" opacity="0.65" />
+      <!-- Front Hub -->
+      <rect x="-18" y="-6" width="36" height="12" rx="4" fill="url(#chromeGrad)" />
+    </g>
+
+    <!-- CRANKSET, CHAINRINGS, CHAIN & PEDALS (Bottom Bracket around 435, 565) -->
+    <!-- Rear Chainstays -->
+    <path d="M 215,790 L 415,550" stroke="url(#carbonGrad)" stroke-width="11" stroke-linecap="round" />
+    <path d="M 235,800 L 455,580" stroke="url(#carbonGrad)" stroke-width="11" stroke-linecap="round" />
+    
+    <!-- Drivetrain Chain -->
+    <path d="M 234,798 L 462,592 L 448,572 L 228,786 Z" fill="none" stroke="url(#chromeGrad)" stroke-width="3.5" stroke-dasharray="5 3" />
+
+    <!-- Left Crank Arm & Pedal (Extended Forward/Up-Left for Left Webbed Foot) -->
+    <g id="left-pedal-assembly">
+      <!-- Crank Arm -->
+      <path d="M 420,552 L 385,468" stroke="url(#carbonGrad)" stroke-width="14" stroke-linecap="round" />
+      <path d="M 420,552 L 385,468" stroke="#adb5bd" stroke-width="2" stroke-linecap="round" opacity="0.5" />
+      <!-- Clipless Road Pedal Platform -->
+      <g transform="translate(362, 452) rotate(42)">
+        <rect x="-22" y="-14" width="44" height="28" rx="6" fill="url(#carbonGrad)" stroke="url(#chromeGrad)" stroke-width="2" />
+        <line x1="0" y1="-10" x2="0" y2="10" stroke="url(#aeroRedGrad)" stroke-width="4" />
+        <!-- Pedal Spindle -->
+        <line x1="18" y1="0" x2="32" y2="0" stroke="url(#chromeGrad)" stroke-width="6" />
+      </g>
+    </g>
+
+    <!-- Right Crank Arm & Chainring (Extended Down-Right for Right Webbed Foot) -->
+    <g id="right-pedal-assembly">
+      <!-- Aero Spider & Chainring -->
+      <ellipse cx="452" cy="578" rx="18" ry="38" transform="rotate(42 452 578)" fill="url(#carbonGrad)" stroke="url(#chromeGrad)" stroke-width="3" />
+      <ellipse cx="452" cy="578" rx="10" ry="22" transform="rotate(42 452 578)" fill="none" stroke="#495057" stroke-width="2" stroke-dasharray="8 6" />
+      <!-- Right Crank Arm -->
+      <path d="M 452,578 L 535,622" stroke="url(#carbonGrad)" stroke-width="15" stroke-linecap="round" />
+      <path d="M 454,575 L 535,619" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.6" />
+      <!-- Right Clipless Road Pedal Platform -->
+      <g transform="translate(558, 634) rotate(42)">
+        <line x1="-32" y1="0" x2="-18" y2="0" stroke="url(#chromeGrad)" stroke-width="6" />
+        <rect x="-22" y="-14" width="44" height="28" rx="6" fill="url(#carbonGrad)" stroke="url(#chromeGrad)" stroke-width="2" />
+        <line x1="0" y1="-10" x2="0" y2="10" stroke="url(#aeroRedGrad)" stroke-width="4" />
+      </g>
+    </g>
+
+    <!-- CARBON AERO FRAME (Seat Stays, Fork, Down Tube, Top Tube, Seat Tube) -->
+    <!-- Rear Seat Stays -->
+    <path d="M 215,790 L 355,635" stroke="url(#aeroRedGrad)" stroke-width="10" stroke-linecap="round" />
+    <path d="M 235,800 L 372,650" stroke="url(#aeroRedGrad)" stroke-width="10" stroke-linecap="round" />
+
+    <!-- Front Aero Fork Blades -->
+    <path d="M 612,344 C 595,320 585,305 588,292" fill="none" stroke="url(#aeroRedGrad)" stroke-width="13" stroke-linecap="round" />
+    <path d="M 638,366 C 618,342 605,320 594,296" fill="none" stroke="url(#aeroRedGrad)" stroke-width="13" stroke-linecap="round" />
+    <!-- Fork Specular Highlights -->
+    <path d="M 612,344 C 595,320 585,305 588,292" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.6" />
+
+    <!-- Aero Down Tube (Partially visible beneath Top Tube) -->
+    <path d="M 435,565 L 592,300" stroke="url(#carbonGrad)" stroke-width="22" stroke-linecap="round" />
+
+    <!-- Sculpted Carbon Top Tube & Head Tube (Viewed from above) -->
+    <path d="M 352,638 C 420,545 510,415 592,292" fill="none" stroke="url(#aeroRedGrad)" stroke-width="24" stroke-linecap="round" />
+    <!-- Top Tube Cyan/White Racing Stripe & Specular Highlight -->
+    <path d="M 365,620 C 430,530 515,405 586,300" fill="none" stroke="url(#aeroCyanGrad)" stroke-width="6" stroke-linecap="round" />
+    <path d="M 356,632 C 425,540 512,410 589,295" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.85" />
+
+    <!-- Water Bottle Cage & Aero Bidon on Down Tube -->
+    <ellipse cx="498" cy="458" rx="14" ry="28" transform="rotate(36 498 458)" fill="url(#aeroCyanGrad)" stroke="#1a1d24" stroke-width="2" />
+    <circle cx="508" cy="444" r="6" fill="#ffffff" />
+
+    <!-- RACING SADDLE (Partially visible behind/under Pelican's tail) -->
+    <g transform="translate(342, 650) rotate(42)">
+      <path d="M 0,-42 C 12,-35 10,-5 16,15 C 22,35 28,45 14,52 C 4,56 -4,56 -14,52 C -28,45 -22,35 -16,15 C -10,-5 -12,-35 0,-42 Z" fill="url(#carbonGrad)" stroke="#495057" stroke-width="2" />
+      <!-- Saddle Cutout Channel & Racing Accents -->
+      <ellipse cx="0" cy="8" rx="4" ry="22" fill="#0f1116" />
+      <path d="M -16,38 C -8,46 8,46 16,38" fill="none" stroke="url(#aeroRedGrad)" stroke-width="4" stroke-linecap="round" />
+    </g>
+
+    <!-- ===================================================================== -->
+    <!-- DROP HANDLEBARS & INTEGRATED AERO COCKPIT (Top-Right)                 -->
+    <!-- ===================================================================== -->
+    <g id="drop-handlebars">
+      <!-- Aero Integrated Carbon Stem (From steerer tube 590,294 forward to bar clamp 635,244) -->
+      <path d="M 584,300 L 638,240" stroke="url(#carbonGrad)" stroke-width="22" stroke-linecap="round" />
+      <path d="M 586,298 L 636,242" stroke="url(#chromeGrad)" stroke-width="4" stroke-linecap="round" opacity="0.7" />
+      <!-- Stem Top Cap & Out-Front GPS Cycling Computer -->
+      <circle cx="588" cy="296" r="8" fill="#141619" stroke="url(#chromeGrad)" stroke-width="2" />
+      <g transform="translate(658, 218) rotate(48)">
+        <rect x="-12" y="-18" width="24" height="36" rx="4" fill="#1a1d24" stroke="url(#chromeGrad)" stroke-width="1.5" />
+        <rect x="-9" y="-14" width="18" height="26" rx="2" fill="url(#aeroCyanGrad)" opacity="0.85" />
+        <!-- GPS Screen Glare -->
+        <polygon points="-9,-14 9,-14 -9,6" fill="#ffffff" opacity="0.4" />
+      </g>
+
+      <!-- Lower Drop Ends (Curving backward & down underneath the top flats) -->
+      <!-- Left Drop Hook (Curves back from left hood 546,162 toward 498,215) -->
+      <path d="M 546,162 C 525,185 505,205 496,216" fill="none" stroke="url(#tireGrad)" stroke-width="15" stroke-linecap="round" />
+      <circle cx="496" cy="216" r="7" fill="url(#aeroRedGrad)" />
+      <!-- Right Drop Hook (Curves back from right hood 724,324 toward 676,377) -->
+      <path d="M 724,324 C 703,347 683,367 674,378" fill="none" stroke="url(#tireGrad)" stroke-width="15" stroke-linecap="round" />
+      <circle cx="674" cy="378" r="7" fill="url(#aeroRedGrad)" />
+
+      <!-- Aero Flat-Top Handlebar Wing (Perpendicular to stem, from 546,162 through 635,244 to 724,324) -->
+      <path d="M 546,162 C 570,185 605,216 635,244 C 665,272 700,302 724,324" fill="none" stroke="url(#carbonGrad)" stroke-width="18" stroke-linecap="round" />
+      <!-- Handlebar Specular Highlight -->
+      <path d="M 552,165 C 575,188 605,216 635,244 C 665,272 695,298 718,320" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity="0.65" />
+
+      <!-- Textured Black Bar Tape Ribbons on Outer Curves -->
+      <path d="M 546,162 L 582,195" stroke="#181a20" stroke-width="19" stroke-dasharray="5 3" stroke-linecap="round" />
+      <path d="M 688,292 L 724,324" stroke="#181a20" stroke-width="19" stroke-dasharray="5 3" stroke-linecap="round" />
+      <!-- Red Bar Tape Finishing Rings -->
+      <line x1="576" y1="202" x2="588" y2="188" stroke="url(#aeroRedGrad)" stroke-width="4" />
+      <line x1="682" y1="298" x2="694" y2="285" stroke="url(#aeroRedGrad)" stroke-width="4" />
+
+      <!-- Dual-Control Brake/Shifter Hoods (Extending forward from bar corners) -->
+      <!-- Left Brake Hood & Lever Blade -->
+      <path d="M 568,138 L 592,115" stroke="url(#chromeGrad)" stroke-width="5" stroke-linecap="round" />
+      <path d="M 538,168 C 548,152 562,135 574,126 C 582,120 592,128 584,140 C 574,154 560,168 552,176 Z" fill="url(#carbonGrad)" stroke="#495057" stroke-width="1.5" />
+      <!-- Right Brake Hood & Lever Blade (Target for Pelican's Beak Tip!) -->
+      <path d="M 746,300 L 770,277" stroke="url(#chromeGrad)" stroke-width="5" stroke-linecap="round" />
+      <path d="M 716,330 C 726,314 740,297 752,288 C 760,282 770,290 762,302 C 752,316 738,330 730,338 Z" fill="url(#carbonGrad)" stroke="#495057" stroke-width="1.5" />
+    </g>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- 4. PELICAN LEGS & WEBBED FEET ON THE PEDALS                               -->
+  <!-- ========================================================================= -->
+  <g id="pelican-legs-and-feet">
+    <!-- LEFT LEG & WEBBED FOOT (Pressing Forward/Up-Left Pedal at 362, 452) -->
+    <!-- Orange Scaly Tarsus (Lower Leg) emerging from under left flank -->
+    <path d="M 382,535 C 378,505 372,482 365,462" fill="none" stroke="url(#webbedFootGrad)" stroke-width="16" stroke-linecap="round" />
+    <path d="M 380,530 C 376,502 370,480 364,462" fill="none" stroke="#ffe169" stroke-width="3" stroke-linecap="round" opacity="0.6" />
+    
+    <!-- Left Totipalmate Webbed Foot (4 toes connected by webbing wrapped onto pedal) -->
+    <g>
+      <!-- Stretched Webbing Membrane -->
+      <path d="M 365,462 L 332,458 C 334,442 342,428 348,422 C 358,425 368,420 376,415 C 384,424 394,430 402,432 L 372,462 Z" fill="url(#webbedFootGrad)" stroke="#b53800" stroke-width="1.5" stroke-linejoin="round" />
+      <!-- Webbing Indentation Highlights -->
+      <path d="M 340,445 Q 355,442 352,428" fill="none" stroke="#ff9e00" stroke-width="2" opacity="0.5" />
+      <path d="M 362,438 Q 372,436 376,422" fill="none" stroke="#ff9e00" stroke-width="2" opacity="0.5" />
+      <!-- Articulated Toes (Digits I, II, III, IV) -->
+      <path d="M 365,460 L 332,458" stroke="#ffb703" stroke-width="4.5" stroke-linecap="round" />
+      <path d="M 365,458 L 348,422" stroke="#ffb703" stroke-width="5.5" stroke-linecap="round" />
+      <path d="M 368,458 L 376,415" stroke="#ffb703" stroke-width="6" stroke-linecap="round" />
+      <path d="M 371,460 L 402,432" stroke="#ffb703" stroke-width="5" stroke-linecap="round" />
+      <!-- Curved Keratin Claws gripping pedal front edge -->
+      <path d="M 332,458 L 325,460" stroke="#2b2d42" stroke-width="3" stroke-linecap="round" />
+      <path d="M 348,422 L 344,414" stroke="#2b2d42" stroke-width="3.5" stroke-linecap="round" />
+      <path d="M 376,415 L 376,406" stroke="#2b2d42" stroke-width="3.5" stroke-linecap="round" />
+      <path d="M 402,432 L 408,426" stroke="#2b2d42" stroke-width="3" stroke-linecap="round" />
+    </g>
+
+    <!-- RIGHT LEG & WEBBED FOOT (Powering Down-Right Pedal at 558, 634) -->
+    <!-- Orange Scaly Tarsus emerging from under right flank -->
+    <path d="M 485,602 C 512,612 534,622 554,632" fill="none" stroke="url(#webbedFootGrad)" stroke-width="17" stroke-linecap="round" />
+    <path d="M 488,600 C 514,610 535,620 554,630" fill="none" stroke="#ffe169" stroke-width="3.5" stroke-linecap="round" opacity="0.65" />
+
+    <!-- Right Totipalmate Webbed Foot -->
+    <g>
+      <!-- Stretched Webbing Membrane -->
+      <path d="M 548,634 L 542,664 C 556,662 568,656 576,652 C 578,642 586,632 594,624 C 586,614 580,604 578,596 L 550,626 Z" fill="url(#webbedFootGrad)" stroke="#b53800" stroke-width="1.5" stroke-linejoin="round" />
+      <!-- Webbing Highlight Veins -->
+      <path d="M 556,654 Q 560,642 572,646" fill="none" stroke="#ff9e00" stroke-width="2" opacity="0.5" />
+      <path d="M 568,634 Q 574,626 588,624" fill="none" stroke="#ff9e00" stroke-width="2" opacity="0.5" />
+      <!-- Articulated Toes -->
+      <path d="M 550,634 L 542,664" stroke="#ffb703" stroke-width="4.5" stroke-linecap="round" />
+      <path d="M 552,632 L 576,652" stroke="#ffb703" stroke-width="5.5" stroke-linecap="round" />
+      <path d="M 554,630 L 594,624" stroke="#ffb703" stroke-width="6" stroke-linecap="round" />
+      <path d="M 552,626 L 578,596" stroke="#ffb703" stroke-width="5" stroke-linecap="round" />
+      <!-- Curved Claws gripping pedal -->
+      <path d="M 542,664 L 540,671" stroke="#2b2d42" stroke-width="3" stroke-linecap="round" />
+      <path d="M 576,652 L 583,657" stroke="#2b2d42" stroke-width="3.5" stroke-linecap="round" />
+      <path d="M 594,624 L 602,624" stroke="#2b2d42" stroke-width="3.5" stroke-linecap="round" />
+      <path d="M 578,596 L 583,589" stroke="#2b2d42" stroke-width="3" stroke-linecap="round" />
+    </g>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- 5. PELICAN BODY, TAIL & FOLDED WINGS (Seen from Overhead Bird's-Eye View) -->
+  <!-- ========================================================================= -->
+  <g id="pelican-body" filter="url(#dropShadow)">
+    
+    <!-- FAN-SHAPED TAIL FEATHERS (Extending back over the rear wheel & saddle) -->
+    <g id="tail-feathers">
+      <path d="M 355,635 L 285,682 C 280,692 286,700 298,696 L 362,645 Z" fill="url(#wingCovertsGrad)" stroke="#9eb1c2" stroke-width="1" />
+      <path d="M 352,640 L 292,704 C 289,715 297,722 308,715 L 365,650 Z" fill="url(#wingCovertsGrad)" stroke="#9eb1c2" stroke-width="1" />
+      <path d="M 355,645 L 306,722 C 306,734 316,738 325,728 L 370,655 Z" fill="url(#bodyPlumageGrad)" stroke="#9eb1c2" stroke-width="1" />
+      <path d="M 360,648 L 326,734 C 328,745 339,746 346,734 L 375,658 Z" fill="url(#bodyPlumageGrad)" stroke="#9eb1c2" stroke-width="1" />
+      <path d="M 365,650 L 348,736 C 352,746 362,744 366,732 L 382,658 Z" fill="url(#wingCovertsGrad)" stroke="#9eb1c2" stroke-width="1" />
+      <path d="M 370,648 L 368,728 C 374,736 384,732 385,720 L 388,652 Z" fill="url(#wingCovertsGrad)" stroke="#9eb1c2" stroke-width="1" />
+      <!-- Upper Tail Coverts (Soft overlapping plumage base) -->
+      <path d="M 332,630 C 312,665 325,695 362,698 C 392,700 412,675 398,635 Z" fill="url(#bodyPlumageGrad)" />
+    </g>
+
+    <!-- AERODYNAMIC TORSO / BACK PLUMAGE -->
+    <ellipse cx="422" cy="568" rx="96" ry="132" transform="rotate(42 422 568)" fill="url(#bodyPlumageGrad)" />
+    <!-- Subtle Feather Shaft Texture on Back -->
+    <g stroke="#c5d1db" stroke-width="1.5" fill="none" opacity="0.7">
+      <path d="M 435,515 C 415,535 405,550 385,570" />
+      <path d="M 455,525 C 435,545 425,560 405,580" />
+      <path d="M 420,500 C 400,520 390,535 370,555" />
+      <path d="M 412,565 C 392,585 380,600 362,620" />
+      <path d="M 432,578 C 412,598 400,612 382,632" />
+    </g>
+
+    <!-- LEFT WING (Folded aerodynamically along the pelican's left flank, tucked for speed) -->
+    <g id="left-wing">
+      <!-- Dark Slate-Black Primary Flight Feathers (Projecting backward at wingtip) -->
+      <path d="M 340,565 L 258,645 C 252,654 260,662 272,656 L 358,585 Z" fill="url(#primariesGrad)" stroke="#3d4452" stroke-width="1" />
+      <path d="M 335,548 L 245,624 C 238,632 246,642 258,635 L 352,570 Z" fill="url(#primariesGrad)" stroke="#3d4452" stroke-width="1" />
+      <path d="M 332,532 L 238,602 C 230,610 238,620 252,614 L 348,555 Z" fill="url(#primariesGrad)" stroke="#3d4452" stroke-width="1" />
+      <path d="M 330,518 L 236,580 C 228,588 236,598 250,592 L 345,540 Z" fill="url(#primariesGrad)" stroke="#3d4452" stroke-width="1" />
+      
+      <!-- Secondary Feathers (Dark grey/black edged with silver) -->
+      <path d="M 375,455 C 325,485 282,535 268,585 C 288,592 325,578 362,550 C 388,528 402,485 375,455 Z" fill="url(#primariesGrad)" stroke="#9eb1c2" stroke-width="1.5" />
+
+      <!-- White & Silver Wing Coverts (Scapulars & Greater/Median Coverts) -->
+      <path d="M 465,442 C 418,418 358,442 322,492 C 288,538 282,578 298,588 C 316,598 358,568 395,528 C 432,488 478,448 465,442 Z" fill="url(#wingCovertsGrad)" />
+      
+      <!-- Layered Covert Feather Details & Specular Sheen -->
+      <path d="M 442,442 C 405,445 365,472 335,512" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" opacity="0.9" />
+      <path d="M 315,515 C 328,525 345,522 358,508" fill="none" stroke="#b0c0d0" stroke-width="2" />
+      <path d="M 332,492 C 345,502 362,498 375,485" fill="none" stroke="#b0c0d0" stroke-width="2" />
+      <path d="M 352,470 C 365,480 382,476 395,462" fill="none" stroke="#b0c0d0" stroke-width="2" />
+      <path d="M 302,540 C 315,550 332,546 345,532" fill="none" stroke="#b0c0d0" stroke-width="2" />
+    </g>
+
+    <!-- RIGHT WING (Folded aerodynamically along the pelican's right flank) -->
+    <g id="right-wing">
+      <!-- Dark Slate-Black Primary Flight Feathers -->
+      <path d="M 418,642 L 338,722 C 330,732 338,740 348,732 L 435,658 Z" fill="url(#primariesGrad)" stroke="#3d4452" stroke-width="1" />
+      <path d="M 435,645 L 358,732 C 350,742 360,750 370,740 L 450,660 Z" fill="url(#primariesGrad)" stroke="#3d4452" stroke-width="1" />
+      <path d="M 452,648 L 380,738 C 374,748 384,755 394,744 L 465,662 Z" fill="url(#primariesGrad)" stroke="#3d4452" stroke-width="1" />
+      <path d="M 468,648 L 404,738 C 398,748 408,754 418,742 L 480,660 Z" fill="url(#primariesGrad)" stroke="#3d4452" stroke-width="1" />
+
+      <!-- Secondary Feathers -->
+      <path d="M 522,595 C 495,645 450,692 402,710 C 392,690 402,652 428,615 C 448,588 492,570 522,595 Z" fill="url(#primariesGrad)" stroke="#9eb1c2" stroke-width="1.5" />
+
+      <!-- White & Silver Wing Coverts -->
+      <path d="M 525,502 C 552,548 532,608 485,648 C 442,685 402,692 392,676 C 382,658 408,615 445,575 C 482,535 518,490 525,502 Z" fill="url(#wingCovertsGrad)" />
+
+      <!-- Layered Covert Feather Details & Specular Highlight -->
+      <path d="M 518,518 C 520,555 495,595 455,632" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" opacity="0.75" />
+      <path d="M 465,655 C 455,642 458,625 472,612" fill="none" stroke="#9eb1c2" stroke-width="2" />
+      <path d="M 488,635 C 478,622 480,605 495,592" fill="none" stroke="#9eb1c2" stroke-width="2" />
+      <path d="M 508,612 C 498,600 500,582 515,570" fill="none" stroke="#9eb1c2" stroke-width="2" />
+      <path d="M 442,670 C 432,658 435,640 448,628" fill="none" stroke="#9eb1c2" stroke-width="2" />
+    </g>
+
+    <!-- ===================================================================== -->
+    <!-- 6. PELICAN NECK, HEAD & LONG BEAK STEERING THE HANDLEBARS             -->
+    <!-- ===================================================================== -->
+    
+    <!-- S-CURVED NECK (Arched forward from shoulders ~475,500 to head ~535,410) -->
+    <g id="pelican-neck">
+      <!-- Neck Base & Arch -->
+      <path d="M 442,505 C 452,462 482,422 518,395 C 542,378 572,395 562,428 C 550,465 522,498 498,535 C 478,552 436,535 442,505 Z" fill="url(#neckGrad)" />
+      <!-- Bright Overhead Sunlight Specular Highlight along Upper Neck Crest -->
+      <path d="M 455,495 C 468,458 492,426 525,402" fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round" opacity="0.8" />
+    </g>
+
+    <!-- PELICAN HEAD, CROWN CREST & EYES (Positioned at ~538, 405, tilted toward right handlebar) -->
+    <g id="pelican-head">
+      <!-- Occipital Nuance / Short Tufted Crest Feathers at Back of Head -->
+      <path d="M 512,388 L 490,378 L 504,398 L 482,395 L 502,410 L 488,412 L 512,422 Z" fill="url(#headCrownGrad)" />
+
+      <!-- Expandable Gular Pouch (Visible bulging slightly beneath the lower mandible as it steers) -->
+      <path d="M 565,420 C 608,425 662,392 712,340 C 728,324 740,308 745,298 C 725,302 650,355 565,402 Z" fill="url(#gularPouchGrad)" />
+      <!-- Gular Pouch Throat Folds / Vascular Striations -->
+      <path d="M 578,416 C 618,415 662,384 705,342" fill="none" stroke="#ffccd5" stroke-width="1.5" opacity="0.5" />
+      <path d="M 590,410 C 625,405 665,378 712,332" fill="none" stroke="#590d22" stroke-width="1.5" opacity="0.6" />
+
+      <!-- Cranium / Crown (Golden-yellow and white breeding plumage wash) -->
+      <ellipse cx="542" cy="402" rx="36" ry="28" transform="rotate(-12 542 402)" fill="url(#headCrownGrad)" />
+      <!-- Crown Specular Highlight -->
+      <ellipse cx="534" cy="392" rx="22" ry="14" transform="rotate(-12 534 392)" fill="#ffffff" opacity="0.7" />
+
+      <!--LONG ANATOMICAL PELICAN BEAK (Extending from head 562,395 to Right Handlebar Hood 754,294) -->
+      <g id="pelican-beak">
+        <!-- Upper Mandible Main Structure (Broad base tapering to tip on right brake hood) -->
+        <path d="M 556,382 C 605,356 665,326 732,294 C 742,289 752,286 758,288 C 762,292 758,300 748,306 C 685,352 628,392 572,418 C 560,412 552,395 556,382 Z" fill="url(#upperMandibleGrad)" stroke="#b53800" stroke-width="1.5" />
+
+        <!--Culmen (Central Dorsal Ridge of the Beak) -->
+        <path d="M 558,396 C 615,365 680,330 752,292" fill="none" stroke="url(#beakRidgeSpecular)" stroke-width="7" stroke-linecap="round" />
+        <!--Lateral Mandible Grooves -->
+        <path d="M 565,386 C 620,356 680,325 744,292" fill="none" stroke="#9e2a2b" stroke-width="1.5" opacity="0.7" />
+        <path d="M 570,408 C 625,378 685,342 746,302" fill="none" stroke="#9e2a2b" stroke-width="1.5" opacity="0.7" />
+        <!-- Nasal Slits at Base of Culmen -->
+        <line x1="572" y1="386" x2="582" y2="381" stroke="#3d0c11" stroke-width="2" stroke-linecap="round" />
+        <line x1="576" y1="395" x2="586" y2="390" stroke="#3d0c11" stroke-width="2" stroke-linecap="round" />
+
+        <!-- Hooked Nail at the Tip of the Beak (Gripping & Steering the Right Brake Hood/Drop Bar at 754,294!) -->
+        <path d="M 738,290 C 748,285 758,284 763,290 C 767,295 762,305 754,308 C 750,309 746,306 749,301 C 752,297 746,294 738,290 Z" fill="#d90429" stroke="#59000f" stroke-width="1.5" />
+        <!-- Bright Specular Glint on the Beak Tip Nail -->
+        <path d="M 744,289 C 752,286 757,287 760,291" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" />
+      </g>
+
+      <!-- Facial Skin Lore (Bare yellow-orange skin patch around eyes merging into beak) -->
+      <path d="M 536,378 C 546,374 558,378 564,384 C 558,390 544,390 536,378 Z" fill="#ffb703" />
+      <path d="M 552,412 C 562,414 572,412 576,406 C 568,402 558,404 552,412 Z" fill="#fb8500" />
+
+      <!-- Keen Eyes (Positioned anatomically on sides of head, focused ahead on the handlebars/road) -->
+      <!-- Left Eye (Upper-left side of head) -->
+      <g transform="translate(544, 380)">
+        <ellipse cx="0" cy="0" rx="6" ry="4.5" transform="rotate(-18)" fill="#ff9f1c" stroke="#5c3a00" stroke-width="1" />
+        <circle cx="1" cy="-0.5" r="3.5" fill="#1b263b" />
+        <circle cx="2" cy="-1" r="1.8" fill="#000000" />
+        <circle cx="0.5" cy="-2" r="1.3" fill="#ffffff" />
+      </g>
+
+      <!-- Right Eye (Lower-right side of head, focused directly down the beak toward the handlebar) -->
+      <g transform="translate(560, 409)">
+        <ellipse cx="0" cy="0" rx="6.5" ry="5" transform="rotate(-18)" fill="#ff9f1c" stroke="#5c3a00" stroke-width="1" />
+        <circle cx="1.5" cy="-0.5" r="3.8" fill="#1b263b" />
+        <circle cx="2.2" cy="-1" r="2" fill="#000000" />
+        <circle cx="0.8" cy="-2" r="1.5" fill="#ffffff" />
+      </g>
+    </g>
+  </g>
+
+  <!-- 7. FOREGROUND WIND/AERO STREAKS FOR DYNAMIC REALISM -->
+  <g opacity="0.45" pointer-events="none">
+    <path d="M 780,180 C 660,300 560,400 420,540" fill="none" stroke="url(#speedLineGrad)" stroke-width="2.5" stroke-linecap="round" />
+    <path d="M 710,120 C 590,240 490,340 310,520" fill="none" stroke="url(#speedLineGrad)" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 840,310 C 720,430 620,530 460,690" fill="none" stroke="url(#speedLineGrad)" stroke-width="2" stroke-linecap="round" />
+  </g>
+</svg>

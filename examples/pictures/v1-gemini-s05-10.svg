@@ -1,0 +1,178 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <!-- Background: Warm Vintage Coastal Sky & Sun -->
+  <rect width="800" height="600" fill="#F4EFE6" />
+  <circle cx="580" cy="240" r="190" fill="#F3C663" opacity="0.35" />
+  
+  <!-- Ground Shadow / Horizon -->
+  <rect x="100" y="516" width="600" height="8" rx="4" fill="#E2D9C8" />
+
+  <!-- ==========================================
+       BACKGROUND PELICAN ELEMENTS (Left Side)
+       ========================================== -->
+  <!-- Far Wing (Reaching to Handlebar) -->
+  <polygon points="340,255 435,280 500,255 430,295" fill="#CBD2D9" />
+  
+  <!-- Far Leg & Webbed Foot (High Pedal) -->
+  <polygon points="335,330 347,330 392,380 380,385" fill="#D96B27" />
+  <polygon points="385,375 397,385 352,412 346,398" fill="#D96B27" />
+  <polygon points="365,400 385,400 375,408" fill="#B85214" /> <!-- Back Pedal -->
+
+  <!-- ==========================================
+       VINTAGE CRUISER BICYCLE (Back Layers)
+       ========================================== -->
+  <!-- Rear Wheel -->
+  <g id="rear-wheel">
+    <!-- Tire -->
+    <path d="M 220,310 A 105,105 0 1,0 220,520 A 105,105 0 1,0 220,310 Z M 220,332 A 83,83 0 1,1 220,498 A 83,83 0 1,1 220,332 Z" fill="#2A2B2D" />
+    <!-- Whitewall -->
+    <path d="M 220,330 A 85,85 0 1,0 220,500 A 85,85 0 1,0 220,330 Z M 220,348 A 67,67 0 1,1 220,482 A 67,67 0 1,1 220,348 Z" fill="#FDFBF7" />
+    <!-- Rim -->
+    <path d="M 220,346 A 69,69 0 1,0 220,484 A 69,69 0 1,0 220,346 Z M 220,354 A 61,61 0 1,1 220,476 A 61,61 0 1,1 220,354 Z" fill="#8C969E" />
+    <!-- Spokes (Minimalist Geometric Crosses) -->
+    <rect x="218" y="350" width="4" height="130" fill="#CBD2D9" />
+    <rect x="155" y="413" width="130" height="4" fill="#CBD2D9" />
+    <rect x="218" y="350" width="4" height="130" fill="#CBD2D9" transform="rotate(45 220 415)" />
+    <rect x="155" y="413" width="130" height="4" fill="#CBD2D9" transform="rotate(45 220 415)" />
+  </g>
+
+  <!-- Front Wheel -->
+  <g id="front-wheel">
+    <!-- Tire -->
+    <path d="M 590,310 A 105,105 0 1,0 590,520 A 105,105 0 1,0 590,310 Z M 590,332 A 83,83 0 1,1 590,498 A 83,83 0 1,1 590,332 Z" fill="#2A2B2D" />
+    <!-- Whitewall -->
+    <path d="M 590,330 A 85,85 0 1,0 590,500 A 85,85 0 1,0 590,330 Z M 590,348 A 67,67 0 1,1 590,482 A 67,67 0 1,1 590,348 Z" fill="#FDFBF7" />
+    <!-- Rim -->
+    <path d="M 590,346 A 69,69 0 1,0 590,484 A 69,69 0 1,0 590,346 Z M 590,354 A 61,61 0 1,1 590,476 A 61,61 0 1,1 590,354 Z" fill="#8C969E" />
+    <!-- Spokes -->
+    <rect x="588" y="350" width="4" height="130" fill="#CBD2D9" />
+    <rect x="525" y="413" width="130" height="4" fill="#CBD2D9" />
+    <rect x="588" y="350" width="4" height="130" fill="#CBD2D9" transform="rotate(45 590 415)" />
+    <rect x="525" y="413" width="130" height="4" fill="#CBD2D9" transform="rotate(45 590 415)" />
+  </g>
+
+  <!-- Vintage Fenders -->
+  <!-- Rear Fender -->
+  <path d="M 103,415 A 117,117 0 0,1 321,356 L 306,365 A 100,100 0 0,0 120,415 Z" fill="#1E6B7B" />
+  <!-- Front Fender -->
+  <path d="M 488,356 A 117,117 0 0,1 691,356 L 676,365 A 100,100 0 0,0 503,365 Z" fill="#1E6B7B" />
+
+  <!-- ==========================================
+       BICYCLE FRAME (Flat Geometric Shapes)
+       ========================================== -->
+  <!-- Seat Post & Stem -->
+  <polygon points="325,305 339,305 344,325 330,325" fill="#8C969E" />
+  <polygon points="528,230 540,230 550,275 538,275" fill="#8C969E" />
+
+  <!-- Swept-Back Handlebars (Behind Stem) -->
+  <path d="M 534,230 Q 525,215 505,225 L 485,250 L 495,258 L 512,237 Q 522,232 528,238 Z" fill="#CBD2D9" />
+
+  <!-- Cruiser Frame (Teal) -->
+  <!-- Seat Tube -->
+  <polygon points="328,318 344,318 388,430 372,430" fill="#29889B" />
+  <!-- Chainstay -->
+  <polygon points="220,408 380,422 380,436 220,422" fill="#1E6B7B" />
+  <!-- Seatstay -->
+  <polygon points="216,410 335,322 342,334 224,420" fill="#29889B" />
+  <!-- Curved Down Tube -->
+  <path d="M 540,285 C 510,410 450,435 380,435 L 380,419 C 440,419 495,395 524,280 Z" fill="#29889B" />
+  <!-- Curved Cantilever Top Tube -->
+  <path d="M 332,322 C 390,270 460,260 542,272 L 538,288 C 460,276 395,286 340,334 Z" fill="#35A2B8" />
+  <!-- Classic Cruiser Tank Insert -->
+  <path d="M 365,315 C 410,282 465,277 522,284 C 512,312 495,328 470,332 C 425,338 390,330 365,315 Z" fill="#F4EFE6" />
+  <path d="M 380,314 C 415,292 460,287 508,292 C 502,308 490,318 470,321 C 430,326 400,322 380,314 Z" fill="#E05A47" />
+
+  <!-- Head Tube -->
+  <polygon points="528,262 546,258 558,308 540,312" fill="#1E6B7B" />
+  <!-- Front Fork -->
+  <polygon points="540,305 556,300 598,412 582,418" fill="#35A2B8" />
+
+  <!-- Wheel Hubs -->
+  <circle cx="220" cy="415" r="14" fill="#1E6B7B" />
+  <circle cx="220" cy="415" r="6" fill="#F4EFE6" />
+  <circle cx="590" cy="415" r="14" fill="#1E6B7B" />
+  <circle cx="590" cy="415" r="6" fill="#F4EFE6" />
+
+  <!-- ==========================================
+       PELICAN (Anthropomorphic & Geometric)
+       ========================================== -->
+  <!-- Near Leg & Webbed Foot (Low Pedal) -->
+  <polygon points="325,330 339,330 365,405 351,408" fill="#F0803C" />
+  <polygon points="351,405 365,402 418,468 404,475" fill="#F0803C" />
+  <!-- Webbed Foot (Flat Triangle/Polygon) -->
+  <polygon points="402,470 416,465 455,478 410,484" fill="#F0803C" />
+
+  <!-- Drivetrain / Crankset (Layered between legs/feet) -->
+  <circle cx="380" cy="428" r="28" fill="#1E6B7B" />
+  <circle cx="380" cy="428" r="20" fill="#CBD2D9" />
+  <circle cx="380" cy="428" r="8" fill="#2A2B2D" />
+  <!-- Front Crank Arm -->
+  <polygon points="376,428 384,428 424,478 416,478" fill="#8C969E" />
+  <!-- Front Pedal -->
+  <rect x="405" y="476" width="32" height="10" rx="4" fill="#2A2B2D" />
+
+  <!-- Cruiser Saddle -->
+  <path d="M 275,302 C 275,322 315,325 360,312 C 365,310 365,298 352,298 C 325,298 300,285 282,292 C 276,294 275,298 275,302 Z" fill="#8C4A27" />
+
+  <!-- Pelican Tail Feathers -->
+  <polygon points="278,288 235,265 250,255 288,275" fill="#CBD2D9" />
+  <polygon points="275,280 225,245 245,235 290,268" fill="#FFFFFF" />
+
+  <!-- Pelican Body / Torso (Upright Posture) -->
+  <path d="M 272,275 C 262,225 305,195 345,205 C 390,215 405,265 375,305 C 350,335 282,320 272,275 Z" fill="#FFFFFF" />
+  <!-- Subtle Belly Shading -->
+  <path d="M 272,275 C 282,320 350,335 375,305 C 385,290 390,270 385,250 C 375,285 340,305 295,295 C 280,290 274,282 272,275 Z" fill="#E6EAEF" />
+
+  <!-- Pelican Neck & Head (S-Curve) -->
+  <!-- Neck Base / Chest -->
+  <path d="M 330,220 C 330,170 300,150 300,105 C 300,70 330,50 360,50 C 390,50 405,70 400,95 C 395,120 365,130 365,160 C 365,185 390,205 385,235 Z" fill="#FFFFFF" />
+  
+  <!-- Cute Head Crest Feathers -->
+  <polygon points="335,53 295,35 315,62" fill="#FFFFFF" />
+  <polygon points="325,60 285,52 310,75" fill="#E6EAEF" />
+  <!-- Yellow Crown Patch -->
+  <path d="M 345,50 C 365,50 385,58 395,75 C 375,80 355,70 345,50 Z" fill="#F5B841" />
+
+  <!-- Giant Geometric Pelican Beak & Pouch -->
+  <!-- Gular Pouch (Deep Coral/Orange, sweeping curve) -->
+  <path d="M 380,95 C 385,175 460,215 585,112 L 392,82 Z" fill="#E05A47" />
+  <!-- Pouch Geometric Shadow Fold -->
+  <path d="M 380,95 C 390,155 445,185 540,136 L 390,90 Z" fill="#C84634" />
+  
+  <!-- Upper Mandible (Long, flat, geometric) -->
+  <polygon points="390,68 595,105 585,114 380,95" fill="#F5B841" />
+  <!-- Beak Tip Hook -->
+  <polygon points="595,105 605,112 592,124 585,114" fill="#D96B27" />
+
+  <!-- Pelican Eye -->
+  <circle cx="372" cy="76" r="11" fill="#E6EAEF" />
+  <circle cx="372" cy="76" r="7" fill="#2A2B2D" />
+  <circle cx="375" cy="73" r="2.5" fill="#FFFFFF" />
+  <!-- Cheek Accent -->
+  <circle cx="362" cy="92" r="6" fill="#E05A47" opacity="0.4" />
+
+  <!-- ==========================================
+       FOREGROUNDWING & HANDLEBARS
+       ========================================== -->
+  <!-- Swept-Back Handlebars (Foreground Side) -->
+  <path d="M 540,230 Q 535,250 510,265 L 470,280 L 465,268 L 502,253 Q 522,242 528,230 Z" fill="#8C969E" />
+  <!-- Vintage Handlebar Grip -->
+  <polygon points="485,277 450,290 444,274 479,261" fill="#8C4A27" />
+  <circle cx="447" cy="282" r="8" fill="#8C4A27" />
+
+  <!-- Near Wing (Articulated, reaching forward to grip the bar) -->
+  <!-- Upper Wing / Shoulder -->
+  <path d="M 325,225 C 350,215 385,235 405,295 C 365,305 325,280 325,225 Z" fill="#E6EAEF" />
+  <!-- Forewing / Feathers -->
+  <polygon points="375,298 465,265 470,285 395,312" fill="#CBD2D9" />
+  <polygon points="355,288 468,272 465,290 375,305" fill="#FFFFFF" />
+  
+  <!-- Wing-Tip "Fingers" Curled Around the Grip -->
+  <polygon points="455,265 482,268 475,288 448,282" fill="#FFFFFF" />
+  <polygon points="462,272 485,278 472,294 455,288" fill="#E6EAEF" />
+  <polygon points="452,282 475,288 462,298 445,292" fill="#CBD2D9" />
+
+  <!-- Minimalist Speed / Breeze Lines -->
+  <rect x="120" y="180" width="55" height="4" rx="2" fill="#CBD2D9" opacity="0.6" />
+  <rect x="85" y="200" width="35" height="4" rx="2" fill="#CBD2D9" opacity="0.6" />
+  <rect x="60" y="360" width="45" height="4" rx="2" fill="#CBD2D9" opacity="0.6" />
+</svg>

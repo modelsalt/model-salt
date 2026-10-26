@@ -1,0 +1,233 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F2027" />
+      <stop offset="40%" stop-color="#203A43" />
+      <stop offset="100%" stop-color="#2C5364" />
+    </linearGradient>
+
+    <!-- Dynamic Sky Overlay -->
+    <linearGradient id="skyOverlay" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#00B4DB" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#0083B0" stop-opacity="0.9" />
+    </linearGradient>
+
+    <!-- Sun Gradient -->
+    <linearGradient id="sunGrad" x1="20%" y1="20%" x2="80%" y2="80%">
+      <stop offset="0%" stop-color="#FFF7B2" />
+      <stop offset="30%" stop-color="#FFCC00" />
+      <stop offset="100%" stop-color="#FF5E00" />
+    </linearGradient>
+
+    <!-- Sun Outer Glow -->
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF9900" stop-opacity="0.6" />
+      <stop offset="50%" stop-color="#FF5E00" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#FF5E00" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Main Cloud Gradient -->
+    <linearGradient id="cloudGrad" x1="50%" y1="15%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="65%" stop-color="#F0F4F8" />
+      <stop offset="100%" stop-color="#CFE0EC" />
+    </linearGradient>
+
+    <!-- Cloud 3D Inner Shadow Effect (Simulated via Gradient) -->
+    <radialGradient id="cloudHighlight" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="1" />
+      <stop offset="70%" stop-color="#FFFFFF" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Back Cloud Gradient -->
+    <linearGradient id="backCloudGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#89B2D8" stop-opacity="0.3" />
+    </linearGradient>
+
+    <!-- Raindrop Gradient -->
+    <linearGradient id="rainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#80FFDB" />
+      <stop offset="50%" stop-color="#00D2FF" />
+      <stop offset="100%" stop-color="#0072FF" />
+    </linearGradient>
+
+    <!-- Lightning Gradient -->
+    <linearGradient id="boltGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFDF0" />
+      <stop offset="30%" stop-color="#FFE600" />
+      <stop offset="100%" stop-color="#FF7B00" />
+    </linearGradient>
+
+    <!-- Drop Shadows -->
+    <filter id="cloudShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="25" stdDeviation="25" flood-color="#041B2D" flood-opacity="0.45" />
+    </filter>
+    
+    <filter id="sunShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="15" stdDeviation="30" flood-color="#FF4500" flood-opacity="0.5" />
+    </filter>
+
+    <filter id="elementShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#041B2D" flood-opacity="0.35" />
+    </filter>
+    
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Clip Path for Strict Square Borders -->
+    <clipPath id="squareClip">
+      <rect x="0" y="0" width="1024" height="1024" />
+    </clipPath>
+  </defs>
+
+  <!-- Main Icon Container (Strictly Square) -->
+  <g clip-path="url(#squareClip)">
+    
+    <!-- 1. Background -->
+    <rect x="0" y="0" width="1024" height="1024" fill="url(#bgGrad)" />
+    <rect x="0" y="0" width="1024" height="1024" fill="url(#skyOverlay)" />
+
+    <!-- 2. Background Atmospheric Swooshes (Wind/Isotherms) -->
+    <path d="M-100,200 C300,400 700,0 1124,200 L1124,1024 L-100,1024 Z" fill="#FFFFFF" opacity="0.03" />
+    <path d="M-100,600 C200,800 800,400 1124,700 L1124,1024 L-100,1024 Z" fill="#00D2FF" opacity="0.06" />
+    <circle cx="512" cy="512" r="600" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.05" />
+    <circle cx="512" cy="512" r="450" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity="0.08" stroke-dasharray="10 20" />
+
+    <!-- 3. The Sun -->
+    <g id="sun">
+      <!-- Outer Glow -->
+      <circle cx="340" cy="360" r="350" fill="url(#sunGlow)" />
+      <!-- SunRays / Halo -->
+      <circle cx="340" cy="360" r="210" fill="#FF9900" opacity="0.15" />
+      <circle cx="340" cy="360" r="185" fill="#FFCC00" opacity="0.25" />
+      <!-- Core Sun -->
+      <circle cx="340" cy="360" r="160" fill="url(#sunGrad)" filter="url(#sunShadow)" />
+      <!-- Sun Rim Light -->
+      <circle cx="340" cy="360" r="158" fill="none" stroke="#FFFFE0" stroke-width="4" opacity="0.6" />
+    </g>
+
+    <!-- 4. Secondary/Back Cloud (Glassmorphic) -->
+    <path d="M 480,450 
+             A 95,95 0 0 1 650,390 
+             A 110,110 0 0 1 840,460 
+             A 80,80 0 0 1 900,540
+             A 80,80 0 0 1 820,620 
+             L 480,620 
+             A 85,85 0 0 1 480,450 Z" 
+          fill="url(#backCloudGrad)" 
+          backdrop-filter="blur(10px)"
+          stroke="#FFFFFF" 
+          stroke-width="2" 
+          stroke-opacity="0.3" />
+
+    <!-- 5. Weather Elements (Rain & Lightning) - Behind Main Cloud -->
+    <g id="rain-and-bolt" filter="url(#elementShadow)">
+      <!-- Lightning Bolt -->
+      <path d="M 480,580 
+               L 390,730 
+               L 475,730 
+               L 425,910 
+               L 595,700 
+               L 500,700 
+               L 560,580 Z" 
+            fill="url(#boltGrad)" 
+            stroke="#FFFDF0" 
+            stroke-width="3" 
+            stroke-linejoin="round" />
+
+      <!-- Raindrop 1 (Left) -->
+      <g transform="translate(260, 700) rotate(18)">
+        <path d="M 0,-50 
+                 C 15,-15 35,10 35,30 
+                 A 35,35 0 1 1 -35,30 
+                 C -35,10 -15,-15 0,-50 Z" 
+              fill="url(#rainGrad)" />
+        <path d="M -15,35 A 20,20 0 0 1 -5,5" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" opacity="0.8" />
+      </g>
+
+      <!-- Raindrop 2 (Middle-Right) -->
+      <g transform="translate(640, 770) rotate(18) scale(0.85)">
+        <path d="M 0,-50 
+                 C 15,-15 35,10 35,30 
+                 A 35,35 0 1 1 -35,30 
+                 C -35,10 -15,-15 0,-50 Z" 
+              fill="url(#rainGrad)" />
+        <path d="M -15,35 A 20,20 0 0 1 -5,5" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" opacity="0.8" />
+      </g>
+
+      <!-- Raindrop 3 (Far Right) -->
+      <g transform="translate(750, 680) rotate(18) scale(0.7)">
+        <path d="M 0,-50 
+                 C 15,-15 35,10 35,30 
+                 A 35,35 0 1 1 -35,30 
+                 C -35,10 -15,-15 0,-50 Z" 
+              fill="url(#rainGrad)" />
+        <path d="M -15,35 A 20,20 0 0 1 -5,5" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" opacity="0.8" />
+      </g>
+    </g>
+
+    <!-- 6. Main Foreground Cloud -->
+    <g id="main-cloud" filter="url(#cloudShadow)">
+      <!-- Base Cloud Shape -->
+      <path d="M 280,680 
+               L 720,680 
+               A 110,110 0 0 0 830,570 
+               A 110,110 0 0 0 735,462 
+               A 145,145 0 0 0 595,350 
+               A 175,175 0 0 0 265,425 
+               A 130,130 0 0 0 150,550 
+               A 130,130 0 0 0 280,680 Z" 
+            fill="url(#cloudGrad)" />
+
+      <!-- Cloud 3D Volume Gradients (Internal overlaps for puffiness) -->
+      <!-- Left Puff Highlight -->
+      <circle cx="280" cy="550" r="130" fill="url(#cloudHighlight)" opacity="0.7" />
+      <!-- Center-Left Giant Puff Highlight -->
+      <circle cx="435" cy="445" r="175" fill="url(#cloudHighlight)" opacity="0.9" />
+      <!-- Center-Right Puff Highlight -->
+      <circle cx="595" cy="495" r="145" fill="url(#cloudHighlight)" opacity="0.8" />
+      <!-- Right Puff Highlight -->
+      <circle cx="720" cy="570" r="110" fill="url(#cloudHighlight)" opacity="0.6" />
+
+      <!-- Subtle Inner Shadow/Crease for Depth -->
+      <path d="M 595,350 A 145,145 0 0 0 470,420 A 175,175 0 0 1 560,520" 
+            fill="none" stroke="#B8CDE0" stroke-width="8" stroke-linecap="round" opacity="0.4" filter="url(#glow)" />
+      
+      <path d="M 265,425 A 130,130 0 0 1 360,520" 
+            fill="none" stroke="#B8CDE0" stroke-width="8" stroke-linecap="round" opacity="0.4" filter="url(#glow)" />
+
+      <!-- Cloud Rim Lighting (Top Edge) -->
+      <path d="M 152,530 
+               A 130,130 0 0 1 265,425 
+               A 175,175 0 0 1 595,350 
+               A 145,145 0 0 1 735,462 
+               A 110,110 0 0 1 828,550" 
+            fill="none" 
+            stroke="#FFFFFF" 
+            stroke-width="6" 
+            stroke-linecap="round" 
+            opacity="0.9" />
+    </g>
+
+    <!-- 7. Foreground Sparkles / Dew / Atmosphere -->
+    <g fill="#FFFFFF" opacity="0.6">
+      <circle cx="200" cy="300" r="4" filter="url(#glow)" />
+      <circle cx="150" cy="380" r="2" />
+      <circle cx="480" cy="220" r="3" filter="url(#glow)" />
+      <circle cx="820" cy="320" r="5" filter="url(#glow)" />
+      <circle cx="880" cy="380" r="2.5" />
+      
+      <!-- Sun Lens Flare Polygon -->
+      <polygon points="340,360 280,240 300,230" fill="#FFFFFF" opacity="0.15" />
+      <polygon points="340,360 460,240 470,260" fill="#FFFFFF" opacity="0.1" />
+    </g>
+
+    <!-- 8. Crisp Square Border Finish (Inner Bevel) -->
+    <rect x="0" y="0" width="1024" height="1024" fill="none" stroke="#FFFFFF" stroke-width="16" opacity="0.1" />
+    <rect x="0" y="0" width="1024" height="1024" fill="none" stroke="#000000" stroke-width="4" opacity="0.2" />
+  </g>
+</svg>

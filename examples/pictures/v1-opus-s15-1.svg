@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 520" width="560" height="520">
+  <title>A pelican riding a bicycle (isometric storybook style)</title>
+  <defs>
+    <style>
+      .ol   { stroke:#1B2A4A; stroke-width:4; stroke-linecap:round; stroke-linejoin:round; }
+      .frame{ fill:none; stroke:#D62828; stroke-width:9; stroke-linecap:round; stroke-linejoin:round; }
+    </style>
+  </defs>
+
+  <rect width="560" height="520" fill="#FFFDF6"/>
+
+  <!-- ===== FAR SIDE (shifted back along the isometric depth axis) ===== -->
+  <g transform="translate(-19 -11)">
+    <g transform="matrix(0.866 -0.5 0 1 150 390)">
+      <!-- far crank + pedal -->
+      <line x1="90" y1="10" x2="70" y2="-10" stroke="#1B2A4A" stroke-width="6" stroke-linecap="round"/>
+      <rect x="59" y="-13" width="22" height="7" rx="3.5" fill="#1B2A4A"/>
+      <!-- far leg -->
+      <path d="M80,-95 L120,-62 L70,-12" fill="none" stroke="#1B2A4A" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M80,-95 L120,-62 L70,-12" fill="none" stroke="#E6A800" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M62,-14 L84,-16 L81,-8 Z" fill="#E6A800" class="ol" stroke-width="3"/>
+      <!-- far wing reaching to far grip -->
+      <path d="M95,-152 C122,-156 152,-130 168,-111 C174,-104 166,-98 160,-103 C140,-116 110,-116 84,-121 Z"
+            fill="#E9E1CF" class="ol"/>
+      <path d="M150,-122 C158,-116 164,-110 168,-111 C174,-104 166,-98 160,-103 C155,-108 150,-113 144,-117 Z"
+            fill="#1A44B8" class="ol" stroke-width="3"/>
+      <circle cx="172" cy="-105" r="5" fill="#1B2A4A"/>
+    </g>
+  </g>
+
+  <!-- ===== NEAR SIDE: ground, bike ===== -->
+  <g transform="matrix(0.866 -0.5 0 1 150 390)">
+    <!-- minimal ground line -->
+    <line x1="-150" y1="62" x2="370" y2="62" stroke="#1B2A4A" stroke-width="4" stroke-linecap="round"/>
+
+    <!-- wheels -->
+    <g>
+      <circle cx="0" cy="0" r="58" fill="none" stroke="#1D4ED8" stroke-width="11"/>
+      <circle cx="0" cy="0" r="50" fill="none" stroke="#FFC800" stroke-width="3"/>
+      <g stroke="#1B2A4A" stroke-width="2" stroke-linecap="round">
+        <line x1="-48" y1="0" x2="48" y2="0"/><line x1="0" y1="-48" x2="0" y2="48"/>
+        <line x1="-34" y1="-34" x2="34" y2="34"/><line x1="-34" y1="34" x2="34" y2="-34"/>
+      </g>
+      <circle cx="0" cy="0" r="7" fill="#FFC800" class="ol" stroke-width="3"/>
+    </g>
+    <g>
+      <circle cx="210" cy="0" r="58" fill="none" stroke="#1D4ED8" stroke-width="11"/>
+      <circle cx="210" cy="0" r="50" fill="none" stroke="#FFC800" stroke-width="3"/>
+      <g stroke="#1B2A4A" stroke-width="2" stroke-linecap="round">
+        <line x1="162" y1="0" x2="258" y2="0"/><line x1="210" y1="-48" x2="210" y2="48"/>
+        <line x1="176" y1="-34" x2="244" y2="34"/><line x1="176" y1="34" x2="244" y2="-34"/>
+      </g>
+      <circle cx="210" cy="0" r="7" fill="#FFC800" class="ol" stroke-width="3"/>
+    </g>
+
+    <!-- frame -->
+    <path class="frame" d="M0,0 L90,10 L70,-80 Z"/>
+    <path class="frame" d="M70,-80 L182,-84"/>
+    <path class="frame" d="M90,10 L188,-58"/>
+    <path class="frame" d="M180,-92 L190,-55"/>
+    <path class="frame" d="M190,-55 L210,0" stroke-width="7"/>
+    <!-- stem -->
+    <path d="M180,-92 L176,-105" stroke="#1B2A4A" stroke-width="6" stroke-linecap="round"/>
+
+    <!-- chainring -->
+    <circle cx="90" cy="10" r="15" fill="#FFC800" class="ol" stroke-width="3"/>
+    <circle cx="90" cy="10" r="4" fill="#1B2A4A"/>
+
+    <!-- seat post + saddle -->
+    <line x1="70" y1="-80" x2="70" y2="-88" stroke="#1B2A4A" stroke-width="5" stroke-linecap="round"/>
+    <path d="M50,-90 C58,-98 88,-98 94,-89 C86,-84 60,-84 50,-90 Z" fill="#1B2A4A"/>
+  </g>
+
+  <!-- handlebar crossbar (runs along the depth axis) -->
+  <line x1="280" y1="188" x2="301" y2="200" stroke="#1B2A4A" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- ===== NEAR SIDE: pelican ===== -->
+  <g transform="matrix(0.866 -0.5 0 1 150 390)">
+    <!-- tail tuft -->
+    <path d="M54,-104 L30,-96 L36,-110 L28,-120 L54,-120 Z" fill="#FFFFFF" class="ol"/>
+
+    <!-- body (upright, relaxed) -->
+    <path d="M50,-110 C44,-162 86,-188 116,-166 C141,-148 136,-100 110,-88 C86,-78 54,-80 50,-110 Z"
+          fill="#FFFFFF" class="ol"/>
+    <path d="M70,-150 C80,-160 96,-162 104,-156" fill="none" stroke="#D9D2C2" stroke-width="3" stroke-linecap="round"/>
+
+    <!-- neck -->
+    <path d="M106,-160 C98,-186 104,-206 120,-216" fill="none" stroke="#1B2A4A" stroke-width="26" stroke-linecap="round"/>
+    <path d="M106,-160 C98,-186 104,-206 120,-216" fill="none" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round"/>
+
+    <!-- head -->
+    <circle cx="125" cy="-218" r="19" fill="#FFFFFF" class="ol"/>
+    <path d="M114,-234 C110,-246 120,-248 122,-238 C124,-250 134,-248 130,-236" fill="#FFC800" class="ol" stroke-width="3"/>
+
+    <!-- beak + pouch -->
+    <path d="M140,-208 C170,-206 200,-204 224,-202 C206,-184 170,-176 144,-190 Z" fill="#F2A900" class="ol"/>
+    <path d="M136,-225 C170,-224 202,-215 226,-202 C200,-205 170,-207 138,-208 Z" fill="#FFC800" class="ol"/>
+    <circle cx="223" cy="-202" r="3" fill="#D62828"/>
+
+    <!-- eye + cheek -->
+    <circle cx="129" cy="-222" r="4.5" fill="#1B2A4A"/>
+    <circle cx="130.5" cy="-223.5" r="1.4" fill="#FFFFFF"/>
+    <circle cx="117" cy="-209" r="5" fill="#D62828" opacity="0.35"/>
+
+    <!-- near leg -->
+    <path d="M92,-94 L132,-50 L110,28" fill="none" stroke="#1B2A4A" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M92,-94 L132,-50 L110,28" fill="none" stroke="#FFC800" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- near crank + pedal + webbed foot -->
+    <line x1="90" y1="10" x2="110" y2="30" stroke="#1B2A4A" stroke-width="6" stroke-linecap="round"/>
+    <rect x="99" y="28" width="24" height="7" rx="3.5" fill="#1B2A4A"/>
+    <path d="M100,28 L126,25 L123,33 Z" fill="#FFC800" class="ol" stroke-width="3"/>
+
+    <!-- near wing resting on near grip -->
+    <path d="M96,-150 C124,-156 154,-130 170,-111 C176,-104 168,-98 162,-103 C142,-116 112,-116 84,-120 Z"
+          fill="#FFFFFF" class="ol"/>
+    <path d="M152,-122 C160,-116 166,-110 170,-111 C176,-104 168,-98 162,-103 C157,-108 152,-113 146,-117 Z"
+          fill="#1D4ED8" class="ol" stroke-width="3"/>
+    <path d="M108,-132 C122,-132 136,-126 146,-118" fill="none" stroke="#D9D2C2" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>

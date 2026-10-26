@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f6f4eb">
+<meta name="description" content="Meet Plenty: a calmer way to plan delicious dinners around your grocery budget.">
+<title>Plenty — Good food. Room in your budget.</title>
+<style>
+:root{--paper:#f6f4eb;--ink:#203d31;--muted:#677166;--green:#244d39;--lime:#dce99d;--line:#d9ddd0;--white:#fffef9;--orange:#e8a36f}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:30px}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.65 Arial,Helvetica,sans-serif}
+button,input{font:inherit}
+button,a,input{ -webkit-tap-highlight-color:transparent}
+button,a{touch-action:manipulation}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #bb6b36;outline-offset:5px}
+.wrap{max-width:1200px;margin:auto;padding:0 36px}
+nav{min-height:100px;display:flex;align-items:center;justify-content:space-between;gap:24px;border-bottom:1px solid var(--line)}
+.logo{display:inline-flex;align-items:center;gap:9px;font-family:Georgia,serif;font-size:35px;letter-spacing:-2px}
+.logo svg{width:31px;height:35px}
+.links{display:flex;gap:32px;font-size:13px}
+.links a:hover{text-decoration:underline;text-underline-offset:5px}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:20px;padding:13px 22px;border:1px solid var(--green);background:var(--green);color:var(--white);border-radius:6px;font-weight:600;font-size:13px;transition:transform .2s,background .2s}
+.button:hover{background:#356047;transform:translateY(-2px)}
+.button.light{background:var(--lime);color:var(--ink);border-color:var(--lime)}
+.nav-cta{padding:10px 18px}
+.hero{display:grid;grid-template-columns:1.25fr 1fr;align-items:center;gap:70px;padding:80px 0 75px}
+.eyebrow{text-transform:uppercase;letter-spacing:2px;font-size:10px;font-weight:700;display:flex;align-items:center;gap:9px}
+.dot{width:7px;height:7px;background:#719453;border-radius:50%;display:inline-block}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{font-family:Georgia,'Times New Roman',serif;font-weight:400}
+h1{font-size:clamp(48px,5.7vw,75px);line-height:1.06;letter-spacing:-3.5px;margin:22px 0}
+h1 em{color:#6f8157;font-weight:400}
+.hero-copy>p{max-width:420px;color:var(--muted);font-size:16px;line-height:1.8}
+.hero-actions{display:flex;gap:23px;align-items:center;margin:28px 0 14px}
+.text-link{font-size:13px;border-bottom:1px solid #8d9983;padding-bottom:2px}
+.micro{font-size:11px;color:var(--muted)}
+.hero-art{position:relative;min-height:365px;display:grid;place-items:center}
+.orbit{position:absolute;width:350px;height:350px;border:1px solid #ced5bd;border-radius:50%}
+.orbit:after{content:"";position:absolute;inset:25px;border:1px dashed #d3d9c5;border-radius:50%}
+.budget-ticket{position:relative;transform:rotate(-5deg);width:294px;background:var(--green);color:var(--white);padding:28px 29px 24px;border-radius:10px;box-shadow:14px 20px 0 #e5e8d7}
+.ticket-top{display:flex;align-items:center;justify-content:space-between;font-size:10px;text-transform:uppercase;letter-spacing:1.5px}
+.ticket-top svg{width:24px;height:24px}
+.budget-ticket .amount{font-family:Georgia,serif;font-size:72px;line-height:1.25;margin-top:8px}
+.budget-ticket .amount span{font:12px Arial,sans-serif;color:#c4d3be}
+.ticket-line{display:flex;justify-content:space-between;font-size:12px;padding:9px 0;color:#dce5d3}
+.ticket-line.total{border-top:1px dashed #7b967c;color:white;margin-top:10px;padding-top:18px}
+.ticket-bar{height:6px;border-radius:5px;background:#52705a;margin:13px 0 7px;overflow:hidden}
+.ticket-bar span{display:block;background:var(--lime);width:80%;height:100%}
+.ticket-note{font-size:10px;color:#d0dfc3}
+.sticker{position:absolute;right:0;bottom:29px;transform:rotate(7deg);background:var(--lime);padding:19px 24px;border-radius:5px;font-family:Georgia,serif;font-size:20px;box-shadow:0 6px 18px #203d3110}
+.sprig{position:absolute;left:0;top:15px;width:78px;height:100px;transform:rotate(-20deg)}
+.promise-strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:15px;padding:19px 0;font-size:12px}
+.promise-strip span{display:flex;align-items:center;gap:10px}
+.check{color:#6b844c}
+.section{padding:75px 0}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:32px}
+h2{font-size:43px;line-height:1.15;letter-spacing:-1.5px;margin-top:12px}
+.section-head>p{max-width:310px;color:var(--muted);font-size:13px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:25px}
+.step{min-width:0;position:relative}
+.step:not(:last-child):after{content:"→";position:absolute;right:-25px;top:165px;z-index:2;background:var(--paper);width:25px;text-align:center;color:#7d8d6d}
+.mockup{height:344px;padding:23px;background:var(--white);border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 20px #203d3103}
+.mockup-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e9ebe1;padding-bottom:16px;margin-bottom:20px}
+.mockup-head b{font-size:13px}
+.tiny{font-size:10px;color:var(--muted)}
+.window-dots{letter-spacing:3px;color:#b6c0a9;font-size:15px}
+.field-label{font-size:11px;display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.budget-value{font:32px Georgia,serif}
+input[type=range]{width:100%;accent-color:var(--green);cursor:pointer;margin:12px 0 5px}
+.range-labels{display:flex;justify-content:space-between;font-size:9px;color:var(--muted);margin-bottom:21px}
+.segment{display:flex;border:1px solid var(--line);border-radius:5px;padding:3px;gap:3px}
+.segment button{flex:1;padding:6px 3px;background:transparent;border:0;border-radius:3px;color:var(--muted);font-size:11px}
+.segment button[aria-pressed=true]{background:var(--green);color:white}
+.preference-note{background:#f1f4e7;margin-top:18px;padding:10px;border-radius:4px;font-size:10px;color:#586b47}
+.meal{display:flex;align-items:center;gap:10px;width:100%;padding:10px 0;background:none;border:0;border-bottom:1px solid #e9ebe1;text-align:left;color:var(--ink)}
+.meal:first-of-type{padding-top:0}
+.meal svg{width:51px;height:51px;flex-shrink:0;background:#f1ebdd;border-radius:7px}
+.meal-info{flex:1;min-width:0}
+.meal-info b{display:block;font-size:11px}
+.meal-info small{font-size:10px;color:var(--muted)}
+.meal-toggle{width:21px;height:21px;border-radius:50%;border:1px solid #bec9b4;display:grid;place-items:center;font-size:12px}
+.meal[aria-pressed=true] .meal-toggle{background:var(--green);border-color:var(--green);color:white}
+.meal[aria-pressed=false] .meal-toggle{font-size:0}
+.meal[aria-pressed=false] .meal-toggle:after{content:"+";font-size:14px}
+.selection-note{margin-top:14px;font-size:10px;color:var(--muted)}
+.plan-mockup{background:#edf1e3}
+.plan-sub{font-size:11px;color:var(--muted);margin-top:-10px;margin-bottom:13px}
+.plan-row{display:flex;align-items:center;justify-content:space-between;gap:7px;font-size:10px;padding:11px 0;border-bottom:1px solid #dbe1ce}
+.plan-row span:first-child{color:#78836b;font-size:9px;text-transform:uppercase;width:29px}
+.plan-row b{font-weight:400;flex:1}
+.plan-bottom{display:flex;justify-content:space-between;align-items:end;margin-top:19px}
+.plan-bottom small{display:block;font-size:10px;color:var(--muted)}
+.plan-bottom strong{font-family:Georgia,serif;font-size:28px;font-weight:400}
+.savings{background:var(--lime);border-radius:4px;font-size:10px;padding:5px 8px}
+.step-copy{padding:24px 2px 0}
+.step-number{font-size:10px;color:#788569;margin-bottom:7px;letter-spacing:1px}
+h3{font-size:24px;letter-spacing:-.6px;line-height:1.25}
+.step-copy p{font-size:12px;color:var(--muted);line-height:1.85;margin-top:12px}
+.budget-story{background:#e8eddd;border-radius:12px;display:grid;grid-template-columns:1fr 1fr;gap:70px;padding:46px;margin-bottom:65px}
+.budget-story h2{font-size:36px;margin-bottom:18px}
+.budget-story p{font-size:13px;color:#5f6d57}
+.example{background:var(--paper);padding:25px;border-radius:6px;align-self:center}
+.example-title{font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px}
+.ingredient{display:flex;justify-content:space-between;gap:18px;padding:11px 0;border-bottom:1px solid var(--line);font-size:12px}
+.ingredient span:last-child{font-size:11px;color:var(--muted);text-align:right}
+.example .micro{margin-top:15px}
+.faq-section{max-width:760px;margin:0 auto;padding-bottom:65px}
+.faq-section h2{text-align:center;margin-bottom:30px;font-size:35px}
+details{border-bottom:1px solid var(--line);padding:18px 0}
+summary{cursor:pointer;font-size:14px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:20px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";font-size:19px;font-weight:400}
+details[open] summary:after{content:"−"}
+details p{font-size:13px;color:var(--muted);margin-top:13px;max-width:660px}
+.final-cta{text-align:center;background:var(--green);color:var(--paper);padding:51px 25px;border-radius:12px;margin-bottom:45px}
+.final-cta h2{font-size:43px;margin:0 0 14px}
+.final-cta p{font-size:13px;color:#d1ddc6;margin-bottom:24px}
+footer{border-top:1px solid var(--line);padding:23px 0 30px;display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:10px;color:var(--muted)}
+footer .logo{font-size:26px;color:var(--ink)}
+.download-button{margin-top:16px;padding:7px 12px;width:100%;font-size:10px}
+.download-button:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(min-width:1000px){.plan-mockup .mockup-head{margin-bottom:19px}}
+@media(max-width:950px){.hero{gap:20px}.mockup{padding:17px}.steps{gap:16px}.step:not(:last-child):after{right:-16px;width:16px}.budget-story{gap:35px}.links{gap:20px}.sticker{right:-5px}.meal-info b{font-size:10px}}
+@media(max-width:740px){.wrap{padding:0 22px}nav{min-height:82px;flex-wrap:wrap;padding:16px 0;gap:12px}.logo{font-size:30px}.links{order:3;width:100%;justify-content:center;font-size:12px;gap:26px}.nav-cta{font-size:11px;padding:8px 13px}.hero{grid-template-columns:1fr;padding:45px 0 35px;gap:25px}h1{font-size:58px;max-width:520px}.hero-copy>p{max-width:460px}.hero-art{max-width:380px;width:100%;margin:auto;min-height:360px}.promise-strip{flex-wrap:wrap;justify-content:center;font-size:10px;gap:10px 20px}.section{padding:50px 0}.section-head{display:block}.section-head>p{margin-top:16px;max-width:440px}h2{font-size:36px}.steps{grid-template-columns:1fr;gap:35px;max-width:450px;margin:auto}.mockup{padding:23px;height:344px}.meal-info b{font-size:12px}.step:not(:last-child):after{display:none}.step-copy{padding-top:18px}.step-copy p{font-size:13px}.budget-story{grid-template-columns:1fr;padding:27px;gap:24px;margin-bottom:45px}.final-cta h2{font-size:34px}footer{flex-wrap:wrap}.orbit{width:310px;height:310px}.hero-actions{gap:18px}.hero-actions .button{padding:12px 17px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+<defs>
+<symbol id="leaf" viewBox="0 0 40 45"><path d="M21 42V22C7 24 2 14 4 5c14 0 20 7 17 17C19 10 26 3 37 3c1 13-5 20-16 19" fill="currentColor"/><path d="M9 11l12 13L32 9" fill="none" stroke="#f6f4eb" stroke-width="1.3"/></symbol>
+<symbol id="bowl" viewBox="0 0 80 80"><circle cx="40" cy="40" r="32" fill="#fffdf5"/><circle cx="40" cy="40" r="25" fill="#e5ce97"/><path d="M21 38c-6-15 13-24 20-15 10-10 26 6 17 16-12-7-24 11-37-1" fill="#66844b"/><g fill="#b9d777"><ellipse cx="30" cy="27" rx="6" ry="4" transform="rotate(-35 30 27)"/><ellipse cx="49" cy="30" rx="6" ry="4"/><ellipse cx="29" cy="38" rx="6" ry="3"/></g><g fill="#e29357"><rect x="22" y="46" width="12" height="11" rx="3" transform="rotate(15 22 46)"/><rect x="39" y="41" width="12" height="11" rx="3" transform="rotate(-15 39 41)"/><rect x="42" y="55" width="9" height="8" rx="2"/></g><g fill="#f8e5b3"><circle cx="55" cy="47" r="3"/><circle cx="32" cy="56" r="3"/><circle cx="56" cy="55" r="3"/></g></symbol>
+<symbol id="pasta" viewBox="0 0 80 80"><circle cx="40" cy="40" r="32" fill="#fffdf5"/><circle cx="40" cy="40" r="25" fill="#f0d8a1"/><g stroke="#d99c55" stroke-width="5" stroke-linecap="round"><path d="M24 30l10 6m7-12l9 7m-27 11l10 7m8-10l10 6m-12 7l8 6m7-25l4 7m-31 12l5 5"/></g><g fill="#b85136"><circle cx="36" cy="27" r="5"/><circle cx="53" cy="49" r="5"/><circle cx="26" cy="44" r="4"/></g><path d="M39 38q0-13 11-10-2 10-11 10M34 56q-9-9-13-1 8 7 13 1" fill="#557b45"/></symbol>
+<symbol id="taco" viewBox="0 0 80 80"><circle cx="40" cy="40" r="32" fill="#fffdf5"/><path d="M17 47c0-38 47-40 48-1L42 62Z" fill="#e8bd63"/><path d="M23 43c1-27 35-28 36-1L42 55Z" fill="#526e3d"/><g fill="#b86139"><circle cx="31" cy="37" r="5"/><circle cx="43" cy="30" r="5"/><circle cx="51" cy="40" r="5"/></g><g fill="#e9dbaa"><rect x="31" y="27" width="6" height="5" rx="1"/><rect x="38" y="40" width="6" height="5" rx="1"/><rect x="49" y="30" width="5" height="5" rx="1"/></g><path d="M17 47q24-3 48-1L43 64Q25 61 17 47" fill="#f4d080"/><path d="M24 51l33-1" stroke="#d8ab53" stroke-width="2"/></symbol>
+</defs>
+</svg>
+<div class="wrap">
+<header>
+<nav aria-label="Main navigation">
+<a href="#" class="logo" aria-label="Plenty home"><svg aria-hidden="true"><use href="#leaf"/></svg>plenty</a>
+<div class="links"><a href="#how-it-works">How it works</a><a href="#less-waste">The little extras</a><a href="#questions">FAQs</a></div>
+<a class="button nav-cta" href="#how-it-works">Try a meal plan <span aria-hidden="true">↗</span></a>
+</nav>
+</header>
+<main>
+<section class="hero" aria-labelledby="hero-title">
+<div class="hero-copy">
+<div class="eyebrow"><span class="dot"></span> A little planning. A lot of plenty.</div>
+<h1 id="hero-title">Good food.<br>Room in your<br><em>budget.</em></h1>
+<p>Meet the meal planner that starts with what you want to spend. Make a plan you’ll look forward to cooking, with a grocery list that adds up.</p>
+<div class="hero-actions"><a href="#how-it-works" class="button">Make room for better dinners <span aria-hidden="true">↗</span></a></div>
+<p class="micro">Try the interactive demo below. No account needed.</p>
+</div>
+<div class="hero-art" aria-label="Example: a $60 dinner budget, $48 planned, and $12 left over">
+<div class="orbit" aria-hidden="true"></div>
+<svg class="sprig" aria-hidden="true"><use href="#leaf"/></svg>
+<div class="budget-ticket">
+<div class="ticket-top">A good week starts here <svg aria-hidden="true"><use href="#leaf"/></svg></div>
+<div class="amount">$60<span> / dinner budget</span></div>
+<div class="ticket-line"><span>People around the table</span><span>2</span></div>
+<div class="ticket-line"><span>Dinners to look forward to</span><span>3</span></div>
+<div class="ticket-line total"><span>Estimated groceries</span><strong>$48.00</strong></div>
+<div class="ticket-bar"><span></span></div>
+<div class="ticket-note">A little breathing room: $12.00</div>
+</div>
+<div class="sticker">Full plates. Happy wallet.</div>
+</div>
+</section>
+<div class="promise-strip" aria-label="Benefits">
+<span><span class="check">✓</span> Your budget comes first</span>
+<span><span class="check">✓</span> Everyday ingredients</span>
+<span><span class="check">✓</span> Less forgotten food</span>
+<span><span class="check">✓</span> One organized grocery list</span>
+</div>
+<section class="section" id="how-it-works" aria-labelledby="how-title">
+<div class="section-head">
+<div><div class="eyebrow">From “what’s for dinner?” to done.</div><h2 id="how-title">A good week, in three little steps.</h2></div>
+<p>Give your dinners a budget, pick what sounds good, and see your plan come together. Go on, give it a try.</p>
+</div>
+<div class="steps">
+<article class="step">
+<div class="mockup">
+<div class="mockup-head"><b>Your kind of week</b><span class="window-dots" aria-hidden="true">•••</span></div>
+<label for="budget" class="field-label">Dinner grocery budget <output class="budget-value" id="budget-value" for="budget">$60</output></label>
+<input id="budget" type="range" min="30" max="150" step="5" value="60">
+<div class="range-labels"><span>$30 · keep it simple</span><span>$150 · more room</span></div>
+<div class="field-label" id="people-label">How many at the table?</div>
+<div class="segment" role="group" aria-labelledby="people-label">
+<button type="button" data-people="1" aria-pressed="false">Just me</button>
+<button type="button" data-people="2" aria-pressed="true">Two of us</button>
+<button type="button" data-people="4" aria-pressed="false">Four of us</button>
+</div>
+<div class="preference-note">A budget for these dinners, with room for your week.</div>
+</div>
+<div class="step-copy"><div class="step-number">01 / SET YOUR PREFERENCES</div><h3>Start with your number.</h3><p>A good plan fits real life. Set aside a grocery budget for your dinners and tell Plenty how many people you’re feeding. For example, start with $60 for two people and keep breakfast, lunch, and household essentials in a separate budget.</p></div>
+</article>
+<article class="step">
+<div class="mockup">
+<div class="mockup-head"><b>A few delicious possibilities</b><span class="tiny">3 recipes</span></div>
+<button class="meal" type="button" data-meal="0" aria-pressed="true"><svg aria-hidden="true"><use href="#bowl"/></svg><span class="meal-info"><b>Golden chickpea bowls</b><small>25 min · <span data-cost="0">$8.00 / serving</span></small></span><span class="meal-toggle" aria-hidden="true">✓</span></button>
+<button class="meal" type="button" data-meal="1" aria-pressed="true"><svg aria-hidden="true"><use href="#pasta"/></svg><span class="meal-info"><b>Roasted tomato pasta</b><small>20 min · <span data-cost="1">$7.00 / serving</span></small></span><span class="meal-toggle" aria-hidden="true">✓</span></button>
+<button class="meal" type="button" data-meal="2" aria-pressed="true"><svg aria-hidden="true"><use href="#taco"/></svg><span class="meal-info"><b>Smoky black bean tacos</b><small>25 min · <span data-cost="2">$9.00 / serving</span></small></span><span class="meal-toggle" aria-hidden="true">✓</span></button>
+<p class="selection-note">Tap a recipe to add or remove it from your plan.</p>
+</div>
+<div class="step-copy"><div class="step-number">02 / FIND YOUR DINNERS</div><h3>Pick a little delicious.</h3><p>Choose meals you actually want to eat and see how each one affects your total. In this sample, a tomato pasta dinner comes to $14 for two servings. Remove a recipe to make space for a night out or something already in your freezer.</p></div>
+</article>
+<article class="step">
+<div class="mockup plan-mockup">
+<div class="mockup-head"><b>Look at you. All planned.</b><span aria-hidden="true">✧</span></div>
+<p class="plan-sub" id="plan-sub">3 dinners · 2 people · one happy plan</p>
+<div id="plan-rows"></div>
+<div class="plan-bottom"><div><small>Estimated grocery total</small><strong id="total">$48.00</strong></div><span class="savings" id="remaining">$12 to spare</span></div>
+<button class="button download-button" id="download" type="button">Download your grocery list <span aria-hidden="true">↓</span></button>
+</div>
+<div class="step-copy"><div class="step-number">03 / SHOP WITH A PLAN</div><h3>A list. A plan. A deep breath.</h3><p>Your chosen dinners become one grocery list, with shared ingredients added together. Download the sample list to see exactly what to buy. The total is a planning estimate; check local prices and your pantry before heading to the store.</p></div>
+</article>
+</div>
+<p class="micro" style="margin-top:24px">Illustrative US-dollar estimates for ingredients used. Store prices, package sizes, and pantry supplies can change your checkout total.</p>
+<p class="sr-only" role="status" id="plan-status"></p>
+</section>
+<section class="budget-story" id="less-waste" aria-labelledby="waste-title">
+<div><div class="eyebrow">Small overlaps. Lovely little savings.</div><h2 id="waste-title">Give every ingredient<br>a second dinner.</h2><p>That bunch of cilantro shouldn’t have a one-night appearance. Meals that share ingredients help you use what you buy, with fewer half-used bags at the end of the week.</p><p style="margin-top:14px">In our sample plan, the bowls and tacos both use lime and cilantro. The grocery list combines them, so you can check what’s already in your kitchen before buying more.</p></div>
+<div class="example"><div class="example-title">One shop, a few happy overlaps</div><div class="ingredient"><span>Fresh cilantro</span><span>Chickpea bowls + tacos</span></div><div class="ingredient"><span>A squeeze of lime</span><span>Chickpea bowls + tacos</span></div><div class="ingredient"><span>Olive oil</span><span>Bowls + pasta + tacos</span></div><p class="micro">Already have it? Cross it off your downloaded list.</p></div>
+</section>
+<section class="faq-section" id="questions" aria-labelledby="faq-title">
+<h2 id="faq-title">A few things you might be wondering.</h2>
+<details><summary>What does the grocery estimate include?</summary><p>The demo adds the estimated ingredient cost of each selected recipe for your household size. It covers the dinners shown, rather than a full week of food. Actual checkout costs may be higher if you need to buy full packages of ingredients, oil, or spices.</p></details>
+<details><summary>What if my plan goes over budget?</summary><p>Plenty shows the amount over your chosen budget immediately. Try removing a dinner or increasing the budget slider. For example, the three sample dinners cost an estimated $48 for two people; removing the tacos brings the plan to $30.</p></details>
+<details><summary>Can I try this without signing up?</summary><p>Yes. This page is a working local demo: adjust your budget and household size, choose dinners, and download a grocery list. No account is created and your choices are not sent to a server. Refreshing the page resets the demo.</p></details>
+</section>
+<section class="final-cta"><h2>A little less “what’s for dinner?”<br>A little more plenty.</h2><p>Your next good week can start with a simple plan.</p><a href="#how-it-works" class="button light">Try your first meal plan <span aria-hidden="true">↗</span></a></section>
+</main>
+<footer><a href="#" class="logo">plenty</a><span>Good food. Thoughtfully planned.</span><span>© <span id="year"></span> Plenty · Product concept</span></footer>
+</div>
+<script>
+(()=>{
+"use strict";
+const recipes=[
+{name:"Golden chickpea bowls",cost:8,ingredients:[["Chickpeas","cans",1],["Rice","cups (dry)",.75],["Sweet potato","medium",1],["Lime","whole",1],["Cilantro","bunches",.25],["Olive oil","tbsp",1]]},
+{name:"Roasted tomato pasta",cost:7,ingredients:[["Pasta","g",180],["Cherry tomatoes","g",300],["Garlic","cloves",2],["Basil","bunches",.5],["Olive oil","tbsp",2]]},
+{name:"Smoky black bean tacos",cost:9,ingredients:[["Black beans","cans",1],["Tortillas","small",6],["Avocado","whole",1],["Lime","whole",1],["Cilantro","bunches",.25],["Smoked paprika","tsp",1],["Olive oil","tbsp",1]]}
+];
+const selected=new Set([0,1,2]);
+let people=2;
+const $=id=>document.getElementById(id);
+const money=n=>"$"+n.toFixed(2);
+function update(){
+const budget=Number($("budget").value);
+const total=[...selected].reduce((sum,i)=>sum+recipes[i].cost*people,0);
+$("budget-value").textContent="$"+budget;
+$("plan-sub").textContent=`${selected.size} dinner${selected.size===1?"":"s"} · ${people} ${people===1?"person":"people"} · your plan`;
+$("plan-rows").replaceChildren();
+[0,1,2].forEach((i)=>{
+const row=document.createElement("div");
+row.className="plan-row";
+const day=document.createElement("span");
+day.textContent=["Mon","Tue","Wed"][i];
+const name=document.createElement("b");
+name.textContent=selected.has(i)?recipes[i].name:"A night for your own plans";
+const cost=document.createElement("span");
+cost.textContent=selected.has(i)?money(recipes[i].cost*people):"—";
+row.append(day,name,cost);$("plan-rows").append(row);
+});
+$("total").textContent=money(total);
+const difference=budget-total;
+$("remaining").textContent=difference>=0?money(difference)+" to spare":money(-difference)+" over budget";
+$("remaining").style.background=difference>=0?"var(--lime)":"#f1d3ba";
+$("download").disabled=selected.size===0;
+$("plan-status").textContent=`${selected.size} dinners for ${people}. Estimated total ${money(total)}. ${$("remaining").textContent}.`;
+}
+$("budget").addEventListener("input",update);
+document.querySelectorAll("[data-people]").forEach(button=>button.addEventListener("click",()=>{
+people=Number(button.dataset.people);
+document.querySelectorAll("[data-people]").forEach(b=>b.setAttribute("aria-pressed",String(b===button)));
+update();
+}));
+document.querySelectorAll("[data-meal]").forEach(button=>button.addEventListener("click",()=>{
+const index=Number(button.dataset.meal);
+selected.has(index)?selected.delete(index):selected.add(index);
+button.setAttribute("aria-pressed",String(selected.has(index)));
+update();
+}));
+$("download").addEventListener("click",()=>{
+const ingredients=new Map();
+const chosen=[...selected].sort();
+chosen.forEach(i=>recipes[i].ingredients.forEach(([name,unit,quantity])=>{
+const previous=ingredients.get(name);
+ingredients.set(name,{unit,quantity:(previous?previous.quantity:0)+quantity*people/2});
+}));
+const total=chosen.reduce((sum,i)=>sum+recipes[i].cost*people,0);
+const lines=[
+"PLENTY — YOUR DINNER PLAN","",
+`Household: ${people} | Budget: $${$("budget").value}`,
+`Estimated ingredient total: ${money(total)}`,"",
+"DINNERS",...chosen.map(i=>"- "+recipes[i].name),"",
+"GROCERY LIST — check your pantry first",
+...[...ingredients].map(([name,item])=>`[ ] ${name}: ${Number(item.quantity.toFixed(2))} ${item.unit}`),
+"","Quantities are scaled from sample recipes; round up to available package sizes.",
+"Illustrative ingredient costs in USD. Actual store prices and checkout totals vary.",
+"This demo provides a plan and ingredient list, not cooking instructions."
+];
+const url=URL.createObjectURL(new Blob([lines.join("\n")],{type:"text/plain;charset=utf-8"}));
+const link=document.createElement("a");link.href=url;link.download="plenty-grocery-list.txt";
+document.body.append(link);link.click();link.remove();
+setTimeout(()=>URL.revokeObjectURL(url),1000);
+$("plan-status").textContent="Your grocery list is ready to download.";
+});
+$("year").textContent=new Date().getFullYear();
+update();
+})();
+</script>
+</body>
+</html>

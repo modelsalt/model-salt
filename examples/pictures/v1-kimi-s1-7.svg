@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-labelledby="title desc">
+  <title id="title">A pelican riding a bicycle</title>
+  <desc id="desc">Top-down cartoon view of a white pelican with an orange beak riding a teal bicycle, one foot on a pedal and the other pushing off the ground.</desc>
+
+  <!-- sky-cream backdrop -->
+  <rect width="400" height="400" fill="#FFF4DE"/>
+
+  <!-- whole scene tilted slightly forward for a gentle cruising feel -->
+  <g transform="rotate(-7 200 200)">
+
+    <!-- ground path -->
+    <rect x="108" y="-40" width="184" height="480" rx="92" fill="#F3E4C3"/>
+    <circle cx="146" cy="96" r="4" fill="#E6D2AC"/>
+    <circle cx="258" cy="182" r="3" fill="#E6D2AC"/>
+    <circle cx="150" cy="318" r="5" fill="#E6D2AC"/>
+    <circle cx="252" cy="336" r="3.5" fill="#E6D2AC"/>
+    <circle cx="238" cy="52" r="3" fill="#E6D2AC"/>
+
+    <!-- roadside flowers -->
+    <g fill="#FFFFFF">
+      <circle cx="84" cy="112" r="3.5"/><circle cx="91.6" cy="117.5" r="3.5"/>
+      <circle cx="88.7" cy="126.5" r="3.5"/><circle cx="79.3" cy="126.5" r="3.5"/>
+      <circle cx="76.4" cy="117.5" r="3.5"/>
+      <circle cx="322" cy="254" r="3.5"/><circle cx="329.6" cy="259.5" r="3.5"/>
+      <circle cx="326.7" cy="268.5" r="3.5"/><circle cx="317.3" cy="268.5" r="3.5"/>
+      <circle cx="314.4" cy="259.5" r="3.5"/>
+    </g>
+    <circle cx="84" cy="120" r="3.2" fill="#F97316"/>
+    <circle cx="322" cy="262" r="3.2" fill="#F97316"/>
+
+    <!-- soft shadow -->
+    <ellipse cx="205" cy="214" rx="102" ry="128" fill="#44403C" opacity="0.10"/>
+    <ellipse cx="278" cy="324" rx="16" ry="7" fill="#44403C" opacity="0.12" transform="rotate(35 278 324)"/>
+
+    <!-- ===== teal bicycle ===== -->
+    <rect x="192" y="84" width="16" height="72" rx="8" fill="#0F766E"/>
+    <rect x="192" y="262" width="16" height="72" rx="8" fill="#0F766E"/>
+    <circle cx="200" cy="120" r="4" fill="#FFF4DE"/>
+    <circle cx="200" cy="298" r="4" fill="#FFF4DE"/>
+    <rect x="196" y="138" width="8" height="132" rx="4" fill="#14B8A6"/>
+    <path d="M146 132 Q200 120 254 132 L254 141 Q200 129 146 141 Z" fill="#14B8A6"/>
+    <circle cx="146" cy="136" r="9" fill="#F97316"/>
+    <circle cx="254" cy="136" r="9" fill="#F97316"/>
+    <circle cx="214" cy="127" r="4.5" fill="#F97316"/>
+    <circle cx="200" cy="258" r="8" fill="#0F766E"/>
+    <path d="M196 252 L148 260 L152 270 L200 262 Z" fill="#0F766E"/>
+    <path d="M200 254 L248 244 L252 254 L204 264 Z" fill="#0F766E"/>
+    <rect x="126" y="258" width="22" height="13" rx="6" fill="#0F766E"/>
+    <rect x="252" y="242" width="22" height="13" rx="6" fill="#0F766E"/>
+
+    <!-- pushing-off leg + webbed foot -->
+    <path d="M234 252 Q256 276 266 302 L276 296 Q264 268 246 244 Z" fill="#F97316"/>
+    <path d="M264 298 Q264 306 270 312 Q266 318 272 322 Q272 328 279 326
+             Q280 332 287 328 Q294 324 290 316 Q286 304 278 296 Q270 292 264 298 Z" fill="#F97316"/>
+
+    <!-- tail feathers -->
+    <path d="M184 278 L186 312 Q189 322 197 318 L200 326 L203 318 Q211 322 214 312
+             L216 278 Q200 290 184 278 Z" fill="#EEEAE0"/>
+
+    <!-- wings reaching to the handlebars -->
+    <path d="M178 196 Q118 170 144 138 Q150 130 158 140 Q152 188 168 224 Q178 212 178 196 Z" fill="#FFFFFF"/>
+    <path d="M222 196 Q282 170 256 138 Q250 130 242 140 Q248 188 232 224 Q222 212 222 196 Z" fill="#FFFFFF"/>
+    <ellipse cx="150" cy="152" rx="7" ry="16" fill="#EEEAE0" transform="rotate(-28 150 152)"/>
+    <ellipse cx="250" cy="152" rx="7" ry="16" fill="#EEEAE0" transform="rotate(28 250 152)"/>
+
+    <!-- body -->
+    <ellipse cx="200" cy="225" rx="58" ry="68" fill="#FFFFFF"/>
+
+    <!-- neck, head, beak -->
+    <path d="M187 172 Q184 148 192 138 L208 138 Q216 148 213 172 Q200 162 187 172 Z" fill="#FFFFFF"/>
+    <ellipse cx="200" cy="132" rx="17" ry="15" fill="#FFFFFF"/>
+    <ellipse cx="200" cy="120" rx="13" ry="9" fill="#FDBA74"/>
+    <path d="M188 124 L212 124 L204 62 Q200 55 196 62 Z" fill="#F97316"/>
+    <path d="M197 64 L200 57 L200 122 L194 122 Z" fill="#FDBA74"/>
+    <circle cx="185.5" cy="129" r="2.8" fill="#334155"/>
+    <circle cx="214.5" cy="129" r="2.8" fill="#334155"/>
+
+    <!-- foot on the left pedal -->
+    <path d="M162 250 Q152 254 146 252 L148 262 Q158 260 168 258 Z" fill="#F97316"/>
+    <ellipse cx="140" cy="254" rx="11" ry="8" fill="#F97316" transform="rotate(-15 140 254)"/>
+    <circle cx="128" cy="247" r="3.8" fill="#F97316"/>
+    <circle cx="126" cy="255" r="3.8" fill="#F97316"/>
+    <circle cx="129" cy="263" r="3.8" fill="#F97316"/>
+  </g>
+</svg>

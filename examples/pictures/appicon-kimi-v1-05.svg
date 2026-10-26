@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="panelFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.10"/>
+    </linearGradient>
+    <radialGradient id="sunFill" cx="0.38" cy="0.35" r="0.85">
+      <stop offset="0" stop-color="#FFE89A"/>
+      <stop offset="0.55" stop-color="#FFD34D"/>
+      <stop offset="1" stop-color="#FFB02E"/>
+    </radialGradient>
+    <linearGradient id="cloudFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.98"/>
+      <stop offset="1" stop-color="#DBEEFF" stop-opacity="0.88"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="panelClip">
+      <rect x="192" y="192" width="640" height="640"/>
+    </clipPath>
+  </defs>
+
+  <!-- Solid bright-blue field, sharp square -->
+  <rect width="1024" height="1024" fill="#2E9BFF"/>
+
+  <!-- Inset frosted-glass square panel (sharp corners) -->
+  <rect x="192" y="192" width="640" height="640" fill="url(#panelFill)"/>
+  <rect x="192" y="192" width="640" height="640" fill="none"
+        stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="4"/>
+  <rect x="192" y="192" width="640" height="6" fill="#FFFFFF" fill-opacity="0.5"/>
+  <rect x="192" y="826" width="640" height="6" fill="#0B5CB8" fill-opacity="0.2"/>
+
+  <!-- Motif, clipped to the panel -->
+  <g clip-path="url(#panelClip)">
+    <!-- Translucent layered sun glow -->
+    <circle cx="545" cy="405" r="152" fill="#FFD34D" fill-opacity="0.16"/>
+    <circle cx="545" cy="405" r="124" fill="#FFD34D" fill-opacity="0.22"/>
+
+    <!-- Sun -->
+    <circle cx="545" cy="405" r="98" fill="url(#sunFill)"/>
+    <ellipse cx="512" cy="365" rx="34" ry="22" fill="#FFFFFF" fill-opacity="0.45"/>
+
+    <!-- Single cloud, half-hiding the sun -->
+    <path d="M 410 630
+             c -48 0 -85 -35 -85 -80
+             c 0 -42 33 -76 75 -80
+             c 15 -50 60 -85 115 -85
+             c 50 0 93 31 110 76
+             c 42 4 75 40 75 84
+             c 0 47 -38 85 -85 85
+             Z"
+          fill="url(#cloudFill)"
+          stroke="#FFFFFF" stroke-opacity="0.9" stroke-width="5"/>
+
+    <!-- Frosted-glass sheen across the panel -->
+    <polygon points="192,192 460,192 250,832 192,832" fill="url(#sheen)" opacity="0.45"/>
+  </g>
+</svg>

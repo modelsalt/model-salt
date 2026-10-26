@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <g fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- Front wheel, seen head-on (narrow ellipse) -->
+    <ellipse cx="50" cy="78" rx="5" ry="18"/>
+    <line x1="50" y1="62" x2="50" y2="94" stroke-width="0.8"/>
+
+    <!-- Fork blades and head tube / stem -->
+    <line x1="47.5" y1="76" x2="49" y2="52"/>
+    <line x1="52.5" y1="76" x2="51" y2="52"/>
+    <line x1="50" y1="52" x2="50" y2="44"/>
+
+    <!-- Handlebars with grips -->
+    <path d="M30 45 Q50 41 70 45"/>
+    <path d="M30 45 L27 46" stroke-width="2.5"/>
+    <path d="M70 45 L73 46" stroke-width="2.5"/>
+
+    <!-- Pedals and cranks (one up, one down) -->
+    <line x1="45" y1="69" x2="39" y2="71"/>
+    <rect x="34" y="69.5" width="6" height="3" rx="1"/>
+    <line x1="55" y1="66" x2="61" y2="64"/>
+    <rect x="60" y="62.5" width="6" height="3" rx="1"/>
+
+    <!-- Pelican body, seated on the saddle -->
+    <path d="M38 58 C34 48 36 36 44 31 Q50 28 56 31 C64 36 66 48 62 58"/>
+    <path d="M44 49 Q50 52 56 49" stroke-width="0.8"/>
+
+    <!-- Legs to the pedals -->
+    <line x1="42" y1="58" x2="38" y2="69"/>
+    <line x1="58" y1="58" x2="62" y2="63"/>
+    <!-- Webbed feet -->
+    <path d="M35 69.5 L38 66 L41 69.5"/>
+    <path d="M60 62.5 L62 60 L65 62.5"/>
+
+    <!-- Wings reaching out to the grips -->
+    <path d="M42 34 C33 32 26 36 28 45"/>
+    <path d="M43 41 C37 40 31 42 30 45"/>
+    <path d="M58 34 C67 32 74 36 72 45"/>
+    <path d="M57 41 C63 40 69 42 70 45"/>
+    <!-- Feather hints at wingtips -->
+    <path d="M28 45 L25 43 M28 45 L25 47" stroke-width="0.8"/>
+    <path d="M72 45 L75 43 M72 45 L75 47" stroke-width="0.8"/>
+
+    <!-- Neck -->
+    <line x1="46" y1="30" x2="46" y2="21"/>
+    <line x1="54" y1="30" x2="54" y2="21"/>
+
+    <!-- Head and eyes -->
+    <circle cx="50" cy="15" r="7"/>
+    <circle cx="46.5" cy="13.5" r="1"/>
+    <circle cx="53.5" cy="13.5" r="1"/>
+
+    <!-- Bill pointing at the viewer, drooping down, with pouch -->
+    <path d="M46 21 L45 36 Q50 41 55 36 L54 21"/>
+    <line x1="50" y1="22" x2="50" y2="38" stroke-width="0.8"/>
+    <path d="M45.5 30 Q50 33 54.5 30" stroke-width="0.8"/>
+  </g>
+</svg>

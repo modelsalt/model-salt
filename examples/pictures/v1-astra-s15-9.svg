@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600" role="img" aria-labelledby="title desc">
+  <title id="title">A pelican riding a bicycle</title>
+  <desc id="desc">A folk-style pelican on a road bicycle, seen from behind and to its left, in shades of blue.</desc>
+
+  <rect width="900" height="600" fill="#eaf4fc"/>
+  <ellipse cx="453" cy="503" rx="243" ry="23" fill="#d0e5f5"/>
+
+  <!-- Narrow wheels: the front wheel recedes into the scene. -->
+  <g fill="#eaf4fc" stroke="#234f7e" stroke-width="7">
+    <ellipse cx="337" cy="437" rx="65" ry="99" transform="rotate(-12 337 437)"/>
+    <ellipse cx="586" cy="403" rx="49" ry="83" transform="rotate(-12 586 403)"/>
+  </g>
+  <g fill="none" stroke="#8cb5d8" stroke-width="2">
+    <path d="M317 341 357 533 M273 424 401 450 M291 366 383 508 M286 500 388 374"/>
+    <path d="M569 322 603 484 M538 393 634 413 M549 344 623 462 M554 465 618 341"/>
+  </g>
+  <g fill="#234f7e">
+    <circle cx="337" cy="437" r="8"/>
+    <circle cx="586" cy="403" r="7"/>
+  </g>
+
+  <!-- Diamond frame, crank and fork. -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M337 437 411 320 463 432 337 437
+             M411 320 548 294 463 432
+             M548 294 586 403"
+          stroke="#397fb8" stroke-width="11"/>
+    <path d="M561 295 594 400 M411 320 403 298"
+          stroke="#234f7e" stroke-width="6"/>
+    <path d="M340 430 460 416 Q480 427 468 445 L340 445 Z"
+          stroke="#234f7e" stroke-width="3"/>
+    <circle cx="463" cy="432" r="19" fill="#b9daf0" stroke="#234f7e" stroke-width="5"/>
+    <path d="M463 432 493 454 M463 432 440 407"
+          stroke="#234f7e" stroke-width="5"/>
+    <path d="M479 455 507 452 M427 408 451 405"
+          stroke="#234f7e" stroke-width="7"/>
+    <path d="M383 299 Q405 287 430 296"
+          stroke="#183e6b" stroke-width="13"/>
+
+    <!-- Curled road handlebars. -->
+    <path d="M548 294 543 267 580 256
+             M543 267 508 278
+             Q488 283 493 301 Q497 311 511 305
+             M580 256 Q601 253 606 270 Q608 283 593 286"
+          stroke="#234f7e" stroke-width="7"/>
+    <path d="M494 293 Q492 310 511 305 M606 271 Q608 283 593 286"
+          stroke="#689bc8" stroke-width="10"/>
+  </g>
+
+  <!-- Far leg and webbed foot. -->
+  <path d="M451 294 475 345 441 401 459 410 425 415 430 399 452 345 429 306"
+        fill="#79abd2" stroke="#234f7e" stroke-width="5" stroke-linejoin="round"/>
+
+  <!-- Body, viewed from the rear, with a small trailing tail. -->
+  <path d="M350 263 319 288 348 292 333 309 375 297"
+        fill="#689bc8" stroke="#234f7e" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M371 183
+           Q336 211 345 263
+           Q353 313 409 320
+           Q466 325 488 279
+           Q510 234 476 198
+           Q425 164 371 183Z"
+        fill="#b9daf0" stroke="#234f7e" stroke-width="5"/>
+
+  <!-- Long curved neck and head. -->
+  <path d="M432 228
+           Q465 210 454 170
+           Q440 124 459 99
+           Q475 78 501 90
+           Q524 102 518 123
+           Q514 141 494 146
+           Q487 164 503 203
+           Q523 250 480 274"
+        fill="#dceefa" stroke="#234f7e" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- Pelican bill and generous throat pouch. -->
+  <path d="M504 126 643 160
+           Q604 202 550 183
+           Q522 170 504 139Z"
+        fill="#79abd2" stroke="#234f7e" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M510 116 650 156 641 164 506 136Z"
+        fill="#b0d6ef" stroke="#234f7e" stroke-width="5" stroke-linejoin="round"/>
+  <circle cx="499" cy="111" r="4.5" fill="#183e6b"/>
+  <path d="M463 96 458 82 M472 90 472 77" stroke="#234f7e" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Near wing reaches toward the left drop handlebar. -->
+  <path d="M373 205
+           Q399 198 433 234
+           L505 278
+           Q512 290 497 293
+           L423 270
+           Q384 258 373 205Z"
+        fill="#8cb9dc" stroke="#234f7e" stroke-width="5" stroke-linejoin="round"/>
+  <g fill="none" stroke="#4c83b1" stroke-width="4" stroke-linecap="round">
+    <path d="M388 222 423 251 477 275"/>
+    <path d="M384 238 413 263"/>
+    <path d="M361 266 Q371 289 396 296"/>
+  </g>
+
+  <!-- Near leg presses the lower pedal. -->
+  <path d="M410 309
+           Q407 342 437 365
+           L479 437
+           L506 447 511 457
+           L474 457 464 444 416 379
+           Q384 347 389 310"
+        fill="#8cb9dc" stroke="#234f7e" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M484 445 489 455 M496 448 500 456"
+        stroke="#3973a5" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Small, hand-drawn ground marks. -->
+  <g fill="none" stroke="#8cb5d8" stroke-width="3" stroke-linecap="round">
+    <path d="M234 505 253 505 M622 493 651 493 M380 548 413 548"/>
+  </g>
+</svg>

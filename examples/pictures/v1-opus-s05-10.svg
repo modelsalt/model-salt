@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450">
+  <!-- Plain background -->
+  <rect width="600" height="450" fill="#ffffff"/>
+
+  <!-- Ground line -->
+  <line x1="20" y1="391" x2="580" y2="391" stroke="#1d1d1d" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- ===== FAR WING (behind, gripping handlebar) ===== -->
+  <path d="M270,135 Q330,120 378,160 Q392,170 388,180 Q375,184 362,176 Q315,160 268,165 Z"
+        fill="#e6e6e6" stroke="#1d1d1d" stroke-width="5" stroke-linejoin="round"/>
+
+  <!-- ===== WHEELS ===== -->
+  <g stroke="#1d1d1d" stroke-linecap="round">
+    <!-- Rear wheel -->
+    <circle cx="170" cy="320" r="68" fill="none" stroke-width="12"/>
+    <circle cx="170" cy="320" r="58" fill="none" stroke="#9aa0a6" stroke-width="4"/>
+    <g stroke-width="2.5">
+      <line x1="170" y1="262" x2="170" y2="378"/>
+      <line x1="112" y1="320" x2="228" y2="320"/>
+      <line x1="129" y1="279" x2="211" y2="361"/>
+      <line x1="211" y1="279" x2="129" y2="361"/>
+    </g>
+    <circle cx="170" cy="320" r="8" fill="#9aa0a6" stroke-width="4"/>
+
+    <!-- Front wheel -->
+    <circle cx="430" cy="320" r="68" fill="none" stroke-width="12"/>
+    <circle cx="430" cy="320" r="58" fill="none" stroke="#9aa0a6" stroke-width="4"/>
+    <g stroke-width="2.5">
+      <line x1="430" y1="262" x2="430" y2="378"/>
+      <line x1="372" y1="320" x2="488" y2="320"/>
+      <line x1="389" y1="279" x2="471" y2="361"/>
+      <line x1="471" y1="279" x2="389" y2="361"/>
+    </g>
+    <circle cx="430" cy="320" r="8" fill="#9aa0a6" stroke-width="4"/>
+  </g>
+
+  <!-- ===== FAR LEG + PEDAL ===== -->
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="250,190 292,248 270,312" fill="none" stroke="#1d1d1d" stroke-width="13"/>
+    <polyline points="250,190 292,248 270,312" fill="none" stroke="#e08a1e" stroke-width="7"/>
+    <path d="M262,312 L292,312 L284,322 L266,322 Z" fill="#e08a1e" stroke="#1d1d1d" stroke-width="4"/>
+    <line x1="290" y1="330" x2="272" y2="318" stroke="#1d1d1d" stroke-width="6"/>
+    <rect x="258" y="314" width="26" height="7" rx="2" fill="#555" stroke="#1d1d1d" stroke-width="3"/>
+  </g>
+
+  <!-- ===== BIKE FRAME (outlined) ===== -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- dark outline pass -->
+    <g stroke="#1d1d1d" stroke-width="15">
+      <line x1="170" y1="320" x2="290" y2="330"/>
+      <line x1="170" y1="320" x2="250" y2="215"/>
+      <line x1="290" y1="330" x2="250" y2="215"/>
+      <line x1="250" y1="215" x2="395" y2="212"/>
+      <line x1="290" y1="330" x2="403" y2="240"/>
+      <line x1="395" y1="212" x2="403" y2="240"/>
+      <line x1="403" y1="240" x2="430" y2="320"/>
+      <line x1="395" y1="212" x2="392" y2="182"/>
+    </g>
+    <!-- bright color pass -->
+    <g stroke="#e63946" stroke-width="8">
+      <line x1="170" y1="320" x2="290" y2="330"/>
+      <line x1="170" y1="320" x2="250" y2="215"/>
+      <line x1="290" y1="330" x2="250" y2="215"/>
+      <line x1="250" y1="215" x2="395" y2="212"/>
+      <line x1="290" y1="330" x2="403" y2="240"/>
+      <line x1="395" y1="212" x2="403" y2="240"/>
+      <line x1="403" y1="240" x2="430" y2="320"/>
+    </g>
+    <line x1="395" y1="212" x2="392" y2="182" stroke="#9aa0a6" stroke-width="8"/>
+  </g>
+
+  <!-- Handlebar -->
+  <path d="M392,182 Q395,170 380,172 L366,175" fill="none" stroke="#1d1d1d" stroke-width="12" stroke-linecap="round"/>
+  <path d="M392,182 Q395,170 380,172 L366,175" fill="none" stroke="#9aa0a6" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Chain -->
+  <path d="M170,312 L290,312 M170,328 L290,348" stroke="#1d1d1d" stroke-width="3" fill="none"/>
+  <!-- Chainring -->
+  <circle cx="290" cy="330" r="19" fill="#ffd166" stroke="#1d1d1d" stroke-width="5"/>
+  <circle cx="290" cy="330" r="5" fill="#1d1d1d"/>
+
+  <!-- Saddle -->
+  <path d="M225,205 Q250,196 272,206 Q262,214 230,213 Z" fill="#2b2b2b" stroke="#1d1d1d" stroke-width="4"/>
+
+  <!-- ===== PELICAN BODY ===== -->
+  <!-- Tail feathers -->
+  <path d="M205,160 L168,150 L178,165 L162,172 L182,178 L172,190 L210,185 Z"
+        fill="#ffffff" stroke="#1d1d1d" stroke-width="5" stroke-linejoin="round"/>
+  <!-- Body -->
+  <ellipse cx="250" cy="160" rx="58" ry="46" transform="rotate(-15 250 160)"
+           fill="#ffffff" stroke="#1d1d1d" stroke-width="6"/>
+
+  <!-- Neck -->
+  <path d="M272,128 Q262,95 290,72 L318,82 Q300,100 305,130 Z"
+        fill="#ffffff" stroke="#1d1d1d" stroke-width="6" stroke-linejoin="round"/>
+  <!-- cover the neck/body seam -->
+  <ellipse cx="286" cy="130" rx="18" ry="10" fill="#ffffff"/>
+
+  <!-- Head -->
+  <circle cx="310" cy="66" r="26" fill="#ffffff" stroke="#1d1d1d" stroke-width="6"/>
+  <!-- Crest -->
+  <path d="M296,44 Q286,28 300,30 Q298,38 306,40" fill="#fff6cc" stroke="#1d1d1d" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- Beak pouch -->
+  <path d="M322,80 Q370,128 452,98 L446,90 Q390,96 326,72 Z"
+        fill="#f4a23c" stroke="#1d1d1d" stroke-width="5" stroke-linejoin="round"/>
+  <!-- Upper beak -->
+  <path d="M326,58 Q395,66 462,90 Q466,96 456,98 Q390,90 324,78 Z"
+        fill="#ffc93c" stroke="#1d1d1d" stroke-width="5" stroke-linejoin="round"/>
+  <!-- Beak hook tip -->
+  <path d="M456,88 Q470,92 462,102 Q458,98 452,98 Z" fill="#e08a1e" stroke="#1d1d1d" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Beak ridge line -->
+  <path d="M332,68 Q395,76 450,92" fill="none" stroke="#c97a10" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Eye -->
+  <circle cx="314" cy="60" r="7" fill="#ffffff" stroke="#1d1d1d" stroke-width="3"/>
+  <circle cx="316" cy="60" r="3.5" fill="#1d1d1d"/>
+  <!-- Determined brow -->
+  <path d="M305,50 L322,53" stroke="#1d1d1d" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- ===== NEAR LEG + PEDAL ===== -->
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="268,192 318,262 310,344" fill="none" stroke="#1d1d1d" stroke-width="13"/>
+    <polyline points="268,192 318,262 310,344" fill="none" stroke="#f4a23c" stroke-width="7"/>
+    <line x1="290" y1="330" x2="308" y2="342" stroke="#1d1d1d" stroke-width="6"/>
+    <rect x="296" y="342" width="28" height="8" rx="2" fill="#555" stroke="#1d1d1d" stroke-width="3"/>
+    <!-- Webbed foot -->
+    <path d="M298,340 L332,336 L326,346 L300,348 Z" fill="#f4a23c" stroke="#1d1d1d" stroke-width="4"/>
+  </g>
+
+  <!-- ===== NEAR WING (gripping handlebar) ===== -->
+  <path d="M215,140 Q270,118 330,140 Q365,152 382,168 Q392,178 384,186
+           Q370,190 360,182 Q345,175 330,176 Q285,182 232,178 Q205,168 215,140 Z"
+        fill="#ffffff" stroke="#1d1d1d" stroke-width="6" stroke-linejoin="round"/>
+  <!-- Feather details -->
+  <path d="M245,165 Q265,160 285,166 M260,152 Q285,146 310,156 M300,170 Q320,166 340,170"
+        fill="none" stroke="#1d1d1d" stroke-width="3" stroke-linecap="round"/>
+  <!-- Dark wingtip "fingers" wrapped around grip -->
+  <path d="M362,166 Q382,160 390,172 Q394,184 382,188 Q370,190 364,182 Z"
+        fill="#2b2b2b" stroke="#1d1d1d" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M372,170 L376,186 M381,168 L384,184" stroke="#555" stroke-width="2"/>
+</svg>

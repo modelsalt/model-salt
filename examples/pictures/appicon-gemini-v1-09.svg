@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="100%" height="100%" shape-rendering="crispEdges">
+  <!-- Solid Square Background (No rounded corners) -->
+  <rect width="1024" height="1024" fill="#0B2249" />
+
+  <!-- Ambient Ground Shadow (Isometric Footprint) -->
+  <g fill="#06142E">
+    <!-- Sun Footprint Shadow -->
+    <polygon points="552,650 759.8,770 621.3,850 413.4,730" />
+    <!-- Cloud Footprint Shadow -->
+    <polygon points="413.4,710 690.6,870 552,950 274.9,790" />
+  </g>
+
+  <!-- Centered Floating Isometric Emblem -->
+  <g>
+    <!-- ================= ISOMETRIC SUN ================= -->
+    <!-- A 2x1x2 Isometric Block (Warm Yellow Palette) -->
+    <g id="isometric-sun">
+      <!-- Top Face (Brightest Warm Yellow) -->
+      <polygon points="552,190 759.8,310 621.3,390 413.4,270" fill="#FFE64D" />
+      <!-- Left Face (Primary Warm Yellow) -->
+      <polygon points="413.4,270 621.3,390 621.3,630 413.4,510" fill="#FFC700" />
+      <!-- Right Face (Deep Amber Gold) -->
+      <polygon points="621.3,390 759.8,310 759.8,550 621.3,630" fill="#E09F00" />
+    </g>
+
+    <!-- Cast Shadow of Cloud onto the Sun's Left Face -->
+    <polygon points="413.4,370 552,450 552,590 413.4,510" fill="#D99B00" />
+
+    <!-- ================= ISOMETRIC CLOUD ================= -->
+    <!-- A Stepped Geometric Block Structure (Cool Blue Palette) -->
+    <g id="isometric-cloud">
+      
+      <!-- Lower Tier Left (X:0..1, Y:0..2, Z:0..1) -->
+      <!-- Top Face -->
+      <polygon points="413.4,470 552,390 413.4,310 274.9,390" fill="#EBF8FF" />
+      <!-- Left Face -->
+      <polygon points="274.9,390 413.4,470 413.4,590 274.9,510" fill="#99D6FF" />
+
+      <!-- Upper Tier Center Peak (X:1..2, Y:0..2, Z:0..2) -->
+      <!-- Top Face -->
+      <polygon points="552,270 690.6,350 552,430 413.4,350" fill="#EBF8FF" />
+      <!-- Left Face -->
+      <polygon points="413.4,350 552,430 552,670 413.4,590" fill="#99D6FF" />
+      <!-- Right Upper Face (Above Lower Right Tier) -->
+      <polygon points="552,430 690.6,350 690.6,470 552,550" fill="#47A8F5" />
+
+      <!-- Lower Tier Right (X:2..3, Y:0..2, Z:0..1) -->
+      <!-- Top Face -->
+      <polygon points="690.6,470 829.1,550 690.6,630 552,550" fill="#EBF8FF" />
+      <!-- Left Face -->
+      <polygon points="552,550 690.6,630 690.6,750 552,670" fill="#99D6FF" />
+      <!-- Right Face -->
+      <polygon points="690.6,630 829.1,550 829.1,670 690.6,750" fill="#47A8F5" />
+      
+    </g>
+  </g>
+</svg>

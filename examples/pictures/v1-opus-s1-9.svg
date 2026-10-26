@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <g stroke="#1a1a2e" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- Rear leg, stretched back (behind the bike) -->
+    <path d="M345 288 L262 345" stroke-width="20" fill="none"/>
+    <path d="M345 288 L262 345" stroke="#FFB000" stroke-width="10" fill="none"/>
+    <path d="M262 345 L228 340 L240 368 Z" fill="#FFB000" stroke-width="6"/>
+
+    <!-- Wheels -->
+    <g fill="none">
+      <circle cx="230" cy="450" r="95" stroke-width="16"/>
+      <circle cx="230" cy="450" r="82" stroke="#1E5BFF" stroke-width="8"/>
+      <circle cx="570" cy="450" r="95" stroke-width="16"/>
+      <circle cx="570" cy="450" r="82" stroke="#1E5BFF" stroke-width="8"/>
+      <g stroke-width="3">
+        <path d="M230 370 V530 M150 450 H310 M173 393 L287 507 M287 393 L173 507"/>
+        <path d="M570 370 V530 M490 450 H650 M513 393 L627 507 M627 393 L513 507"/>
+      </g>
+    </g>
+    <circle cx="230" cy="450" r="12" fill="#FFD60A" stroke-width="5"/>
+    <circle cx="570" cy="450" r="12" fill="#FFD60A" stroke-width="5"/>
+
+    <!-- Frame: dark outline underneath, red tube on top -->
+    <g fill="none">
+      <path d="M230 450 L380 460 L345 305 Z M345 305 L520 300 L380 460 M520 290 L570 450 M520 300 L512 255"
+            stroke-width="22"/>
+      <path d="M230 450 L380 460 L345 305 Z M345 305 L520 300 L380 460 M520 290 L570 450 M520 300 L512 255"
+            stroke="#E3122B" stroke-width="12"/>
+      <path d="M498 258 Q528 244 552 260" stroke-width="12"/>
+    </g>
+
+    <!-- Seat -->
+    <path d="M308 296 Q335 282 368 292 Q362 306 335 306 Q312 306 308 296 Z" fill="#1E5BFF" stroke-width="6"/>
+
+    <!-- Crank and pedals, nobody's feet on them -->
+    <circle cx="380" cy="460" r="22" fill="#FFD60A" stroke-width="6"/>
+    <path d="M355 420 L405 500" stroke-width="8" fill="none"/>
+    <rect x="340" y="412" width="30" height="10" rx="3" fill="#1E5BFF" stroke-width="5"/>
+    <rect x="390" y="498" width="30" height="10" rx="3" fill="#1E5BFF" stroke-width="5"/>
+
+    <!-- Tail feathers -->
+    <path d="M298 238 L245 212 L258 248 L240 262 L298 262 Z" fill="#FFFFFF" stroke-width="6"/>
+
+    <!-- Body -->
+    <path d="M290 250 C290 180 380 160 430 190 C460 210 450 270 400 290 C360 305 300 295 290 250 Z"
+          fill="#FFFFFF" stroke-width="6"/>
+
+    <!-- Neck -->
+    <path d="M405 205 C398 155 428 122 445 110 L472 126 C456 142 442 170 442 208 Z"
+          fill="#FFFFFF" stroke-width="6"/>
+
+    <!-- Scarf flapping in the wind -->
+    <path d="M402 192 Q425 202 446 192 L448 208 Q424 218 400 208 Z" fill="#E3122B" stroke-width="5"/>
+    <path d="M404 200 Q370 185 335 196 L340 176 Q372 166 404 192 Z" fill="#E3122B" stroke-width="5"/>
+    <path d="M338 188 L312 180 L318 198 Z" fill="#E3122B" stroke-width="5"/>
+
+    <!-- Head -->
+    <circle cx="455" cy="105" r="32" fill="#FFFFFF" stroke-width="6"/>
+
+    <!-- Pouch and beak -->
+    <path d="M482 118 L638 136 C600 178 520 182 482 142 Z" fill="#F5B700" stroke-width="6"/>
+    <path d="M476 94 L640 126 Q652 132 640 138 L480 118 Z" fill="#FFD60A" stroke-width="6"/>
+    <path d="M636 126 Q656 132 642 146" fill="none" stroke="#E3122B" stroke-width="6"/>
+
+    <!-- Helmet -->
+    <path d="M422 98 Q428 58 462 62 Q492 66 494 96 Z" fill="#1E5BFF" stroke-width="6"/>
+    <path d="M440 72 L448 94 M462 66 L466 94" fill="none" stroke="#FFFFFF" stroke-width="4"/>
+
+    <!-- Eye -->
+    <circle cx="463" cy="108" r="9" fill="#FFFFFF" stroke-width="4"/>
+    <circle cx="466" cy="108" r="4" fill="#1a1a2e" stroke="none"/>
+
+    <!-- Wing reaching out to the handlebar grip -->
+    <path d="M388 206 C450 210 510 232 552 250 L546 270 C500 264 440 258 378 250 Z"
+          fill="#FFFFFF" stroke-width="6"/>
+    <path d="M520 240 L552 250 L546 270 L516 266 Z" fill="#1a1a2e" stroke-width="4"/>
+
+    <!-- Front leg, stretched forward, foot in the air -->
+    <path d="M385 284 L472 350" stroke-width="20" fill="none"/>
+    <path d="M385 284 L472 350" stroke="#FFB000" stroke-width="10" fill="none"/>
+    <path d="M472 350 L508 338 L500 368 Z" fill="#FFB000" stroke-width="6"/>
+  </g>
+</svg>

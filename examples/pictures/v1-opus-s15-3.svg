@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <!-- Wheel: tire, rim, 18 spokes, hub — all flat fills, no strokes -->
+    <g id="wheel">
+      <path fill="#2b2b2b" fill-rule="evenodd"
+            d="M-110,0a110,110 0 1,0 220,0a110,110 0 1,0 -220,0Z
+               M-98,0a98,98 0 1,0 196,0a98,98 0 1,0 -196,0Z"/>
+      <path fill="#a9b0b6" fill-rule="evenodd"
+            d="M-98,0a98,98 0 1,0 196,0a98,98 0 1,0 -196,0Z
+               M-91,0a91,91 0 1,0 182,0a91,91 0 1,0 -182,0Z"/>
+      <g fill="#c9ced2">
+        <rect x="-0.9" y="-92" width="1.8" height="184" transform="rotate(0)"/>
+        <rect x="-0.9" y="-92" width="1.8" height="184" transform="rotate(20)"/>
+        <rect x="-0.9" y="-92" width="1.8" height="184" transform="rotate(40)"/>
+        <rect x="-0.9" y="-92" width="1.8" height="184" transform="rotate(60)"/>
+        <rect x="-0.9" y="-92" width="1.8" height="184" transform="rotate(80)"/>
+        <rect x="-0.9" y="-92" width="1.8" height="184" transform="rotate(100)"/>
+        <rect x="-0.9" y="-92" width="1.8" height="184" transform="rotate(120)"/>
+        <rect x="-0.9" y="-92" width="1.8" height="184" transform="rotate(140)"/>
+        <rect x="-0.9" y="-92" width="1.8" height="184" transform="rotate(160)"/>
+      </g>
+      <circle r="11" fill="#7d858c"/>
+      <circle r="4" fill="#3a3f44"/>
+    </g>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="#cfe7ee"/>
+  <circle cx="680" cy="95" r="45" fill="#f7e3a1"/>
+  <ellipse cx="160" cy="110" rx="70" ry="18" fill="#e9f4f7"/>
+  <ellipse cx="215" cy="98" rx="45" ry="15" fill="#e9f4f7"/>
+  <rect y="520" width="800" height="80" fill="#c8b98d"/>
+  <rect y="520" width="800" height="6" fill="#b3a479"/>
+  <ellipse cx="400" cy="524" rx="260" ry="7" fill="#a89a70"/>
+
+  <!-- Far wing (behind everything else) -->
+  <path fill="#aeb3b7" d="M343,142 Q408,132 458,187 L513,220 Q518,237 503,237 L448,224 Q378,217 338,192 Z"/>
+  <path fill="#2f2f33" d="M458,187 L513,220 Q518,237 503,237 L448,224 Z"/>
+
+  <!-- Far leg (to rear-up pedal) -->
+  <polygon fill="#d9822b" points="352,244 360,240 412,300 371,368 363,366 403,301"/>
+  <!-- Far crank & pedal -->
+  <rect x="0" y="-4" width="55.6" height="8" fill="#5c6166" transform="translate(390,420) rotate(-120.3)"/>
+  <rect x="348" y="368" width="30" height="6" fill="#3a3f44"/>
+  <polygon fill="#d9822b" points="352,368 384,368 366,356"/>
+
+  <!-- Wheels -->
+  <use xlink:href="#wheel" href="#wheel" transform="translate(230,410)"/>
+  <use xlink:href="#wheel" href="#wheel" transform="translate(570,410)"/>
+
+  <!-- Frame (tubes as rotated rects) -->
+  <g fill="#c0392b">
+    <rect x="0" y="-5" width="160.3" height="10" transform="translate(230,410) rotate(3.58)"/>
+    <rect x="0" y="-4" width="166.2" height="8" transform="translate(230,410) rotate(-46.2)"/>
+    <rect x="0" y="-6" width="147.1" height="12" transform="translate(390,420) rotate(-107.8)"/>
+    <rect x="0" y="-7" width="192.1" height="14" transform="translate(390,420) rotate(-38.66)"/>
+    <rect x="0" y="-6" width="187.9" height="12" transform="translate(345,290) rotate(-5.5)"/>
+    <rect x="0" y="-8" width="57" height="16" transform="translate(530,260) rotate(74.7)"/>
+  </g>
+  <rect x="0" y="-5" width="98.2" height="10" fill="#8e9499" transform="translate(545,315) rotate(75.3)"/>
+  <!-- Stem & handlebar -->
+  <rect x="524" y="232" width="9" height="32" fill="#8e9499"/>
+  <rect x="0" y="-4" width="36" height="8" fill="#8e9499" transform="translate(530,236) rotate(188)"/>
+  <rect x="490" y="227" width="20" height="13" rx="4" fill="#1f1f1f"/>
+
+  <!-- Seat post & saddle -->
+  <rect x="340" y="255" width="9" height="30" fill="#8e9499"/>
+  <polygon fill="#1f1f1f" points="312,256 370,250 376,260 364,266 322,266"/>
+
+  <!-- Chain: individual links -->
+  <g transform="translate(230,398) rotate(-2.15)">
+    <rect x="0" y="-2.5" width="9" height="5" rx="2" fill="#4a4f54"/>
+    <rect x="10" y="-2.5" width="9" height="5" rx="2" fill="#8b9197"/>
+    <rect x="20" y="-2.5" width="9" height="5" rx="2" fill="#4a4f54"/>
+    <rect x="30" y="-2.5" width="9" height="5" rx="2" fill="#8b9197"/>
+    <rect x="40" y="-2.5" width="9" height="5" rx="2" fill="#4a4f54"/>
+    <rect x="50" y="-2.5" width="9" height="5" rx="2" fill="#8b9197"/>
+    <rect x="60" y="-2.5" width="9" height="5" rx="2" fill="#4a4f54"/>
+    <rect x="70" y="-2.5" width="9" height="5" rx="2" fill="#8b9197"/>
+    <rect x="80" y="-2.5" width="9" height="5" rx="2" fill="#4a4f54"/>
+    <rect x="90" y="-2.5" width="9" height="5" rx="2" fill="#8b9197"/>
+    <rect x="100" y="-2.5" width="9" height="5" rx="2" fill="#4a4f54"/>
+    <rect x="110" y="-2.5" width="9" height="5" rx="2" fill="#8b9197"/>
+    <rect x="120" y="-2.5" width="9" height="5" rx="2" fill="#4a4f54"/>
+    <rect x="130" y="-2.5" width="9" height="5" rx="2" fill="#8b9197"/>
+    <rect x="140" y="-2.5" width="9" height="5" rx="2" fill="#4a4f54"/>
+    <rect x="150" y="-2.5" width="9" height="5" rx="2" fill="#8b9197"/>
+  </g>
+  <g transform="translate(230,422) rotate(9.2)">
+    <rect x="0" y="-2.5" width="9" height="5" rx="2" fill="#8b9197"/>
+    <rect x="10" y="-2.5" width="9" height="5" rx="2" fill="#4a4f54"/>
+    <rect x="20" y="-2.5" width="9" height="5" rx="2" fill="#8b9197"/>
+    <rect x="30" y="-2.5" width="9" height="5" rx="2" fill="#4a4f54"/>
+    <rect x="40" y="-2.5" width="9" height="5" rx="2" fill="#8b9197"/>
+    <rect x="50" y="-2.5" width="9" height="5" rx="2" fill="#4a4f54"/>
+    <rect x="60" y="-2.5" width="9" height="5" rx="2" fill="#8b9197"/>
+    <rect x="70" y="-2.5" width="9" height="5" rx="2" fill="#4a4f54"/>
+    <rect x="80" y="-2.5" width="9" height="5" rx="2" fill="#8b9197"/>
+    <rect x="90" y="-2.5" width="9" height="5" rx="2" fill="#4a4f54"/>
+    <rect x="100" y="-2.5" width="9" height="5" rx="2" fill="#8b9197"/>
+    <rect x="110" y="-2.5" width="9" height="5" rx="2" fill="#4a4f54"/>
+    <rect x="120" y="-2.5" width="9" height="5" rx="2" fill="#8b9197"/>
+    <rect x="130" y="-2.5" width="9" height="5" rx="2" fill="#4a4f54"/>
+    <rect x="140" y="-2.5" width="9" height="5" rx="2" fill="#8b9197"/>
+    <rect x="150" y="-2.5" width="9" height="5" rx="2" fill="#4a4f54"/>
+  </g>
+  <!-- Rear cog -->
+  <circle cx="230" cy="410" r="13" fill="#5c6166"/>
+  <circle cx="230" cy="410" r="5" fill="#3a3f44"/>
+  <!-- Chainring with teeth -->
+  <g transform="translate(390,420)" fill="#6f767c">
+    <circle r="29"/>
+    <rect x="-2.5" y="-33" width="5" height="66" transform="rotate(0)"/>
+    <rect x="-2.5" y="-33" width="5" height="66" transform="rotate(22.5)"/>
+    <rect x="-2.5" y="-33" width="5" height="66" transform="rotate(45)"/>
+    <rect x="-2.5" y="-33" width="5" height="66" transform="rotate(67.5)"/>
+    <rect x="-2.5" y="-33" width="5" height="66" transform="rotate(90)"/>
+    <rect x="-2.5" y="-33" width="5" height="66" transform="rotate(112.5)"/>
+    <rect x="-2.5" y="-33" width="5" height="66" transform="rotate(135)"/>
+    <rect x="-2.5" y="-33" width="5" height="66" transform="rotate(157.5)"/>
+    <circle r="18" fill="#9aa1a7"/>
+    <circle r="7" fill="#3a3f44"/>
+  </g>
+
+  <!-- Pelican tail -->
+  <polygon fill="#e7e4dc" points="298,236 322,212 334,250"/>
+  <polygon fill="#2f2f33" points="298,236 306,228 312,244"/>
+
+  <!-- Pelican body -->
+  <ellipse cx="360" cy="188" rx="52" ry="74" fill="#f2efe8" transform="rotate(12 360 188)"/>
+  <ellipse cx="372" cy="200" rx="30" ry="48" fill="#e7e4dc" transform="rotate(12 372 200)"/>
+
+  <!-- Near leg, crank, pedal, webbed foot -->
+  <polygon fill="#e8902f" points="366,244 376,238 435,330 423,458 414,458 425,333"/>
+  <rect x="0" y="-4.5" width="55.6" height="9" fill="#7d858c" transform="translate(390,420) rotate(59.7)"/>
+  <circle cx="390" cy="420" r="6" fill="#3a3f44"/>
+  <rect x="402" y="466" width="34" height="7" fill="#3a3f44"/>
+  <polygon fill="#e8902f" points="404,466 442,466 420,453"/>
+  <polygon fill="#c8731f" points="410,466 416,466 420,456"/>
+  <polygon fill="#c8731f" points="424,466 430,466 421,456"/>
+
+  <!-- Neck -->
+  <path fill="#f2efe8" d="M343,148 C328,106 368,70 415,66 L442,94 C416,100 404,122 406,152 Z"/>
+  <!-- Head & crest -->
+  <ellipse cx="428" cy="82" rx="27" ry="20" fill="#f7f4ec"/>
+  <path fill="#f3e3a6" d="M404,72 Q418,56 440,62 Q424,64 410,78 Z"/>
+  <!-- Bill: upper mandible -->
+  <path fill="#e9b13c" d="M440,71 L566,111 Q574,118 562,122 L446,92 Z"/>
+  <path fill="#d9822b" d="M556,110 L568,114 Q572,121 562,123 Z"/>
+  <!-- Throat pouch -->
+  <path fill="#ec8f63" d="M447,92 L561,122 Q522,152 472,142 Q446,126 447,92 Z"/>
+  <path fill="#d97a52" d="M470,130 Q510,142 548,126 Q520,146 476,140 Z"/>
+  <!-- Eye -->
+  <circle cx="433" cy="77" r="5.5" fill="#f2d04a"/>
+  <circle cx="433.5" cy="77" r="2.6" fill="#141414"/>
+
+  <!-- Near wing, gripping the handlebar -->
+  <path fill="#d6d8da" d="M332,150 Q400,138 452,193 L506,226 Q512,244 496,245 L440,232 Q368,226 326,200 Z"/>
+  <path fill="#c3c6c9" d="M352,176 Q400,178 440,210 Q392,206 352,190 Z"/>
+  <path fill="#2f2f33" d="M452,193 L506,226 Q512,244 496,245 L440,232 Z"/>
+  <!-- Wingtip "fingers" wrapped around grip -->
+  <path fill="#2f2f33" d="M494,224 Q514,224 512,238 Q504,232 494,232 Z"/>
+  <rect x="497" y="236" width="12" height="4" rx="2" fill="#1f1f1f"/>
+</svg>

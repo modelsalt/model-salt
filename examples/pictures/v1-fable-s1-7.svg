@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Flat geometric, monochrome black on white, no outlines, no background -->
+  <g fill="#000">
+
+    <!-- Rear wheel (three-quarter view: slightly compressed ellipse, further back) -->
+    <ellipse cx="105" cy="300" rx="52" ry="62"/>
+    <ellipse cx="105" cy="300" rx="40" ry="50" fill="#fff"/>
+    <ellipse cx="105" cy="300" rx="6" ry="7"/>
+    <!-- rear spokes -->
+    <rect x="103" y="252" width="4" height="96"/>
+    <rect x="65" y="298" width="80" height="4"/>
+    <polygon points="76,264 80,261 134,336 130,339"/>
+    <polygon points="134,261 138,264 80,339 76,336"/>
+
+    <!-- Front wheel (closer to viewer: rounder, larger) -->
+    <ellipse cx="300" cy="300" rx="62" ry="66"/>
+    <ellipse cx="300" cy="300" rx="50" ry="54" fill="#fff"/>
+    <ellipse cx="300" cy="300" rx="7" ry="7"/>
+    <!-- front spokes -->
+    <rect x="298" y="248" width="4" height="104"/>
+    <rect x="250" y="298" width="100" height="4"/>
+    <polygon points="264,262 268,259 336,338 332,341"/>
+    <polygon points="332,259 336,262 268,341 264,338"/>
+
+    <!-- Frame -->
+    <!-- down tube: head to crank -->
+    <polygon points="272,214 282,214 210,302 200,302"/>
+    <!-- top tube: head to seat tube -->
+    <polygon points="268,212 280,212 170,222 160,222"/>
+    <!-- seat tube: saddle to crank -->
+    <polygon points="160,218 172,218 210,302 198,302"/>
+    <!-- chain stay: crank to rear hub -->
+    <polygon points="200,298 204,306 108,304 108,296"/>
+    <!-- seat stay: seat to rear hub -->
+    <polygon points="162,220 170,222 110,300 104,296"/>
+    <!-- head tube / fork -->
+    <polygon points="276,200 290,200 304,302 292,302"/>
+    <!-- stem up to handlebars -->
+    <polygon points="276,200 290,200 282,180 272,180"/>
+    <!-- crank hub -->
+    <circle cx="205" cy="302" r="10"/>
+    <!-- chainring -->
+    <circle cx="205" cy="302" r="18"/>
+    <circle cx="205" cy="302" r="13" fill="#fff"/>
+    <circle cx="205" cy="302" r="6"/>
+
+    <!-- Handlebars (three-quarter: near grip bigger, far grip smaller) -->
+    <polygon points="238,178 296,172 298,182 240,188"/>
+    <ellipse cx="236" cy="183" rx="9" ry="7"/>
+    <ellipse cx="298" cy="177" rx="7" ry="5"/>
+
+    <!-- Pedals and cranks -->
+    <polygon points="203,300 209,302 228,328 222,331"/>
+    <rect x="216" y="326" width="22" height="8"/>
+    <polygon points="203,304 207,300 190,276 185,279"/>
+    <rect x="176" y="272" width="18" height="7"/>
+
+    <!-- Seat post + saddle -->
+    <rect x="162" y="196" width="8" height="26"/>
+    <polygon points="138,196 196,196 190,186 150,186"/>
+
+    <!-- PELICAN -->
+    <!-- Legs: upright posture, feet on pedals -->
+    <polygon points="168,250 180,250 232,326 222,332"/>
+    <polygon points="160,250 172,250 192,278 182,282"/>
+    <!-- webbed feet -->
+    <polygon points="214,322 244,322 240,336 210,336"/>
+    <polygon points="172,268 196,268 193,279 170,279"/>
+
+    <!-- Body: plump oval, sitting upright on the saddle -->
+    <ellipse cx="170" cy="195" rx="48" ry="62"/>
+    <!-- tail feathers -->
+    <polygon points="128,220 100,232 104,248 134,232"/>
+
+    <!-- Near wing: reaches forward to the near handlebar grip -->
+    <polygon points="190,160 214,150 240,184 232,192 184,180"/>
+    <ellipse cx="236" cy="186" rx="11" ry="8"/>
+    <!-- Far wing: reaches to the far grip (slightly narrower, three-quarter) -->
+    <polygon points="200,150 222,142 298,178 292,186 196,166"/>
+    <ellipse cx="298" cy="180" rx="9" ry="6"/>
+
+    <!-- Neck: upright S-curve -->
+    <polygon points="178,145 206,145 212,100 186,96"/>
+    <!-- Head -->
+    <ellipse cx="204" cy="86" rx="30" ry="24"/>
+    <!-- Crest tuft -->
+    <polygon points="186,64 182,46 198,60"/>
+    <polygon points="196,62 200,42 208,62"/>
+
+    <!-- Bill: long and heavy, angled forward/down in three-quarter view -->
+    <polygon points="226,80 312,118 306,128 228,98"/>
+    <!-- Pouch under bill -->
+    <polygon points="228,98 306,128 286,146 234,122"/>
+
+    <!-- Eye: white hole to read against the black head -->
+    <circle cx="216" cy="80" r="7" fill="#fff"/>
+    <circle cx="218" cy="80" r="3"/>
+  </g>
+</svg>

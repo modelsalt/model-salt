@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="640" viewBox="0 0 720 640" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A layered paper-cut pelican seen from behind at a three-quarter angle, leaning forward with wings on the handlebars and webbed feet on the pedals of a bicycle with an arched frame. Ivory, peach, pale gold, and warm gray.</desc>
+  <defs>
+    <filter id="paper" x="-20%" y="-20%" width="145%" height="150%">
+      <feDropShadow dx="2" dy="4" stdDeviation="2" flood-color="#84786f" flood-opacity=".18"/>
+    </filter>
+  </defs>
+
+  <path fill="#faf5e9" d="M0 0h720v640H0z"/>
+  <ellipse cx="360" cy="549" rx="253" ry="24" fill="#e5ddd1"/>
+
+  <!-- Wheels recede toward the front of the bicycle. -->
+  <g fill="#faf5e9" stroke="#827a73" stroke-width="13">
+    <ellipse cx="249" cy="455" rx="91" ry="107"/>
+    <ellipse cx="502" cy="419" rx="69" ry="88"/>
+  </g>
+  <g fill="none" stroke="#d5cbbd" stroke-width="2.5">
+    <path d="M249 348v214m-91-107h182m-155-76 128 152m-128 0 128-152"/>
+    <path d="M502 331v176m-69-88h138m-118-62 98 124m-98 0 98-124"/>
+  </g>
+
+  <!-- Arched frame and fork, made from overlapping paper strips. -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#paper)">
+    <path d="m249 455 61-116 41 111-102 5m61-116 14-29" stroke="#b5a99c" stroke-width="12"/>
+    <path d="M310 339Q386 282 475 326" stroke="#e7cb91" stroke-width="15"/>
+    <path d="m351 450 124-124-226 129" stroke="#e7cb91" stroke-width="12"/>
+    <path d="m475 326 27 93m-27-93-11-43" stroke="#b5a99c" stroke-width="12"/>
+    <path d="m448 286 16-3 37-12 20 13" stroke="#827a73" stroke-width="9"/>
+    <path d="m443 285 19 4m46-14 17 11" stroke="#dcae94" stroke-width="12"/>
+    <path d="m295 311 42-6" stroke="#827a73" stroke-width="15"/>
+  </g>
+
+  <!-- Far leg and pedal. -->
+  <path d="m367 323 36 51-28 51" fill="none" stroke="#dcb496" stroke-width="15" stroke-linejoin="round"/>
+  <path d="m375 415 26 12-5 10-41-5z" fill="#e8c88f" filter="url(#paper)"/>
+  <g stroke="#827a73" stroke-width="6" stroke-linecap="round">
+    <path d="m351 450 32-21"/>
+    <path d="m371 432 27-4"/>
+  </g>
+
+  <!-- Far wing reaches the distant handlebar. -->
+  <path d="M368 234q47 0 76 48l-13 11-66-37z" fill="#d7cfc1" filter="url(#paper)"/>
+
+  <!-- Tail, body, and folded back feathers. -->
+  <g filter="url(#paper)">
+    <path d="m301 303-55 27 15-33-25 3 47-51z" fill="#d1c6b6"/>
+    <path d="M280 217q29-44 73-26 53 21 60 72 6 37-35 64-38 25-77 2-46-28-21-112" fill="#f5eddd"/>
+    <path d="M290 219q-25 53 4 92 20 27 57 21-37-19-35-54 2-27 24-54z" fill="#e5dac7"/>
+    <path d="M280 242q-10 42 11 66l22-9-14-20 19 2-14-22 17-2-14-27z" fill="#fff9ed"/>
+  </g>
+
+  <!-- Bent neck and head, viewed over the shoulder. -->
+  <g filter="url(#paper)">
+    <path d="M346 234q-2-28 19-58 17-24 12-46l35-13q19 36-8 75-12 17-11 48z" fill="#ede3d1"/>
+    <path d="M360 224q2-26 22-54 17-23 10-43l18-3q12 31-13 66-13 18-12 43z" fill="#fff9ec"/>
+    <path d="M374 129q-10-29 10-46 24-20 49-2 18 13 11 37l-25 20z" fill="#fff8e9"/>
+    <path d="M431 111 549 147q-28 47-76 24-26-12-42-45z" fill="#edc3a8"/>
+    <path d="m431 105 131 40-13 9-119-32z" fill="#e7cb91"/>
+    <path d="M460 134q28 20 69 21-33 18-58 1z" fill="#f3d5bd"/>
+    <ellipse cx="428" cy="101" rx="5" ry="6" fill="#716a63"/>
+    <circle cx="429" cy="99" r="1.5" fill="#fff9ed"/>
+  </g>
+
+  <!-- Near wing extends from the back to the near grip. -->
+  <path d="M337 223q32-13 57 13l56 47-13 12-62-35q-26 21-43-2z" fill="#fff8e9" filter="url(#paper)"/>
+  <path d="m373 249 51 33-39-14-19 5" fill="#e5dac7"/>
+  <path d="m436 281 13 2 10 10-9 7-14-7z" fill="#f5eddd"/>
+
+  <!-- Near leg, webbed foot, and crank. -->
+  <path d="m324 322-6 47 36 78" fill="none" stroke="#e8bfa1" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" filter="url(#paper)"/>
+  <circle cx="351" cy="450" r="17" fill="#d8c4a5" stroke="#a39788" stroke-width="4"/>
+  <path d="m351 450-20 34m-15 3 36-3" fill="none" stroke="#827a73" stroke-width="6" stroke-linecap="round"/>
+  <path d="m344 458-14 13-13 14 43-2 5-10z" fill="#e7cb91" filter="url(#paper)"/>
+  <circle cx="249" cy="455" r="7" fill="#a39788"/>
+  <circle cx="502" cy="419" r="6" fill="#a39788"/>
+</svg>

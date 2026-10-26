@@ -1,0 +1,480 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 900" width="100%" height="100%">
+  <defs>
+    <!-- Double-line offset stroke style definitions -->
+    <style>
+      .bg-card { fill: #ffffff; stroke: #000000; stroke-width: 3; }
+      .card-inner { fill: none; stroke: #000000; stroke-width: 1; }
+      
+      /* Double-line effect using layered paths or dash/gap tricks, 
+         implemented via explicit twin paths and compound strokes for precision */
+      .dbl-outer { fill: none; stroke: #000000; stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; }
+      .dbl-inner { fill: none; stroke: #ffffff; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+      
+      .dbl-thick-outer { fill: none; stroke: #000000; stroke-width: 18; stroke-linecap: round; stroke-linejoin: round; }
+      .dbl-thick-inner { fill: none; stroke: #ffffff; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+
+      .fill-white { fill: #ffffff; stroke: none; }
+      .fill-black { fill: #000000; stroke: none; }
+      
+      .solid-stroke { fill: none; stroke: #000000; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+      .thin-stroke { fill: none; stroke: #000000; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+      
+      .feather-card { fill: #ffffff; stroke: #000000; stroke-width: 2.5; stroke-linejoin: round; }
+      .feather-offset { fill: none; stroke: #000000; stroke-width: 1.5; stroke-linejoin: round; }
+
+      .tire-tread { fill: none; stroke: #000000; stroke-width: 32; stroke-dasharray: 12 8; }
+      .tire-base { fill: none; stroke: #000000; stroke-width: 26; }
+      .tire-highlight { fill: none; stroke: #ffffff; stroke-width: 4; }
+    </style>
+
+    <!-- Reusable Double-Line Tube Macro via Group -->
+    <g id="knobby-wheel-front">
+      <!-- Front Wheel in 3/4 perspective (tilted ellipse) -->
+      <ellipse cx="0" cy="0" rx="68" ry="95" class="tire-tread" />
+      <ellipse cx="0" cy="0" rx="68" ry="95" class="tire-base" />
+      <!-- Double-line offset on tire wall -->
+      <ellipse cx="-3" cy="0" rx="64" ry="91" class="tire-highlight" />
+      <ellipse cx="0" cy="0" rx="55" ry="82" class="fill-white" />
+      <ellipse cx="0" cy="0" rx="55" ry="82" class="solid-stroke" />
+      <ellipse cx="0" cy="0" rx="50" ry="77" class="thin-stroke" />
+      <!-- Spokes -->
+      <g class="thin-stroke">
+        <line x1="-50" y1="0" x2="50" y2="0" />
+        <line x1="0" y1="-77" x2="0" y2="77" />
+        <line x1="-35" y1="-55" x2="35" y2="55" />
+        <line x1="-35" y1="55" x2="35" y2="-55" />
+        <line x1="-46" y1="-28" x2="46" y2="28" />
+        <line x1="-46" y1="28" x2="46" y2="-28" />
+        <line x1="-20" y1="-70" x2="20" y2="70" />
+        <line x1="-20" y1="70" x2="20" y2="-70" />
+      </g>
+      <!-- Hub -->
+      <ellipse cx="0" cy="0" rx="10" ry="14" class="fill-black" />
+      <ellipse cx="0" cy="0" rx="6" ry="9" class="tire-highlight" />
+    </g>
+
+    <g id="knobby-wheel-rear">
+      <!-- Rear Wheel in 3/4 perspective (larger, closer to viewer) -->
+      <ellipse cx="0" cy="0" rx="82" ry="118" class="tire-tread" style="stroke-width: 38; stroke-dasharray: 15 9;" />
+      <ellipse cx="0" cy="0" rx="82" ry="118" class="tire-base" style="stroke-width: 30;" />
+      <!-- Double-line offset on tire wall -->
+      <ellipse cx="-4" cy="0" rx="79" ry="114" class="tire-highlight" />
+      <ellipse cx="4" cy="0" rx="70" ry="105" class="tire-highlight" style="stroke-width: 2;" />
+      <ellipse cx="0" cy="0" rx="67" ry="103" class="fill-white" />
+      <ellipse cx="0" cy="0" rx="67" ry="103" class="solid-stroke" />
+      <ellipse cx="0" cy="0" rx="61" ry="97" class="thin-stroke" />
+      <!-- Disc Brake & Cassette -->
+      <ellipse cx="-5" cy="0" rx="26" ry="38" class="fill-white" />
+      <ellipse cx="-5" cy="0" rx="26" ry="38" class="solid-stroke" stroke-dasharray="4 4" />
+      <ellipse cx="4" cy="0" rx="18" ry="26" class="fill-black" />
+      <ellipse cx="4" cy="0" rx="14" ry="20" class="tire-highlight" style="stroke-width: 2;" />
+      <!-- Spokes -->
+      <g class="thin-stroke">
+        <line x1="-61" y1="0" x2="61" y2="0" />
+        <line x1="0" y1="-97" x2="0" y2="97" />
+        <line x1="-43" y1="-68" x2="43" y2="68" />
+        <line x1="-43" y1="68" x2="43" y2="-68" />
+        <line x1="-56" y1="-36" x2="56" y2="36" />
+        <line x1="-56" y1="36" x2="56" y2="-36" />
+        <line x1="-24" y1="-89" x2="24" y2="89" />
+        <line x1="-24" y1="89" x2="24" y2="-89" />
+      </g>
+      <!-- Hub -->
+      <ellipse cx="0" cy="0" rx="12" ry="18" class="fill-black" />
+      <ellipse cx="0" cy="0" rx="7" ry="11" class="tire-highlight" />
+    </g>
+  </defs>
+
+  <!-- 1. BACKGROUND: Rounded Rectangular Card Frame with Thin Border (Double-Line Offset) -->
+  <rect x="30" y="30" width="740" height="840" rx="36" ry="36" class="bg-card" />
+  <rect x="40" y="40" width="720" height="820" rx="28" ry="28" class="card-inner" />
+  
+  <!-- Corner Accents (Monochrome Double-Line Detail) -->
+  <path d="M 55 75 L 55 60 Q 55 55 60 55 L 75 55" class="thin-stroke" />
+  <path d="M 745 75 L 745 60 Q 745 55 740 55 L 725 55" class="thin-stroke" />
+  <path d="M 55 825 L 55 840 Q 55 845 60 845 L 75 845" class="thin-stroke" />
+  <path d="M 745 825 L 745 840 Q 745 845 740 845 L 725 845" class="thin-stroke" />
+
+  <!-- Ground / Motion Path Lines (Receding into the right background, 3/4 view) -->
+  <g>
+    <!-- Ground shadow / track under wheels -->
+    <path d="M 160 800 L 660 660" class="dbl-outer" />
+    <path d="M 160 800 L 660 660" class="dbl-inner" />
+    
+    <path d="M 240 815 L 520 735" class="solid-stroke" />
+    <path d="M 245 820 L 525 740" class="thin-stroke" />
+    
+    <path d="M 480 685 L 690 625" class="solid-stroke" />
+    <path d="M 485 690 L 695 630" class="thin-stroke" />
+    
+    <!-- Small pebbles / dust kicked up behind rear wheel -->
+    <ellipse cx="210" cy="775" rx="8" ry="4" transform="rotate(-15 210 775)" class="feather-card" />
+    <ellipse cx="180" cy="765" rx="5" ry="2.5" transform="rotate(-10 180 765)" class="feather-card" />
+    <path d="M 190 740 Q 210 730 235 745" class="solid-stroke" />
+    <path d="M 192 745 Q 212 735 237 750" class="thin-stroke" />
+  </g>
+
+  <!-- 2. FRONT OF BICYCLE (Receding into Front-Right, 3/4 Rear Perspective) -->
+  <!-- Front Wheel -->
+  <g transform="translate(545, 555) rotate(-8)">
+    <use href="#knobby-wheel-front" />
+  </g>
+
+  <!-- Mountain Bike Front Suspension Fork (Sturdy Thick Tubes with Double-Line Offset) -->
+  <g>
+    <!-- Left Fork Leg (Further away) -->
+    <path d="M 475 375 L 525 545" class="dbl-thick-outer" />
+    <path d="M 475 375 L 525 545" class="dbl-thick-inner" />
+    
+    <!-- Right Fork Leg (Closer) -->
+    <path d="M 495 385 L 550 560" class="dbl-thick-outer" />
+    <path d="M 495 385 L 550 560" class="dbl-thick-inner" />
+    
+    <!-- Fork Crown & Stanchion Detail -->
+    <path d="M 468 380 L 502 390" class="dbl-thick-outer" style="stroke-width: 14;" />
+    <path d="M 468 380 L 502 390" class="dbl-thick-inner" style="stroke-width: 4;" />
+    
+    <!-- Head Tube -->
+    <path d="M 465 315 L 485 382" class="dbl-thick-outer" style="stroke-width: 22;" />
+    <path d="M 465 315 L 485 382" class="dbl-thick-inner" style="stroke-width: 8;" />
+  </g>
+
+  <!-- Mountain Bike Handlebars (Wide flat/riser bars seen in 3/4 perspective) -->
+  <g>
+    <!-- Stem -->
+    <path d="M 465 315 L 485 295" class="dbl-thick-outer" style="stroke-width: 16;" />
+    <path d="M 465 315 L 485 295" class="dbl-thick-inner" style="stroke-width: 5;" />
+    
+    <!-- Wide Bar: Left to Right -->
+    <path d="M 350 280 Q 430 295 485 295 Q 535 295 605 315" class="dbl-outer" style="stroke-width: 12;" />
+    <path d="M 350 280 Q 430 295 485 295 Q 535 295 605 315" class="dbl-inner" style="stroke-width: 4;" />
+    
+    <!-- Grips & Brake Levers -->
+    <path d="M 335 278 L 375 284" class="dbl-thick-outer" style="stroke-width: 16;" />
+    <path d="M 335 278 L 375 284" class="dbl-thick-inner" style="stroke-width: 4;" />
+    
+    <path d="M 580 308 L 620 320" class="dbl-thick-outer" style="stroke-width: 16;" />
+    <path d="M 580 308 L 620 320" class="dbl-thick-inner" style="stroke-width: 4;" />
+    
+    <!-- Brake Cables looping in front -->
+    <path d="M 380 285 Q 450 350 475 360" class="solid-stroke" />
+    <path d="M 383 289 Q 453 354 478 364" class="thin-stroke" />
+    <path d="M 575 310 Q 530 370 490 365" class="solid-stroke" />
+    <path d="M 572 314 Q 527 374 487 369" class="thin-stroke" />
+  </g>
+
+  <!-- 3. BICYCLE MAIN FRAME (Sturdy Thick-Tubed Mountain Bike) -->
+  <g>
+    <!-- Down Tube (From Head Tube to Bottom Bracket) -->
+    <path d="M 478 365 L 415 585" class="dbl-thick-outer" style="stroke-width: 24;" />
+    <path d="M 478 365 L 415 585" class="dbl-thick-inner" style="stroke-width: 8;" />
+    <!-- Extra internal offset line for thick tube styling -->
+    <path d="M 478 365 L 415 585" class="thin-stroke" />
+
+    <!-- Top Tube (Sloping Mountain Bike Geometry, from Head Tube to Seat Tube) -->
+    <path d="M 470 330 L 355 465" class="dbl-thick-outer" style="stroke-width: 20;" />
+    <path d="M 470 330 L 355 465" class="dbl-thick-inner" style="stroke-width: 7;" />
+    <path d="M 470 330 L 355 465" class="thin-stroke" />
+
+    <!-- Rear Suspension Shock / Gusset Detail -->
+    <path d="M 380 438 L 435 495" class="dbl-outer" style="stroke-width: 14;" />
+    <path d="M 380 438 L 435 495" class="dbl-inner" style="stroke-width: 6;" />
+    <!-- Coil spring ribs -->
+    <line x1="392" y1="458" x2="404" y2="446" class="solid-stroke" />
+    <line x1="400" y1="466" x2="412" y2="454" class="solid-stroke" />
+    <line x1="408" y1="474" x2="420" y2="462" class="solid-stroke" />
+
+    <!-- Seat Tube -->
+    <path d="M 345 435 L 415 585" class="dbl-thick-outer" style="stroke-width: 20;" />
+    <path d="M 345 435 L 415 585" class="dbl-thick-inner" style="stroke-width: 7;" />
+    <path d="M 345 435 L 415 585" class="thin-stroke" />
+
+    <!-- Far Side Chainstay & Seatstay -->
+    <path d="M 415 575 L 315 625" class="dbl-outer" style="stroke-width: 12;" />
+    <path d="M 415 575 L 315 625" class="dbl-inner" style="stroke-width: 4;" />
+  </g>
+
+  <!-- 4. PELICAN LEGS & PEDALS (Standing Up on the Pedals!) -->
+  <!-- Because the pelican is standing up off the saddle, the saddle is visible between/behind its legs -->
+  
+  <!-- Left Leg (Forward/Up Pedal Stroke, on the far side of frame) -->
+  <g>
+    <!-- Left Pedal & Crank Arm -->
+    <path d="M 415 585 L 445 535" class="dbl-outer" style="stroke-width: 12;" />
+    <path d="M 415 585 L 445 535" class="dbl-inner" style="stroke-width: 4;" />
+    <!-- Flat MTB Pedal with pins -->
+    <polygon points="425,530 465,525 475,538 435,543" class="feather-card" style="stroke-width: 3;" />
+    <polygon points="430,533 462,529 468,535 436,539" class="feather-offset" />
+    
+    <!-- Left Webbed Foot gripping pedal -->
+    <polygon points="430,532 468,522 460,510 432,515" class="fill-black" />
+    <path d="M 432 518 L 465 524 M 434 514 L 460 515" class="tire-highlight" style="stroke-width: 2;" />
+
+    <!-- Left Bird Leg (Standing straight/tall) -->
+    <path d="M 365 390 L 420 465 L 440 520" class="dbl-outer" style="stroke-width: 14;" />
+    <path d="M 365 390 L 420 465 L 440 520" class="dbl-inner" style="stroke-width: 5;" />
+    <path d="M 365 390 L 420 465 L 440 520" class="thin-stroke" />
+  </g>
+
+  <!-- Rear Wheel (Drawn over far stays, under near stays for true 3/4 rear depth) -->
+  <g transform="translate(320, 635) rotate(-6)">
+    <use href="#knobby-wheel-rear" />
+  </g>
+
+  <!-- Near Side Seatstay & Chainstay (Connecting Rear Hub to Frame) -->
+  <g>
+    <!-- Seatstay -->
+    <path d="M 355 465 L 320 635" class="dbl-outer" style="stroke-width: 14;" />
+    <path d="M 355 465 L 320 635" class="dbl-inner" style="stroke-width: 5;" />
+    <!-- Chainstay -->
+    <path d="M 415 585 L 320 635" class="dbl-outer" style="stroke-width: 16;" />
+    <path d="M 415 585 L 320 635" class="dbl-inner" style="stroke-width: 6;" />
+    
+    <!-- Chainring & Chain -->
+    <ellipse cx="415" cy="585" rx="22" ry="30" class="feather-card" style="stroke-width: 3;" />
+    <ellipse cx="415" cy="585" rx="17" ry="24" class="feather-offset" stroke-dasharray="5 3" />
+    <line x1="325" y1="612" x2="415" y2="555" class="solid-stroke" stroke-dasharray="4 2" />
+    <line x1="325" y1="655" x2="415" y2="615" class="solid-stroke" stroke-dasharray="4 2" />
+  </g>
+
+  <!-- Bicycle Seatpost & Saddle (Unoccupied because Pelican is standing up on pedals!) -->
+  <g>
+    <!-- Seatpost -->
+    <path d="M 345 435 L 325 390" class="dbl-outer" style="stroke-width: 12;" />
+    <path d="M 345 435 L 325 390" class="dbl-inner" style="stroke-width: 4;" />
+    <!-- Mountain Bike Saddle (Clearly visible below the standing pelican's tail) -->
+    <path d="M 290 392 Q 320 375 360 385 Q 340 402 300 402 Z" class="feather-card" style="stroke-width: 3.5;" />
+    <path d="M 297 392 Q 320 381 350 387 Q 335 397 303 397 Z" class="feather-offset" />
+  </g>
+
+  <!-- Right Leg (Down/Power Pedal Stroke, closer to viewer) -->
+  <g>
+    <!-- Right Crank Arm extending down -->
+    <path d="M 415 585 L 395 655" class="dbl-outer" style="stroke-width: 14;" />
+    <path d="M 415 585 L 395 655" class="dbl-inner" style="stroke-width: 5;" />
+    
+    <!-- Right Webbed Foot planted firmly on bottom pedal -->
+    <path d="M 380 650 L 430 645 L 438 662 L 375 662 Z" class="fill-black" />
+    <path d="M 385 653 L 425 650 M 382 658 L 430 657" class="tire-highlight" style="stroke-width: 2;" />
+    
+    <!-- Right Flat MTB Pedal -->
+    <polygon points="370,658 435,655 442,668 377,671" class="feather-card" style="stroke-width: 3;" />
+    <polygon points="376,662 431,659 435,665 380,668" class="feather-offset" />
+
+    <!-- Right Bird Leg (Fully extended, standing tall) -->
+    <path d="M 345 380 L 385 510 L 398 652" class="dbl-outer" style="stroke-width: 15;" />
+    <path d="M 345 380 L 385 510 L 398 652" class="dbl-inner" style="stroke-width: 5;" />
+    <path d="M 345 380 L 385 510 L 398 652" class="thin-stroke" />
+    
+    <!-- Knobby Bird Knee Joint Detail -->
+    <circle cx="385" cy="510" r="9" class="feather-card" />
+    <circle cx="385" cy="510" r="5" class="feather-offset" />
+  </g>
+
+  <!-- 5. PELICAN BODY, TAIL, HEAD & WIDE-SPREAD WINGS (3/4 Rear View) -->
+
+  <!-- Pelican Torso & Tail (Elevated well above the saddle, leaning slightly forward into the ride) -->
+  <g>
+    <!-- Shaggy Feathered Leg Britches (Thighs) -->
+    <path d="M 320 340 Q 325 380 345 395 Q 365 385 370 355 Z" class="feather-card" />
+    <path d="M 326 345 Q 330 375 345 387 Q 360 378 364 355" class="feather-offset" />
+    
+    <path d="M 355 340 Q 360 375 375 390 Q 390 380 390 350 Z" class="feather-card" />
+    <path d="M 360 345 Q 364 370 375 382 Q 384 374 384 350" class="feather-offset" />
+
+    <!-- Main Body / Back (Viewed from 3/4 Rear) -->
+    <path d="M 320 220 C 280 250, 275 325, 305 355 C 335 375, 395 365, 415 320 C 430 280, 415 220, 365 205 Z" class="feather-card" style="stroke-width: 4;" />
+    <!-- Double-line offset contour inside body -->
+    <path d="M 324 228 C 289 255, 284 322, 311 348 C 337 366, 389 357, 407 316 C 420 280, 407 227, 363 213 Z" class="feather-offset" />
+
+    <!-- Back Feather Texture (Double-line scalloped U-shapes) -->
+    <path d="M 330 255 Q 345 270 360 255" class="solid-stroke" />
+    <path d="M 333 251 Q 345 263 357 251" class="thin-stroke" />
+    
+    <path d="M 355 270 Q 370 285 385 270" class="solid-stroke" />
+    <path d="M 358 266 Q 370 278 382 266" class="thin-stroke" />
+    
+    <path d="M 320 285 Q 338 302 355 285" class="solid-stroke" />
+    <path d="M 324 281 Q 338 295 351 281" class="thin-stroke" />
+
+    <path d="M 345 305 Q 365 322 385 305" class="solid-stroke" />
+    <path d="M 349 301 Q 365 315 381 301" class="thin-stroke" />
+
+    <!-- Pelican Tail Feathers (Fanning out toward the viewer in 3/4 rear view, hovering above the bike saddle) -->
+    <g>
+      <path d="M 295 325 L 250 355 L 270 368 L 310 345 Z" class="feather-card" />
+      <path d="M 293 331 L 258 354 L 270 362 L 305 342" class="feather-offset" />
+
+      <path d="M 305 335 L 265 375 L 290 382 L 325 350 Z" class="feather-card" />
+      <path d="M 303 341 L 273 372 L 289 376 L 319 348" class="feather-offset" />
+
+      <path d="M 320 342 L 295 385 L 322 385 L 342 350 Z" class="feather-card" />
+      <path d="M 320 347 L 302 379 L 319 379 L 336 349" class="feather-offset" />
+
+      <path d="M 338 345 L 330 385 L 355 378 L 358 345 Z" class="feather-card" />
+      <path d="M 341 348 L 335 378 L 350 373 L 353 347" class="feather-offset" />
+    </g>
+  </g>
+
+  <!-- Pelican Neck, Head & Iconic Bill (Turned forward-right in 3/4 rear perspective, looking down the trail) -->
+  <g>
+    <!-- S-Curved Neck (Seen from behind/side) -->
+    <path d="M 345 220 C 335 175, 365 130, 375 95 C 385 70, 420 70, 425 95 C 430 120, 400 165, 405 215" class="feather-card" style="stroke-width: 4;" />
+    <path d="M 352 218 C 343 175, 372 132, 382 98 C 389 78, 414 78, 418 98 C 422 120, 392 165, 398 213" class="feather-offset" />
+
+    <!-- Famous Pelican Beak & Gular Pouch (Projecting forward-right in 3/4 view) -->
+    <!-- Pouch (Lower Bill) -->
+    <path d="M 418 95 C 465 100, 535 110, 565 115 C 545 165, 470 185, 410 140 Z" class="feather-card" style="stroke-width: 3.5;" />
+    <path d="M 422 102 C 465 106, 525 114, 553 119 C 535 158, 470 175, 416 135 Z" class="feather-offset" />
+    <!-- Pouch striations (double lines) -->
+    <path d="M 430 125 Q 480 145 535 125" class="thin-stroke" />
+    <path d="M 435 135 Q 480 155 520 135" class="thin-stroke" />
+
+    <!-- Upper Mandible (Long flat ridge with hooked tip) -->
+    <path d="M 410 75 C 460 82, 530 98, 570 108 C 578 110, 575 122, 565 122 C 562 122, 560 116, 555 115 C 510 108, 455 100, 415 95 Z" class="feather-card" style="stroke-width: 3.5;" />
+    <path d="M 415 81 C 460 87, 525 102, 565 112" class="feather-offset" />
+
+    <!-- Head & Tufted Crown (3/4 Rear View) -->
+    <path d="M 365 98 C 360 70, 385 52, 415 62 C 430 67, 435 82, 422 98" class="feather-card" style="stroke-width: 3.5;" />
+    <path d="M 372 96 C 368 74, 388 59, 412 67 C 424 71, 428 82, 418 95" class="feather-offset" />
+    
+    <!-- Feathery Crest Tuft on back of head -->
+    <path d="M 368 78 L 348 72 L 362 86 L 345 88 L 365 96" class="feather-card" />
+    
+    <!-- Eye (Visible on the far-right side of the head in 3/4 view) -->
+    <circle cx="415" cy="78" r="6" class="feather-card" />
+    <circle cx="417" cy="78" r="2.5" class="fill-black" />
+  </g>
+
+  <!-- 6. WINGS SPREAD WIDE FOR BALANCE (Dramatic Horizontal Span across the Card) -->
+  
+  <!-- LEFT WING (Extending wide to the left, seen from the back/dorsal side) -->
+  <g>
+    <!-- Primary Wing Span Structure (Black flight feathers at tips for high-contrast monochrome) -->
+    <!-- Outer Primary Feathers (Black with white inner offset line) -->
+    <g>
+      <!-- Primary 1 (Top/Outermost) -->
+      <path d="M 190 165 L 65 140 C 55 145, 60 160, 75 165 L 195 190 Z" class="fill-black" />
+      <path d="M 185 170 L 72 147 C 66 150, 69 158, 78 161 L 188 184" class="tire-highlight" style="stroke-width: 1.5;" />
+      
+      <!-- Primary 2 -->
+      <path d="M 195 180 L 58 175 C 50 182, 58 195, 75 198 L 200 205 Z" class="fill-black" />
+      <path d="M 190 186 L 66 181 C 61 185, 66 192, 78 194 L 192 200" class="tire-highlight" style="stroke-width: 1.5;" />
+
+      <!-- Primary 3 -->
+      <path d="M 200 195 L 68 210 C 62 218, 72 230, 88 230 L 210 220 Z" class="fill-black" />
+      <path d="M 195 201 L 76 214 C 72 219, 79 225, 90 225 L 202 215" class="tire-highlight" style="stroke-width: 1.5;" />
+
+      <!-- Primary 4 -->
+      <path d="M 205 210 L 88 242 C 84 250, 95 260, 110 258 L 215 232 Z" class="fill-black" />
+      <path d="M 200 215 L 96 244 C 93 249, 100 254, 112 253 L 208 228" class="tire-highlight" style="stroke-width: 1.5;" />
+
+      <!-- Primary 5 -->
+      <path d="M 215 220 L 118 268 C 115 276, 128 282, 140 278 L 225 240 Z" class="fill-black" />
+      <path d="M 210 225 L 125 268 C 123 273, 132 277, 140 273 L 218 236" class="tire-highlight" style="stroke-width: 1.5;" />
+    </g>
+
+    <!-- Secondary Flight Feathers (Black tips / White bases) -->
+    <g>
+      <path d="M 220 225 L 155 285 C 155 295, 170 298, 180 290 L 240 235 Z" class="fill-black" />
+      <path d="M 218 230 L 162 283 C 162 289, 172 291, 178 286 L 235 235" class="tire-highlight" style="stroke-width: 1.5;" />
+
+      <path d="M 240 230 L 188 292 C 190 302, 205 302, 212 292 L 260 240 Z" class="fill-black" />
+      <path d="M 238 235 L 194 289 C 195 295, 204 295, 209 289 L 255 240" class="tire-highlight" style="stroke-width: 1.5;" />
+
+      <path d="M 260 235 L 222 295 C 225 305, 240 302, 245 292 L 280 245 Z" class="fill-black" />
+      <path d="M 258 240 L 227 291 C 229 297, 238 295, 242 289 L 275 245" class="tire-highlight" style="stroke-width: 1.5;" />
+
+      <path d="M 280 240 L 255 295 C 260 305, 275 300, 278 290 L 305 248 Z" class="fill-black" />
+      <path d="M 278 245 L 260 291 C 263 297, 272 294, 275 287 L 300 248" class="tire-highlight" style="stroke-width: 1.5;" />
+    </g>
+
+    <!-- Upper Wing Coverts (White Layered Feathers with Double-Line Offset) -->
+    <path d="M 335 225 C 295 190, 240 155, 165 155 C 150 155, 130 165, 145 180 C 165 195, 200 220, 240 245 C 275 265, 310 270, 335 265 Z" class="feather-card" style="stroke-width: 4;" />
+    <path d="M 330 230 C 292 197, 240 163, 167 163 C 156 163, 142 170, 153 179 C 172 193, 205 216, 243 239 C 276 258, 307 263, 330 258 Z" class="feather-offset" />
+
+    <!-- Individual Covert Feather Rows (Left Wing) -->
+    <path d="M 165 185 Q 175 205 195 195 Q 205 215 225 205 Q 235 225 255 215 Q 265 235 285 225 Q 295 245 315 235" class="solid-stroke" />
+    <path d="M 168 181 Q 177 198 195 189 Q 205 208 223 199 Q 233 218 253 209 Q 263 228 283 219 Q 293 238 313 229" class="thin-stroke" />
+
+    <path d="M 190 212 Q 202 232 222 222 Q 234 242 254 232 Q 266 252 286 242 Q 298 262 318 252" class="solid-stroke" />
+    <path d="M 193 208 Q 204 225 222 216 Q 234 235 252 226 Q 264 245 284 236 Q 296 255 316 246" class="thin-stroke" />
+  </g>
+
+  <!-- RIGHT WING (Extending wide to the right for balance, slightly foreshortened by 3/4 angle) -->
+  <g>
+    <!-- Outer Primary Feathers (Black with white inner offset line) -->
+    <g>
+      <!-- Primary 1 (Outermost Right) -->
+      <path d="M 590 155 L 735 120 C 745 125, 742 140, 725 148 L 585 180 Z" class="fill-black" />
+      <path d="M 595 160 L 728 128 C 735 131, 733 140, 722 144 L 592 174" class="tire-highlight" style="stroke-width: 1.5;" />
+
+      <!-- Primary 2 -->
+      <path d="M 585 170 L 745 155 C 752 162, 745 176, 728 180 L 580 195 Z" class="fill-black" />
+      <path d="M 590 176 L 736 162 C 741 166, 736 174, 725 176 L 588 190" class="tire-highlight" style="stroke-width: 1.5;" />
+
+      <!-- Primary 3 -->
+      <path d="M 580 185 L 735 190 C 742 198, 732 212, 715 212 L 570 208 Z" class="fill-black" />
+      <path d="M 585 191 L 726 195 C 731 200, 724 208, 712 208 L 578 204" class="tire-highlight" style="stroke-width: 1.5;" />
+
+      <!-- Primary 4 -->
+      <path d="M 575 200 L 712 222 C 718 232, 705 242, 690 240 L 560 220 Z" class="fill-black" />
+      <path d="M 580 205 L 704 225 C 708 231, 699 237, 688 236 L 568 216" class="tire-highlight" style="stroke-width: 1.5;" />
+
+      <!-- Primary 5 -->
+      <path d="M 560 210 L 680 250 C 684 260, 670 268, 655 262 L 545 230 Z" class="fill-black" />
+      <path d="M 565 215 L 672 251 C 675 257, 665 262, 655 258 L 552 226" class="tire-highlight" style="stroke-width: 1.5;" />
+    </g>
+
+    <!-- Secondary Flight Feathers (Right Wing) -->
+    <g>
+      <path d="M 545 215 L 640 270 C 640 280, 625 284, 612 275 L 525 230 Z" class="fill-black" />
+      <path d="M 548 220 L 633 268 C 633 274, 623 277, 615 271 L 530 230" class="tire-highlight" style="stroke-width: 1.5;" />
+
+      <path d="M 525 220 L 602 278 C 600 288, 585 288, 575 278 L 500 235 Z" class="fill-black" />
+      <path d="M 528 225 L 595 275 C 594 281, 585 281, 578 275 L 505 235" class="tire-highlight" style="stroke-width: 1.5;" />
+
+      <path d="M 500 225 L 562 282 C 558 292, 542 290, 535 280 L 475 240 Z" class="fill-black" />
+      <path d="M 503 230 L 556 278 C 553 284, 544 283, 538 277 L 480 240" class="tire-highlight" style="stroke-width: 1.5;" />
+
+      <path d="M 475 230 L 520 284 C 515 294, 500 290, 495 280 L 450 245 Z" class="fill-black" />
+      <path d="M 478 235 L 515 280 C 512 286, 503 283, 498 277 L 455 245" class="tire-highlight" style="stroke-width: 1.5;" />
+
+      <path d="M 450 235 L 480 284 C 475 294, 460 290, 455 280 L 420 250 Z" class="fill-black" />
+      <path d="M 453 240 L 475 280 C 472 286, 463 283, 458 277 L 425 250" class="tire-highlight" style="stroke-width: 1.5;" />
+    </g>
+
+    <!-- Upper Wing Coverts (Right Wing - White with Double-Line Offset) -->
+    <path d="M 395 215 C 440 175, 515 140, 610 140 C 628 140, 645 152, 628 168 C 605 185, 560 212, 510 238 C 468 258, 425 265, 395 258 Z" class="feather-card" style="stroke-width: 4;" />
+    <path d="M 402 220 C 445 182, 515 148, 608 148 C 621 148, 634 156, 620 167 C 598 183, 555 208, 507 232 C 467 251, 428 257, 402 251 Z" class="feather-offset" />
+
+    <!-- Individual Covert Feather Rows (Right Wing) -->
+    <path d="M 605 170 Q 592 192 570 182 Q 558 204 535 194 Q 522 216 500 206 Q 488 228 465 218 Q 452 240 430 230" class="solid-stroke" />
+    <path d="M 602 166 Q 590 185 570 176 Q 558 197 537 188 Q 524 209 502 200 Q 490 221 467 212 Q 454 233 432 224" class="thin-stroke" />
+
+    <path d="M 575 198 Q 560 220 538 210 Q 525 232 502 222 Q 488 244 465 234 Q 452 256 428 246" class="solid-stroke" />
+    <path d="M 572 194 Q 558 213 538 204 Q 525 225 504 216 Q 490 237 467 228 Q 454 249 430 240" class="thin-stroke" />
+  </g>
+
+  <!-- 7. MOTION & BALANCE ACCENT LINES (Double-Line Offset Style) -->
+  <!-- Subtle wind/balance arcs around wingtips and moving bike -->
+  <g>
+    <!-- Left Wingtip Balance Swooshes -->
+    <path d="M 48 125 Q 38 175 55 225" class="solid-stroke" />
+    <path d="M 53 128 Q 44 175 60 222" class="thin-stroke" />
+
+    <!-- Right Wingtip Balance Swooshes -->
+    <path d="M 750 105 Q 765 155 745 205" class="solid-stroke" />
+    <path d="M 745 108 Q 759 155 740 202" class="thin-stroke" />
+
+    <!-- Speed lines trailing behind the pelican -->
+    <path d="M 160 360 L 235 340" class="solid-stroke" />
+    <path d="M 162 365 L 237 345" class="thin-stroke" />
+
+    <path d="M 130 480 L 215 455" class="solid-stroke" />
+    <path d="M 132 485 L 217 460" class="thin-stroke" />
+
+    <path d="M 140 610 L 205 590" class="solid-stroke" />
+    <path d="M 142 615 L 207 595" class="thin-stroke" />
+  </g>
+</svg>

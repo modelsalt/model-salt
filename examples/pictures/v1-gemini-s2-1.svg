@@ -1,0 +1,264 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+  <defs>
+    <!-- Mid-century screenprint dot pattern -->
+    <pattern id="halftone" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
+      <circle cx="7" cy="7" r="3" fill="#00F0FF" opacity="0.25"/>
+    </pattern>
+    <pattern id="halftone-magenta" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(-15)">
+      <circle cx="5" cy="5" r="2.5" fill="#FF007F" opacity="0.4"/>
+    </pattern>
+  </defs>
+
+  <!-- Background: Deep 80s Retro Violet-Blue -->
+  <rect width="800" height="800" fill="#180A2E"/>
+
+  <!-- Screenprint registration marks -->
+  <g stroke="#00F0FF" stroke-width="1.5" fill="none" opacity="0.6">
+    <circle cx="50" cy="50" r="12"/>
+    <line x1="32" y1="50" x2="68" y2="50"/>
+    <line x1="50" y1="32" x2="50" y2="68"/>
+    
+    <circle cx="750" cy="750" r="12"/>
+    <line x1="732" y1="750" x2="768" y2="750"/>
+    <line x1="750" y1="732" x2="750" y2="768"/>
+  </g>
+
+  <!-- Abstract Mid-Century Background Shapes (Isometric 30-deg aligned) -->
+  <!-- Offset Cyan Block -->
+  <polygon points="100,450 550,190 720,480 270,740" fill="#00F0FF" opacity="0.12"/>
+  <!-- Halftone Texture Block -->
+  <polygon points="140,380 480,184 620,426 280,622" fill="url(#halftone)"/>
+  <!-- Big Retro Sun / Circle -->
+  <circle cx="380" cy="360" r="210" fill="#FF007F" opacity="0.18"/>
+  <!-- Isometric Ground Track -->
+  <polygon points="-50,730 850,210 950,380 50,900" fill="#261047"/>
+  <line x1="-50" y1="760" x2="850" y2="240" stroke="#00F0FF" stroke-width="6" stroke-dasharray="40 25" opacity="0.5"/>
+  <line x1="-20" y1="810" x2="880" y2="290" stroke="#FF007F" stroke-width="12" opacity="0.7"/>
+
+  <!-- Isometric Drop Shadow on Ground -->
+  <polygon points="190,620 630,366 690,400 250,655" fill="#0D041A" opacity="0.8"/>
+
+  <!-- ================================================================= -->
+  <!-- LAYER 1: BACK OF PELICAN & FAR SIDE OF BICYCLE (Screenprint Flat)  -->
+  <!-- ================================================================= -->
+
+  <!-- Far Leg (Upper & Lower) reaching to high far pedal -->
+  <polygon points="340,400 415,435 395,455 325,420" fill="#FF5500"/>
+  <!-- Far Webbed Foot -->
+  <polygon points="405,435 455,415 445,450 395,450" fill="#FF5500"/>
+
+  <!-- Far Pedal & Crank -->
+  <line x1="380" y1="490" x2="420" y2="440" stroke="#FF007F" stroke-width="10" stroke-linecap="round"/>
+  <polygon points="400,435 440,425 445,440 405,450" fill="#00F0FF"/>
+
+  <!-- Far Handlebar Grip (Isometric offset: -40x, -23y from near grip) -->
+  <line x1="485" y1="225" x2="430" y2="195" stroke="#00F0FF" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="430" cy="195" r="10" fill="#FF007F"/>
+
+  <!-- Far Wing (Flapping out proudly) -->
+  <path d="M 380,290 C 440,250 510,270 520,310 C 490,335 430,340 380,320 Z" fill="#00B8D4"/>
+
+  <!-- ================================================================= -->
+  <!-- LAYER 2: COMPACT FOLDING BICYCLE (Isometric 30-deg projection)    -->
+  <!-- ================================================================= -->
+
+  <!-- REAR WHEEL (Small 16" wheel at 260, 560) -->
+  <g id="rear-wheel">
+    <!-- Tire Misregistration Offset -->
+    <ellipse cx="266" cy="564" rx="52" ry="72" transform="rotate(-28 266 564)" fill="#FF007F"/>
+    <!-- Tire Base -->
+    <ellipse cx="260" cy="560" rx="52" ry="72" transform="rotate(-28 260 560)" fill="#180A2E" stroke="#00F0FF" stroke-width="14"/>
+    <!-- Rim & Solid Mag-Wheel Cutouts (Mid-century simple shapes) -->
+    <ellipse cx="260" cy="560" rx="34" ry="48" transform="rotate(-28 260 560)" fill="#FFEA00"/>
+    <ellipse cx="248" cy="545" rx="10" ry="16" transform="rotate(-28 248 545)" fill="#180A2E"/>
+    <ellipse cx="272" cy="575" rx="10" ry="16" transform="rotate(-28 272 575)" fill="#180A2E"/>
+    <ellipse cx="275" cy="540" rx="12" ry="10" transform="rotate(-28 275 540)" fill="#180A2E"/>
+    <ellipse cx="245" cy="580" rx="12" ry="10" transform="rotate(-28 245 580)" fill="#180A2E"/>
+    <!-- Hub -->
+    <circle cx="260" cy="560" r="12" fill="#FF007F"/>
+  </g>
+
+  <!-- FRONT WHEEL (Small 16" wheel at 560, 387 - strictly on 30-deg isometric line) -->
+  <g id="front-wheel">
+    <!-- Tire Misregistration Offset -->
+    <ellipse cx="566" cy="391" rx="52" ry="72" transform="rotate(-28 566 391)" fill="#FF007F"/>
+    <!-- Tire Base -->
+    <ellipse cx="560" cy="387" rx="52" ry="72" transform="rotate(-28 560 387)" fill="#180A2E" stroke="#00F0FF" stroke-width="14"/>
+    <!-- Rim & Solid Mag-Wheel -->
+    <ellipse cx="560" cy="387" rx="34" ry="48" transform="rotate(-28 560 387)" fill="#FFEA00"/>
+    <ellipse cx="548" cy="372" rx="10" ry="16" transform="rotate(-28 548 372)" fill="#180A2E"/>
+    <ellipse cx="572" cy="402" rx="10" ry="16" transform="rotate(-28 572 402)" fill="#180A2E"/>
+    <ellipse cx="575" cy="367" rx="12" ry="10" transform="rotate(-28 575 367)" fill="#180A2E"/>
+    <ellipse cx="545" cy="407" rx="12" ry="10" transform="rotate(-28 545 407)" fill="#180A2E"/>
+    <!-- Hub -->
+    <circle cx="560" cy="387" r="12" fill="#FF007F"/>
+  </g>
+
+  <!-- FOLDING BIKE FRAME (Low step-through, long posts, hinge blocks) -->
+  <g id="bike-frame">
+    <!-- Print Offset Shadow for Frame -->
+    <path d="M 265,565 L 385,495 L 445,490 L 525,315 M 565,392 L 525,315 L 490,230 M 385,495 L 335,365" stroke="#00F0FF" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+    <!-- Rear Cargo Rack (Classic folding bike feature) -->
+    <polygon points="215,495 315,438 330,450 230,507" fill="#FFEA00"/>
+    <line x1="260" y1="560" x2="235" y2="500" stroke="#FFEA00" stroke-width="8"/>
+    <line x1="260" y1="560" x2="310" y2="445" stroke="#FFEA00" stroke-width="8"/>
+
+    <!-- Seatpost (Long telescoping) -->
+    <line x1="380" y1="490" x2="325" y2="345" stroke="#00F0FF" stroke-width="14" stroke-linecap="round"/>
+    
+    <!-- Handlepost (Long telescoping) -->
+    <line x1="520" y1="310" x2="485" y2="225" stroke="#00F0FF" stroke-width="14" stroke-linecap="round"/>
+
+    <!-- Main Low Step-Through Frame Tubes (Magenta) -->
+    <!-- Rear Chainstay -->
+    <line x1="260" y1="560" x2="380" y2="490" stroke="#FF007F" stroke-width="18" stroke-linecap="round"/>
+    <!-- Low U-Frame / Step-Through Main Tube -->
+    <path d="M 380,490 L 445,485 L 520,310" stroke="#FF007F" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <!-- Front Fork & Headtube -->
+    <line x1="560" y1="387" x2="515" y2="295" stroke="#FF007F" stroke-width="18" stroke-linecap="round"/>
+
+    <!-- Folding Hinges (Chunky Electric Yellow Mechanical Blocks) -->
+    <!-- Main Frame Hinge -->
+    <polygon points="430,465 465,455 470,495 435,505" fill="#FFEA00"/>
+    <circle cx="450" cy="480" r="5" fill="#180A2E"/>
+    <!-- Stem Folding Hinge -->
+    <polygon points="495,275 525,265 530,285 500,295" fill="#FFEA00"/>
+    <!-- Seatpost Quick-Release Clamp -->
+    <polygon points="340,395 365,385 370,400 345,410" fill="#FFEA00"/>
+
+    <!-- Crankset / Chainring (At Bottom Bracket 380, 490) -->
+    <ellipse cx="380" cy="490" rx="26" ry="36" transform="rotate(-28 380 490)" fill="#FFEA00" stroke="#180A2E" stroke-width="4"/>
+    <circle cx="380" cy="490" r="12" fill="#FF007F"/>
+
+    <!-- Saddle -->
+    <path d="M 285,360 C 285,335 355,325 365,345 C 350,365 305,375 285,360 Z" fill="#FF007F"/>
+    <path d="M 290,355 C 290,340 350,330 360,345 Z" fill="#FFEA00"/>
+  </g>
+
+  <!-- ================================================================= -->
+  <!-- LAYER 3: THE PROUD PELICAN (Mid-Century Screenprint Overlapping)  -->
+  <!-- ================================================================= -->
+
+  <!-- NEAR LEG (Pedaling steadily downward) -->
+  <g id="near-leg">
+    <!-- Thigh/Knee to low pedal (345, 550) -->
+    <polygon points="325,410 375,465 350,550 330,550 345,470 300,425" fill="#FFEA00"/>
+    <polygon points="330,413 380,468 355,553 335,553 350,473 305,428" fill="#FF007F" opacity="0.4"/>
+    <!-- Big Webbed Foot on Near Pedal -->
+    <polygon points="335,545 405,535 390,565 325,560" fill="#FFEA00"/>
+    <!-- Near Crank Arm & Pedal (Drawn over leg base) -->
+    <line x1="380" y1="490" x2="345" y2="555" stroke="#00F0FF" stroke-width="10" stroke-linecap="round"/>
+    <polygon points="320,550 370,540 375,555 325,565" fill="#FF007F"/>
+  </g>
+
+  <!-- PELICAN BODY & PUFFED CHEST -->
+  <g id="pelican-body">
+    <!-- Screenprint Misregistration Offset (Magenta) -->
+    <path d="M 268,368 C 238,328 288,248 358,238 C 438,228 468,308 428,368 C 388,428 308,418 268,368 Z" fill="#FF007F"/>
+
+    <!-- Tail Feathers (Perky, sticking out back) -->
+    <polygon points="270,350 205,335 225,365 195,380 265,390" fill="#00F0FF"/>
+    <polygon points="270,360 215,355 265,385" fill="#FFFFFF"/>
+
+    <!-- Main Torso & Huge Proud Puffed Chest (Crisp White + Cyan) -->
+    <path d="M 260,365 C 240,385 215,345 255,315 C 285,290 310,235 355,215 C 425,185 470,265 435,340 C 405,405 315,430 260,365 Z" fill="#FFFFFF"/>
+    
+    <!-- Mid-century Halftone Shading on Belly/Chest -->
+    <path d="M 355,215 C 425,185 470,265 435,340 C 405,405 315,430 260,365 C 330,390 410,330 390,230 Z" fill="url(#halftone-magenta)"/>
+
+    <!-- Bold Cyan Underbelly Shadow Shape -->
+    <path d="M 260,365 C 315,430 405,405 435,340 C 415,365 345,385 280,340 Z" fill="#00F0FF"/>
+  </g>
+
+  <!-- PELICAN NECK & HEAD HELD HIGH -->
+  <g id="pelican-head">
+    <!-- S-Curve Proud Neck (Arched back, head high) -->
+    <path d="M 325,255 C 300,200 305,130 335,95 C 365,65 410,80 415,120 C 415,155 375,185 385,240 Z" fill="#FFFFFF"/>
+    
+    <!-- Cyan Neck Shadow/Stripe -->
+    <path d="M 325,255 C 300,200 305,130 335,95 C 320,135 320,195 345,250 Z" fill="#00F0FF"/>
+
+    <!-- Tufted Crown Feathers (Back of head) -->
+    <polygon points="325,105 285,95 310,120 280,130 325,135" fill="#FFEA00"/>
+
+    <!-- Cheek Patch -->
+    <circle cx="365" cy="115" r="18" fill="#FF007F" opacity="0.25"/>
+  </g>
+
+  <!-- WIDE-OPEN BEAK & THROAT POUCH (Calling out!) -->
+  <g id="open-beak">
+    <!-- Inside of Mouth / Throat Cavity (Deep Dark Violet) -->
+    <path d="M 390,105 L 555,95 C 535,175 450,210 375,175 Z" fill="#180A2E"/>
+    
+    <!-- Loud Squawk Tongue (Magenta) -->
+    <path d="M 390,155 C 430,140 465,150 485,165 C 450,185 410,180 385,170 Z" fill="#FF007F"/>
+
+    <!-- Massive Inflated Throat Pouch (Electric Yellow + Magenta Offset) -->
+    <!-- Offset shadow -->
+    <path d="M 380,168 C 435,245 535,215 568,125 C 515,145 445,155 380,168 Z" fill="#FF007F"/>
+    <!-- Main Pouch -->
+    <path d="M 372,162 C 425,245 530,215 565,120 C 510,145 435,155 372,162 Z" fill="#FFEA00"/>
+    <!-- Mid-Century Striations on Pouch -->
+    <path d="M 405,175 C 445,205 505,190 540,140" stroke="#FF007F" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M 425,192 C 460,210 500,195 525,160" stroke="#FF007F" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+    <!-- Upper Mandible (Pointed skyward, calling out) -->
+    <path d="M 380,95 L 575,40 L 585,65 L 565,70 L 390,115 Z" fill="#FFEA00"/>
+    <path d="M 380,95 L 575,40 L 570,52 L 385,105 Z" fill="#FF007F"/>
+
+    <!-- Eye (Wide, energetic, proud) -->
+    <circle cx="368" cy="102" r="13" fill="#00F0FF"/>
+    <circle cx="370" cy="102" r="7" fill="#180A2E"/>
+    <circle cx="367" cy="99" r="3" fill="#FFFFFF"/>
+  </g>
+
+  <!-- NEAR WING (Reaching forward to steer the handlebar) -->
+  <g id="near-wing">
+    <!-- Wing Offset Shadow -->
+    <path d="M 345,285 C 325,345 395,385 525,260 C 475,240 395,255 345,285 Z" fill="#FF007F"/>
+    <!-- Main Wing Shape -->
+    <path d="M 340,280 C 320,340 390,380 525,255 C 475,235 390,250 340,280 Z" fill="#00F0FF"/>
+    <!-- White Wing Coverts (Simple overlapping geometric shape) -->
+    <path d="M 340,280 C 330,315 365,340 445,295 C 415,265 375,265 340,280 Z" fill="#FFFFFF"/>
+    <!-- Feather Notch Details -->
+    <polygon points="485,280 525,255 495,255" fill="#180A2E"/>
+    <polygon points="455,302 495,275 465,275" fill="#180A2E"/>
+
+    <!-- Near Handlebar Bar & Grip (Clipped by wing tip) -->
+    <line x1="485" y1="225" x2="535" y2="255" stroke="#00F0FF" stroke-width="12" stroke-linecap="round"/>
+    <circle cx="535" cy="255" r="12" fill="#FFEA00"/>
+    <!-- Wing Tip wrapping grip -->
+    <path d="M 510,250 C 530,240 550,255 535,270 C 520,275 505,265 510,250 Z" fill="#00F0FF"/>
+  </g>
+
+  <!-- ================================================================= -->
+  <!-- LAYER 4: CALLOUT SOUNDWAVES & RETRO ACCENTS                       -->
+  <!-- ================================================================= -->
+
+  <!-- Graphic Soundwaves blasting from open beak -->
+  <g id="soundwaves">
+    <!-- Wave 1 -->
+    <polygon points="605,45 645,20 650,35 610,55" fill="#00F0FF"/>
+    <polygon points="610,75 665,65 665,80 610,88" fill="#FF007F"/>
+    <polygon points="595,105 645,115 640,130 590,118" fill="#FFEA00"/>
+    
+    <!-- Outer starburst rays -->
+    <polygon points="675,5 730,-20 715,10" fill="#FFEA00"/>
+    <polygon points="690,55 755,45 735,70" fill="#00F0FF"/>
+    <polygon points="670,105 730,120 710,135" fill="#FF007F"/>
+  </g>
+
+  <!-- Isometric Motion Lines (Behind Bike) -->
+  <g stroke-linecap="round">
+    <line x1="80" y1="620" x2="170" y2="568" stroke="#FFEA00" stroke-width="8"/>
+    <line x1="50" y1="580" x2="120" y2="540" stroke="#00F0FF" stroke-width="6"/>
+    <line x1="110" y1="645" x2="160" y2="616" stroke="#FF007F" stroke-width="10"/>
+    
+    <!-- Mid-century geometric sparkles -->
+    <polygon points="150,220 165,220 170,205 175,220 190,220 178,230 182,245 170,235 158,245 162,230" fill="#FFEA00"/>
+    <polygon points="650,260 660,260 665,245 670,260 680,260 672,268 675,280 665,272 655,280 658,268" fill="#FF007F"/>
+    <circle cx="220" cy="150" r="8" fill="#00F0FF"/>
+    <circle cx="670" cy="330" r="10" fill="#FFEA00"/>
+  </g>
+</svg>

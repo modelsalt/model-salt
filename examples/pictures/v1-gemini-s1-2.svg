@@ -1,0 +1,231 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+  <defs>
+    <!-- Clip path for the pelican's body shading -->
+    <clipPath id="body-clip">
+      <path d="M 410 150 C 445 150, 455 180, 440 220 C 425 260, 445 310, 495 340 C 555 370, 585 430, 560 475 C 535 515, 450 515, 405 475 C 365 440, 355 370, 375 310 C 390 260, 385 210, 380 185 C 375 160, 390 150, 410 150 Z" />
+    </clipPath>
+    
+    <!-- Clip path for the beak pouch shading -->
+    <clipPath id="pouch-clip">
+      <path d="M 215 198 C 215 285, 295 320, 355 290 C 385 270, 392 225, 388 195 Z" />
+    </clipPath>
+  </defs>
+
+  <!-- Background: Warm Earthy Cream -->
+  <rect width="800" height="800" fill="#F6EFEA" />
+
+  <!-- Subtle Background Sun/Circle -->
+  <circle cx="420" cy="380" r="260" fill="#EFE4DC" />
+
+  <!-- Ground Shadow -->
+  <ellipse cx="415" cy="645" rx="220" ry="18" fill="#E4D5C9" />
+
+  <!-- ==================== FAR SIDE ELEMENTS (BACK) ==================== -->
+  
+  <!-- Back Wing (Reaching for far handlebar) -->
+  <path d="M 415 325 C 375 365, 325 350, 290 295 L 305 280 C 340 320, 380 330, 415 305 Z" fill="#D5C7BC" />
+
+  <!-- Back Leg & Foot (High pedal position) -->
+  <!-- Thigh/Lower Leg -->
+  <path d="M 435 470 L 385 500 L 405 535 L 419 528 L 405 505 L 445 485 Z" fill="#C97A53" />
+  <!-- Webbed Foot -->
+  <path d="M 412 528 L 370 538 L 380 546 L 420 538 Z" fill="#C97A53" />
+  <!-- Far Pedal -->
+  <rect x="372" y="538" width="36" height="10" rx="5" fill="#463F3A" />
+  <!-- Far Crank Arm -->
+  <path d="M 425 575 L 390 543" stroke="#9B928B" stroke-width="12" stroke-linecap="round" />
+
+
+  <!-- ==================== BICYCLE: WHEELS & DRIVETRAIN ==================== -->
+
+  <!-- Front Wheel (Compact 20" style) -->
+  <g id="front-wheel" transform="translate(275, 575)">
+    <!-- Tire -->
+    <circle cx="0" cy="0" r="70" fill="#463F3A" />
+    <!-- Cream Inner Tire Wall / Rim -->
+    <circle cx="0" cy="0" r="52" fill="#E5DCD3" />
+    <!-- Inner Rim Recess -->
+    <circle cx="0" cy="0" r="44" fill="#EFE4DC" />
+    <!-- Mag Spokes (Solid Minimalist Shapes) -->
+    <rect x="-5" y="-45" width="10" height="90" fill="#B7AEA6" />
+    <rect x="-45" y="-5" width="90" height="10" fill="#B7AEA6" />
+    <rect x="-5" y="-45" width="10" height="90" fill="#B7AEA6" transform="rotate(45)" />
+    <rect x="-45" y="-5" width="90" height="10" fill="#B7AEA6" transform="rotate(45)" />
+  </g>
+
+  <!-- Rear Wheel (Compact 20" style) -->
+  <g id="rear-wheel" transform="translate(555, 575)">
+    <!-- Tire -->
+    <circle cx="0" cy="0" r="70" fill="#463F3A" />
+    <!-- Cream Inner Tire Wall / Rim -->
+    <circle cx="0" cy="0" r="52" fill="#E5DCD3" />
+    <!-- Inner Rim Recess -->
+    <circle cx="0" cy="0" r="44" fill="#EFE4DC" />
+    <!-- Mag Spokes -->
+    <rect x="-5" y="-45" width="10" height="90" fill="#B7AEA6" />
+    <rect x="-45" y="-5" width="90" height="10" fill="#B7AEA6" />
+    <rect x="-5" y="-45" width="10" height="90" fill="#B7AEA6" transform="rotate(45)" />
+    <rect x="-45" y="-5" width="90" height="10" fill="#B7AEA6" transform="rotate(45)" />
+  </g>
+
+  <!-- Drivetrain / Chain -->
+  <path d="M 425 551 L 555 559 L 555 591 L 425 599 Z" fill="#A89F96" />
+  <path d="M 425 561 L 555 566 L 555 584 L 425 589 Z" fill="#EFE4DC" />
+  <!-- Rear Cassette -->
+  <circle cx="555" cy="575" r="18" fill="#8D847C" />
+
+
+  <!-- ==================== FOLDING BICYCLE FRAME ==================== -->
+  <!-- Frame Color: Muted Sage Green (#819B8B) with Dark Sage cell shade (#688272) -->
+
+  <!-- Seatpost (Long, angled) -->
+  <path d="M 418 575 L 478 440 L 494 440 L 434 575 Z" fill="#C5BDB4" />
+  <path d="M 426 575 L 486 440 L 494 440 L 434 575 Z" fill="#ABA299" /> <!-- Cell shade -->
+
+  <!-- Handlebar Stem (Long, telescopic) -->
+  <path d="M 317 440 L 297 295 L 311 295 L 331 440 Z" fill="#C5BDB4" />
+  <path d="M 324 440 L 304 295 L 311 295 L 331 440 Z" fill="#ABA299" /> <!-- Cell shade -->
+
+  <!-- Rear Stays (Triangle) -->
+  <!-- Seat Stay -->
+  <path d="M 455 485 L 555 568 L 555 582 L 450 500 Z" fill="#688272" />
+  <!-- Chain Stay -->
+  <path d="M 425 567 L 555 567 L 555 583 L 425 583 Z" fill="#819B8B" />
+  <path d="M 425 575 L 555 575 L 555 583 L 425 583 Z" fill="#688272" />
+
+  <!-- Main Folding Tube (Low curved swoop) -->
+  <path d="M 318 450 Q 375 490 432 565 L 418 585 Q 360 510 308 470 Z" fill="#819B8B" />
+  <path d="M 313 460 Q 368 500 425 575 L 418 585 Q 360 510 308 470 Z" fill="#688272" /> <!-- Underside shade -->
+
+  <!-- Front Fork -->
+  <path d="M 310 470 L 265 575 L 285 575 L 332 470 Z" fill="#819B8B" />
+  <path d="M 321 470 L 275 575 L 285 575 L 332 470 Z" fill="#688272" />
+
+  <!-- Head Tube -->
+  <path d="M 308 430 L 336 430 L 328 480 L 300 480 Z" fill="#819B8B" />
+  <path d="M 322 430 L 336 430 L 328 480 L 314 480 Z" fill="#688272" />
+
+  <!-- Folding Hinge Clamp (Mid-frame) -->
+  <rect x="362" y="492" width="16" height="32" rx="4" transform="rotate(-38 370 508)" fill="#58504A" />
+  <circle cx="374" cy="498" r="4" fill="#D5C7BC" />
+
+  <!-- Stem & Seatpost Clamps -->
+  <rect x="306" y="422" width="32" height="10" rx="3" fill="#58504A" />
+  <rect x="442" y="475" width="28" height="10" rx="3" transform="rotate(22 456 480)" fill="#58504A" />
+
+  <!-- Wheel Hubs -->
+  <circle cx="275" cy="575" r="12" fill="#58504A" />
+  <circle cx="555" cy="575" r="12" fill="#58504A" />
+
+  <!-- Crankset / Chainring -->
+  <circle cx="425" cy="575" r="28" fill="#B7AEA6" />
+  <circle cx="425" cy="575" r="20" fill="#9B928B" />
+  <circle cx="425" cy="575" r="8" fill="#58504A" />
+
+  <!-- Bicycle Saddle -->
+  <path d="M 445 438 C 445 425, 520 415, 530 432 C 538 448, 505 458, 480 452 C 460 448, 445 445, 445 438 Z" fill="#7D5A4B" />
+  <path d="M 450 442 C 465 448, 480 452, 528 438 C 524 449, 500 456, 480 452 C 460 448, 448 445, 450 442 Z" fill="#634538" />
+
+
+  <!-- ==================== THE PELICAN ==================== -->
+
+  <!-- Pelican Tail Feathers -->
+  <path d="M 550 440 L 605 420 L 590 445 L 610 455 L 555 470 Z" fill="#EAE0D5" />
+  <path d="M 552 455 L 610 455 L 555 470 Z" fill="#D5C7BC" />
+
+  <!-- Pelican Body & Neck (Base + Clipped Shading) -->
+  <g>
+    <path d="M 410 150 C 445 150, 455 180, 440 220 C 425 260, 445 310, 495 340 C 555 370, 585 430, 560 475 C 535 515, 450 515, 405 475 C 365 440, 355 370, 375 310 C 390 260, 385 210, 380 185 C 375 160, 390 150, 410 150 Z" fill="#FAF5F0" />
+    
+    <!-- Cell Shading along Back and Belly -->
+    <g clip-path="url(#body-clip)">
+      <path d="M 425 140 C 435 200, 405 260, 460 330 C 515 400, 540 450, 480 470 C 420 490, 360 440, 350 440 L 350 550 L 620 550 L 620 140 Z" fill="#E6DBD0" />
+    </g>
+  </g>
+
+  <!-- Head Crest Feathers -->
+  <path d="M 432 155 L 465 145 L 445 168 L 470 168 L 438 182 Z" fill="#E6DBD0" />
+
+  <!-- Pelican Beak & Gular Pouch -->
+  <!-- Pouch Base -->
+  <g>
+    <path d="M 215 198 C 215 285, 295 320, 355 290 C 385 270, 392 225, 388 195 Z" fill="#E59A59" />
+    <!-- Pouch Cell Shading & Striations -->
+    <g clip-path="url(#pouch-clip)">
+      <!-- Bottom Curve Shadow -->
+      <path d="M 200 220 C 230 295, 310 295, 395 230 L 395 330 L 200 330 Z" fill="#D08242" />
+      <!-- Subtle Throat Lines (Lineless Ribbon Shapes) -->
+      <path d="M 235 200 C 245 260, 305 285, 385 240 L 385 246 C 305 292, 240 265, 230 200 Z" fill="#D08242" opacity="0.5" />
+      <path d="M 265 200 C 275 245, 320 265, 388 225 L 388 231 C 320 272, 270 250, 260 200 Z" fill="#D08242" opacity="0.5" />
+    </g>
+  </g>
+
+  <!-- Upper Mandible (Top Beak) -->
+  <path d="M 385 168 L 215 186 C 202 188, 198 198, 205 205 C 212 208, 218 200, 222 198 L 392 196 Z" fill="#F3B969" />
+  <!-- Beak Ridge Highlight -->
+  <path d="M 385 168 L 215 186 C 208 187, 203 191, 203 195 L 388 176 Z" fill="#FAD284" />
+  <!-- Beak Tip Hook Coral Spot -->
+  <path d="M 212 187 C 202 188, 198 198, 205 205 C 210 207, 215 202, 218 199 C 212 198, 210 192, 212 187 Z" fill="#E07A5F" />
+
+  <!-- Eye -->
+  <!-- Pale Eye Ring -->
+  <circle cx="398" cy="176" r="11" fill="#E6DBD0" />
+  <!-- Pupil -->
+  <circle cx="398" cy="176" r="6.5" fill="#3B3532" />
+  <!-- Eye Catchlight -->
+  <circle cx="396" cy="174" r="2" fill="#FAF5F0" />
+
+  <!-- Rosy Cheek Patch -->
+  <ellipse cx="412" cy="192" rx="10" ry="6" fill="#E07A5F" opacity="0.35" />
+
+
+  <!-- ==================== FOREGROUND LIMBS & CONTROLS ==================== -->
+
+  <!-- Front Leg & Foot (Low pedal position) -->
+  <!-- Fluffy Leg Base -->
+  <path d="M 430 475 C 430 495, 455 500, 465 480 Z" fill="#E6DBD0" />
+  <!-- Lower Leg -->
+  <path d="M 442 485 L 415 550 L 452 608 L 466 600 L 434 548 L 456 485 Z" fill="#E08E63" />
+  <path d="M 449 485 L 424 549 L 459 604 L 466 600 L 434 548 L 456 485 Z" fill="#C97A53" /> <!-- Leg shade -->
+  
+  <!-- Foreground Crank Arm (Drawn behind foot, over chainring) -->
+  <path d="M 425 575 L 455 608" stroke="#D5C7BC" stroke-width="14" stroke-linecap="round" />
+  <circle cx="425" cy="575" r="6" fill="#7D746D" />
+
+  <!-- Webbed Foot (On lower pedal) -->
+  <path d="M 458 596 L 410 610 L 422 620 L 468 608 Z" fill="#E08E63" />
+  <path d="M 430 612 L 410 610 L 422 620 L 468 608 L 464 603 Z" fill="#C97A53" />
+  
+  <!-- Foreground Pedal -->
+  <rect x="425" y="612" width="40" height="10" rx="5" fill="#463F3A" />
+  <rect x="432" y="615" width="26" height="4" rx="2" fill="#D08242" /> <!-- Pedal reflector -->
+
+
+  <!-- Handlebars & Foreground Wing -->
+  <!-- Handlebar Grips (Warm Brown) -->
+  <rect x="275" y="286" width="42" height="16" rx="8" fill="#7D5A4B" />
+  <rect x="275" y="294" width="42" height="8" rx="4" fill="#634538" />
+
+  <!-- Pelican Foreground Wing (Sweeping forward to grip handlebar) -->
+  <!-- Main Wing Shape -->
+  <path d="M 455 330 C 495 340, 505 405, 445 415 C 390 425, 335 375, 288 302 C 278 288, 295 275, 308 285 C 350 345, 395 370, 425 365 C 445 360, 440 330, 455 330 Z" fill="#FAF5F0" />
+  
+  <!-- Wing Feather Tips (Warm Taupe/Grey-Brown) -->
+  <path d="M 335 355 C 315 340, 298 318, 288 302 C 278 288, 295 275, 308 285 C 320 302, 335 320, 350 332 C 340 335, 332 345, 335 355 Z" fill="#A69688" />
+  
+  <!-- Wing Underside Cell Shading & FeatherScallops -->
+  <path d="M 478 385 C 468 402, 458 412, 445 415 C 390 425, 335 375, 288 302 C 283 295, 286 287, 291 284 C 290 290, 293 296, 298 302 C 345 368, 395 410, 445 400 C 460 397, 470 392, 478 385 Z" fill="#E6DBD0" />
+  
+  <!-- Secondary Feather Details -->
+  <path d="M 365 378 C 350 368, 340 350, 345 340 C 355 350, 368 360, 382 365 C 372 368, 365 372, 365 378 Z" fill="#D5C7BC" />
+  <path d="M 395 392 C 380 385, 372 370, 378 360 C 388 368, 400 374, 412 375 C 402 380, 395 385, 395 392 Z" fill="#D5C7BC" />
+
+  <!-- Wing Tip Wrapping Over Grip -->
+  <ellipse cx="295" cy="292" rx="14" ry="10" transform="rotate(-15 295 292)" fill="#A69688" />
+  <path d="M 282 292 C 285 300, 298 302, 308 295 C 302 304, 285 304, 282 292 Z" fill="#8C7A6B" />
+
+  <!-- Little Brass Bell on Handlebars -->
+  <path d="M 285 278 C 285 268, 301 268, 301 278 Z" fill="#E59A59" />
+  <rect x="291" y="278" width="4" height="8" fill="#58504A" />
+
+</svg>

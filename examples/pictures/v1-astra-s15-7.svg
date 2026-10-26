@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a penny-farthing</title>
+  <desc id="desc">A geometric white pelican rides a blue penny-farthing bicycle, seen from the front-right, against a pale blue background.</desc>
+
+  <rect width="800" height="600" rx="28" fill="#eaf8ff"/>
+  <ellipse cx="414" cy="553" rx="252" ry="17" fill="#c5e9f7"/>
+
+  <!-- Far sides of the tires -->
+  <g fill="#173454">
+    <ellipse cx="242" cy="488" rx="53" ry="62"/>
+    <ellipse cx="515" cy="398" rx="133" ry="154"/>
+  </g>
+
+  <!-- Near wheel faces -->
+  <g fill="#f7fcff" stroke="#102b49" stroke-width="12">
+    <ellipse cx="230" cy="484" rx="50" ry="60"/>
+    <ellipse cx="500" cy="394" rx="130" ry="152"/>
+  </g>
+  <g fill="none" stroke="#38bce5" stroke-width="4">
+    <ellipse cx="230" cy="484" rx="40" ry="49"/>
+    <ellipse cx="500" cy="394" rx="119" ry="140"/>
+  </g>
+
+  <!-- Spokes follow the wheels' elliptical perspective -->
+  <g stroke="#97d9ef" stroke-width="3">
+    <path d="M500 254V534 M381 394H619
+             M416 295L584 493 M416 493L584 295
+             M454 265L546 523 M390 340L610 448
+             M390 448L610 340 M454 523L546 265"/>
+    <path d="M230 435V533 M190 484H270
+             M202 449L258 519 M202 519L258 449"/>
+  </g>
+
+  <!-- Curved backbone and fork -->
+  <path d="M230 484C295 477 307 320 422 268"
+        fill="none" stroke="#1377b5" stroke-width="14" stroke-linecap="round"/>
+  <path d="M438 234L500 394" fill="none" stroke="#102b49" stroke-width="15"/>
+  <path d="M451 238L515 398" fill="none" stroke="#38bce5" stroke-width="8"/>
+  <path d="M412 272L401 247" stroke="#102b49" stroke-width="10"/>
+  <path d="M375 246H431" stroke="#102b49" stroke-width="15" stroke-linecap="round"/>
+
+  <!-- Far leg and pedal -->
+  <path d="M395 236L455 281L467 364" fill="none"
+        stroke="#1684bb" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M467 357L488 370L455 373Z" fill="#1684bb"/>
+  <path d="M500 394L472 369" stroke="#102b49" stroke-width="7"/>
+  <path d="M457 373L483 368" stroke="#102b49" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Tail and reclining body -->
+  <path d="M345 203L277 170L302 224L345 241Z" fill="#89cfe9"/>
+  <path d="M321 184C355 169 400 179 423 205
+           L444 230C426 259 373 264 340 246
+           C313 231 307 203 321 184Z" fill="#fff"/>
+
+  <!-- Long neck -->
+  <path d="M389 216C413 195 405 163 403 137
+           C400 106 419 80 446 81
+           C473 82 483 106 475 127
+           C464 154 448 166 449 196
+           L448 230Z" fill="#fff"/>
+  <path d="M440 145C424 179 436 207 423 229L446 231
+           C450 199 441 181 458 153Z" fill="#c6ebf7"/>
+
+  <!-- Pelican pouch and long bill -->
+  <path d="M462 119L622 147
+           C590 165 546 185 509 176
+           C482 169 467 145 462 119Z" fill="#38bce5"/>
+  <path d="M461 116L637 144L620 151L462 132Z" fill="#1377b5"/>
+  <path d="M466 119L623 144" stroke="#8ee5fa" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="451" cy="108" r="7" fill="#102b49"/>
+  <circle cx="453" cy="106" r="2" fill="#fff"/>
+
+  <!-- Handlebars in perspective -->
+  <path d="M439 239L450 211L490 200L520 213"
+        fill="none" stroke="#1377b5" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M481 199L496 202M513 210L529 217"
+        stroke="#102b49" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- Wing reaches toward the handlebars -->
+  <path d="M339 197C364 183 394 197 413 211
+           L488 201L493 213L414 235
+           C385 238 352 223 339 197Z" fill="#b6e5f5"/>
+  <path d="M353 204L407 224L466 211"
+        fill="none" stroke="#82cce8" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- Near leg, webbed foot, crank and pedal -->
+  <path d="M407 245L464 287L514 367"
+        fill="none" stroke="#38bce5" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M510 359L542 382L503 386L509 374L500 372Z" fill="#38bce5"/>
+  <circle cx="500" cy="394" r="12" fill="#1377b5"/>
+  <path d="M500 394L532 381" stroke="#102b49" stroke-width="7" stroke-linecap="round"/>
+  <path d="M516 386L548 379" stroke="#102b49" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="500" cy="394" r="5" fill="#eaf8ff"/>
+  <circle cx="230" cy="484" r="8" fill="#1377b5"/>
+</svg>

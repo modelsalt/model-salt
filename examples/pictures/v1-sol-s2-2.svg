@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="500" viewBox="0 0 1000 500" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A faceted white pelican leans forward on a teal road bicycle, seen from the front left, with its orange bill pointing ahead.</desc>
+
+  <rect width="1000" height="500" fill="#f7f3e9"/>
+  <path d="M170 426 338 412 748 413 824 431 366 447Z" fill="#e2e3d8"/>
+
+  <!-- Wheels, viewed obliquely -->
+  <g fill="#f7f3e9" stroke="#23363e" stroke-width="12" stroke-linejoin="bevel">
+    <path d="M326 288 362 306 385 346 388 387 369 423 337 435 305 416 284 378 281 337 299 302Z"/>
+    <path d="M660 259 689 274 709 310 713 349 698 382 672 395 643 379 623 345 619 307 634 273Z"/>
+  </g>
+  <g fill="none" stroke="#a1afb0" stroke-width="2">
+    <path d="M334 361 326 288M334 361 362 306M334 361 385 346M334 361 388 387M334 361 369 423M334 361 337 435M334 361 305 416M334 361 284 378M334 361 281 337M334 361 299 302"/>
+    <path d="M666 327 660 259M666 327 689 274M666 327 709 310M666 327 713 349M666 327 698 382M666 327 672 395M666 327 643 379M666 327 623 345M666 327 619 307M666 327 634 273"/>
+  </g>
+
+  <!-- Far leg and pedal -->
+  <path d="M498 226 545 266 485 301" fill="none" stroke="#c68239" stroke-width="14" stroke-linejoin="bevel"/>
+  <path d="M469 298 501 293 507 302 474 308Z" fill="#253841"/>
+
+  <!-- Road frame -->
+  <g fill="none" stroke-linejoin="bevel">
+    <path d="M666 327 477 348 554 238 666 327 477 348 380 248 554 238" stroke="#176e72" stroke-width="13"/>
+    <path d="M554 238 567 209M380 248 367 213" stroke="#31464b" stroke-width="10"/>
+    <path d="M380 248 334 361M392 250 346 362" stroke="#248f90" stroke-width="9"/>
+    <path d="M477 348 554 238M380 248 554 238" stroke="#48b9ad" stroke-width="5"/>
+  </g>
+
+  <!-- Saddle and drop handlebars -->
+  <path d="M538 204 579 200 596 207 587 218 546 218 530 212Z" fill="#23363e"/>
+  <path d="M367 214 336 201 305 205 289 220 291 241 310 248 325 238"
+        fill="none" stroke="#23363e" stroke-width="10" stroke-linejoin="bevel"/>
+  <path d="M350 201 329 185 304 189 292 203"
+        fill="none" stroke="#53686a" stroke-width="8" stroke-linejoin="bevel"/>
+
+  <!-- Chain and crank -->
+  <path d="M478 332 666 317 676 328 665 339 478 365 461 353Z"
+        fill="none" stroke="#53686a" stroke-width="3"/>
+  <path d="M478 332 491 339 495 353 485 365 470 365 459 354 462 340Z"
+        fill="#263b42"/>
+  <path d="M477 348 439 375" stroke="#aab6b4" stroke-width="7"/>
+  <path d="M419 372 454 368 460 378 424 384Z" fill="#23363e"/>
+
+  <!-- Angular tail and body -->
+  <path d="M553 165 618 140 593 184 565 199Z" fill="#d8dfdc" stroke="#283d44" stroke-width="3"/>
+  <path d="M412 154 463 132 538 139 580 176 563 219 516 242 458 230 419 202Z"
+        fill="#fffdf5" stroke="#283d44" stroke-width="4" stroke-linejoin="bevel"/>
+  <path d="M462 147 528 153 561 183 532 216 472 214 437 188Z" fill="#e2e8e3"/>
+  <path d="M462 147 489 178 532 216 472 214 437 188Z" fill="#c5d2ce"/>
+  <path d="M489 178 544 182 532 216Z" fill="#edf0e9"/>
+
+  <!-- Neck bowed forward -->
+  <path d="M442 181 414 171 396 150 390 120 367 104 341 110 331 132 347 155 370 161 379 184 411 207 440 207Z"
+        fill="#fffdf5" stroke="#283d44" stroke-width="4" stroke-linejoin="bevel"/>
+  <path d="M390 120 377 139 370 161 379 184 411 207 425 192 397 174 384 153Z" fill="#dce4df"/>
+
+  <!-- Low head and long orange bill -->
+  <path d="M342 108 370 105 389 121 382 145 352 153 329 139 326 121Z"
+        fill="#fffdf5" stroke="#283d44" stroke-width="4"/>
+  <path d="M336 128 214 143 245 164 292 174 347 148Z"
+        fill="#ec9a38" stroke="#283d44" stroke-width="3" stroke-linejoin="bevel"/>
+  <path d="M336 128 214 143 347 148Z" fill="#ffbd50"/>
+  <path d="M245 164 292 174 347 148 277 157Z" fill="#d8782e"/>
+  <path d="M220 144 337 140" fill="none" stroke="#8d512c" stroke-width="2"/>
+  <path d="M353 119 363 117 369 124 363 132 354 129Z" fill="#273941"/>
+  <path d="M358 120 362 120 362 124 358 124Z" fill="white"/>
+
+  <!-- Wing reaching the handlebars -->
+  <path d="M454 161 427 163 398 181 366 192 329 192 320 202 337 212 378 208 423 192 460 184Z"
+        fill="#f9faf2" stroke="#283d44" stroke-width="4" stroke-linejoin="bevel"/>
+  <path d="M454 161 423 180 378 199 337 202 329 192 366 192 398 181 427 163Z" fill="#e1e8e1"/>
+  <path d="M337 202 365 201M347 208 374 204" stroke="#a9b9b2" stroke-width="2"/>
+
+  <!-- Near leg, webbed foot, and pedal -->
+  <path d="M501 233 465 278 433 350 439 369"
+        fill="none" stroke="#e9a247" stroke-width="14" stroke-linejoin="bevel"/>
+  <path d="M434 357 419 369 408 376 432 377 443 383 454 375 446 365Z"
+        fill="#efaa4a" stroke="#283d44" stroke-width="3"/>
+  <path d="M434 365 432 377M440 366 443 378" stroke="#bb7935" stroke-width="2"/>
+
+  <g fill="#23363e">
+    <path d="M328 355 338 354 343 362 338 369 328 366Z"/>
+    <path d="M660 321 669 321 673 328 668 334 660 332Z"/>
+  </g>
+</svg>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f8f7f2">
+<title>Sprig — A little planning. A lot of good food.</title>
+<style>
+:root{--ink:#263d30;--muted:#687368;--paper:#f8f7f2;--green:#345b3b;--lime:#dce9a8;--line:#dfe2d7}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.6 Arial,Helvetica,sans-serif}
+button,a,input,select{ -webkit-tap-highlight-color:transparent}
+button,input,select{font:inherit}
+button,a{touch-action:manipulation}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer}
+button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid #b67b36;outline-offset:5px}
+.wrap{max-width:1200px;margin:auto;padding:0 40px}
+nav{height:100px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.logo{font:700 35px Georgia,serif;letter-spacing:-2px;display:flex;align-items:center;gap:9px}
+.logo svg{width:28px;height:35px}
+.navlinks{display:flex;align-items:center;gap:32px;font-size:13px}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:24px;border:1px solid var(--green);padding:14px 23px;border-radius:7px;background:var(--green);color:white;font-weight:600;font-size:13px;transition:transform .2s,background .2s}
+.button:hover{background:#24472c;transform:translateY(-2px)}
+.button.light{background:transparent;color:var(--ink);border-color:#bec7b6}
+.button.light:hover{background:#edf0e3}
+nav .button{padding:10px 19px}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;padding:64px 0 70px}
+.eyebrow{font-size:10px;letter-spacing:2.1px;font-weight:700;text-transform:uppercase;display:flex;align-items:center;gap:9px}
+.eyebrow::before{content:"";width:7px;height:7px;background:#7c9256;border-radius:50%}
+h1,h2,h3,p{margin:0}
+h1{font:normal clamp(48px,5.3vw,71px)/1.05 Georgia,serif;letter-spacing:-3px;margin:22px 0}
+h1 em{color:#71864e;font-weight:normal}
+.intro{max-width:370px;color:var(--muted);font-size:15px;line-height:1.8}
+.actions{display:flex;gap:12px;margin-top:28px;align-items:center}
+.small{font-size:11px;color:var(--muted)}
+.hero .small{margin-top:13px}
+.proof{display:flex;gap:12px;align-items:center;margin-top:34px}
+.avatars{display:flex;padding-left:5px}
+.avatar{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;border:3px solid var(--paper);margin-left:-5px;background:#e7c8aa;font-size:14px}
+.avatar:nth-child(2){background:#d5dfbc}.avatar:nth-child(3){background:#e6bb9f}.avatar:nth-child(4){background:#d4d7e4}
+.proof-text{font-size:11px;line-height:1.5}
+.stars{color:#a17b35;letter-spacing:2px;font-size:12px}
+.hero-art{position:relative;min-height:466px;display:grid;place-items:center}
+.art-bg{position:absolute;inset:20px -5px 5px 10px;background:#e9eddf;border-radius:48% 48% 43% 43%;transform:rotate(-7deg)}
+.food{width:100%;position:relative;filter:drop-shadow(0 19px 15px #34472d21)}
+.note{position:absolute;background:#fffef9;border:1px solid #e5e7db;box-shadow:0 10px 35px #283b3010;border-radius:9px;z-index:2}
+.note-top{right:-8px;top:25px;transform:rotate(5deg);padding:14px 20px;font-size:12px;display:flex;align-items:center;gap:12px}
+.check{background:#e9f0da;color:#4b6937;width:28px;height:28px;border-radius:50%;display:grid;place-items:center}
+.note-bottom{bottom:0;left:7px;padding:16px 21px;transform:rotate(-4deg);width:218px}
+.note-label{font-size:9px;letter-spacing:1.7px;color:#7c846e;text-transform:uppercase}
+.note-title{font:20px Georgia,serif;margin:5px 0 8px}
+.tag{font-size:10px;color:#61714d;background:#ecf0e2;border-radius:20px;padding:4px 9px}
+.handwriting{position:absolute;right:0;bottom:22px;font:italic 19px Georgia,serif;transform:rotate(-9deg);color:#71864e}
+.benefits{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:23px 0;gap:30px}
+.benefit{display:flex;align-items:center;justify-content:center;gap:13px;font-size:12px}
+.benefit svg{width:23px;height:23px;stroke:#71864e;fill:none;stroke-width:1.5}
+.plan-section{padding:70px 0}
+.section-top{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:26px}
+.kicker{font-size:10px;letter-spacing:1.8px;font-weight:700;text-transform:uppercase;color:#75835f;margin-bottom:10px}
+h2{font:normal 38px/1.15 Georgia,serif;letter-spacing:-1.2px}
+.section-top p{font-size:13px;color:var(--muted);max-width:290px}
+.planner{background:#fffefb;border:1px solid var(--line);border-radius:13px;padding:24px}
+.planner-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.planner-title{font-weight:600;font-size:13px;display:flex;gap:10px;align-items:center}
+.planner-title span{background:#edf1e6;padding:3px 8px;border-radius:4px;font-size:10px;color:#71805f;font-weight:400}
+.text-button{border:0;background:none;color:var(--green);padding:6px 0;font-size:11px}
+.text-button:hover{text-decoration:underline}
+.days{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.day{padding:0;text-align:left;border:1px solid transparent;background:#f6f5ef;border-radius:8px;overflow:hidden;color:var(--ink);transition:border-color .2s,transform .2s}
+.day:hover{transform:translateY(-4px)}
+.day[aria-pressed="true"]{border-color:#6c8350;box-shadow:0 0 0 2px #6c835019}
+.day-name{display:flex;justify-content:space-between;padding:10px 12px;font-size:10px;color:#7a806f}
+.day[aria-pressed="true"] .day-name{color:var(--green);font-weight:700}
+.mini-art{height:130px;overflow:hidden;background:#ece9d9;display:flex;justify-content:center;align-items:center}
+.mini-art svg{width:175px;height:175px;flex-shrink:0}
+.day:nth-child(2) .mini-art{background:#e4e8da}
+.day:nth-child(3) .mini-art{background:#eedfcc}
+.day:nth-child(4) .mini-art{background:#e6e3d8}
+.day:nth-child(5) .mini-art{background:#e7e8d9}
+.meal-copy{padding:12px}
+.meal-copy strong{font:17px/1.25 Georgia,serif;display:block;min-height:42px}
+.meal-copy small{display:block;font-size:10px;color:var(--muted);margin-top:9px}
+.planner-foot{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-top:19px;font-size:11px;color:var(--muted)}
+#meal-detail{max-width:70%}
+.steps{padding:10px 0 70px;display:grid;grid-template-columns:repeat(3,1fr);gap:45px}
+.step-num{font:italic 27px Georgia,serif;color:#8c9a6a;margin-bottom:12px}
+h3{font:23px Georgia,serif;margin-bottom:10px}
+.steps p{font-size:13px;color:var(--muted)}
+.cta{padding:42px;background:#e8eddb;border-radius:12px;display:flex;justify-content:space-between;align-items:center;gap:25px}
+.cta p{font-size:13px;color:var(--muted);margin-top:12px}
+footer{display:flex;justify-content:space-between;align-items:center;padding:35px 0;font-size:11px;color:var(--muted)}
+footer .logo{font-size:25px;color:var(--ink)}
+dialog{width:min(480px,calc(100% - 32px));border:1px solid var(--line);border-radius:16px;padding:32px;background:var(--paper);color:var(--ink);box-shadow:0 30px 100px #18332140}
+dialog::backdrop{background:#1a2e2670;backdrop-filter:blur(4px)}
+.close{float:right;background:transparent;border:0;font-size:25px;line-height:1;color:var(--muted)}
+dialog h2{font-size:32px;margin:12px 0}
+dialog p{font-size:13px;color:var(--muted)}
+dialog label{display:block;font-size:12px;margin:20px 0 7px}
+dialog select{display:block;width:100%;padding:12px;border:1px solid #bdc5b2;border-radius:6px;background:#fffefb;color:var(--ink)}
+dialog .button{margin-top:24px;width:100%}
+#shopping-items{padding:0;list-style:none;max-height:300px;overflow:auto}
+#shopping-items label{display:flex;gap:10px;margin:0;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+#shopping-items input{accent-color:var(--green)}
+#shopping-items input:checked+span{text-decoration:line-through;color:#87907e}
+@media(min-width:1400px){.wrap{max-width:1300px}.hero{gap:70px;padding-top:80px;padding-bottom:85px}.hero-art{min-height:500px}}
+@media(max-width:800px){.wrap{padding:0 24px}.navlinks{gap:20px}.navlinks>a:not(.button){display:none}.hero{gap:10px;padding-top:40px}h1{font-size:50px}.hero-art{min-height:370px}.note-top{right:0;padding:10px;font-size:10px}.note-bottom{width:185px;padding:12px}.handwriting{display:none}.actions{flex-wrap:wrap;gap:8px}.benefits{gap:12px}.benefit{font-size:10px;gap:8px}.days{gap:8px}.meal-copy{padding:9px}.meal-copy strong{font-size:15px}.mini-art{height:100px}.planner{padding:16px}.steps{gap:24px}}
+@media(max-width:580px){nav{height:80px}.hero{grid-template-columns:1fr;padding:40px 0}.hero-copy{padding-right:10px}h1{font-size:58px}.hero-art{min-height:390px;margin-top:20px}.food{max-width:390px}.art-bg{inset:20px 0 15px}.note-top{right:0;top:10px}.note-bottom{left:5px;bottom:0}.benefits{grid-template-columns:1fr;padding:20px;gap:15px}.benefit{justify-content:start;font-size:12px}.section-top{display:block}.section-top p{margin-top:14px}.plan-section{padding:45px 0}.days{grid-template-columns:repeat(5,155px);overflow-x:auto;padding:3px 3px 12px;scroll-snap-type:x mandatory}.day{scroll-snap-align:start}.mini-art{height:125px}.planner-top{gap:12px}.planner-title{display:block}.planner-title span{display:inline-block;margin-left:5px}.planner-foot{align-items:start}.steps{grid-template-columns:1fr;gap:28px;padding-bottom:40px}.step-num{float:left;margin:0 18px 40px 0}.cta{display:block;padding:28px}.cta h2{font-size:32px}.cta .button{margin-top:22px}footer{gap:15px;font-size:10px}h2{font-size:34px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<!-- Reusable, entirely inline food illustrations. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true" style="position:absolute">
+<defs>
+<radialGradient id="plate"><stop stop-color="#fffef8"/><stop offset=".79" stop-color="#f5f1e7"/><stop offset=".82" stop-color="#dedbd0"/><stop offset=".86" stop-color="#fffef9"/><stop offset="1" stop-color="#e8e5dc"/></radialGradient>
+<linearGradient id="salmon" x2="1" y2="1"><stop stop-color="#edaa72"/><stop offset=".5" stop-color="#db8254"/><stop offset="1" stop-color="#b95e3f"/></linearGradient>
+<symbol id="leaf" viewBox="0 0 50 60"><path d="M25 56C-8 36 3 7 41 3 56 26 43 48 25 56Z" fill="currentColor"/><path d="M25 54 32 14M29 33 13 22M28 39 41 27" stroke="#b6c383" stroke-width="1.2" fill="none"/></symbol>
+<symbol id="bowl" viewBox="0 0 500 500">
+<ellipse cx="252" cy="264" rx="201" ry="195" fill="#536044" opacity=".12"/>
+<circle cx="250" cy="247" r="200" fill="url(#plate)"/>
+<circle cx="250" cy="247" r="165" fill="#e9dfbd"/>
+<g color="#4d7543">
+<use href="#leaf" x="91" y="147" width="90" height="110" transform="rotate(-30 135 200)"/>
+<use href="#leaf" x="117" y="103" width="90" height="110" transform="rotate(20 160 155)"/>
+<use href="#leaf" x="181" y="92" width="90" height="110" transform="rotate(-15 226 147)"/>
+<use href="#leaf" x="263" y="104" width="90" height="110" transform="rotate(55 308 159)"/>
+</g>
+<g color="#769652">
+<use href="#leaf" x="93" y="213" width="86" height="100" transform="rotate(-60 135 260)"/>
+<use href="#leaf" x="301" y="146" width="86" height="100" transform="rotate(70 345 196)"/>
+<use href="#leaf" x="127" y="127" width="75" height="90" transform="rotate(-40 165 170)"/>
+</g>
+<g fill="#d9c795" stroke="#baaa79" stroke-width=".6">
+<circle cx="190" cy="304" r="13"/><circle cx="213" cy="324" r="12"/><circle cx="178" cy="329" r="12"/><circle cx="201" cy="350" r="12"/><circle cx="225" cy="350" r="12"/><circle cx="247" cy="368" r="12"/><circle cx="220" cy="378" r="11"/><circle cx="175" cy="355" r="11"/><circle cx="151" cy="316" r="11"/><circle cx="148" cy="343" r="10"/><circle cx="265" cy="345" r="12"/><circle cx="241" cy="331" r="11"/><circle cx="270" cy="377" r="11"/>
+</g>
+<g transform="rotate(-28 250 245)">
+<rect x="168" y="178" width="171" height="111" rx="21" fill="#8d5934" opacity=".19" transform="translate(4 7)"/>
+<rect x="168" y="178" width="171" height="111" rx="21" fill="url(#salmon)"/>
+<g stroke="#f9cc95" stroke-width="4" fill="none" opacity=".85"><path d="m186 185 17 43-14 51M211 181l17 48-14 54M237 180l17 48-13 57M263 181l17 47-13 57M289 181l17 47-12 55M313 184l13 42-10 51"/></g>
+<g fill="#654a2b"><circle cx="202" cy="209" r="2"/><circle cx="253" cy="250" r="2"/><circle cx="296" cy="205" r="2.5"/><circle cx="275" cy="267" r="2"/><circle cx="229" cy="192" r="1.5"/><circle cx="318" cy="245" r="2"/></g>
+</g>
+<g fill="#d75b39" stroke="#c34d30" stroke-width="2"><circle cx="124" cy="267" r="20"/><circle cx="142" cy="292" r="18"/><circle cx="343" cy="280" r="20"/><circle cx="367" cy="252" r="17"/></g>
+<g stroke="#f1b071" stroke-width="2"><path d="m113 258 17 17m-16 0 17-16m202 111 18 19m-16-2 15-16M133 284l15 15"/></g>
+<g transform="translate(316 329) rotate(-30)">
+<path d="M-46 0A46 46 0 0 0 46 0Z" fill="#d7b842"/>
+<path d="M-40 2A40 40 0 0 0 40 2Z" fill="#f7e495" stroke="#fff3c1" stroke-width="3"/>
+<path d="M0 3v33M-2 3l-26 24M3 3l26 24" stroke="#fff5c8" stroke-width="3"/>
+</g>
+<g color="#335e39"><use href="#leaf" x="227" y="211" width="33" height="42" transform="rotate(45 243 231)"/><use href="#leaf" x="250" y="218" width="30" height="40" transform="rotate(100 265 238)"/></g>
+<g fill="#fff1c8"><ellipse cx="214" cy="145" rx="3" ry="6" transform="rotate(30 214 145)"/><ellipse cx="299" cy="168" rx="3" ry="6"/><ellipse cx="150" cy="226" rx="3" ry="6"/><ellipse cx="283" cy="308" rx="3" ry="6"/></g>
+</symbol>
+<symbol id="pasta" viewBox="0 0 500 500">
+<circle cx="250" cy="250" r="200" fill="url(#plate)"/>
+<circle cx="250" cy="250" r="159" fill="#d7a45c"/>
+<g fill="none" stroke="#f1cd7c" stroke-width="19" stroke-linecap="round">
+<path d="M144 214q80-87 141-39t33 108q-45 67-121 31t-18-102q65-41 105 4t-25 66q-58 3-34-35"/>
+<path d="M136 273q-3 84 102 87t121-104q-3-91-114-119M155 186q55-60 105-30M290 323q45-28 35-78"/>
+</g>
+<g fill="#c95737"><circle cx="178" cy="187" r="20"/><circle cx="306" cy="293" r="22"/><circle cx="195" cy="319" r="16"/></g>
+<g color="#50783d"><use href="#leaf" x="213" y="180" width="65" height="80"/><use href="#leaf" x="249" y="214" width="60" height="75" transform="rotate(80 280 250)"/></g>
+<g fill="#fff4ce"><path d="m173 242 28-12-7 24ZM281 170l27 9-20 14ZM239 309l26 11-25 12Z"/></g>
+</symbol>
+<symbol id="tacos" viewBox="0 0 500 500">
+<circle cx="250" cy="250" r="200" fill="url(#plate)"/>
+<g transform="rotate(-30 250 250)">
+<g fill="#ebbd69" stroke="#ca9b4d" stroke-width="3"><rect x="113" y="126" width="274" height="103" rx="50"/><rect x="113" y="261" width="274" height="103" rx="50"/></g>
+<g fill="#63854b"><path d="m132 168 30-22 32 9 29-15 38 16 30-13 30 15 37-2 12 32-27 22-34-10-38 13-33-12-38 11-33-17-28 9Z"/><path d="m132 303 30-22 32 9 29-15 38 16 30-13 30 15 37-2 12 32-27 22-34-10-38 13-33-12-38 11-33-17-28 9Z"/></g>
+<g fill="#ad633b"><rect x="160" y="164" width="35" height="28" rx="8"/><rect x="215" y="165" width="35" height="28" rx="8"/><rect x="275" y="164" width="35" height="28" rx="8"/><rect x="174" y="297" width="35" height="28" rx="8"/><rect x="232" y="300" width="35" height="28" rx="8"/><rect x="288" y="298" width="35" height="28" rx="8"/></g>
+<g fill="#df7051"><circle cx="210" cy="186" r="9"/><circle cx="324" cy="175" r="9"/><circle cx="227" cy="316" r="9"/><circle cx="319" cy="326" r="9"/></g>
+<path d="m153 182 46-12 40 20 46-18 51 12m-178 132 46-12 40 20 46-18 51 12" fill="none" stroke="#fff0ce" stroke-width="6"/>
+</g>
+</symbol>
+</defs>
+</svg>
+
+<div class="wrap">
+<nav aria-label="Main navigation">
+<a class="logo" href="#" aria-label="Sprig home">
+<svg viewBox="0 0 32 40" aria-hidden="true"><path d="M16 36V17" stroke="#345b3b" stroke-width="2.5" fill="none"/><path d="M16 24C0 24 0 10 2 7c13 0 18 8 14 17ZM16 17C14 5 22 1 30 1c2 10-3 17-14 16Z" fill="#71864e"/></svg>
+sprig<span style="color:#8b9d62">.</span>
+</a>
+<div class="navlinks">
+<a href="#how-it-works">How it works</a>
+<a href="#your-week">On the menu</a>
+<button class="button" data-start>Get started <span aria-hidden="true">↗</span></button>
+</div>
+</nav>
+
+<main>
+<section class="hero">
+<div class="hero-copy">
+<div class="eyebrow">Good food. Less figuring it out.</div>
+<h1>Your week,<br>with a little<br><em>more flavor.</em></h1>
+<p class="intro">Meet your new mealtime rhythm. Feel-good recipes, a plan that fits your life, and one less thing on your plate.</p>
+<div class="actions">
+<button class="button" data-start>Find your meal plan <span aria-hidden="true">↗</span></button>
+<a class="button light" href="#your-week">Take a peek <span aria-hidden="true">↓</span></a>
+</div>
+<p class="small">Try the planner. No sign-up needed.</p>
+<div class="proof">
+<div class="avatars" aria-hidden="true"><span class="avatar">🥑</span><span class="avatar">🥕</span><span class="avatar">🍋</span><span class="avatar">🌱</span></div>
+<div class="proof-text"><strong>A fresh take on the everyday.</strong><br><span style="color:var(--muted)">For busy weeks and hungry people.</span></div>
+</div>
+</div>
+<div class="hero-art">
+<div class="art-bg"></div>
+<svg class="food" viewBox="0 0 500 500" role="img" aria-label="Illustrated salmon bowl with leafy greens, chickpeas, tomatoes, and lemon"><use href="#bowl"/></svg>
+<div class="note note-top"><span class="check">✓</span><span>This week?<br><strong>Already figured out.</strong></span></div>
+<div class="note note-bottom"><div class="note-label">A little taste of Monday</div><div class="note-title">The feel-good bowl</div><span class="tag">25 min</span> <span class="tag">Fresh & balanced</span></div>
+<div class="handwriting">A good week starts here ↖</div>
+</div>
+</section>
+
+<div class="benefits">
+<div class="benefit"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg>Less planning. More living.</div>
+<div class="benefit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C1 6 12 3 20 4c1 10-4 17-15 15ZM5 19 15 9"/></svg>Real ingredients. Really good food.</div>
+<div class="benefit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8ZM9 8V6a3 3 0 0 1 6 0v2M9 13l2 2 4-4"/></svg>One list. A whole lot less waste.</div>
+</div>
+
+<section class="plan-section" id="your-week">
+<div class="section-top">
+<div><div class="kicker">A week worth looking forward to</div><h2>“What’s for dinner?” Solved.</h2></div>
+<p>A little variety. Plenty of delicious.<br>Here’s what your week could look like.</p>
+</div>
+<div class="planner">
+<div class="planner-top"><div class="planner-title">Your weekly menu <span id="plan-type">Everyday favorites</span></div><button class="text-button" id="shuffle">↻ &nbsp; Mix things up</button></div>
+<div class="days" id="days"></div>
+<div class="planner-foot">
+<p id="meal-detail" aria-live="polite"></p>
+<button class="text-button" id="shopping">Your shopping list ↗</button>
+</div>
+</div>
+</section>
+
+<section class="steps" id="how-it-works" aria-label="How Sprig works">
+<article><div class="step-num">01.</div><h3>Make it yours.</h3><p>Veggie lover? Cooking for two? Start with your preferences and find your rhythm.</p></article>
+<article><div class="step-num">02.</div><h3>Meet your menu.</h3><p>Five delicious dinners, all lined up. Mix things up until your week feels just right.</p></article>
+<article><div class="step-num">03.</div><h3>Shop once. Eat well.</h3><p>Bring your ready-made list to the store. Spend less time planning and more time enjoying.</p></article>
+</section>
+
+<section class="cta">
+<div><div class="kicker">A little less effort. A little more joy.</div><h2>Let’s put good food on your calendar.</h2><p>Your next favorite dinner is a plan away.</p></div>
+<button class="button" data-start>Find your meal plan <span aria-hidden="true">↗</span></button>
+</section>
+</main>
+<footer><a href="#" class="logo">sprig.</a><span>Made for real life. And really good dinners.</span><span>© <span id="year"></span> Sprig</span></footer>
+</div>
+
+<dialog id="setup" aria-labelledby="setup-title">
+<button class="close" aria-label="Close">×</button>
+<div class="kicker">Your week, your way</div>
+<h2 id="setup-title">What sounds good?</h2>
+<p>Build a sample five-day dinner plan and a shopping list to match.</p>
+<form id="setup-form">
+<label for="diet">How do you like to eat?</label>
+<select id="diet"><option value="all">A little of everything</option><option value="veggie">Vegetarian</option></select>
+<label for="people">How many at the table?</label>
+<select id="people"><option value="1">Just me</option><option value="2" selected>Two people</option><option value="4">Four people</option></select>
+<button class="button" type="submit">Make my week <span aria-hidden="true">↗</span></button>
+</form>
+</dialog>
+
+<dialog id="list" aria-labelledby="list-title">
+<button class="close" aria-label="Close">×</button>
+<div class="kicker">One trip, all sorted</div>
+<h2 id="list-title">Your shopping list</h2>
+<p id="list-description"></p>
+<ul id="shopping-items"></ul>
+<button class="button" id="download">Download shopping list ↓</button>
+</dialog>
+
+<script>
+const meals = [
+ {name:"Lemony salmon bowl",art:"bowl",time:25,veggie:false,desc:"Roasted salmon, leafy greens, chickpeas, and a bright lemon dressing.",items:{"Salmon fillet (g)":150,"Mixed greens (g)":60,"Chickpeas (g)":100,"Cherry tomatoes (g)":80,"Lemons":0.5}},
+ {name:"Basil & tomato pasta",art:"pasta",time:20,veggie:true,desc:"A weeknight classic with juicy tomatoes, fresh basil, and parmesan.",items:{"Pasta (g)":100,"Cherry tomatoes (g)":150,"Fresh basil (bunch)":0.25,"Vegetarian parmesan (g)":25}},
+ {name:"Smoky chickpea tacos",art:"tacos",time:25,veggie:true,desc:"Crisp chickpeas, crunchy greens, and yogurt in warm tortillas.",items:{"Chickpeas (g)":150,"Small tortillas":3,"Mixed greens (g)":50,"Cherry tomatoes (g)":80,"Yogurt (g)":50}},
+ {name:"Green goddess bowl",art:"bowl",time:20,veggie:true,desc:"Chickpeas and greens with tomatoes and a creamy lemon-yogurt dressing.",items:{"Chickpeas (g)":200,"Mixed greens (g)":100,"Cherry tomatoes (g)":100,"Yogurt (g)":50,"Lemons":0.5}},
+ {name:"Friday fish tacos",art:"tacos",time:30,veggie:false,desc:"Golden fish, crisp greens, and a squeeze of lemon. Friday, sorted.",items:{"White fish (g)":150,"Small tortillas":3,"Mixed greens (g)":60,"Yogurt (g)":50,"Lemons":0.5}},
+ {name:"Creamy lemon pasta",art:"pasta",time:20,veggie:true,desc:"Silky lemon pasta with a generous handful of basil and parmesan.",items:{"Pasta (g)":100,"Lemons":0.5,"Fresh basil (bunch)":0.25,"Vegetarian parmesan (g)":30,"Yogurt (g)":60}}
+];
+const weekdays=["Monday","Tuesday","Wednesday","Thursday","Friday"];
+let plan=meals.slice(0,5),selected=0,people=2,vegetarian=false;
+const days=document.querySelector("#days");
+function render(){
+ days.replaceChildren();
+ plan.forEach((meal,i)=>{
+  const button=document.createElement("button");
+  button.className="day";
+  button.setAttribute("aria-pressed",String(i===selected));
+  button.innerHTML=`<div class="day-name">${weekdays[i]}<span>${i===selected?"✓":"·"}</span></div><div class="mini-art"><svg viewBox="0 0 500 500" aria-hidden="true"><use href="#${meal.art}"/></svg></div><div class="meal-copy"><strong>${meal.name}</strong><small>◷ ${meal.time} min &nbsp; · &nbsp; ${meal.veggie?"Vegetarian":"Balanced"}</small></div>`;
+  // Vegetarian bowls use the pasta illustration to avoid depicting salmon.
+  if(meal.veggie&&meal.art==="bowl")button.querySelector("use").setAttribute("href","#pasta");
+  button.addEventListener("click",()=>{selected=i;render();days.children[i].focus({preventScroll:true})});
+  days.append(button);
+ });
+ document.querySelector("#meal-detail").textContent=plan[selected].desc;
+}
+function openDialog(id){document.getElementById(id).showModal()}
+document.querySelectorAll("[data-start]").forEach(button=>button.addEventListener("click",()=>openDialog("setup")));
+document.querySelectorAll("dialog").forEach(dialog=>{
+ dialog.querySelector(".close").addEventListener("click",()=>dialog.close());
+ dialog.addEventListener("click",event=>{if(event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close()}});
+});
+function shuffle(){
+ const pool=meals.filter(m=>!vegetarian||m.veggie);
+ for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]]}
+ plan=Array.from({length:5},(_,i)=>pool[i%pool.length]);selected=0;render();
+}
+document.querySelector("#shuffle").addEventListener("click",shuffle);
+document.querySelector("#setup-form").addEventListener("submit",event=>{
+ event.preventDefault();vegetarian=document.querySelector("#diet").value==="veggie";people=Number(document.querySelector("#people").value);
+ document.querySelector("#plan-type").textContent=`${vegetarian?"Vegetarian":"Everyday"} · ${people} ${people===1?"person":"people"}`;
+ shuffle();document.querySelector("#setup").close();
+ document.querySelector("#your-week").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});
+});
+function groceries(){
+ const totals={};
+ plan.forEach(meal=>Object.entries(meal.items).forEach(([name,amount])=>{totals[name]=(totals[name]||0)+amount*people}));
+ return Object.entries(totals).sort(([a],[b])=>a.localeCompare(b)).map(([name,amount])=>`${name}: ${Number(amount.toFixed(2))}`);
+}
+document.querySelector("#shopping").addEventListener("click",()=>{
+ document.querySelector("#list-description").textContent=`Five dinners for ${people} ${people===1?"person":"people"}. Quantities are estimates; check your pantry for oil, salt, and spices.`;
+ const list=document.querySelector("#shopping-items");list.replaceChildren();
+ groceries().forEach(item=>{
+  const li=document.createElement("li"),label=document.createElement("label"),input=document.createElement("input"),span=document.createElement("span");
+  input.type="checkbox";span.textContent=item;label.append(input,span);li.append(label);list.append(li);
+ });openDialog("list");
+});
+document.querySelector("#download").addEventListener("click",()=>{
+ const content=`SPRIG · Your week\n\n${plan.map((meal,i)=>`${weekdays[i]}: ${meal.name}`).join("\n")}\n\nSHOPPING LIST · ${people} people\n\n${groceries().join("\n")}\n\nAlso check: olive oil, salt, pepper, and smoked paprika.\nQuantities are estimates.`;
+ const url=URL.createObjectURL(new Blob([content],{type:"text/plain"})),link=document.createElement("a");
+ link.href=url;link.download="sprig-shopping-list.txt";document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
+document.querySelector("#year").textContent=new Date().getFullYear();
+render();
+</script>
+</body>
+</html>

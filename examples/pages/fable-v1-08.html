@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supperly — Weeknight dinners, planned for your family</title>
+<style>
+  :root {
+    --green-900: #1f3a2a;
+    --green-700: #2f5d3f;
+    --green-500: #4d8a5c;
+    --green-100: #e4efe3;
+    --cream: #fbf7ef;
+    --sand: #f1e9d8;
+    --tomato: #d9482b;
+    --tomato-dark: #b83a20;
+    --ink: #22281f;
+    --muted: #65705f;
+    --radius-lg: 28px;
+    --radius-md: 18px;
+    --shadow: 0 18px 40px rgba(31, 58, 42, 0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { height: 100%; }
+
+  body {
+    font-family: "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
+    color: var(--ink);
+    background:
+      radial-gradient(900px 500px at 10% -10%, #f6ead3 0%, transparent 60%),
+      radial-gradient(700px 400px at 100% 110%, #dce9d7 0%, transparent 60%),
+      var(--cream);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ---------- Nav ---------- */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px clamp(20px, 5vw, 64px);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+    color: var(--green-900);
+  }
+
+  .logo-mark {
+    width: 34px; height: 34px;
+    border-radius: 12px;
+    background: var(--green-700);
+    display: grid; place-items: center;
+    color: var(--cream);
+    font-size: 1.1rem;
+  }
+
+  .nav-note {
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  /* ---------- Hero ---------- */
+  main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(28px, 5vw, 72px);
+    align-items: center;
+    padding: 0 clamp(20px, 5vw, 64px) 36px;
+    max-width: 1240px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--green-100);
+    color: var(--green-700);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border-radius: 999px;
+    margin-bottom: 22px;
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--tomato);
+  }
+
+  h1 {
+    font-size: clamp(2.3rem, 4.6vw, 4rem);
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    color: var(--green-900);
+    margin-bottom: 20px;
+  }
+
+  h1 em {
+    font-style: normal;
+    color: var(--tomato);
+  }
+
+  .lede {
+    font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+    line-height: 1.55;
+    color: var(--muted);
+    max-width: 34rem;
+    margin-bottom: 30px;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--tomato);
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 18px 30px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 14px 28px rgba(217, 72, 43, 0.32);
+    transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .cta:hover {
+    background: var(--tomato-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 18px 32px rgba(217, 72, 43, 0.38);
+  }
+
+  .cta:active { transform: translateY(0); }
+
+  .cta svg { width: 20px; height: 20px; }
+
+  .cta-note {
+    margin-top: 14px;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  /* ---------- Plan card ---------- */
+  .plan-card {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    padding: 26px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(31, 58, 42, 0.06);
+    position: relative;
+  }
+
+  .plan-card::after {
+    content: "";
+    position: absolute;
+    inset: 14px -14px -14px 14px;
+    border-radius: var(--radius-lg);
+    background: var(--sand);
+    z-index: -1;
+  }
+
+  .card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .card-head h2 {
+    font-size: 1.05rem;
+    color: var(--green-900);
+    letter-spacing: -0.01em;
+  }
+
+  .card-head p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .toggle-group {
+    display: inline-flex;
+    background: var(--green-100);
+    border-radius: 999px;
+    padding: 4px;
+    gap: 2px;
+  }
+
+  .toggle-group button {
+    border: none;
+    background: transparent;
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--green-700);
+    padding: 7px 13px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .toggle-group button[aria-pressed="true"] {
+    background: var(--green-700);
+    color: #fff;
+  }
+
+  .meals {
+    display: grid;
+    gap: 10px;
+    list-style: none;
+  }
+
+  .meal {
+    display: grid;
+    grid-template-columns: 54px 1fr auto;
+    align-items: center;
+    gap: 14px;
+    background: var(--cream);
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    animation: pop 0.35s ease both;
+  }
+
+  .meal:nth-child(2) { animation-delay: 0.05s; }
+  .meal:nth-child(3) { animation-delay: 0.10s; }
+  .meal:nth-child(4) { animation-delay: 0.15s; }
+  .meal:nth-child(5) { animation-delay: 0.20s; }
+
+  @keyframes pop {
+    from { opacity: 0; transform: translateY(8px) scale(0.98); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .day {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green-700);
+    background: #fff;
+    border-radius: 12px;
+    padding: 10px 0;
+    text-align: center;
+  }
+
+  .meal-name {
+    font-weight: 700;
+    font-size: 0.98rem;
+    color: var(--ink);
+  }
+
+  .meal-meta {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .time {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--tomato);
+    background: #fdece7;
+    padding: 6px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .card-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px dashed rgba(31, 58, 42, 0.15);
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .card-foot strong { color: var(--green-900); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 880px) {
+    body { overflow: auto; }
+    main {
+      grid-template-columns: 1fr;
+      padding-top: 10px;
+      gap: 36px;
+    }
+    .plan-card::after { display: none; }
+    .card-head { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (max-width: 480px) {
+    .meal { grid-template-columns: 46px 1fr; }
+    .time { grid-column: 2; justify-self: start; }
+    .nav-note { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <span class="logo-mark" aria-hidden="true">&#127859;</span>
+    Supperly
+  </div>
+  <span class="nav-note">Dinner, sorted by 4 p.m. every day</span>
+</header>
+
+<main>
+  <section>
+    <span class="eyebrow">For busy families</span>
+    <h1>Weeknight dinners, <em>planned</em> before you even ask "what's for dinner?"</h1>
+    <p class="lede">
+      Supperly builds a week of family-friendly meals around your schedule, your picky eaters,
+      and what's already in the fridge, then hands you one grocery list. Most dinners land on the table in under 30 minutes.
+    </p>
+    <button class="cta" id="start-trial" type="button">
+      Start your free trial
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M5 12h14M13 6l6 6-6 6"/>
+      </svg>
+    </button>
+    <p class="cta-note">14 days free. No card needed. Cancel anytime.</p>
+  </section>
+
+  <aside class="plan-card" aria-labelledby="plan-title">
+    <div class="card-head">
+      <div>
+        <h2 id="plan-title">This week's sample plan</h2>
+        <p>Switch your family's preference and watch it adapt.</p>
+      </div>
+      <div class="toggle-group" role="group" aria-label="Diet preference">
+        <button type="button" data-diet="everything" aria-pressed="true">Everything</button>
+        <button type="button" data-diet="vegetarian" aria-pressed="false">Vegetarian</button>
+        <button type="button" data-diet="glutenfree" aria-pressed="false">Gluten-free</button>
+      </div>
+    </div>
+
+    <ul class="meals" id="meals"></ul>
+
+    <div class="card-foot">
+      <span id="summary"></span>
+      <span>Serves a family of 4</span>
+    </div>
+  </aside>
+</main>
+
+<script>
+  const plans = {
+    everything: {
+      label: "Family favorites",
+      meals: [
+        { day: "Mon", name: "Sheet-pan chicken fajitas", meta: "Kids build their own", time: "25 min" },
+        { day: "Tue", name: "One-pot creamy tomato pasta", meta: "Leftovers for lunch", time: "20 min" },
+        { day: "Wed", name: "Turkey & veggie meatball bowls", meta: "Freezer-friendly", time: "30 min" },
+        { day: "Thu", name: "Honey-garlic salmon & rice", meta: "Omega-3 win", time: "22 min" },
+        { day: "Fri", name: "Homemade pizza night", meta: "Everyone picks toppings", time: "28 min" }
+      ]
+    },
+    vegetarian: {
+      label: "Vegetarian",
+      meals: [
+        { day: "Mon", name: "Black bean & sweet potato tacos", meta: "Kids build their own", time: "25 min" },
+        { day: "Tue", name: "Creamy tomato & spinach pasta", meta: "Hidden greens", time: "20 min" },
+        { day: "Wed", name: "Chickpea tikka masala & rice", meta: "Freezer-friendly", time: "30 min" },
+        { day: "Thu", name: "Crispy tofu fried rice", meta: "Uses up leftover veg", time: "22 min" },
+        { day: "Fri", name: "Veggie-loaded pizza night", meta: "Everyone picks toppings", time: "28 min" }
+      ]
+    },
+    glutenfree: {
+      label: "Gluten-free",
+      meals: [
+        { day: "Mon", name: "Chicken fajita rice bowls", meta: "Corn tortillas on the side", time: "25 min" },
+        { day: "Tue", name: "Zucchini noodle bolognese", meta: "Or GF pasta swap", time: "20 min" },
+        { day: "Wed", name: "Loaded baked potato bar", meta: "Kids pick toppings", time: "30 min" },
+        { day: "Thu", name: "Lemon-herb salmon & quinoa", meta: "Omega-3 win", time: "22 min" },
+        { day: "Fri", name: "Cauliflower-crust pizza night", meta: "Crowd-tested crust", time: "28 min" }
+      ]
+    }
+  };
+
+  const mealsEl = document.getElementById("meals");
+  const summaryEl = document.getElementById("summary");
+  const toggles = document.querySelectorAll("[data-diet]");
+
+  function render(diet) {
+    const plan = plans[diet];
+    mealsEl.innerHTML = plan.meals.map(m => `
+      <li class="meal">
+        <span class="day">${m.day}</span>
+        <div>
+          <div class="meal-name">${m.name}</div>
+          <div class="meal-meta">${m.meta}</div>
+        </div>
+        <span class="time">${m.time}</span>
+      </li>
+    `).join("");
+
+    const total = plan.meals.reduce((sum, m) => sum + parseInt(m.time, 10), 0);
+    summaryEl.innerHTML = `<strong>${plan.label}</strong> · 5 dinners · ${total} min total cooking`;
+
+    toggles.forEach(btn => {
+      btn.setAttribute("aria-pressed", String(btn.dataset.diet === diet));
+    });
+  }
+
+  toggles.forEach(btn => {
+    btn.addEventListener("click", () => render(btn.dataset.diet));
+  });
+
+  document.getElementById("start-trial").addEventListener("click", () => {
+    // Hook this up to your signup route.
+    window.location.hash = "signup";
+  });
+
+  render("everything");
+</script>
+
+</body>
+</html>

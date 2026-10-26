@@ -1,0 +1,181 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 820 540" width="820" height="540">
+  <title>Pelican in a racing crouch on a tandem bicycle, going downhill — engraving style</title>
+  <defs>
+    <!-- Engraving hatch fills -->
+    <pattern id="hatch" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#1a1a1a" stroke-width="1"/>
+    </pattern>
+    <pattern id="fine" patternUnits="userSpaceOnUse" width="4" height="4" patternTransform="rotate(-35)">
+      <line x1="0" y1="0" x2="0" y2="4" stroke="#1a1a1a" stroke-width="0.6"/>
+    </pattern>
+    <pattern id="cross" patternUnits="userSpaceOnUse" width="5" height="5" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="5" stroke="#1a1a1a" stroke-width="0.9"/>
+      <line x1="0" y1="0" x2="5" y2="0" stroke="#1a1a1a" stroke-width="0.9"/>
+    </pattern>
+
+    <!-- Wheel: hatched tyre, rim, 16 spokes, hub -->
+    <symbol id="wheel" overflow="visible">
+      <path fill-rule="evenodd" fill="url(#hatch)" stroke="#1a1a1a" stroke-width="2"
+            d="M-70,0 a70,70 0 1,0 140,0 a70,70 0 1,0 -140,0 Z M-61,0 a61,61 0 1,1 122,0 a61,61 0 1,1 -122,0 Z"/>
+      <circle r="57" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+      <g stroke="#1a1a1a" stroke-width="1.2">
+        <line x1="6" y1="0" x2="57" y2="0"/>
+        <line x1="6" y1="0" x2="57" y2="0" transform="rotate(22.5)"/>
+        <line x1="6" y1="0" x2="57" y2="0" transform="rotate(45)"/>
+        <line x1="6" y1="0" x2="57" y2="0" transform="rotate(67.5)"/>
+        <line x1="6" y1="0" x2="57" y2="0" transform="rotate(90)"/>
+        <line x1="6" y1="0" x2="57" y2="0" transform="rotate(112.5)"/>
+        <line x1="6" y1="0" x2="57" y2="0" transform="rotate(135)"/>
+        <line x1="6" y1="0" x2="57" y2="0" transform="rotate(157.5)"/>
+        <line x1="6" y1="0" x2="57" y2="0" transform="rotate(180)"/>
+        <line x1="6" y1="0" x2="57" y2="0" transform="rotate(202.5)"/>
+        <line x1="6" y1="0" x2="57" y2="0" transform="rotate(225)"/>
+        <line x1="6" y1="0" x2="57" y2="0" transform="rotate(247.5)"/>
+        <line x1="6" y1="0" x2="57" y2="0" transform="rotate(270)"/>
+        <line x1="6" y1="0" x2="57" y2="0" transform="rotate(292.5)"/>
+        <line x1="6" y1="0" x2="57" y2="0" transform="rotate(315)"/>
+        <line x1="6" y1="0" x2="57" y2="0" transform="rotate(337.5)"/>
+      </g>
+      <circle r="7" fill="#fff" stroke="#1a1a1a" stroke-width="2"/>
+      <circle r="2.5" fill="#1a1a1a"/>
+    </symbol>
+  </defs>
+
+  <!-- Whole scene tilted: front wheel lower, as if descending a hill -->
+  <g transform="rotate(14 400 280)" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- Wheels -->
+    <use xlink:href="#wheel" x="170" y="360"/>
+    <use xlink:href="#wheel" x="640" y="360"/>
+
+    <!-- Rear sprocket & chainrings -->
+    <circle cx="170" cy="360" r="9" fill="#fff" stroke="#1a1a1a" stroke-width="1.5"/>
+    <circle cx="290" cy="355" r="18" fill="url(#fine)" stroke="#1a1a1a" stroke-width="2"/>
+    <circle cx="480" cy="355" r="18" fill="url(#fine)" stroke="#1a1a1a" stroke-width="2"/>
+    <!-- Chains -->
+    <g stroke="#1a1a1a" stroke-width="2" stroke-dasharray="3 2" fill="none">
+      <line x1="290" y1="337" x2="480" y2="337"/>
+      <line x1="290" y1="373" x2="480" y2="373"/>
+      <line x1="290" y1="337" x2="170" y2="351"/>
+      <line x1="290" y1="373" x2="170" y2="369"/>
+    </g>
+
+    <!-- Tandem frame: dark outline then white core gives engraved tube look -->
+    <g fill="none" stroke="#1a1a1a" stroke-width="7">
+      <line x1="598" y1="222" x2="614" y2="292"/>
+      <polyline points="598,222 400,218 232,222"/>
+      <line x1="614" y1="292" x2="480" y2="355"/>
+      <line x1="400" y1="218" x2="480" y2="355"/>
+      <line x1="232" y1="222" x2="290" y2="355"/>
+      <line x1="480" y1="355" x2="290" y2="355"/>
+      <line x1="400" y1="218" x2="290" y2="355"/>
+      <line x1="290" y1="355" x2="170" y2="360"/>
+      <line x1="232" y1="222" x2="170" y2="360"/>
+      <line x1="614" y1="292" x2="640" y2="360"/>
+    </g>
+    <g fill="none" stroke="#fff" stroke-width="3.5">
+      <line x1="598" y1="222" x2="614" y2="292"/>
+      <polyline points="598,222 400,218 232,222"/>
+      <line x1="614" y1="292" x2="480" y2="355"/>
+      <line x1="400" y1="218" x2="480" y2="355"/>
+      <line x1="232" y1="222" x2="290" y2="355"/>
+      <line x1="480" y1="355" x2="290" y2="355"/>
+      <line x1="400" y1="218" x2="290" y2="355"/>
+      <line x1="290" y1="355" x2="170" y2="360"/>
+      <line x1="232" y1="222" x2="170" y2="360"/>
+      <line x1="614" y1="292" x2="640" y2="360"/>
+    </g>
+
+    <!-- Cranks & pedals (both sets, tandem) -->
+    <g stroke="#1a1a1a" stroke-width="3.5" fill="#1a1a1a">
+      <line x1="480" y1="355" x2="503" y2="381"/>
+      <line x1="480" y1="355" x2="458" y2="330"/>
+      <line x1="290" y1="355" x2="313" y2="381"/>
+      <line x1="290" y1="355" x2="268" y2="330"/>
+      <rect x="496" y="378" width="16" height="6" rx="1"/>
+      <rect x="450" y="326" width="16" height="6" rx="1"/>
+      <rect x="306" y="378" width="16" height="6" rx="1"/>
+      <rect x="260" y="326" width="16" height="6" rx="1"/>
+    </g>
+
+    <!-- Seat posts & saddles -->
+    <line x1="400" y1="218" x2="400" y2="200" stroke="#1a1a1a" stroke-width="4"/>
+    <line x1="232" y1="222" x2="232" y2="204" stroke="#1a1a1a" stroke-width="4"/>
+    <path d="M373,204 L428,204 C432,196 420,192 408,196 L386,194 C378,194 374,198 373,204 Z"
+          fill="url(#fine)" stroke="#1a1a1a" stroke-width="2"/>
+    <!-- Empty rear (stoker) saddle -->
+    <path d="M205,208 L260,208 C264,200 252,196 240,200 L218,198 C210,198 206,202 205,208 Z"
+          fill="url(#fine)" stroke="#1a1a1a" stroke-width="2"/>
+    <!-- Stoker handlebar hanging off the front seat post -->
+    <path d="M400,232 L350,234 C336,234 336,248 352,249" fill="none" stroke="#1a1a1a" stroke-width="4"/>
+
+    <!-- Captain's drop handlebars & stem -->
+    <path d="M596,214 L632,207 C656,204 660,238 636,244" fill="none" stroke="#1a1a1a" stroke-width="5"/>
+
+    <!-- ================= PELICAN ================= -->
+    <!-- Far leg -->
+    <path d="M452,222 C440,250 428,268 430,288 C440,300 455,318 462,330" fill="none" stroke="#1a1a1a" stroke-width="7"/>
+    <path d="M452,222 C440,250 428,268 430,288 C440,300 455,318 462,330" fill="none" stroke="#fff" stroke-width="3"/>
+    <path d="M452,332 L470,326 L474,338 Z" fill="url(#hatch)" stroke="#1a1a1a" stroke-width="1.5"/>
+
+    <!-- Far wing (behind body) -->
+    <path d="M498,138 C555,150 592,178 624,214 L612,226 C586,195 544,170 492,166 Z"
+          fill="url(#fine)" stroke="#1a1a1a" stroke-width="1.5"/>
+
+    <!-- Tail feathers -->
+    <path d="M372,178 L332,160 L348,182 L326,186 L352,196 L340,212 L376,200 Z"
+          fill="url(#hatch)" stroke="#1a1a1a" stroke-width="2"/>
+
+    <!-- Body -->
+    <path d="M360,178 C390,130 450,112 520,122 C560,128 575,160 560,192 C540,228 470,232 420,222 C395,217 375,205 360,178 Z"
+          fill="#fff" stroke="#1a1a1a" stroke-width="2.5"/>
+    <!-- Belly shadow (hatched crescent) -->
+    <path d="M368,196 C400,226 470,238 552,202 C530,226 460,232 418,224 C398,220 380,210 368,196 Z"
+          fill="url(#hatch)" stroke="none"/>
+    <path d="M372,186 C410,220 480,230 556,196" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+    <!-- Back contour hatching -->
+    <path d="M372,170 C400,138 452,122 516,128" fill="none" stroke="#1a1a1a" stroke-width="0.8"/>
+    <path d="M384,164 C412,142 456,130 512,134" fill="none" stroke="#1a1a1a" stroke-width="0.6"/>
+
+    <!-- Near leg to the forward pedal -->
+    <path d="M470,224 C480,255 498,275 500,298 C502,322 503,352 503,378" fill="none" stroke="#1a1a1a" stroke-width="8"/>
+    <path d="M470,224 C480,255 498,275 500,298 C502,322 503,352 503,378" fill="none" stroke="#fff" stroke-width="3.5"/>
+    <path d="M493,382 L514,376 L518,390 L498,392 Z" fill="url(#hatch)" stroke="#1a1a1a" stroke-width="1.5"/>
+
+    <!-- Neck (crouched forward) -->
+    <path d="M508,120 C530,96 556,74 586,66 L616,86 C598,96 572,120 556,148 C540,150 520,140 508,120 Z"
+          fill="#fff" stroke="#1a1a1a" stroke-width="2.5"/>
+    <path d="M520,138 C540,118 560,100 586,86" fill="none" stroke="#1a1a1a" stroke-width="0.9"/>
+    <path d="M530,144 C548,126 566,110 592,94" fill="none" stroke="#1a1a1a" stroke-width="0.7"/>
+
+    <!-- Head -->
+    <circle cx="604" cy="84" r="24" fill="#fff" stroke="#1a1a1a" stroke-width="2.5"/>
+    <path d="M582,92 C586,104 600,110 616,104 C606,108 592,106 582,92 Z" fill="url(#fine)"/>
+    <circle cx="613" cy="78" r="4" fill="#1a1a1a"/>
+    <circle cx="614.5" cy="76.5" r="1.2" fill="#fff"/>
+    <!-- Crest tuft -->
+    <path d="M586,64 L578,54 M592,60 L588,48 M600,60 L600,50" fill="none" stroke="#1a1a1a" stroke-width="1.8"/>
+
+    <!-- Beak: upper mandible -->
+    <path d="M620,74 C666,82 712,108 742,134 L738,141 C704,122 658,102 620,96 Z"
+          fill="#fff" stroke="#1a1a1a" stroke-width="2.2"/>
+    <path d="M628,82 C668,92 706,112 736,134" fill="none" stroke="#1a1a1a" stroke-width="0.8"/>
+    <!-- Lower mandible with pouch -->
+    <path d="M620,96 C660,104 702,122 738,141 C716,152 686,164 656,154 C638,146 626,118 620,96 Z"
+          fill="url(#hatch)" stroke="#1a1a1a" stroke-width="2.2"/>
+    <path d="M628,104 C650,122 672,140 700,148" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+
+    <!-- Near wing gripping the handlebar -->
+    <path d="M506,130 C562,140 604,170 636,208 L626,232 C596,198 548,170 496,160 Z"
+          fill="#fff" stroke="#1a1a1a" stroke-width="2.5"/>
+    <path d="M514,156 C560,170 598,196 626,226 C600,204 560,180 514,166 Z" fill="url(#hatch)"/>
+    <g fill="none" stroke="#1a1a1a" stroke-width="1">
+      <path d="M520,140 C566,152 600,180 628,214"/>
+      <path d="M512,148 C556,160 592,188 620,222"/>
+    </g>
+    <!-- Wing-tip "fingers" wrapped on bar -->
+    <path d="M628,216 C642,214 650,224 644,236 M634,226 C648,226 652,238 642,246"
+          fill="none" stroke="#1a1a1a" stroke-width="2"/>
+  </g>
+</svg>

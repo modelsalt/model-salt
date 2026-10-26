@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <!-- Pelican popping a wheelie — flat fills, single blue hue, transparent background -->
+  <g transform="rotate(-22 170 380)">
+
+    <!-- Rear wheel (on the ground) -->
+    <g transform="translate(170 380)">
+      <path fill="#1d4f8a" fill-rule="evenodd"
+            d="M-70 0a70 70 0 1 0 140 0a70 70 0 1 0 -140 0zM-60 0a60 60 0 1 1 120 0a60 60 0 1 1 -120 0z"/>
+      <rect x="-60" y="-1.2" width="120" height="2.4" fill="#8fb8e3"/>
+      <rect x="-60" y="-1.2" width="120" height="2.4" fill="#8fb8e3" transform="rotate(30)"/>
+      <rect x="-60" y="-1.2" width="120" height="2.4" fill="#8fb8e3" transform="rotate(60)"/>
+      <rect x="-60" y="-1.2" width="120" height="2.4" fill="#8fb8e3" transform="rotate(90)"/>
+      <rect x="-60" y="-1.2" width="120" height="2.4" fill="#8fb8e3" transform="rotate(120)"/>
+      <rect x="-60" y="-1.2" width="120" height="2.4" fill="#8fb8e3" transform="rotate(150)"/>
+      <circle r="9" fill="#0d2b4f"/>
+    </g>
+
+    <!-- Front wheel (lifted) -->
+    <g transform="translate(370 380)">
+      <path fill="#1d4f8a" fill-rule="evenodd"
+            d="M-70 0a70 70 0 1 0 140 0a70 70 0 1 0 -140 0zM-60 0a60 60 0 1 1 120 0a60 60 0 1 1 -120 0z"/>
+      <rect x="-60" y="-1.2" width="120" height="2.4" fill="#8fb8e3" transform="rotate(15)"/>
+      <rect x="-60" y="-1.2" width="120" height="2.4" fill="#8fb8e3" transform="rotate(45)"/>
+      <rect x="-60" y="-1.2" width="120" height="2.4" fill="#8fb8e3" transform="rotate(75)"/>
+      <rect x="-60" y="-1.2" width="120" height="2.4" fill="#8fb8e3" transform="rotate(105)"/>
+      <rect x="-60" y="-1.2" width="120" height="2.4" fill="#8fb8e3" transform="rotate(135)"/>
+      <rect x="-60" y="-1.2" width="120" height="2.4" fill="#8fb8e3" transform="rotate(165)"/>
+      <circle r="9" fill="#0d2b4f"/>
+    </g>
+
+    <!-- Frame tubes -->
+    <rect x="170" y="376.5" width="80.2" height="7" fill="#0d2b4f" transform="rotate(3.6 170 380)"/>      <!-- chainstay -->
+    <rect x="170" y="376.5" width="105.5" height="7" fill="#0d2b4f" transform="rotate(-58.6 170 380)"/>   <!-- seat stay -->
+    <rect x="250" y="381" width="98.2" height="8" fill="#0d2b4f" transform="rotate(-104.7 250 385)"/>     <!-- seat tube -->
+    <rect x="250" y="381" width="114.1" height="8" fill="#0d2b4f" transform="rotate(-28.8 250 385)"/>     <!-- down tube -->
+    <rect x="225" y="286" width="110" height="8" fill="#0d2b4f"/>                                         <!-- top tube -->
+    <rect x="335" y="286" width="42.7" height="8" fill="#0d2b4f" transform="rotate(69.4 335 290)"/>       <!-- head tube -->
+    <rect x="350" y="327" width="53.9" height="6" fill="#0d2b4f" transform="rotate(68.2 350 330)"/>       <!-- fork -->
+    <rect x="335" y="287.5" width="24.2" height="5" fill="#0d2b4f" transform="rotate(-114.4 335 290)"/>   <!-- stem -->
+    <rect x="325" y="265.5" width="22" height="5" fill="#0d2b4f" transform="rotate(168.7 325 268)"/>      <!-- handlebar -->
+    <circle cx="303.5" cy="272" r="4" fill="#1d4f8a"/>                                                    <!-- grip -->
+
+    <!-- Seat -->
+    <rect x="203" y="281" width="42" height="11" rx="5.5" fill="#0d2b4f"/>
+
+    <!-- Drivetrain -->
+    <circle cx="250" cy="385" r="15" fill="#1d4f8a"/>
+    <circle cx="250" cy="385" r="5" fill="#0d2b4f"/>
+    <rect x="250" y="382.5" width="34" height="5" fill="#0d2b4f" transform="rotate(42 250 385)"/>
+    <rect x="250" y="382.5" width="34" height="5" fill="#0d2b4f" transform="rotate(222 250 385)"/>
+    <rect x="267" y="404" width="14" height="5" rx="2" fill="#1d4f8a"/>   <!-- front pedal -->
+    <rect x="219" y="361" width="14" height="5" rx="2" fill="#1d4f8a"/>   <!-- rear pedal -->
+
+    <!-- Pelican: back leg (behind body) -->
+    <polygon points="222,272 232,270 220,330 212,332" fill="#3f7fc1"/>
+    <polygon points="212,332 220,330 230,362 222,364" fill="#3f7fc1"/>
+    <polygon points="214,362 238,358 236,366 218,370" fill="#3f7fc1"/>
+
+    <!-- Tail -->
+    <polygon points="186,240 150,226 162,246 148,262 190,262" fill="#a9c8ea"/>
+
+    <!-- Body -->
+    <ellipse cx="218" cy="250" rx="52" ry="32" fill="#d6e4f5" transform="rotate(-8 218 250)"/>
+
+    <!-- Neck (curving forward to the head) -->
+    <path fill="#d6e4f5"
+          d="M236 232 C250 212 262 206 286 180 C292 170 300 170 310 176 L312 160 C296 142 272 160 258 186 C246 206 236 212 226 222 Z"/>
+
+    <!-- Head -->
+    <circle cx="300" cy="165" r="21" fill="#d6e4f5"/>
+
+    <!-- Bill -->
+    <polygon points="312,158 388,178 386,186 314,172" fill="#3f7fc1"/>
+    <!-- Pouch -->
+    <path fill="#a9c8ea" d="M314 172 L386 186 C370 200 340 208 318 190 Z"/>
+
+    <!-- Eye -->
+    <circle cx="305" cy="159" r="4.5" fill="#0d2b4f"/>
+    <circle cx="306.5" cy="157.5" r="1.4" fill="#eaf2fb"/>
+
+    <!-- Wing (reaching to the handlebar) -->
+    <path fill="#7fa9d9"
+          d="M232 236 C262 226 290 246 306 268 C300 276 292 274 282 268 C264 258 246 262 224 262 C210 258 214 240 232 236 Z"/>
+
+    <!-- Front leg -->
+    <polygon points="232,276 244,274 268,338 258,342" fill="#3f7fc1"/>
+    <polygon points="258,342 268,338 278,404 270,406" fill="#3f7fc1"/>
+    <!-- Webbed foot -->
+    <polygon points="262,404 290,400 288,409 266,412" fill="#3f7fc1"/>
+  </g>
+</svg>

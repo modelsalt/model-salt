@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" width="900" height="640">
+  <title>A cheerful cartoon pelican riding a classic diamond-frame city bicycle</title>
+  <g fill="none" stroke="#20242b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" transform="translate(40 10)">
+
+    <!-- ground line + hatching ticks -->
+    <path d="M70 545 H780"/>
+    <g stroke-width="1.3">
+      <path d="M231 547 l-9 9 M257 547 l-9 9 M283 547 l-9 9 M309 547 l-9 9"/>
+      <path d="M536 547 l-9 9 M562 547 l-9 9 M588 547 l-9 9 M614 547 l-9 9"/>
+    </g>
+
+    <!-- rear wheel -->
+    <circle cx="270" cy="460" r="85"/>
+    <circle cx="270" cy="460" r="81" stroke-width="1.5"/>
+    <circle cx="270" cy="460" r="77" stroke-width="1.5"/>
+    <g stroke-width="1.5">
+      <line x1="270" y1="383" x2="270" y2="537"/>
+      <line x1="270" y1="383" x2="270" y2="537" transform="rotate(30 270 460)"/>
+      <line x1="270" y1="383" x2="270" y2="537" transform="rotate(60 270 460)"/>
+      <line x1="270" y1="383" x2="270" y2="537" transform="rotate(90 270 460)"/>
+      <line x1="270" y1="383" x2="270" y2="537" transform="rotate(120 270 460)"/>
+      <line x1="270" y1="383" x2="270" y2="537" transform="rotate(150 270 460)"/>
+    </g>
+    <circle cx="270" cy="460" r="10" stroke-width="2"/>
+    <circle cx="270" cy="460" r="3" stroke-width="1.5"/>
+
+    <!-- front wheel -->
+    <circle cx="580" cy="460" r="85"/>
+    <circle cx="580" cy="460" r="81" stroke-width="1.5"/>
+    <circle cx="580" cy="460" r="77" stroke-width="1.5"/>
+    <g stroke-width="1.5">
+      <line x1="580" y1="383" x2="580" y2="537"/>
+      <line x1="580" y1="383" x2="580" y2="537" transform="rotate(30 580 460)"/>
+      <line x1="580" y1="383" x2="580" y2="537" transform="rotate(60 580 460)"/>
+      <line x1="580" y1="383" x2="580" y2="537" transform="rotate(90 580 460)"/>
+      <line x1="580" y1="383" x2="580" y2="537" transform="rotate(120 580 460)"/>
+      <line x1="580" y1="383" x2="580" y2="537" transform="rotate(150 580 460)"/>
+    </g>
+    <circle cx="580" cy="460" r="7"/>
+    <circle cx="580" cy="460" r="3" stroke-width="1.5"/>
+
+    <!-- rear fender -->
+    <path d="M188 413 A95 95 0 0 1 352 413" stroke-width="2.5"/>
+
+    <!-- diamond frame -->
+    <path d="M270 460 L425 460"/>
+    <path d="M270 460 L400 351"/>
+    <path d="M425 460 L397 348"/>
+    <path d="M425 460 L563 368"/>
+    <path d="M397 348 L545 318"/>
+    <path d="M545 318 L563 368"/>
+    <path d="M563 368 C568 400 574 432 580 458"/>
+    <path d="M397 348 L392 324"/>
+
+    <!-- saddle with springs -->
+    <path d="M352 326 Q372 311 400 310 Q424 309 430 318"/>
+    <path d="M352 326 Q390 322 430 318"/>
+    <path d="M364 327 c2 6 4 6 6 0 c2 -6 4 -6 6 0 M400 323 c2 6 4 6 6 0 c2 -6 4 -6 6 0" stroke-width="1.5"/>
+
+    <!-- stem, swept-back handlebar, grip, bell -->
+    <path d="M546 320 L538 284"/>
+    <path d="M538 284 C524 270 504 265 488 271"/>
+    <path d="M489 271 L478 278" stroke-width="6"/>
+    <path d="M523 271 a8 7 0 0 1 16 0 M532 271 L536 281" stroke-width="2"/>
+
+    <!-- drivetrain -->
+    <circle cx="425" cy="460" r="24"/>
+    <circle cx="425" cy="460" r="17" stroke-width="1.5"/>
+    <path d="M425 460 L455 509 M425 460 L393 417"/>
+    <path d="M439 507 L471 511 M379 415 L407 419" stroke-width="2.5"/>
+    <path d="M425 436 L270 450 M425 484 L270 470" stroke-width="2"/>
+
+    <!-- tail feathers -->
+    <path d="M302 264 C284 256 264 256 248 264 C264 270 284 274 300 276"/>
+    <path d="M302 280 C286 280 268 284 254 294 C270 296 288 294 302 290"/>
+    <path d="M291 266 C280 263 268 263 259 266 M290 284 C278 285 267 288 259 292" stroke-width="1.3"/>
+
+    <!-- body -->
+    <path d="M300 264 C310 228 344 203 382 205 C414 207 432 232 428 264 C424 294 398 309 362 307 C330 305 304 292 300 264 Z"/>
+
+    <!-- far leg + webbed foot on raised pedal -->
+    <path d="M360 305 C350 328 344 350 349 370 C354 389 366 401 382 407"/>
+    <path d="M347 300 C337 324 333 348 339 368 C345 385 357 396 374 402"/>
+    <path d="M371 401 C380 400 390 402 398 406 C401 411 397 415 390 415 C381 415 374 411 371 406 Z"/>
+    <path d="M380 403 L381 414 M389 405 L390 415 M340 366 q9 -4 16 1" stroke-width="1.5"/>
+
+    <!-- near leg + webbed foot pushing pedal down -->
+    <path d="M378 302 C392 330 404 356 414 382 C426 416 440 456 450 494"/>
+    <path d="M364 306 C382 336 396 364 406 386 C418 420 430 458 440 494"/>
+    <path d="M439 494 C449 495 461 498 470 503 C474 508 469 512 462 512 C452 512 443 508 438 502 Z"/>
+    <path d="M449 497 L450 509 M459 499 L460 511 M406 382 q9 1 12 9" stroke-width="1.5"/>
+
+    <!-- neck and head -->
+    <path d="M400 216 C412 190 418 164 428 146 C434 128 446 118 460 119 C476 120 486 131 486 146 C486 154 482 161 474 165 C462 170 452 182 448 198 C444 214 440 234 432 252"/>
+    <path d="M452 118 q-3 -9 2 -13 M461 118 q0 -10 6 -13" stroke-width="2"/>
+
+    <!-- smiling open beak with pouch -->
+    <path d="M478 129 C518 125 563 133 600 150 C603 152 602 155 597 156 C560 145 516 141 475 145"/>
+    <path d="M475 145 q-5 3 -3 9"/>
+    <path d="M475 150 C486 173 516 186 548 182 C572 179 590 168 597 156"/>
+    <path d="M494 133 q10 -2 20 1" stroke-width="2"/>
+
+    <!-- huge cartoon eye -->
+    <circle cx="460" cy="136" r="11" stroke-width="2.5"/>
+    <circle cx="462" cy="137" r="5" stroke-width="2.5"/>
+    <circle cx="459" cy="133" r="1.6" stroke-width="1.5"/>
+    <path d="M446 124 Q459 116 473 123" stroke-width="2"/>
+    <path d="M446 152 C452 158 462 160 470 157" stroke-width="1.5"/>
+
+    <!-- wing resting on the handlebar grip -->
+    <path d="M388 222 C416 230 452 248 483 264 C488 267 490 271 488 275 C470 280 446 280 424 275 C406 271 392 256 384 240 C382 232 384 226 388 222 Z"/>
+    <path d="M481 262 C489 260 495 265 494 272 C493 278 487 281 482 278" stroke-width="2.5"/>
+    <path d="M384 220 C404 222 424 230 440 240" stroke-width="1.5"/>
+    <path d="M398 234 C420 245 444 256 466 265 M392 246 C412 256 432 265 450 271 M390 256 C404 264 418 270 432 274" stroke-width="1.5"/>
+    <path d="M424 275 q5 8 13 7 M440 278 q5 8 13 6 M456 279 q5 7 13 5" stroke-width="1.5"/>
+
+    <!-- hatching -->
+    <g stroke-width="1.3">
+      <path d="M324 238 q12 -10 28 -13 M318 252 q14 -10 32 -12 M318 266 q16 -8 34 -9"/>
+      <path d="M332 296 q12 7 28 7 M350 288 q14 6 30 5"/>
+      <path d="M409 206 q9 -8 13 -19 M414 190 q8 -9 11 -19 M421 170 q6 -10 8 -18"/>
+      <path d="M488 158 C502 174 528 180 550 175 M496 154 C510 166 532 170 550 165"/>
+    </g>
+  </g>
+</svg>

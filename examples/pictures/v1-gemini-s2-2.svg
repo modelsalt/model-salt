@@ -1,0 +1,219 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 900" width="100%" height="100%">
+  <defs>
+    <!-- Muted Pastel Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F7F4EF" />
+      <stop offset="50%" stop-color="#EFECE6" />
+      <stop offset="100%" stop-color="#E6E1DA" />
+    </linearGradient>
+
+    <!-- Soft Pastel Glow for Ambient Depth -->
+    <radialGradient id="sunGlow" cx="65%" cy="35%" r="45%">
+      <stop offset="0%" stop-color="#F9E5D8" stop-opacity="0.8" />
+      <stop offset="60%" stop-color="#E2ECE9" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#EFECE6" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Pastel Color Wash Gradients -->
+    <linearGradient id="pouchWash" x1="0%" y1="0%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#F2C6B6" stop-opacity="0.65" />
+      <stop offset="100%" stop-color="#E5D4CE" stop-opacity="0.2" />
+    </linearGradient>
+
+    <linearGradient id="bodyWash" x1="0%" y1="100%" x2="80%" y2="0%">
+      <stop offset="0%" stop-color="#C5D5D0" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#DFD8E8" stop-opacity="0.3" />
+    </linearGradient>
+
+    <linearGradient id="wheelWash" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D6E2E0" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#F2D7EE" stop-opacity="0.15" />
+    </linearGradient>
+
+    <!-- Continuous Line Gradient (Sophisticated Muted Slate to Warm Plum/Terracotta) -->
+    <linearGradient id="continuousLineGrad" x1="10%" y1="90%" x2="90%" y2="10%">
+      <stop offset="0%" stop-color="#5B6970" />
+      <stop offset="40%" stop-color="#48525E" />
+      <stop offset="75%" stop-color="#69596E" />
+      <stop offset="100%" stop-color="#8A6468" />
+    </linearGradient>
+
+    <!-- Vintage Ornate Frame Gradient -->
+    <linearGradient id="frameGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9E8C85" />
+      <stop offset="50%" stop-color="#7D8886" />
+      <stop offset="100%" stop-color="#967E85" />
+    </linearGradient>
+
+    <!-- Reusable Ornate Corner Motif -->
+    <g id="ornateCorner">
+      <!-- Outer & Inner Filigree Scrolls -->
+      <path d="M 45,105 L 45,55 C 45,48 48,45 55,45 L 105,45" fill="none" stroke="url(#frameGrad)" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M 60,120 L 60,68 C 60,63 63,60 68,60 L 120,60" fill="none" stroke="url(#frameGrad)" stroke-width="1.2" stroke-linecap="round"/>
+      <!-- Corner Acanthus / Flourish -->
+      <path d="M 45,80 C 65,80 75,70 75,55 C 75,45 65,40 58,48 C 52,55 60,68 72,65 C 88,61 95,45 95,45" fill="none" stroke="url(#frameGrad)" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M 80,45 C 80,65 70,75 55,75 C 45,75 40,65 48,58 C 55,52 68,60 65,72 C 61,88 45,95 45,95" fill="none" stroke="url(#frameGrad)" stroke-width="1.8" stroke-linecap="round"/>
+      <circle cx="53" cy="53" r="2.5" fill="#9E8C85" />
+      <circle cx="88" cy="53" r="1.5" fill="#7D8886" />
+      <circle cx="53" cy="88" r="1.5" fill="#7D8886" />
+      <path d="M 60,60 L 78,78 M 74,78 C 82,78 78,70 78,82" fill="none" stroke="url(#frameGrad)" stroke-width="1.2" stroke-linecap="round"/>
+    </g>
+  </defs>
+
+  <!-- 1. Background -->
+  <rect width="800" height="900" fill="url(#bgGrad)" />
+  <circle cx="480" cy="340" r="320" fill="url(#sunGlow)" />
+
+  <!-- 2. Vintage Ornate Rectangular Border Frame -->
+  <g id="vintage-border">
+    <!-- Outer Perimeter -->
+    <rect x="45" y="45" width="710" height="810" rx="8" fill="none" stroke="url(#frameGrad)" stroke-width="2" opacity="0.7" />
+    <!-- Inner Perimeter with Beveled Corners -->
+    <path d="M 75,60 L 725,60 A 15,15 0 0 1 740,75 L 740,825 A 15,15 0 0 1 725,840 L 75,840 A 15,15 0 0 1 60,825 L 60,75 A 15,15 0 0 1 75,60 Z" fill="none" stroke="url(#frameGrad)" stroke-width="1.2" opacity="0.85" />
+    <rect x="66" y="66" width="668" height="768" rx="4" fill="none" stroke="url(#frameGrad)" stroke-width="0.6" stroke-dasharray="6 4" opacity="0.6" />
+
+    <!-- Four Corners -->
+    <use href="#ornateCorner" x="0" y="0" />
+    <use href="#ornateCorner" x="800" y="0" transform="scale(-1, 1)" />
+    <use href="#ornateCorner" x="0" y="900" transform="scale(1, -1)" />
+    <use href="#ornateCorner" x="800" y="900" transform="scale(-1, -1)" />
+
+    <!-- Top & Bottom Center Medallions -->
+    <g transform="translate(400, 52.5)">
+      <path d="M -60,0 C -35,-12 -15,10 0,-6 C 15,10 35,-12 60,0 C 35,12 15,-10 0,6 C -15,-10 -35,12 -60,0 Z" fill="#EFECE6" stroke="url(#frameGrad)" stroke-width="1.5"/>
+      <circle cx="0" cy="0" r="3" fill="#967E85" />
+      <circle cx="-25" cy="0" r="1.5" fill="#7D8886" />
+      <circle cx="25" cy="0" r="1.5" fill="#7D8886" />
+    </g>
+    <g transform="translate(400, 847.5)">
+      <path d="M -60,0 C -35,-12 -15,10 0,-6 C 15,10 35,-12 60,0 C 35,12 15,-10 0,6 C -15,-10 -35,12 -60,0 Z" fill="#E6E1DA" stroke="url(#frameGrad)" stroke-width="1.5"/>
+      <circle cx="0" cy="0" r="3" fill="#967E85" />
+      <circle cx="-25" cy="0" r="1.5" fill="#7D8886" />
+      <circle cx="25" cy="0" r="1.5" fill="#7D8886" />
+    </g>
+    <!-- Left & Right Center Medallions -->
+    <g transform="translate(52.5, 450) rotate(90)">
+      <path d="M -45,0 C -25,-9 -10,7 0,-4 C 10,7 25,-9 45,0 C 25,9 10,-7 0,4 C -10,-7 -25,9 -45,0 Z" fill="#EFECE6" stroke="url(#frameGrad)" stroke-width="1.5"/>
+      <circle cx="0" cy="0" r="2.5" fill="#9E8C85" />
+    </g>
+    <g transform="translate(747.5, 450) rotate(90)">
+      <path d="M -45,0 C -25,-9 -10,7 0,-4 C 10,7 25,-9 45,0 C 25,9 10,-7 0,4 C -10,-7 -25,9 -45,0 Z" fill="#E6E1DA" stroke="url(#frameGrad)" stroke-width="1.5"/>
+      <circle cx="0" cy="0" r="2.5" fill="#9E8C85" />
+    </g>
+  </g>
+
+  <!-- 3. Abstract Pastel Color Washes (Behind the Continuous Line) -->
+  <!-- Positioned in three-quarter rear perspective (riding away to top-right) -->
+  <g id="pastel-washes">
+    <!-- Ground Shadow Wash -->
+    <ellipse cx="385" cy="698" rx="195" ry="26" transform="rotate(-19 385 698)" fill="#C5C9C6" opacity="0.35" />
+
+    <!-- High Front Wheel Foreshortened Ellipse Wash -->
+    <ellipse cx="475" cy="492" rx="116" ry="186" transform="rotate(-15 475 492)" fill="url(#wheelWash)" />
+
+    <!-- Small Rear Wheel Foreshortened Ellipse Wash -->
+    <ellipse cx="226" cy="705" rx="34" ry="54" transform="rotate(-17 226 705)" fill="url(#wheelWash)" />
+
+    <!-- Pelican Aerodynamic Body & Folded Wings Wash -->
+    <path d="M 278,342 C 252,320 268,260 325,248 C 395,235 458,255 480,225 C 485,248 440,322 390,342 C 335,365 292,355 278,342 Z" fill="url(#bodyWash)" />
+
+    <!-- Pelican Jutting Beak & Gular Pouch Wash -->
+    <path d="M 498,176 C 555,155 628,158 656,168 C 632,208 565,235 512,218 C 492,212 488,185 498,176 Z" fill="url(#pouchWash)" />
+  </g>
+
+  <!-- 4. Minimalist Continuous Single-Line Drawing -->
+  <!-- Strictly one unbroken <path> element tracing ground, rear wheel, spine, pelican from behind, jutting beak, handlebars, high wheel, and pedals -->
+  <path id="continuous-single-line"
+        fill="none"
+        stroke="url(#continuousLineGrad)"
+        stroke-width="3.6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="
+          M 118, 768
+          C 155, 768, 192, 762, 226, 758
+          C 202, 762, 184, 738, 190, 704
+          C 196, 670, 218, 646, 242, 650
+          C 266, 654, 274, 684, 266, 718
+          C 258, 748, 236, 762, 214, 752
+          C 194, 742, 196, 708, 226, 704
+          C 222, 678, 218, 642, 240, 610
+          C 218, 608, 216, 596, 238, 598
+          C 264, 545, 315, 455, 354, 376
+          C 326, 384, 304, 372, 316, 360
+          C 328, 348, 362, 352, 374, 362
+          C 350, 360, 308, 366, 286, 352
+          C 272, 344, 264, 348, 256, 338
+          C 268, 332, 262, 322, 248, 320
+          C 264, 314, 262, 304, 252, 298
+          C 270, 296, 275, 274, 298, 260
+          C 328, 240, 378, 236, 424, 252
+          C 402, 262, 348, 276, 312, 304
+          C 348, 294, 396, 284, 434, 268
+          C 395, 296, 348, 322, 316, 336
+          C 365, 328, 422, 298, 458, 258
+          C 476, 238, 466, 206, 454, 188
+          C 444, 174, 434, 172, 426, 176
+          C 438, 168, 448, 164, 460, 160
+          C 474, 155, 492, 156, 504, 166
+          C 500, 174, 490, 176, 488, 168
+          C 486, 160, 498, 158, 514, 162
+          C 562, 162, 622, 158, 662, 165
+          C 668, 166, 666, 173, 658, 174
+          C 618, 172, 562, 176, 520, 182
+          C 568, 180, 622, 175, 654, 175
+          C 634, 210, 582, 232, 534, 222
+          C 504, 216, 490, 202, 485, 224
+          C 480, 248, 458, 278, 428, 296
+          C 452, 290, 474, 276, 488, 260
+          C 474, 284, 444, 308, 412, 316
+          C 442, 316, 472, 294, 486, 275
+          C 464, 312, 424, 328, 386, 324
+          C 404, 316, 408, 294, 388, 286
+          C 412, 278, 444, 260, 458, 242
+          C 450, 230, 424, 236, 406, 244
+          C 394, 248, 392, 256, 402, 254
+          C 422, 250, 448, 240, 462, 252
+          C 472, 262, 464, 276, 446, 284
+          C 472, 278, 504, 262, 520, 266
+          C 528, 268, 524, 280, 512, 278
+          C 502, 276, 506, 264, 490, 268
+          C 468, 274, 448, 292, 434, 286
+          C 422, 280, 402, 304, 392, 312
+          C 408, 298, 430, 282, 440, 290
+          C 448, 298, 456, 345, 466, 405
+          C 472, 445, 476, 478, 475, 492
+          C 456, 488, 442, 496, 432, 506
+          C 418, 514, 404, 510, 412, 498
+          C 420, 488, 436, 496, 432, 506
+          C 406, 478, 366, 426, 394, 398
+          C 374, 412, 354, 398, 344, 382
+          C 334, 412, 346, 442, 376, 424
+          C 398, 412, 408, 462, 432, 506
+          C 448, 502, 464, 496, 475, 492
+          C 492, 498, 512, 512, 524, 520
+          C 538, 528, 548, 520, 536, 508
+          C 524, 498, 512, 512, 524, 520
+          C 514, 482, 492, 434, 456, 408
+          C 434, 392, 412, 362, 402, 338
+          C 422, 358, 446, 384, 478, 408
+          C 502, 426, 518, 478, 524, 520
+          C 504, 508, 488, 498, 475, 492
+          C 472, 440, 456, 368, 442, 306
+          C 502, 294, 568, 358, 588, 462
+          C 608, 566, 568, 668, 504, 678
+          C 440, 688, 376, 616, 360, 512
+          C 344, 408, 382, 314, 442, 306
+          C 448, 305, 454, 312, 456, 322
+          C 510, 316, 560, 376, 576, 466
+          C 592, 556, 556, 646, 498, 656
+          C 440, 666, 386, 598, 372, 508
+          C 358, 418, 392, 334, 448, 324
+          C 462, 380, 475, 492, 554, 402
+          C 574, 440, 580, 490, 572, 534
+          C 515, 508, 475, 492, 396, 578
+          C 376, 540, 368, 492, 374, 448
+          C 432, 472, 475, 492, 498, 656
+          C 535, 652, 595, 636, 682, 622
+        " />
+</svg>

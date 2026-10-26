@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A white pelican with a golden bill rides a teal city bicycle, seen from the front at a three-quarter angle.</desc>
+
+  <rect width="640" height="640" rx="40" fill="#f5ead7"/>
+  <circle cx="326" cy="282" r="222" fill="#e0ebdf"/>
+  <ellipse cx="331" cy="554" rx="192" ry="24" fill="#c4d3c4"/>
+
+  <!-- Wheels, offset in perspective -->
+  <g fill="#f5ead7" stroke="#253e43" stroke-width="15">
+    <ellipse cx="221" cy="455" rx="55" ry="92" transform="rotate(-13 221 455)"/>
+    <ellipse cx="423" cy="476" rx="66" ry="101" transform="rotate(-13 423 476)"/>
+  </g>
+  <g fill="none" stroke="#a3b7b5" stroke-width="3">
+    <path d="M201 366 241 544M168 443 274 467M181 390 261 520M180 512 262 398"/>
+    <path d="M400 378 446 574M359 460 487 492M372 404 474 548M379 546 467 406"/>
+  </g>
+  <g fill="#253e43">
+    <ellipse cx="221" cy="455" rx="10" ry="13"/>
+    <ellipse cx="423" cy="476" rx="11" ry="14"/>
+  </g>
+
+  <!-- Far leg and pedal -->
+  <path d="m289 319 43 48-17 59" fill="none" stroke="#dd8b36" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m309 416 30 8 9 14-47-2Z" fill="#edaa42"/>
+  <path d="m303 440 49 1" stroke="#253e43" stroke-width="9" stroke-linecap="round"/>
+
+  <!-- Step-through city frame -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m221 455 55-111 31 130-86-19 104-66" stroke="#278f8b" stroke-width="12"/>
+    <path d="M276 344c10 99 54 114 103-59" stroke="#36a7a0" stroke-width="15"/>
+    <path d="m307 474 72-189" stroke="#278f8b" stroke-width="12"/>
+    <path d="m374 365 49 111m-34-115 46 112" stroke="#278f8b" stroke-width="9"/>
+    <path d="m276 346-8-30m111 69-14-63" stroke="#253e43" stroke-width="9"/>
+  </g>
+  <path d="M244 307q21-13 56 1 10 6-1 14l-48 2q-19-6-7-17Z" fill="#9b573d"/>
+  <circle cx="307" cy="474" r="20" fill="#253e43"/>
+  <circle cx="307" cy="474" r="10" fill="#edf1e5"/>
+  <path d="m307 474 34 20" stroke="#253e43" stroke-width="7" stroke-linecap="round"/>
+  <path d="m322 497 42-1" stroke="#253e43" stroke-width="9" stroke-linecap="round"/>
+
+  <!-- Swept-back handlebars -->
+  <path d="m365 322-7-38m-48 12-9-23q-2-11 12-9l45 20 53 1q14-1 13 12l-3 18"
+        fill="none" stroke="#253e43" stroke-width="9" stroke-linecap="round"/>
+  <path d="m303 279 7 17m113 1-2 18" stroke="#9b573d" stroke-width="13" stroke-linecap="round"/>
+  <circle cx="386" cy="282" r="9" fill="#f4bd53"/>
+
+  <!-- Tail and body -->
+  <path d="m244 281-56-17 24 37 40 15Z" fill="#253e43"/>
+  <path d="M246 212c-37 27-45 69-21 97 21 25 68 30 98 6 26-20 28-62 10-91Z" fill="#fffdf3"/>
+  <path d="M242 257c-13 26-7 45 17 56 14 6 32 6 44-1-29-7-40-25-38-53Z" fill="#d7e1db"/>
+
+  <!-- Near leg and webbed foot -->
+  <path d="m285 321-9 66 58 87" fill="none" stroke="#efa640" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m329 464 18 13 24 12-49 2-8-10Z" fill="#f6bc4e"/>
+
+  <!-- Curving neck -->
+  <path d="M288 252c25-2 40-25 30-53-9-25-19-39-12-63 5-19 23-31 43-29 28 3 42 25 37 48-3 18-18 31-25 44-9 17 0 36-1 56-1 27-21 50-45 51Z" fill="#fffdf3"/>
+  <path d="M341 175c-8 22-6 38 3 57 6 15 3 30-4 42 19-13 23-31 17-51-5-19-2-30 8-46Z" fill="#d7e1db"/>
+
+  <!-- Wings reaching the grips -->
+  <path d="M263 230c-18 6-18 27 0 43l38 29q10 7 17-2 5-8-6-17l-28-37q-10-16-21-16Z" fill="#d7e1db"/>
+  <path d="M352 216c13 1 21 15 31 38l37 45q8 11 0 17-9 7-19-6l-46-43q-23-29-3-51Z" fill="#fffdf3"/>
+  <path d="m397 291 20 17m-119-25 11 12" stroke="#253e43" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- Pelican bill and broad throat pouch -->
+  <path d="M349 156 489 215c-37 42-90 29-122-3-15-16-19-36-18-56Z" fill="#e8a442"/>
+  <path d="M361 177 482 215c-36 23-78 10-103-13Z" fill="#f3c777"/>
+  <path d="M348 148c43 9 103 37 147 64l-6 9-139-49Z" fill="#f5bd46"/>
+  <path d="m350 171 139 47" fill="none" stroke="#bb7734" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Face -->
+  <ellipse cx="351" cy="139" rx="13" ry="15" fill="#fffdf3"/>
+  <ellipse cx="355" cy="140" rx="6" ry="8" fill="#253e43"/>
+  <circle cx="357" cy="137" r="2" fill="#fff"/>
+  <path d="M323 112q-7-17-1-27l12 18q3-18 12-22l1 22" fill="#fffdf3"/>
+</svg>

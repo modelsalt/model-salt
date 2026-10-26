@@ -1,0 +1,226 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <!-- Coastal Palette:
+         Deep Ocean Navy (Line): #1B3B4B
+         Ocean Blue: #387B98
+         Deep Ocean Blue (Cel Shade): #285A70
+         Soft Sky/Foam: #EBF2F5
+         White: #FFFFFF
+         Sandy Grey (Body/Pouch): #DED8CE
+         Dark Sandy Grey (Cel Shade): #C4BDB0
+         Warm Sand (Beak/Legs): #E6B87D
+         Dark Warm Sand (Cel Shade): #CE9E60
+    -->
+    <style>
+      .continuous-line {
+        fill: none;
+        stroke: #1B3B4B;
+        stroke-width: 5.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .thin-line {
+        fill: none;
+        stroke: #1B3B4B;
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .bg-sky { fill: #EBF2F5; }
+      .fill-white { fill: #FFFFFF; }
+      .fill-sand-grey { fill: #DED8CE; }
+      .shade-sand-grey { fill: #C4BDB0; }
+      .fill-warm-sand { fill: #E6B87D; }
+      .shade-warm-sand { fill: #CE9E60; }
+      .fill-ocean { fill: #387B98; }
+      .shade-ocean { fill: #285A70; }
+      .fill-navy { fill: #1B3B4B; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" class="bg-sky" />
+
+  <!-- Subtle Coastal Horizon / Ground Shadow -->
+  <ellipse cx="415" cy="520" rx="220" ry="12" class="fill-sand-grey" />
+
+  <!-- ==========================================
+       CEL-SHADED COLOR BLOCKS (UNDERLAY)
+       ========================================== -->
+  <g id="color-fills">
+    <!-- Far Wing (Behind Neck) -->
+    <path d="M 380 265 Q 435 285 480 250 Q 430 295 375 290 Z" class="shade-sand-grey" />
+
+    <!-- Far Leg & Webbed Foot (Coasting Forward) -->
+    <path d="M 355 365 L 475 315 L 495 280 L 510 295 L 490 325 L 472 325 L 350 375 Z" class="shade-warm-sand" />
+
+    <!-- Bicycle Wheels (Small Circus Mini-Bike Wheels) -->
+    <circle cx="290" cy="465" r="52" class="fill-white" />
+    <circle cx="290" cy="465" r="52" stroke="#DED8CE" stroke-width="10" fill="none" />
+    <circle cx="530" cy="465" r="52" class="fill-white" />
+    <circle cx="530" cy="465" r="52" stroke="#DED8CE" stroke-width="10" fill="none" />
+
+    <!-- Compact Folding Mini-Bike Frame (Ocean Blue with Cel Shading) -->
+    <path d="M 285 460 L 340 385 L 415 415 L 505 375 L 535 465 L 522 468 L 498 392 L 415 432 L 410 470 L 395 470 L 400 425 L 345 402 L 295 468 Z" class="fill-ocean" />
+    <!-- Frame Cel Shade -->
+    <path d="M 415 425 L 500 388 L 503 395 L 415 434 Z" class="shade-ocean" />
+    <path d="M 340 395 L 402 422 L 400 430 L 338 402 Z" class="shade-ocean" />
+    <!-- Folding Hinge Box -->
+    <rect x="442" y="395" width="14" height="22" rx="3" transform="rotate(-22 449 406)" class="shade-ocean" />
+
+    <!-- Saddle -->
+    <path d="M 310 380 Q 340 368 375 380 Q 365 398 320 392 Z" class="fill-navy" />
+
+    <!-- Pelican Body & Head (White Base) -->
+    <path d="M 235 335 
+             C 245 310, 290 290, 325 275 
+             C 340 245, 315 160, 345 120 
+             C 365 95, 410 95, 430 120 
+             C 425 165, 395 215, 415 265 
+             C 440 325, 410 380, 345 380 
+             C 295 380, 265 355, 235 335 Z" class="fill-white" />
+
+    <!-- Pelican Body Cel-Shading (Sandy Grey Underbelly, Back & Neck Shadow) -->
+    <path d="M 235 335 
+             C 265 355, 295 380, 345 380 
+             C 405 380, 430 335, 415 280 
+             C 395 330, 355 350, 305 345 
+             C 275 342, 255 335, 235 335 Z" class="fill-sand-grey" />
+    <path d="M 345 120 C 328 155, 350 235, 338 275 C 352 275, 362 260, 360 230 C 358 190, 345 150, 360 120 Z" class="fill-sand-grey" />
+    <!-- Deep Cel-Shade under tail/seat -->
+    <path d="M 265 350 C 295 375, 335 382, 375 375 C 395 365, 410 345, 415 325 C 390 355, 340 365, 265 350 Z" class="shade-sand-grey" />
+
+    <!-- Pelican Beak & Gular Pouch -->
+    <!-- Upper Mandible (Warm Sand) -->
+    <path d="M 426 115 C 495 110, 580 112, 625 118 C 632 120, 630 132, 620 132 C 560 130, 490 135, 425 140 Z" class="fill-warm-sand" />
+    <path d="M 426 128 C 495 125, 570 125, 624 128 L 620 132 C 560 130, 490 135, 425 140 Z" class="shade-warm-sand" />
+    
+    <!-- Big Throat Pouch (Sandy Grey with Deep Cel-Shade) -->
+    <path d="M 425 140 
+             C 490 135, 560 130, 618 132 
+             C 590 215, 505 245, 435 210 
+             C 415 198, 412 165, 425 140 Z" class="fill-sand-grey" />
+    <!-- Pouch Cel-Shade -->
+    <path d="M 420 175 
+             C 465 215, 545 205, 610 145 
+             C 580 215, 500 242, 435 210 
+             C 418 200, 414 185, 420 175 Z" class="shade-sand-grey" />
+
+    <!-- Near Wing (Steering the Handlebar) -->
+    <path d="M 335 275 
+             C 375 260, 435 260, 488 252 
+             C 495 262, 482 280, 460 288 
+             C 420 305, 365 325, 320 315 
+             C 305 310, 315 282, 335 275 Z" class="fill-white" />
+    <!-- Wing Cel-Shade (Lower Feathers) -->
+    <path d="M 320 315 
+             C 365 325, 420 305, 460 288 
+             C 482 280, 492 266, 488 255 
+             C 455 275, 390 295, 318 302 Z" class="fill-sand-grey" />
+
+    <!-- Near Leg & Webbed Foot (Lifted High & Coasting Forward) -->
+    <path d="M 345 375 L 465 340 L 490 300 L 508 318 L 482 355 L 462 352 L 340 388 Z" class="fill-warm-sand" />
+    <path d="M 342 382 L 463 347 L 482 355 L 462 352 L 340 388 Z" class="shade-warm-sand" />
+  </g>
+
+  <!-- ==========================================
+       MINIMALIST CONTINUOUS LINE ART (OVERLAY)
+       ========================================== -->
+  <g id="continuous-line-art">
+    <!-- Auxiliary Thin Mechanical Spokes & Details (Minimalist) -->
+    <path d="M 255 465 L 325 465 M 290 430 L 290 500 M 265 440 L 315 490 M 265 490 L 315 440" class="thin-line" />
+    <path d="M 495 465 L 565 465 M 530 430 L 530 500 M 505 440 L 555 490 M 505 490 L 555 440" class="thin-line" />
+    <!-- Coasting Motion Breeze Lines -->
+    <path d="M 160 260 L 210 260 M 130 340 L 195 340 M 170 465 L 215 465" class="thin-line" />
+
+    <!-- THE MAIN CONTINUOUS LINE: 
+         Traces the entire pelican and compact folding mini-bike in one unbroken, flowing path -->
+    <path class="continuous-line" d="
+      M 180 517 
+      L 290 517 
+      A 52 52 0 1 1 292 517 
+      A 36 36 0 1 1 290 429 
+      A 36 36 0 0 1 290 501
+      L 290 465 
+      L 340 392 
+      L 312 386 
+      Q 340 368 372 382 
+      L 340 392 
+      L 408 424 
+      L 405 395 
+      L 395 395 
+      L 415 395 
+      L 405 395 
+      L 405 465 
+      A 20 20 0 1 1 403 465 
+      L 405 492 
+      L 395 492 
+      L 415 492 
+      L 405 492 
+      L 405 465 
+      L 290 465 
+      L 340 392 
+      L 348 378 
+      L 465 345 
+      L 492 302 
+      Q 502 312 508 318 
+      Q 495 335 482 355 
+      L 465 345 
+      L 348 378 
+      L 355 368 
+      L 472 320 
+      L 495 282 
+      Q 505 290 510 296 
+      L 488 325 
+      L 472 320 
+      L 355 368 
+      C 305 378, 270 362, 235 335 
+      L 258 332 
+      L 242 320 
+      L 268 320 
+      C 295 300, 315 288, 330 278 
+      C 375 260, 435 262, 488 252 
+      C 495 262, 482 280, 458 288 
+      L 468 275 
+      L 438 295 
+      L 448 282 
+      C 405 305, 360 322, 320 315 
+      C 305 310, 312 285, 330 278 
+      C 340 240, 318 160, 345 120 
+      C 332 108, 322 115, 335 128 
+      C 325 125, 318 132, 335 138 
+      C 350 100, 405 95, 428 118 
+      C 410 120, 392 125, 392 135 
+      A 6 6 0 1 1 394 135 
+      C 394 125, 410 120, 428 118 
+      C 495 110, 580 112, 625 118 
+      C 634 120, 630 135, 620 134 
+      C 618 138, 614 136, 616 132 
+      C 555 130, 485 135, 425 140 
+      C 485 135, 555 130, 616 132 
+      C 588 215, 505 245, 435 210 
+      C 412 198, 410 165, 425 140 
+      C 410 165, 412 198, 435 210 
+      C 412 232, 408 250, 415 268 
+      Q 452 272 482 252 
+      C 492 245, 470 238, 472 252 
+      L 502 380 
+      L 448 405 
+      L 442 392 
+      L 455 386 
+      L 465 408 
+      L 452 414 
+      L 448 405 
+      L 408 424 
+      L 405 465 
+      L 408 424 
+      L 502 380 
+      L 530 465 
+      A 36 36 0 1 1 530 429 
+      A 36 36 0 0 1 530 501 
+      L 530 517 
+      A 52 52 0 1 1 532 517 
+      L 650 517
+    " />
+  </g>
+</svg>

@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KINETIC — Precision Macro Meal Planning</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8F8F8;
+            --bg-tertiary: #F0F0F0;
+            --text-primary: #0A0A0A;
+            --text-secondary: #666666;
+            --text-muted: #999999;
+            --border-color: #E5E5E5;
+            --border-dark: #0A0A0A;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --max-width: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+
+        .mono {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navigation */
+        header {
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 76px;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.15rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-mark {
+            width: 14px;
+            height: 14px;
+            background: var(--text-primary);
+            display: inline-block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.15s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--border-dark);
+            background: transparent;
+            color: var(--text-primary);
+            padding: 0.6rem 1.25rem;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.15s ease;
+            cursor: pointer;
+        }
+
+        .btn-outline:hover {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6.5rem 0 5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero-header {
+            max-width: 820px;
+            margin: 0 auto 4rem;
+            text-align: center;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            border: 1px solid var(--border-color);
+            padding: 0.35rem 0.85rem;
+            margin-bottom: 1.75rem;
+            background: var(--bg-secondary);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.75rem, 5.5vw, 4.5rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p.lead {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        /* Frictionless Trial Form */
+        .trial-form {
+            display: flex;
+            max-width: 480px;
+            margin: 0 auto;
+            border: 1px solid var(--border-dark);
+            background: var(--bg-primary);
+            transition: box-shadow 0.2s ease;
+        }
+
+        .trial-form:focus-within {
+            box-shadow: 4px 4px 0px var(--text-primary);
+        }
+
+        .trial-input {
+            flex: 1;
+            border: none;
+            padding: 1rem 1.25rem;
+            font-family: var(--font-sans);
+            font-size: 0.9375rem;
+            color: var(--text-primary);
+            outline: none;
+            background: transparent;
+        }
+
+        .trial-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .trial-submit {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            border: none;
+            padding: 0 1.75rem;
+            font-family: var(--font-sans);
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.15s ease;
+        }
+
+        .trial-submit:hover {
+            background: #2A2A2A;
+        }
+
+        .trial-meta {
+            margin-top: 0.875rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            font-size: 0.75rem;
+        }
+
+        .trial-meta span::before {
+            content: "— ";
+        }
+
+        /* Interactive UI Showcase */
+        .ui-showcase {
+            border: 1px solid var(--border-dark);
+            background: var(--bg-primary);
+            margin-top: 3rem;
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.04);
+        }
+
+        .ui-topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+            padding: 0 1.5rem;
+            height: 56px;
+        }
+
+        .ui-window-controls {
+            display: flex;
+            gap: 6px;
+        }
+
+        .ui-dot {
+            width: 8px;
+            height: 8px;
+            border: 1px solid var(--text-secondary);
+        }
+
+        .ui-tabs {
+            display: flex;
+            height: 100%;
+        }
+
+        .ui-tab-btn {
+            background: transparent;
+            border: none;
+            border-left: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            margin-left: -1px;
+            padding: 0 1.75rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-secondary);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.15s ease;
+        }
+
+        .ui-tab-btn:hover {
+            color: var(--text-primary);
+            background: rgba(0,0,0,0.02);
+        }
+
+        .ui-tab-btn.active {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .ui-tab-btn.active::after {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--text-primary);
+        }
+
+        .ui-status {
+            color: var(--text-secondary);
+        }
+
+        .ui-viewport {
+            min-height: 480px;
+            padding: 2.5rem;
+        }
+
+        .tab-panel {
+            display: none;
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(3px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Tab 1: Calendar View */
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .macro-summary-bar {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .macro-stat-label {
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .macro-stat-val {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border: 1px solid var(--border-color);
+        }
+
+        .cal-col {
+            border-right: 1px solid var(--border-color);
+        }
+
+        .cal-col:last-child {
+            border-right: none;
+        }
+
+        .cal-day-head {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cal-meals {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.875rem;
+        }
+
+        .meal-card {
+            border: 1px solid var(--border-color);
+            padding: 0.875rem;
+            transition: border-color 0.15s ease;
+        }
+
+        .meal-card:hover {
+            border-color: var(--border-dark);
+        }
+
+        .meal-type {
+            color: var(--text-muted);
+            font-size: 0.6875rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .meal-title {
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .meal-macros {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid var(--border-color);
+            padding-top: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        /* Tab 2: Recipe View */
+        .recipe-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.25fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .recipe-meta-box {
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            background: var(--bg-secondary);
+        }
+
+        .recipe-title {
+            font-size: 1.75rem;
+            margin: 0.5rem 0 1rem;
+        }
+
+        .macro-bars {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .macro-bar-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .macro-bar-top {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .bar-track {
+            width: 100%;
+            height: 6px;
+            background: var(--border-color);
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: var(--text-primary);
+        }
+
+        .recipe-details h4 {
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .ingredient-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .ingredient-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.65rem 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9375rem;
+        }
+
+        .steps-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .steps-list li {
+            display: grid;
+            grid-template-columns: 32px 1fr;
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+        }
+
+        /* Tab 3: Grocery View */
+        .grocery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .grocery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .grocery-category h4 {
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-dark);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .check-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .custom-checkbox {
+            width: 16px;
+            height: 16px;
+            border: 1px solid var(--border-dark);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.15s ease;
+        }
+
+        .check-item input {
+            display: none;
+        }
+
+        .check-item input:checked + .custom-checkbox {
+            background: var(--text-primary);
+        }
+
+        .check-item input:checked + .custom-checkbox::after {
+            content: "";
+            width: 6px;
+            height: 6px;
+            background: var(--bg-primary);
+        }
+
+        .check-item input:checked ~ .item-name {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        .item-name {
+            font-size: 0.9375rem;
+            transition: color 0.15s ease;
+        }
+
+        /* Social Proof */
+        .social-proof {
+            border-bottom: 1px solid var(--border-color);
+            padding: 3rem 0;
+            background: var(--bg-secondary);
+        }
+
+        .proof-inner {
+            display: flex;
+             flex-direction: column;
+            align-items: center;
+            gap: 1.75rem;
+        }
+
+        .logo-cloud {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 960px;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .brand-item {
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        /* Features (3-Column) */
+        .features {
+            padding: 7rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-head {
+            max-width: 640px;
+            margin-bottom: 4.5rem;
+        }
+
+        .section-head h2 {
+            font-size: clamp(2rem, 3.5vw, 2.75rem);
+            margin-top: 0.75rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-col {
+            padding: 3rem 2.5rem;
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .feature-col:last-child {
+            border-right: none;
+        }
+
+        .feature-num {
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            display: block;
+        }
+
+        .feature-col h3 {
+            font-size: 1.35rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-col p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.65;
+            margin-bottom: 2rem;
+        }
+
+        .feature-spec {
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+            color: var(--text-primary);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 7rem 0;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .quote-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .quote-text {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+            color: var(--text-primary);
+        }
+
+        .quote-author {
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .author-name {
+            font-weight: 600;
+            font-size: 0.9375rem;
+        }
+
+        .author-stats {
+            color: var(--text-muted);
+        }
+
+        /* Footer CTA */
+        .footer-cta {
+            padding: 7.5rem 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .footer-cta h2 {
+            font-size: clamp(2.25rem, 4vw, 3.5rem);
+            max-width: 680px;
+            margin: 0.75rem auto 1.5rem;
+        }
+
+        .footer-cta p {
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3.5rem 0;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .feedback-msg {
+            display: none;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            border: 1px solid var(--border-dark);
+            background: var(--bg-secondary);
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 960px) {
+            .calendar-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .cal-col:nth-child(2) {
+                border-right: none;
+            }
+            .cal-col:nth-child(1), .cal-col:nth-child(2) {
+                border-bottom: 1px solid var(--border-color);
+            }
+            .recipe-layout, .grocery-grid, .features-grid, .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+            .feature-col {
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .feature-col:last-child {
+                border-bottom: none;
+            }
+            .ui-topbar {
+                flex-direction: column;
+                height: auto;
+                padding: 1rem;
+                gap: 1rem;
+            }
+            .ui-tabs {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav-links {
+                display: none;
+            }
+            .trial-form {
+                flex-direction: column;
+            }
+            .trial-submit {
+                padding: 1rem;
+            }
+            .calendar-grid {
+                grid-template-columns: 1fr;
+            }
+            .cal-col {
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .macro-summary-bar {
+                flex-wrap: wrap;
+                gap: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <div class="container nav-inner">
+            <a href="#" class="logo">
+                <span class="logo-mark"></span>
+                KINETIC
+            </a>
+            <ul class="nav-links">
+                <li><a href="#interface">Interface</a></li>
+                <li><a href="#architecture">Architecture</a></li>
+                <li><a href="#athletes">Athletes</a></li>
+            </ul>
+            <a href="#signup" class="btn-outline mono">Start 14-Day Trial</a>
+        </div>
+    </header>
+
+    <!-- 1. Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-header">
+                <span class="hero-tag mono">SYSTEM V2.4 — NUTRITIONAL ARCHITECTURE</span>
+                <h1>Precision macro planning for physical performance.</h1>
+                <p class="lead">Algorithmic meal schedules, exact gram-weight recipes, and automated grocery logistics calibrated to your training expenditure.</p>
+                
+                <!-- Frictionless 14-Day Trial Signup -->
+                <form class="trial-form" onsubmit="handleSignup(event, 'hero-feedback')">
+                    <input type="email" class="trial-input" placeholder="Enter your email address..." required aria-label="Email Address">
+                    <button type="submit" class="trial-submit">Start 14-Day Free Trial</button>
+                </form>
+                <div class="trial-meta mono">
+                    <span>No credit card required</span>
+                    <span>Instant macro calibration</span>
+                </div>
+                <div id="hero-feedback" class="feedback-msg mono">
+                    ✓ TRIAL INITIALIZED. CHECK YOUR INBOX FOR CALIBRATION LINK.
+                </div>
+            </div>
+
+            <!-- Interactive Multi-Tabbed Product Showcase -->
+            <div id="interface" class="ui-showcase">
+                <div class="ui-topbar">
+                    <div class="ui-window-controls">
+                        <span class="ui-dot"></span>
+                        <span class="ui-dot"></span>
+                        <span class="ui-dot"></span>
+                    </div>
+                    <div class="ui-tabs" role="tablist">
+                        <button class="ui-tab-btn active" role="tab" onclick="switchTab(event, 'tab-calendar')">01 / Macro Calendar</button>
+                        <button class="ui-tab-btn" role="tab" onclick="switchTab(event, 'tab-recipe')">02 / Recipe Spec</button>
+                        <button class="ui-tab-btn" role="tab" onclick="switchTab(event, 'tab-grocery')">03 / Grocery Logistics</button>
+                    </div>
+                    <div class="ui-status mono">TARGET: 2,850 KCAL [P:210G C:315G F:82G]</div>
+                </div>
+
+                <div class="ui-viewport">
+                    <!-- TAB 1: CALENDAR VIEW -->
+                    <div id="tab-calendar" class="tab-panel active">
+                        <div class="calendar-header">
+                            <div>
+                                <div class="mono" style="color: var(--text-muted);">CURRENT CYCLE</div>
+                                <h3 style="font-size: 1.5rem; margin-top: 0.25rem;">Week 14 — Hypertrophy Block</h3>
+                            </div>
+                            <div class="macro-summary-bar">
+                                <div>
+                                    <div class="macro-stat-label mono">DAILY AVG</div>
+                                    <div class="macro-stat-val">2,845 kcal</div>
+                                </div>
+                                <div>
+                                    <div class="macro-stat-label mono">PROTEIN</div>
+                                    <div class="macro-stat-val">212g <span class="mono" style="color:var(--text-muted)">30%</span></div>
+                                </div>
+                                <div>
+                                    <div class="macro-stat-label mono">CARBOHYDRATES</div>
+                                    <div class="macro-stat-val">318g <span class="mono" style="color:var(--text-muted)">45%</span></div>
+                                </div>
+                                <div>
+                                    <div class="macro-stat-label mono">LIPIDS</div>
+                                    <div class="macro-stat-val">79g <span class="mono" style="color:var(--text-muted)">25%</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="calendar-grid">
+                            <!-- Monday -->
+                            <div class="cal-col">
+                                <div class="cal-day-head">
+                                    <span style="font-weight: 600;">MON 12</span>
+                                    <span class="mono">HIGH CARB</span>
+                                </div>
+                                <div class="cal-meals">
+                                    <div class="meal-card">
+                                        <div class="meal-type mono">07:30 // PRE-SESSION</div>
+                                        <div class="meal-title">Buckwheat &amp; Whey Isolate Porridge</div>
+                                        <div class="meal-macros mono">
+                                            <span>640 KCAL</span>
+                                            <span>P:48 C:88 F:10</span>
+                                        </div>
+                                    </div>
+                                    <div class="meal-card">
+                                        <div class="meal-type mono">13:00 // POST-SESSION</div>
+                                        <div class="meal-title">Charred Cod, Black Rice &amp; Seaweed</div>
+                                        <div class="meal-macros mono">
+                                            <span>890 KCAL</span>
+                                            <span>P:68 C:115 F:16</span>
+                                        </div>
+                                    </div>
+                                    <div class="meal-card">
+                                        <div class="meal-type mono">19:30 // EVENING</div>
+                                        <div class="meal-title">Venison Sirloin &amp; Root Mash</div>
+                                        <div class="meal-macros mono">
+                                            <span>920 KCAL</span>
+                                            <span>P:72 C:94 F:28</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tuesday -->
+                            <div class="cal-col">
+                                <div class="cal-day-head">
+                                    <span style="font-weight: 600;">TUE 13</span>
+                                    <span class="mono">MODERATE</span>
+                                </div>
+                                <div class="cal-meals">
+                                    <div class="meal-card">
+                                        <div class="meal-type mono">08:00 // BREAKFAST</div>
+                                        <div class="meal-title">Skyr Bowl, Hemp Seeds &amp; Rye</div>
+                                        <div class="meal-macros mono">
+                                            <span>580 KCAL</span>
+                                            <span>P:52 C:54 F:17</span>
+                                        </div>
+                                    </div>
+                                    <div class="meal-card">
+                                        <div class="meal-type mono">13:30 // LUNCH</div>
+                                        <div class="meal-title">Poached Chicken &amp; Farro Salad</div>
+                                        <div class="meal-macros mono">
+                                            <span>810 KCAL</span>
+                                            <span>P:64 C:82 F:24</span>
+                                        </div>
+                                    </div>
+                                    <div class="meal-card">
+                                        <div class="meal-type mono">20:00 // EVENING</div>
+                                        <div class="meal-title">Seared Arctic Char &amp; Fennel</div>
+                                        <div class="meal-macros mono">
+                                            <span>860 KCAL</span>
+                                            <span>P:62 C:68 F:36</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Wednesday -->
+                            <div class="cal-col">
+                                <div class="cal-day-head">
+                                    <span style="font-weight: 600;">WED 14</span>
+                                    <span class="mono">HIGH CARB</span>
+                                </div>
+                                <div class="cal-meals">
+                                    <div class="meal-card">
+                                        <div class="meal-type mono">07:30 // PRE-SESSION</div>
+                                        <div class="meal-title">Sourdough, Egg Whites &amp; Smoked Trout</div>
+                                        <div class="meal-macros mono">
+                                            <span>670 KCAL</span>
+                                            <span>P:54 C:78 F:14</span>
+                                        </div>
+                                    </div>
+                                    <div class="meal-card">
+                                        <div class="meal-type mono">13:00 // POST-SESSION</div>
+                                        <div class="meal-title">Bison Ragù with Durum Rigatoni</div>
+                                        <div class="meal-macros mono">
+                                            <span>980 KCAL</span>
+                                            <span>P:74 C:122 F:21</span>
+                                        </div>
+                                    </div>
+                                    <div class="meal-card">
+                                        <div class="meal-type mono">19:30 // EVENING</div>
+                                        <div class="meal-title">Miso Glazed Halibut &amp; Jasmine Rice</div>
+                                        <div class="meal-macros mono">
+                                            <span>840 KCAL</span>
+                                            <span>P:66 C:104 F:16</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Thursday -->
+                            <div class="cal-col">
+                                <div class="cal-day-head">
+                                    <span style="font-weight: 600;">THU 15</span>
+                                    <span class="mono">RECOVERY / LOW</span>
+                                </div>
+                                <div class="cal-meals">
+                                    <div class="meal-card">
+                                        <div class="meal-type mono">08:30 // BREAKFAST</div>
+                                        <div class="meal-title">3-Egg Omelet, Spinach &amp; Cottage Cheese</div>
+                                        <div class="meal-macros mono">
+                                            <span>540 KCAL</span>
+                                            <span>P:49 C:12 F:32</span>
+                                        </div>
+                                    </div>
+                                    <div class="meal-card">
+                                        <div class="meal-type mono">14:00 // LUNCH</div>
+                                        <div class="meal-title">Grilled Mackerel, Kale &amp; Walnuts</div>
+                                        <div class="meal-macros mono">
+                                            <span>790 KCAL</span>
+                                            <span>P:56 C:28 F:48</span>
+                                        </div>
+                                    </div>
+                                    <div class="meal-card">
+                                        <div class="meal-type mono">19:30 // EVENING</div>
+                                        <div class="meal-title">Roast Turkey Breast &amp; Charred Broccolini</div>
+                                        <div class="meal-macros mono">
+                                            <span>720 KCAL</span>
+                                            <span>P:78 C:34 F:26</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: RECIPE VIEW -->
+                    <div id="tab-recipe" class="tab-panel">
+                        <div class="recipe-layout">
+                            <div class="recipe-meta-box">
+                                <span class="mono" style="color: var(--text-muted);">RECIPE SPEC #042 // POST-WORKOUT</span>
+                                <h3 class="recipe-title">Charred Atlantic Cod, Forbidden Black Rice &amp; Pickled Kombu</h3>
+                                <p style="color: var(--text-secondary); font-size: 0.9375rem;">High-glycemic replenishment paired with rapid-digesting marine protein and trace electrolytes.</p>
+                                
+                                <div class="macro-bars">
+                                    <div class="macro-bar-item">
+                                        <div class="macro-bar-top mono">
+                                            <span>PROTEIN (68G)</span>
+                                            <span>31% OF MEAL</span>
+                                        </div>
+                                        <div class="bar-track"><div class="bar-fill" style="width: 68%;"></div></div>
+                                    </div>
+                                    <div class="macro-bar-item">
+                                        <div class="macro-bar-top mono">
+                                            <span>CARBOHYDRATES (115G)</span>
+                                            <span>52% OF MEAL</span>
+                                        </div>
+                                        <div class="bar-track"><div class="bar-fill" style="width: 85%;"></div></div>
+                                    </div>
+                                    <div class="macro-bar-item">
+                                        <div class="macro-bar-top mono">
+                                            <span>LIPIDS (16G)</span>
+                                            <span>17% OF MEAL</span>
+                                        </div>
+                                        <div class="bar-track"><div class="bar-fill" style="width: 24%;"></div></div>
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between;" class="mono">
+                                    <span>PREP: 10 MIN</span>
+                                    <span>COOK: 18 MIN</span>
+                                    <span>TOTAL: 890 KCAL</span>
+                                </div>
+                            </div>
+
+                            <div class="recipe-details">
+                                <h4 class="mono">SCALED INGREDIENTS (1 ATHLETE)</h4>
+                                <ul class="ingredient-list">
+                                    <li><span>Wild Atlantic Cod Loin, skinless</span><span class="mono">280g</span></li>
+                                    <li><span>Dry Forbidden Black Rice</span><span class="mono">140g</span></li>
+                                    <li><span>Rehydrated Kombu &amp; Wakame</span><span class="mono">45g</span></li>
+                                    <li><span>Cold-Pressed Rapeseed Oil</span><span class="mono">12ml</span></li>
+                                    <li><span>Fermented White Miso Paste</span><span class="mono">18g</span></li>
+                                    <li><span>Rice Vinegar &amp; flaky sea salt</span><span class="mono">15ml</span></li>
+                                </ul>
+
+                                <h4 class="mono">EXECUTION PROTOCOL</h4>
+                                <ul class="steps-list">
+                                    <li>
+                                        <span class="mono">01</span>
+                                        <span>Rinse black rice thoroughly. Cook at a 1:1.75 water ratio in a pressurized vessel for 18 minutes.</span>
+                                    </li>
+                                    <li>
+                                        <span class="mono">02</span>
+                                        <span>Pat cod loin dry. Whisk white miso with 10ml warm water and brush evenly over the fish surface.</span>
+                                    </li>
+                                    <li>
+                                        <span class="mono">03</span>
+                                        <span>Sear in carbon steel pan with rapeseed oil for 3 minutes per side until internal temperature hits 58°C.</span>
+                                    </li>
+                                    <li>
+                                        <span class="mono">04</span>
+                                        <span>Fold rice vinegar and sliced kombu into steamed rice. Plate immediately to preserve resistant starch profile.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: GROCERY LIST VIEW -->
+                    <div id="tab-grocery" class="tab-panel">
+                        <div class="grocery-header">
+                            <div>
+                                <span class="mono" style="color: var(--text-muted);">AUTOMATED AGGREGATION // 21 MEALS</span>
+                                <h3 style="font-size: 1.5rem; margin-top: 0.25rem;">Weekly Provisioning Manifest</h3>
+                            </div>
+                            <span class="mono" style="border: 1px solid var(--border-dark); padding: 0.4rem 0.8rem;">CLICK ITEMS TO MARK ACQUIRED</span>
+                        </div>
+
+                        <div class="grocery-grid">
+                            <div class="grocery-category">
+                                <h4 class="mono"><span>PROTEINS</span><span>04 ITEMS</span></h4>
+                                <label class="check-item">
+                                    <span class="check-left">
+                                        <input type="checkbox" checked>
+                                        <span class="custom-checkbox"></span>
+                                        <span class="item-name">Wild Atlantic Cod Loin</span>
+                                    </span>
+                                    <span class="mono">840g</span>
+                                </label>
+                                <label class="check-item">
+                                    <span class="check-left">
+                                        <input type="checkbox">
+                                        <span class="custom-checkbox"></span>
+                                        <span class="item-name">Pasture-Raised Venison Sirloin</span>
+                                    </span>
+                                    <span class="mono">650g</span>
+                                </label>
+                                <label class="check-item">
+                                    <span class="check-left">
+                                        <input type="checkbox">
+                                        <span class="custom-checkbox"></span>
+                                        <span class="item-name">Icelandic Skyr (0% Fat)</span>
+                                    </span>
+                                    <span class="mono">1,500g</span>
+                                </label>
+                                <label class="check-item">
+                                    <span class="check-left">
+                                        <input type="checkbox">
+                                        <span class="custom-checkbox"></span>
+                                        <span class="item-name">Arctic Char Fillets</span>
+                                    </span>
+                                    <span class="mono">560g</span>
+                                </label>
+                            </div>
+
+                            <div class="grocery-category">
+                                <h4 class="mono"><span>COMPLEX CARBOHYDRATES</span><span>04 ITEMS</span></h4>
+                                <label class="check-item">
+                                    <span class="check-left">
+                                        <input type="checkbox" checked>
+                                        <span class="custom-checkbox"></span>
+                                        <span class="item-name">Forbidden Black Rice</span>
+                                    </span>
+                                    <span class="mono">700g</span>
+                                </label>
+                                <label class="check-item">
+                                    <span class="check-left">
+                                        <input type="checkbox" checked>
+                                        <span class="custom-checkbox"></span>
+                                        <span class="item-name">Raw Buckwheat Groats</span>
+                                    </span>
+                                    <span class="mono">500g</span>
+                                </label>
+                                <label class="check-item">
+                                    <span class="check-left">
+                                        <input type="checkbox">
+                                        <span class="custom-checkbox"></span>
+                                        <span class="item-name">Organic Pearled Farro</span>
+                                    </span>
+                                    <span class="mono">450g</span>
+                                </label>
+                                <label class="check-item">
+                                    <span class="check-left">
+                                        <input type="checkbox">
+                                        <span class="custom-checkbox"></span>
+                                        <span class="item-name">Dense Danish Rye Loaf</span>
+                                    </span>
+                                    <span class="mono">1 Loaf</span>
+                                </label>
+                            </div>
+
+                            <div class="grocery-category">
+                                <h4 class="mono"><span>PRODUCE &amp; LIPIDS</span><span>04 ITEMS</span></h4>
+                                <label class="check-item">
+                                    <span class="check-left">
+                                        <input type="checkbox">
+                                        <span class="custom-checkbox"></span>
+                                        <span class="item-name">Fresh Fennel Bulbs</span>
+                                    </span>
+                                    <span class="mono">3 Bulbs</span>
+                                </label>
+                                <label class="check-item">
+                                    <span class="check-left">
+                                        <input type="checkbox">
+                                        <span class="custom-checkbox"></span>
+                                        <span class="item-name">Lacinato Kale &amp; Broccolini</span>
+                                    </span>
+                                    <span class="mono">600g</span>
+                                </label>
+                                <label class="check-item">
+                                    <span class="check-left">
+                                        <input type="checkbox" checked>
+                                        <span class="custom-checkbox"></span>
+                                        <span class="item-name">Shelled Hemp Hearts</span>
+                                    </span>
+                                    <span class="mono">250g</span>
+                                </label>
+                                <label class="check-item">
+                                    <span class="check-left">
+                                        <input type="checkbox">
+                                        <span class="custom-checkbox"></span>
+                                        <span class="item-name">Cold-Pressed Rapeseed Oil</span>
+                                    </span>
+                                    <span class="mono">500ml</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Social Proof -->
+    <section class="social-proof">
+        <div class="container proof-inner">
+            <span class="mono" style="color: var(--text-muted);">TRUSTED BY PERFORMANCE DIRECTORS &amp; ENDURANCE ATHLETES AT</span>
+            <div class="logo-cloud">
+                <span class="brand-item">NORDIC TRACK LABS</span>
+                <span class="brand-item">VELO // STUDIO</span>
+                <span class="brand-item">KRONOS ATHLETICS</span>
+                <span class="brand-item">AERO BIOMETRICS</span>
+                <span class="brand-item">STHLM BARBELL</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. 3-Column Features -->
+    <section id="architecture" class="features">
+        <div class="container">
+            <div class="section-head">
+                <span class="mono" style="color: var(--text-muted);">SYSTEM ARCHITECTURE</span>
+                <h2>Eliminate nutritional guesswork with clinical precision.</h2>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-col">
+                    <div>
+                        <span class="feature-num mono">01 // ALGORITHMIC SCALING</span>
+                        <h3>Dynamic Macro Calibration</h3>
+                        <p>Every recipe automatically scales ingredient weights to the exact gram to hit your daily protein, carbohydrate, and lipid targets—adjusting seamlessly between rest days and high-output sessions.</p>
+                    </div>
+                    <div class="feature-spec mono">TOLERANCE: ± 1.5 GRAMS PER MEAL</div>
+                </div>
+
+                <div class="feature-col">
+                    <div>
+                        <span class="feature-num mono">02 // BIOMETRIC SYNC</span>
+                        <h3>Expenditure Integration</h3>
+                        <p>Connect directly with Apple Health, Garmin, Oura, or Whoop. When your morning heart-rate variability or kilojoule output shifts, KINETIC recalculates your evening glycogen replenishment.</p>
+                    </div>
+                    <div class="feature-spec mono">REAL-TIME API SYNC</div>
+                </div>
+
+                <div class="feature-col">
+                    <div>
+                        <span class="feature-num mono">03 // ZERO-WASTE LOGISTICS</span>
+                        <h3>Consolidated Provisioning</h3>
+                        <p>Turn a 7-day training block into a single, aisle-sorted manifest. Ingredients are cross-utilized across recipes so you never buy half a bunch of herbs or waste perishable proteins.</p>
+                    </div>
+                    <div class="feature-spec mono">1-CLICK INSTACART &amp; EXPORT</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Testimonials -->
+    <section id="athletes" class="testimonials">
+        <div class="container">
+            <div class="section-head">
+                <span class="mono" style="color: var(--text-muted);">FIELD REPORTS</span>
+                <h2>Engineered for those who measure output.</h2>
+            </div>
+
+            <div class="testimonial-grid">
+                <div class="quote-card">
+                    <p class="quote-text">"I used to spend two hours every Sunday cross-referencing spreadsheets with MyFitnessPal. KINETIC builds my entire 3,400 kcal triathlon block in 30 seconds with whole, anti-inflammatory foods."</p>
+                    <div class="quote-author">
+                        <span class="author-name">Soren Lindqvist</span>
+                        <span class="author-stats mono">2:41 MARATHONER</span>
+                    </div>
+                </div>
+
+                <div class="quote-card">
+                    <p class="quote-text">"The gram-level recipe scaling is unmatched. When I drop from a maintenance phase into a 6-week cut, the app adjusts my rice and oil portions automatically without ruining the culinary balance."</p>
+                    <div class="quote-author">
+                        <span class="author-name">Freja Holm</span>
+                        <span class="author-stats mono">OLYMPIC WEIGHTLIFTER</span>
+                    </div>
+                </div>
+
+                <div class="quote-card">
+                    <p class="quote-text">"Minimalist, fast, no bloated social feeds or ads. Just pure nutritional data, clean Nordic-inspired whole food recipes, and a grocery list that actually respects my time."</p>
+                    <div class="quote-author">
+                        <span class="author-name">Dr. Marcus Vance</span>
+                        <span class="author-stats mono">EXERCISE PHYSIOLOGIST</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Footer CTA -->
+    <section id="signup" class="footer-cta">
+        <div class="container">
+            <span class="mono" style="color: var(--text-muted);">INITIALIZE PROTOCOL</span>
+            <h2>Calibrate your first 14 days of nutrition. Free.</h2>
+            <p>Full access to the recipe database, biometric sync, and macro scheduler.</p>
+
+            <form class="trial-form" onsubmit="handleSignup(event, 'footer-feedback')">
+                <input type="email" class="trial-input" placeholder="Enter your email address..." required aria-label="Email Address">
+                <button type="submit" class="trial-submit">Start 14-Day Free Trial</button>
+            </form>
+            <div class="trial-meta mono">
+                <span>No credit card required</span>
+                <span>Cancel anytime in one click</span>
+            </div>
+            <div id="footer-feedback" class="feedback-msg mono">
+                ✓ TRIAL INITIALIZED. CHECK YOUR INBOX FOR CALIBRATION LINK.
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-inner">
+            <div class="mono">© 2025 KINETIC NUTRITION AB. STOCKHOLM.</div>
+            <ul class="footer-links mono">
+                <li><a href="#interface">Product</a></li>
+                <li><a href="#architecture">Methodology</a></li>
+                <li><a href="#signup">Privacy</a></li>
+                <li><a href="#signup">Terms</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        function switchTab(event, tabId) {
+            const buttons = document.querySelectorAll('.ui-tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            const panels = document.querySelectorAll('.tab-panel');
+            panels.forEach(panel => panel.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        function handleSignup(event, feedbackId) {
+            event.preventDefault();
+            const form = event.currentTarget;
+            const input = form.querySelector('input');
+            const feedback = document.getElementById(feedbackId);
+            
+            if (input.value) {
+                input.value = '';
+                feedback.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

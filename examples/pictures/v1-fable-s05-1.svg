@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 440" width="520" height="440">
+  <!-- Pelican riding a bicycle: flat cartoon, three-quarter front view, isolated on blank canvas -->
+
+  <!-- ===== BICYCLE (angled toward viewer; rear wheel smaller/offset in perspective) ===== -->
+  <!-- Rear wheel (further away, foreshortened ellipse) -->
+  <g>
+    <ellipse cx="150" cy="330" rx="52" ry="68" fill="none" stroke="#2b2b2b" stroke-width="12"/>
+    <ellipse cx="150" cy="330" rx="40" ry="55" fill="none" stroke="#9a9a9a" stroke-width="3"/>
+    <g stroke="#b5b5b5" stroke-width="2.5">
+      <line x1="150" y1="275" x2="150" y2="385"/>
+      <line x1="110" y1="330" x2="190" y2="330"/>
+      <line x1="122" y1="292" x2="178" y2="368"/>
+      <line x1="178" y1="292" x2="122" y2="368"/>
+    </g>
+    <circle cx="150" cy="330" r="7" fill="#555"/>
+  </g>
+
+  <!-- Front wheel (closer, larger, rounder) -->
+  <g>
+    <ellipse cx="385" cy="335" rx="66" ry="76" fill="none" stroke="#2b2b2b" stroke-width="13"/>
+    <ellipse cx="385" cy="335" rx="52" ry="62" fill="none" stroke="#9a9a9a" stroke-width="3"/>
+    <g stroke="#b5b5b5" stroke-width="2.5">
+      <line x1="385" y1="273" x2="385" y2="397"/>
+      <line x1="333" y1="335" x2="437" y2="335"/>
+      <line x1="348" y1="291" x2="422" y2="379"/>
+      <line x1="422" y1="291" x2="348" y2="379"/>
+    </g>
+    <circle cx="385" cy="335" r="8" fill="#555"/>
+  </g>
+
+  <!-- Frame (teal) -->
+  <g stroke="#1f8a8a" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- chain stay: rear hub to crank -->
+    <line x1="150" y1="330" x2="258" y2="340"/>
+    <!-- seat tube: crank up to seat -->
+    <line x1="258" y1="340" x2="232" y2="215"/>
+    <!-- seat stay: rear hub to seat -->
+    <line x1="150" y1="330" x2="232" y2="215"/>
+    <!-- top tube: seat to head tube -->
+    <line x1="232" y1="215" x2="345" y2="212"/>
+    <!-- down tube: head tube to crank -->
+    <line x1="345" y1="212" x2="258" y2="340"/>
+    <!-- head tube / fork down to front hub -->
+    <line x1="345" y1="212" x2="385" y2="335"/>
+    <!-- stem up to handlebars -->
+    <line x1="345" y1="212" x2="340" y2="185"/>
+  </g>
+
+  <!-- Chainring and crank -->
+  <circle cx="258" cy="340" r="20" fill="none" stroke="#444" stroke-width="6"/>
+  <circle cx="258" cy="340" r="6" fill="#444"/>
+  <line x1="258" y1="340" x2="282" y2="372" stroke="#444" stroke-width="7" stroke-linecap="round"/>
+  <!-- pedal (near) -->
+  <rect x="272" y="366" width="26" height="10" rx="4" fill="#333"/>
+
+  <!-- Seat post + saddle -->
+  <line x1="232" y1="215" x2="226" y2="190" stroke="#444" stroke-width="7" stroke-linecap="round"/>
+  <path d="M200 190 Q226 178 256 188 Q238 200 206 198 Z" fill="#3a2a1f"/>
+
+  <!-- Handlebars (curving toward viewer) -->
+  <path d="M305 180 Q340 170 372 182" fill="none" stroke="#444" stroke-width="8" stroke-linecap="round"/>
+  <rect x="294" y="173" width="20" height="12" rx="5" fill="#222" transform="rotate(-12 304 179)"/>
+  <rect x="364" y="177" width="20" height="12" rx="5" fill="#222" transform="rotate(14 374 183)"/>
+
+  <!-- ===== PELICAN ===== -->
+  <!-- Far leg (behind frame) -->
+  <path d="M238 265 Q232 300 250 322" fill="none" stroke="#e8a21a" stroke-width="9" stroke-linecap="round"/>
+
+  <!-- Tail feathers -->
+  <path d="M190 236 Q160 232 148 252 Q176 250 190 262 Z" fill="#cfcfcf"/>
+
+  <!-- Body -->
+  <ellipse cx="238" cy="240" rx="62" ry="50" fill="#f4f4f4"/>
+  <!-- Wing (folded, grey) -->
+  <path d="M212 232 Q238 208 280 228 Q268 262 226 266 Q206 254 212 232 Z" fill="#c9c9c9"/>
+  <!-- Belly shading -->
+  <ellipse cx="236" cy="266" rx="40" ry="18" fill="#e6e6e6"/>
+
+  <!-- Near leg: thigh to pedal -->
+  <path d="M250 272 Q262 308 282 370" fill="none" stroke="#f0ad22" stroke-width="10" stroke-linecap="round"/>
+  <!-- Near webbed foot on pedal -->
+  <path d="M270 366 L298 362 L296 376 L266 378 Z" fill="#f0ad22"/>
+
+  <!-- Neck (curved forward toward handlebars) -->
+  <path d="M262 212 Q278 160 298 128" fill="none" stroke="#f4f4f4" stroke-width="30" stroke-linecap="round"/>
+
+  <!-- Head -->
+  <circle cx="306" cy="112" r="30" fill="#f4f4f4"/>
+  <!-- Grey crest patch -->
+  <path d="M282 100 Q296 80 322 86 Q312 94 302 92 Q292 96 282 100 Z" fill="#c9c9c9"/>
+
+  <!-- Bill (upper mandible) -->
+  <path d="M322 110 L418 134 Q422 140 414 142 L324 126 Z" fill="#f2a41a"/>
+  <!-- Pouch (lower, sagging) -->
+  <path d="M324 126 L414 142 Q392 176 340 158 Q322 146 324 126 Z" fill="#f7c24a"/>
+  <!-- Bill ridge line -->
+  <line x1="326" y1="118" x2="412" y2="138" stroke="#d8861a" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Eye -->
+  <circle cx="314" cy="106" r="6.5" fill="#ffffff"/>
+  <circle cx="316" cy="106" r="3.8" fill="#222"/>
+  <circle cx="317.5" cy="104.5" r="1.3" fill="#fff"/>
+
+  <!-- Wing tip / "hand" reaching to handlebar -->
+  <path d="M280 228 Q300 200 318 184" fill="none" stroke="#c9c9c9" stroke-width="16" stroke-linecap="round"/>
+  <ellipse cx="320" cy="182" rx="11" ry="8" fill="#c9c9c9"/>
+</svg>

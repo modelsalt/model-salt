@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A white pelican sits upright on a teal bicycle, shown in side profile with a long golden bill and orange webbed feet.</desc>
+
+  <rect width="800" height="640" rx="32" fill="#f4eddb"/>
+  <ellipse cx="400" cy="566" rx="292" ry="19" fill="#dfd7c2"/>
+
+  <!-- Wheels: filled rings with no outlines -->
+  <g fill="#283d43" fill-rule="evenodd">
+    <path d="M302 458a112 112 0 1 1-224 0 112 112 0 1 1 224 0
+             M288 458a98 98 0 1 0-196 0 98 98 0 1 0 196 0"/>
+    <path d="M722 458a112 112 0 1 1-224 0 112 112 0 1 1 224 0
+             M708 458a98 98 0 1 0-196 0 98 98 0 1 0 196 0"/>
+  </g>
+  <g fill="#b4c2ba">
+    <path d="M187 357h6v202h-6zM89 455h202v6H89z"
+          transform="rotate(30 190 458)"/>
+    <path d="M187 357h6v202h-6zM89 455h202v6H89z"
+          transform="rotate(-15 190 458)"/>
+    <path d="M607 357h6v202h-6zM509 455h202v6H509z"
+          transform="rotate(30 610 458)"/>
+    <path d="M607 357h6v202h-6zM509 455h202v6H509z"
+          transform="rotate(-15 610 458)"/>
+  </g>
+
+  <!-- Far leg and pedal -->
+  <path d="M382 319l61 54-33 59-14-7 24-49-56-39z" fill="#d78d37"/>
+  <rect x="386" y="429" width="48" height="10" rx="5" fill="#283d43"/>
+
+  <!-- Bicycle frame -->
+  <g fill="#208f8c">
+    <path fill-rule="evenodd"
+          d="M181 465l111-143h252L386 469z
+             M211 451h153l-66-108z
+             M315 337l65 112 132-112z"/>
+    <path d="M291 307l15-6 81 158-15 7z"/>
+    <path d="M529 313l15-5 74 148-15 7z"/>
+    <path d="M525 322l-11-47 15-4 13 51z"/>
+  </g>
+  <path d="M513 281l-9-36h46v12h-30l6 21z" fill="#283d43"/>
+  <rect x="534" y="242" width="38" height="17" rx="8" fill="#c77b43"/>
+  <path d="M263 298q0-12 17-12h59q17 0 17 10t-20 12h-57q-16 0-16-10z" fill="#283d43"/>
+  <g fill="#283d43">
+    <circle cx="190" cy="458" r="12"/>
+    <circle cx="610" cy="458" r="12"/>
+    <circle cx="380" cy="458" r="23"/>
+  </g>
+  <circle cx="380" cy="458" r="12" fill="#e4b756"/>
+  <path d="M375 454l9-4 28 47-9 5z" fill="#283d43"/>
+  <rect x="391" y="496" width="49" height="10" rx="5" fill="#283d43"/>
+
+  <!-- Pelican body and upright neck -->
+  <path d="M287 253l-55-25 24 49 45 8z" fill="#d6dfd6"/>
+  <path d="M278 228q17-38 67-34l39 7
+           q-15-40-9-79 5-39 37-48
+           41-12 62 17 19 28-1 53
+           -16 22-36 23-7 33 8 72
+           8 34-20 55-31 23-87 10
+           -68-15-60-76z" fill="#fffdf3"/>
+  <path d="M427 165q-10 47 8 77 9 24-13 45
+           40-14 30-49-16-43-3-77z" fill="#d6dfd6"/>
+  <path d="M291 233q15-26 53-19 36 6 56 43
+           -25 29-62 15-26-10-47-39z" fill="#d6dfd6"/>
+  <path d="M303 231q31 0 60 28-35-7-60-28z" fill="#b7c8bf"/>
+
+  <!-- Wing reaching to the handlebar -->
+  <path d="M376 213q19-12 37 3l58 30 68-3
+           q14-1 15 8 0 10-14 12l-76 4
+           q-10 0-19-5l-63-29q-13-6-6-20z" fill="#eef0e4"/>
+
+  <!-- Near leg and webbed foot on the pedal -->
+  <path d="M351 291q13-5 22 4l-20 77 53 109-14 8-62-112z" fill="#eda63f"/>
+  <path d="M391 479l17-3 12 13 25 9h-63l8-10z" fill="#f0ad45"/>
+
+  <!-- Head, pouch, and long bill -->
+  <path d="M443 122l192 12q-32 31-105 51
+           -49 11-70-13-14-16-17-50z" fill="#efb44d"/>
+  <path d="M455 120l191 10q12 2 4 9l-199 4z" fill="#e39432"/>
+  <path d="M457 119l188 11-186 4z" fill="#ffd16b"/>
+  <ellipse cx="443" cy="107" rx="13" ry="15" fill="#e6d9a3"/>
+  <circle cx="446" cy="106" r="7" fill="#283d43"/>
+  <circle cx="448" cy="103" r="2.5" fill="#fffdf3"/>
+  <path d="M390 84l-8-20 20 11 2-21 14 19z" fill="#fffdf3"/>
+</svg>

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" shape-rendering="geometricPrecision">
+  <defs>
+    <!-- Sky gradient: deep blue top to lighter horizon -->
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1E5BD6"/>
+      <stop offset="1" stop-color="#5FB3F5"/>
+    </linearGradient>
+    <!-- Sun gradient -->
+    <radialGradient id="sun" cx="0.4" cy="0.4" r="0.7">
+      <stop offset="0" stop-color="#FFE98A"/>
+      <stop offset="1" stop-color="#FFB400"/>
+    </radialGradient>
+    <!-- Cloud gradient: white to soft blue-grey underside -->
+    <linearGradient id="cloud" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#DCE9F7"/>
+    </linearGradient>
+    <!-- Soft shadow for the cloud -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="24" stdDeviation="20" flood-color="#0B2F7A" flood-opacity="0.35"/>
+    </filter>
+    <!-- Sun glow -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="30"/>
+    </filter>
+  </defs>
+
+  <!-- Square background, sharp corners -->
+  <rect width="1024" height="1024" fill="url(#sky)"/>
+
+  <!-- Subtle horizon haze -->
+  <ellipse cx="512" cy="1024" rx="800" ry="260" fill="#FFFFFF" opacity="0.10"/>
+
+  <!-- Sun glow halo -->
+  <circle cx="640" cy="360" r="190" fill="#FFD24A" opacity="0.55" filter="url(#glow)"/>
+
+  <!-- Sun -->
+  <circle cx="640" cy="360" r="150" fill="url(#sun)"/>
+
+  <!-- Cloud (built from overlapping circles + base) -->
+  <g filter="url(#shadow)">
+    <g fill="url(#cloud)">
+      <rect x="220" y="560" width="520" height="190" rx="95"/>
+      <circle cx="360" cy="560" r="130"/>
+      <circle cx="510" cy="500" r="170"/>
+      <circle cx="650" cy="580" r="120"/>
+    </g>
+  </g>
+
+  <!-- Rain drops -->
+  <g fill="#FFFFFF" opacity="0.9">
+    <path d="M360 800 q-22 40 0 60 q22 -20 0 -60z" transform="rotate(-18 360 830)"/>
+    <path d="M470 820 q-22 40 0 60 q22 -20 0 -60z" transform="rotate(-18 470 850)"/>
+    <path d="M580 800 q-22 40 0 60 q22 -20 0 -60z" transform="rotate(-18 580 830)"/>
+  </g>
+</svg>

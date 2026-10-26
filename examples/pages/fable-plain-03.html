@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forkcast — Plan your week. Eat like you meant to.</title>
+<meta name="description" content="Forkcast turns 'what's for dinner?' into a five-minute Sunday habit. Smart weekly plans, one tap grocery lists, and recipes that actually fit your life.">
+<style>
+  :root {
+    --bg: #fbf8f2;
+    --surface: #ffffff;
+    --ink: #1f2a22;
+    --ink-soft: #5b6a60;
+    --ink-faint: #8f9a93;
+    --line: #e8e2d6;
+    --green: #2f7a4f;
+    --green-deep: #215c3b;
+    --green-soft: #e3f1e8;
+    --tomato: #e8603c;
+    --tomato-soft: #fde7df;
+    --lemon: #f6c85f;
+    --lemon-soft: #fdf3d4;
+    --radius: 18px;
+    --shadow: 0 10px 30px rgba(31, 42, 34, 0.08);
+    --shadow-lg: 0 30px 60px rgba(31, 42, 34, 0.14);
+    --max: 1120px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  img, svg { display: block; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; }
+  h1, h2, h3 { letter-spacing: -0.02em; line-height: 1.12; }
+
+  .wrap { width: min(var(--max), calc(100% - 2.5rem)); margin: 0 auto; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: .5rem;
+    font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--green);
+  }
+  .eyebrow::before { content: ""; width: 1.5rem; height: 2px; background: var(--green); border-radius: 2px; }
+  .section { padding: 6rem 0; }
+  .section-head { max-width: 620px; margin-bottom: 3.5rem; }
+  .section-head h2 { font-size: clamp(2rem, 4vw, 2.75rem); margin: .75rem 0 1rem; }
+  .section-head p { color: var(--ink-soft); font-size: 1.1rem; }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+    padding: .9rem 1.5rem; border-radius: 999px; font-weight: 600; font-size: 1rem;
+    border: 1.5px solid transparent; transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    white-space: nowrap;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--green); color: #fff; box-shadow: 0 6px 18px rgba(47,122,79,.28); }
+  .btn-primary:hover { background: var(--green-deep); }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+  .btn-ghost:hover { background: #fff; border-color: #d6cfc2; }
+  .btn-light { background: #fff; color: var(--green-deep); }
+  .btn-light:hover { background: var(--green-soft); }
+
+  /* Nav */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(251,248,242,.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent; transition: border-color .2s ease;
+  }
+  header.scrolled { border-bottom-color: var(--line); }
+  nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .logo { display: flex; align-items: center; gap: .6rem; font-weight: 800; font-size: 1.25rem; letter-spacing: -0.02em; }
+  .logo-mark {
+    width: 34px; height: 34px; border-radius: 10px; background: var(--green);
+    display: grid; place-items: center; color: #fff;
+  }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links a { font-weight: 500; color: var(--ink-soft); font-size: .95rem; transition: color .15s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta { display: flex; gap: .75rem; align-items: center; }
+  .nav-cta .btn { padding: .65rem 1.2rem; font-size: .95rem; }
+  .menu-toggle { display: none; background: none; border: 0; width: 40px; height: 40px; }
+  .menu-toggle span { display: block; width: 22px; height: 2px; background: var(--ink); margin: 5px auto; border-radius: 2px; transition: .2s; }
+
+  /* Hero */
+  .hero { padding: 4.5rem 0 5rem; position: relative; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 3rem; align-items: center; }
+  .hero h1 { font-size: clamp(2.6rem, 5.5vw, 4.25rem); font-weight: 800; margin: 1.25rem 0 1.25rem; }
+  .hero h1 em { font-style: normal; color: var(--green); position: relative; display: inline-block; }
+  .hero h1 em::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: .08em; height: .32em;
+    background: var(--lemon); z-index: -1; border-radius: 4px; opacity: .8;
+  }
+  .hero p.lead { font-size: 1.2rem; color: var(--ink-soft); max-width: 520px; margin-bottom: 2rem; }
+  .hero-actions { display: flex; gap: .85rem; flex-wrap: wrap; align-items: center; }
+  .hero-proof { display: flex; align-items: center; gap: 1rem; margin-top: 2rem; font-size: .9rem; color: var(--ink-soft); }
+  .avatars { display: flex; }
+  .avatars span {
+    width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--bg);
+    margin-left: -10px; display: grid; place-items: center; font-size: .7rem; font-weight: 700; color: #fff;
+  }
+  .avatars span:first-child { margin-left: 0; }
+  .stars { color: var(--lemon); letter-spacing: 1px; }
+
+  /* Phone mockup */
+  .hero-visual { position: relative; display: flex; justify-content: center; }
+  .blob {
+    position: absolute; inset: 0; margin: auto; width: 440px; height: 440px; border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--green-soft), var(--lemon-soft) 60%, transparent 75%);
+    z-index: 0; filter: blur(10px);
+  }
+  .phone {
+    position: relative; z-index: 1; width: 300px; height: 620px; border-radius: 44px;
+    background: #1b221d; padding: 12px; box-shadow: var(--shadow-lg), inset 0 0 0 2px #333c35;
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float { 0%,100% { transform: translateY(0) rotate(-1.5deg); } 50% { transform: translateY(-10px) rotate(-1.5deg); } }
+  .screen {
+    background: var(--bg); border-radius: 34px; height: 100%; overflow: hidden; padding: 1.1rem 1rem; position: relative;
+    display: flex; flex-direction: column; gap: .85rem;
+  }
+  .notch { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 90px; height: 24px; background: #1b221d; border-radius: 999px; }
+  .screen-top { margin-top: 1.6rem; display: flex; justify-content: space-between; align-items: center; }
+  .screen-top strong { font-size: 1.05rem; }
+  .screen-top small { color: var(--ink-faint); font-size: .72rem; display: block; }
+  .week { display: flex; justify-content: space-between; gap: 4px; }
+  .week button {
+    flex: 1; border: 0; background: transparent; padding: .45rem 0; border-radius: 10px; font-size: .68rem;
+    color: var(--ink-soft); display: flex; flex-direction: column; align-items: center; gap: 2px; transition: .15s;
+  }
+  .week button b { font-size: .85rem; color: var(--ink); }
+  .week button.active { background: var(--green); color: #fff; }
+  .week button.active b { color: #fff; }
+  .meal-card {
+    background: #fff; border-radius: 14px; padding: .7rem; display: flex; gap: .7rem; align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,.04); animation: slidein .35s ease both;
+  }
+  @keyframes slidein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .meal-card .thumb { width: 46px; height: 46px; border-radius: 10px; flex-shrink: 0; display: grid; place-items: center; font-size: 1.4rem; }
+  .meal-card .meta { flex: 1; min-width: 0; }
+  .meal-card .meta small { display: block; font-size: .62rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-faint); font-weight: 700; }
+  .meal-card .meta span { font-size: .82rem; font-weight: 600; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .meal-card .time { font-size: .7rem; color: var(--ink-soft); white-space: nowrap; }
+  .grocery-pill {
+    margin-top: auto; background: var(--ink); color: #fff; border-radius: 14px; padding: .8rem .9rem;
+    display: flex; justify-content: space-between; align-items: center; font-size: .8rem;
+  }
+  .grocery-pill b { display: block; font-size: .9rem; }
+  .grocery-pill small { color: #b9c3bc; font-size: .7rem; }
+  .grocery-pill .go { width: 30px; height: 30px; background: var(--green); border-radius: 50%; display: grid; place-items: center; }
+
+  .float-chip {
+    position: absolute; z-index: 2; background: #fff; border-radius: 14px; padding: .65rem .85rem;
+    box-shadow: var(--shadow); display: flex; align-items: center; gap: .6rem; font-size: .82rem; font-weight: 600;
+    animation: float 7s ease-in-out infinite;
+  }
+  .float-chip .ico { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; font-size: 1rem; }
+  .chip-1 { top: 70px; left: 0; animation-delay: -2s; }
+  .chip-2 { bottom: 110px; right: 0; animation-delay: -4s; }
+  .float-chip small { display: block; font-weight: 500; color: var(--ink-faint); font-size: .7rem; }
+
+  /* Logos strip */
+  .strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 1.75rem 0; background: #fff; }
+  .strip .wrap { display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+  .strip p { font-size: .85rem; color: var(--ink-faint); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+  .strip ul { display: flex; gap: 2.5rem; list-style: none; flex-wrap: wrap; }
+  .strip li { font-weight: 800; font-size: 1.1rem; color: #c3bdb2; letter-spacing: -0.02em; }
+
+  /* Features */
+  .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .feature {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 2rem;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .feature:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .feature .ico { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; margin-bottom: 1.25rem; }
+  .feature h3 { font-size: 1.2rem; margin-bottom: .5rem; }
+  .feature p { color: var(--ink-soft); font-size: .97rem; }
+  .feature.wide { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
+  .feature.wide .demo { background: var(--bg); border-radius: 14px; padding: 1.25rem; border: 1px solid var(--line); }
+  .list-row { display: flex; align-items: center; gap: .7rem; padding: .55rem 0; border-bottom: 1px dashed var(--line); font-size: .9rem; }
+  .list-row:last-child { border-bottom: 0; }
+  .check { width: 20px; height: 20px; border-radius: 6px; border: 1.5px solid #cfd8d2; display: grid; place-items: center; flex-shrink: 0; }
+  .check.on { background: var(--green); border-color: var(--green); color: #fff; font-size: .7rem; }
+  .list-row.done span { text-decoration: line-through; color: var(--ink-faint); }
+  .list-row .qty { margin-left: auto; color: var(--ink-faint); font-size: .8rem; }
+
+  /* How it works */
+  .how { background: var(--ink); color: #fff; }
+  .how .eyebrow { color: #8fd4ab; } .how .eyebrow::before { background: #8fd4ab; }
+  .how .section-head p { color: #b9c3bc; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; position: relative; counter-reset: step; }
+  .step { position: relative; padding-top: 1rem; }
+  .step .num {
+    width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 1.25rem;
+    background: var(--green); margin-bottom: 1.5rem; position: relative;
+  }
+  .step .num::after {
+    content: ""; position: absolute; left: 100%; top: 50%; width: calc(100% + 6rem); height: 2px;
+    background: repeating-linear-gradient(90deg, #3b4a40 0 8px, transparent 8px 16px);
+  }
+  .step:last-child .num::after { display: none; }
+  .step h3 { font-size: 1.35rem; margin-bottom: .6rem; }
+  .step p { color: #b9c3bc; }
+
+  /* Stats */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 5rem; border-top: 1px solid #334039; padding-top: 3rem; }
+  .stat b { display: block; font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; color: #fff; }
+  .stat span { color: #b9c3bc; font-size: .95rem; }
+
+  /* Testimonials */
+  .quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .quote { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 2rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .quote p { font-size: 1.05rem; line-height: 1.6; }
+  .quote .who { display: flex; align-items: center; gap: .85rem; margin-top: auto; }
+  .quote .who span.av { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; color: #fff; font-size: .85rem; }
+  .quote .who b { display: block; font-size: .95rem; }
+  .quote .who small { color: var(--ink-faint); font-size: .85rem; }
+
+  /* Pricing */
+  .pricing { background: #fff; border-top: 1px solid var(--line); }
+  .toggle { display: inline-flex; background: var(--bg); border: 1px solid var(--line); border-radius: 999px; padding: 4px; margin-bottom: 2.5rem; }
+  .toggle button { border: 0; background: transparent; padding: .55rem 1.1rem; border-radius: 999px; font-weight: 600; font-size: .9rem; color: var(--ink-soft); }
+  .toggle button.on { background: var(--ink); color: #fff; }
+  .toggle .save { color: var(--green); font-weight: 700; font-size: .75rem; margin-left: .35rem; }
+  .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; align-items: stretch; }
+  .plan { border: 1px solid var(--line); border-radius: var(--radius); padding: 2rem; display: flex; flex-direction: column; background: var(--bg); position: relative; }
+  .plan.hot { background: var(--ink); color: #fff; border-color: var(--ink); transform: scale(1.03); box-shadow: var(--shadow-lg); }
+  .plan .badge { position: absolute; top: -12px; left: 2rem; background: var(--tomato); color: #fff; font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: .3rem .7rem; border-radius: 999px; }
+  .plan h3 { font-size: 1.1rem; margin-bottom: .35rem; }
+  .plan .desc { font-size: .9rem; color: var(--ink-soft); margin-bottom: 1.5rem; }
+  .plan.hot .desc { color: #b9c3bc; }
+  .price { display: flex; align-items: baseline; gap: .3rem; margin-bottom: 1.5rem; }
+  .price b { font-size: 2.75rem; font-weight: 800; letter-spacing: -0.03em; }
+  .price span { color: var(--ink-faint); font-size: .9rem; }
+  .plan ul { list-style: none; display: grid; gap: .65rem; margin-bottom: 2rem; font-size: .93rem; }
+  .plan li { display: flex; gap: .6rem; align-items: flex-start; }
+  .plan li::before { content: "✓"; color: var(--green); font-weight: 800; flex-shrink: 0; }
+  .plan.hot li::before { color: #8fd4ab; }
+  .plan .btn { margin-top: auto; width: 100%; }
+
+  /* FAQ */
+  .faq-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem; align-items: start; }
+  details { border-bottom: 1px solid var(--line); }
+  summary {
+    list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    padding: 1.35rem 0; font-weight: 600; font-size: 1.05rem;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary .plus { width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--line); display: grid; place-items: center; flex-shrink: 0; transition: .2s; font-weight: 400; }
+  details[open] .plus { transform: rotate(45deg); background: var(--ink); color: #fff; border-color: var(--ink); }
+  details p { padding: 0 2.5rem 1.35rem 0; color: var(--ink-soft); }
+
+  /* CTA */
+  .cta { padding: 0 0 6rem; }
+  .cta-box {
+    background: linear-gradient(135deg, var(--green-deep), var(--green) 70%, #4f9a6f);
+    border-radius: 28px; padding: 4.5rem 3rem; color: #fff; text-align: center; position: relative; overflow: hidden;
+  }
+  .cta-box::before, .cta-box::after {
+    content: ""; position: absolute; border-radius: 50%; background: rgba(255,255,255,.08);
+  }
+  .cta-box::before { width: 360px; height: 360px; top: -140px; right: -100px; }
+  .cta-box::after { width: 240px; height: 240px; bottom: -120px; left: -60px; }
+  .cta-box h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; position: relative; }
+  .cta-box p { color: #d6ecde; font-size: 1.1rem; max-width: 520px; margin: 0 auto 2rem; position: relative; }
+  .cta-form { display: flex; gap: .6rem; max-width: 460px; margin: 0 auto; position: relative; }
+  .cta-form input {
+    flex: 1; padding: .9rem 1.25rem; border-radius: 999px; border: 0; font: inherit; font-size: 1rem; outline: 0;
+  }
+  .cta-form input:focus { box-shadow: 0 0 0 3px rgba(255,255,255,.4); }
+  .cta-note { font-size: .82rem; color: #b3dcc2; margin-top: 1rem; position: relative; }
+  .cta-success { display: none; font-weight: 600; font-size: 1.1rem; position: relative; }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--line); padding: 3.5rem 0 2rem; }
+  .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; margin-bottom: 3rem; }
+  .foot-grid p { color: var(--ink-soft); font-size: .92rem; max-width: 300px; margin-top: .85rem; }
+  .foot-grid h4 { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-faint); margin-bottom: 1rem; }
+  .foot-grid ul { list-style: none; display: grid; gap: .55rem; }
+  .foot-grid li a { font-size: .95rem; color: var(--ink-soft); }
+  .foot-grid li a:hover { color: var(--ink); }
+  .foot-bottom { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; padding-top: 1.5rem; border-top: 1px solid var(--line); font-size: .85rem; color: var(--ink-faint); }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* Responsive */
+  @media (max-width: 980px) {
+    .hero-grid { grid-template-columns: 1fr; text-align: center; }
+    .hero p.lead { margin: 0 auto 2rem; }
+    .hero-actions, .hero-proof { justify-content: center; }
+    .hero-visual { margin-top: 2rem; }
+    .features { grid-template-columns: 1fr 1fr; }
+    .feature.wide { grid-column: span 2; }
+    .steps { grid-template-columns: 1fr; gap: 3rem; }
+    .step .num::after { display: none; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .quotes, .plans { grid-template-columns: 1fr; }
+    .plan.hot { transform: none; }
+    .faq-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 720px) {
+    .section { padding: 4rem 0; }
+    .nav-links, .nav-cta .btn-ghost { display: none; }
+    .menu-toggle { display: block; }
+    .nav-links.open {
+      display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0;
+      background: var(--bg); padding: 1.5rem; border-bottom: 1px solid var(--line); gap: 1.25rem;
+    }
+    .features { grid-template-columns: 1fr; }
+    .feature.wide { grid-column: span 1; grid-template-columns: 1fr; }
+    .float-chip { display: none; }
+    .phone { width: 270px; height: 560px; }
+    .cta-form { flex-direction: column; }
+    .cta-box { padding: 3rem 1.5rem; }
+    .foot-grid { grid-template-columns: 1fr; }
+    .strip .wrap { justify-content: center; text-align: center; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<header id="header">
+  <nav class="wrap">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v8M4 3v5a3 3 0 0 0 6 0V3M7 11v10M17 3c-2 2-3 5-3 8h3v10"/></svg>
+      </span>
+      Forkcast
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#" class="btn btn-ghost">Log in</a>
+      <a href="#cta" class="btn btn-primary">Start free</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Meal planning, minus the spreadsheet</span>
+        <h1>Plan your week. <em>Eat like you meant to.</em></h1>
+        <p class="lead">Forkcast turns "what's for dinner?" into a five‑minute Sunday habit. Smart weekly plans, a grocery list that builds itself, and recipes that actually fit your life.</p>
+        <div class="hero-actions">
+          <a href="#cta" class="btn btn-primary">
+            Start planning free
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#how" class="btn btn-ghost">See how it works</a>
+        </div>
+        <div class="hero-proof">
+          <div class="avatars" aria-hidden="true">
+            <span style="background:#2f7a4f">JM</span>
+            <span style="background:#e8603c">AK</span>
+            <span style="background:#5b6a60">RP</span>
+            <span style="background:#d9a633">TL</span>
+          </div>
+          <div>
+            <span class="stars" aria-label="4.9 out of 5 stars">★★★★★</span>
+            <strong>4.9</strong> · Loved by 120,000+ home cooks
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="blob" aria-hidden="true"></div>
+
+        <div class="float-chip chip-1" aria-hidden="true">
+          <span class="ico" style="background:var(--lemon-soft)">⚡</span>
+          <div>Plan generated<small>in 4.2 seconds</small></div>
+        </div>
+        <div class="float-chip chip-2" aria-hidden="true">
+          <span class="ico" style="background:var(--tomato-soft)">🛒</span>
+          <div>$38 saved<small>vs. last week</small></div>
+        </div>
+
+        <div class="phone" role="img" aria-label="Forkcast app showing a weekly meal plan">
+          <div class="screen">
+            <div class="notch"></div>
+            <div class="screen-top">
+              <div><small>This week</small><strong>Oct 26 – Nov 1</strong></div>
+              <span style="width:32px;height:32px;border-radius:50%;background:var(--green-soft);display:grid;place-items:center;font-size:.9rem">🥦</span>
+            </div>
+            <div class="week" id="weekPicker">
+              <button data-day="0"><span>M</span><b>26</b></button>
+              <button data-day="1" class="active"><span>T</span><b>27</b></button>
+              <button data-day="2"><span>W</span><b>28</b></button>
+              <button data-day="3"><span>T</span><b>29</b></button>
+              <button data-day="4"><span>F</span><b>30</b></button>
+              <button data-day="5"><span>S</span><b>31</b></button>
+              <button data-day="6"><span>S</span><b>1</b></button>
+            </div>
+            <div id="mealList"></div>
+            <div class="grocery-pill">
+              <div><small>Grocery list ready</small><b id="groceryCount">23 items · 3 stores</b></div>
+              <span class="go"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRIP -->
+  <div class="strip">
+    <div class="wrap">
+      <p>Featured in</p>
+      <ul>
+        <li>Bon Appétit</li><li>The Kitchn</li><li>Wirecutter</li><li>Lifehacker</li><li>TechCrunch</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="section" id="features">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Why Forkcast</span>
+        <h2>Everything between "I'm hungry" and dinner, handled.</h2>
+        <p>Most meal planners give you a calendar and wish you luck. Forkcast does the thinking: what you like, what's in the fridge, what's on sale, and how much time you actually have on a Tuesday.</p>
+      </div>
+
+      <div class="features">
+        <div class="feature wide reveal">
+          <div>
+            <div class="ico" style="background:var(--green-soft)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </div>
+            <h3>A grocery list that writes itself</h3>
+            <p>Every plan rolls up into one organized list — grouped by aisle, de‑duplicated, and already minus what's in your pantry. Share it with your household and check things off together in real time.</p>
+          </div>
+          <div class="demo" aria-hidden="true">
+            <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint);margin-bottom:.5rem">Produce</div>
+            <div class="list-row done"><span class="check on">✓</span><span>Baby spinach</span><span class="qty">2 bags</span></div>
+            <div class="list-row done"><span class="check on">✓</span><span>Lemons</span><span class="qty">4</span></div>
+            <div class="list-row"><span class="check"></span><span>Cherry tomatoes</span><span class="qty">1 pint</span></div>
+            <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint);margin:1rem 0 .5rem">Protein</div>
+            <div class="list-row"><span class="check"></span><span>Chicken thighs</span><span class="qty">1.5 lb</span></div>
+            <div class="list-row"><span class="check"></span><span>Salmon fillets</span><span class="qty">2</span></div>
+          </div>
+        </div>
+
+        <div class="feature reveal">
+          <div class="ico" style="background:var(--lemon-soft)">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#b8891a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <h3>Plans that fit real schedules</h3>
+          <p>Tell Forkcast which nights are chaos and which are chill. Soccer practice gets a 15‑minute stir‑fry; Sunday gets the braise.</p>
+        </div>
+
+        <div class="feature reveal">
+          <div class="ico" style="background:var(--tomato-soft)">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--tomato)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h3>Learns what your table loves</h3>
+          <p>Thumbs up, thumbs down, "the kids won't touch it." Recommendations sharpen every week, and your allergies and diets are never an afterthought.</p>
+        </div>
+
+        <div class="feature reveal">
+          <div class="ico" style="background:#e4ecf8">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b6bb5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3>Import any recipe</h3>
+          <p>Paste a link, snap a photo of grandma's index card, or type it out. Forkcast cleans it up, scales it, and slots it into your plan.</p>
+        </div>
+
+        <div class="feature reveal">
+          <div class="ico" style="background:var(--green-soft)">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/><circle cx="12" cy="12" r="10"/></svg>
+          </div>
+          <h3>Zero‑waste leftovers</h3>
+          <p>Roast a chicken Monday, and Forkcast plans Wednesday's tacos around it. Less tossed food, less spent money.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section how" id="how">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">How it works</span>
+        <h2>Sunday, 5 minutes. Then you're done for the week.</h2>
+        <p>No more 5:30pm panic, no more third trip to the store.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="num">1</div>
+          <h3>Tell us about your table</h3>
+          <p>Who's eating, what they'll eat, how much time you've got each night, and your weekly budget. Takes about two minutes, once.</p>
+        </div>
+        <div class="step reveal">
+          <div class="num">2</div>
+          <h3>Get a plan, tweak it</h3>
+          <p>Forkcast drafts your week. Swap anything with one tap — "something lighter," "use the salmon," "make it Thai" — and it rebuilds around you.</p>
+        </div>
+        <div class="step reveal">
+          <div class="num">3</div>
+          <h3>Shop once, cook calm</h3>
+          <p>Your list syncs to your phone (or your grocery delivery app). Each night, open the recipe, hit start, and follow along step by step.</p>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat reveal"><b>5 min</b><span>average weekly planning time</span></div>
+        <div class="stat reveal"><b>$1,900</b><span>saved per household per year</span></div>
+        <div class="stat reveal"><b>42%</b><span>less food thrown away</span></div>
+        <div class="stat reveal"><b>120k+</b><span>home cooks planning weekly</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">From real kitchens</span>
+        <h2>"We stopped ordering takeout three nights a week."</h2>
+      </div>
+      <div class="quotes">
+        <div class="quote reveal">
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <p>I've tried every planner out there. This is the first one that understood that Tuesday is not a Sunday. The 15‑minute dinners on busy nights are the whole reason I still use it.</p>
+          <div class="who"><span class="av" style="background:#2f7a4f">JM</span><div><b>Jordan M.</b><small>Parent of two, Denver</small></div></div>
+        </div>
+        <div class="quote reveal">
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <p>The leftover planning is clever. It noticed I'd have half a bunch of cilantro left and quietly worked it into Thursday. My fridge has never been this empty on Saturday.</p>
+          <div class="who"><span class="av" style="background:#e8603c">AK</span><div><b>Amara K.</b><small>Cooks for one, Toronto</small></div></div>
+        </div>
+        <div class="quote reveal">
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <p>Shared list with my partner means no more "did you get onions?" texts. We've cut our grocery bill by about a quarter and I honestly didn't expect that.</p>
+          <div class="who"><span class="av" style="background:#5b6a60">RP</span><div><b>Riley P.</b><small>Couple, Portland</small></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section pricing" id="pricing">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Pricing</span>
+        <h2>Less than one skipped takeout order.</h2>
+        <p>Start free. Upgrade when you want the whole household on it.</p>
+      </div>
+
+      <div class="toggle reveal" role="group" aria-label="Billing period">
+        <button class="on" data-period="monthly">Monthly</button>
+        <button data-period="yearly">Yearly <span class="save">save 25%</span></button>
+      </div>
+
+      <div class="plans">
+        <div class="plan reveal">
+          <h3>Starter</h3>
+          <p class="desc">Perfect for trying the habit on.</p>
+          <div class="price"><b>$0</b><span>/ forever</span></div>
+          <ul>
+            <li>3 planned dinners per week</li>
+            <li>Auto‑generated grocery list</li>
+            <li>500+ tested recipes</li>
+            <li>Import up to 10 of your own recipes</li>
+          </ul>
+          <a href="#cta" class="btn btn-ghost">Get started</a>
+        </div>
+        <div class="plan hot reveal">
+          <span class="badge">Most popular</span>
+          <h3>Plus</h3>
+          <p class="desc">Full weeks, full flexibility.</p>
+          <div class="price"><b data-monthly="7" data-yearly="5">$7</b><span>/ month</span></div>
+          <ul>
+            <li>Unlimited meals — breakfast, lunch, dinner, snacks</li>
+            <li>Smart leftovers & pantry tracking</li>
+            <li>Unlimited recipe import (links, photos, text)</li>
+            <li>Budget mode with store price matching</li>
+            <li>Grocery delivery integrations</li>
+          </ul>
+          <a href="#cta" class="btn btn-light">Start 14‑day free trial</a>
+        </div>
+        <div class="plan reveal">
+          <h3>Household</h3>
+          <p class="desc">Everyone cooks, everyone's covered.</p>
+          <div class="price"><b data-monthly="12" data-yearly="9">$12</b><span>/ month</span></div>
+          <ul>
+            <li>Everything in Plus</li>
+            <li>Up to 6 members, each with their own preferences</li>
+            <li>Shared lists with real‑time check‑off</li>
+            <li>Assign cooking nights & send reminders</li>
+            <li>Priority support</li>
+          </ul>
+          <a href="#cta" class="btn btn-ghost">Start 14‑day free trial</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="wrap faq-grid">
+      <div class="section-head reveal" style="margin-bottom:0">
+        <span class="eyebrow">FAQ</span>
+        <h2>Good questions.</h2>
+        <p>Something else on your mind? Email <a href="mailto:hello@forkcast.app" style="color:var(--green);font-weight:600">hello@forkcast.app</a> — a human replies, usually same day.</p>
+      </div>
+      <div class="reveal">
+        <details open>
+          <summary>Does it handle allergies and diets?<span class="plus">+</span></summary>
+          <p>Yes. Set restrictions per person — vegetarian, gluten‑free, nut allergy, low‑FODMAP, halal, kosher, and more. Forkcast never suggests a recipe that conflicts, and it flags any recipe you import that does.</p>
+        </details>
+        <details>
+          <summary>Can I use my own recipes?<span class="plus">+</span></summary>
+          <p>Absolutely. Paste a URL, take a photo of a cookbook page or handwritten card, or type it in. Forkcast parses ingredients and steps, lets you correct anything, then treats it like any other recipe for planning and lists.</p>
+        </details>
+        <details>
+          <summary>What if I don't like a suggested meal?<span class="plus">+</span></summary>
+          <p>Swap it with one tap. You can ask for something specific ("faster," "vegetarian," "use what's in my fridge") or just shuffle. Your grocery list updates instantly.</p>
+        </details>
+        <details>
+          <summary>Which grocery delivery services work with it?<span class="plus">+</span></summary>
+          <p>Plus and Household plans can send lists straight to Instacart, Amazon Fresh, Walmart, and Kroger. Or just use the built‑in list in store — it's organized by aisle for whichever shop you pick.</p>
+        </details>
+        <details>
+          <summary>Is there a family or shared option?<span class="plus">+</span></summary>
+          <p>The Household plan covers up to six people, each with their own preferences and dislikes. Everyone sees the same plan and list, and you can assign who's cooking which night.</p>
+        </details>
+        <details>
+          <summary>Can I cancel anytime?<span class="plus">+</span></summary>
+          <p>Yes — no contracts, no hoops. Cancel in two taps from settings and keep access until the end of your billing period. Your recipes and plans export as a tidy PDF or spreadsheet whenever you want them.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="cta">
+    <div class="wrap">
+      <div class="cta-box reveal">
+        <h2>Your next week of dinners is five minutes away.</h2>
+        <p>Join 120,000 home cooks who stopped asking "what's for dinner?" Free to start, no credit card.</p>
+        <form class="cta-form" id="ctaForm" novalidate>
+          <input type="email" id="ctaEmail" placeholder="you@example.com" aria-label="Email address" required>
+          <button type="submit" class="btn btn-light">Get started</button>
+        </form>
+        <p class="cta-note" id="ctaNote">Free forever on Starter · 14‑day trial on paid plans · Cancel anytime</p>
+        <p class="cta-success" id="ctaSuccess">🎉 You're in! Check your inbox for your first plan.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#" class="logo">
+          <span class="logo-mark" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v8M4 3v5a3 3 0 0 0 6 0V3M7 11v10M17 3c-2 2-3 5-3 8h3v10"/></svg>
+          </span>
+          Forkcast
+        </a>
+        <p>Weekly meal plans that respect your time, your budget, and the picky eater at the end of the table.</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul><li><a href="#features">Features</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#">Recipes</a></li><li><a href="#">Changelog</a></li></ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul><li><a href="#">About</a></li><li><a href="#">Blog</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li></ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul><li><a href="#faq">Help center</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Forkcast, Inc. Made with leftovers.</span>
+      <span>iOS · Android · Web</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Sticky header shadow
+  const header = document.getElementById('header');
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 8);
+  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Mobile menu
+  const toggle = document.getElementById('menuToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  // Phone mockup: interactive week
+  const plans = [
+    { meals: [['🥣','Breakfast','Overnight oats, berries','5 min'],['🥗','Lunch','Chickpea & kale bowl','10 min'],['🍗','Dinner','Sheet‑pan lemon chicken','35 min']], g: '23 items · 3 stores' },
+    { meals: [['🍳','Breakfast','Veggie scramble','8 min'],['🥪','Lunch','Leftover chicken wrap','5 min'],['🍜','Dinner','15‑min garlic noodles','15 min']], g: '23 items · 3 stores' },
+    { meals: [['🥞','Breakfast','Banana oat pancakes','15 min'],['🍲','Lunch','Tomato white bean soup','12 min'],['🌮','Dinner','Chicken tinga tacos','25 min']], g: '23 items · 3 stores' },
+    { meals: [['🫐','Breakfast','Greek yogurt parfait','3 min'],['🥙','Lunch','Falafel pita','10 min'],['🍛','Dinner','Coconut chickpea curry','30 min']], g: '23 items · 3 stores' },
+    { meals: [['🥯','Breakfast','Everything bagel, lox','5 min'],['🍝','Lunch','Curry leftovers','4 min'],['🍕','Dinner','Friday skillet pizza','25 min']], g: '23 items · 3 stores' },
+    { meals: [['🧇','Breakfast','Weekend waffles','20 min'],['🥗','Lunch','Big chopped salad','15 min'],['🐟','Dinner','Miso‑glazed salmon','30 min']], g: '23 items · 3 stores' },
+    { meals: [['🍳','Breakfast','Shakshuka','25 min'],['🥘','Lunch','Salmon rice bowls','10 min'],['🍖','Dinner','Sunday braised short ribs','2 hr 30'] ], g: '23 items · 3 stores' },
+  ];
+  const colors = ['var(--lemon-soft)','var(--green-soft)','var(--tomato-soft)'];
+  const mealList = document.getElementById('mealList');
+  const weekPicker = document.getElementById('weekPicker');
+  function renderDay(i) {
+    mealList.innerHTML = plans[i].meals.map((m, k) => `
+      <div class="meal-card" style="animation-delay:${k * 60}ms; margin-bottom:.6rem">
+        <div class="thumb" style="background:${colors[k]}">${m[0]}</div>
+        <div class="meta"><small>${m[1]}</small><span>${m[2]}</span></div>
+        <div class="time">${m[3]}</div>
+      </div>`).join('');
+  }
+  weekPicker.addEventListener('click', e => {
+    const btn = e.target.closest('button'); if (!btn) return;
+    weekPicker.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderDay(+btn.dataset.day);
+  });
+  renderDay(1);
+
+  // Pricing toggle
+  document.querySelectorAll('.toggle button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.toggle button').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      const p = btn.dataset.period;
+      document.querySelectorAll('.price b[data-monthly]').forEach(el => {
+        el.textContent = '$' + el.dataset[p];
+      });
+    });
+  });
+
+  // FAQ: close others when one opens
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open) document.querySelectorAll('details').forEach(o => { if (o !== d) o.open = false; });
+    });
+  });
+
+  // CTA form
+  document.getElementById('ctaForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const input = document.getElementById('ctaEmail');
+    if (!input.checkValidity() || !input.value.includes('@')) {
+      input.focus(); input.style.boxShadow = '0 0 0 3px var(--tomato)';
+      setTimeout(() => input.style.boxShadow = '', 1200);
+      return;
+    }
+    e.target.style.display = 'none';
+    document.getElementById('ctaNote').style.display = 'none';
+    document.getElementById('ctaSuccess').style.display = 'block';
+  });
+
+  // Scroll reveal
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

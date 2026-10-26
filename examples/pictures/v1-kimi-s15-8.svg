@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" width="900" height="640" role="img" aria-labelledby="t">
+  <title id="t">Blueprint-style technical line drawing of a pelican riding a bicycle, side profile</title>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.05"/>
+    </pattern>
+  </defs>
+  <style>
+    .l{fill:none;stroke:#e8f4ff;stroke-linecap:round;stroke-linejoin:round}
+    .t{fill:#e8f4ff;font-family:'Courier New',monospace;letter-spacing:3px}
+  </style>
+
+  <!-- blueprint sheet -->
+  <rect width="900" height="640" fill="#123f6e"/>
+  <rect width="900" height="640" fill="url(#grid)"/>
+  <rect x="20" y="20" width="860" height="600" class="l" stroke-width="2" opacity="0.5"/>
+
+  <!-- construction lines + wheelbase dimension -->
+  <g class="l" opacity="0.5">
+    <line x1="80" y1="492" x2="820" y2="492" stroke-width="2.5" stroke-dasharray="14 9"/>
+    <line x1="158" y1="420" x2="342" y2="420" stroke-width="2" stroke-dasharray="10 8"/>
+    <line x1="250" y1="328" x2="250" y2="512" stroke-width="2" stroke-dasharray="10 8"/>
+    <line x1="468" y1="420" x2="652" y2="420" stroke-width="2" stroke-dasharray="10 8"/>
+    <line x1="560" y1="328" x2="560" y2="512" stroke-width="2" stroke-dasharray="10 8"/>
+    <line x1="250" y1="532" x2="250" y2="548" stroke-width="2"/>
+    <line x1="560" y1="532" x2="560" y2="548" stroke-width="2"/>
+    <line x1="250" y1="540" x2="560" y2="540" stroke-width="2"/>
+    <path d="M262 540L250 535.5L250 544.5Z" fill="#e8f4ff" stroke="none"/>
+    <path d="M548 540L560 535.5L560 544.5Z" fill="#e8f4ff" stroke="none"/>
+  </g>
+
+  <!-- wheels -->
+  <g class="l">
+    <circle cx="250" cy="420" r="70" stroke-width="10"/>
+    <circle cx="250" cy="420" r="55" stroke-width="3"/>
+    <circle cx="250" cy="420" r="9" stroke-width="7"/>
+    <path d="M250 364V476M194 420H306" stroke-width="7"/>
+    <circle cx="560" cy="420" r="70" stroke-width="10"/>
+    <circle cx="560" cy="420" r="55" stroke-width="3"/>
+    <circle cx="560" cy="420" r="9" stroke-width="7"/>
+    <path d="M560 364V476M504 420H616" stroke-width="7"/>
+  </g>
+
+  <!-- bicycle frame -->
+  <g class="l">
+    <path stroke-width="10" d="M400 425L345 305M345 305L505 295M505 292L522 328M400 425L516 320M400 425L250 420M345 305L250 420M514 316L560 420"/>
+    <path stroke-width="12" d="M312 296C326 284 352 282 368 292"/>
+    <path stroke-width="10" d="M505 292L520 238"/>
+    <path stroke-width="10" d="M520 238C514 227 504 222 494 223C487 224 484 230 488 236"/>
+    <circle cx="400" cy="425" r="15" stroke-width="8"/>
+    <circle cx="400" cy="425" r="23" stroke-width="3"/>
+    <circle cx="250" cy="420" r="11" stroke-width="4"/>
+    <path stroke-width="4" stroke-dasharray="8 7" d="M250 409L398 402M250 431L398 448"/>
+    <path stroke-width="9" d="M400 425L435 462M400 425L365 388"/>
+    <path stroke-width="10" d="M432 466L462 466M352 384L378 384"/>
+  </g>
+
+  <!-- pelican, seated upright and pedaling -->
+  <g class="l">
+    <path stroke-width="11" d="M288 278L254 296M292 288L262 306M285 268L256 280"/>
+    <path stroke-width="12" d="M292 282C268 250 268 205 292 178C312 155 348 148 368 165C390 183 398 220 390 252C383 280 360 300 332 301C315 301 300 294 292 282Z"/>
+    <path stroke-width="8" d="M300 208C326 194 356 200 368 224C374 244 364 268 344 276"/>
+    <path stroke-width="11" d="M336 302L302 348L358 380"/>
+    <path stroke-width="11" d="M352 304L396 366L438 456"/>
+    <path stroke-width="10" d="M350 380L376 385M430 460L460 464"/>
+    <path stroke-width="11" d="M374 188C412 198 452 212 492 222"/>
+    <path stroke-width="12" d="M334 160C340 142 348 128 356 118M372 166C382 150 387 136 384 122L392 111"/>
+    <circle cx="368" cy="105" r="26" stroke-width="12"/>
+    <path stroke-width="8" d="M346 90C340 82 339 74 343 68"/>
+    <path stroke-width="10" d="M390 90C436 91 486 97 528 105C486 111 438 114 392 111"/>
+    <path stroke-width="3" d="M420 96C450 98 480 101 505 104"/>
+    <path stroke-width="10" d="M392 111C412 146 458 165 496 152C514 145 524 126 528 105"/>
+    <path stroke-width="8" d="M528 105L536 110"/>
+    <circle cx="372" cy="98" r="5" fill="#e8f4ff" stroke="none"/>
+  </g>
+
+  <!-- annotations -->
+  <text x="44" y="58" class="t" font-size="14" opacity="0.8">TECHNICAL DRAWING — AVIAN CYCLE</text>
+  <text x="856" y="58" text-anchor="end" class="t" font-size="14" opacity="0.8">SCALE 1:1 · SHEET 01</text>
+  <text x="44" y="592" class="t" font-size="20" opacity="0.9">FIG. 1 · PELICAN ON BICYCLE</text>
+  <text x="405" y="530" text-anchor="middle" class="t" font-size="14" opacity="0.8">310</text>
+</svg>

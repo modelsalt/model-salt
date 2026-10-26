@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <!-- Sky: smooth vertical navy gradient -->
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"    stop-color="#060B21"/>
+      <stop offset="0.55" stop-color="#0E1A3F"/>
+      <stop offset="1"    stop-color="#1C2C60"/>
+    </linearGradient>
+
+    <!-- Warm halo around the sun -->
+    <radialGradient id="halo" cx="610" cy="405" r="330" gradientUnits="userSpaceOnUse">
+      <stop offset="0"   stop-color="#FFB547" stop-opacity="0.45"/>
+      <stop offset="0.5" stop-color="#FF9A2E" stop-opacity="0.12"/>
+      <stop offset="1"   stop-color="#FF9A2E" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Glassy sun body (the single bright accent) -->
+    <radialGradient id="sunBody" cx="0.5" cy="0.5" r="0.5" fx="0.38" fy="0.32">
+      <stop offset="0"    stop-color="#FFF6CC"/>
+      <stop offset="0.35" stop-color="#FFD25E"/>
+      <stop offset="0.8"  stop-color="#FFA12E"/>
+      <stop offset="1"    stop-color="#EE7016"/>
+    </radialGradient>
+
+    <!-- Specular highlight -->
+    <radialGradient id="spec" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Cloud glass: pale periwinkle top to deep navy base -->
+    <linearGradient id="cloudBody" x1="0" y1="355" x2="0" y2="760" gradientUnits="userSpaceOnUse">
+      <stop offset="0"    stop-color="#CCD6F6"/>
+      <stop offset="0.45" stop-color="#8195D0"/>
+      <stop offset="1"    stop-color="#2D3F80"/>
+    </linearGradient>
+
+    <linearGradient id="cloudSheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Cloud silhouette -->
+    <clipPath id="cloudClip">
+      <rect x="205" y="560" width="614" height="200" rx="100"/>
+      <circle cx="355" cy="590" r="125"/>
+      <circle cx="525" cy="525" r="170"/>
+      <circle cx="690" cy="610" r="128"/>
+    </clipPath>
+
+    <filter id="blurBig"   x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="34"/></filter>
+    <filter id="blurMid"   x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
+    <filter id="blurSmall" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter>
+
+    <!-- Bright rim along the cloud's top edges, so it reads as 3D glass -->
+    <filter id="innerRim" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="b"/>
+      <feOffset in="b" dy="9" result="o"/>
+      <feComposite in="SourceAlpha" in2="o" operator="out" result="edge"/>
+      <feFlood flood-color="#FFFFFF" flood-opacity="0.9"/>
+      <feComposite in2="edge" operator="in" result="rim"/>
+      <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="rim"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Square background, no rounded corners -->
+  <rect width="1024" height="1024" fill="url(#sky)"/>
+
+  <!-- Sun halo -->
+  <circle cx="610" cy="405" r="330" fill="url(#halo)"/>
+
+  <!-- Sun -->
+  <circle cx="610" cy="405" r="150" fill="url(#sunBody)"/>
+  <circle cx="610" cy="405" r="148.5" fill="none" stroke="#FFF3C4" stroke-opacity="0.35" stroke-width="3"/>
+  <ellipse cx="560" cy="330" rx="66" ry="36" transform="rotate(-32 560 330)" fill="url(#spec)"/>
+
+  <!-- Cloud shadow cast on the sun and sky -->
+  <g fill="#03081C" opacity="0.55" filter="url(#blurMid)" transform="translate(0 26)">
+    <rect x="205" y="560" width="614" height="200" rx="100"/>
+    <circle cx="355" cy="590" r="125"/>
+    <circle cx="525" cy="525" r="170"/>
+    <circle cx="690" cy="610" r="128"/>
+  </g>
+
+  <!-- Glass cloud -->
+  <g filter="url(#innerRim)">
+    <g clip-path="url(#cloudClip)">
+      <rect x="180" y="340" width="660" height="440" fill="url(#cloudBody)"/>
+      <!-- Sun light coming through the frosted glass -->
+      <circle cx="640" cy="420" r="160" fill="#FFB547" opacity="0.5" filter="url(#blurBig)"/>
+      <!-- Soft top sheen -->
+      <ellipse cx="470" cy="470" rx="230" ry="110" fill="url(#cloudSheen)" opacity="0.7"/>
+      <!-- Depth shading at the base -->
+      <ellipse cx="512" cy="790" rx="360" ry="90" fill="#0A1440" opacity="0.6" filter="url(#blurMid)"/>
+      <!-- Small specular glints -->
+      <ellipse cx="455" cy="425" rx="58" ry="22" transform="rotate(-18 455 425)" fill="#FFFFFF" opacity="0.55" filter="url(#blurSmall)"/>
+      <ellipse cx="315" cy="520" rx="30" ry="13" transform="rotate(-25 315 520)" fill="#FFFFFF" opacity="0.4" filter="url(#blurSmall)"/>
+    </g>
+  </g>
+</svg>

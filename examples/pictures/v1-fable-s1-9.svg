@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="800" height="520">
+  <!-- Palette: cream background, charcoal ink, marigold, slate blue -->
+  <defs>
+    <filter id="wobble" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+
+  <!-- Solid flat background -->
+  <rect width="800" height="520" fill="#f3e7cf"/>
+
+  <g filter="url(#wobble)" fill="none" stroke="#2a2a2a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- Ground line, sketched twice -->
+    <path d="M40 440 C 200 436, 420 444, 760 439"/>
+    <path d="M60 446 C 260 450, 500 442, 740 447" stroke-width="1.6" opacity="0.6"/>
+
+    <!-- ===== BICYCLE (slate blue) ===== -->
+    <g stroke="#4b6f8c">
+      <!-- Rear wheel -->
+      <circle cx="210" cy="380" r="62"/>
+      <circle cx="210" cy="380" r="58" stroke-width="1.5" opacity="0.7"/>
+      <circle cx="210" cy="380" r="7"/>
+      <g stroke-width="1.8" opacity="0.8">
+        <path d="M210 322 L210 438"/><path d="M152 380 L268 380"/>
+        <path d="M169 339 L251 421"/><path d="M251 339 L169 421"/>
+        <path d="M188 326 L232 434"/><path d="M232 326 L188 434"/>
+        <path d="M156 358 L264 402"/><path d="M264 358 L156 402"/>
+      </g>
+      <!-- Front wheel -->
+      <circle cx="560" cy="380" r="62"/>
+      <circle cx="560" cy="380" r="58" stroke-width="1.5" opacity="0.7"/>
+      <circle cx="560" cy="380" r="7"/>
+      <g stroke-width="1.8" opacity="0.8">
+        <path d="M560 322 L560 438"/><path d="M502 380 L618 380"/>
+        <path d="M519 339 L601 421"/><path d="M601 339 L519 421"/>
+        <path d="M538 326 L582 434"/><path d="M582 326 L538 434"/>
+        <path d="M506 358 L614 402"/><path d="M614 358 L506 402"/>
+      </g>
+      <!-- Frame -->
+      <path d="M210 380 L300 250 L470 250"/>
+      <path d="M210 380 L380 372"/>
+      <path d="M300 250 L380 372 L470 250"/>
+      <path d="M470 250 L510 232 L560 380"/>
+      <path d="M475 252 L562 382" stroke-width="2" opacity="0.6"/>
+      <!-- Seat post and saddle -->
+      <path d="M300 250 L292 222"/>
+      <path d="M268 222 C 285 214, 310 214, 326 222 C 310 230, 290 231, 268 222 Z" fill="#2a2a2a" stroke="#2a2a2a"/>
+      <!-- Handlebar stem and bars -->
+      <path d="M510 232 L498 196"/>
+      <path d="M474 192 C 490 186, 512 186, 530 198"/>
+      <path d="M474 192 C 470 200, 472 206, 478 210" stroke-width="4"/>
+      <!-- Crank and pedals -->
+      <circle cx="380" cy="372" r="13"/>
+      <path d="M380 372 L410 404"/>
+      <path d="M380 372 L350 340"/>
+      <path d="M400 404 L422 404" stroke-width="5"/>
+      <path d="M340 340 L360 340" stroke-width="5"/>
+      <!-- Chain -->
+      <path d="M210 368 C 280 352, 330 356, 380 359" stroke-width="2" stroke-dasharray="4 3"/>
+      <path d="M210 392 C 280 388, 330 388, 380 385" stroke-width="2" stroke-dasharray="4 3"/>
+    </g>
+
+    <!-- ===== PELICAN ===== -->
+    <!-- Legs from saddle to pedals (marigold) -->
+    <g stroke="#e2a131" stroke-width="5">
+      <path d="M300 230 C 330 280, 350 330, 350 340"/>
+      <path d="M305 232 C 360 300, 400 370, 410 402"/>
+      <!-- Webbed feet on pedals -->
+      <path d="M336 340 L350 332 L364 340 L352 346 Z" fill="#e2a131" stroke-width="2.5"/>
+      <path d="M396 404 L410 394 L426 404 L412 410 Z" fill="#e2a131" stroke-width="2.5"/>
+    </g>
+
+    <!-- Body: upright on the saddle -->
+    <path d="M268 226 C 240 190, 250 130, 300 110 C 350 92, 392 118, 386 168 C 382 200, 350 226, 326 226" fill="#f3e7cf"/>
+    <!-- Tail feathers -->
+    <path d="M262 214 C 236 206, 222 210, 214 224 C 232 220, 246 224, 258 230" fill="#f3e7cf"/>
+    <path d="M250 212 L228 198" stroke-width="2"/>
+    <path d="M244 220 L218 212" stroke-width="2"/>
+
+    <!-- Near wing reaching forward to the handlebars -->
+    <path d="M330 150 C 380 150, 430 168, 476 194" stroke-width="7"/>
+    <path d="M330 150 C 370 128, 420 150, 474 190" fill="#f3e7cf" stroke-width="3.5"/>
+    <path d="M345 160 C 380 158, 410 170, 440 182" stroke-width="2" opacity="0.7"/>
+    <!-- Wing-tip "hand" wrapping the bar -->
+    <path d="M466 184 C 478 180, 486 188, 480 198 C 474 204, 464 200, 466 190" fill="#f3e7cf"/>
+
+    <!-- Neck -->
+    <path d="M330 112 C 340 86, 352 68, 372 56" stroke-width="3.5"/>
+    <path d="M372 112 C 380 92, 390 76, 404 62" stroke-width="3.5"/>
+    <!-- Head -->
+    <path d="M362 58 C 364 36, 392 28, 412 42 C 428 54, 420 70, 404 72 C 390 76, 372 74, 362 58 Z" fill="#f3e7cf"/>
+    <!-- Eye -->
+    <circle cx="398" cy="50" r="4.5" fill="#2a2a2a" stroke="none"/>
+    <circle cx="399.5" cy="48.5" r="1.3" fill="#f3e7cf" stroke="none"/>
+    <!-- Tiny head crest -->
+    <path d="M372 36 L364 24"/>
+    <path d="M382 32 L380 20"/>
+
+    <!-- Beak (marigold) with pouch, pointing right -->
+    <g stroke="#2a2a2a">
+      <path d="M414 48 C 450 46, 500 50, 536 58 C 500 62, 450 62, 416 60 Z" fill="#e2a131"/>
+      <path d="M416 60 C 440 70, 490 84, 534 60 C 500 88, 450 96, 420 72 Z" fill="#e2a131"/>
+      <path d="M420 54 C 460 54, 500 56, 530 58" stroke-width="1.6" opacity="0.7"/>
+    </g>
+
+    <!-- Sketchy second pass on body outline -->
+    <path d="M272 222 C 246 186, 258 136, 304 116" stroke-width="1.6" opacity="0.55"/>
+    <path d="M356 100 C 388 118, 390 172, 364 206" stroke-width="1.6" opacity="0.55"/>
+
+    <!-- Motion dashes behind the rear wheel -->
+    <g stroke-width="2.5" opacity="0.8">
+      <path d="M110 350 L136 352"/>
+      <path d="M96 380 L128 380"/>
+      <path d="M112 410 L138 408"/>
+    </g>
+  </g>
+</svg>

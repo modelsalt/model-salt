@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <path id="frame" d="M250 440 L370 450 L340 318 Z M340 318 L500 316 L510 356 L370 450" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+    <path id="fork" d="M510 356 Q518 410 530 440" fill="none" stroke-linecap="round"/>
+    <g id="wheel">
+      <circle r="85" fill="none" stroke="#3B2A4A" stroke-width="14"/>
+      <circle r="76" fill="none" stroke="#C9B8EC" stroke-width="5"/>
+      <g stroke="#3B2A4A" stroke-width="2.5">
+        <line x1="-74" y1="0" x2="74" y2="0"/>
+        <line x1="0" y1="-74" x2="0" y2="74"/>
+        <line x1="-52" y1="-52" x2="52" y2="52"/>
+        <line x1="-52" y1="52" x2="52" y2="-52"/>
+        <line x1="-28" y1="-68" x2="28" y2="68"/>
+        <line x1="-68" y1="-28" x2="68" y2="28"/>
+        <line x1="-28" y1="68" x2="28" y2="-68"/>
+        <line x1="-68" y1="28" x2="68" y2="-28"/>
+      </g>
+      <circle r="10" fill="#FFE3A3" stroke="#3B2A4A" stroke-width="4"/>
+    </g>
+  </defs>
+
+  <!-- Open sky -->
+  <rect width="800" height="600" fill="#CDEBFA"/>
+  <circle cx="660" cy="100" r="48" fill="#FFF1B5" stroke="#3B2A4A" stroke-width="5"/>
+  <g fill="#FFFFFF" stroke="#3B2A4A" stroke-width="5" stroke-linejoin="round">
+    <path d="M90 120 q10 -30 40 -22 q15 -25 45 -8 q30 -5 30 22 q10 25 -20 28 h-85 q-25 -5 -10 -20z"/>
+    <path d="M410 70 q8 -22 32 -16 q14 -20 36 -4 q24 0 20 20 q4 18 -18 18 h-62 q-20 -4 -8 -18z"/>
+  </g>
+
+  <!-- Rolling hills -->
+  <path d="M0 360 Q120 270 260 330 T540 310 T800 320 V600 H0Z" fill="#DCCFF5" stroke="#3B2A4A" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M0 410 Q160 340 330 395 T650 375 T800 390 V600 H0Z" fill="#BDEBD0" stroke="#3B2A4A" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M0 500 Q200 470 400 505 T800 495 V600 H0Z" fill="#FFD6E3" stroke="#3B2A4A" stroke-width="5" stroke-linejoin="round"/>
+  <g fill="#FFF6A8" stroke="#3B2A4A" stroke-width="3">
+    <circle cx="90" cy="440" r="6"/><circle cx="180" cy="420" r="5"/><circle cx="660" cy="430" r="6"/><circle cx="740" cy="415" r="5"/>
+  </g>
+  <!-- Road -->
+  <path d="M0 525 H800" stroke="#3B2A4A" stroke-width="5"/>
+
+  <!-- Speed lines -->
+  <g stroke="#3B2A4A" stroke-width="5" stroke-linecap="round">
+    <line x1="60" y1="250" x2="190" y2="250"/>
+    <line x1="90" y1="290" x2="230" y2="290"/>
+    <line x1="40" y1="330" x2="150" y2="330"/>
+  </g>
+
+  <!-- Far leg -->
+  <path d="M368 300 L385 392 L346 470" fill="none" stroke="#3B2A4A" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M368 300 L385 392 L346 470" fill="none" stroke="#F2A27E" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M330 470 L366 462 L360 480Z" fill="#F2A27E" stroke="#3B2A4A" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- Wheels -->
+  <use href="#wheel" x="250" y="440"/>
+  <use href="#wheel" x="530" y="440"/>
+
+  <!-- Road bike frame (diamond) -->
+  <use href="#frame" stroke="#3B2A4A" stroke-width="15"/>
+  <use href="#frame" stroke="#F7A8C4" stroke-width="8"/>
+  <use href="#fork" stroke="#3B2A4A" stroke-width="13"/>
+  <use href="#fork" stroke="#F7A8C4" stroke-width="6"/>
+
+  <!-- Seatpost & saddle -->
+  <line x1="340" y1="318" x2="336" y2="300" stroke="#3B2A4A" stroke-width="7"/>
+  <path d="M308 296 Q335 288 362 298 Q340 306 312 304Z" fill="#B8A6E6" stroke="#3B2A4A" stroke-width="5" stroke-linejoin="round"/>
+
+  <!-- Stem & drop handlebar -->
+  <path d="M500 316 L520 304 Q552 302 552 326 Q552 348 530 346" fill="none" stroke="#3B2A4A" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M500 316 L520 304 Q552 302 552 326 Q552 348 530 346" fill="none" stroke="#C9B8EC" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Chainring & crank -->
+  <circle cx="370" cy="450" r="22" fill="#FFE3A3" stroke="#3B2A4A" stroke-width="5"/>
+  <line x1="346" y1="470" x2="396" y2="430" stroke="#3B2A4A" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- Pelican tail -->
+  <path d="M310 262 L268 248 L282 268 L262 280 L312 284Z" fill="#FFF8EE" stroke="#3B2A4A" stroke-width="5" stroke-linejoin="round"/>
+
+  <!-- Pelican body (low racing crouch) -->
+  <ellipse cx="385" cy="268" rx="88" ry="44" transform="rotate(-8 385 268)" fill="#FFF8EE" stroke="#3B2A4A" stroke-width="5"/>
+
+  <!-- Near leg -->
+  <path d="M392 298 L436 368 L397 430" fill="none" stroke="#3B2A4A" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M392 298 L436 368 L397 430" fill="none" stroke="#FFB896" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M382 432 L418 424 L410 442Z" fill="#FFB896" stroke="#3B2A4A" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- Wing stretched to handlebar -->
+  <path d="M345 250 Q420 220 470 258 Q510 288 548 322 L530 330 L536 338 L514 336 Q460 320 420 300 Q370 285 345 250Z" fill="#F6CFE4" stroke="#3B2A4A" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M385 262 Q420 270 450 290 M400 248 Q440 258 470 282" fill="none" stroke="#3B2A4A" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Neck stretched forward -->
+  <path d="M440 236 Q500 212 560 206 L566 236 Q505 248 462 272Z" fill="#FFF8EE" stroke="#3B2A4A" stroke-width="5" stroke-linejoin="round"/>
+
+  <!-- Head -->
+  <circle cx="576" cy="214" r="28" fill="#FFF8EE" stroke="#3B2A4A" stroke-width="5"/>
+  <path d="M560 190 Q556 172 572 176 Q566 160 586 168" fill="none" stroke="#3B2A4A" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Beak pouch + upper mandible -->
+  <path d="M596 222 Q660 268 712 236 L600 230Z" fill="#FFC9A8" stroke="#3B2A4A" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M592 202 L724 222 Q730 230 718 232 L598 230 Q588 216 592 202Z" fill="#FFE3A3" stroke="#3B2A4A" stroke-width="5" stroke-linejoin="round"/>
+  <line x1="604" y1="216" x2="706" y2="226" stroke="#3B2A4A" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Eye with determined brow -->
+  <circle cx="580" cy="206" r="7" fill="#FFFFFF" stroke="#3B2A4A" stroke-width="3"/>
+  <circle cx="582" cy="206" r="3.5" fill="#3B2A4A"/>
+  <path d="M570 194 L592 198" stroke="#3B2A4A" stroke-width="4" stroke-linecap="round"/>
+  <ellipse cx="566" cy="226" rx="7" ry="4" fill="#FFB3C7"/>
+</svg>

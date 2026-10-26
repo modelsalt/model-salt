@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CHOMP! — Family Meal Planning Without The Meltdowns</title>
+  <!-- Google Fonts for Neo-Brutalist Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-cream: #FFFDF5;
+      --black: #000000;
+      --white: #FFFFFF;
+      --neon-lime: #CCFF00;
+      --neon-pink: #FF2A85;
+      --neon-cyan: #00F0FF;
+      --neon-yellow: #FFE600;
+      --neon-purple: #B57CFF;
+      --border-thick: 4px solid var(--black);
+      --border-thin: 2px solid var(--black);
+      --shadow-lg: 8px 8px 0px var(--black);
+      --shadow-md: 5px 5px 0px var(--black);
+      --shadow-sm: 3px 3px 0px var(--black);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-cream);
+      background-image: radial-gradient(var(--black) 1.25px, transparent 1.25px);
+      background-size: 28px 28px;
+      color: var(--black);
+      font-family: 'Space Grotesk', sans-serif;
+      line-height: 1.4;
+      overflow-x: hidden;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+    }
+
+    .mono {
+      font-family: 'Space Mono', monospace;
+    }
+
+    /* Utility & Neo-Brutalist Components */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      border: var(--border-thin);
+      box-shadow: var(--shadow-sm);
+      background: var(--neon-yellow);
+      margin-bottom: 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--white);
+      color: var(--black);
+      border: var(--border-thick);
+      box-shadow: var(--shadow-md);
+      padding: 12px 20px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0px var(--black);
+    }
+
+    .btn:active {
+      transform: translate(4px, 4px);
+      box-shadow: 1px 1px 0px var(--black);
+    }
+
+    .btn-apple {
+      background: var(--neon-lime);
+    }
+
+    .btn-google {
+      background: var(--neon-cyan);
+    }
+
+    .store-text {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      line-height: 1.1;
+    }
+
+    .store-text small {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+    }
+
+    .store-text strong {
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+
+    /* Top Marquee */
+    .marquee-bar {
+      background: var(--black);
+      color: var(--neon-lime);
+      border-bottom: var(--border-thick);
+      padding: 10px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .marquee-track {
+      display: inline-block;
+      animation: scroll 22s linear infinite;
+    }
+
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* Navigation */
+    header {
+      background: var(--white);
+      border-bottom: var(--border-thick);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+
+    .logo {
+      font-size: 2.1rem;
+      font-weight: 800;
+      text-decoration: none;
+      color: var(--black);
+      background: var(--neon-pink);
+      color: var(--white);
+      padding: 4px 16px;
+      border: var(--border-thick);
+      box-shadow: var(--shadow-sm);
+      transform: rotate(-2deg);
+      display: inline-block;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .nav-links a:not(.btn) {
+      color: var(--black);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.05rem;
+      border-bottom: 3px solid transparent;
+    }
+
+    .nav-links a:not(.btn):hover {
+      border-bottom: 3px solid var(--neon-pink);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 72px 0 90px;
+      border-bottom: var(--border-thick);
+      background: linear-gradient(135deg, var(--bg-cream) 65%, var(--neon-yellow) 65%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 5.2vw, 4.7rem);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 .highlight-pink {
+      background: var(--neon-pink);
+      color: var(--white);
+      padding: 0 10px;
+      border: 3px solid var(--black);
+      display: inline-block;
+      transform: rotate(-1deg);
+    }
+
+    .hero h1 .highlight-lime {
+      background: var(--neon-lime);
+      padding: 0 10px;
+      border: 3px solid var(--black);
+      display: inline-block;
+      transform: rotate(1.5deg);
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      max-width: 560px;
+      margin-bottom: 32px;
+      font-weight: 500;
+      background: var(--white);
+      padding: 16px;
+      border: var(--border-thin);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* CTA Download Cluster */
+    .cta-cluster {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .store-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .qr-box {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--white);
+      border: var(--border-thick);
+      box-shadow: var(--shadow-md);
+      padding: 12px 16px;
+    }
+
+    .qr-code-svg {
+      width: 80px;
+      height: 80px;
+      border: var(--border-thin);
+      padding: 4px;
+      background: var(--white);
+      flex-shrink: 0;
+    }
+
+    .qr-label {
+      max-width: 115px;
+      font-size: 0.8rem;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    /* Hero Graphic / Phone Mockup */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .phone-mockup {
+      width: 100%;
+      max-width: 370px;
+      background: var(--white);
+      border: 6px solid var(--black);
+      border-radius: 32px;
+      box-shadow: 14px 14px 0px var(--black);
+      padding: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .phone-notch {
+      width: 110px;
+      height: 18px;
+      background: var(--black);
+      border-radius: 20px;
+      margin: 0 auto 18px;
+    }
+
+    .app-header {
+      background: var(--neon-purple);
+      border: var(--border-thin);
+      padding: 12px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .app-day-card {
+      border: var(--border-thin);
+      padding: 12px;
+      margin-bottom: 12px;
+      background: var(--bg-cream);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .app-tag-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .mini-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border: 1.5px solid var(--black);
+    }
+
+    .geo-star {
+      position: absolute;
+      top: -30px;
+      right: -15px;
+      width: 110px;
+      height: 110px;
+      z-index: 3;
+      animation: spinSlow 16s linear infinite;
+    }
+
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Zig-Zag Alternating Feature Rows */
+    .features-section {
+      padding: 90px 0;
+      border-bottom: var(--border-thick);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      display: inline-block;
+      background: var(--white);
+      padding: 12px 28px;
+      border: var(--border-thick);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .zigzag-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+      margin-bottom: 96px;
+    }
+
+    .zigzag-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .zigzag-row.reverse .zigzag-media {
+      order: 2;
+    }
+
+    .zigzag-row.reverse .zigzag-text {
+      order: 1;
+    }
+
+    .zigzag-media {
+      background: var(--white);
+      border: var(--border-thick);
+      box-shadow: var(--shadow-lg);
+      padding: 28px;
+      position: relative;
+    }
+
+    .zigzag-media.bg-cyan { background: var(--neon-cyan); }
+    .zigzag-media.bg-pink { background: var(--neon-pink); }
+    .zigzag-media.bg-lime { background: var(--neon-lime); }
+
+    .zigzag-text h3 {
+      font-size: clamp(1.9rem, 3vw, 2.75rem);
+      margin-bottom: 18px;
+    }
+
+    .zigzag-text p {
+      font-size: 1.15rem;
+      margin-bottom: 20px;
+    }
+
+    .feature-checklist {
+      list-style: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.95rem;
+    }
+
+    .feature-checklist li {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--white);
+      padding: 8px 12px;
+      border: var(--border-thin);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Mock UI Widgets inside Zig-Zag Media */
+    .ui-card {
+      background: var(--white);
+      border: var(--border-thick);
+      box-shadow: var(--shadow-md);
+      padding: 20px;
+    }
+
+    .kid-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 12px;
+      border: var(--border-thin);
+      margin-bottom: 10px;
+      background: var(--bg-cream);
+      font-weight: 700;
+    }
+
+    .status-pill {
+      padding: 4px 10px;
+      border: var(--border-thin);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      background: var(--neon-yellow);
+    }
+
+    .aisle-group {
+      margin-bottom: 12px;
+    }
+
+    .aisle-header {
+      background: var(--black);
+      color: var(--white);
+      padding: 4px 10px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+
+    .grocery-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 10px;
+      border: 2px solid var(--black);
+      border-top: none;
+      background: var(--white);
+      font-weight: 700;
+    }
+
+    /* Interactive Dietary Filter Section */
+    .filter-section {
+      padding: 90px 0;
+      background: var(--neon-purple);
+      border-bottom: var(--border-thick);
+    }
+
+    .filter-box {
+      background: var(--bg-cream);
+      border: var(--border-thick);
+      box-shadow: var(--shadow-lg);
+      padding: 48px 36px;
+    }
+
+    .filter-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+      margin: 32px 0 40px;
+    }
+
+    .filter-btn {
+      font-family: 'Space Mono', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 12px 22px;
+      background: var(--white);
+      border: var(--border-thick);
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      transition: all 0.1s ease;
+    }
+
+    .filter-btn:hover {
+      background: var(--neon-yellow);
+      transform: translate(-2px, -2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .filter-btn.active {
+      background: var(--neon-lime);
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px var(--black);
+    }
+
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 28px;
+    }
+
+    .recipe-card {
+      background: var(--white);
+      border: var(--border-thick);
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.15s ease;
+    }
+
+    .recipe-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .recipe-banner {
+      height: 110px;
+      border-bottom: var(--border-thick);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      font-size: 3rem;
+    }
+
+    .recipe-body {
+      padding: 20px;
+      flex-grow: 1;
+    }
+
+    .recipe-body h4 {
+      font-size: 1.35rem;
+      margin-bottom: 8px;
+    }
+
+    .recipe-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      margin-bottom: 12px;
+      color: #222;
+    }
+
+    .kid-approval {
+      background: var(--neon-yellow);
+      border: var(--border-thin);
+      padding: 6px 10px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-top: 12px;
+      display: inline-block;
+    }
+
+    .recipe-tags {
+      padding: 12px 20px;
+      border-top: var(--border-thin);
+      background: var(--bg-cream);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    /* Reviews Section */
+    .reviews-section {
+      padding: 90px 0;
+      border-bottom: var(--border-thick);
+      background: var(--neon-yellow);
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+
+    .review-card {
+      background: var(--white);
+      border: var(--border-thick);
+      box-shadow: var(--shadow-lg);
+      padding: 28px;
+      position: relative;
+    }
+
+    .stars {
+      font-size: 1.4rem;
+      margin-bottom: 14px;
+      letter-spacing: 2px;
+      background: var(--black);
+      color: var(--neon-lime);
+      display: inline-block;
+      padding: 2px 10px;
+    }
+
+    .review-card p {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .reviewer {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 0.9rem;
+      border-top: var(--border-thin);
+      padding-top: 12px;
+    }
+
+    /* Footer CTA */
+    footer {
+      background: var(--black);
+      color: var(--white);
+      padding: 80px 0 40px;
+    }
+
+    .footer-cta-card {
+      background: var(--neon-cyan);
+      color: var(--black);
+      border: var(--border-thick);
+      box-shadow: 10px 10px 0px var(--neon-pink);
+      padding: 48px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 32px;
+      align-items: center;
+      margin-bottom: 64px;
+    }
+
+    .footer-cta-card h2 {
+      font-size: clamp(2.1rem, 4vw, 3.3rem);
+      margin-bottom: 16px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      border-top: 2px solid #333;
+      padding-top: 28px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+      .hero-grid,
+      .zigzag-row,
+      .footer-cta-card {
+        grid-template-columns: 1fr;
+      }
+
+      .zigzag-row.reverse .zigzag-media {
+        order: 1;
+      }
+      .zigzag-row.reverse .zigzag-text {
+        order: 2;
+      }
+
+      .nav-links a:not(.btn) {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Brutalist Ticker -->
+  <div class="marquee-bar">
+    <div class="marquee-track">
+      ★ NO MORE 5PM DINNER PANIC ★ PICKY EATER PROOF ★ AUTOMATED BULK GROCERY LISTS ★ SYNC SCHEDULE WITH PARTNER &amp; KIDS ★ ZERO WEIRD LEFTOVERS ★ NO MORE 5PM DINNER PANIC ★ PICKY EATER PROOF ★ AUTOMATED BULK GROCERY LISTS ★ SYNC SCHEDULE WITH PARTNER &amp; KIDS ★
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav-inner">
+      <a href="#" class="logo">CHOMP!</a>
+      <nav class="nav-links">
+        <a href="#features">How It Works</a>
+        <a href="#recipes">Picky-Filter Demo</a>
+        <a href="#reviews">Parent Raves</a>
+        <a href="#download" class="btn btn-apple" style="padding: 8px 16px;">Get The App ↓</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Full-Width Hero Section -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="badge">FAMILY MEAL OS v3.2</span>
+        <h1>
+          ONE DINNER.<br>
+          <span class="highlight-pink">ZERO TEARS.</span><br>
+          <span class="highlight-lime">AUTO-SHOPPED.</span>
+        </h1>
+        <p>
+          Stop cooking three separate meals every Tuesday. <strong>CHOMP!</strong> syncs your chaotic family calendar, filters out your kids' "icky" ingredients, and builds a bulk aisle-sorted grocery list in 12 seconds flat.
+        </p>
+
+        <!-- Primary Conversion Goal: Mobile App Store Badges + QR Code -->
+        <div class="cta-cluster" id="download">
+          <div class="store-buttons">
+            <a href="#download-ios" class="btn btn-apple" aria-label="Download on the App Store">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.33c.64-.78 1.08-1.86.96-2.94-.93.04-2.07.62-2.73 1.4-.58.68-1.1 1.79-.96 2.84 1.04.08 2.09-.52 2.73-1.3z"/>
+              </svg>
+              <div class="store-text">
+                <small>Download on the</small>
+                <strong>App Store</strong>
+              </div>
+            </a>
+
+            <a href="#download-android" class="btn btn-google" aria-label="Get it on Google Play">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3 20.5v-17c0-.83.94-1.3 1.6-.8l14 8.5c.6.37.6 1.23 0 1.6l-14 8.5c-.66.5-1.6.03-1.6-.8z"/>
+              </svg>
+              <div class="store-text">
+                <small>GET IT ON</small>
+                <strong>Google Play</strong>
+              </div>
+            </a>
+          </div>
+
+          <div class="qr-box">
+            <!-- Neo-brutalist crisp SVG QR Code -->
+            <svg class="qr-code-svg" viewBox="0 0 100 100" fill="#000">
+              <rect x="5" y="5" width="30" height="30" fill="none" stroke="#000" stroke-width="6"/>
+              <rect x="13" y="13" width="14" height="14"/>
+              <rect x="65" y="5" width="30" height="30" fill="none" stroke="#000" stroke-width="6"/>
+              <rect x="73" y="13" width="14" height="14"/>
+              <rect x="5" y="65" width="30" height="30" fill="none" stroke="#000" stroke-width="6"/>
+              <rect x="13" y="73" width="14" height="14"/>
+              <rect x="43" y="8" width="8" height="8"/>
+              <rect x="43" y="24" width="14" height="8"/>
+              <rect x="8" y="43" width="16" height="8"/>
+              <rect x="34" y="43" width="22" height="14"/>
+              <rect x="66" y="45" width="10" height="10"/>
+              <rect x="84" y="45" width="12" height="18"/>
+              <rect x="43" y="66" width="12" height="12"/>
+              <rect x="63" y="68" width="18" height="8"/>
+              <rect x="45" y="84" width="24" height="10"/>
+              <rect x="78" y="82" width="16" height="14"/>
+            </svg>
+            <div class="qr-label">
+              SCAN WITH PHONE CAMERA FOR INSTANT 14-DAY FREE TRIAL
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Phone UI Preview -->
+      <div class="hero-visual">
+        <!-- Quirky Neo-Brutalist Starburst SVG -->
+        <svg class="geo-star" viewBox="0 0 100 100">
+          <polygon points="50,0 63,25 90,15 78,42 100,60 72,68 78,96 50,80 22,96 28,68 0,60 22,42 10,15 37,25" fill="#FF2A85" stroke="#000" stroke-width="4"/>
+          <text x="50" y="56" text-anchor="middle" fill="#FFF" font-family="Space Mono" font-weight="700" font-size="14">FREE!</text>
+        </svg>
+
+        <div class="phone-mockup">
+          <div class="phone-notch"></div>
+          <div class="app-header">
+            <strong class="mono">THIS WEEK'S PLAN</strong>
+            <span class="mini-tag" style="background: var(--neon-lime);">4 HUMANS</span>
+          </div>
+
+          <div class="app-day-card">
+            <div style="display:flex; justify-content:space-between; font-weight:800;">
+              <span>TUE • SOCCER NIGHT</span>
+              <span class="mono">15 MIN</span>
+            </div>
+            <div style="font-size:1.1rem; font-weight:700; margin-top:4px;">Crispy Sheet-Pan Tacos</div>
+            <div class="app-tag-row">
+              <span class="mini-tag" style="background: var(--neon-yellow);">NO CILANTRO (LEO)</span>
+              <span class="mini-tag" style="background: var(--neon-cyan);">GLUTEN-FREE</span>
+            </div>
+          </div>
+
+          <div class="app-day-card">
+            <div style="display:flex; justify-content:space-between; font-weight:800;">
+              <span>WED • LATE MEETING</span>
+              <span class="mono">SLOW COOK</span>
+            </div>
+            <div style="font-size:1.1rem; font-weight:700; margin-top:4px;">Hidden-Veggie Mac &amp; Cheese</div>
+            <div class="app-tag-row">
+              <span class="mini-tag" style="background: var(--neon-pink); color:#fff;">MUSHROOM-FREE (MAYA)</span>
+              <span class="mini-tag" style="background: var(--neon-lime);">BULK PREP</span>
+            </div>
+          </div>
+
+          <div style="background: var(--neon-lime); border: var(--border-thin); padding: 12px; text-align:center; font-weight:800; box-shadow: var(--shadow-sm);">
+            🛒 34 ITEMS AUTO-SORTED BY AISLE →
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Zig-Zag Alternating Feature Rows -->
+  <section class="features-section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <h2>BUILT FOR BUSY PARENTS, NOT TV CHEFS</h2>
+      </div>
+
+      <!-- Row 1: Left Media, Right Text -->
+      <div class="zigzag-row">
+        <div class="zigzag-media bg-pink">
+          <div class="ui-card">
+            <div class="badge" style="background: var(--neon-cyan);">PICKY-EATER RADAR ACTIVE</div>
+            <div class="kid-toggle">
+              <span>🧒 Leo (Age 6): "No squishy textures"</span>
+              <span class="status-pill">BLOCKED: MUSHROOMS</span>
+            </div>
+            <div class="kid-toggle">
+              <span>👧 Maya (Age 9): "Sauce on the side!"</span>
+              <span class="status-pill" style="background: var(--neon-lime);">MODULAR RECIPE</span>
+            </div>
+            <div class="kid-toggle">
+              <span>🧑 Dad: Trying Low-Carb</span>
+              <span class="status-pill" style="background: var(--neon-purple);">CAULI-SWAP READY</span>
+            </div>
+          </div>
+        </div>
+        <div class="zigzag-text">
+          <span class="badge">FEATURE 01 // PEACE AT THE TABLE</span>
+          <h3>THE PICKY-EATER VETO ENGINE</h3>
+          <p>
+            Create a profile for every member of your household—from the toddler who refuses anything green to the partner doing Keto. CHOMP! automatically suggests "deconstructable" family meals or effortless 1-minute side swaps.
+          </p>
+          <ul class="feature-checklist">
+            <li>✔ Blacklist specific ingredients per child</li>
+            <li>✔ "Sauce-on-the-side" friendly meal badges</li>
+            <li>✔ Track each kid's "Tried It &amp; Liked It" score</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Row 2: Right Media, Left Text (Reverse) -->
+      <div class="zigzag-row reverse">
+        <div class="zigzag-media bg-cyan">
+          <div class="ui-card">
+            <div style="display:flex; justify-content:space-between; margin-bottom:12px; font-weight:800;">
+              <span>BULK GROCERY MERGER</span>
+              <span class="mono" style="background:var(--neon-yellow); padding:0 6px; border:1px solid #000;">SAVED $44.20</span>
+            </div>
+            <div class="aisle-group">
+              <div class="aisle-header">AISLE 01 — PRODUCE (COMBINED FROM 4 MEALS)</div>
+              <div class="grocery-item"><span>☑ Yellow Onions</span><span class="mono">5 Large</span></div>
+              <div class="grocery-item"><span>☑ Baby Spinach (Family Tub)</span><span class="mono">16 oz</span></div>
+            </div>
+            <div class="aisle-group" style="margin-bottom:0;">
+              <div class="aisle-header">AISLE 04 — PANTRY &amp; BULK</div>
+              <div class="grocery-item"><span>☑ Black Beans (3-Pack)</span><span class="mono">45 oz</span></div>
+              <div class="grocery-item"><span>☐ Taco Shells + Lettuce Wraps</span><span class="mono">1 Box</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="zigzag-text">
+          <span class="badge" style="background: var(--neon-lime);">FEATURE 02 // ONE-TRIP SHOPPING</span>
+          <h3>AUTOMATED BULK GROCERY LISTS</h3>
+          <p>
+            Say goodbye to buying 1/4 cup of cilantro that rots in the crisper drawer. CHOMP! cross-references your whole week's recipes so ingredients overlap, combining quantities into smart bulk sizes sorted by store aisle.
+          </p>
+          <ul class="feature-checklist">
+            <li>✔ Merges duplicate ingredients across 7 days</li>
+            <li>✔ Real-time live sync when both parents shop</li>
+            <li>✔ 1-tap export to Instacart, Walmart, or Target</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Row 3: Left Media, Right Text -->
+      <div class="zigzag-row">
+        <div class="zigzag-media bg-lime">
+          <div class="ui-card">
+            <div class="badge" style="background: var(--neon-pink); color:#fff;">MULTI-PERSON CALENDAR SYNC</div>
+            <div style="border:var(--border-thin); padding:10px; margin-bottom:8px; background:var(--neon-yellow); font-weight:700;">
+              ⚡ ALERT: Thursday has Swim Practice (5:30 PM) + Piano (6:15 PM)
+            </div>
+            <div style="border:var(--border-thin); padding:12px; background:var(--bg-cream);">
+              <div class="mono" style="font-size:0.75rem; font-weight:700;">AUTO-SWAPPED THURSDAY DINNER TO:</div>
+              <div style="font-size:1.15rem; font-weight:800; margin:4px 0;">10-Minute Pesto Tortellini Skillet</div>
+              <div class="mono" style="font-size:0.8rem;">Prep: 2 mins • Dishes: 1 Pan</div>
+            </div>
+          </div>
+        </div>
+        <div class="zigzag-text">
+          <span class="badge" style="background: var(--neon-cyan);">FEATURE 03 // CHAOS-AWARE</span>
+          <h3>MULTI-PERSON FAMILY SCHEDULING</h3>
+          <p>
+            CHOMP! reads your family Google or Apple Calendar. Got soccer practice until 6:30 PM on Wednesday? It automatically assigns a 15-minute sheet-pan meal or a morning crockpot recipe—and assigns cooking duty to whichever parent is home first.
+          </p>
+          <ul class="feature-checklist">
+            <li>✔ Auto-matches prep time to your nightly free time</li>
+            <li>✔ Ping-pongs chef duties between partners</li>
+            <li>✔ Scales servings instantly when Grandma visits</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Dietary & Picky Filter Showcase -->
+  <section class="filter-section" id="recipes">
+    <div class="container">
+      <div class="filter-box">
+        <div style="text-align: center;">
+          <span class="badge" style="background: var(--neon-cyan);">LIVE INTERACTIVE DEMO</span>
+          <h2 style="font-size: clamp(2rem, 3.6vw, 3rem); margin-bottom: 12px;">TEST THE DIETARY &amp; PICKY FILTER</h2>
+          <p style="max-width: 650px; margin: 0 auto; font-size: 1.1rem;">
+            Click any dietary filter below to see how CHOMP! dynamically adapts your family recipe queue while keeping picky kids happy.
+          </p>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="filter-controls" role="group" aria-label="Dietary Preference Filters">
+          <button class="filter-btn active" data-filter="all">All Family Hits (6)</button>
+          <button class="filter-btn" data-filter="keto">Keto-Friendly</button>
+          <button class="filter-btn" data-filter="vegan">Vegan</button>
+          <button class="filter-btn" data-filter="gluten-free">Gluten-Free</button>
+          <button class="filter-btn" data-filter="picky-safe">100% Picky-Safe</button>
+        </div>
+
+        <!-- Dynamic Recipe Grid -->
+        <div class="recipe-grid" id="recipeGrid">
+          <!-- Populated by Vanilla JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- User Reviews Section -->
+  <section class="reviews-section" id="reviews">
+    <div class="container">
+      <div class="section-header">
+        <h2>PARENTS ARE LOSING THEIR MINDS (IN A GOOD WAY)</h2>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>
+            "My 7-year-old hates onions, my husband is doing Keto, and I work until 6 PM. CHOMP! is the only reason we aren't eating cereal four nights a week."
+          </p>
+          <div class="reviewer">
+            — SARAH M., MOM OF 3 (AUSTIN, TX)
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>
+            "The bulk grocery list merger cut our Sunday grocery bill by $65 the very first week. Zero slimy bags of forgotten herbs in the fridge!"
+          </p>
+          <div class="reviewer">
+            — MARCUS &amp; DEVON T., PARENTS OF TWINS
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>
+            "I love that it syncs with our shared calendar and automatically assigns slow-cooker meals on baseball nights. Best download of the year."
+          </p>
+          <div class="reviewer">
+            — JENNA K., BUSY WORKING PARENT
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer CTA -->
+  <footer>
+    <div class="container">
+      <div class="footer-cta-card">
+        <div>
+          <span class="badge" style="background: var(--neon-yellow);">RECLAIM YOUR EVENINGS</span>
+          <h2>READY TO DITCH THE "WHAT'S FOR DINNER?" TEXT?</h2>
+          <p style="font-size: 1.15rem; margin-bottom: 24px; font-weight: 500;">
+            Download <strong>CHOMP!</strong> on iOS or Android. Link your partner's phone for free and build your first week's bulk grocery list in under 60 seconds.
+          </p>
+          <div style="display:flex; flex-wrap:wrap; gap:14px;">
+            <a href="#download" class="btn btn-apple">
+              <div class="store-text">
+                <small>Download on the</small>
+                <strong>App Store</strong>
+              </div>
+            </a>
+            <a href="#download" class="btn" style="background: var(--neon-yellow);">
+              <div class="store-text">
+                <small>GET IT ON</small>
+                <strong>Google Play</strong>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:center;">
+          <div class="qr-box" style="transform: rotate(2deg);">
+            <svg class="qr-code-svg" viewBox="0 0 100 100" fill="#000">
+              <rect x="5" y="5" width="30" height="30" fill="none" stroke="#000" stroke-width="6"/>
+              <rect x="13" y="13" width="14" height="14"/>
+              <rect x="65" y="5" width="30" height="30" fill="none" stroke="#000" stroke-width="6"/>
+              <rect x="73" y="13" width="14" height="14"/>
+              <rect x="5" y="65" width="30" height="30" fill="none" stroke="#000" stroke-width="6"/>
+              <rect x="13" y="73" width="14" height="14"/>
+              <rect x="43" y="10" width="12" height="12"/>
+              <rect x="38" y="42" width="24" height="16"/>
+              <rect x="70" y="45" width="18" height="12"/>
+              <rect x="44" y="68" width="14" height="22"/>
+              <rect x="68" y="72" width="22" height="18"/>
+            </svg>
+            <div class="qr-label">
+              POINT CAMERA HERE TO INSTALL APP NOW
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2025 CHOMP! LABS INC. ALL RIGHTS RESERVED.</div>
+        <div>PRIVACY POLICY • TERMS OF SERVICE • PRESS KIT</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Vanilla JavaScript for Interactive Dietary Preference Filter -->
+  <script>
+    const recipes = [
+      {
+        title: "Build-Your-Own Burger Bowls",
+        emoji: "🍔",
+        bg: "#CCFF00",
+        prepTime: "18 MIN",
+        bulkOverlap: "Uses bulk ground beef + romaine",
+        kidNote: "Kids get mini slider buns; parents go bunless!",
+        categories: ["keto", "gluten-free", "picky-safe"]
+      },
+      {
+        title: "Crispy Coconut Chickpea Tenders",
+        emoji: "🥥",
+        bg: "#00F0FF",
+        prepTime: "20 MIN",
+        bulkOverlap: "Pantry staple batch cook",
+        kidNote: "Crunchy finger-food texture kids devour.",
+        categories: ["vegan", "gluten-free", "picky-safe"]
+      },
+      {
+        title: "Sheet-Pan Fajita Fiesta",
+        emoji: "🌮",
+        bg: "#FF2A85",
+        prepTime: "15 MIN",
+        bulkOverlap: "Shares bell peppers with Thu pasta",
+        kidNote: "Peppers sliced big so picky eaters can dodge 'em.",
+        categories: ["keto", "gluten-free"]
+      },
+      {
+        title: "10-Min Creamy Avocado Zoodles & Pasta",
+        emoji: "🥑",
+        bg: "#FFE600",
+        prepTime: "10 MIN",
+        bulkOverlap: "Uses 3 ripe bulk-bag avocados",
+        kidNote: "Tastes like buttery mac, zero visible greens!",
+        categories: ["vegan", "keto", "picky-safe"]
+      },
+      {
+        title: "Sweet Potato & Black Bean Quesadillas",
+        emoji: "🧀",
+        bg: "#B57CFF",
+        prepTime: "12 MIN",
+        bulkOverlap: "Uses leftover Tuesday black beans",
+        kidNote: "98% Kid Thumbs-Up Rating across 14k families.",
+        categories: ["vegan", "picky-safe"]
+      },
+      {
+        title: "Parmesan Crusted Salmon Bites",
+        emoji: "🐟",
+        bg: "#CCFF00",
+        prepTime: "14 MIN",
+        bulkOverlap: "Family-pack salmon fillet",
+        kidNote: "Bite-sized nuggets = zero 'fishy' complaints.",
+        categories: ["keto", "gluten-free", "picky-safe"]
+      }
+    ];
+
+    const recipeGrid = document.getElementById('recipeGrid');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+
+    function renderRecipes(filterKey) {
+      recipeGrid.innerHTML = '';
+
+      const filtered = filterKey === 'all'
+        ? recipes
+        : recipes.filter(r => r.categories.includes(filterKey));
+
+      filtered.forEach(recipe => {
+        const card = document.createElement('div');
+        card.className = 'recipe-card';
+
+        const tagsHtml = recipe.categories
+          .map(cat => `<span class="mini-tag" style="background: var(--white); text-transform:uppercase;">${cat}</span>`)
+          .join('');
+
+        card.innerHTML = `
+          <div>
+            <div class="recipe-banner" style="background: ${recipe.bg};">
+              <span>${recipe.emoji}</span>
+              <span class="badge" style="margin:0; background: var(--white);">⏱ ${recipe.prepTime}</span>
+            </div>
+            <div class="recipe-body">
+              <h4>${recipe.title}</h4>
+              <div class="recipe-meta">🛒 <strong>BULK SYNC:</strong> ${recipe.bulkOverlap}</div>
+              <div class="kid-approval">🧒 ${recipe.kidNote}</div>
+            </div>
+          </div>
+          <div class="recipe-tags">
+            ${tagsHtml}
+          </div>
+        `;
+        recipeGrid.appendChild(card);
+      });
+    }
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const selected = btn.getAttribute('data-filter');
+        renderRecipes(selected);
+      });
+    });
+
+    // Initial render
+    renderRecipes('all');
+  </script>
+</body>
+</html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prepped - Eat Better, Stress Less</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            light: '#dcfce7',
+                            DEFAULT: '#16a34a', // Green-600
+                            dark: '#15803d',
+                        },
+                        accent: {
+                            DEFAULT: '#f97316', // Orange-500
+                            hover: '#ea580c',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for subtle animations */
+        .float-anim {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-brand selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-md z-50 border-b border-slate-100 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+                    <div class="w-10 h-10 rounded-xl bg-brand flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-brand/30">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <span class="font-bold text-2xl tracking-tight text-slate-900">Prepped<span class="text-brand">.</span></span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-slate-600 hover:text-brand font-medium transition">Features</a>
+                    <a href="#how-it-works" class="text-slate-600 hover:text-brand font-medium transition">How it Works</a>
+                    <a href="#testimonials" class="text-slate-600 hover:text-brand font-medium transition">Reviews</a>
+                    <a href="#pricing" class="text-slate-600 hover:text-brand font-medium transition">Pricing</a>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="#" class="text-slate-600 hover:text-slate-900 font-medium">Log in</a>
+                    <a href="#cta" class="bg-brand hover:bg-brand-dark text-white px-5 py-2.5 rounded-full font-semibold transition shadow-lg shadow-brand/30 hover:shadow-brand/50 transform hover:-translate-y-0.5">
+                        Start Free Trial
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-600 hover:text-slate-900 focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 px-4 pt-2 pb-6 space-y-3 shadow-xl">
+            <a href="#features" class="block px-3 py-2 text-slate-600 font-medium hover:bg-slate-50 rounded-lg">Features</a>
+            <a href="#how-it-works" class="block px-3 py-2 text-slate-600 font-medium hover:bg-slate-50 rounded-lg">How it Works</a>
+            <a href="#testimonials" class="block px-3 py-2 text-slate-600 font-medium hover:bg-slate-50 rounded-lg">Reviews</a>
+            <a href="#pricing" class="block px-3 py-2 text-slate-600 font-medium hover:bg-slate-50 rounded-lg">Pricing</a>
+            <div class="pt-4 border-t border-slate-100 flex flex-col gap-3">
+                <a href="#" class="w-full text-center py-2.5 text-slate-600 font-medium border border-slate-200 rounded-full">Log in</a>
+                <a href="#cta" class="w-full text-center bg-brand text-white py-2.5 rounded-full font-semibold shadow-md">Start Free Trial</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                
+                <!-- Text Content -->
+                <div class="lg:col-span-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-100 text-accent font-semibold text-sm mb-6">
+                        <span class="flex h-2 w-2 rounded-full bg-accent"></span>
+                        #1 Meal Planning App of 2025
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight mb-6 leading-[1.15]">
+                        Stop wondering <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand to-emerald-400">what's for dinner.</span>
+                    </h1>
+                    <p class="text-lg text-slate-600 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Get personalized weekly meal plans, automated grocery lists, and delicious 30-minute recipes tailored to your diet and budget. Save 4+ hours every week.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#cta" class="bg-accent hover:bg-accent-hover text-white text-lg px-8 py-4 rounded-full font-bold transition shadow-xl shadow-accent/30 flex items-center justify-center gap-2 transform hover:-translate-y-1">
+                            Build Your First Plan <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </a>
+                        <a href="#how-it-works" class="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-lg px-8 py-4 rounded-full font-semibold transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-play text-brand"></i> See How It Works
+                        </a>
+                    </div>
+                    <div class="mt-8 flex items-center justify-center lg:justify-start gap-4 text-sm text-slate-500">
+                        <div class="flex -space-x-2">
+                            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt=""/>
+                            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80" alt=""/>
+                            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" alt=""/>
+                        </div>
+                        <p>Joined by <strong class="text-slate-700">50,000+</strong> happy home cooks</p>
+                    </div>
+                </div>
+
+                <!-- Image/App Mockup -->
+                <div class="lg:col-span-6 relative">
+                    <!-- Decorative background blob -->
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-tr from-brand-light to-emerald-50 rounded-full blur-3xl -z-10 opacity-70"></div>
+                    
+                    <div class="relative mx-auto max-w-md lg:max-w-none float-anim">
+                        <img src="https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&w=1000&q=80" alt="Healthy Food" class="rounded-3xl shadow-2xl border-8 border-white object-cover h-[500px] w-full">
+                        
+                        <!-- Floating UI Card 1 -->
+                        <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-4">
+                            <div class="bg-green-100 text-brand p-3 rounded-xl">
+                                <i class="fa-solid fa-check-double text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 font-medium">Grocery List</p>
+                                <p class="text-sm font-bold text-slate-800">Auto-generated in 1 click!</p>
+                            </div>
+                        </div>
+
+                        <!-- Floating UI Card 2 -->
+                        <div class="absolute top-8 -right-6 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3">
+                            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=100&q=80" class="w-12 h-12 rounded-xl object-cover" alt="Salad">
+                            <div>
+                                <p class="text-xs font-bold text-accent">Tonight's Dinner</p>
+                                <p class="text-sm font-bold text-slate-800">Thai Peanut Buddha Bowl</p>
+                                <p class="text-xs text-slate-400"><i class="fa-regular fa-clock"></i> 20 mins • 450 kcal</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-brand font-bold tracking-wide uppercase text-sm mb-2">Why Choose Prepped</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">Everything you need to conquer the kitchen</h3>
+                <p class="text-slate-600 text-lg">We take the cognitive load out of eating healthy. No more wasted produce, no more last-minute takeout guilt.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-slate-50 rounded-3xl p-8 border border-slate-100 hover:shadow-xl transition duration-300">
+                    <div class="w-14 h-14 bg-green-100 text-brand rounded-2xl flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">AI Personalization</h4>
+                    <p class="text-slate-600 leading-relaxed">Keto? Vegan? Picky kids? Gluten-free? Tell us what you like and we'll craft a menu you'll actually look forward to eating.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-slate-50 rounded-3xl p-8 border border-slate-100 hover:shadow-xl transition duration-300">
+                    <div class="w-14 h-14 bg-orange-100 text-accent rounded-2xl flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">Smart Grocery Lists</h4>
+                    <p class="text-slate-600 leading-relaxed">Ingredients are automatically consolidated and sorted by aisle. Export directly to Instacart, Amazon Fresh, or Walmart.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-slate-50 rounded-3xl p-8 border border-slate-100 hover:shadow-xl transition duration-300">
+                    <div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-piggy-bank"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">Zero Food Waste</h4>
+                    <p class="text-slate-600 leading-relaxed">Our algorithm cross-utilizes ingredients across the week. Buy a bunch of cilantro on Monday, use it all by Friday. Save ~$200/mo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 bg-slate-900 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-accent font-bold tracking-wide uppercase text-sm mb-2">Simple Workflow</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold mb-4">From couch to kitchen in 3 steps</h3>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-12 relative">
+                <!-- Connecting Line (Desktop) -->
+                <div class="hidden md:block absolute top-12 left-1/6 right-1/6 h-0.5 bg-slate-700 -z-10"></div>
+
+                <!-- Step 1 -->
+                <div class="text-center">
+                    <div class="w-24 h-24 mx-auto bg-slate-800 border-4 border-slate-900 rounded-full flex items-center justify-center text-3xl font-extrabold text-brand mb-6 shadow-xl">
+                        1
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Set Your Preferences</h4>
+                    <p class="text-slate-400">Choose your dietary needs, allergies, serving sizes, and how much time you have to cook each night.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="text-center">
+                    <div class="w-24 h-24 mx-auto bg-slate-800 border-4 border-slate-900 rounded-full flex items-center justify-center text-3xl font-extrabold text-accent mb-6 shadow-xl">
+                        2
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Review & Swap</h4>
+                    <p class="text-slate-400">Get your instant weekly plan. Not feeling salmon on Tuesday? Swap it out with one tap from thousands of recipes.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="text-center">
+                    <div class="w-24 h-24 mx-auto bg-slate-800 border-4 border-slate-900 rounded-full flex items-center justify-center text-3xl font-extrabold text-blue-400 mb-6 shadow-xl">
+                        3
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Shop & Cook</h4>
+                    <p class="text-slate-400">Check off your auto-sorted grocery list at the store, then follow our foolproof, step-by-step cooking mode.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-center text-slate-900 mb-16">Loved by busy people everywhere</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-600 mb-6 italic">"This app literally saved my marriage. We used to argue every single night at 6 PM about what to eat. Now we just look at the app and the ingredients are already in the fridge."</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=100&q=80" alt="User" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <h5 class="font-bold text-slate-900">Sarah Jenkins</h5>
+                            <p class="text-xs text-slate-400">Working Mom of 2</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-600 mb-6 italic">"I was spending $600 a month on UberEats because I didn't know how to plan. Prepped taught me how to cook simple meals and my grocery bill is only $75 a week now!"</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80" alt="User" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <h5 class="font-bold text-slate-900">Marcus Chen</h5>
+                            <p class="text-xs text-slate-400">Software Engineer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-600 mb-6 italic">"As someone with Celiac disease, finding varied gluten-free recipes that don't taste like cardboard is hard. The filtering on Prepped is top-tier. Highly recommend."</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&q=80" alt="User" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <h5 class="font-bold text-slate-900">Elena Rodriguez</h5>
+                            <p class="text-xs text-slate-400">Fitness Instructor</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">Costs less than one takeout meal</h2>
+                <p class="text-slate-600 text-lg">Start with a 14-day free trial. Cancel anytime with one click.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Monthly Plan -->
+                <div class="border border-slate-200 rounded-3xl p-8 flex flex-col">
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Monthly</h3>
+                    <p class="text-slate-500 text-sm mb-6">Flexible month-to-month plan.</p>
+                    <div class="mb-6">
+                        <span class="text-5xl font-extrabold text-slate-900">$9</span>
+                        <span class="text-slate-500">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-8 flex-1 text-slate-600">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> Unlimited meal plans</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> Automated grocery lists</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> Access to 5,000+ recipes</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> Nutritional & macro tracking</li>
+                    </ul>
+                    <a href="#cta" class="w-full py-4 rounded-xl font-bold text-center border-2 border-slate-200 text-slate-700 hover:border-slate-900 hover:text-slate-900 transition">Start 14-Day Free Trial</a>
+                </div>
+
+                <!-- Annual Plan (Highlighted) -->
+                <div class="border-2 border-brand rounded-3xl p-8 flex flex-col relative bg-slate-900 text-white shadow-2xl">
+                    <div class="absolute top-0 right-8 -translate-y-1/2 bg-accent text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                        Most Popular • Save 45%
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Annual</h3>
+                    <p class="text-slate-400 text-sm mb-6">Billed as $59 once a year.</p>
+                    <div class="mb-6">
+                        <span class="text-5xl font-extrabold">$4.99</span>
+                        <span class="text-slate-400">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-8 flex-1 text-slate-300">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> <strong>Everything in Monthly</strong></li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> Grocery delivery integration</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> Import your own web recipes</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> Family sharing (up to 4 accounts)</li>
+                    </ul>
+                    <a href="#cta" class="w-full py-4 rounded-xl font-bold text-center bg-brand hover:bg-brand-dark text-white transition shadow-lg shadow-brand/30">Start 14-Day Free Trial</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section id="cta" class="py-20">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-br from-brand to-emerald-800 rounded-3xl p-8 sm:p-16 text-center text-white shadow-2xl relative overflow-hidden">
+                <!-- Decorative circles -->
+                <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-white/10 blur-2xl"></div>
+                <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 rounded-full bg-black/10 blur-2xl"></div>
+                
+                <h2 class="text-3xl sm:text-5xl font-extrabold mb-6 relative z-10">Ready to take back your evenings?</h2>
+                <p class="text-emerald-100 text-lg mb-8 max-w-xl mx-auto relative z-10">Join thousands of others who have ditched the daily dinner stress. Try it free for 14 days.</p>
+                
+                <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-3 relative z-10" onsubmit="event.preventDefault(); alert('Welcome to Prepped! Check your email.');">
+                    <input type="email" required placeholder="Enter your email address" class="flex-1 px-5 py-4 rounded-xl text-slate-900 focus:outline-none focus:ring-4 focus:ring-accent/50">
+                    <button type="submit" class="bg-accent hover:bg-accent-hover px-8 py-4 rounded-xl font-bold transition shadow-lg whitespace-nowrap">
+                        Get Started
+                    </button>
+                </form>
+                <p class="text-xs text-emerald-200 mt-4 relative z-10">No credit card required for trial. Available on iOS, Android, and Web.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-100 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
+                <div class="col-span-2 lg:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 rounded-lg bg-brand flex items-center justify-center text-white font-bold">
+                            <i class="fa-solid fa-leaf"></i>
+                        </div>
+                        <span class="font-bold text-xl text-slate-900">Prepped.</span>
+                    </div>
+                    <p class="text-slate-500 text-sm max-w-xs mb-6">Making healthy home cooking accessible, affordable, and stress-free for everyone.</p>
+                    <div class="flex space-x-4 text-slate-400">
+                        <a href="#" class="hover:text-brand transition"><i class="fa-brands fa-instagram text-xl"></i></a>
+                        <a href="#" class="hover:text-brand transition"><i class="fa-brands fa-tiktok text-xl"></i></a>
+                        <a href="#" class="hover:text-brand transition"><i class="fa-brands fa-twitter text-xl"></i></a>
+                        <a href="#" class="hover:text-brand transition"><i class="fa-brands fa-pinterest text-xl"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-slate-900 mb-4">Product</h4>
+                    <ul class="space-y-2 text-sm text-slate-500">
+                        <li><a href="#" class="hover:text-brand">Features</a></li>
+                        <li><a href="#" class="hover:text-brand">Pricing</a></li>
+                        <li><a href="#" class="hover:text-brand">Recipe Database</a></li>
+                        <li><a href="#" class="hover:text-brand">Download App</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-900 mb-4">Diets</h4>
+                    <ul class="space-y-2 text-sm text-slate-500">
+                        <li><a href="#" class="hover:text-brand">Keto & Low Carb</a></li>
+                        <li><a href="#" class="hover:text-brand">Vegan & Plant-Based</a></li>
+                        <li><a href="#" class="hover:text-brand">Mediterranean</a></li>
+                        <li><a href="#" class="hover:text-brand">Gluten-Free</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-900 mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-slate-500">
+                        <li><a href="#" class="hover:text-brand">About Us</a></li>
+                        <li><a href="#" class="hover:text-brand">Blog</a></li>
+                        <li><a href="#" class="hover:text-brand">Careers</a></li>
+                        <li><a href="#" class="hover:text-brand">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-100 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-400">
+                <p>&copy; 2025 Prepped Inc. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 sm:mt-0">
+                    <a href="#" class="hover:text-slate-600">Privacy Policy</a>
+                    <a href="#" class="hover:text-slate-600">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Simple JS for Mobile Menu Toggle -->
+    <script>
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

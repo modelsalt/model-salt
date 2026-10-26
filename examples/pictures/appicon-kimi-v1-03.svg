@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <title>Weather app icon — faceted amber raindrop on deep blue</title>
+
+  <!-- Flat solid background: deep blue -->
+  <rect width="512" height="512" fill="#0E2A52"/>
+
+  <!-- Oversized low-poly raindrop, bleeding off top and bottom edges -->
+  <g stroke="#0E2A52" stroke-width="5" stroke-linejoin="round">
+    <!-- Tip -->
+    <polygon points="256,-90 152,90 256,140" fill="#FFB733"/>
+    <polygon points="256,-90 256,140 360,90" fill="#F5A623"/>
+    <!-- Upper body -->
+    <polygon points="152,90 62,240 182,260"  fill="#FFC24B"/>
+    <polygon points="152,90 182,260 256,140" fill="#FFB733"/>
+    <polygon points="360,90 256,140 330,260" fill="#E8940C"/>
+    <polygon points="360,90 330,260 450,240" fill="#CE7E06"/>
+    <!-- Mid body -->
+    <polygon points="62,240 44,380 182,260"   fill="#FFC24B"/>
+    <polygon points="182,260 44,380 180,420"  fill="#FFB733"/>
+    <polygon points="182,260 256,140 256,330" fill="#FFB733"/>
+    <polygon points="256,140 330,260 256,330" fill="#F5A623"/>
+    <polygon points="330,260 450,240 468,380" fill="#CE7E06"/>
+    <polygon points="330,260 468,380 332,420" fill="#E8940C"/>
+    <!-- Lower body -->
+    <polygon points="182,260 256,330 180,420" fill="#FFC24B"/>
+    <polygon points="256,330 330,260 332,420" fill="#E8940C"/>
+    <polygon points="180,420 256,330 256,470" fill="#FFB733"/>
+    <polygon points="256,330 332,420 256,470" fill="#F5A623"/>
+    <!-- Rounded base -->
+    <polygon points="44,380 112,500 180,420"  fill="#F5A623"/>
+    <polygon points="112,500 256,470 180,420" fill="#FFB733"/>
+    <polygon points="112,500 256,575 256,470" fill="#E8940C"/>
+    <polygon points="256,470 256,575 332,420" fill="#CE7E06"/>
+    <polygon points="332,420 256,575 400,500" fill="#E8940C"/>
+    <polygon points="332,420 400,500 468,380" fill="#CE7E06"/>
+  </g>
+</svg>

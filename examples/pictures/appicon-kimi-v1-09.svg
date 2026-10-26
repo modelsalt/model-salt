@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="glow" gradientUnits="userSpaceOnUse" cx="452" cy="60" r="215">
+      <stop offset="0" stop-color="#AEF0FF" stop-opacity="0.9"/>
+      <stop offset="0.55" stop-color="#8CDDFF" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#8CDDFF" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="iconClip">
+      <rect x="0" y="0" width="512" height="512"/>
+    </clipPath>
+    <g id="ray">
+      <rect x="-8" y="-152" width="16" height="50"/>
+    </g>
+  </defs>
+
+  <g clip-path="url(#iconClip)">
+    <!-- Sky field -->
+    <rect x="0" y="0" width="512" height="512" fill="#0B4FA8"/>
+
+    <!-- Flat geometric facet for depth -->
+    <polygon points="0,512 0,318 336,512" fill="#093E86" opacity="0.65"/>
+
+    <!-- Soft radial halo behind the sun -->
+    <circle cx="452" cy="60" r="215" fill="url(#glow)"/>
+
+    <!-- Radiant sun disc, peeking from the top-right corner -->
+    <g transform="translate(452 60)">
+      <g fill="#9FE9FF">
+        <use href="#ray"/>
+        <use href="#ray" transform="rotate(30)"/>
+        <use href="#ray" transform="rotate(60)"/>
+        <use href="#ray" transform="rotate(90)"/>
+        <use href="#ray" transform="rotate(120)"/>
+        <use href="#ray" transform="rotate(150)"/>
+        <use href="#ray" transform="rotate(180)"/>
+        <use href="#ray" transform="rotate(210)"/>
+        <use href="#ray" transform="rotate(240)"/>
+        <use href="#ray" transform="rotate(270)"/>
+        <use href="#ray" transform="rotate(300)"/>
+        <use href="#ray" transform="rotate(330)"/>
+      </g>
+      <circle r="88" fill="#F4FDFF"/>
+    </g>
+
+    <!-- Flat geometric sparkles -->
+    <rect x="-7" y="-7" width="14" height="14" transform="translate(96 318) rotate(45)" fill="#9FE9FF" opacity="0.85"/>
+    <rect x="-5" y="-5" width="10" height="10" transform="translate(168 402) rotate(45)" fill="#9FE9FF" opacity="0.6"/>
+    <rect x="-4" y="-4" width="8" height="8" transform="translate(238 306) rotate(45)" fill="#9FE9FF" opacity="0.45"/>
+    <circle cx="128" cy="456" r="5" fill="#9FE9FF" opacity="0.5"/>
+    <circle cx="286" cy="366" r="4" fill="#9FE9FF" opacity="0.35"/>
+  </g>
+</svg>

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640" viewBox="0 0 640 640" fill="none">
+  <title>Pelican riding a bicycle</title>
+  <desc>A navy and orange pelican on a diamond-frame city bicycle, seen from a front three-quarter angle. Transparent background.</desc>
+
+  <g stroke="#142C45" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Far wheel -->
+    <ellipse cx="228" cy="436" rx="57" ry="100" fill="#142C45"/>
+    <ellipse cx="228" cy="436" rx="45" ry="87" fill="none" stroke="#F59B38" stroke-width="4"/>
+    <g stroke="#F59B38" stroke-width="3">
+      <path d="M228 349v174m-44-87h88m-76-61 64 122m-64 0 64-122"/>
+    </g>
+
+    <!-- Diamond frame -->
+    <path d="M228 436 272 329 391 367 316 458Z" stroke="#F59B38" stroke-width="15"/>
+    <path d="M272 329 316 458 391 367M228 436 391 367" stroke-width="7"/>
+    <path d="m272 329-10-31m-23 0 48 8"/>
+    <path d="m383 345 16 58 36 89" stroke-width="13"/>
+    <path d="m383 345 16 58 36 89" stroke="#F59B38" stroke-width="5"/>
+
+    <!-- Seat -->
+    <path d="M234 288q21-8 57 9l-4 12-51-9Z" fill="#F59B38"/>
+
+    <!-- Far leg and pedal -->
+    <path d="m289 272 49 57-22 58" stroke="#F59B38" stroke-width="15"/>
+    <path d="m311 377 26 14-4 10-36-6Z" fill="#F59B38"/>
+    <path d="m311 401 25 3"/>
+    <path d="m316 458 8-55"/>
+
+    <!-- Tail and body -->
+    <path d="m229 247-46-37 13 56 45 22" fill="#F59B38"/>
+    <path d="M233 188c-36 17-48 66-19 95 24 25 79 28 111 1 25-21 34-65 12-96-24-33-73-20-104 0Z" fill="#F59B38"/>
+    <path d="M220 218c23-24 61-25 84-5l-14 58c-32 8-58-9-70-53Z" fill="#142C45"/>
+    <path d="m234 230 38 25m-30-38 40 20" stroke="#F59B38" stroke-width="4"/>
+
+    <!-- Upright neck -->
+    <path d="M291 224c-7-42 10-68 11-99-1-25 10-48 36-51 30-4 49 17 45 43-4 25-32 39-30 66l12 58c-20 24-54 22-74-17Z" fill="#F59B38"/>
+
+    <!-- Pelican throat pouch and long bill -->
+    <path d="M354 124 491 185c-26 31-63 49-91 29-23-16-36-49-46-90Z" fill="#F59B38"/>
+    <path d="m357 115 153 68-18 12-140-60Z" fill="#F59B38"/>
+    <path d="m364 136 119 51" stroke-width="4"/>
+    <path d="M351 97h1" stroke-width="12"/>
+    <path d="m332 77-13-11m18 9-4-15"/>
+
+    <!-- Handlebars, rotated toward the viewer -->
+    <path d="m383 345-7-42 30-20"/>
+    <path d="m343 292-14-17 18-12 59 20 40 27 4 21" fill="none" stroke="#F59B38" stroke-width="12"/>
+    <path d="m330 275 14 17m102 18 4 21" stroke-width="13"/>
+
+    <!-- Near wing reaching the handlebar -->
+    <path d="M322 207c22 5 36 28 42 50l-19 36-16-7 10-31-29-24Z" fill="#F59B38"/>
+
+    <!-- Near leg and webbed foot -->
+    <path d="m265 285 30 48-14 80" stroke="#F59B38" stroke-width="17"/>
+    <path d="m281 402 27 24-11 7-13-6-14 2-11-9Z" fill="#F59B38"/>
+    <circle cx="316" cy="458" r="15" fill="#F59B38"/>
+    <path d="m316 458-30-27m-18 0 36 3"/>
+
+    <!-- Front wheel -->
+    <ellipse cx="435" cy="492" rx="66" ry="111" fill="#142C45"/>
+    <ellipse cx="435" cy="492" rx="53" ry="97" stroke="#F59B38" stroke-width="5"/>
+    <g stroke="#F59B38" stroke-width="3">
+      <path d="M435 395v194m-53-97h106m-91-69 76 138m-76 0 76-138m-88 32 100 74m-100 0 100-74"/>
+    </g>
+    <path d="m399 403 36 89" stroke="#142C45" stroke-width="15"/>
+    <path d="m399 403 36 89" stroke="#F59B38" stroke-width="6"/>
+    <circle cx="435" cy="492" r="10" fill="#F59B38"/>
+  </g>
+</svg>

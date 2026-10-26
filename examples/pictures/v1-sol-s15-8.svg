@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640" viewBox="0 0 640 640" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A white pelican rides a blue full-suspension mountain bicycle in front three-quarter view, holding the handlebars with one wing and raising the other overhead.</desc>
+
+  <rect width="640" height="640" rx="32" fill="#edf6f8"/>
+  <ellipse cx="330" cy="580" rx="205" ry="19" fill="#d5e5e9"/>
+
+  <!-- Wheels in perspective -->
+  <g stroke="#263747" stroke-width="15" fill="#f8fcfd">
+    <ellipse cx="224" cy="466" rx="65" ry="95" transform="rotate(-9 224 466)"/>
+    <ellipse cx="438" cy="484" rx="79" ry="104" transform="rotate(-9 438 484)"/>
+  </g>
+  <g fill="none" stroke="#a8bbc5" stroke-width="3">
+    <ellipse cx="224" cy="466" rx="54" ry="83" transform="rotate(-9 224 466)"/>
+    <ellipse cx="438" cy="484" rx="67" ry="92" transform="rotate(-9 438 484)"/>
+    <path d="M224 383v166m-54-83h108m-87-65 66 130m-76-17 86-97
+             M438 392v184m-67-92h134m-108-72 82 144m-91-6 100-132"/>
+  </g>
+  <g fill="#d4dfe5" stroke="#7c919f" stroke-width="3">
+    <ellipse cx="224" cy="466" rx="17" ry="25"/>
+    <ellipse cx="438" cy="484" rx="22" ry="30"/>
+  </g>
+
+  <!-- Far leg and pedal -->
+  <path d="M304 324l-39 61 37 52" fill="none" stroke="#de922e" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M297 429l-19 11 35 8 12-10z" fill="#f5ae3e"/>
+  <path d="M283 448h40" stroke="#263747" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Rear swingarm and blue frame -->
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M224 466l59-103 54 107z" stroke="#277eb4" stroke-width="12"/>
+    <path d="M283 363l112-10-58 117z" stroke="#339bd1" stroke-width="16"/>
+    <path d="M283 363l-7-30" stroke="#263747" stroke-width="10"/>
+    <path d="M257 332l42 3" stroke="#263747" stroke-width="13"/>
+    <!-- Rear shock -->
+    <path d="M287 389l39 35" stroke="#263747" stroke-width="12"/>
+    <path d="M295 391l-5 10m13-3-5 10m13-3-5 10m13-3-5 10" stroke="#d3dde3" stroke-width="4"/>
+    <!-- Suspension fork -->
+    <path d="M395 353l14 62m-1-64 14 61" stroke="#aabcc7" stroke-width="7"/>
+    <path d="M409 408l18 71m-5-71 16 76" stroke="#2489c3" stroke-width="11"/>
+    <path d="M427 479l11 5" stroke="#263747" stroke-width="8"/>
+    <path d="M399 354l-8-35 25-17" stroke="#263747" stroke-width="9"/>
+    <path d="M370 290l46 12 25-9" stroke="#263747" stroke-width="9"/>
+    <path d="M363 288l17 5m52 3 17-6" stroke="#526775" stroke-width="12"/>
+  </g>
+
+  <!-- Crank and chain -->
+  <ellipse cx="337" cy="470" rx="22" ry="26" fill="#263747"/>
+  <ellipse cx="337" cy="470" rx="12" ry="15" fill="#aabcc7"/>
+  <path d="M224 451l111-7m-111 36 113 16" fill="none" stroke="#6e8492" stroke-width="3"/>
+  <path d="M337 470l26 29" stroke="#263747" stroke-width="7" stroke-linecap="round"/>
+  <path d="M349 502l35 3" stroke="#263747" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Raised wing -->
+  <path d="M292 277
+           C248 263 214 209 195 152
+           C186 125 176 79 188 66
+           C199 63 207 108 214 120
+           C206 83 211 65 219 72
+           C229 80 230 119 237 133
+           C232 102 239 91 247 101
+           C259 122 251 157 265 184
+           L318 247Z" fill="#fff"/>
+  <path d="M294 260c-41-35-63-80-75-121 4 55 24 105 60 135z" fill="#d6e0e5"/>
+
+  <!-- Body and tail -->
+  <path d="M263 310l-28 34 52-9z" fill="#9aadb8"/>
+  <path d="M261 257
+           C280 225 333 223 358 251
+           C385 281 362 329 325 342
+           C291 356 253 334 250 307
+           C248 287 250 273 261 257Z" fill="#fff"/>
+  <path d="M257 301c12 26 48 36 78 24-23 30-69 25-80-2z" fill="#d6e0e5"/>
+
+  <!-- Long neck and head -->
+  <path d="M310 263
+           C326 237 333 215 320 191
+           C303 178 301 157 313 140
+           C328 120 359 123 370 143
+           C382 165 370 183 360 195
+           C357 217 379 242 354 273Z" fill="#fff"/>
+  <path d="M351 190c-9 25 14 51-5 76l-17 4c23-29 5-52 12-75z" fill="#d6e0e5"/>
+
+  <!-- Bill and throat pouch -->
+  <path d="M320 158L198 195
+           C229 226 288 233 325 180Z" fill="#f4b351"/>
+  <path d="M318 153L190 192
+           Q186 197 201 198
+           L329 173Z" fill="#ef8c2e"/>
+  <path d="M204 198l116-26" stroke="#bd6826" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="340" cy="151" rx="9" ry="10" fill="#f3cd79"/>
+  <circle cx="340" cy="151" r="5" fill="#263747"/>
+  <circle cx="342" cy="149" r="1.7" fill="#fff"/>
+
+  <!-- Wing reaching the handlebar -->
+  <path d="M346 253
+           C368 255 378 275 397 285
+           L421 292
+           Q429 297 419 303
+           L395 299
+           C364 294 346 281 336 270Z" fill="#c5d2da"/>
+  <path d="M350 254c20 4 33 24 49 29l19 7c6 3 3 8-3 8l-24-8c-22-8-35-16-47-26z" fill="#fff"/>
+
+  <!-- Near leg and webbed foot on the pedal -->
+  <path d="M324 333l-15 57 42 87" fill="none" stroke="#f0a238" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M348 470l-8 23 15 7 28 1-9-12-14-4z" fill="#f5ae3e"/>
+  <path d="M348 500l37 3" stroke="#263747" stroke-width="7" stroke-linecap="round"/>
+</svg>

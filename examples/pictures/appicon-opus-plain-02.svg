@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <!-- Sky background -->
+    <linearGradient id="sky" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#1A4FD0"/>
+      <stop offset="0.6" stop-color="#2F8CEB"/>
+      <stop offset="1" stop-color="#5CCBF5"/>
+    </linearGradient>
+
+    <!-- Sun body -->
+    <radialGradient id="sun" cx="0.38" cy="0.32" r="0.75">
+      <stop offset="0" stop-color="#FFF1A8"/>
+      <stop offset="0.55" stop-color="#FFD23F"/>
+      <stop offset="1" stop-color="#FFA81E"/>
+    </radialGradient>
+
+    <!-- Sun glow -->
+    <radialGradient id="glow">
+      <stop offset="0" stop-color="#FFE27A" stop-opacity="0.55"/>
+      <stop offset="0.6" stop-color="#FFE27A" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#FFE27A" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Cloud -->
+    <linearGradient id="cloud" gradientUnits="userSpaceOnUse" x1="0" y1="360" x2="0" y2="760">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#D6E8FB"/>
+    </linearGradient>
+
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="170%">
+      <feDropShadow dx="0" dy="26" stdDeviation="30" flood-color="#0A2A6E" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Square background, no rounded corners -->
+  <rect width="1024" height="1024" fill="url(#sky)"/>
+
+  <!-- Sun glow -->
+  <circle cx="650" cy="360" r="360" fill="url(#glow)"/>
+
+  <!-- Sun rays -->
+  <g transform="translate(650 360)" stroke="#FFC83A" stroke-width="34" stroke-linecap="round">
+    <line x1="0" y1="-212" x2="0" y2="-272"/>
+    <line x1="0" y1="-212" x2="0" y2="-272" transform="rotate(45)"/>
+    <line x1="0" y1="-212" x2="0" y2="-272" transform="rotate(90)"/>
+    <line x1="0" y1="-212" x2="0" y2="-272" transform="rotate(135)"/>
+    <line x1="0" y1="-212" x2="0" y2="-272" transform="rotate(180)"/>
+    <line x1="0" y1="-212" x2="0" y2="-272" transform="rotate(225)"/>
+    <line x1="0" y1="-212" x2="0" y2="-272" transform="rotate(270)"/>
+    <line x1="0" y1="-212" x2="0" y2="-272" transform="rotate(315)"/>
+  </g>
+
+  <!-- Sun -->
+  <circle cx="650" cy="360" r="168" fill="url(#sun)"/>
+
+  <!-- Cloud -->
+  <g fill="url(#cloud)" filter="url(#shadow)">
+    <rect x="220" y="590" width="590" height="165" rx="82.5"/>
+    <circle cx="410" cy="585" r="122"/>
+    <circle cx="590" cy="525" r="165"/>
+    <circle cx="728" cy="630" r="104"/>
+  </g>
+
+  <!-- Cloud highlight -->
+  <path d="M500 420 A150 150 0 0 1 690 400" fill="none" stroke="#FFFFFF"
+        stroke-width="18" stroke-linecap="round" opacity="0.7"/>
+</svg>

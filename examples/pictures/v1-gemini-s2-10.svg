@@ -1,0 +1,411 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 850" width="100%" height="100%">
+  <defs>
+    <!-- Soft Volumetric Filters -->
+    <filter id="soft-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="drop-shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="10"/>
+      <feOffset dx="0" dy="12" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.35"/>
+      </feComponentTransfer>
+      <feMerge> 
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Sunset Background & Frame Gradients -->
+    <radialGradient id="canvas-bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#4A1228"/>
+      <stop offset="100%" stop-color="#1E0510"/>
+    </radialGradient>
+
+    <linearGradient id="diamond-sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFE57F"/>
+      <stop offset="35%" stop-color="#FF9E2C"/>
+      <stop offset="70%" stop-color="#D6384C"/>
+      <stop offset="100%" stop-color="#4A1228"/>
+    </linearGradient>
+
+    <linearGradient id="gold-frame" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF2B2"/>
+      <stop offset="30%" stop-color="#FFB340"/>
+      <stop offset="50%" stop-color="#D96B27"/>
+      <stop offset="75%" stop-color="#FFCC5C"/>
+      <stop offset="100%" stop-color="#9A2B2B"/>
+    </linearGradient>
+
+    <radialGradient id="sun-glow" cx="50%" cy="45%" r="45%">
+      <stop offset="0%" stop-color="#FFFDE4" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#FFB74D" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#D6384C" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Pelican Volumetric Gradients (Gradient-Mesh Emulation) -->
+    <radialGradient id="pelican-body" cx="35%" cy="30%" r="70%" fx="25%" fy="25%">
+      <stop offset="0%" stop-color="#FFFDF7"/>
+      <stop offset="35%" stop-color="#FFE0A3"/>
+      <stop offset="75%" stop-color="#F08A4B"/>
+      <stop offset="100%" stop-color="#9E2A45"/>
+    </radialGradient>
+
+    <linearGradient id="pelican-neck" x1="15%" y1="15%" x2="85%" y2="85%">
+      <stop offset="0%" stop-color="#FFF9E6"/>
+      <stop offset="45%" stop-color="#FFC77D"/>
+      <stop offset="80%" stop-color="#D9534F"/>
+      <stop offset="100%" stop-color="#7A1C33"/>
+    </linearGradient>
+
+    <radialGradient id="pelican-head" cx="30%" cy="25%" r="70%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="50%" stop-color="#FFD180"/>
+      <stop offset="90%" stop-color="#E66C37"/>
+      <stop offset="100%" stop-color="#9E2A45"/>
+    </radialGradient>
+
+    <linearGradient id="beak-upper" x1="0%" y1="20%" x2="90%" y2="80%">
+      <stop offset="0%" stop-color="#FFF3B0"/>
+      <stop offset="30%" stop-color="#FFA62B"/>
+      <stop offset="75%" stop-color="#D64527"/>
+      <stop offset="100%" stop-color="#801A28"/>
+    </linearGradient>
+
+    <radialGradient id="gular-pouch" cx="35%" cy="25%" r="75%" fx="25%" fy="20%">
+      <stop offset="0%" stop-color="#FFCA61"/>
+      <stop offset="40%" stop-color="#F26430"/>
+      <stop offset="75%" stop-color="#B8253E"/>
+      <stop offset="100%" stop-color="#5C0E24"/>
+    </radialGradient>
+
+    <radialGradient id="wing-left" cx="30%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#FFF8E7"/>
+      <stop offset="40%" stop-color="#F9B465"/>
+      <stop offset="80%" stop-color="#C94A38"/>
+      <stop offset="100%" stop-color="#6B152B"/>
+    </radialGradient>
+
+    <radialGradient id="wing-right" cx="60%" cy="25%" r="75%">
+      <stop offset="0%" stop-color="#FFE6B3"/>
+      <stop offset="45%" stop-color="#E88342"/>
+      <stop offset="85%" stop-color="#9E263A"/>
+      <stop offset="100%" stop-color="#4A0B1D"/>
+    </radialGradient>
+
+    <linearGradient id="webbed-foot" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFB732"/>
+      <stop offset="55%" stop-color="#E04F26"/>
+      <stop offset="100%" stop-color="#781426"/>
+    </linearGradient>
+
+    <!-- Dutch Cruiser Bicycle Gradients -->
+    <linearGradient id="bike-frame" x1="0%" y1="0%" x2="100%" y2="80%">
+      <stop offset="0%" stop-color="#D9384A"/>
+      <stop offset="30%" stop-color="#8A152C"/>
+      <stop offset="70%" stop-color="#470716"/>
+      <stop offset="100%" stop-color="#29020A"/>
+    </linearGradient>
+
+    <linearGradient id="bike-fender" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF9E44"/>
+      <stop offset="40%" stop-color="#B8293D"/>
+      <stop offset="100%" stop-color="#420614"/>
+    </linearGradient>
+
+    <linearGradient id="tire-rubber" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#521627"/>
+      <stop offset="50%" stop-color="#2B0712"/>
+      <stop offset="100%" stop-color="#140207"/>
+    </linearGradient>
+
+    <linearGradient id="cream-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF5D6"/>
+      <stop offset="50%" stop-color="#F2A65A"/>
+      <stop offset="100%" stop-color="#9E333B"/>
+    </linearGradient>
+
+    <linearGradient id="chrome-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFDF0"/>
+      <stop offset="35%" stop-color="#FFCC66"/>
+      <stop offset="70%" stop-color="#C9592C"/>
+      <stop offset="100%" stop-color="#611421"/>
+    </linearGradient>
+
+    <radialGradient id="headlight-glow" cx="30%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="45%" stop-color="#FFE57F"/>
+      <stop offset="100%" stop-color="#FF8F00" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Clip Path for Inner Diamond Scene -->
+    <clipPath id="diamond-clip">
+      <polygon points="400,55 745,425 400,795 55,425"/>
+    </clipPath>
+  </defs>
+
+  <!-- Outer Canvas Background -->
+  <rect width="800" height="850" fill="url(#canvas-bg)"/>
+
+  <!-- Decorative Corner Flourishes Outside Frame -->
+  <g stroke="url(#gold-frame)" stroke-width="1.5" fill="none" opacity="0.35">
+    <polygon points="400,25 775,425 400,825 25,425"/>
+    <path d="M 350,55 L 400,15 L 450,55 M 745,375 L 785,425 L 745,475 M 350,795 L 400,835 L 450,795 M 55,375 L 15,425 L 55,475"/>
+  </g>
+
+  <!-- ================= DIAMOND BACKGROUND SCENE ================= -->
+  <g clip-path="url(#diamond-clip)">
+    <!-- Sky -->
+    <rect x="0" y="0" width="800" height="850" fill="url(#diamond-sky)"/>
+
+    <!-- Setting Sun & Volumetric Glow -->
+    <circle cx="400" cy="370" r="240" fill="url(#sun-glow)"/>
+    <circle cx="400" cy="370" r="135" fill="#FFF7CC" opacity="0.75"/>
+
+    <!-- Soft Sunset Clouds / Horizon Waves -->
+    <path d="M 20,440 Q 180,390 350,430 T 780,410 L 780,600 L 20,600 Z" fill="#C93B4B" opacity="0.35"/>
+    <path d="M 20,490 Q 260,445 470,485 T 780,470 L 780,650 L 20,650 Z" fill="#8A1C36" opacity="0.5"/>
+    <path d="M 20,545 Q 320,515 550,545 T 780,530 L 780,820 L 20,820 Z" fill="#470A1F" opacity="0.85"/>
+
+    <!-- Ground Cast Shadow for Bike -->
+    <ellipse cx="385" cy="705" rx="195" ry="26" fill="#21030D" opacity="0.65" filter="url(#soft-glow)"/>
+  </g>
+
+  <!-- ================= DIAMOND DECORATIVE BORDER ================= -->
+  <g filter="url(#drop-shadow)">
+    <!-- Outer Thick Gold Diamond -->
+    <polygon points="400,45 755,425 400,805 45,425" fill="none" stroke="url(#gold-frame)" stroke-width="14" stroke-linejoin="round"/>
+    <!-- Inner Fine Filigree Diamond -->
+    <polygon points="400,63 737,425 400,787 63,425" fill="none" stroke="#FFF2B2" stroke-width="2.5" opacity="0.8"/>
+    <!-- Corner Ornaments -->
+    <circle cx="400" cy="45" r="9" fill="#FFF5C0" stroke="#9A2B2B" stroke-width="3"/>
+    <circle cx="755" cy="425" r="9" fill="#FFF5C0" stroke="#9A2B2B" stroke-width="3"/>
+    <circle cx="400" cy="805" r="9" fill="#FFF5C0" stroke="#9A2B2B" stroke-width="3"/>
+    <circle cx="45" cy="425" r="9" fill="#FFF5C0" stroke="#9A2B2B" stroke-width="3"/>
+  </g>
+
+  <!-- ================= PELICAN & DUTCH CRUISER (3/4 FRONT VIEW) ================= -->
+  <g filter="url(#drop-shadow)">
+
+    <!-- 1. REAR WHEEL (Right/Back in 3/4 view) -->
+    <g id="rear-wheel">
+      <!-- Rear Fender -->
+      <path d="M 425,535 A 82,118 -10 0 1 560,475" fill="none" stroke="url(#bike-fender)" stroke-width="22" stroke-linecap="round"/>
+      <!-- Rear Spokes -->
+      <g stroke="#FFCC66" stroke-width="1.5" opacity="0.55">
+        <line x1="490" y1="455" x2="490" y2="675"/>
+        <line x1="420" y1="565" x2="560" y2="565"/>
+        <line x1="440" y1="485" x2="540" y2="645"/>
+        <line x1="440" y1="645" x2="540" y2="485"/>
+        <line x1="460" y1="465" x2="520" y2="665"/>
+        <line x1="425" y1="525" x2="555" y2="605"/>
+      </g>
+      <!-- Rear Rim -->
+      <ellipse cx="490" cy="565" rx="68" ry="105" transform="rotate(-10 490 565)" fill="none" stroke="url(#cream-rim)" stroke-width="10"/>
+      <!-- Rear Tire -->
+      <ellipse cx="490" cy="565" rx="76" ry="113" transform="rotate(-10 490 565)" fill="none" stroke="url(#tire-rubber)" stroke-width="18"/>
+      <!-- Rear Hub -->
+      <ellipse cx="490" cy="565" rx="12" ry="16" fill="url(#chrome-gold)"/>
+    </g>
+
+    <!-- 2. REAR FRAME, SADDLE & PELICAN TAIL -->
+    <g id="rear-frame-and-tail">
+      <!-- Luggage Carrier Rack -->
+      <path d="M 450,445 L 545,455 L 490,565" fill="none" stroke="url(#bike-frame)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Seat Stays -->
+      <line x1="435" y1="440" x2="490" y2="565" stroke="url(#bike-frame)" stroke-width="11" stroke-linecap="round"/>
+      <!-- Seat Post -->
+      <line x1="435" y1="445" x2="425" y2="395" stroke="url(#chrome-gold)" stroke-width="12" stroke-linecap="round"/>
+      <!-- Cruiser Sprung Saddle -->
+      <path d="M 385,395 C 385,375 465,375 475,398 C 482,415 445,425 400,415 Z" fill="#591220" stroke="#FFAD52" stroke-width="2"/>
+      <!-- Pelican Tail Feathers Resting Over Saddle -->
+      <path d="M 455,375 C 495,365 530,385 520,405 C 510,420 480,415 450,405 Z" fill="url(#pelican-neck)"/>
+      <path d="M 465,360 C 505,355 535,370 525,388 C 510,398 485,395 455,390 Z" fill="url(#wing-right)"/>
+    </g>
+
+    <!-- 3. RIGHT LEG, BACK PEDAL & CHAINCASE (Viewer's Right) -->
+    <g id="right-leg-assembly">
+      <!-- Classic Dutch Enclosed Chaincase -->
+      <path d="M 405,570 L 495,548 A 22,26 0 0 1 495,588 L 405,618 A 30,32 0 0 1 405,570 Z" fill="url(#bike-fender)" stroke="#FFBA6A" stroke-width="1.5"/>
+      <ellipse cx="412" cy="594" rx="16" ry="20" fill="url(#chrome-gold)"/>
+
+      <!-- Back Crank Arm (Raised Up-Right) -->
+      <line x1="412" y1="594" x2="452" y2="532" stroke="url(#chrome-gold)" stroke-width="10" stroke-linecap="round"/>
+
+      <!-- Pelican Right Leg (Further back, raised) -->
+      <path d="M 442,410 C 455,450 458,490 448,528" fill="none" stroke="url(#webbed-foot)" stroke-width="18" stroke-linecap="round"/>
+      <!-- Knee Highlight -->
+      <path d="M 442,410 C 455,450 458,490 448,528" fill="none" stroke="#FFD07B" stroke-width="5" stroke-linecap="round" opacity="0.5"/>
+
+      <!-- Right Webbed Foot Flat on Back Pedal -->
+      <path d="M 445,522 C 430,528 408,536 415,545 C 425,552 465,552 480,542 C 485,535 462,524 445,522 Z" fill="url(#webbed-foot)"/>
+      <!-- Webbing ridges -->
+      <path d="M 446,525 L 423,540 M 448,526 L 445,545 M 452,526 L 468,542" stroke="#FFE099" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+
+      <!-- Right Pedal Platform -->
+      <path d="M 412,544 L 478,548" stroke="#360511" stroke-width="9" stroke-linecap="round"/>
+      <path d="M 418,544 L 472,548" stroke="url(#chrome-gold)" stroke-width="4" stroke-linecap="round"/>
+    </g>
+
+    <!-- 4. DUTCH STEP-THROUGH FRAME (Low Swooping Tubes) -->
+    <g id="step-through-frame">
+      <!-- Seat Tube -->
+      <path d="M 428,415 L 410,594" stroke="url(#bike-frame)" stroke-width="16" stroke-linecap="round"/>
+      <!-- Step-Through Curved Upper & Lower Down Tubes -->
+      <path d="M 290,415 C 320,540 355,585 410,594" fill="none" stroke="url(#bike-frame)" stroke-width="16" stroke-linecap="round"/>
+      <path d="M 284,380 C 318,505 358,555 416,562" fill="none" stroke="url(#bike-frame)" stroke-width="14" stroke-linecap="round"/>
+      <!-- Volumetric Specular Highlights on Frame Tubes -->
+      <path d="M 286,380 C 319,502 358,552 414,559" fill="none" stroke="#FF9E6D" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+      <path d="M 425,420 L 408,585" fill="none" stroke="#FF9E6D" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+    </g>
+
+    <!-- 5. PELICAN PLUMP BODY, CALM TUCKED S-NECK, HEAD & BEAK -->
+    <g id="pelican-main">
+      <!-- Torso / Belly sitting upright on cruiser -->
+      <path d="M 300,320 C 275,395 310,468 385,465 C 455,462 482,415 465,355 C 450,295 330,260 300,320 Z" fill="url(#pelican-body)"/>
+
+      <!-- Soft breast plumage shading -->
+      <ellipse cx="345" cy="375" rx="52" ry="62" transform="rotate(-12 345 375)" fill="url(#pelican-head)" opacity="0.55"/>
+
+      <!-- Left Leg (Foreground, extending down to low pedal) -->
+      <!-- Feathered Thigh -->
+      <path d="M 355,430 C 345,460 355,485 372,485 C 390,485 398,455 390,430 Z" fill="url(#pelican-neck)"/>
+      <!-- Orange Lower Leg -->
+      <path d="M 372,475 C 370,530 374,585 380,632" fill="none" stroke="url(#webbed-foot)" stroke-width="19" stroke-linecap="round"/>
+      <path d="M 369,478 C 367,530 371,585 377,630" fill="none" stroke="#FFE082" stroke-width="5" stroke-linecap="round" opacity="0.65"/>
+
+      <!-- Front Crank Arm (Down-Left) -->
+      <line x1="406" y1="594" x2="375" y2="648" stroke="url(#chrome-gold)" stroke-width="11" stroke-linecap="round"/>
+      <circle cx="408" cy="594" r="10" fill="#FFF3B0"/>
+
+      <!-- Left Webbed Foot Flat on Front Pedal -->
+      <path d="M 378,625 C 358,632 325,642 332,654 C 342,666 392,666 412,652 C 418,644 395,628 378,625 Z" fill="url(#webbed-foot)"/>
+      <!-- Webbed Foot Toe Highlights -->
+      <path d="M 375,630 L 344,648 M 379,630 L 372,656 M 384,630 L 400,649" stroke="#FFE099" stroke-width="3" stroke-linecap="round" opacity="0.75"/>
+
+      <!-- Front Pedal Platform -->
+      <path d="M 330,656 L 412,660" stroke="#2B040E" stroke-width="10" stroke-linecap="round"/>
+      <path d="M 338,656 L 404,660" stroke="url(#chrome-gold)" stroke-width="4" stroke-linecap="round"/>
+
+      <!-- Long S-Curved Neck Tucked Back Calmly -->
+      <path d="M 330,345 C 395,355 462,315 452,245 C 444,195 375,180 355,145 C 345,125 395,120 405,155 C 418,195 488,205 492,265 C 495,328 430,395 340,390 Z" fill="url(#pelican-neck)"/>
+      <!-- Volumetric Rim Light along Neck S-Curve -->
+      <path d="M 355,145 C 375,180 444,195 452,245 C 462,315 395,355 330,345" fill="none" stroke="#FFFDF5" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+
+      <!-- Pelican Head & Crown -->
+      <g id="head-and-beak">
+        <!-- Small Tufted Crest Feathers -->
+        <path d="M 405,125 C 425,118 445,128 435,140 C 450,138 455,150 438,155 C 445,160 435,168 420,165 Z" fill="url(#pelican-neck)"/>
+
+        <!-- Rounded Head -->
+        <ellipse cx="380" cy="148" rx="46" ry="38" transform="rotate(-8 380 148)" fill="url(#pelican-head)"/>
+
+        <!-- Huge Throat Pouch (Gular Pouch) resting calmly over curved neck -->
+        <path d="M 155,188 C 170,268 258,305 338,282 C 385,268 405,222 385,175 C 335,182 230,185 155,188 Z" fill="url(#gular-pouch)"/>
+        <!-- Soft Volumetric Highlight & Creases on Pouch -->
+        <ellipse cx="265" cy="235" rx="68" ry="32" transform="rotate(10 265 235)" fill="#FF9E44" opacity="0.35" filter="url(#soft-glow)"/>
+        <path d="M 185,205 C 235,245 305,255 365,220" fill="none" stroke="#FFCA61" stroke-width="3" opacity="0.45" stroke-linecap="round"/>
+        <path d="M 215,235 C 260,265 315,270 355,245" fill="none" stroke="#5C0E24" stroke-width="2.5" opacity="0.4" stroke-linecap="round"/>
+
+        <!-- Long Upper Mandible (Beak) angled in 3/4 view toward viewer-left -->
+        <path d="M 352,135 C 285,132 205,152 148,175 C 136,180 138,196 148,195 C 155,194 156,188 164,188 C 235,188 320,185 385,175 C 392,162 372,136 352,135 Z" fill="url(#beak-upper)"/>
+        <!-- Beak Ridge Specular Shine -->
+        <path d="M 348,142 C 285,140 210,158 152,179" fill="none" stroke="#FFF9D2" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+
+        <!-- Calm Expressive Eye (with sunset catchlight) -->
+        <ellipse cx="356" cy="144" rx="13" ry="11" fill="#FFE0B2"/>
+        <circle cx="354" cy="144" r="8" fill="#2B0510"/>
+        <!-- Calm half-lowered eyelid -->
+        <path d="M 343,140 Q 355,135 367,142" fill="none" stroke="#D9534F" stroke-width="3.5" stroke-linecap="round"/>
+        <circle cx="351" cy="141" r="3" fill="#FFFDF5"/>
+        <circle cx="357" cy="147" r="1.2" fill="#FFB74D"/>
+      </g>
+    </g>
+
+    <!-- 6. FRONT WHEEL, FORK, HEADLIGHT & CURVED HANDLEBARS -->
+    <g id="front-bicycle-assembly">
+      <!-- Front Fork (Behind Wing/Handlebars) -->
+      <path d="M 284,380 L 235,585" stroke="url(#bike-frame)" stroke-width="12" stroke-linecap="round"/>
+      <path d="M 284,380 L 268,588" stroke="url(#bike-frame)" stroke-width="12" stroke-linecap="round"/>
+
+      <!-- Front Fender (Sweeping over 3/4 angled front wheel) -->
+      <path d="M 185,480 A 90,128 -14 0 1 335,555" fill="none" stroke="url(#bike-fender)" stroke-width="24" stroke-linecap="round"/>
+      <path d="M 192,476 A 90,128 -14 0 1 325,530" fill="none" stroke="#FFCC66" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+
+      <!-- Front Wheel (Larger & Closer in 3/4 Perspective) -->
+      <g id="front-wheel">
+        <!-- Spokes -->
+        <g stroke="#FFCC66" stroke-width="1.8" opacity="0.65">
+          <line x1="252" y1="468" x2="252" y2="712"/>
+          <line x1="168" y1="590" x2="336" y2="590"/>
+          <line x1="190" y1="495" x2="314" y2="685"/>
+          <line x1="190" y1="685" x2="314" y2="495"/>
+          <line x1="215" y1="475" x2="289" y2="705"/>
+          <line x1="173" y1="540" x2="331" y2="640"/>
+          <line x1="173" y1="640" x2="331" y2="540"/>
+        </g>
+        <!-- Deep Cream/Gold Cruiser Rim -->
+        <ellipse cx="252" cy="590" rx="82" ry="120" transform="rotate(-14 252 590)" fill="none" stroke="url(#cream-rim)" stroke-width="12"/>
+        <!-- Thick Balloon Cruiser Tire -->
+        <ellipse cx="252" cy="590" rx="92" ry="130" transform="rotate(-14 252 590)" fill="none" stroke="url(#tire-rubber)" stroke-width="22"/>
+        <!-- Tire Sidewall Sunset Highlight -->
+        <path d="M 168,530 A 92,130 -14 0 1 285,468" fill="none" stroke="#9E334B" stroke-width="4" opacity="0.5"/>
+        <!-- Front Hub -->
+        <ellipse cx="252" cy="590" rx="14" ry="18" fill="url(#chrome-gold)"/>
+      </g>
+
+      <!-- Head Tube & Classic Vintage Headlight -->
+      <path d="M 276,335 L 290,415" stroke="url(#bike-frame)" stroke-width="18" stroke-linecap="round"/>
+      <path d="M 273,338 L 287,412" stroke="#FFAD66" stroke-width="3.5" stroke-linecap="round" opacity="0.8"/>
+
+      <!-- Vintage Chrome Headlight & Warm Beam -->
+      <path d="M 274,365 L 250,358" stroke="url(#chrome-gold)" stroke-width="6" stroke-linecap="round"/>
+      <ellipse cx="242" cy="355" rx="18" ry="22" transform="rotate(-10 242 355)" fill="url(#chrome-gold)"/>
+      <ellipse cx="234" cy="355" rx="10" ry="16" transform="rotate(-10 234 355)" fill="#FFFDE7"/>
+      <!-- Soft Headlight Glow Cone -->
+      <path d="M 230,340 L 85,295 L 85,435 L 230,370 Z" fill="url(#headlight-glow)" opacity="0.55" style="mix-blend-mode: screen;"/>
+    </g>
+
+    <!-- 7. CURVED DUTCH HANDLEBARS & PELICAN WINGS GRASPING GRIPS -->
+    <g id="handlebars-and-wings">
+      <!-- Pelican Left Wing (Viewer's Left - Reaching forward to left grip) -->
+      <path d="M 312,315 C 265,310 218,320 198,325 C 185,328 188,348 208,348 C 245,348 288,358 318,350 Z" fill="url(#wing-left)"/>
+
+      <!-- Stem & Swept-Back Curved Cruiser Handlebars -->
+      <path d="M 276,335 L 266,288" stroke="url(#chrome-gold)" stroke-width="12" stroke-linecap="round"/>
+      <!-- Left Handlebar Sweep -->
+      <path d="M 266,288 C 238,268 182,285 198,328" fill="none" stroke="url(#chrome-gold)" stroke-width="10" stroke-linecap="round"/>
+      <!-- Right Handlebar Sweep (Closer to viewer in 3/4 perspective) -->
+      <path d="M 266,288 C 292,268 358,292 332,342" fill="none" stroke="url(#chrome-gold)" stroke-width="11" stroke-linecap="round"/>
+      <!-- Brass Bell on Bar -->
+      <ellipse cx="298" cy="282" rx="10" ry="8" fill="url(#chrome-gold)" stroke="#781426" stroke-width="1"/>
+
+      <!-- Left Leather Grip & Feather Tips Wrapping Around -->
+      <path d="M 195,320 L 208,348" stroke="#591220" stroke-width="14" stroke-linecap="round"/>
+      <path d="M 190,322 C 182,332 192,348 208,344 C 216,342 214,326 200,322 Z" fill="url(#wing-left)"/>
+      <path d="M 188,332 C 195,336 205,335 212,330" fill="none" stroke="#801A28" stroke-width="2" stroke-linecap="round"/>
+
+      <!-- Right Leather Grip -->
+      <path d="M 336,332 L 320,362" stroke="#591220" stroke-width="15" stroke-linecap="round"/>
+      <circle cx="320" cy="362" r="7" fill="url(#chrome-gold)"/>
+
+      <!-- Pelican Right Wing (Viewer's Right - Gracefully curved over side to hold right grip) -->
+      <path d="M 415,310 C 448,325 452,388 408,402 C 372,412 338,382 320,356 C 312,344 326,328 342,336 C 362,346 385,352 400,338 C 410,328 405,312 415,310 Z" fill="url(#wing-right)"/>
+      <!-- Volumetric Feather Layering on Right Wing -->
+      <path d="M 410,322 C 430,338 428,375 395,385 C 370,392 345,370 330,348" fill="none" stroke="#FFE099" stroke-width="3.5" stroke-linecap="round" opacity="0.55"/>
+      <path d="M 398,338 C 412,350 408,370 385,375 C 365,380 348,362 336,342" fill="none" stroke="#6B152B" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+    </g>
+
+  </g>
+
+  <!-- Ambient Golden Sunset Sparkles / Dust Motes inside Diamond -->
+  <g fill="#FFF9D2" opacity="0.7" filter="url(#soft-glow)">
+    <circle cx="155" cy="280" r="3.5"/>
+    <circle cx="220" cy="145" r="2.5"/>
+    <circle cx="545" cy="235" r="4"/>
+    <circle cx="590" cy="340" r="2.5"/>
+    <circle cx="635" cy="435" r="3"/>
+    <circle cx="135" cy="465" r="2.5"/>
+  </g>
+</svg>

@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CHOP.15 — 15-Minute Zero-Waste Weeknight Dinners</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #FF3B22;
+      --yellow: #FFD000;
+      --cream: #FFFDF5;
+      --black: #111111;
+      --green: #00E054;
+      --white: #FFFFFF;
+      --border-lg: 4px solid var(--black);
+      --border-sm: 3px solid var(--black);
+      --shadow-lg: 8px 8px 0px var(--black);
+      --shadow-sm: 4px 4px 0px var(--black);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--cream);
+      color: var(--black);
+      font-family: 'Space Grotesk', sans-serif;
+      line-height: 1.35;
+      overflow-x: hidden;
+    }
+
+    /* Typography */
+    h1, h2, h3, .font-display {
+      font-family: 'Archivo Black', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .mono {
+      font-family: 'IBM Plex Mono', monospace;
+      text-transform: uppercase;
+    }
+
+    /* Marquee Top Bar */
+    .marquee-bar {
+      background: var(--black);
+      color: var(--yellow);
+      padding: 10px 0;
+      border-bottom: var(--border-lg);
+      overflow: hidden;
+      white-space: nowrap;
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+    }
+
+    .marquee-track {
+      display: inline-block;
+      animation: scroll-left 22s linear infinite;
+    }
+
+    @keyframes scroll-left {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Sticky Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--yellow);
+      border-bottom: var(--border-lg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 32px;
+    }
+
+    .brand {
+      font-size: 1.9rem;
+      color: var(--black);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-badge {
+      background: var(--red);
+      color: var(--white);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem;
+      padding: 4px 8px;
+      border: var(--border-sm);
+      box-shadow: 3px 3px 0 var(--black);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    /* Neo-Brutalist Buttons */
+    .btn {
+      display: inline-block;
+      font-family: 'Archivo Black', sans-serif;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 14px 24px;
+      border: var(--border-sm);
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+      background: var(--red);
+      color: var(--white);
+    }
+
+    .btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px var(--black);
+    }
+
+    .btn:active {
+      transform: translate(4px, 4px);
+      box-shadow: 0px 0px 0px var(--black);
+    }
+
+    .btn-yellow {
+      background: var(--yellow);
+      color: var(--black);
+    }
+
+    .btn-white {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    /* Split Screen Layout */
+    .split-layout {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      min-height: calc(100vh - 75px);
+      align-items: start;
+    }
+
+    .story-column {
+      border-right: var(--border-lg);
+    }
+
+    .story-block {
+      min-height: 92vh;
+      padding: 64px 56px;
+      border-bottom: var(--border-lg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      transition: background-color 0.25s ease;
+    }
+
+    .story-block:last-child {
+      border-bottom: none;
+    }
+
+    .story-block[data-bg="cream"] { background: var(--cream); }
+    .story-block[data-bg="yellow"] { background: var(--yellow); }
+    .story-block[data-bg="red"] { background: var(--red); color: var(--white); }
+
+    .step-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      align-self: flex-start;
+      background: var(--black);
+      color: var(--yellow);
+      padding: 6px 14px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      border: 2px solid var(--black);
+    }
+
+    .story-block[data-bg="red"] .step-tag {
+      background: var(--yellow);
+      color: var(--black);
+    }
+
+    .headline {
+      font-size: clamp(2.5rem, 4.8vw, 4.4rem);
+      line-height: 0.96;
+      margin-bottom: 24px;
+    }
+
+    .subcopy {
+      font-size: 1.25rem;
+      font-weight: 700;
+      max-width: 540px;
+      margin-bottom: 32px;
+    }
+
+    /* Stat Grid */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+      max-width: 580px;
+    }
+
+    .stat-card {
+      background: var(--white);
+      color: var(--black);
+      border: var(--border-sm);
+      box-shadow: var(--shadow-sm);
+      padding: 16px;
+    }
+
+    .stat-num {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 2rem;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    /* Bullet Callouts */
+    .efficiency-list {
+      list-style: none;
+      display: grid;
+      gap: 14px;
+      max-width: 540px;
+      margin-bottom: 28px;
+    }
+
+    .efficiency-list li {
+      background: var(--white);
+      color: var(--black);
+      border: var(--border-sm);
+      box-shadow: var(--shadow-sm);
+      padding: 14px 18px;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .badge-time {
+      background: var(--black);
+      color: var(--yellow);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      padding: 4px 8px;
+    }
+
+    /* Interactive 3-Step Quiz inside Block 4 */
+    .quiz-box {
+      background: var(--white);
+      color: var(--black);
+      border: var(--border-lg);
+      box-shadow: var(--shadow-lg);
+      padding: 28px;
+      max-width: 600px;
+    }
+
+    .quiz-progress {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .quiz-pip {
+      flex: 1;
+      height: 12px;
+      border: 2px solid var(--black);
+      background: var(--cream);
+    }
+
+    .quiz-pip.active {
+      background: var(--red);
+    }
+
+    .quiz-pip.done {
+      background: var(--green);
+    }
+
+    .quiz-question {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 1.35rem;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .quiz-option-btn {
+      background: var(--cream);
+      border: var(--border-sm);
+      box-shadow: var(--shadow-sm);
+      padding: 14px;
+      text-align: left;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.1s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .quiz-option-btn:hover {
+      background: var(--yellow);
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--black);
+    }
+
+    .quiz-option-btn span.sub {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .quiz-result-summary {
+      display: none;
+    }
+
+    .quiz-result-summary.active {
+      display: block;
+    }
+
+    .result-plan-cards {
+      display: grid;
+      gap: 10px;
+      margin: 16px 0 20px;
+    }
+
+    .result-card {
+      border: var(--border-sm);
+      padding: 12px;
+      background: var(--cream);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .result-day {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      background: var(--black);
+      color: var(--yellow);
+      padding: 2px 6px;
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+
+    /* Right Sticky Preview Column */
+    .preview-column {
+      position: sticky;
+      top: 75px;
+      height: calc(100vh - 75px);
+      background-color: var(--cream);
+      background-image: radial-gradient(var(--black) 1.5px, transparent 1.5px);
+      background-size: 20px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .app-shell {
+      width: 100%;
+      max-width: 390px;
+      background: var(--white);
+      border: var(--border-lg);
+      box-shadow: 12px 12px 0px var(--black);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-topbar {
+      background: var(--black);
+      color: var(--white);
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      border-bottom: var(--border-sm);
+    }
+
+    .app-status-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: var(--green);
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+
+    .app-screen-body {
+      padding: 20px;
+      min-height: 440px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--cream);
+    }
+
+    .screen-pane {
+      display: none;
+      animation: popIn 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    }
+
+    .screen-pane.active {
+      display: block;
+    }
+
+    @keyframes popIn {
+      0% { opacity: 0; transform: translateY(8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .app-card {
+      background: var(--white);
+      border: var(--border-sm);
+      box-shadow: var(--shadow-sm);
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+
+    .app-tag {
+      display: inline-block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      background: var(--yellow);
+      border: 2px solid var(--black);
+      margin-bottom: 8px;
+    }
+
+    .app-tag.red {
+      background: var(--red);
+      color: var(--white);
+    }
+
+    .app-tag.green {
+      background: var(--green);
+      color: var(--black);
+    }
+
+    .ingredient-chain {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .chain-row {
+      background: var(--white);
+      border: var(--border-sm);
+      padding: 10px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .chain-bar {
+      height: 10px;
+      background: var(--cream);
+      border: 2px solid var(--black);
+      margin-top: 6px;
+      position: relative;
+    }
+
+    .chain-bar-fill {
+      height: 100%;
+      background: var(--green);
+      width: 100%;
+    }
+
+    .timer-display {
+      background: var(--black);
+      color: var(--yellow);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 2.3rem;
+      font-weight: 700;
+      text-align: center;
+      padding: 12px;
+      border: var(--border-sm);
+      margin-bottom: 14px;
+      letter-spacing: 0.05em;
+    }
+
+    .step-check {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--white);
+      border: var(--border-sm);
+      padding: 10px;
+      margin-bottom: 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .check-box {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--black);
+      background: var(--green);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .app-footer-bar {
+      background: var(--yellow);
+      border-top: var(--border-sm);
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    /* Footer */
+    footer {
+      border-top: var(--border-lg);
+      background: var(--black);
+      color: var(--white);
+      padding: 40px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .split-layout {
+        grid-template-columns: 1fr;
+      }
+      .story-column {
+        border-right: none;
+      }
+      .story-block {
+        min-height: auto;
+        padding: 48px 24px;
+      }
+      .preview-column {
+        position: relative;
+        top: 0;
+        height: auto;
+        padding: 48px 20px;
+        border-top: var(--border-lg);
+      }
+      .stat-grid, .quiz-options {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Ticker -->
+  <div class="marquee-bar">
+    <div class="marquee-track">
+      15 MINUTES HARD CAP • ZERO LEFTOVER ROT • 1 PAN MAX • BUILT FOR 7PM BURNOUT • NO LIFE STORIES BEFORE RECIPES • 15 MINUTES HARD CAP • ZERO LEFTOVER ROT • 1 PAN MAX • BUILT FOR 7PM BURNOUT • NO LIFE STORIES BEFORE RECIPES •
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <a href="#" class="brand font-display">
+      CHOP.15
+      <span class="brand-badge">ZERO-WASTE</span>
+    </a>
+    <div class="header-actions">
+      <span class="mono" style="font-size:0.85rem; display:none;" id="header-timer-hint">AVG PREP: 13M 40S</span>
+      <a href="#build-plan" class="btn">BUILD 3-DAY PLAN →</a>
+    </div>
+  </header>
+
+  <!-- Main Split-Screen Sticky Container -->
+  <main class="split-layout">
+
+    <!-- Left Scrolling Story Blocks -->
+    <div class="story-column">
+
+      <!-- BLOCK 1: HERO / TIME SAVED -->
+      <section class="story-block" data-step="1" data-bg="cream">
+        <div class="step-tag">01 // KILL THE 7PM DELIVERY TAX</div>
+        <h1 class="headline">CLOCK OUT AT 6:30. EAT REAL FOOD AT 6:45.</h1>
+        <p class="subcopy">
+          You work 50 hours a week. You don’t have time for 22-ingredient recipes or $38 soggy takeout bowls. CHOP.15 scripts 3 weeknight dinners around one tight grocery bag and a strict 900-second timer.
+        </p>
+        <div>
+          <a href="#build-plan" class="btn">GENERATE MY 3-DAY MENU</a>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-num">15m</div>
+            <div class="stat-label">HARD PREP + COOK CEILING</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">0%</div>
+            <div class="stat-label">SPINACH SLIME IN CRISPER</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">$4.10</div>
+            <div class="stat-label">AVG COST PER PORTION</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BLOCK 2: ZERO WASTE INGREDIENT CHAINING -->
+      <section class="story-block" data-step="2" data-bg="yellow">
+        <div class="step-tag">02 // ALGORITHMIC INGREDIENT CHAINING</div>
+        <h2 class="headline">BUY ONE BUNCH OF CILANTRO. USE 100% OF IT.</h2>
+        <p class="subcopy">
+          Standard meal apps leave you with half a cabbage, three limp scallions, and $40 of guilt. CHOP.15 locks Mon–Wed dinners together so every perishable pack hits zero by Wednesday night.
+        </p>
+        <ul class="efficiency-list">
+          <li>
+            <span>11 EXACT ITEMS PER 3-DAY SPRINT</span>
+            <span class="badge-time">6 MIN GROCERY RUN</span>
+          </li>
+          <li>
+            <span>SHARED SAUCES + AROMATICS ACROSS MEALS</span>
+            <span class="badge-time">ZERO SPOILAGE</span>
+          </li>
+          <li>
+            <span>AISLE-SORTED CHECKLIST BY STORE LAYOUT</span>
+            <span class="badge-time">IN &amp; OUT</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- BLOCK 3: HIGH-SPEED EXECUTION -->
+      <section class="story-block" data-step="3" data-bg="red">
+        <div class="step-tag">03 // SINGLE-SKILLET SYNCHRONIZED TIMERS</div>
+        <h2 class="headline">ONE KNIFE. ONE PAN. ZERO DOWNTIME.</h2>
+        <p class="subcopy">
+          No pre-chopping bowls for Instagram. While garlic hits hot oil, you slice the protein. CHOP.15 sequences every cut and toss in real time so your sink stays empty.
+        </p>
+        <ul class="efficiency-list">
+          <li>
+            <span>PARALLEL PREP-WHILE-SEARING PROMPTS</span>
+            <span class="badge-time">-9 MINS SAVED</span>
+          </li>
+          <li>
+            <span>1 DISHWASHER LOAD MAX PER NIGHT</span>
+            <span class="badge-time">90 SEC CLEANUP</span>
+          </li>
+          <li>
+            <span>VOICE HANDS-FREE STEP ADVANCE</span>
+            <span class="badge-time">NO GREASY SCREEN</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- BLOCK 4: 3-STEP INTERACTIVE ONBOARDING QUIZ -->
+      <section class="story-block" id="build-plan" data-step="4" data-bg="cream">
+        <div class="step-tag">04 // INSTANT ONBOARDING ENGINE</div>
+        <h2 class="headline">BUILD THIS WEEK’S 3-NIGHT SPRINT NOW.</h2>
+        <p class="subcopy">
+          Three clicks. No email wall. Watch the live app preview lock in your zero-waste grocery list and 15-minute schedule on the spot.
+        </p>
+
+        <div class="quiz-box" id="quiz-container">
+          <div class="quiz-progress">
+            <div class="quiz-pip active" id="pip-1"></div>
+            <div class="quiz-pip" id="pip-2"></div>
+            <div class="quiz-pip" id="pip-3"></div>
+          </div>
+
+          <div id="quiz-step-view">
+            <div class="mono" style="font-size:0.8rem; margin-bottom:6px; color:var(--red);" id="quiz-step-label">STEP 1 OF 3 // DIET TRACK</div>
+            <div class="quiz-question" id="quiz-question-text">1. PICK YOUR PROTEIN TRACK:</div>
+            <div class="quiz-options" id="quiz-options-grid">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <div class="quiz-result-summary" id="quiz-result-view">
+            <div class="mono" style="font-size:0.8rem; color:var(--red); margin-bottom:4px;">SPRINT COMPILED // 100% INGREDIENT UTILIZATION</div>
+            <h3 style="font-size:1.5rem; margin-bottom:8px;" id="result-headline">YOUR 3-DAY ZERO-WASTE PLAN</h3>
+            <p class="mono" style="font-size:0.8rem; margin-bottom:12px;" id="result-meta"></p>
+            <div class="result-plan-cards" id="result-cards-container"></div>
+            <div style="display:flex; gap:12px; flex-wrap:wrap;">
+              <button class="btn" id="send-sms-btn" type="button">TEXT ME GROCERY LIST (9 ITEMS)</button>
+              <button class="btn btn-white" id="reset-quiz-btn" type="button">RESET</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Right Sticky Live App Mockup -->
+    <aside class="preview-column">
+      <div class="app-shell">
+        <div class="app-topbar">
+          <span><span class="app-status-dot"></span>CHOP.15 OS v2.4</span>
+          <span id="preview-mode-label">MODE: ROI AUDIT</span>
+        </div>
+
+        <div class="app-screen-body">
+          <!-- Screen 1: Time vs Takeout -->
+          <div class="screen-pane active" id="screen-1">
+            <div>
+              <span class="app-tag red">TUESDAY 6:42 PM</span>
+              <h3 style="font-size:1.45rem; margin-bottom:12px;">DELIVERY VS. CHOP.15</h3>
+              <div class="app-card" style="background:#FFE6E2;">
+                <div class="mono" style="font-size:0.75rem;">UBER EATS / PAD THAI</div>
+                <div style="display:flex; justify-content:space-between; font-weight:700; font-size:1.1rem; margin-top:4px;">
+                  <span>52 MINS WAIT</span>
+                  <span style="color:var(--red);">$34.80</span>
+                </div>
+              </div>
+              <div class="app-card" style="background:var(--yellow);">
+                <div class="mono" style="font-size:0.75rem;">CHOP.15 / CHARRED SCALLION BEEF NOODLES</div>
+                <div style="display:flex; justify-content:space-between; font-weight:700; font-size:1.1rem; margin-top:4px;">
+                  <span>13 MINS TOTAL</span>
+                  <span>$4.25</span>
+                </div>
+              </div>
+              <div class="app-card">
+                <div class="mono" style="font-size:0.75rem; margin-bottom:6px;">WEEKLY CORPORATE TIME RECLAIMED</div>
+                <div class="font-display" style="font-size:2rem; color:var(--red);">3.8 HOURS</div>
+                <div style="font-size:0.85rem; font-weight:700;">+$88.50 saved vs. 3x weeknight delivery</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Screen 2: Zero-Waste Chain -->
+          <div class="screen-pane" id="screen-2">
+            <div>
+              <span class="app-tag green">ZERO-TRASH LEDGER</span>
+              <h3 style="font-size:1.4rem; margin-bottom:8px;">SHARED FRIDGE PACK</h3>
+              <p style="font-size:0.85rem; font-weight:700; margin-bottom:10px;">Every fresh item split across Mon / Tue / Wed:</p>
+              <div class="ingredient-chain">
+                <div class="chain-row">
+                  <div style="width:100%;">
+                    <div style="display:flex; justify-content:space-between;">
+                      <span>1 BUNCH SCALLIONS</span>
+                      <span class="mono" style="color:var(--red);">100% USED</span>
+                    </div>
+                    <div style="font-size:0.75rem; opacity:0.8;">Mon: 40% Udon • Tue: 60% Tacos</div>
+                    <div class="chain-bar"><div class="chain-bar-fill"></div></div>
+                  </div>
+                </div>
+                <div class="chain-row">
+                  <div style="width:100%;">
+                    <div style="display:flex; justify-content:space-between;">
+                      <span>8 OZ BABY SPINACH</span>
+                      <span class="mono" style="color:var(--red);">100% USED</span>
+                    </div>
+                    <div style="font-size:0.75rem; opacity:0.8;">Mon: 50% Wilt • Wed: 50% Gnocchi</div>
+                    <div class="chain-bar"><div class="chain-bar-fill"></div></div>
+                  </div>
+                </div>
+                <div class="chain-row">
+                  <div style="width:100%;">
+                    <div style="display:flex; justify-content:space-between;">
+                      <span>1 JAR CHILI CRISP</span>
+                      <span class="mono" style="color:var(--red);">3X GLAZE</span>
+                    </div>
+                    <div style="font-size:0.75rem; opacity:0.8;">Shared finisher across all 3 nights</div>
+                    <div class="chain-bar"><div class="chain-bar-fill"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Screen 3: 15-Min Execution Timer -->
+          <div class="screen-pane" id="screen-3">
+            <div>
+              <span class="app-tag">LIVE KITCHEN PACER</span>
+              <div class="timer-display" id="live-countdown">14:18</div>
+              <div class="step-check">
+                <span class="check-box">✓</span>
+                <span>00:00 — Rip heat under 12" skillet (dry)</span>
+              </div>
+              <div class="step-check">
+                <span class="check-box">✓</span>
+                <span>01:30 — Sear protein 4m while slicing scallions</span>
+              </div>
+              <div class="step-check" style="background:var(--yellow);">
+                <span class="check-box" style="background:var(--white);">→</span>
+                <span>06:00 — Deglaze pan + toss pre-steamed noodles</span>
+              </div>
+              <div class="step-check" style="opacity:0.65;">
+                <span class="check-box" style="background:transparent;"></span>
+                <span>11:30 — Plate &amp; wipe warm pan in 30 seconds</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Screen 4: Live Interactive Quiz Sync -->
+          <div class="screen-pane" id="screen-4">
+            <div>
+              <span class="app-tag red" id="preview-quiz-badge">LIVE PLAN COMPILER</span>
+              <h3 style="font-size:1.35rem; margin-bottom:10px;" id="preview-quiz-title">SELECT OPTIONS ON LEFT</h3>
+              <div id="preview-quiz-slots">
+                <!-- Updated dynamically as user clicks quiz -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="app-footer-bar">
+          <span id="app-footer-left">WASTE SCORE: 0.0 OZ</span>
+          <span id="app-footer-right">1 PAN // 1 KNIFE</span>
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <footer>
+    <div class="font-display" style="font-size:1.5rem;">CHOP.15 // BUILT FOR BUSY HUMANS</div>
+    <div class="mono" style="font-size:0.85rem; color:var(--yellow);">NO ADS. NO BLOG PREAMBLES. JUST 15-MINUTE DINNER.</div>
+  </footer>
+
+  <script>
+    // 1. Live countdown ticker for Screen 3
+    let secondsRemaining = 14 * 60 + 18;
+    const countdownEl = document.getElementById('live-countdown');
+    setInterval(() => {
+      secondsRemaining = secondsRemaining > 720 ? secondsRemaining - 1 : 14 * 60 + 59;
+      const m = String(Math.floor(secondsRemaining / 60)).padStart(2, '0');
+      const s = String(secondsRemaining % 60).padStart(2, '0');
+      if (countdownEl) countdownEl.textContent = `${m}:${s}`;
+    }, 1000);
+
+    // 2. Scroll Observer to sync Left Story Blocks with Right Sticky App Screen
+    const storyBlocks = document.querySelectorAll('.story-block');
+    const screens = {
+      '1': document.getElementById('screen-1'),
+      '2': document.getElementById('screen-2'),
+      '3': document.getElementById('screen-3'),
+      '4': document.getElementById('screen-4')
+    };
+    const modeLabels = {
+      '1': 'MODE: ROI AUDIT',
+      '2': 'MODE: ZERO-WASTE CHAIN',
+      '3': 'MODE: 900S PACER',
+      '4': 'MODE: CUSTOM SPRINT'
+    };
+    const previewModeLabel = document.getElementById('preview-mode-label');
+
+    function activateScreen(stepId) {
+      Object.keys(screens).forEach(k => {
+        screens[k].classList.toggle('active', k === String(stepId));
+      });
+      previewModeLabel.textContent = modeLabels[stepId] || 'MODE: LIVE';
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const step = entry.target.getAttribute('data-step');
+          activateScreen(step);
+        }
+      });
+    }, { threshold: 0.45 });
+
+    storyBlocks.forEach(block => observer.observe(block));
+
+    // 3. Interactive 3-Step Onboarding Quiz
+    const quizSteps = [
+      {
+        label: 'STEP 1 OF 3 // PROTEIN TRACK',
+        question: '1. PICK YOUR WEEKNIGHT PROTEIN TRACK:',
+        key: 'diet',
+        options: [
+          { value: 'omnivore', title: 'HIGH-PROTEIN OMNIVORE', sub: 'Steak strips, chicken thigh, shrimp' },
+          { value: 'pescatarian', title: 'FAST PESCATARIAN', sub: 'Salmon, seared shrimp, crispy tofu' },
+          { value: 'plant', title: '100% PLANT POWER', sub: 'Crispy tempeh, chickpeas, miso tofu' },
+          { value: 'poultry', title: 'LEAN POULTRY + EGG', sub: 'Turkey smash, chicken chorizo, eggs' }
+        ]
+      },
+      {
+        label: 'STEP 2 OF 3 // CLEANUP TOLERANCE',
+        question: '2. PICK YOUR HARDWARE LIMIT:',
+        key: 'gear',
+        options: [
+          { value: 'skillet', title: '1 CAST-IRON / SKILLET', sub: 'Stovetop sear only • 60s wash' },
+          { value: 'sheetpan', title: '1 SHEET PAN + BROILER', sub: 'Foil-lined • Zero scrubbing' },
+          { value: 'wok', title: 'HIGH-HEAT CARBON WOK', sub: 'Blistered greens + 3-min noodles' },
+          { value: 'any', title: 'WHATEVER IS FASTEST', sub: 'Optimize purely for 12-min speed' }
+        ]
+      },
+      {
+        label: 'STEP 3 OF 3 // HOUSEHOLD PORTIONS',
+        question: '3. WHO ARE WE FEEDING AT 7PM?',
+        key: 'portions',
+        options: [
+          { value: 'solo', title: 'SOLO EXEC + LUNCH BOX', sub: '1 dinner + 1 next-day desk lunch' },
+          { value: 'duo', title: '2 ADULTS (ZERO LEFTOVERS)', sub: 'Exact 2-plate scaling every night' },
+          { value: 'double', title: '2 ADULTS + 2 LUNCHES', sub: '4 portions total per 15-min cook' },
+          { value: 'family', title: '4 HUNGRY HUMANS', sub: 'Max skillet volume, Mild spice base' }
+        ]
+      }
+    ];
+
+    const mealPlansDB = {
+      omnivore: {
+        sharedPack: '1 bunch scallions + 8oz spinach + 1 lime pack',
+        meals: [
+          { day: 'MON // 12 MIN', name: 'Black Pepper Flank Steak & Blistered Spinach Udon', uses: 'Uses 50% spinach + 40% scallions' },
+          { day: 'TUE // 14 MIN', name: 'Crispy Chipotle Chicken & Charred Corn Tostadas', uses: 'Uses 60% scallions + 50% limes' },
+          { day: 'WED // 11 MIN', name: 'Garlic Butter Shrimp & Wilted Greens Skillet Gnocchi', uses: 'Finishes 50% spinach + 50% limes' }
+        ]
+      },
+      pescatarian: {
+        sharedPack: '1 pack cherry tomatoes + 1 bunch cilantro + coconut milk',
+        meals: [
+          { day: 'MON // 13 MIN', name: 'Miso-Glazed Salmon Bites & Sesame Cucumber Rice', uses: 'Uses 40% cilantro + scallions' },
+          { day: 'TUE // 11 MIN', name: 'Coconut Red Curry Shrimp & Blistered Tomatoes', uses: 'Uses 50% coconut milk + 50% tomatoes' },
+          { day: 'WED // 14 MIN', name: 'Crispy Halloumi & Burst Tomato Herb Couscous', uses: 'Finishes 50% tomatoes + 60% cilantro' }
+        ]
+      },
+      plant: {
+        sharedPack: '1 jar tahini + 1 bunch kale + 1 pack cremini mushrooms',
+        meals: [
+          { day: 'MON // 12 MIN', name: 'Chili-Crisp Smashed Tofu & Garlicky Kale Ramen', uses: 'Uses 50% kale + 40% mushrooms' },
+          { day: 'TUE // 13 MIN', name: 'Smoky Black Bean & Seared Mushroom Quesadillas', uses: 'Finishes 60% mushrooms + lime' },
+          { day: 'WED // 11 MIN', name: 'Lemon-Tahini Crispy Chickpeas & Charred Kale Flatbread', uses: 'Finishes 50% kale + tahini drizzle' }
+        ]
+      },
+      poultry: {
+        sharedPack: '1 bag shredded slaw + 1 bunch basil + ginger paste',
+        meals: [
+          { day: 'MON // 12 MIN', name: 'Thai Basil Street-Style Turkey Over Jasmine Rice', uses: 'Uses 60% basil + ginger paste' },
+          { day: 'TUE // 13 MIN', name: 'Sesame Ginger Chicken Smash Tacos + Crunchy Slaw', uses: 'Uses 60% slaw mix + ginger' },
+          { day: 'WED // 10 MIN', name: '5-Spice Egg Roll in a Skillet + Fresh Basil Finish', uses: 'Finishes 40% slaw + 40% basil' }
+        ]
+      }
+    };
+
+    let currentQuizStep = 0;
+    const answers = {};
+
+    const stepLabelEl = document.getElementById('quiz-step-label');
+    const questionTextEl = document.getElementById('quiz-question-text');
+    const optionsGridEl = document.getElementById('quiz-options-grid');
+    const stepViewEl = document.getElementById('quiz-step-view');
+    const resultViewEl = document.getElementById('quiz-result-view');
+    const previewQuizTitle = document.getElementById('preview-quiz-title');
+    const previewQuizSlots = document.getElementById('preview-quiz-slots');
+
+    function updateRightPhonePreview() {
+      const selectedDiet = answers.diet || 'omnivore';
+      const plan = mealPlansDB[selectedDiet];
+      const gearLabel = answers.gear ? answers.gear.toUpperCase() : '1 PAN';
+      const portionLabel = answers.portions ? answers.portions.toUpperCase() : '2 PLATES';
+
+      previewQuizTitle.textContent = `${selectedDiet.toUpperCase()} // ${gearLabel}`;
+      previewQuizSlots.innerHTML = `
+        <div class="app-card" style="background:var(--yellow); margin-bottom:10px; padding:10px;">
+          <div class="mono" style="font-size:0.72rem;">ZERO-WASTE SHARED BRIDGE</div>
+          <div style="font-weight:700; font-size:0.86rem;">${plan.sharedPack}</div>
+        </div>
+        ${plan.meals.map(m => `
+          <div class="app-card" style="margin-bottom:8px; padding:10px;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="mono" style="font-size:0.7rem; background:var(--black); color:var(--yellow); padding:2px 6px;">${m.day}</span>
+              <span class="mono" style="font-size:0.7rem; color:var(--red);">${portionLabel}</span>
+            </div>
+            <div style="font-weight:700; font-size:0.9rem; margin-top:5px;">${m.name}</div>
+            <div class="mono" style="font-size:0.68rem; opacity:0.75; margin-top:3px;">${m.uses}</div>
+          </div>
+        `).join('')}
+      `;
+    }
+
+    function renderQuizStep() {
+      // Update pips
+      [1, 2, 3].forEach(i => {
+        const pip = document.getElementById(`pip-${i}`);
+        pip.className = 'quiz-pip';
+        if (i - 1 < currentQuizStep) pip.classList.add('done');
+        if (i - 1 === currentQuizStep) pip.classList.add('active');
+      });
+
+      if (currentQuizStep >= quizSteps.length) {
+        // Show final compiled plan
+        stepViewEl.style.display = 'none';
+        resultViewEl.classList.add('active');
+        const plan = mealPlansDB[answers.diet || 'omnivore'];
+        document.getElementById('result-meta').textContent =
+          `SHARED GROCERY BRIDGE: ${plan.sharedPack} • 0% LEFTOVER WASTE`;
+
+        const cardsContainer = document.getElementById('result-cards-container');
+        cardsContainer.innerHTML = plan.meals.map(m => `
+          <div class="result-card">
+            <div>
+              <span class="result-day">${m.day}</span>
+              <div style="font-weight:700; font-size:1rem;">${m.name}</div>
+              <div class="mono" style="font-size:0.72rem; opacity:0.8;">${m.uses}</div>
+            </div>
+            <span class="mono" style="font-size:0.78rem; font-weight:700; color:var(--red);">100% USED</span>
+          </div>
+        `).join('');
+        activateScreen(4);
+        updateRightPhonePreview();
+        return;
+      }
+
+      stepViewEl.style.display = 'block';
+      resultViewEl.classList.remove('active');
+
+      const stepData = quizSteps[currentQuizStep];
+      stepLabelEl.textContent = stepData.label;
+      questionTextEl.textContent = stepData.question;
+
+      optionsGridEl.innerHTML = stepData.options.map(opt => `
+        <button type="button" class="quiz-option-btn" data-val="${opt.value}">
+          <span>${opt.title}</span>
+          <span class="sub">${opt.sub}</span>
+        </button>
+      `).join('');
+
+      optionsGridEl.querySelectorAll('.quiz-option-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          answers[stepData.key] = btn.getAttribute('data-val');
+          currentQuizStep++;
+          activateScreen(4);
+          updateRightPhonePreview();
+          renderQuizStep();
+        });
+      });
+    }
+
+    document.getElementById('reset-quiz-btn').addEventListener('click', () => {
+      currentQuizStep = 0;
+      delete answers.diet;
+      delete answers.gear;
+      delete answers.portions;
+      renderQuizStep();
+      updateRightPhonePreview();
+    });
+
+    document.getElementById('send-sms-btn').addEventListener('click', (e) => {
+      const btn = e.currentTarget;
+      btn.textContent = '✓ GROCERY LIST COPIED TO CLIPBOARD!';
+      btn.style.background = 'var(--green)';
+      btn.style.color = 'var(--black)';
+      setTimeout(() => {
+        btn.textContent = 'TEXT ME GROCERY LIST (9 ITEMS)';
+        btn.style.background = 'var(--red)';
+        btn.style.color = 'var(--white)';
+      }, 2600);
+    });
+
+    // Initialize quiz & right screen
+    updateRightPhonePreview();
+    renderQuizStep();
+  </script>
+</body>
+</html>

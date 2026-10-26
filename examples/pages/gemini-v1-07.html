@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SoloSprout — Zero-Waste Single-Serving Meal Planning</title>
+  <style>
+    :root {
+      --bg-cream: #F6FBF7;
+      --bg-mint: #E6F5EA;
+      --forest-dark: #0F2E22;
+      --leaf-green: #1E6F50;
+      --fresh-green: #2ECC71;
+      --citrus-lime: #C6FF00;
+      --citrus-orange: #FF8A00;
+      --citrus-yellow: #FFD600;
+      --text-main: #0F2E22;
+      --text-muted: #4A6B5D;
+      --card-glass: rgba(255, 255, 255, 0.78);
+      --border-glass: rgba(255, 255, 255, 0.9);
+      --shadow-soft: 0 20px 40px -15px rgba(15, 46, 34, 0.08);
+      --shadow-3d: 0 30px 60px -12px rgba(15, 46, 34, 0.22);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-pill: 999px;
+      --font-geo: 'Plus Jakarta Sans', 'Outfit', 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: var(--font-geo);
+      background-color: var(--bg-cream);
+      color: var(--text-main);
+    }
+
+    body {
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 12% 18%, rgba(198, 255, 0, 0.22) 0%, transparent 32%),
+        radial-gradient(circle at 88% 25%, rgba(46, 204, 113, 0.16) 0%, transparent 40%),
+        radial-gradient(circle at 50% 75%, rgba(255, 214, 0, 0.12) 0%, transparent 45%);
+      line-height: 1.6;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+
+    .pill-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      background: var(--bg-mint);
+      border: 1.5px solid rgba(46, 204, 113, 0.35);
+      color: var(--leaf-green);
+      font-weight: 700;
+      font-size: 0.85rem;
+      border-radius: var(--radius-pill);
+      margin-bottom: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .pill-tag .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--citrus-orange);
+      box-shadow: 0 0 0 4px rgba(255, 138, 0, 0.2);
+    }
+
+    /* Navigation */
+    header {
+      position: sticky;
+      top: 16px;
+      z-index: 100;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 24px;
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-pill);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      font-size: 1.35rem;
+      color: var(--forest-dark);
+      text-decoration: none;
+      letter-spacing: -0.04em;
+    }
+
+    .logo-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--fresh-green), var(--citrus-lime));
+      display: grid;
+      place-items: center;
+      position: relative;
+      box-shadow: 0 6px 14px rgba(46, 204, 113, 0.35);
+    }
+
+    .logo-mark::after {
+      content: "";
+      width: 14px;
+      height: 14px;
+      border-radius: 50% 50% 0 50%;
+      background: var(--forest-dark);
+      transform: rotate(-45deg);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--forest-dark);
+    }
+
+    .btn-primary {
+      background: var(--forest-dark);
+      color: var(--citrus-lime);
+      padding: 12px 24px;
+      border-radius: var(--radius-pill);
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(15, 46, 34, 0.2);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 70px 0 90px;
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 4.8vw, 4.1rem);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 .highlight {
+      background: linear-gradient(120deg, var(--citrus-lime) 0%, #9EFFA9 100%);
+      padding: 0 12px;
+      border-radius: 14px;
+      display: inline-block;
+      transform: rotate(-1deg);
+    }
+
+    .hero p {
+      font-size: 1.18rem;
+      color: var(--text-muted);
+      margin-bottom: 34px;
+      max-width: 520px;
+    }
+
+    /* App Store Badges */
+    .store-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+
+    .store-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--forest-dark);
+      color: #fff;
+      padding: 12px 22px;
+      border-radius: 16px;
+      text-decoration: none;
+      transition: transform 0.2s, background 0.2s;
+      border: 1.5px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .store-badge:hover {
+      transform: translateY(-3px);
+      background: #174231;
+    }
+
+    .store-icon {
+      font-size: 1.5rem;
+      line-height: 1;
+      color: var(--citrus-lime);
+    }
+
+    .store-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+
+    .store-text small {
+      font-size: 0.7rem;
+      opacity: 0.75;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .store-text strong {
+      font-size: 1.02rem;
+      font-weight: 700;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 28px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(15, 46, 34, 0.1);
+    }
+
+    .stat-item strong {
+      display: block;
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--forest-dark);
+    }
+
+    .stat-item span {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Pure CSS 3D Phone Mockup */
+    .phone-stage {
+      perspective: 1200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .phone-3d {
+      width: 330px;
+      height: 650px;
+      background: #0A1F17;
+      border-radius: 48px;
+      padding: 12px;
+      transform: rotateY(-16deg) rotateX(8deg) rotateZ(2deg);
+      transform-style: preserve-3d;
+      box-shadow: 
+        22px 28px 0 -4px #1E6F50,
+        28px 38px 60px rgba(15, 46, 34, 0.35);
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative;
+    }
+
+    .phone-stage:hover .phone-3d {
+      transform: rotateY(-6deg) rotateX(4deg) rotateZ(0deg);
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(165deg, #F3FBF5 0%, #E0F4E7 100%);
+      border-radius: 38px;
+      padding: 20px 16px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .phone-notch {
+      width: 96px;
+      height: 22px;
+      background: #0A1F17;
+      border-radius: 99px;
+      margin: 0 auto 6px;
+    }
+
+    .app-header-ui {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .app-header-ui .greeting {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--leaf-green);
+      text-transform: uppercase;
+    }
+
+    .app-header-ui .title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--forest-dark);
+    }
+
+    .zero-waste-ring {
+      background: var(--citrus-lime);
+      color: var(--forest-dark);
+      font-weight: 800;
+      font-size: 0.72rem;
+      padding: 6px 10px;
+      border-radius: 12px;
+    }
+
+    .ui-schedule-card {
+      background: var(--card-glass);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-glass);
+      border-radius: 20px;
+      padding: 14px;
+      box-shadow: 0 8px 20px rgba(15, 46, 34, 0.05);
+    }
+
+    .ui-schedule-card .day-tag {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: var(--leaf-green);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .ui-schedule-card h4 {
+      font-size: 0.96rem;
+      margin-bottom: 6px;
+    }
+
+    .ingredient-chain {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .ing-pill {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 8px;
+      background: rgba(46, 204, 113, 0.16);
+      color: var(--forest-dark);
+    }
+
+    .ing-pill.shared {
+      background: var(--citrus-yellow);
+      color: var(--forest-dark);
+    }
+
+    /* Floating Glassmorphic Badges on 3D Phone */
+    .floating-glass {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.86);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid #fff;
+      border-radius: 20px;
+      padding: 14px 18px;
+      box-shadow: var(--shadow-3d);
+      transform: translateZ(50px);
+    }
+
+    .floating-top-left {
+      top: 75px;
+      left: -30px;
+    }
+
+    .floating-bottom-right {
+      bottom: 85px;
+      right: -25px;
+      background: rgba(15, 46, 34, 0.92);
+      color: #fff;
+      border-color: rgba(198, 255, 0, 0.4);
+    }
+
+    /* Interactive Macro & Calorie Filter Section */
+    .interactive-section {
+      padding: 80px 0;
+    }
+
+    .interactive-wrapper {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(230, 245, 234, 0.85));
+      border: 2px solid #fff;
+      border-radius: var(--radius-lg);
+      padding: 50px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .section-head {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 40px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      margin-bottom: 12px;
+    }
+
+    .controls-panel {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+      background: var(--forest-dark);
+      color: #fff;
+      padding: 28px 32px;
+      border-radius: var(--radius-md);
+      margin-bottom: 36px;
+      align-items: center;
+    }
+
+    .slider-group label {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+
+    .slider-val {
+      color: var(--citrus-lime);
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 99px;
+      outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--citrus-lime);
+      border: 3px solid var(--forest-dark);
+      cursor: pointer;
+      box-shadow: 0 0 12px rgba(198, 255, 0, 0.6);
+      transition: transform 0.15s;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    .filter-summary {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      border-left: 1px solid rgba(255, 255, 255, 0.15);
+      padding-left: 24px;
+    }
+
+    .meal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .meal-card {
+      background: var(--card-glass);
+      backdrop-filter: blur(12px);
+      border: 1.5px solid #fff;
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: 0 12px 28px -10px rgba(15, 46, 34, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.25s, border-color 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .meal-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--fresh-green);
+    }
+
+    .meal-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .time-badge {
+      background: var(--bg-mint);
+      color: var(--leaf-green);
+      font-weight: 800;
+      font-size: 0.78rem;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+    }
+
+    .serving-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--citrus-orange);
+      background: rgba(255, 138, 0, 0.12);
+      padding: 5px 10px;
+      border-radius: var(--radius-pill);
+    }
+
+    .meal-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+    }
+
+    .zero-waste-note {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      background: rgba(46, 204, 113, 0.08);
+      border-left: 3px solid var(--fresh-green);
+      padding: 8px 12px;
+      border-radius: 0 10px 10px 0;
+      margin: 12px 0 18px;
+      font-weight: 600;
+    }
+
+    .macro-bar-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      background: #fff;
+      padding: 12px;
+      border-radius: 14px;
+      text-align: center;
+    }
+
+    .macro-cell span {
+      display: block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .macro-cell strong {
+      font-size: 0.95rem;
+      color: var(--forest-dark);
+      font-weight: 800;
+    }
+
+    /* Alternating Visual Storytelling Journey */
+    .story-section {
+      padding: 70px 0;
+    }
+
+    .story-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      margin-bottom: 90px;
+    }
+
+    .story-row.reverse .story-text {
+      order: 2;
+    }
+
+    .story-row.reverse .story-visual {
+      order: 1;
+    }
+
+    .story-text h2 {
+      font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+      margin-bottom: 18px;
+    }
+
+    .story-text p {
+      font-size: 1.08rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .check-list {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .check-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+    }
+
+    .check-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--citrus-lime);
+      color: var(--forest-dark);
+      display: grid;
+      place-items: center;
+      font-size: 0.85rem;
+      font-weight: 900;
+    }
+
+    /* Pure CSS UI Visual Mockups for Story Rows */
+    .css-mockup-stage {
+      background: linear-gradient(135deg, var(--forest-dark), #1B4D38);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      position: relative;
+      box-shadow: var(--shadow-3d);
+      perspective: 900px;
+    }
+
+    .glass-ui-board {
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 22px;
+      padding: 24px;
+      transform: rotateY(8deg) rotateX(4deg);
+      box-shadow: -15px 20px 35px rgba(0, 0, 0, 0.25);
+    }
+
+    .chain-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      background: var(--bg-cream);
+      border-radius: 14px;
+      margin-top: 10px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .fraction-pill {
+      background: var(--citrus-yellow);
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    /* Testimonial Grid */
+    .testimonials {
+      padding: 60px 0 90px;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 24px;
+    }
+
+    .testi-card {
+      background: var(--card-glass);
+      border: 1.5px solid #fff;
+      border-radius: var(--radius-md);
+      padding: 28px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .stars {
+      color: var(--citrus-orange);
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
+
+    .testi-card p {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+      color: var(--forest-dark);
+    }
+
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--citrus-lime), var(--fresh-green));
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      color: var(--forest-dark);
+    }
+
+    /* Bottom CTA */
+    .cta-banner {
+      background: var(--forest-dark);
+      color: #fff;
+      border-radius: var(--radius-lg);
+      padding: 64px 40px;
+      text-align: center;
+      margin-bottom: 70px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-banner h2 {
+      font-size: clamp(2rem, 3.8vw, 3.1rem);
+      margin-bottom: 16px;
+    }
+
+    .cta-banner p {
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 540px;
+      margin: 0 auto 32px;
+      font-size: 1.1rem;
+    }
+
+    .cta-banner .store-badges {
+      justify-content: center;
+      margin-bottom: 0;
+    }
+
+    .cta-banner .store-badge {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(198, 255, 0, 0.35);
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px 24px 48px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    @media (max-width: 920px) {
+      .hero, .story-row {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+      .story-row.reverse .story-text {
+        order: 1;
+      }
+      .story-row.reverse .story-visual {
+        order: 2;
+      }
+      .nav-links {
+        display: none;
+      }
+      .interactive-wrapper {
+        padding: 28px 20px;
+      }
+      .filter-summary {
+        border-left: none;
+        padding-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <nav class="navbar">
+      <a href="#" class="logo">
+        <div class="logo-mark"></div>
+        SoloSprout
+      </a>
+      <ul class="nav-links">
+        <li><a href="#interactive-planner">Macro Explorer</a></li>
+        <li><a href="#how-it-works">Zero-Waste Engine</a></li>
+        <li><a href="#reviews">Solo Cooks</a></li>
+      </ul>
+      <a href="#download" class="btn-primary">Get the App →</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="pill-tag">
+          <span class="dot"></span> Built for 1 • Zero Leftover Guilt
+        </div>
+        <h1>
+          Cook for one. <br />
+          <span class="highlight">Waste nothing.</span>
+        </h1>
+        <p>
+          Say goodbye to wilted cilantro and 5 days of identical Tupperware. SoloSprout chains your single-serving weeknight dinners together so every half-avocado, lemon, and herb bunch gets used 100%.
+        </p>
+
+        <div class="store-badges">
+          <a href="#download" class="store-badge">
+            <span class="store-icon"></span>
+            <div class="store-text">
+              <small>Download on the</small>
+              <strong>App Store</strong>
+            </div>
+          </a>
+          <a href="#download" class="store-badge">
+            <span class="store-icon">▶</span>
+            <div class="store-text">
+              <small>Get it on</small>
+              <strong>Google Play</strong>
+            </div>
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <strong>15 mins</strong>
+            <span>Avg. weeknight prep</span>
+          </div>
+          <div class="stat-item">
+            <strong>$190/mo</strong>
+            <span>Saved on spoiled groceries</span>
+          </div>
+          <div class="stat-item">
+            <strong>1.0x</strong>
+            <span>Exact solo portions</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pure CSS 3D Phone & Glassmorphic UI Schedule -->
+      <div class="phone-stage">
+        <div class="phone-3d">
+          <div class="phone-screen">
+            <div class="phone-notch"></div>
+            <div class="app-header-ui">
+              <div>
+                <div class="greeting">This Week's Chain</div>
+                <div class="title">12 Exact Groceries</div>
+              </div>
+              <div class="zero-waste-ring">0% Waste</div>
+            </div>
+
+            <div class="ui-schedule-card">
+              <div class="day-tag">
+                <span>Monday • 12m</span>
+                <span>510 kcal</span>
+              </div>
+              <h4>Yuzu Miso Glazed Salmon</h4>
+              <div class="ingredient-chain">
+                <span class="ing-pill shared">½ Avocado</span>
+                <span class="ing-pill shared">⅓ Scallion Bunch</span>
+                <span class="ing-pill">1 Salmon Fillet</span>
+              </div>
+            </div>
+
+            <div class="ui-schedule-card">
+              <div class="day-tag">
+                <span>Tuesday • 10m</span>
+                <span>480 kcal</span>
+              </div>
+              <h4>Crispy Chili Lime Tofu Tacos</h4>
+              <div class="ingredient-chain">
+                <span class="ing-pill shared">½ Avocado (Used!)</span>
+                <span class="ing-pill shared">⅓ Scallion Bunch</span>
+                <span class="ing-pill shared">½ Block Tofu</span>
+              </div>
+            </div>
+
+            <div class="ui-schedule-card">
+              <div class="day-tag">
+                <span>Wednesday • 14m</span>
+                <span>540 kcal</span>
+              </div>
+              <h4>Sesame Ginger Sobas</h4>
+              <div class="ingredient-chain">
+                <span class="ing-pill shared">⅓ Scallion (100% Gone!)</span>
+                <span class="ing-pill shared">½ Block Tofu (100% Gone!)</span>
+              </div>
+            </div>
+
+            <div style="margin-top:auto; background:var(--forest-dark); color:#fff; border-radius:16px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center; font-size:0.8rem;">
+              <span>Fridge Freshness Score</span>
+              <strong style="color:var(--citrus-lime); font-size:0.95rem;">100 / 100</strong>
+            </div>
+          </div>
+
+          <!-- Floating 3D Glass Badges -->
+          <div class="floating-glass floating-top-left">
+            <div style="font-size:0.7rem; font-weight:800; color:var(--leaf-green); text-transform:uppercase;">Smart Cart</div>
+            <div style="font-weight:800; font-size:0.95rem;">1 Avocado = 2 Meals</div>
+          </div>
+
+          <div class="floating-glass floating-bottom-right">
+            <div style="font-size:0.7rem; color:var(--citrus-lime); font-weight:800;">SOLO PORTION LOCK</div>
+            <div style="font-weight:700; font-size:0.88rem;">No 6-serving math</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Calorie & Macro Real-Time Filter -->
+    <section id="interactive-planner" class="interactive-section">
+      <div class="interactive-wrapper">
+        <div class="section-head">
+          <div class="pill-tag"><span class="dot"></span> Interactive Demo</div>
+          <h2>Dial in your solo weeknight macros</h2>
+          <p style="color:var(--text-muted);">
+            Slide to set your target calorie ceiling and minimum protein goal. Every single-serving recipe below links ingredients with tomorrow's dinner.
+          </p>
+        </div>
+
+        <div class="controls-panel">
+          <div class="slider-group">
+            <label for="calSlider">
+              <span>Max Calories per Meal</span>
+              <span class="slider-val" id="calValue">700 kcal</span>
+            </label>
+            <input type="range" id="calSlider" min="380" max="850" step="10" value="700" />
+          </div>
+
+          <div class="slider-group">
+            <label for="proteinSlider">
+              <span>Minimum Protein</span>
+              <span class="slider-val" id="proteinValue">25g+</span>
+            </label>
+            <input type="range" id="proteinSlider" min="15" max="50" step="1" value="25" />
+          </div>
+
+          <div class="filter-summary">
+            <span style="font-size:0.78rem; text-transform:uppercase; letter-spacing:0.05em; opacity:0.8;">Matching Solo Meals</span>
+            <strong id="matchCount" style="font-size:1.7rem; color:var(--citrus-lime);">6 Single-Servings</strong>
+          </div>
+        </div>
+
+        <div class="meal-grid" id="mealGrid">
+          <!-- Populated dynamically by Vanilla JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Visual Storytelling Journey -->
+    <section id="how-it-works" class="story-section">
+      <!-- Row 1 -->
+      <div class="story-row">
+        <div class="story-text">
+          <div class="pill-tag"><span class="dot"></span> Ingredient Daisy-Chaining</div>
+          <h2>Never throw away half a bunch of cilantro again.</h2>
+          <p>
+            Standard recipe apps assume you’re cooking for a family of four. SoloSprout’s algorithm pairs single-serving recipes that share perishable produce across 3 consecutive days.
+          </p>
+          <ul class="check-list">
+            <li><span class="check-icon">✓</span> Buy 1 bunch of basil → Used across Thai Beef, Caprese Toast & Pesto Orzo</li>
+            <li><span class="check-icon">✓</span> Zero repetitive meal-prep fatigue—eat a fresh dish every night</li>
+            <li><span class="check-icon">✓</span> Aisles sorted for the 5-item express checkout lane</li>
+          </ul>
+        </div>
+
+        <div class="story-visual">
+          <div class="css-mockup-stage">
+            <div class="glass-ui-board">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+                <strong style="font-size:1.05rem;">Perishable Rescue Tracker</strong>
+                <span style="background:var(--citrus-lime); padding:4px 10px; border-radius:99px; font-size:0.75rem; font-weight:800;">100% Utilized</span>
+              </div>
+              <div class="chain-row">
+                <span>1x English Cucumber</span>
+                <span class="fraction-pill">Tue 50% • Thu 50%</span>
+              </div>
+              <div class="chain-row">
+                <span>1x Pack Halloumi Cheese</span>
+                <span class="fraction-pill">Mon 50% • Wed 50%</span>
+              </div>
+              <div class="chain-row">
+                <span>1x Fresh Mint Bunch</span>
+                <span class="fraction-pill">Mon 33% • Wed 33% • Fri 34%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2 (Alternating) -->
+      <div class="story-row reverse">
+        <div class="story-text">
+          <div class="pill-tag"><span class="dot"></span> One-Pan Speed</div>
+          <h2>From laptop shut to first bite in 15 minutes flat.</h2>
+          <p>
+            After an 8-hour workday, the last thing you want is a sink full of pots. Every SoloSprout recipe is engineered for a single skillet, air fryer basket, or sheet pan.
+          </p>
+          <ul class="check-list">
+            <li><span class="check-icon">✓</span> Step-by-step timers built directly into each card</li>
+            <li><span class="check-icon">✓</span> Automatic pantry staple tracking (oil, soy sauce, spices)</li>
+            <li><span class="check-icon">✓</span> Instant 2x toggle when a friend or date stays over</li>
+          </ul>
+        </div>
+
+        <div class="story-visual">
+          <div class="css-mockup-stage" style="background: linear-gradient(135deg, #1E6F50, #0F2E22);">
+            <div class="glass-ui-board" style="transform: rotateY(-8deg) rotateX(4deg);">
+              <div style="font-size:0.75rem; font-weight:800; color:var(--leaf-green); text-transform:uppercase;">Live Kitchen Mode</div>
+              <h3 style="margin: 6px 0 14px;">12-Min Harissa Chickpea Skillet</h3>
+              <div style="background:var(--forest-dark); color:#fff; padding:16px; border-radius:16px; display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                  <div style="font-size:0.75rem; color:var(--citrus-lime);">STEP 2 OF 3 • ONE SKILLET</div>
+                  <div style="font-weight:700;">Blister cherry tomatoes & garlic</div>
+                </div>
+                <div style="font-size:1.4rem; font-weight:900; color:var(--citrus-lime);">03:45</div>
+              </div>
+              <div style="margin-top:12px; display:flex; justify-content:space-between; font-size:0.82rem; font-weight:700; color:var(--text-muted);">
+                <span>Dishes to wash: 1 Skillet</span>
+                <span style="color:var(--leaf-green);">Solo Portion ✓</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonial Grid -->
+    <section id="reviews" class="testimonials">
+      <div class="section-head">
+        <div class="pill-tag"><span class="dot"></span> Loved by Solo Dwellers</div>
+        <h2>Real kitchens. Empty compost bins.</h2>
+      </div>
+
+      <div class="testimonial-grid">
+        <div class="testi-card">
+          <div class="stars">★★★★★</div>
+          <p>“I used to spend $75 on groceries only to throw half the produce away on Sunday and order takeout anyway. SoloSprout cut my grocery bill in half in week one.”</p>
+          <div class="testi-author">
+            <div class="avatar-circle">MK</div>
+            <div>
+              <strong style="display:block; font-size:0.95rem;">Maya K.</strong>
+              <span style="font-size:0.8rem; color:var(--text-muted);">Product Designer • Lives solo in Seattle</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="stars">★★★★★</div>
+          <p>“I hate eating the same meal-prepped chicken and rice 5 days in a row. Having 4 completely different meals that use up the exact same bag of spinach is pure magic.”</p>
+          <div class="testi-author">
+            <div class="avatar-circle">JL</div>
+            <div>
+              <strong style="display:block; font-size:0.95rem;">Jordan L.</strong>
+              <span style="font-size:0.8rem; color:var(--text-muted);">Software Engineer • Chicago</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="stars">★★★★★</div>
+          <p>“No more weird fraction math trying to divide a 6-serving lasagna recipe down to 1 person. Everything is already scaled for my single small skillet.”</p>
+          <div class="testi-author">
+            <div class="avatar-circle">ER</div>
+            <div>
+              <strong style="display:block; font-size:0.95rem;">Elena R.</strong>
+              <span style="font-size:0.8rem; color:var(--text-muted);">Architect • Austin</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Conversion CTA -->
+    <section id="download" class="cta-banner">
+      <div class="pill-tag" style="background:rgba(198,255,0,0.15); color:var(--citrus-lime); border-color:rgba(198,255,0,0.3);">
+        Free 14-Day Zero-Waste Trial
+      </div>
+      <h2>Ready to rescue your fridge?</h2>
+      <p>Join 85,000+ solo professionals cooking faster, hitting their macros, and wasting zero groceries.</p>
+      <div class="store-badges">
+        <a href="#download" class="store-badge">
+          <span class="store-icon"></span>
+          <div class="store-text">
+            <small>Download on the</small>
+            <strong>App Store</strong>
+          </div>
+        </a>
+        <a href="#download" class="store-badge">
+          <span class="store-icon">▶</span>
+          <div class="store-text">
+            <small>Get it on</small>
+            <strong>Google Play</strong>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 SoloSprout Labs Inc. Crafted for solo tables everywhere. 100% Self-Contained Experience.</p>
+  </footer>
+
+  <script>
+    const soloMeals = [
+      {
+        title: "Citrus Miso Glazed Salmon Bowl",
+        time: "12 mins",
+        calories: 520,
+        protein: 38,
+        carbs: 42,
+        fat: 21,
+        wasteChain: "Uses ½ Avocado + ½ Cucumber (Pairs with Tue Tuna Tostada)"
+      },
+      {
+        title: "Crispy Lime Chicken Tinga Tacos",
+        time: "14 mins",
+        calories: 460,
+        protein: 36,
+        carbs: 38,
+        fat: 16,
+        wasteChain: "Uses ½ Cilantro Bunch + ½ Lime (Pairs with Wed Thai Curry)"
+      },
+      {
+        title: "10-Min Lemon Ricotta & Pea Gnocchi",
+        time: "10 mins",
+        calories: 410,
+        protein: 18,
+        carbs: 54,
+        fat: 13,
+        wasteChain: "Uses ½ Tub Ricotta + ½ Lemon (Pairs with Thu Zucchini Flatbread)"
+      },
+      {
+        title: "Sizzling Ginger Scallion Flank Steak",
+        time: "15 mins",
+        calories: 640,
+        protein: 46,
+        carbs: 36,
+        fat: 32,
+        wasteChain: "Uses ½ Scallion Bunch + ½ Bell Pepper (Pairs with Fri Crispy Rice)"
+      },
+      {
+        title: "Golden Halloumi & Harissa Chickpea Skillet",
+        time: "11 mins",
+        calories: 580,
+        protein: 27,
+        carbs: 44,
+        fat: 29,
+        wasteChain: "Uses ½ Block Halloumi + ½ Baby Spinach Bag"
+      },
+      {
+        title: "Blackened Shrimp & Mango Edamame Salad",
+        time: "9 mins",
+        calories: 390,
+        protein: 32,
+        carbs: 34,
+        fat: 12,
+        wasteChain: "Uses ½ Ripe Mango + ½ Red Onion (100% Zero Leftovers)"
+      },
+      {
+        title: "Spicy Gochujang Pork & Crispy Tofu",
+        time: "15 mins",
+        calories: 760,
+        protein: 49,
+        carbs: 52,
+        fat: 36,
+        wasteChain: "Uses ½ Firm Tofu Block + ½ Bok Choy Head"
+      },
+      {
+        title: "Creamy Sun-Dried Tomato Tuscan Chicken",
+        time: "14 mins",
+        calories: 690,
+        protein: 44,
+        carbs: 28,
+        fat: 42,
+        wasteChain: "Uses ½ Baby Spinach Bag + ½ Fresh Basil Bunch"
+      }
+    ];
+
+    const calSlider = document.getElementById('calSlider');
+    const proteinSlider = document.getElementById('proteinSlider');
+    const calValue = document.getElementById('calValue');
+    const proteinValue = document.getElementById('proteinValue');
+    const matchCount = document.getElementById('matchCount');
+    const mealGrid = document.getElementById('mealGrid');
+
+    function renderMeals() {
+      const maxCal = parseInt(calSlider.value, 10);
+      const minProt = parseInt(proteinSlider.value, 10);
+
+      calValue.textContent = `${maxCal} kcal`;
+      proteinValue.textContent = `${minProt}g+`;
+
+      const filtered = soloMeals.filter(
+        meal => meal.calories <= maxCal && meal.protein >= minProt
+      );
+
+      matchCount.textContent = `${filtered.length} Single-Serving${filtered.length === 1 ? '' : 's'}`;
+
+      if (filtered.length === 0) {
+        mealGrid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align:center; padding: 40px; background: rgba(255,255,255,0.7); border-radius: 18px;">
+            <h3 style="margin-bottom:8px;">No exact solo meals match that high-protein / low-calorie combo!</h3>
+            <p style="color:var(--text-muted);">Try nudging the calorie slider up slightly or lowering minimum protein.</p>
+          </div>
+        `;
+        return;
+      }
+
+      mealGrid.innerHTML = filtered.map(meal => `
+        <article class="meal-card">
+          <div>
+            <div class="meal-card-top">
+              <span class="time-badge">⚡ ${meal.time}</span>
+              <span class="serving-badge">1 Solo Serving</span>
+            </div>
+            <h3>${meal.title}</h3>
+            <div class="zero-waste-note">
+              ♻️ ${meal.wasteChain}
+            </div>
+          </div>
+          <div class="macro-bar-row">
+            <div class="macro-cell">
+              <span>Calories</span>
+              <strong>${meal.calories}</strong>
+            </div>
+            <div class="macro-cell">
+              <span>Protein</span>
+              <strong style="color:var(--leaf-green);">${meal.protein}g</strong>
+            </div>
+            <div class="macro-cell">
+              <span>Carbs</span>
+              <strong>${meal.carbs}g</strong>
+            </div>
+            <div class="macro-cell">
+              <span>Fats</span>
+              <strong>${meal.fat}g</strong>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    calSlider.addEventListener('input', renderMeals);
+    proteinSlider.addEventListener('input', renderMeals);
+
+    // Initial render
+    renderMeals();
+  </script>
+</body>
+</html>

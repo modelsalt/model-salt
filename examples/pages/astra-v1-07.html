@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f2e9">
+<title>Sideplate — Good food. Real life.</title>
+<style>
+:root{--paper:#f5f2e9;--ink:#243e31;--muted:#657166;--green:#d8e6bd;--orange:#ec7347;--line:#d8dacf;--white:#fffef9}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:40px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+button,input{font:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+button{cursor:pointer}
+a{color:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--orange);outline-offset:5px}
+.wrap{width:min(1200px,calc(100% - 96px));margin:auto}
+header{height:112px;display:flex;align-items:center}
+.logo{display:inline-flex;align-items:center;gap:10px;font-size:28px;font-weight:800;letter-spacing:-1.4px;text-decoration:none}
+.brand-icon{width:31px;height:31px;border:2px solid var(--ink);border-radius:50%;display:grid;place-items:center;transform:rotate(-18deg)}
+.brand-icon:before{content:"";width:17px;height:17px;border:2px solid var(--ink);border-radius:50%;border-top-color:transparent}
+.menu-button{position:fixed;top:32px;right:48px;z-index:20;background:var(--white);border:1px solid var(--line);border-radius:30px;padding:13px 20px;display:flex;gap:19px;align-items:center;box-shadow:0 3px 15px #243e3108}
+.menu-button span:last-child{font-size:20px;line-height:16px}
+.nav-panel{position:fixed;right:48px;top:91px;z-index:19;width:245px;padding:12px;background:var(--ink);color:var(--white);border-radius:18px;box-shadow:0 12px 40px #243e3120}
+.nav-panel[hidden]{display:none}
+.nav-panel a{display:block;padding:15px;text-decoration:none;border-radius:10px}
+.nav-panel a:hover{background:#ffffff12}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:center;padding:52px 0 78px}
+.eyebrow{text-transform:uppercase;font-size:11px;font-weight:700;letter-spacing:2px;display:flex;align-items:center;gap:9px}
+.dot{width:7px;height:7px;background:var(--orange);border-radius:50%;display:inline-block}
+h1,h2,h3,p{margin:0}
+h1{font-family:Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-4.5px;font-size:clamp(58px,6.1vw,84px);line-height:1.02;margin:26px 0}
+h1 em{color:#66834d;font-weight:400}
+.hero-copy>p{font-size:17px;line-height:1.8;max-width:390px;color:var(--muted)}
+.actions{display:flex;gap:23px;align-items:center;flex-wrap:wrap;margin-top:32px}
+.primary{border:0;border-radius:7px;background:var(--ink);color:var(--white);padding:17px 22px;display:inline-flex;gap:27px;align-items:center;text-decoration:none;font-size:14px;font-weight:600;transition:background .2s,transform .2s}
+.primary:hover{background:#365641;transform:translateY(-2px)}
+.text-link{font-size:13px;text-decoration:none;border-bottom:1px solid #899486;padding-bottom:4px}
+.micro{font-size:11px!important;color:var(--muted);margin-top:16px!important}
+.preview-scene{position:relative;padding:32px 22px 37px;background:#e5e8d8;border-radius:48% 48% 16px 16px;isolation:isolate}
+.preview-scene:before{content:"";position:absolute;width:210px;height:210px;border:1px solid #bac7a9;border-radius:50%;right:-17px;top:16px;z-index:-1}
+.preview-label{display:flex;justify-content:space-between;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;padding:0 8px 16px}
+.app{background:var(--white);border:1px solid #d8ddcb;border-radius:17px;box-shadow:0 18px 30px #384c2710;overflow:hidden;transform:rotate(-2deg)}
+.app-top{padding:23px 23px 17px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e8e9df}
+.app-brand{font-size:17px;font-weight:800;letter-spacing:-.7px}
+.avatar{border-radius:50%;width:29px;height:29px;background:#eddbbd;display:grid;place-items:center;font-size:10px}
+.app-body{padding:22px}
+.week-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:21px}
+.week-title h3{font-family:Georgia,serif;font-size:26px;font-weight:400;letter-spacing:-1px}
+.week-title span{font-size:10px;color:var(--muted)}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:19px}
+.day{text-align:center;padding:10px 2px;font-size:9px;color:var(--muted);border-radius:8px}
+.day b{display:block;margin-top:7px;font-size:13px;font-weight:500;color:var(--ink)}
+.day.active{background:var(--ink);color:#c4d3c0}
+.day.active b{color:white}
+.meal-art{height:182px;position:relative;background:#e9bd86;border-radius:9px;overflow:hidden}
+.meal-art svg{width:100%;height:100%;display:block}
+.time{position:absolute;bottom:11px;left:11px;background:var(--white);border-radius:20px;font-size:10px;padding:7px 10px}
+.meal-info{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
+.meal-info h4{margin:0 0 6px;font-size:15px;letter-spacing:-.3px}
+.meal-info p{font-size:10px;color:var(--muted)}
+.swap{border:1px solid #d3d9cc;background:transparent;border-radius:50%;width:33px;height:33px;color:var(--ink);font-size:20px}
+.swap:hover{background:var(--green)}
+.up-next{display:flex;align-items:center;gap:11px;border-top:1px solid #e5e7dc;padding-top:15px}
+.mini-art{width:39px;height:39px;border-radius:8px;background:#dce5c7;display:grid;place-items:center;font-size:23px}
+.up-next p{font-size:11px;line-height:1.7}
+.up-next small{display:block;font-size:9px;color:var(--muted)}
+.up-next>span{margin-left:auto;font-size:10px;color:var(--muted)}
+.floating-note{position:absolute;right:-22px;bottom:40px;max-width:233px;display:flex;align-items:center;gap:12px;background:var(--green);border:1px solid #bdcda5;border-radius:10px;padding:15px 18px;box-shadow:0 8px 20px #233c3110;transform:rotate(3deg)}
+.check{width:25px;height:25px;display:grid;place-items:center;background:var(--ink);color:white;border-radius:50%;font-size:12px;flex-shrink:0}
+.floating-note p{font-size:12px;line-height:1.5}
+.floating-note small{font-size:10px;color:#59674b}
+.caption{font-family:Georgia,serif;font-size:15px;font-style:italic;text-align:center;margin-top:18px;color:#657753}
+.ribbon{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:23px 0;display:flex;justify-content:space-between;gap:20px;font-size:12px}
+.ribbon span{display:flex;align-items:center;gap:11px}
+.ribbon i{font-style:normal;color:#7a915b;font-size:19px}
+.story{padding:91px 0 80px}
+.section-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:35px;margin-bottom:40px}
+h2{font:400 clamp(36px,4vw,51px)/1.12 Georgia,serif;letter-spacing:-1.8px}
+.section-heading h2{max-width:540px;margin-top:17px}
+.section-heading>p{max-width:285px;font-size:14px;color:var(--muted);line-height:1.8}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{border:1px solid var(--line);border-radius:12px;padding:26px;display:flex;flex-direction:column;align-items:flex-start}
+.card-number{font-family:Georgia,serif;font-size:15px;color:#7c896f;margin-bottom:29px}
+.card .problem{font-size:11px;color:var(--muted);margin-bottom:10px}
+.card h3{font:400 26px/1.15 Georgia,serif;letter-spacing:-.7px;margin-bottom:14px}
+.card>p:last-of-type{font-size:13px;color:var(--muted);line-height:1.8;margin-bottom:24px}
+.detail-button{margin-top:auto;border:0;border-bottom:1px solid #aeb8a2;background:none;padding:0 0 6px;color:var(--ink);font-size:11px}
+.detail-button span{margin-left:18px}
+.card:nth-child(2){background:#e9eddf}
+.bottom{margin-bottom:62px;padding:48px 50px;background:var(--green);border-radius:14px;display:flex;align-items:center;justify-content:space-between;gap:30px;position:relative;overflow:hidden}
+.bottom p{margin-top:14px;line-height:1.7;font-size:14px;color:#53624a}
+.bottom .primary{flex-shrink:0}
+footer{border-top:1px solid var(--line);padding:26px 0 34px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+footer .logo{font-size:21px}
+footer p{font-size:10px;color:var(--muted)}
+dialog{border:1px solid var(--line);padding:35px;border-radius:18px;width:min(460px,calc(100% - 32px));background:var(--white);color:var(--ink);box-shadow:0 24px 80px #162b3440}
+dialog::backdrop{background:#243e3160;backdrop-filter:blur(4px)}
+.dialog-close{float:right;border:1px solid var(--line);border-radius:50%;width:30px;height:30px;background:transparent;color:var(--ink);font-size:20px}
+dialog h2{font-size:34px;margin:24px 0 15px}
+dialog p{font-size:14px;line-height:1.8;color:var(--muted)}
+.preference-options{display:grid;gap:10px;margin:23px 0}
+.preference-options label{padding:13px;border:1px solid var(--line);border-radius:7px;display:flex;gap:10px;align-items:center;font-size:13px}
+input{accent-color:var(--ink)}
+dialog .primary{margin-top:12px}
+#plan-result{margin-top:20px}
+#plan-result ul{padding-left:20px;font-size:14px;line-height:2;color:var(--ink)}
+@media(min-width:1450px){.hero{padding-top:75px;padding-bottom:90px}}
+@media(max-width:950px){.wrap{width:calc(100% - 56px)}.hero{gap:25px}h1{font-size:62px}.preview-scene{padding:25px 13px}.floating-note{right:-6px;bottom:30px}.app-body{padding:16px}.meal-art{height:160px}.cards{gap:12px}.card{padding:21px}.menu-button,.nav-panel{right:28px}}
+@media(max-width:700px){.wrap{width:calc(100% - 40px)}header{height:90px}.logo{font-size:25px}.menu-button{top:22px;right:20px}.nav-panel{top:80px;right:20px}.hero{grid-template-columns:1fr;padding:35px 0 40px;gap:42px}h1{font-size:64px;letter-spacing:-3.5px}.hero-copy>p{max-width:440px}.preview-scene{width:min(440px,100%);justify-self:center;padding:30px 20px 37px}.meal-art{height:195px}.floating-note{right:-5px}.ribbon{flex-wrap:wrap;gap:17px;font-size:11px}.ribbon span:last-child{display:none}.story{padding:58px 0}.section-heading{display:block}.section-heading>p{margin-top:22px;max-width:400px}.cards{grid-template-columns:1fr}.card-number{margin-bottom:20px}.bottom{padding:32px 25px;display:block;margin-bottom:40px}.bottom .primary{margin-top:25px}footer{flex-wrap:wrap}footer p{line-height:1.7}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="wrap">
+<a class="logo" href="#" aria-label="Sideplate home"><span class="brand-icon" aria-hidden="true"></span>sideplate</a>
+</header>
+
+<button class="menu-button" id="menu-toggle" aria-expanded="false" aria-controls="navigation">Explore <span aria-hidden="true">☰</span></button>
+<nav class="nav-panel" id="navigation" aria-label="Main navigation" hidden>
+<a href="#your-week">Your week, sorted</a>
+<a href="#how-it-helps">A little less juggling</a>
+<a href="#get-started">Try your first plan</a>
+</nav>
+
+<main>
+<section class="hero wrap" id="your-week">
+<div class="hero-copy">
+<div class="eyebrow"><span class="dot"></span> Meal plans with wiggle room</div>
+<h1>Life changes.<br>Dinner can<br><em>keep up.</em></h1>
+<p>Late meeting? Last-minute plans? Meet the meal planner that makes room for real life. Good food, with a little less figuring it out.</p>
+<div class="actions">
+<button class="primary" data-start>Find my dinner rhythm <span aria-hidden="true">↗</span></button>
+<a class="text-link" href="#how-it-helps">See how it works</a>
+</div>
+<p class="micro">Try a sample plan. No account needed.</p>
+</div>
+
+<div>
+<div class="preview-scene">
+<div class="preview-label"><span>A little look inside</span><span>↓</span></div>
+<div class="app" aria-label="Interactive sample meal plan">
+<div class="app-top"><span class="app-brand">sideplate</span><span class="avatar">You</span></div>
+<div class="app-body">
+<div class="week-title"><h3>A good-looking week.</h3><span>JUN 8–14</span></div>
+<div class="days" aria-label="Weekly calendar">
+<div class="day">M<b>8</b></div><div class="day active">T<b>9</b></div><div class="day">W<b>10</b></div><div class="day">T<b>11</b></div><div class="day">F<b>12</b></div><div class="day">S<b>13</b></div><div class="day">S<b>14</b></div>
+</div>
+<div class="meal-art">
+<svg viewBox="0 0 420 215" role="img" aria-label="Illustration of a colorful bowl with greens, chickpeas, tomatoes and lemon">
+<defs>
+<pattern id="cloth" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M0 0H24V24" fill="none" stroke="#ffffff" stroke-opacity=".17" stroke-width="2"/></pattern>
+<filter id="shadow"><feDropShadow dx="2" dy="6" stdDeviation="6" flood-color="#715431" flood-opacity=".23"/></filter>
+</defs>
+<path fill="#e7bc86" d="M0 0h420v215H0z"/><path fill="url(#cloth)" d="M0 0h420v215H0z"/>
+<path d="M338 -10l55 232h45L386-10z" fill="#eee3c9" opacity=".65"/>
+<g filter="url(#shadow)">
+<ellipse cx="210" cy="110" rx="113" ry="99" fill="#fdf9eb"/>
+<ellipse cx="210" cy="110" rx="94" ry="81" fill="#e6ddbc"/>
+<ellipse cx="210" cy="110" rx="87" ry="74" fill="#aeb478"/>
+<g fill="#4e733e">
+<ellipse cx="167" cy="78" rx="26" ry="13" transform="rotate(-35 167 78)"/><ellipse cx="151" cy="106" rx="28" ry="14" transform="rotate(20 151 106)"/><ellipse cx="168" cy="137" rx="32" ry="14" transform="rotate(45 168 137)"/><ellipse cx="199" cy="58" rx="27" ry="12" transform="rotate(15 199 58)"/>
+</g>
+<g fill="#81a458"><ellipse cx="180" cy="95" rx="29" ry="11" transform="rotate(-65 180 95)"/><ellipse cx="142" cy="120" rx="23" ry="10" transform="rotate(-23 142 120)"/><ellipse cx="191" cy="148" rx="26" ry="10" transform="rotate(30 191 148)"/></g>
+<g fill="#d8a653" stroke="#bf9145" stroke-width="1.5">
+<circle cx="227" cy="116" r="10"/><circle cx="246" cy="110" r="10"/><circle cx="266" cy="119" r="10"/><circle cx="215" cy="134" r="10"/><circle cx="238" cy="133" r="10"/><circle cx="257" cy="139" r="10"/><circle cx="230" cy="155" r="10"/><circle cx="251" cy="158" r="9"/><circle cx="278" cy="137" r="9"/><circle cx="213" cy="157" r="8"/>
+</g>
+<g fill="#db6844" stroke="#b85137" stroke-width="2"><ellipse cx="227" cy="77" rx="15" ry="12" transform="rotate(30 227 77)"/><ellipse cx="260" cy="87" rx="16" ry="12" transform="rotate(-35 260 87)"/><ellipse cx="202" cy="104" rx="13" ry="16"/></g>
+<g fill="#f3c29a"><ellipse cx="226" cy="76" rx="6" ry="3"/><ellipse cx="260" cy="86" rx="6" ry="3"/><ellipse cx="202" cy="104" rx="3" ry="6"/></g>
+<g fill="#fff7de"><path d="m179 116 12 3-3 13-13-4z"/><path d="m212 64 11 4-4 10-10-3z"/><path d="m248 124 10-2 3 10-11 3z"/><path d="m192 146 10 2-2 9-11-1z"/></g>
+<path d="M277 62a31 31 0 0 1 7 53l-18-24z" fill="#f6d667" stroke="#fff3b0" stroke-width="5"/>
+<path d="m269 90 21-13m-21 13 26 3m-26-3 15 20" stroke="#fff3b0" stroke-width="2"/>
+<g fill="#344f31"><ellipse cx="220" cy="121" rx="3" ry="1.5"/><ellipse cx="251" cy="149" rx="3" ry="1.5" transform="rotate(40 251 149)"/><ellipse cx="176" cy="88" rx="3" ry="1.5"/><ellipse cx="236" cy="92" rx="3" ry="1.5"/></g>
+</g>
+<path d="M60 46v45q0 14 12 14v74m12-133v45q0 14-12 14M72 46v50" fill="none" stroke="#eee8d9" stroke-width="5" stroke-linecap="round"/>
+</svg>
+<span class="time" id="meal-time">◷ 20 minutes</span>
+</div>
+<div class="meal-info">
+<div aria-live="polite"><h4 id="meal-name">The anything-goes bowl</h4><p id="meal-description">A little crunch. A lot of good stuff.</p></div>
+<button class="swap" id="swap-meal" aria-label="Swap tonight’s meal" title="Try swapping dinner">↻</button>
+</div>
+<div class="up-next"><div class="mini-art" aria-hidden="true">≈</div><p>Tomorrow’s looking easy<small>Lemony one-pot pasta</small></p><span>25 min</span></div>
+</div>
+</div>
+<div class="floating-note" role="status"><span class="check">✓</span><p id="swap-note">Plans changed? All good.<br><small>Swap dinner in one tap.</small></p></div>
+</div>
+<p class="caption">A plan that bends, so you don’t have to.</p>
+</div>
+</section>
+
+<div class="ribbon wrap" aria-label="Benefits">
+<span><i>↻</i> Made for change-of-plans people</span>
+<span><i>◷</i> Less thinking. More eating.</span>
+<span><i>✳</i> Your week, with room to breathe</span>
+</div>
+
+<section class="story wrap" id="how-it-helps">
+<div class="section-heading">
+<div><div class="eyebrow">Sound familiar?</div><h2>Your calendar is full.<br>Your dinner ideas aren’t.</h2></div>
+<p>The 6 p.m. fridge stare. The abandoned meal plan. Let’s make the everyday dinner question a little easier.</p>
+</div>
+<div class="cards">
+<article class="card">
+<span class="card-number">01 / The dinner dilemma</span>
+<p class="problem">“I can’t make another decision.”</p>
+<h3>A starting point.<br>Every evening.</h3>
+<p>Find meals that fit your tastes and the time you actually have. Give your brain the night off.</p>
+<button class="detail-button" data-detail="preferences">How meal matching works <span>↗</span></button>
+</article>
+<article class="card">
+<span class="card-number">02 / The plot twist</span>
+<p class="problem">“Well, there goes the plan.”</p>
+<h3>Move dinner.<br>Keep your groove.</h3>
+<p>A late train shouldn’t derail your week. Swap in something quick and save the bigger recipe for later.</p>
+<button class="detail-button" data-detail="swaps">Explore flexible planning <span>↗</span></button>
+</article>
+<article class="card">
+<span class="card-number">03 / The grocery guesswork</span>
+<p class="problem">“What did I come here for?”</p>
+<h3>One little list.<br>One less thing.</h3>
+<p>Turn your meal plan into a grocery list. Check what’s in the kitchen, then shop with a little more purpose.</p>
+<button class="detail-button" data-detail="groceries">See how the list works <span>↗</span></button>
+</article>
+</div>
+</section>
+
+<section class="bottom wrap" id="get-started">
+<div><div class="eyebrow" style="margin-bottom:16px">Make room for good food</div><h2>A little plan.<br>A much easier week.</h2><p>Start with a few dinners. Leave room for life.</p></div>
+<button class="primary" data-start>Build my sample plan <span aria-hidden="true">↗</span></button>
+</section>
+</main>
+
+<footer class="wrap">
+<a href="#" class="logo">sideplate<span style="color:#ec7347">✳</span></a>
+<p>Good food. Real life. Room for both.</p>
+<p>© <span id="year">2026</span> Sideplate</p>
+</footer>
+
+<dialog id="details-dialog" aria-labelledby="details-title">
+<button class="dialog-close" aria-label="Close details" data-close>×</button>
+<div class="eyebrow">A little more detail</div>
+<h2 id="details-title"></h2>
+<p id="details-copy"></p>
+<button class="primary" data-close>Got it <span aria-hidden="true">✓</span></button>
+</dialog>
+
+<dialog id="start-dialog" aria-labelledby="start-title">
+<button class="dialog-close" aria-label="Close sample planner" data-close>×</button>
+<div class="eyebrow">Let’s start small</div>
+<h2 id="start-title">What’s your week like?</h2>
+<p>Pick your pace. We’ll put together three dinner ideas to get you going.</p>
+<form id="plan-form">
+<div class="preference-options">
+<label><input type="radio" name="pace" value="quick" checked> Full calendar. Keep it under 20 minutes.</label>
+<label><input type="radio" name="pace" value="mixed"> A little busy, a little breathing room.</label>
+<label><input type="radio" name="pace" value="slow"> I’ve got time to enjoy the cooking.</label>
+</div>
+<button type="submit" class="primary">Show my sample plan <span aria-hidden="true">↗</span></button>
+</form>
+<div id="plan-result" aria-live="polite" hidden></div>
+</dialog>
+
+<script>
+const menuButton=document.getElementById('menu-toggle');
+const navigation=document.getElementById('navigation');
+function closeMenu(){navigation.hidden=true;menuButton.setAttribute('aria-expanded','false')}
+menuButton.addEventListener('click',()=>{
+ const open=menuButton.getAttribute('aria-expanded')==='true';
+ navigation.hidden=open;
+ menuButton.setAttribute('aria-expanded',String(!open));
+});
+navigation.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));
+document.addEventListener('click',event=>{if(!navigation.contains(event.target)&&!menuButton.contains(event.target))closeMenu()});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!navigation.hidden){closeMenu();menuButton.focus()}});
+const details={
+ preferences:['Dinner, on your terms.','Start with the foods you enjoy and the time you want to spend cooking. Sideplate’s meal-planning concept brings those preferences together in a flexible week of dinners. Try the sample planner to explore a few ideas at your pace.'],
+ swaps:['A change of plans is part of the plan.','Tap the swap arrow on the preview to try a different dinner. A quicker option can take tonight’s spot when your schedule shifts. The preview cycles through three sample meals so you can get a feel for it.'],
+ groceries:['From “what’s for dinner?” to “got it.”','A plan-based grocery list brings the ingredients for your chosen meals into one place. Check your cupboards first, cross off what you already have, and take the rest to the shop. This landing-page demo shows sample plans; grocery-list syncing is not connected.']
+};
+const detailsDialog=document.getElementById('details-dialog');
+document.querySelectorAll('[data-detail]').forEach(button=>button.addEventListener('click',()=>{
+ const [title,copy]=details[button.dataset.detail];
+ document.getElementById('details-title').textContent=title;
+ document.getElementById('details-copy').textContent=copy;
+ detailsDialog.showModal();
+}));
+const startDialog=document.getElementById('start-dialog');
+document.querySelectorAll('[data-start]').forEach(button=>button.addEventListener('click',()=>startDialog.showModal()));
+document.querySelectorAll('[data-close]').forEach(button=>button.addEventListener('click',()=>button.closest('dialog').close()));
+document.querySelectorAll('dialog').forEach(dialog=>dialog.addEventListener('click',event=>{
+ if(event.target===dialog){
+  const box=dialog.getBoundingClientRect();
+  if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom)dialog.close();
+ }
+}));
+const meals=[
+ ['The anything-goes bowl','A little crunch. A lot of good stuff.',20],
+ ['Lemony chickpea salad','Fresh, bright, and ready when you are.',10],
+ ['The clean-out-the-fridge bowl','Your leftover greens have a new plan.',15]
+];
+let mealIndex=0;
+document.getElementById('swap-meal').addEventListener('click',()=>{
+ mealIndex=(mealIndex+1)%meals.length;
+ const [name,description,time]=meals[mealIndex];
+ document.getElementById('meal-name').textContent=name;
+ document.getElementById('meal-description').textContent=description;
+ document.getElementById('meal-time').textContent=`◷ ${time} minutes`;
+ const note=document.getElementById('swap-note');
+ note.replaceChildren(document.createTextNode('Dinner swapped. You’re set.'),document.createElement('br'));
+ const small=document.createElement('small');
+ small.textContent=`Tonight: ${time} minutes, start to finish.`;
+ note.append(small);
+});
+const plans={
+ quick:['Monday · Lemony chickpea salad · 10 min','Wednesday · Pesto & pea pasta · 15 min','Friday · Black bean tacos · 20 min'],
+ mixed:['Monday · The anything-goes bowl · 20 min','Wednesday · Lemony one-pot pasta · 25 min','Friday · Roasted vegetable wraps · 30 min'],
+ slow:['Monday · Roasted squash risotto · 45 min','Wednesday · Crispy tofu rice bowls · 35 min','Friday · Homemade mushroom pizza · 50 min']
+};
+document.getElementById('plan-form').addEventListener('submit',event=>{
+ event.preventDefault();
+ const pace=new FormData(event.currentTarget).get('pace');
+ const result=document.getElementById('plan-result');
+ const heading=document.createElement('h3');
+ heading.textContent='Three dinners. A little breathing room.';
+ const list=document.createElement('ul');
+ plans[pace].forEach(meal=>{const item=document.createElement('li');item.textContent=meal;list.append(item)});
+ const note=document.createElement('p');
+ note.textContent='Leave the other nights open for leftovers, going out, or whatever life serves up. This is a sample plan; nothing is saved or sent.';
+ result.replaceChildren(heading,list,note);
+ result.hidden=false;
+});
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>

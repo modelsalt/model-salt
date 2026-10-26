@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A rounded cartoon pelican with a long orange bill and folded wings pedals a teal bicycle, viewed from the side.</desc>
+
+  <rect width="800" height="600" rx="32" fill="#fff8e9"/>
+  <ellipse cx="391" cy="548" rx="265" ry="17" fill="#e9dfc9"/>
+
+  <!-- Wheels -->
+  <g stroke="#b2c3c5" stroke-width="2">
+    <g id="spokes">
+      <path d="M230 360V540M140 450H320M166 386L294 514M166 514L294 386"/>
+    </g>
+    <use href="#spokes" transform="translate(330)"/>
+  </g>
+  <g fill="none" stroke="#273e48">
+    <circle cx="230" cy="450" r="94" stroke-width="12"/>
+    <circle cx="560" cy="450" r="94" stroke-width="12"/>
+    <g stroke="#f7faf7" stroke-width="3">
+      <circle cx="230" cy="450" r="85"/>
+      <circle cx="560" cy="450" r="85"/>
+    </g>
+  </g>
+
+  <!-- Bicycle frame -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M230 450L320 327L385 450ZM320 327H512L385 450M500 300L560 450"
+          stroke="#273e48" stroke-width="14"/>
+    <path d="M230 450L320 327L385 450ZM320 327H512L385 450M500 300L560 450"
+          stroke="#28a99e" stroke-width="8"/>
+    <path d="M320 327L309 297" stroke="#273e48" stroke-width="9"/>
+    <path d="M283 297H337" stroke="#273e48" stroke-width="14"/>
+    <path d="M500 300L490 272H532Q548 272 548 287"
+          stroke="#273e48" stroke-width="8"/>
+    <path d="M534 273Q548 272 548 287" stroke="#cf7952" stroke-width="11"/>
+    <path d="M230 450H385" stroke="#53706f" stroke-width="4"/>
+  </g>
+
+  <!-- Far leg and pedal -->
+  <path d="M345 314L373 364L351 407" fill="none"
+        stroke="#d18b38" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M335 410H365" stroke="#273e48" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Pelican body, upright neck, and head -->
+  <path d="M284 263L243 248L261 286
+           C252 326 289 348 336 343
+           C391 343 426 316 439 279
+           C451 247 446 208 460 188
+           C471 174 491 181 504 175
+           C521 167 525 145 514 130
+           C500 111 470 110 451 127
+           C419 156 420 207 396 231
+           C369 253 325 234 299 253Z"
+        fill="#fffef7" stroke="#273e48" stroke-width="5" stroke-linejoin="round"/>
+
+  <!-- Folded wing -->
+  <path d="M293 273C321 251 368 260 391 283
+           C379 313 346 331 317 316
+           C305 307 297 290 293 273Z"
+        fill="#dbe6e5" stroke="#273e48" stroke-width="4"/>
+  <path d="M314 281Q337 303 365 299M309 292Q326 311 346 313"
+        fill="none" stroke="#9eb4b7" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Throat pouch and long bill -->
+  <path d="M489 163L686 166
+           C650 179 608 215 561 219
+           C521 222 499 197 489 163Z"
+        fill="#f5bc58" stroke="#273e48" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M499 150L699 165Q704 172 691 174L497 171Z"
+        fill="#f39544" stroke="#273e48" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M515 183Q535 209 566 207" fill="none"
+        stroke="#e49d41" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Face -->
+  <circle cx="487" cy="142" r="10" fill="#fff"/>
+  <circle cx="490" cy="143" r="5" fill="#273e48"/>
+  <circle cx="492" cy="141" r="1.6" fill="#fff"/>
+  <path d="M471 126Q480 121 489 125" fill="none"
+        stroke="#273e48" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Near leg, webbed foot, and crank -->
+  <path d="M366 331L414 363L405 420"
+        fill="none" stroke="#edab45" stroke-width="15"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="385" cy="450" r="17" fill="#f6e6c9" stroke="#273e48" stroke-width="5"/>
+  <path d="M385 450L417 476" stroke="#273e48" stroke-width="7" stroke-linecap="round"/>
+  <path d="M405 417L401 454L426 466L444 459L434 449L419 443L419 418"
+        fill="#f2ae45" stroke="#273e48" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M407 476H439" stroke="#273e48" stroke-width="8" stroke-linecap="round"/>
+
+  <g fill="#273e48">
+    <circle cx="230" cy="450" r="7"/>
+    <circle cx="560" cy="450" r="7"/>
+  </g>
+</svg>

@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Plateful — the meal-planning app that builds your week, writes your grocery list, and ends the 5pm dinner panic.">
+<meta name="theme-color" content="#1D8348">
+<title>Plateful — Dinner, decided.</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%231D8348'/%3E%3Ccircle cx='16' cy='16' r='8' fill='white'/%3E%3Cpath d='M16 9c3 .8 4.5 3 4.5 6-3-.8-4.5-3-4.5-6z' fill='%231D8348'/%3E%3C/svg%3E">
+<style>
+/* ============ RESET & TOKENS ============ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#FBFBF6;
+  --bg-soft:#F1F6EA;
+  --card:#FFFFFF;
+  --ink:#173021;
+  --ink-soft:#50634F;
+  --line:#E4EBDD;
+  --g900:#0F3D24;
+  --g700:#176B3A;
+  --g600:#1D8348;
+  --g500:#2FA05C;
+  --g100:#E4F3E7;
+  --lime:#D8F3A5;
+  --tomato:#F0604A;
+  --carrot:#F59E4C;
+  --lemon:#F6D34A;
+  --gold:#F2B93B;
+  --r:18px;
+  --shadow:0 24px 48px -20px rgba(23,48,33,.22);
+  --shadow-sm:0 10px 24px -12px rgba(23,48,33,.18);
+  --font:ui-rounded,"SF Pro Rounded",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.6;font-size:1.05rem;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img,svg{display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input{font-family:inherit}
+::selection{background:var(--lime)}
+:focus-visible{outline:3px solid var(--g600);outline-offset:2px;border-radius:6px}
+.container{width:min(1140px,92%);margin-inline:auto}
+.skip{position:absolute;left:-9999px;top:0;background:var(--g700);color:#fff;padding:.7rem 1.2rem;border-radius:0 0 12px 0;z-index:200}
+.skip:focus{left:0}
+
+/* ============ TYPO HELPERS ============ */
+.eyebrow{display:inline-flex;align-items:center;gap:.45rem;background:var(--g100);color:var(--g700);font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.42rem .95rem;border-radius:999px}
+.eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--g600)}
+h1,h2,h3{line-height:1.08;letter-spacing:-.03em;font-weight:800}
+.sec-head{max-width:640px;margin:0 auto 3.4rem;text-align:center}
+.sec-head h2{font-size:clamp(1.9rem,4vw,2.9rem);margin:1.1rem 0 .8rem}
+.sec-head p{color:var(--ink-soft);font-size:1.1rem}
+
+/* ============ BUTTONS ============ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;font-weight:700;font-size:1rem;padding:.95rem 1.7rem;border-radius:999px;transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s,background .25s;white-space:nowrap}
+.btn svg{width:18px;height:18px}
+.btn-primary{background:var(--g600);color:#fff;box-shadow:0 12px 24px -10px rgba(29,131,72,.55)}
+.btn-primary:hover{background:var(--g700);transform:translateY(-2px)}
+.btn-ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--g500);color:var(--g700);transform:translateY(-2px)}
+.btn-lime{background:var(--lime);color:var(--g900)}
+.btn-lime:hover{background:#c8ec8e;transform:translateY(-2px)}
+
+/* ============ NAV ============ */
+.nav{position:fixed;inset:0 0 auto 0;z-index:100;transition:background .3s,box-shadow .3s,backdrop-filter .3s}
+.nav.scrolled{background:rgba(251,251,246,.85);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{display:flex;align-items:center;gap:.55rem;font-weight:800;font-size:1.3rem;letter-spacing:-.02em}
+.logo-mark{width:34px;height:34px}
+.nav-links{display:flex;gap:2rem;list-style:none;font-weight:600;font-size:.95rem}
+.nav-links a{color:var(--ink-soft);transition:color .2s;position:relative}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2.5px;border-radius:2px;background:var(--g600);transition:width .25s}
+.nav-links a:hover,.nav-links a.active{color:var(--ink)}
+.nav-links a.active::after{width:100%}
+.nav-cta{display:flex;align-items:center;gap:1.1rem}
+.nav-cta .login{font-weight:600;color:var(--ink-soft)}
+.nav-cta .login:hover{color:var(--ink)}
+.nav-cta .btn{padding:.62rem 1.25rem;font-size:.92rem}
+.burger{display:none;flex-direction:column;gap:5px;padding:10px}
+.burger span{width:22px;height:2.5px;border-radius:2px;background:var(--ink);transition:.3s}
+.burger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+.mobile-menu{display:none;flex-direction:column;gap:.2rem;background:#fff;border-bottom:1px solid var(--line);padding:1rem 4%;max-height:0;overflow:hidden;opacity:0;transition:max-height .4s ease,opacity .3s}
+.mobile-menu.open{max-height:420px;opacity:1}
+.mobile-menu a{padding:.8rem .4rem;font-weight:600;border-bottom:1px solid var(--bg-soft)}
+.mobile-menu .btn{margin:.9rem 0 .4rem}
+
+/* ============ HERO ============ */
+.hero{position:relative;padding:calc(72px + 3.6rem) 0 5.5rem;overflow:clip}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(#DCE7D0 1.2px,transparent 1.3px);background-size:26px 26px;mask-image:linear-gradient(180deg,#000 0%,transparent 70%);opacity:.55;pointer-events:none}
+.hero::after{content:"";position:absolute;top:-220px;right:-180px;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(216,243,165,.55),transparent 65%);pointer-events:none}
+.hero-inner{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:3rem;align-items:center;z-index:1}
+.hero h1{font-size:clamp(2.7rem,6vw,4.5rem);margin:1.3rem 0 1.2rem}
+.hl{position:relative;z-index:0;white-space:nowrap}
+.hl::after{content:"";position:absolute;left:-2%;right:-2%;bottom:.07em;height:.36em;background:var(--lime);z-index:-1;border-radius:4px;transform:skewX(-8deg)}
+.hero-sub{color:var(--ink-soft);font-size:1.18rem;max-width:32rem;margin-bottom:2rem}
+.hero-ctas{display:flex;gap:.9rem;flex-wrap:wrap;margin-bottom:2.2rem}
+.hero-proof{display:flex;align-items:center;gap:.85rem}
+.avatars{display:flex}
+.avatars span{width:38px;height:38px;border-radius:50%;border:3px solid var(--bg);margin-left:-10px;display:grid;place-items:center;font-size:.72rem;font-weight:800;color:#fff}
+.avatars span:first-child{margin-left:0}
+.hero-proof p{font-size:.9rem;color:var(--ink-soft)}
+.hero-proof .stars{color:var(--gold);display:flex;gap:1px;margin-bottom:2px}
+.hero-proof .stars svg{width:14px;height:14px}
+
+/* floating food */
+.hero-visual{position:relative}
+.fanchor{position:absolute;pointer-events:none;z-index:2}
+.fanchor.behind{z-index:0}
+.fwrap{will-change:transform}
+.fbob{animation:bob 7s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-11px) rotate(4deg)}}
+
+/* ============ PLANNER WIDGET ============ */
+.planner{position:relative;z-index:1;background:var(--card);border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);padding:1.5rem;transition:box-shadow .4s}
+.planner.pulse{animation:pulse 1.3s ease}
+@keyframes pulse{0%,100%{box-shadow:var(--shadow)}30%{box-shadow:0 0 0 10px rgba(216,243,165,.9),var(--shadow)}60%{box-shadow:0 0 0 4px rgba(216,243,165,.5),var(--shadow)}}
+.planner-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1rem}
+.planner-title{display:block;font-weight:800;font-size:1.12rem;letter-spacing:-.01em}
+.planner-sub{display:block;font-size:.82rem;color:var(--ink-soft)}
+.shuffle-btn{flex:none;width:42px;height:42px;border-radius:50%;background:var(--g100);color:var(--g700);display:grid;place-items:center;transition:background .2s,transform .2s}
+.shuffle-btn:hover{background:var(--lime)}
+.shuffle-btn svg{width:19px;height:19px}
+.shuffle-btn.spin svg{animation:spin .6s cubic-bezier(.3,.7,.3,1)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:.9rem}
+.chip{font-size:.82rem;font-weight:700;padding:.44rem .9rem;border-radius:999px;border:1.5px solid var(--line);color:var(--ink-soft);transition:.2s}
+.chip:hover{border-color:var(--g500);color:var(--g700)}
+.chip.active{background:var(--g600);border-color:var(--g600);color:#fff}
+.days-toggle{display:inline-flex;background:var(--bg-soft);border-radius:999px;padding:4px;gap:2px;margin-bottom:1.05rem}
+.days-toggle button{font-size:.8rem;font-weight:700;padding:.4rem .95rem;border-radius:999px;color:var(--ink-soft);transition:.2s}
+.days-toggle button.active{background:#fff;color:var(--ink);box-shadow:var(--shadow-sm)}
+.days-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(94px,1fr));gap:.6rem;margin-bottom:1.15rem;min-height:118px}
+.day-tile{position:relative;background:#F3F8EE;border:1px solid #E6EFDC;border-radius:15px;padding:.6rem .55rem .65rem;text-align:center;animation:tilepop .5s cubic-bezier(.3,1.4,.4,1) both}
+@keyframes tilepop{from{opacity:0;transform:scale(.6) translateY(10px)}}
+.day-name{display:block;font-size:.66rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--g700);margin-bottom:.35rem}
+.meal-icon{width:42px;height:42px;margin:0 auto .35rem}
+.meal-icon svg{width:100%;height:100%}
+.meal-name{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:.74rem;font-weight:700;line-height:1.25;min-height:1.9em}
+.meal-time{display:block;font-size:.66rem;color:var(--ink-soft);margin-top:.15rem}
+.reroll{position:absolute;top:5px;right:5px;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.9);border:1px solid var(--line);display:grid;place-items:center;color:var(--g700);opacity:0;transition:.2s}
+.day-tile:hover .reroll,.day-tile:focus-within .reroll{opacity:1}
+@media(hover:none){.reroll{opacity:1}}
+.reroll:hover{background:var(--lime)}
+.reroll svg{width:11px;height:11px}
+.capture{display:flex;gap:.55rem}
+.capture input{flex:1;min-width:0;border:1.5px solid var(--line);border-radius:999px;padding:.8rem 1.15rem;font-size:.95rem;background:var(--bg);transition:border .2s}
+.capture input:focus{outline:none;border-color:var(--g500)}
+.capture input.err{border-color:var(--tomato);animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+.capture .btn{padding:.8rem 1.35rem;font-size:.92rem}
+.capture-note{font-size:.76rem;color:var(--ink-soft);margin-top:.6rem;text-align:center}
+.captured{position:relative;display:flex;align-items:center;gap:.9rem;background:var(--g100);border:1px solid #CBE6CF;border-radius:16px;padding:.95rem 1.1rem;animation:tilepop .5s cubic-bezier(.3,1.4,.4,1)}
+.captured-check{flex:none;width:40px;height:40px;border-radius:50%;background:var(--g600);color:#fff;display:grid;place-items:center}
+.captured-check svg{width:20px;height:20px}
+.captured strong{display:block;font-size:.98rem}
+.captured p{font-size:.82rem;color:var(--ink-soft)}
+.confetti{position:absolute;left:28px;top:22px;width:8px;height:8px;border-radius:2px;pointer-events:none;z-index:6;animation:conf .9s ease-out forwards}
+@keyframes conf{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(var(--x),var(--y)) rotate(260deg);opacity:0}}
+
+/* ============ PRESS MARQUEE ============ */
+.press{padding:2.2rem 0 1.4rem;border-bottom:1px solid var(--line)}
+.press p{text-align:center;font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:1.3rem}
+.marquee{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 10% 90%,transparent)}
+.marquee-track{display:flex;align-items:center;gap:4.5rem;width:max-content;animation:scrollx 30s linear infinite;padding-right:4.5rem}
+.marquee:hover .marquee-track{animation-play-state:paused}
+@keyframes scrollx{to{transform:translateX(-50%)}}
+.pk{font-size:1.25rem;color:var(--ink);opacity:.42;white-space:nowrap}
+.pk1{font-family:Georgia,serif;font-style:italic;font-weight:700}
+.pk2{font-weight:800;letter-spacing:.22em;text-transform:uppercase;font-size:1rem}
+.pk3{font-family:Georgia,serif;font-weight:400;letter-spacing:.05em}
+.pk4{font-weight:900;text-transform:lowercase;letter-spacing:-.03em}
+.pk5{font-weight:300;letter-spacing:.3em;text-transform:uppercase;font-size:1rem}
+.pk6{font-family:Georgia,serif;font-weight:900}
+
+/* ============ STATS ============ */
+.stats{padding:3.6rem 0}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;text-align:center}
+.stat b{display:block;font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:800;letter-spacing:-.03em;color:var(--g700)}
+.stat span{font-size:.9rem;color:var(--ink-soft)}
+.stat{padding:0 1rem}
+.stat+.stat{border-left:1px solid var(--line)}
+
+/* ============ FEATURES ============ */
+.features{padding:5.5rem 0 6rem}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.2rem}
+.feat{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:1.7rem;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s,border-color .35s}
+.feat:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:#CFE4C9}
+.feat-icon{width:52px;height:52px;border-radius:15px;background:linear-gradient(135deg,var(--lime),var(--g100));color:var(--g700);display:grid;place-items:center;margin-bottom:1.1rem}
+.feat-icon svg{width:26px;height:26px}
+.feat h3{font-size:1.18rem;margin-bottom:.5rem}
+.feat p{font-size:.95rem;color:var(--ink-soft)}
+
+/* ============ HOW IT WORKS (pinned) ============ */
+.hiw{padding:5.5rem 0 4rem;background:linear-gradient(180deg,var(--bg) 0%,var(--bg-soft) 12%,var(--bg-soft) 88%,var(--bg) 100%)}
+.hiw-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.hiw-visual{position:sticky;top:clamp(84px,10vh,120px);display:flex;flex-direction:column;align-items:center;gap:1.4rem;padding-bottom:1rem}
+.phone{position:relative;width:274px;height:556px;border-radius:46px;background:#12261A;padding:11px;box-shadow:var(--shadow),inset 0 0 0 2px #2c4a38}
+.phone::before{content:"";position:absolute;top:22px;left:50%;transform:translateX(-50%);width:92px;height:23px;background:#12261A;border-radius:13px;z-index:5}
+.phone-screens{position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:var(--bg)}
+.pscreen{position:absolute;inset:0;padding:58px 16px 16px;display:flex;flex-direction:column;gap:11px;opacity:0;transform:translateY(26px) scale(.97);transition:opacity .55s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1);pointer-events:none}
+.pscreen.active{opacity:1;transform:none;pointer-events:auto}
+.ps-title{font-weight:800;font-size:1.15rem;letter-spacing:-.01em}
+.ps-sub{font-size:.78rem;color:var(--ink-soft);margin-top:-8px}
+.ps-chips{display:flex;flex-wrap:wrap;gap:6px}
+.ps-chips span{font-size:.68rem;font-weight:700;padding:.38rem .7rem;border-radius:999px;border:1.5px solid var(--line);color:var(--ink-soft)}
+.ps-chips span.on{background:var(--g600);border-color:var(--g600);color:#fff}
+.ps-stepper{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid var(--line);border-radius:14px;padding:.7rem .9rem;font-size:.8rem;font-weight:700}
+.ps-stepper .stepper{display:flex;align-items:center;gap:.7rem}
+.ps-stepper .stepper i{width:26px;height:26px;border-radius:50%;background:var(--g100);color:var(--g700);display:grid;place-items:center;font-style:normal;font-weight:800}
+.ps-btn{margin-top:auto;background:var(--g600);color:#fff;font-weight:700;font-size:.85rem;padding:.85rem;border-radius:999px;text-align:center}
+.wrow{display:flex;align-items:center;gap:.7rem;background:#fff;border:1px solid var(--line);border-radius:14px;padding:.62rem .75rem}
+.wrow .wdot{flex:none;width:34px;height:34px;border-radius:11px;display:grid;place-items:center;color:#fff;font-size:.62rem;font-weight:800}
+.wrow b{display:block;font-size:.78rem;line-height:1.3}
+.wrow span{display:block;font-size:.64rem;color:var(--ink-soft)}
+.wrow svg{margin-left:auto;width:14px;height:14px;color:var(--g600)}
+.gitem{display:flex;align-items:center;gap:.65rem;background:#fff;border:1px solid var(--line);border-radius:12px;padding:.55rem .7rem;font-size:.76rem;font-weight:600;transition:.3s}
+.gitem small{margin-left:auto;color:var(--ink-soft);font-weight:600}
+.gcheck{flex:none;width:22px;height:22px}
+.gcheck circle{fill:#fff;stroke:#CBD8C4;stroke-width:1.6;transition:.35s}
+.gcheck .tick{fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .4s ease .1s}
+.gitem.done{border-color:#CBE6CF;background:#F4FAF1}
+.gitem.done .gcheck circle{fill:var(--g600);stroke:var(--g600)}
+.gitem.done .tick{stroke-dashoffset:0}
+.aisle{font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--g700);margin-top:4px}
+.hiw-progress{display:flex;align-items:center;gap:.8rem;font-size:.8rem;font-weight:800;color:var(--g700);font-variant-numeric:tabular-nums}
+.hiw-bar{width:130px;height:5px;border-radius:3px;background:#D8E4CF;overflow:hidden}
+.hiw-bar i{display:block;height:100%;width:33.3%;border-radius:3px;background:var(--g600);transition:width .5s cubic-bezier(.2,.7,.2,1)}
+.steps{display:flex;flex-direction:column}
+.step{min-height:76vh;display:flex;flex-direction:column;justify-content:center;opacity:.3;transform:translateX(14px);transition:opacity .5s,transform .5s;cursor:pointer;padding:2rem 0}
+.step.active{opacity:1;transform:none}
+.step-num{font-size:4.6rem;font-weight:800;color:transparent;-webkit-text-stroke:2px #B9D3AE;line-height:1;letter-spacing:-.03em;margin-bottom:1rem}
+.step.active .step-num{color:var(--lime);-webkit-text-stroke:0}
+.step h3{font-size:clamp(1.4rem,2.6vw,1.9rem);margin-bottom:.7rem}
+.step p{color:var(--ink-soft);max-width:26rem;font-size:1.05rem}
+.step ul{list-style:none;margin-top:1.1rem;display:flex;flex-direction:column;gap:.5rem}
+.step li{display:flex;align-items:center;gap:.6rem;font-size:.92rem;font-weight:600;color:var(--ink)}
+.step li svg{width:17px;height:17px;color:var(--g600);flex:none}
+
+/* ============ TESTIMONIALS ============ */
+.reviews{padding:6rem 0}
+.carousel-wrap{position:relative}
+.carousel{display:flex;gap:1.2rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:.5rem .2rem 1.6rem;scrollbar-width:none}
+.carousel::-webkit-scrollbar{display:none}
+.tcard{flex:0 0 min(400px,86%);scroll-snap-align:start;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:1.8rem;display:flex;flex-direction:column;gap:1.1rem;transition:transform .35s,box-shadow .35s}
+.tcard:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.tstars{display:flex;gap:2px;color:var(--gold)}
+.tstars svg{width:16px;height:16px}
+.tcard blockquote{font-size:1.05rem;line-height:1.55;letter-spacing:-.01em}
+.tcard footer{display:flex;align-items:center;gap:.8rem;margin-top:auto}
+.tava{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:.85rem;color:#fff;flex:none}
+.tcard footer b{display:block;font-size:.95rem}
+.tcard footer span{font-size:.8rem;color:var(--ink-soft)}
+.car-btns{display:flex;gap:.6rem;justify-content:center}
+.car-btn{width:48px;height:48px;border-radius:50%;background:#fff;border:1.5px solid var(--line);color:var(--g700);display:grid;place-items:center;transition:.25s}
+.car-btn:hover{background:var(--g600);border-color:var(--g600);color:#fff;transform:translateY(-2px)}
+.car-btn svg{width:18px;height:18px}
+.car-btn.prev svg{transform:rotate(180deg)}
+
+/* ============ PRICING ============ */
+.pricing{padding:6rem 0;background:linear-gradient(180deg,var(--bg),var(--bg-soft) 20%,var(--bg-soft) 80%,var(--bg))}
+.bill-toggle{display:flex;align-items:center;justify-content:center;gap:.9rem;margin:-1.2rem 0 3rem;font-weight:700;font-size:.95rem}
+.bt-label{color:var(--ink-soft);transition:color .2s}
+.bt-label.on{color:var(--ink)}
+.bt-label em{font-style:normal;font-size:.7rem;background:var(--lime);color:var(--g900);padding:.2rem .55rem;border-radius:999px;margin-left:.35rem;font-weight:800}
+.switch{position:relative;width:56px;height:30px;border-radius:999px;background:#CBD8C4;transition:background .3s}
+.switch[aria-checked="true"]{background:var(--g600)}
+.switch .knob{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:var(--shadow-sm);transition:transform .3s cubic-bezier(.3,1.3,.4,1)}
+.switch[aria-checked="true"] .knob{transform:translateX(26px)}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;align-items:stretch}
+.pcard{background:var(--card);border:1.5px solid var(--line);border-radius:24px;padding:2rem 1.8rem;display:flex;flex-direction:column;position:relative;transition:transform .35s,box-shadow .35s}
+.pcard:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.pcard.pop{border-color:var(--g600);box-shadow:var(--shadow);transform:scale(1.03)}
+.pcard.pop:hover{transform:scale(1.03) translateY(-5px)}
+.pop-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--g600);color:#fff;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:.4rem 1rem;border-radius:999px;white-space:nowrap}
+.pcard h3{font-size:1.25rem}
+.pcard .ptag{font-size:.88rem;color:var(--ink-soft);margin:.3rem 0 1.4rem}
+.price{display:flex;align-items:baseline;gap:.15rem;margin-bottom:.15rem}
+.price sup{font-size:1.2rem;font-weight:800;color:var(--g700)}
+.price .amount{font-size:3rem;font-weight:800;letter-spacing:-.04em;line-height:1}
+.price .amount.flip{animation:flipnum .45s cubic-bezier(.3,1.3,.4,1)}
+@keyframes flipnum{from{transform:translateY(12px);opacity:0}}
+.price .per{color:var(--ink-soft);font-weight:600}
+.bill-note{font-size:.78rem;color:var(--ink-soft);margin-bottom:1.5rem;min-height:1.2em}
+.plist{list-style:none;display:flex;flex-direction:column;gap:.65rem;margin-bottom:1.8rem}
+.plist li{display:flex;gap:.6rem;align-items:flex-start;font-size:.93rem}
+.plist li svg{width:17px;height:17px;color:var(--g600);flex:none;margin-top:3px}
+.pcard .btn{margin-top:auto;width:100%}
+.pcard.pop .btn-primary{background:var(--g600)}
+
+/* ============ FAQ ============ */
+.faq{padding:6rem 0}
+.faq-list{max-width:720px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem;text-align:left;padding:1.35rem .3rem;font-size:1.08rem;font-weight:700;letter-spacing:-.01em;transition:color .2s}
+.faq-q:hover{color:var(--g700)}
+.faq-q svg{flex:none;width:20px;height:20px;color:var(--g600);transition:transform .35s}
+.faq-item.open .faq-q svg{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.2,.7,.2,1)}
+.faq-a p{padding:0 .3rem 1.4rem;color:var(--ink-soft);font-size:.98rem;max-width:60ch}
+
+/* ============ BIG CTA ============ */
+.cta{padding:2rem 0 6rem}
+.cta-panel{position:relative;background:linear-gradient(120deg,var(--g700),var(--g900) 70%);border-radius:34px;padding:clamp(2.5rem,6vw,4.5rem);display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center;overflow:hidden;color:#fff}
+.cta-panel::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.14) 1.2px,transparent 1.3px);background-size:24px 24px;mask-image:linear-gradient(120deg,#000,transparent 55%)}
+.cta-copy{position:relative;z-index:1}
+.cta-copy h2{font-size:clamp(2rem,4.4vw,3.2rem);margin-bottom:1rem}
+.cta-copy>p{color:rgba(255,255,255,.78);margin-bottom:2rem;max-width:30rem}
+.cta .capture input{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25);color:#fff}
+.cta .capture input::placeholder{color:rgba(255,255,255,.5)}
+.cta .capture input:focus{border-color:var(--lime)}
+.cta .capture-note{color:rgba(255,255,255,.55);text-align:left}
+.cta .captured{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25)}
+.cta .captured p{color:rgba(255,255,255,.7)}
+.cta-art{position:relative;z-index:1;display:flex;justify-content:center}
+.cta-art .bowl{width:min(300px,80%);filter:drop-shadow(0 24px 30px rgba(0,0,0,.25))}
+.cta-float{position:absolute;pointer-events:none}
+
+/* ============ FOOTER ============ */
+.footer{border-top:1px solid var(--line);padding:4rem 0 2.5rem;background:#fff}
+.footer-grid{display:grid;grid-template-columns:1.6fr repeat(4,1fr);gap:2.5rem;margin-bottom:3rem}
+.footer-brand p{color:var(--ink-soft);font-size:.92rem;margin:1rem 0 1.4rem;max-width:22rem}
+.socials{display:flex;gap:.6rem}
+.socials a{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;color:var(--ink-soft);transition:.25s}
+.socials a:hover{background:var(--g600);border-color:var(--g600);color:#fff;transform:translateY(-2px)}
+.socials svg{width:16px;height:16px}
+.fcol h4{font-size:.8rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:1.1rem}
+.fcol ul{list-style:none;display:flex;flex-direction:column;gap:.65rem;font-size:.94rem}
+.fcol a{color:var(--ink-soft);transition:color .2s}
+.fcol a:hover{color:var(--g700)}
+.footer-bottom{border-top:1px solid var(--line);padding-top:1.6rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.84rem;color:var(--ink-soft)}
+
+/* ============ REVEAL ============ */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:1020px){
+  .hero-inner{grid-template-columns:1fr;gap:3.5rem}
+  .hero-copy{text-align:center;display:flex;flex-direction:column;align-items:center}
+  .hero-visual{max-width:520px;margin:0 auto;width:100%}
+  .hiw-grid{grid-template-columns:1fr;gap:2rem}
+  .hiw-visual{position:static;padding-bottom:0}
+  .step{min-height:0;padding:1.2rem 0;cursor:default}
+  .price-grid{grid-template-columns:1fr;max-width:440px;margin:0 auto}
+  .pcard.pop{transform:none}
+  .cta-panel{grid-template-columns:1fr;text-align:center}
+  .cta-copy{display:flex;flex-direction:column;align-items:center}
+  .cta .capture-note{text-align:center}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:760px){
+  .nav-links,.nav-cta .login{display:none}
+  .burger{display:flex}
+  .mobile-menu{display:flex}
+  .nav-cta .btn{padding:.55rem 1.05rem;font-size:.85rem}
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:1.8rem}
+  .stat:nth-child(3){border-left:none}
+  .capture{flex-direction:column}
+  .fanchor.hide-sm{display:none}
+  .footer-grid{grid-template-columns:1fr;gap:1.8rem}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .reveal{opacity:1;transform:none}
+  .marquee-track{animation:none}
+}
+</style>
+<noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
+</head>
+<body>
+
+<a class="skip" href="#planner">Skip to meal planner</a>
+
+<!-- SVG symbol library -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ic-star" viewBox="0 0 20 20"><path d="M10 1.6l2.6 5.2 5.8.9-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.9L10 1.6Z"/></symbol>
+  <symbol id="ic-check" viewBox="0 0 20 20"><path d="M4 10.5l4 4L16.5 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-chev" viewBox="0 0 20 20"><path d="M5 8l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-arr" viewBox="0 0 20 20"><path d="M3 10h13M12 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-shuffle" viewBox="0 0 24 24"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-swap" viewBox="0 0 20 20"><path d="M3.5 7h9.5l-2.5-2.5M16.5 13H7l2.5 2.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a class="logo" href="#top" aria-label="Plateful home">
+      <svg class="logo-mark" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="21" fill="#E4F3E7"/><circle cx="22" cy="22" r="13.5" fill="#fff" stroke="#1D8348" stroke-width="3"/><path d="M22 14.5c4.6 1 7.2 4.2 7.2 8.6-4.6-1-7.2-4.2-7.2-8.6Z" fill="#1D8348"/><path d="M22.8 24.5c1.8-2.4 3.6-4 6-5" stroke="#E4F3E7" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
+      Plateful
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features" data-nav="features">Features</a></li>
+      <li><a href="#how" data-nav="how">How it works</a></li>
+      <li><a href="#reviews" data-nav="reviews">Reviews</a></li>
+      <li><a href="#pricing" data-nav="pricing">Pricing</a></li>
+      <li><a href="#faq" data-nav="faq">FAQ</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a class="login" href="#get">Log in</a>
+      <a class="btn btn-primary" href="#planner">Get the app</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mmenu">
+    <a href="#features">Features</a>
+    <a href="#how">How it works</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a class="btn btn-primary" href="#planner">Get the app</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <span class="eyebrow reveal">Meal planning, minus the planning</span>
+      <h1 class="reveal" style="--d:.08s">Dinner,<br><span class="hl">decided.</span></h1>
+      <p class="hero-sub reveal" style="--d:.16s">Plateful builds your week of meals, writes the grocery list, and uses up what's already in the fridge — so the 5pm “what's for dinner?” panic never happens. Try a real sample week right here:</p>
+      <div class="hero-ctas reveal" style="--d:.24s">
+        <button class="btn btn-primary" id="heroBuild">Build my sample week <svg><use href="#ic-arr"/></svg></button>
+        <a class="btn btn-ghost" href="#how">See how it works</a>
+      </div>
+      <div class="hero-proof reveal" style="--d:.32s">
+        <div class="avatars" aria-hidden="true">
+          <span style="background:#F0604A">M</span><span style="background:#1D8348">D</span><span style="background:#F59E4C">P</span><span style="background:#3E5C76">J</span><span style="background:#8A5FA0">S</span>
+        </div>
+        <p>
+          <span class="stars" aria-hidden="true"><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg></span>
+          <strong>4.9</strong> on the App Store · Loved by <strong>40,000+</strong> home cooks
+        </p>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <!-- floating food illustrations (parallax layers) -->
+      <div class="fanchor behind" style="top:-38px;left:-44px"><div class="fwrap" data-speed=".06"><svg class="fbob" style="animation-duration:7s" width="78" height="78" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="37" r="21" fill="#F0604A"/><path d="M32 16c-2 3-6 4-10 4 2 2 5 3 10 3s8-1 10-3c-4 0-8-1-10-4Z" fill="#3E8E3E"/><path d="M32 16c0-3 2-5 4-6" stroke="#2E7D32" stroke-width="3" stroke-linecap="round" fill="none"/><path d="M20 34a12 12 0 0 1 4-8" stroke="#FF8A75" stroke-width="4" stroke-linecap="round" fill="none"/></svg></div></div>
+      <div class="fanchor" style="top:34%;right:-52px"><div class="fwrap" data-speed="-.05"><svg class="fbob" style="animation-duration:8.5s" width="86" height="86" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="34" rx="17" ry="21" fill="#3E8E3E" transform="rotate(8 32 34)"/><ellipse cx="32" cy="34" rx="12.5" ry="16.5" fill="#B7DE7C" transform="rotate(8 32 34)"/><circle cx="30" cy="40" r="7.5" fill="#A5694A"/><circle cx="27.5" cy="37" r="2" fill="#C68A63"/></svg></div></div>
+      <div class="fanchor hide-sm" style="bottom:-22px;left:-26px"><div class="fwrap" data-speed=".09"><svg class="fbob" style="animation-duration:6s" width="64" height="64" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="24" fill="#F6D34A"/><circle cx="28" cy="28" r="19" fill="#FCEFB4"/><clipPath id="lc"><circle cx="28" cy="28" r="19"/></clipPath><g clip-path="url(#lc)" stroke="#F6D34A" stroke-width="3"><path d="M28 9v38M9 28h38M15 15l26 26M41 15 15 41"/></g><circle cx="28" cy="28" r="3.5" fill="#F6D34A"/></svg></div></div>
+      <div class="fanchor hide-sm" style="top:-30px;right:-14px"><div class="fwrap" data-speed="-.08"><svg class="fbob" style="animation-duration:9s" width="66" height="66" viewBox="0 0 60 60" aria-hidden="true"><path d="M30 14c-1-5 2-9 6-11M30 14c-4-3-4-8-2-12M30 14c2-4 6-6 10-6" stroke="#4CAF50" stroke-width="3.5" stroke-linecap="round" fill="none"/><path d="M30 14c8 2 12 8 10 14L22 52c-4-2-8-8-6-14l14-24Z" fill="#F59E4C"/><path d="M25 26h7M23 34h7M27 20h6" stroke="#E0892F" stroke-width="2.5" stroke-linecap="round"/></svg></div></div>
+      <div class="fanchor" style="bottom:20%;left:-56px"><div class="fwrap" data-speed=".12"><svg class="fbob" style="animation-duration:7.6s" width="54" height="54" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 6c10 2 16 9 16 19 0 8-6 15-16 17C14 40 8 33 8 24 8 14 14 8 24 6Z" fill="#4CAF50"/><path d="M24 12c0 9-.5 18-1 26M23.5 20l7-4M23.5 28l-7-4" stroke="#2E7D32" stroke-width="2" stroke-linecap="round" fill="none"/></svg></div></div>
+
+      <!-- interactive sample-week builder -->
+      <div class="planner" id="planner" aria-label="Sample week meal planner">
+        <div class="planner-head">
+          <div>
+            <span class="planner-title">This week's plan</span>
+            <span class="planner-sub">A real sample — shuffle it, swap it, steal it.</span>
+          </div>
+          <button class="shuffle-btn" id="shuffleBtn" aria-label="Shuffle the whole week">
+            <svg><use href="#ic-shuffle"/></svg>
+          </button>
+        </div>
+        <div class="chips" role="group" aria-label="Choose an eating style">
+          <button class="chip active" data-diet="balanced">Balanced</button>
+          <button class="chip" data-diet="veggie">Veggie</button>
+          <button class="chip" data-diet="keto">Keto</button>
+          <button class="chip" data-diet="protein">High-protein</button>
+        </div>
+        <div class="days-toggle" role="group" aria-label="Number of days">
+          <button data-days="3">3 days</button>
+          <button data-days="5" class="active">5 days</button>
+          <button data-days="7">7 days</button>
+        </div>
+        <div class="days-grid" id="daysGrid" aria-live="polite"></div>
+        <form class="capture" id="plannerForm" novalidate>
+          <input type="email" name="email" placeholder="you@example.com" aria-label="Email address" required>
+          <button class="btn btn-primary" type="submit">Get this plan — free</button>
+        </form>
+        <p class="capture-note">Free forever plan · No credit card · Unsubscribe anytime</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ============ PRESS ============ -->
+<section class="press" aria-label="Press mentions">
+  <p>As simmered in the press</p>
+  <div class="marquee">
+    <div class="marquee-track" id="marqueeTrack">
+      <span class="pk pk1">the daily plate</span><span class="pk pk2">Yum!</span><span class="pk pk3">Kitchen Weekly</span><span class="pk pk4">foodie</span><span class="pk pk5">HomeCook Journal</span><span class="pk pk6">SEASONED</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS ============ -->
+<section class="stats container" aria-label="Plateful in numbers">
+  <div class="stats-grid">
+    <div class="stat reveal"><b><span class="count" data-count="40000" data-suffix="+">0</span></b><span>home cooks planning weekly</span></div>
+    <div class="stat reveal" style="--d:.08s"><b><span class="count" data-count="3.2" data-dec="1" data-suffix="M">0</span></b><span>meals planned to date</span></div>
+    <div class="stat reveal" style="--d:.16s"><b><span class="count" data-count="4.9" data-dec="1" data-suffix="★">0</span></b><span>average App Store rating</span></div>
+    <div class="stat reveal" style="--d:.24s"><b><span class="count" data-count="6" data-suffix=" hrs">0</span></b><span>saved per week, on average</span></div>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section class="features container" id="features">
+  <div class="sec-head reveal">
+    <span class="eyebrow">Features</span>
+    <h2>Everything dinner throws at you — handled.</h2>
+    <p>One calm little app replacing the group chat polls, the recipe bookmarks graveyard, and the third grocery run of the week.</p>
+  </div>
+  <div class="feat-grid">
+    <article class="feat reveal"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/><circle cx="8.5" cy="14.5" r="1.3" fill="currentColor" stroke="none"/><path d="M12.5 14.5h4M12.5 17.5h4"/></svg></div><h3>A fresh week, every week</h3><p>Tell Plateful your tastes once. Every Sunday, a chef-crafted plan lands in your inbox — seasonal, varied, never boring.</p></article>
+    <article class="feat reveal" style="--d:.07s"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.4 18h8.2a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="10" cy="21" r="1.4" fill="currentColor" stroke="none"/><circle cx="18" cy="21" r="1.4" fill="currentColor" stroke="none"/></svg></div><h3>Grocery lists that write themselves</h3><p>Every ingredient summed, de-duplicated and sorted by aisle. Share it with the household or send it straight to pickup.</p></article>
+    <article class="feat reveal" style="--d:.14s"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="8" width="14" height="13" rx="3"/><path d="M8 4h8v4H8z"/><path d="M9.5 13.5h5M9.5 16.5h3"/></svg></div><h3>Pantry-first planning</h3><p>Log what's on hand and Plateful plans around it first. Members toss roughly 40% less food within their first month.</p></article>
+    <article class="feat reveal"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5V12l6 4"/></svg></div><h3>Nutrition on autopilot</h3><p>Calories, protein and macros per serving, balanced across your whole week — no spreadsheet, no mental math.</p></article>
+    <article class="feat reveal" style="--d:.07s"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h12l-3-3M20 16H8l3 3"/></svg></div><h3>One-tap swaps</h3><p>Not feeling Tuesday's salmon? Swap it in a tap — the grocery list and nutrition totals update themselves instantly.</p></article>
+    <article class="feat reveal" style="--d:.14s"><div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h16v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5v-6Z"/><path d="M2 10h20"/><path d="M9.5 7c0-1.4 1-1.8 1-3M14 7c0-1.4 1-1.8 1-3"/></svg></div><h3>Cook-along mode</h3><p>Step-by-step recipes with built-in timers and big, flour-proof buttons your messy hands will appreciate.</p></article>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="hiw" id="how">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>From “ugh, dinner” to done in three steps</h2>
+      <p>Scroll through — the app follows along.</p>
+    </div>
+    <div class="hiw-grid">
+      <div class="hiw-visual">
+        <div class="phone" aria-hidden="true">
+          <div class="phone-screens">
+            <!-- Screen 1: tastes -->
+            <div class="pscreen active" data-screen="0">
+              <div class="ps-title">Your tastes</div>
+              <div class="ps-sub">Takes about a minute, once.</div>
+              <div class="ps-chips"><span class="on">Veggie-friendly</span><span>Gluten-free</span><span class="on">Quick 20-min</span><span>No cilantro</span><span class="on">Kid-approved</span><span>Extra spicy</span></div>
+              <div class="ps-stepper">Household<span class="stepper"><i>−</i><b>4</b><i>+</i></span></div>
+              <div class="ps-stepper">Weekly budget<span class="stepper"><b>$120</b></span></div>
+              <div class="ps-btn">Build my week →</div>
+            </div>
+            <!-- Screen 2: the week -->
+            <div class="pscreen" data-screen="1">
+              <div class="ps-title">Week of May 12</div>
+              <div class="ps-sub">Fresh plan · delivered Sunday</div>
+              <div class="wrow"><span class="wdot" style="background:#1D8348">M</span><div><b>Lemon Herb Chicken</b><span>35 min · 520 kcal</span></div><svg><use href="#ic-swap"/></svg></div>
+              <div class="wrow"><span class="wdot" style="background:#F0604A">T</span><div><b>Turkey Taco Bowls</b><span>25 min · 610 kcal</span></div><svg><use href="#ic-swap"/></svg></div>
+              <div class="wrow"><span class="wdot" style="background:#F59E4C">W</span><div><b>Miso Soup &amp; Gyoza</b><span>30 min · 480 kcal</span></div><svg><use href="#ic-swap"/></svg></div>
+              <div class="wrow"><span class="wdot" style="background:#3E5C76">T</span><div><b>Sheet-Pan Salmon</b><span>25 min · 540 kcal</span></div><svg><use href="#ic-swap"/></svg></div>
+              <div class="wrow"><span class="wdot" style="background:#8A5FA0">F</span><div><b>Creamy Tomato Pasta</b><span>20 min · 590 kcal</span></div><svg><use href="#ic-swap"/></svg></div>
+              <div class="ps-btn">Approve week ✓</div>
+            </div>
+            <!-- Screen 3: grocery list -->
+            <div class="pscreen" data-screen="2">
+              <div class="ps-title">Grocery list</div>
+              <div class="ps-sub">18 items · sorted by aisle</div>
+              <div class="aisle">Produce</div>
+              <div class="gitem"><svg class="gcheck" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10"/><path class="tick" pathLength="1" d="M6.5 11.4l3 3 6-6.4"/></svg>Lemons<small>×3</small></div>
+              <div class="gitem"><svg class="gcheck" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10"/><path class="tick" pathLength="1" d="M6.5 11.4l3 3 6-6.4"/></svg>Broccoli<small>2 heads</small></div>
+              <div class="gitem"><svg class="gcheck" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10"/><path class="tick" pathLength="1" d="M6.5 11.4l3 3 6-6.4"/></svg>Basil<small>1 bunch</small></div>
+              <div class="aisle">Protein</div>
+              <div class="gitem"><svg class="gcheck" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10"/><path class="tick" pathLength="1" d="M6.5 11.4l3 3 6-6.4"/></svg>Chicken thighs<small>×4</small></div>
+              <div class="gitem"><svg class="gcheck" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10"/><path class="tick" pathLength="1" d="M6.5 11.4l3 3 6-6.4"/></svg>Salmon fillets<small>×2</small></div>
+              <div class="ps-btn">Send to pickup →</div>
+            </div>
+          </div>
+        </div>
+        <div class="hiw-progress" aria-hidden="true">
+          <span id="hiwNum">01</span>
+          <div class="hiw-bar"><i id="hiwFill"></i></div>
+          <span>03</span>
+        </div>
+      </div>
+      <div class="steps" id="steps">
+        <article class="step active" data-step="0">
+          <div class="step-num">01</div>
+          <h3>Set your table</h3>
+          <p>Diets, allergies, dislikes, household size, budget — Plateful learns your taste in about a minute and remembers it forever.</p>
+          <ul>
+            <li><svg><use href="#ic-check"/></svg>30+ diet &amp; allergy filters</li>
+            <li><svg><use href="#ic-check"/></svg>Picky-eater profiles per person</li>
+          </ul>
+        </article>
+        <article class="step" data-step="1">
+          <div class="step-num">02</div>
+          <h3>Get your week, every Sunday</h3>
+          <p>A full plan built from 900+ chef-tested recipes arrives in your inbox — plus a grocery list already sorted by aisle.</p>
+          <ul>
+            <li><svg><use href="#ic-check"/></svg>Seasonal, varied, never repeated</li>
+            <li><svg><use href="#ic-check"/></svg>Portions scaled to your household</li>
+          </ul>
+        </article>
+        <article class="step" data-step="2">
+          <div class="step-num">03</div>
+          <h3>Cook, check off, repeat</h3>
+          <p>Guided steps with built-in timers. Swap any meal in one tap — and leftovers roll into tomorrow's lunch automatically.</p>
+          <ul>
+            <li><svg><use href="#ic-check"/></svg>One-tap swaps, list updates itself</li>
+            <li><svg><use href="#ic-check"/></svg>Zero-waste leftover logic</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="reviews container" id="reviews">
+  <div class="sec-head reveal">
+    <span class="eyebrow">Reviews</span>
+    <h2>40,000+ cooks hung up the daily dilemma</h2>
+    <p>Unfiltered words from people who no longer fear the question “what's for dinner?”</p>
+  </div>
+  <div class="carousel-wrap reveal">
+    <div class="carousel" id="tCarousel">
+      <article class="tcard"><div class="tstars" aria-label="5 stars"><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg></div><blockquote>“Sunday scaries are gone. I open Plateful and the week is just… handled. I genuinely got my evenings back.”</blockquote><footer><span class="tava" style="background:#F0604A">MR</span><div><b>Maya R.</b><span>Mom of three, Austin</span></div></footer></article>
+      <article class="tcard"><div class="tstars" aria-label="5 stars"><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg></div><blockquote>“A grocery list sorted by aisle saves me a solid half hour per shop. I didn't expect to love an app this much.”</blockquote><footer><span class="tava" style="background:#1D8348">DK</span><div><b>Dan K.</b><span>Self-declared meal-prep skeptic</span></div></footer></article>
+      <article class="tcard"><div class="tstars" aria-label="5 stars"><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg></div><blockquote>“The pantry feature is witchcraft. My food waste dropped by half, and I've stopped buying my fourth jar of cumin.”</blockquote><footer><span class="tava" style="background:#F59E4C">PS</span><div><b>Priya S.</b><span>Apartment cook, Chicago</span></div></footer></article>
+      <article class="tcard"><div class="tstars" aria-label="5 stars"><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg></div><blockquote>“Swapped Tuesday's chicken for tacos in one tap and the list fixed itself. My kids think I'm a hero.”</blockquote><footer><span class="tava" style="background:#3E5C76">JL</span><div><b>Jordan L.</b><span>Dad of two picky eaters</span></div></footer></article>
+      <article class="tcard"><div class="tstars" aria-label="5 stars"><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg><svg><use href="#ic-star"/></svg></div><blockquote>“Down twelve pounds without thinking about it. Protein targets hit every single week, no spreadsheet required.”</blockquote><footer><span class="tava" style="background:#8A5FA0">SW</span><div><b>Sam W.</b><span>Marathon trainee</span></div></footer></article>
+    </div>
+  </div>
+  <div class="car-btns reveal">
+    <button class="car-btn prev" id="carPrev" aria-label="Previous reviews"><svg><use href="#ic-arr"/></svg></button>
+    <button class="car-btn next" id="carNext" aria-label="Next reviews"><svg><use href="#ic-arr"/></svg></button>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Pricing</span>
+      <h2>Cheaper than one takeout night</h2>
+      <p>Start free. Upgrade when the leftovers logic wins you over.</p>
+    </div>
+    <div class="bill-toggle reveal">
+      <span class="bt-label on" id="lblMonthly">Monthly</span>
+      <button class="switch" id="billSwitch" role="switch" aria-checked="false" aria-label="Toggle yearly billing"><span class="knob"></span></button>
+      <span class="bt-label" id="lblYearly">Yearly <em>save 25%</em></span>
+    </div>
+    <div class="price-grid">
+      <article class="pcard reveal">
+        <h3>Free</h3><p class="ptag">Dip a toe in the sauce.</p>
+        <div class="price"><sup>$</sup><span class="amount">0</span><span class="per">/mo</span></div>
+        <p class="bill-note">free forever</p>
+        <ul class="plist">
+          <li><svg><use href="#ic-check"/></svg>Sample week every Sunday</li>
+          <li><svg><use href="#ic-check"/></svg>30 starter recipes</li>
+          <li><svg><use href="#ic-check"/></svg>Automatic grocery list</li>
+          <li><svg><use href="#ic-check"/></svg>1 taste profile</li>
+        </ul>
+        <a class="btn btn-ghost" href="#get">Start free</a>
+      </article>
+      <article class="pcard pop reveal" style="--d:.08s">
+        <span class="pop-badge">Most popular</span>
+        <h3>Plus</h3><p class="ptag">The full week, on rails.</p>
+        <div class="price"><sup>$</sup><span class="amount" data-m="8" data-y="6">8</span><span class="per">/mo</span></div>
+        <p class="bill-note" data-m="per month, billed monthly" data-y="per month · $72 billed yearly">per month, billed monthly</p>
+        <ul class="plist">
+          <li><svg><use href="#ic-check"/></svg>Everything in Free</li>
+          <li><svg><use href="#ic-check"/></svg>Full 900+ recipe box</li>
+          <li><svg><use href="#ic-check"/></svg>Pantry tracking &amp; waste stats</li>
+          <li><svg><use href="#ic-check"/></svg>Nutrition &amp; macros</li>
+          <li><svg><use href="#ic-check"/></svg>One-tap swaps · cook-along mode</li>
+        </ul>
+        <a class="btn btn-primary" href="#get">Start 14-day trial</a>
+      </article>
+      <article class="pcard reveal" style="--d:.16s">
+        <h3>Family</h3><p class="ptag">For the whole table.</p>
+        <div class="price"><sup>$</sup><span class="amount" data-m="12" data-y="9">12</span><span class="per">/mo</span></div>
+        <p class="bill-note" data-m="per month, billed monthly" data-y="per month · $108 billed yearly">per month, billed monthly</p>
+        <ul class="plist">
+          <li><svg><use href="#ic-check"/></svg>Everything in Plus</li>
+          <li><svg><use href="#ic-check"/></svg>Up to 6 taste profiles</li>
+          <li><svg><use href="#ic-check"/></svg>Kid-friendly filters</li>
+          <li><svg><use href="#ic-check"/></svg>Shared, synced grocery lists</li>
+          <li><svg><use href="#ic-check"/></svg>Priority support</li>
+        </ul>
+        <a class="btn btn-ghost" href="#get">Start 14-day trial</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq container" id="faq">
+  <div class="sec-head reveal">
+    <span class="eyebrow">FAQ</span>
+    <h2>Good questions</h2>
+  </div>
+  <div class="faq-list reveal">
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">Is there really a free plan?<svg><use href="#ic-chev"/></svg></button>
+      <div class="faq-a"><p>Really. Free gets you a fresh sample week every Sunday, 30 starter recipes, and automatic grocery lists — no card required, no countdown clock. Plus and Family add the full recipe box, pantry tracking, and nutrition.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">Can it handle allergies and picky eaters?<svg><use href="#ic-chev"/></svg></button>
+      <div class="faq-a"><p>That's its specialty. Choose from 30+ diet and allergy filters, set per-person dislikes (“no mushrooms for Dad”), and Plateful never suggests anything off-limits. Family plans keep up to six separate taste profiles in one plan.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">How do the grocery lists work?<svg><use href="#ic-chev"/></svg></button>
+      <div class="faq-a"><p>Every ingredient across your week is summed, de-duplicated, and sorted by store aisle. Check items off as you shop, share the list with your household in real time, or send it straight to grocery pickup in supported regions.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">What if I don't like a suggested meal?<svg><use href="#ic-chev"/></svg></button>
+      <div class="faq-a"><p>Swap it in one tap. Plateful suggests replacements that reuse overlapping ingredients, then quietly updates your grocery list and nutrition totals so nothing else breaks.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">Can I add my own recipes?<svg><use href="#ic-chev"/></svg></button>
+      <div class="faq-a"><p>Yes — paste a link or type in Grandma's lasagna, and Plateful parses the ingredients into your grocery list and nutrition automatically. Your recipes can appear in rotation alongside ours.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">How do I cancel?<svg><use href="#ic-chev"/></svg></button>
+      <div class="faq-a"><p>Two taps in Settings, effective immediately, no retention maze. You keep your recipes and your data exports either way. We'd rather earn you back with a great product than trap you with a dark pattern.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BIG CTA ============ -->
+<section class="cta container" id="get">
+  <div class="cta-panel reveal">
+    <div class="cta-copy">
+      <h2>Your next week of dinners is already planned.</h2>
+      <p>Drop your email and we'll send your first starter week tonight — plan, recipes, and grocery list included.</p>
+      <form class="capture" id="ctaForm" novalidate>
+        <input type="email" name="email" placeholder="you@example.com" aria-label="Email address" required>
+        <button class="btn btn-lime" type="submit">Send my week <svg><use href="#ic-arr"/></svg></button>
+      </form>
+      <p class="capture-note">Free 14-day Plus trial included · No credit card required</p>
+    </div>
+    <div class="cta-art" aria-hidden="true">
+      <svg class="bowl" viewBox="0 0 240 200">
+        <rect x="118" y="8" width="7" height="130" rx="3.5" transform="rotate(26 118 8)" fill="#C99B62"/>
+        <rect x="132" y="4" width="7" height="130" rx="3.5" transform="rotate(30 132 4)" fill="#B5874E"/>
+        <path d="M84 44c0 4-4 5-4 10M118 34c0 4-4 5-4 10M152 44c0 4-4 5-4 10" stroke="rgba(255,255,255,.4)" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M40 98h160c0 44-36 78-80 78S40 142 40 98Z" fill="#FBF7EC"/>
+        <path d="M40 98h160c0 7-.6 14-1.8 20.5H41.8C40.6 112 40 105 40 98Z" fill="#EFE6CF"/>
+        <ellipse cx="120" cy="98" rx="80" ry="15" fill="#F6EFDD"/>
+        <clipPath id="rclip"><ellipse cx="120" cy="98" rx="80" ry="15"/></clipPath>
+        <g clip-path="url(#rclip)">
+          <path d="M52 96c8-8 14-8 22 0s14 8 22 0 14-8 22 0 14 8 22 0 14-8 22 0 14 8 22 0" fill="none" stroke="#F2C94C" stroke-width="6" stroke-linecap="round"/>
+          <path d="M48 104c8-8 14-8 22 0s14 8 22 0 14-8 22 0 14 8 22 0 14-8 22 0 14 8 22 0" fill="none" stroke="#E8B93A" stroke-width="6" stroke-linecap="round"/>
+        </g>
+        <ellipse cx="82" cy="92" rx="12" ry="7" fill="#fff"/><circle cx="82" cy="92" r="4.5" fill="#F6D34A"/>
+        <circle cx="152" cy="90" r="6" fill="#4CAF50"/><circle cx="164" cy="97" r="5" fill="#3E8E3E"/>
+        <circle cx="140" cy="99" r="4" fill="#F0604A"/>
+      </svg>
+      <div class="fanchor" style="top:-6px;right:6%"><div class="fwrap" data-speed=".05"><svg class="fbob" style="animation-duration:6.5s" width="52" height="52" viewBox="0 0 56 56"><path d="M12 16c18-2 32 8 34 26-4 2-8 2-12 0 0-14-10-24-22-26Z" fill="#F0604A"/><path d="M12 16c-2-4 0-9 4-11" stroke="#7FBF5B" stroke-width="4" stroke-linecap="round" fill="none"/><path d="M20 20c8 2 14 8 17 15" stroke="#FF8A75" stroke-width="3" stroke-linecap="round" fill="none"/></svg></div></div>
+      <div class="fanchor" style="bottom:4px;left:4%"><div class="fwrap" data-speed="-.06"><svg class="fbob" style="animation-duration:8s" width="48" height="48" viewBox="0 0 48 48"><path d="M24 6c10 2 16 9 16 19 0 8-6 15-16 17C14 40 8 33 8 24 8 14 14 8 24 6Z" fill="#D8F3A5"/><path d="M24 12c0 9-.5 18-1 26M23.5 20l7-4M23.5 28l-7-4" stroke="#1D8348" stroke-width="2" stroke-linecap="round" fill="none"/></svg></div></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="#top">
+          <svg class="logo-mark" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="21" fill="#E4F3E7"/><circle cx="22" cy="22" r="13.5" fill="#fff" stroke="#1D8348" stroke-width="3"/><path d="M22 14.5c4.6 1 7.2 4.2 7.2 8.6-4.6-1-7.2-4.2-7.2-8.6Z" fill="#1D8348"/><path d="M22.8 24.5c1.8-2.4 3.6-4 6-5" stroke="#E4F3E7" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
+          Plateful
+        </a>
+        <p>The meal-planning app that ends the 5pm dinner panic. Made with real butter in Portland, OR.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="16" height="16" rx="5"/><circle cx="10" cy="10" r="3.8"/><circle cx="15" cy="5" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="X"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 3l14 14M17 3 3 17"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="16" height="12" rx="4"/><path d="M8.5 7.5l4.5 2.5-4.5 2.5v-5Z" fill="currentColor" stroke="none"/></svg></a>
+        </div>
+      </div>
+      <div class="fcol"><h4>Product</h4><ul><li><a href="#features">Features</a></li><li><a href="#how">How it works</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#">What's new</a></li></ul></div>
+      <div class="fcol"><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Press kit</a></li><li><a href="#">Contact</a></li></ul></div>
+      <div class="fcol"><h4>Resources</h4><ul><li><a href="#">Recipe box</a></li><li><a href="#">Blog</a></li><li><a href="#">Help center</a></li><li><a href="#">Community</a></li></ul></div>
+      <div class="fcol"><h4>Legal</h4><ul><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="#">Accessibility</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2025</span> Plateful, Inc. All rights reserved.</span>
+      <span>Dinner, decided. Every week since.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+const $=(s,c=document)=>c.querySelector(s);
+const $$=(s,c=document)=>[...c.querySelectorAll(s)];
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- Nav ---------- */
+const nav=$('#nav');
+const burger=$('#burger'), mmenu=$('#mmenu');
+burger.addEventListener('click',()=>{
+  const open=mmenu.classList.toggle('open');
+  burger.classList.toggle('open',open);
+  burger.setAttribute('aria-expanded',open);
+});
+$$('#mmenu a').forEach(a=>a.addEventListener('click',()=>{
+  mmenu.classList.remove('open');burger.classList.remove('open');burger.setAttribute('aria-expanded','false');
+}));
+
+/* ---------- Reveal on scroll ---------- */
+const revealIO=new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); revealIO.unobserve(e.target);} });
+},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+$$('.reveal').forEach(el=>revealIO.observe(el));
+
+/* ---------- Counters ---------- */
+const fmt=(v,dec)=>dec?v.toFixed(dec):Math.round(v).toLocaleString('en-US');
+const countIO=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    countIO.unobserve(e.target);
+    const el=e.target,end=parseFloat(el.dataset.count),dec=+(el.dataset.dec||0),suf=el.dataset.suffix||'';
+    if(RM){el.textContent=fmt(end,dec)+suf;return;}
+    const t0=performance.now(),dur=1500;
+    (function tick(t){
+      const p=Math.min((t-t0)/dur,1),ease=1-Math.pow(1-p,3);
+      el.textContent=fmt(end*ease,dec)+suf;
+      if(p<1)requestAnimationFrame(tick);
+    })(t0);
+  });
+},{threshold:.5});
+$$('.count').forEach(el=>countIO.observe(el));
+
+/* ---------- Parallax (element-centric, rAF) ---------- */
+const layers=$$('.fwrap[data-speed]');
+let pTicking=false;
+function parallax(){
+  const vh=innerHeight;
+  layers.forEach(el=>{
+    const s=parseFloat(el.dataset.speed)||0;
+    const r=el.parentElement.getBoundingClientRect();
+    const off=(r.top+r.height/2-vh/2)*s;
+    el.style.transform='translate3d(0,'+off.toFixed(1)+'px,0)';
+  });
+}
+function onScroll(){
+  nav.classList.toggle('scrolled',scrollY>10);
+  if(RM)return;
+  if(!pTicking){requestAnimationFrame(()=>{parallax();pTicking=false;});pTicking=true;}
+}
+addEventListener('scroll',onScroll,{passive:true});
+addEventListener('resize',()=>{if(!RM)parallax();},{passive:true});
+if(!RM)parallax();
+
+/* ---------- Active nav link ---------- */
+const secIO=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    $$('.nav-links a').forEach(a=>a.classList.toggle('active',a.dataset.nav===e.target.id));
+  });
+},{rootMargin:'-38% 0px -55% 0px'});
+['features','how','reviews','pricing','faq'].forEach(id=>{const el=document.getElementById(id);if(el)secIO.observe(el);});
+
+/* ---------- Marquee: duplicate track ---------- */
+const track=$('#marqueeTrack');
+track.innerHTML+=track.innerHTML;
+track.setAttribute('aria-hidden','false');
+
+/* ==================================================
+   PLANNER WIDGET
+================================================== */
+const MEALS={
+  balanced:[["Lemon Herb Chicken","bowl",35],["Sheet-Pan Salmon","fish",25],["Beef & Broccoli","bowl",20],["Margherita Flatbread","plate",15],["Turkey Taco Bowls","taco",25],["Creamy Tomato Pasta","pasta",20],["Miso Soup & Gyoza","soup",30],["Chicken Souvlaki","skewer",30],["Garden Cobb Salad","salad",15],["Pesto Gnocchi","pasta",15]],
+  veggie:[["Rainbow Buddha Bowl","bowl",20],["Halloumi & Peach Salad","salad",15],["Spinach-Ricotta Shells","pasta",35],["Chickpea Coconut Curry","soup",30],["Crispy Tofu Tacos","taco",25],["Tofu Satay Skewers","skewer",25],["Mushroom Risotto","bowl",40],["Caprese & White Beans","plate",10],["Lentil Shepherd's Pie","plate",45],["Sesame Soba Noodles","pasta",15]],
+  keto:[["Garlic Butter Steak","plate",20],["Zoodle Alfredo","pasta",15],["Classic Cobb Salad","salad",15],["Salmon & Asparagus","fish",25],["Taco Lettuce Wraps","taco",20],["Creamy Tuscan Chicken","bowl",30],["Egg Roll in a Bowl","bowl",15],["Herb Pork Skewers","skewer",25],["Broccoli Cheddar Soup","soup",25],["Shrimp & Avocado Bowl","salad",15]],
+  protein:[["Chicken Burrito Bowl","bowl",25],["Teriyaki Salmon","fish",20],["Steak Fajita Plate","plate",25],["Greek Chicken Skewers","skewer",30],["Ginger Shrimp Stir-Fry","bowl",15],["Tuna & White Bean Salad","salad",10],["Turkey Meatball Pasta","pasta",30],["Veggie Egg Frittata","plate",20],["Beef Taco Skillet","taco",25],["Miso-Glazed Cod","fish",20]]
+};
+const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+function mealIcon(t){
+  const s=i=>`<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">${i}</svg>`;
+  switch(t){
+    case 'bowl': return s(`<path d="M24 20c5.5 0 10-3.8 10-8.5H14c0 4.7 4.5 8.5 10 8.5Z" fill="#F6EFDD"/><circle cx="18" cy="13.5" r="3.2" fill="#F0604A"/><ellipse cx="29.5" cy="13" rx="3.8" ry="2.7" fill="#7FBF5B"/><circle cx="24" cy="11.3" r="3" fill="#fff"/><circle cx="24" cy="11.3" r="1.5" fill="#F6D34A"/><path d="M7 22h34c0 9.4-7.6 17-17 17S7 31.4 7 22Z" fill="#1D8348"/><path d="M7 22h34c0 1.3-.2 2.6-.5 3.8h-33c-.3-1.2-.5-2.5-.5-3.8Z" fill="#176B3A"/>`);
+    case 'salad': return s(`<path d="M9 24h30c0 8.8-6.7 16-15 16S9 32.8 9 24Z" fill="#E8A15C"/><path d="M9 24h30c0 1.2-.1 2.4-.4 3.5H9.4C9.1 26.4 9 25.2 9 24Z" fill="#D98B44"/><circle cx="16" cy="17" r="6" fill="#5FAE4A"/><circle cx="28" cy="14.5" r="7" fill="#7FBF5B"/><circle cx="34" cy="19" r="5.5" fill="#3E8E3E"/><circle cx="14.5" cy="21.5" r="2.3" fill="#F0604A"/><circle cx="29" cy="21" r="2.3" fill="#F0604A"/><circle cx="23" cy="11.5" r="2" fill="#F6D34A"/>`);
+    case 'pasta': return s(`<circle cx="24" cy="26" r="16" fill="#F2EFE6"/><circle cx="24" cy="26" r="11.5" fill="#fff"/><path d="M15 24c2-3 4-3 6 0s4 3 6 0 4-3 6 0" fill="none" stroke="#F2C94C" stroke-width="3.6" stroke-linecap="round"/><path d="M16 29.5c2-3 4-3 6 0s4 3 6 0 4-3 6 0" fill="none" stroke="#E8B93A" stroke-width="3.6" stroke-linecap="round"/><circle cx="19" cy="20.5" r="2" fill="#F0604A"/><circle cx="29.5" cy="21" r="2" fill="#F0604A"/><ellipse cx="24.5" cy="18.3" rx="2.6" ry="1.7" fill="#4CAF50" transform="rotate(-20 24.5 18.3)"/>`);
+    case 'fish': return s(`<path d="M10 24c6-8 16-8 22 0-6 8-16 8-22 0Z" fill="#F2A65A"/><path d="M32 24l9-6.5v13L32 24Z" fill="#E0892F"/><path d="M22 18c-2 4-2 8 0 12" stroke="#E0892F" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="16" cy="22" r="2" fill="#fff"/><circle cx="16" cy="22" r="1" fill="#173021"/><path d="M13 28c2 1.5 4 1.5 6 0" stroke="#E0892F" stroke-width="1.6" fill="none" stroke-linecap="round"/>`);
+    case 'taco': return s(`<circle cx="17" cy="16.5" r="3.2" fill="#5FAE4A"/><circle cx="24" cy="13.5" r="3.2" fill="#F0604A"/><circle cx="31" cy="16.5" r="3.2" fill="#5FAE4A"/><circle cx="24" cy="17.5" r="2.6" fill="#B5654A"/><path d="M10 30a14 14 0 0 1 28 0H10Z" fill="#F6C453"/><path d="M10 30h28c-.6 2.6-1.5 5-2.9 7H12.9c-1.4-2-2.3-4.4-2.9-7Z" fill="#EDBE3C"/>`);
+    case 'soup': return s(`<path d="M21 8c0 2.4-2 2.8-2 5.2M27 6c0 2.4-2 2.8-2 5.2" stroke="#B9CDB4" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M8 24h32c0 8.8-7.2 16-16 16S8 32.8 8 24Z" fill="#fff"/><path d="M8 24h32c0 1.4-.2 2.8-.6 4.1H8.6C8.2 26.8 8 25.4 8 24Z" fill="#EFE9DB"/><ellipse cx="24" cy="24" rx="16" ry="4.5" fill="#F0604A"/><circle cx="19" cy="23" r="1.8" fill="#7FBF5B"/><circle cx="28" cy="24.5" r="1.8" fill="#F6D34A"/>`);
+    case 'plate': return s(`<circle cx="24" cy="26" r="16" fill="#F2EFE6"/><circle cx="24" cy="26" r="11.5" fill="#fff"/><circle cx="19" cy="23" r="3.2" fill="#4CAF50"/><circle cx="22.5" cy="21" r="2.8" fill="#5FAE4A"/><circle cx="20.5" cy="26" r="2.6" fill="#3E8E3E"/><rect x="25.5" y="23" width="10" height="6.5" rx="3.2" fill="#F2A65A" transform="rotate(-8 30 26)"/><path d="M27 25.4l5-1.2M27.6 27.8l5-1.2" stroke="#E0892F" stroke-width="1.2" stroke-linecap="round"/><circle cx="29.5" cy="32" r="2.4" fill="#F6D34A"/>`);
+    case 'skewer': return s(`<path d="M13 37 35 15" stroke="#C99B62" stroke-width="3" stroke-linecap="round"/><rect x="14.5" y="25" width="9" height="9" rx="2.5" fill="#F0604A" transform="rotate(-45 19 29.5)"/><rect x="19.5" y="20" width="9" height="9" rx="2.5" fill="#5FAE4A" transform="rotate(-45 24 24.5)"/><rect x="24.5" y="15" width="9" height="9" rx="2.5" fill="#F2A65A" transform="rotate(-45 29 19.5)"/><circle cx="35.5" cy="14.5" r="2.2" fill="#C99B62"/>`);
+    default: return s(`<circle cx="24" cy="26" r="16" fill="#F2EFE6"/><circle cx="24" cy="26" r="11.5" fill="#fff"/>`);
+  }
+}
+
+const planner=$('#planner'), grid=$('#daysGrid');
+const state={diet:'balanced',days:5,meals:[]};
+
+function shuffleArr(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function sampleMeals(diet,n,exclude){
+  const pool=shuffleArr(MEALS[diet].filter(m=>!exclude||!exclude.includes(m[0])).slice());
+  return pool.slice(0,n);
+}
+function tileHTML(meal,i){
+  return `<div class="day-tile" style="animation-delay:${i*45}ms">
+    <span class="day-name">${DAYS[i]}</span>
+    <div class="meal-icon">${mealIcon(meal[1])}</div>
+    <span class="meal-name">${meal[0]}</span>
+    <span class="meal-time">${meal[2]} min</span>
+    <button class="reroll" data-i="${i}" aria-label="Swap ${DAYS[i]}'s meal"><svg><use href="#ic-swap"/></svg></button>
+  </div>`;
+}
+function render(){
+  grid.innerHTML=state.meals.map((m,i)=>tileHTML(m,i)).join('');
+}
+function newWeek(){
+  state.meals=sampleMeals(state.diet,state.days);
+  render();
+}
+newWeek();
+
+/* chips */
+$$('.chip',planner).forEach(chip=>chip.addEventListener('click',()=>{
+  if(chip.classList.contains('active'))return;
+  $$('.chip',planner).forEach(c=>c.classList.remove('active'));
+  chip.classList.add('active');
+  state.diet=chip.dataset.diet;
+  newWeek();
+}));
+/* days toggle */
+$$('.days-toggle button',planner).forEach(btn=>btn.addEventListener('click',()=>{
+  if(btn.classList.contains('active'))return;
+  $$('.days-toggle button',planner).forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  state.days=+btn.dataset.days;
+  newWeek();
+}));
+/* shuffle whole week */
+const shuffleBtn=$('#shuffleBtn');
+shuffleBtn.addEventListener('click',()=>{
+  shuffleBtn.classList.remove('spin');void shuffleBtn.offsetWidth;shuffleBtn.classList.add('spin');
+  newWeek();
+});
+/* reroll one day */
+grid.addEventListener('click',e=>{
+  const btn=e.target.closest('.reroll');
+  if(!btn)return;
+  const i=+btn.dataset.i,used=state.meals.map(m=>m[0]);
+  const alt=sampleMeals(state.diet,1,used)[0];
+  if(!alt)return;
+  state.meals[i]=alt;
+  const tile=btn.closest('.day-tile');
+  tile.outerHTML=tileHTML(alt,i);
+});
+
+/* ---------- Confetti ---------- */
+function burst(container){
+  if(RM)return;
+  const colors=['#1D8348','#F0604A','#F59E4C','#F6D34A','#D8F3A5','#2FA05C'];
+  for(let i=0;i<26;i++){
+    const s=document.createElement('span');
+    s.className='confetti';
+    const a=Math.random()*Math.PI*2,d=50+Math.random()*95;
+    s.style.setProperty('--x',Math.cos(a)*d+'px');
+    s.style.setProperty('--y',Math.sin(a)*d+'px');
+    s.style.background=colors[i%colors.length];
+    container.appendChild(s);
+    setTimeout(()=>s.remove(),950);
+  }
+}
+
+/* ---------- Email capture forms ---------- */
+function wireCapture(formId,successMsg){
+  const form=$(formId);
+  if(!form)return;
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const input=form.querySelector('input[type=email]');
+    const val=input.value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)){
+      input.classList.remove('err');void input.offsetWidth;input.classList.add('err');input.focus();return;
+    }
+    const note=form.nextElementSibling&&form.nextElementSibling.classList.contains('capture-note')?form.nextElementSibling:null;
+    const box=document.createElement('div');
+    box.className='captured';
+    box.innerHTML=`<span class="captured-check"><svg><use href="#ic-check"/></svg></span>
+      <div><strong>You're in!</strong><p>${successMsg.replace('{email}',val)}</p></div>`;
+    form.replaceWith(box);
+    if(note)note.remove();
+    burst(box);
+  });
+}
+wireCapture('#plannerForm','Your sample week is on its way to {email}.');
+wireCapture('#ctaForm','Your starter week lands at {email} tonight.');
+
+/* hero CTA pulses planner */
+$('#heroBuild').addEventListener('click',()=>{
+  planner.scrollIntoView({behavior:RM?'auto':'smooth',block:'center'});
+  planner.classList.remove('pulse');void planner.offsetWidth;
+  setTimeout(()=>planner.classList.add('pulse'),RM?0:350);
+  setTimeout(()=>planner.classList.remove('pulse'),2200);
+});
+
+/* ==================================================
+   HOW IT WORKS — pinned scroll + phone screens
+================================================== */
+const screens=$$('.pscreen'), steps=$$('.step'), hiwNum=$('#hiwNum'), hiwFill=$('#hiwFill');
+const gitems=$$('.gitem');
+let gTimers=[],curStep=0;
+
+function clearGrocery(){gTimers.forEach(clearTimeout);gTimers=[];gitems.forEach(g=>g.classList.remove('done'));}
+function runGrocery(){
+  clearGrocery();
+  gitems.forEach((g,i)=>gTimers.push(setTimeout(()=>g.classList.add('done'),450+i*300)));
+}
+function setStep(i){
+  if(i===curStep&&screens[i].classList.contains('active'))return;
+  curStep=i;
+  screens.forEach((s,k)=>s.classList.toggle('active',k===i));
+  steps.forEach((s,k)=>s.classList.toggle('active',k===i));
+  hiwNum.textContent='0'+(i+1);
+  hiwFill.style.width=((i+1)/3*100)+'%';
+  if(i===2)runGrocery();else clearGrocery();
+}
+const stepIO=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting)setStep(+e.target.dataset.step));});
+},{rootMargin:'-45% 0px -45% 0px'});
+steps.forEach(s=>stepIO.observe(s));
+/* click a step to scroll to it (desktop) */
+steps.forEach(s=>s.addEventListener('click',()=>{
+  if(matchMedia('(max-width:1020px)').matches)return;
+  s.scrollIntoView({behavior:RM?'auto':'smooth',block:'center'});
+}));
+
+/* mobile: auto-cycle screens instead of scroll pinning */
+let cycle=null;
+const mqMobile=matchMedia('(max-width:1020px)');
+function updateMode(){
+  if(mqMobile.matches){
+    if(!cycle)cycle=setInterval(()=>setStep((curStep+1)%3),2800);
+  }else{
+    clearInterval(cycle);cycle=null;
+  }
+}
+mqMobile.addEventListener?mqMobile.addEventListener('change',updateMode):mqMobile.addListener(updateMode);
+updateMode();
+
+/* ==================================================
+   TESTIMONIAL CAROUSEL
+================================================== */
+const car=$('#tCarousel');
+function carStep(){
+  const card=car.querySelector('.tcard');
+  return card?card.getBoundingClientRect().width+19:320;
+}
+$('#carPrev').addEventListener('click',()=>car.scrollBy({left:-carStep(),behavior:RM?'auto':'smooth'}));
+$('#carNext').addEventListener('click',()=>car.scrollBy({left:carStep(),behavior:RM?'auto':'smooth'}));
+
+/* ==================================================
+   PRICING TOGGLE
+================================================== */
+const sw=$('#billSwitch'),lblM=$('#lblMonthly'),lblY=$('#lblYearly');
+sw.addEventListener('click',()=>{
+  const yearly=sw.getAttribute('aria-checked')!=='true';
+  sw.setAttribute('aria-checked',yearly);
+  lblM.classList.toggle('on',!yearly);
+  lblY.classList.toggle('on',yearly);
+  $$('.amount[data-m]').forEach(el=>{
+    el.textContent=yearly?el.dataset.y:el.dataset.m;
+    el.classList.remove('flip');void el.offsetWidth;el.classList.add('flip');
+  });
+  $$('.bill-note[data-m]').forEach(el=>{el.textContent=yearly?el.dataset.y:el.dataset.m;});
+});
+
+/* ==================================================
+   FAQ ACCORDION
+================================================== */
+$$('.faq-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.parentElement,wasOpen=item.classList.contains('open');
+    $$('.faq-item.open').forEach(i=>{
+      i.classList.remove('open');
+      i.querySelector('.faq-a').style.maxHeight=null;
+      i.querySelector('.faq-q').setAttribute('aria-expanded','false');
+    });
+    if(!wasOpen){
+      item.classList.add('open');
+      const a=item.querySelector('.faq-a');
+      a.style.maxHeight=a.scrollHeight+'px';
+      btn.setAttribute('aria-expanded','true');
+    }
+  });
+});
+
+/* ---------- misc ---------- */
+$('#year').textContent=new Date().getFullYear();
+onScroll();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nourish - Effortless Meal Planning</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            900: '#14532d',
+                        },
+                        accent: {
+                            500: '#f97316',
+                            600: '#ea580c',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-pattern {
+            background-color: #f0fdf4;
+            background-image: radial-gradient(#22c55e 0.5px, transparent 0.5px), radial-gradient(#22c55e 0.5px, #f0fdf4 0.5px);
+            background-size: 20px 20px;
+            background-position: 0 0,10px 10px;
+        }
+        /* Custom Mockup Shadow */
+        .phone-shadow {
+            box-shadow: 0 25px 50px -12px rgba(22, 163, 74, 0.25);
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 antialiased bg-white selection:bg-brand-500 selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-100 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+                    <div class="w-10 h-10 rounded-xl bg-brand-500 flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-brand-500/30">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <span class="font-bold text-2xl tracking-tight text-gray-900">Nourish</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#features" class="text-gray-600 hover:text-brand-600 font-medium transition">Features</a>
+                    <a href="#how-it-works" class="text-gray-600 hover:text-brand-600 font-medium transition">How it Works</a>
+                    <a href="#recipes" class="text-gray-600 hover:text-brand-600 font-medium transition">Recipes</a>
+                    <a href="#pricing" class="text-gray-600 hover:text-brand-600 font-medium transition">Pricing</a>
+                    <a href="#cta" class="bg-brand-600 hover:bg-brand-700 text-white px-6 py-2.5 rounded-full font-semibold transition shadow-lg shadow-brand-500/30 hover:shadow-brand-500/50">
+                        Get Started Free
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-gray-900 focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-100 px-4 pt-2 pb-6 space-y-3 shadow-xl">
+            <a href="#features" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-brand-600 hover:bg-brand-50 rounded-lg">Features</a>
+            <a href="#how-it-works" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-brand-600 hover:bg-brand-50 rounded-lg">How it Works</a>
+            <a href="#recipes" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-brand-600 hover:bg-brand-50 rounded-lg">Recipes</a>
+            <a href="#pricing" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-brand-600 hover:bg-brand-50 rounded-lg">Pricing</a>
+            <div class="pt-4">
+                <a href="#cta" class="block w-full text-center bg-brand-600 text-white px-6 py-3 rounded-full font-semibold shadow-md">
+                    Get Started Free
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden hero-pattern">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
+                
+                <!-- Text Content -->
+                <div class="lg:col-span-6 text-center lg:text-left mb-16 lg:mb-0">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-100 text-brand-700 font-semibold text-sm mb-6">
+                        <span class="flex h-2 w-2 rounded-full bg-brand-500 animate-ping"></span>
+                        AI-Powered Meal Planning 2.0 is here
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 tracking-tight mb-6 leading-tight">
+                        Eat healthy, <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-emerald-500">stress-free</span> every week.
+                    </h1>
+                    <p class="text-lg sm:text-xl text-gray-600 mb-8 max-w-2xl mx-auto lg:mx-0">
+                        Nourish builds personalized meal plans, generates automated grocery lists, and helps you reduce food waste. Say goodbye to the "what's for dinner?" dilemma.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#cta" class="bg-brand-600 hover:bg-brand-700 text-white text-lg px-8 py-4 rounded-full font-bold transition shadow-xl shadow-brand-500/30 flex items-center justify-center gap-2 transform hover:-translate-y-0.5">
+                            Start 14-Day Free Trial <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <a href="#how-it-works" class="bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 text-lg px-8 py-4 rounded-full font-bold transition flex items-center justify-center gap-2 shadow-sm">
+                            <i class="fa-solid fa-play text-brand-600"></i> Watch Demo
+                        </a>
+                    </div>
+
+                    <div class="mt-10 flex items-center justify-center lg:justify-start gap-4 text-sm text-gray-500 font-medium">
+                        <div class="flex -space-x-2">
+                            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt=""/>
+                            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80" alt=""/>
+                            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" alt=""/>
+                        </div>
+                        <div>
+                            <div class="flex text-yellow-400 text-xs">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <span>Loved by 50,000+ home cooks</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- App Mockup -->
+                <div class="lg:col-span-6 relative">
+                    <!-- Decorative blobs -->
+                    <div class="absolute top-0 -left-4 w-72 h-72 bg-accent-500 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-blob"></div>
+                    <div class="absolute -bottom-8 right-4 w-72 h-72 bg-brand-500 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-blob animation-delay-2000"></div>
+                    
+                    <!-- CSS Phone Frame -->
+                    <div class="relative mx-auto border-gray-900 bg-gray-900 border-[14px] rounded-[2.5rem] h-[600px] w-[300px] shadow-2xl phone-shadow">
+                        <div class="w-[148px] h-[18px] bg-gray-900 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute z-20"></div>
+                        <div class="h-[46px] w-[3px] bg-gray-900 absolute -left-[17px] top-[124px] rounded-l-lg"></div>
+                        <div class="h-[46px] w-[3px] bg-gray-900 absolute -left-[17px] top-[178px] rounded-l-lg"></div>
+                        <div class="h-[64px] w-[3px] bg-gray-900 absolute -right-[17px] top-[142px] rounded-r-lg"></div>
+                        
+                        <!-- Screen Content -->
+                        <div class="rounded-[2rem] overflow-hidden w-full h-full bg-gray-50 flex flex-col relative">
+                            <!-- App Header -->
+                            <div class="bg-white pt-8 pb-4 px-5 shadow-sm">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <p class="text-xs text-gray-400 font-semibold">THIS WEEK'S PLAN</p>
+                                        <h3 class="text-lg font-bold text-gray-800">Oct 12 - Oct 18</h3>
+                                    </div>
+                                    <div class="h-8 w-8 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center">
+                                        <i class="fa-solid fa-user text-sm"></i>
+                                    </div>
+                                </div>
+                                <!-- Days Pill -->
+                                <div class="flex justify-between mt-4 text-center">
+                                    <div class="p-2 rounded-xl bg-brand-500 text-white font-bold text-xs shadow-md shadow-brand-500/30">M<br>12</div>
+                                    <div class="p-2 rounded-xl text-gray-400 font-medium text-xs">T<br>13</div>
+                                    <div class="p-2 rounded-xl text-gray-400 font-medium text-xs">W<br>14</div>
+                                    <div class="p-2 rounded-xl text-gray-400 font-medium text-xs">T<br>15</div>
+                                    <div class="p-2 rounded-xl text-gray-400 font-medium text-xs">F<br>16</div>
+                                    <div class="p-2 rounded-xl text-gray-400 font-medium text-xs">S<br>17</div>
+                                </div>
+                            </div>
+
+                            <!-- App Body -->
+                            <div class="p-5 flex-1 overflow-y-auto space-y-4">
+                                <!-- Meal Card 1 -->
+                                <div class="bg-white p-3 rounded-2xl shadow-sm border border-gray-100 flex gap-3 items-center">
+                                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=200&q=80" class="w-16 h-16 rounded-xl object-cover" alt="Salad">
+                                    <div class="flex-1">
+                                        <span class="text-[10px] font-bold text-brand-600 bg-brand-50 px-2 py-0.5 rounded-md">LUNCH</span>
+                                        <h4 class="font-bold text-sm text-gray-800 mt-1">Avocado Quinoa Power Bowl</h4>
+                                        <p class="text-xs text-gray-400 mt-0.5"><i class="fa-regular fa-clock"></i> 15 mins • 420 kcal</p>
+                                    </div>
+                                </div>
+                                <!-- Meal Card 2 -->
+                                <div class="bg-white p-3 rounded-2xl shadow-sm border border-gray-100 flex gap-3 items-center">
+                                    <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=200&q=80" class="w-16 h-16 rounded-xl object-cover" alt="Salmon">
+                                    <div class="flex-1">
+                                        <span class="text-[10px] font-bold text-accent-600 bg-orange-50 px-2 py-0.5 rounded-md">DINNER</span>
+                                        <h4 class="font-bold text-sm text-gray-800 mt-1">Herb Crusted Salmon</h4>
+                                        <p class="text-xs text-gray-400 mt-0.5"><i class="fa-regular fa-clock"></i> 25 mins • 580 kcal</p>
+                                    </div>
+                                </div>
+
+                                <!-- Grocery Widget -->
+                                <div class="bg-brand-900 text-white p-4 rounded-2xl mt-4 relative overflow-hidden">
+                                    <i class="fa-solid fa-basket-shopping absolute -right-2 -bottom-2 text-6xl text-white/10"></i>
+                                    <h4 class="font-bold text-sm">Grocery List Ready</h4>
+                                    <p class="text-xs text-brand-100 mt-1">18 ingredients needed for this week.</p>
+                                    <button class="mt-3 bg-white text-brand-900 text-xs font-bold px-3 py-1.5 rounded-lg">View List</button>
+                                </div>
+                            </div>
+
+                            <!-- App Nav -->
+                            <div class="bg-white py-3 px-6 flex justify-between items-center border-t border-gray-100 text-gray-400">
+                                <i class="fa-solid fa-calendar-day text-brand-500 text-lg"></i>
+                                <i class="fa-solid fa-magnifying-glass text-lg"></i>
+                                <i class="fa-solid fa-cart-shopping text-lg"></i>
+                                <i class="fa-solid fa-heart text-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating Badge 1 -->
+                    <div class="hidden sm:flex absolute top-20 -left-6 bg-white p-3 rounded-2xl shadow-xl border border-gray-50 items-center gap-3 animate-bounce" style="animation-duration: 3s;">
+                        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-400 font-medium">Money Saved</p>
+                            <p class="text-sm font-bold text-gray-800">$120 / month</p>
+                        </div>
+                    </div>
+
+                    <!-- Floating Badge 2 -->
+                    <div class="hidden sm:flex absolute bottom-20 -right-6 bg-white p-3 rounded-2xl shadow-xl border border-gray-50 items-center gap-3 animate-bounce" style="animation-duration: 4s;">
+                        <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-accent-500">
+                            <i class="fa-solid fa-fire"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-400 font-medium">Macros Tracked</p>
+                            <p class="text-sm font-bold text-gray-800">100% Automatic</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Logos / Social Proof -->
+    <section class="py-10 bg-gray-50 border-y border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-6">Featured in top health publications</p>
+            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-50 grayscale">
+                <i class="fa-brands fa-apple text-4xl"></i>
+                <span class="text-2xl font-black tracking-tighter">Men'sHealth</span>
+                <span class="text-2xl font-serif italic font-bold">VOGUE</span>
+                <span class="text-xl font-bold tracking-widest">TECHCRUNCH</span>
+                <span class="text-2xl font-extrabold text-gray-800">Forbes</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 lg:py-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-brand-600 font-bold tracking-wide uppercase text-sm mb-2">Why Nourish?</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-gray-900">Everything you need to master your kitchen.</h3>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-lg shadow-gray-100/50 hover:border-brand-100 transition group">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">AI Personalization</h4>
+                    <p class="text-gray-600 leading-relaxed">Keto, Vegan, Paleo, or picky eaters? Tell us your preferences and allergies, and we'll craft the perfect weekly menu.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-lg shadow-gray-100/50 hover:border-brand-100 transition group">
+                    <div class="w-14 h-14 rounded-2xl bg-orange-50 text-accent-500 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-list-check"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">Smart Grocery Lists</h4>
+                    <p class="text-gray-600 leading-relaxed">Ingredients are automatically consolidated and sorted by aisle. Export directly to Instacart or Amazon Fresh in one tap.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-lg shadow-gray-100/50 hover:border-brand-100 transition group">
+                    <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-500 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-recycle"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">Zero Food Waste</h4>
+                    <p class="text-gray-600 leading-relaxed">Bought a bunch of cilantro for Monday? We'll suggest a recipe for Thursday that uses the rest of it before it goes bad.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-20 bg-brand-900 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-brand-500 font-bold tracking-wide uppercase text-sm mb-2">Simple Process</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold">From couch to kitchen in 3 steps</h3>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-12 text-center relative">
+                <!-- Connecting Line (Desktop) -->
+                <div class="hidden md:block absolute top-12 left-1/6 right-1/6 h-0.5 bg-brand-700 z-0"></div>
+
+                <!-- Step 1 -->
+                <div class="relative z-10">
+                    <div class="w-24 h-24 mx-auto bg-brand-700 border-4 border-brand-900 rounded-full flex items-center justify-center text-3xl font-extrabold text-brand-400 mb-6 shadow-xl">
+                        1
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Set Your Goals</h4>
+                    <p class="text-brand-100">Input your dietary needs, household size, and how much time you actually want to spend cooking.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="relative z-10">
+                    <div class="w-24 h-24 mx-auto bg-brand-500 border-4 border-brand-900 rounded-full flex items-center justify-center text-3xl font-extrabold text-white mb-6 shadow-xl">
+                        2
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Shop Smarter</h4>
+                    <p class="text-brand-100">Use your auto-generated list at the store, or get everything delivered to your door with one click.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="relative z-10">
+                    <div class="w-24 h-24 mx-auto bg-brand-700 border-4 border-brand-900 rounded-full flex items-center justify-center text-3xl font-extrabold text-brand-400 mb-6 shadow-xl">
+                        3
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Cook with Confidence</h4>
+                    <p class="text-brand-100">Follow step-by-step video guides and smart timers. Delicious, healthy meals on the table in 30 mins or less.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recipe Showcase -->
+    <section id="recipes" class="py-20 lg:py-28 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div>
+                    <h2 class="text-brand-600 font-bold tracking-wide uppercase text-sm mb-2">Mouthwatering Database</h2>
+                    <h3 class="text-3xl sm:text-4xl font-extrabold text-gray-900">Over 5,000+ Chef-Curated Recipes</h3>
+                </div>
+                <a href="#" class="mt-4 md:mt-0 text-brand-600 font-bold hover:text-brand-700 flex items-center gap-2">
+                    Explore all recipes <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Recipe Card 1 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition group">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80" alt="Food" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-gray-800">
+                            <i class="fa-solid fa-fire text-accent-500 mr-1"></i> 450 kcal
+                        </div>
+                        <div class="absolute top-4 right-4 bg-brand-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                            Vegan
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-gray-500 mb-2">
+                            <span><i class="fa-regular fa-clock"></i> 20 mins</span>
+                            <span>•</span>
+                            <span>Easy</span>
+                        </div>
+                        <h4 class="font-bold text-xl text-gray-900 mb-2">Crispy Tofu Buddha Bowl with Peanut Sauce</h4>
+                    </div>
+                </div>
+
+                <!-- Recipe Card 2 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition group">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=600&q=80" alt="Food" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-gray-800">
+                            <i class="fa-solid fa-fire text-accent-500 mr-1"></i> 610 kcal
+                        </div>
+                        <div class="absolute top-4 right-4 bg-amber-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                            High Protein
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-gray-500 mb-2">
+                            <span><i class="fa-regular fa-clock"></i> 30 mins</span>
+                            <span>•</span>
+                            <span>Medium</span>
+                        </div>
+                        <h4 class="font-bold text-xl text-gray-900 mb-2">Coconut Chicken Tikka Masala</h4>
+                    </div>
+                </div>
+
+                <!-- Recipe Card 3 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition group">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=600&q=80" alt="Food" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-gray-800">
+                            <i class="fa-solid fa-fire text-accent-500 mr-1"></i> 380 kcal
+                        </div>
+                        <div class="absolute top-4 right-4 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                            Keto
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-gray-500 mb-2">
+                            <span><i class="fa-regular fa-clock"></i> 15 mins</span>
+                            <span>•</span>
+                            <span>Easy</span>
+                        </div>
+                        <h4 class="font-bold text-xl text-gray-900 mb-2">Zucchini Noodles with Pesto & Cherry Tomatoes</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 lg:py-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-brand-600 font-bold tracking-wide uppercase text-sm mb-2">Simple Pricing</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-gray-900">Invest in your health for less than a cup of coffee.</h3>
+                <p class="text-gray-500 mt-4">Save an average of $50/week on groceries by avoiding impulse buys.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Basic Plan -->
+                <div class="bg-white p-8 rounded-3xl border border-gray-200 flex flex-col">
+                    <h4 class="text-xl font-bold text-gray-900">Starter</h4>
+                    <p class="text-gray-500 text-sm mt-1">Great for individuals getting started.</p>
+                    <div class="my-6">
+                        <span class="text-5xl font-extrabold text-gray-900">$0</span>
+                        <span class="text-gray-500">/ forever</span>
+                    </div>
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-center gap-3 text-gray-600"><i class="fa-solid fa-check text-brand-500"></i> Basic weekly meal planner</li>
+                        <li class="flex items-center gap-3 text-gray-600"><i class="fa-solid fa-check text-brand-500"></i> Access to 500+ standard recipes</li>
+                        <li class="flex items-center gap-3 text-gray-600"><i class="fa-solid fa-check text-brand-500"></i> Manual grocery list</li>
+                        <li class="flex items-center gap-3 text-gray-400 line-through"><i class="fa-solid fa-xmark"></i> AI Personalization & Macros</li>
+                        <li class="flex items-center gap-3 text-gray-400 line-through"><i class="fa-solid fa-xmark"></i> Instacart Integration</li>
+                    </ul>
+                    <a href="#cta" class="w-full block text-center bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-4 rounded-xl transition">Download Free</a>
+                </div>
+
+                <!-- Pro Plan -->
+                <div class="bg-brand-900 text-white p-8 rounded-3xl border-2 border-brand-500 relative flex flex-col shadow-2xl shadow-brand-900/20">
+                    <div class="absolute top-0 right-8 -translate-y-1/2 bg-gradient-to-r from-brand-500 to-emerald-400 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                        Most Popular
+                    </div>
+                    <h4 class="text-xl font-bold">Nourish Pro</h4>
+                    <p class="text-brand-200 text-sm mt-1">For busy people & families who want it all.</p>
+                    <div class="my-6">
+                        <span class="text-5xl font-extrabold">$4.99</span>
+                        <span class="text-brand-200">/ month</span>
+                    </div>
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-400"></i> Everything in Starter</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-400"></i> <strong>Unlimited</strong> access to 5,000+ recipes</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-400"></i> AI meal generation based on your fridge</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-400"></i> Automatic Macro & Calorie tracking</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-400"></i> 1-Click Grocery Delivery Export</li>
+                    </ul>
+                    <a href="#cta" class="w-full block text-center bg-brand-500 hover:bg-brand-600 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-brand-500/30">Start 14-Day Free Trial</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section id="cta" class="py-20 bg-brand-50 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-gray-900 mb-6">Ready to take back your evenings?</h2>
+            <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">Join thousands of happy eaters. Download Nourish today and get your first two weeks of Pro completely free.</p>
+            
+            <!-- App Store Buttons -->
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button class="bg-gray-900 hover:bg-gray-800 text-white px-6 py-3 rounded-2xl flex items-center justify-center gap-3 transition shadow-xl">
+                    <i class="fa-brands fa-apple text-4xl"></i>
+                    <div class="text-left">
+                        <div class="text-[10px] uppercase tracking-wider text-gray-300">Download on the</div>
+                        <div class="text-lg font-bold leading-none">App Store</div>
+                    </div>
+                </button>
+                <button class="bg-gray-900 hover:bg-gray-800 text-white px-6 py-3 rounded-2xl flex items-center justify-center gap-3 transition shadow-xl">
+                    <i class="fa-brands fa-google-play text-3xl"></i>
+                    <div class="text-left">
+                        <div class="text-[10px] uppercase tracking-wider text-gray-300">Get it on</div>
+                        <div class="text-lg font-bold leading-none">Google Play</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-100 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
+                <div class="col-span-2 lg:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center text-white font-bold">
+                            <i class="fa-solid fa-leaf"></i>
+                        </div>
+                        <span class="font-bold text-xl text-gray-900">Nourish</span>
+                    </div>
+                    <p class="text-gray-500 text-sm max-w-xs mb-6">Making healthy eating accessible, affordable, and effortless for everyone.</p>
+                    <div class="flex space-x-4 text-gray-400">
+                        <a href="#" class="hover:text-brand-600 transition"><i class="fa-brands fa-instagram text-xl"></i></a>
+                        <a href="#" class="hover:text-brand-600 transition"><i class="fa-brands fa-tiktok text-xl"></i></a>
+                        <a href="#" class="hover:text-brand-600 transition"><i class="fa-brands fa-twitter text-xl"></i></a>
+                        <a href="#" class="hover:text-brand-600 transition"><i class="fa-brands fa-pinterest text-xl"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h5 class="font-bold text-gray-900 mb-4">Product</h5>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-brand-600">Features</a></li>
+                        <li><a href="#" class="hover:text-brand-600">Pricing</a></li>
+                        <li><a href="#" class="hover:text-brand-600">Recipe Database</a></li>
+                        <li><a href="#" class="hover:text-brand-600">Integrations</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="font-bold text-gray-900 mb-4">Company</h5>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-brand-600">About Us</a></li>
+                        <li><a href="#" class="hover:text-brand-600">Careers</a></li>
+                        <li><a href="#" class="hover:text-brand-600">Blog</a></li>
+                        <li><a href="#" class="hover:text-brand-600">Press</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="font-bold text-gray-900 mb-4">Legal</h5>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-brand-600">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-brand-600">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-brand-600">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-100 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-400">
+                <p>&copy; 2023 Nourish App Inc. All rights reserved.</p>
+                <p class="mt-2 sm:mt-0">Designed with <i class="fa-solid fa-heart text-red-400"></i> for food lovers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Simple JS for Mobile Menu -->
+    <script>
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close menu when clicking a link
+        const mobileLinks = menu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

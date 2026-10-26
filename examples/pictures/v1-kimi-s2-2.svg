@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="900" height="600" role="img">
+  <title>A cheerful big-headed pelican popping a wheelie on a BMX bike, decorated with ornamental swirls</title>
+  <desc>A cartoon pelican with an oversized head rides a teal BMX bike, front wheel in the air. Speed lines trail behind, swirls decorate the scene, and open space stretches ahead.</desc>
+
+  <defs>
+    <path id="swirl" d="M0 0 a6 6 0 0 1 12 0 a12 12 0 0 0 -24 0 a18 18 0 0 1 36 0 a24 24 0 0 0 -48 0 a30 30 0 0 1 60 0" fill="none"/>
+    <path id="curl" d="M0 0 a4 4 0 0 1 8 0 a8 8 0 0 0 -16 0 a12 12 0 0 1 24 0" fill="none"/>
+  </defs>
+
+  <rect width="900" height="600" fill="#fdf3e3"/>
+
+  <!-- background ornamental swirls -->
+  <g fill="none" stroke-linecap="round">
+    <use href="#swirl" transform="translate(130 118) rotate(10) scale(2.1)" stroke="#ecd9b8" stroke-width="3"/>
+    <use href="#swirl" transform="translate(150 285) rotate(-15) scale(1.25)" stroke="#e7d3ae" stroke-width="3"/>
+    <use href="#swirl" transform="translate(58 522) rotate(30) scale(1.05)" stroke="#e7d3ae" stroke-width="3"/>
+    <use href="#swirl" transform="translate(725 132) scale(2.5)" stroke="#f0c690" stroke-width="3.5"/>
+    <use href="#swirl" transform="translate(660 332) rotate(20)" stroke="#ecd9b8" stroke-width="3"/>
+    <use href="#curl" transform="translate(432 88) scale(.7)" stroke="#ecd9b8" stroke-width="3"/>
+    <use href="#curl" transform="translate(612 62) scale(.8)" stroke="#ecd9b8" stroke-width="3"/>
+    <use href="#curl" transform="translate(520 168) rotate(-25) scale(.5)" stroke="#f0d9b0" stroke-width="3"/>
+    <use href="#curl" transform="translate(246 196) rotate(15) scale(.45)" stroke="#f0d9b0" stroke-width="3"/>
+    <use href="#curl" transform="translate(800 428) scale(.7)" stroke="#ecd9b8" stroke-width="3"/>
+    <use href="#curl" transform="translate(836 224) rotate(-40) scale(.5)" stroke="#ecd9b8" stroke-width="3"/>
+  </g>
+
+  <!-- ground, shadow, ground tufts -->
+  <path d="M30 538 H872" stroke="#2e2a25" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  <ellipse cx="352" cy="542" rx="92" ry="9" fill="#3a2f1e" opacity="0.12"/>
+  <use href="#curl" transform="translate(618 534) scale(.4)" stroke="#c9b48c" stroke-width="3" fill="none"/>
+  <use href="#curl" transform="translate(758 536) rotate(-15) scale(.35)" stroke="#c9b48c" stroke-width="3" fill="none"/>
+
+  <!-- classic evenly spaced speed lines -->
+  <g stroke="#b3a184" stroke-width="6" stroke-linecap="round">
+    <line x1="118" y1="355" x2="252" y2="355"/>
+    <line x1="72"  y1="390" x2="262" y2="390"/>
+    <line x1="42"  y1="425" x2="258" y2="425"/>
+    <line x1="60"  y1="460" x2="250" y2="460"/>
+    <line x1="88"  y1="495" x2="262" y2="495"/>
+    <line x1="128" y1="530" x2="244" y2="530"/>
+  </g>
+  <use href="#curl" transform="translate(268 520) rotate(-10) scale(.4)" stroke="#cbb894" stroke-width="3" fill="none"/>
+
+  <!-- ======== BICYCLE (BMX, mid-wheelie) ======== -->
+  <!-- rear wheel -->
+  <circle cx="350" cy="470" r="65" fill="#fdf3e3" stroke="#2e2a25" stroke-width="13"/>
+  <circle cx="350" cy="470" r="71" fill="none" stroke="#2e2a25" stroke-width="6" stroke-dasharray="5 10"/>
+  <circle cx="350" cy="470" r="48" fill="none" stroke="#a8a093" stroke-width="5"/>
+  <use href="#swirl" transform="translate(350 470) rotate(15) scale(1.12)" stroke="#8b8172" stroke-width="2.5" fill="none"/>
+  <circle cx="350" cy="470" r="7" fill="#2e2a25"/>
+
+  <!-- front wheel (airborne) -->
+  <circle cx="505" cy="361" r="65" fill="#fdf3e3" stroke="#2e2a25" stroke-width="13"/>
+  <circle cx="505" cy="361" r="71" fill="none" stroke="#2e2a25" stroke-width="6" stroke-dasharray="5 10"/>
+  <circle cx="505" cy="361" r="48" fill="none" stroke="#a8a093" stroke-width="5"/>
+  <use href="#swirl" transform="translate(505 361) rotate(75) scale(1.12)" stroke="#8b8172" stroke-width="2.5" fill="none"/>
+  <circle cx="505" cy="361" r="7" fill="#2e2a25"/>
+
+  <!-- frame -->
+  <g stroke="#2a9d8f" stroke-width="8" stroke-linecap="round" fill="none">
+    <line x1="322" y1="383" x2="446" y2="312"/>
+    <line x1="452" y1="326" x2="400" y2="429"/>
+    <line x1="400" y1="429" x2="318" y2="392"/>
+    <line x1="400" y1="429" x2="350" y2="470"/>
+    <line x1="320" y1="388" x2="350" y2="470"/>
+  </g>
+  <line x1="442" y1="304" x2="456" y2="334" stroke="#1f7a6f" stroke-width="11" stroke-linecap="round"/>
+  <line x1="454" y1="330" x2="505" y2="361" stroke="#1f7a6f" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- frame inlay swirls -->
+  <use href="#curl" transform="translate(384 348) rotate(-30) scale(.32)" stroke="#fdf3e3" stroke-width="3" fill="none"/>
+  <use href="#curl" transform="translate(429 374) rotate(-63) scale(.3)" stroke="#fdf3e3" stroke-width="3" fill="none"/>
+
+  <!-- drivetrain -->
+  <circle cx="400" cy="429" r="13" fill="none" stroke="#57503f" stroke-width="4"/>
+  <line x1="402" y1="416" x2="352" y2="462" stroke="#57503f" stroke-width="3"/>
+  <line x1="398" y1="442" x2="348" y2="478" stroke="#57503f" stroke-width="3"/>
+  <line x1="400" y1="429" x2="434" y2="410" stroke="#2e2a25" stroke-width="6" stroke-linecap="round"/>
+  <line x1="400" y1="429" x2="368" y2="447" stroke="#2e2a25" stroke-width="6" stroke-linecap="round"/>
+  <rect x="424" y="405" width="22" height="8" rx="3" fill="#2e2a25" transform="rotate(-12 435 409)"/>
+  <rect x="357" y="443" width="22" height="8" rx="3" fill="#2e2a25" transform="rotate(-12 368 447)"/>
+
+  <!-- saddle -->
+  <path d="M292 386 Q314 374 334 386 Q332 398 314 399 Q296 398 292 386 Z" fill="#2e2a25"/>
+
+  <!-- high-rise handlebars, grips, crossbar pad -->
+  <path d="M446 310 L436 246" stroke="#57503f" stroke-width="7" stroke-linecap="round"/>
+  <path d="M404 258 Q408 244 424 242 L444 244 Q458 248 464 262" fill="none" stroke="#57503f" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="404" cy="258" r="7" fill="#e76f51" stroke="#2e2a25" stroke-width="2.5"/>
+  <circle cx="464" cy="262" r="7" fill="#e76f51" stroke="#2e2a25" stroke-width="2.5"/>
+  <rect x="420" y="237" width="30" height="13" rx="6" fill="#e76f51" stroke="#2e2a25" stroke-width="2.5" transform="rotate(4 435 243)"/>
+  <use href="#curl" transform="translate(435 244) scale(.22)" stroke="#fdf3e3" stroke-width="3.5" fill="none"/>
+
+  <!-- number plate -->
+  <g transform="rotate(18 452 302)">
+    <rect x="434" y="286" width="36" height="30" rx="7" fill="#fdf3e3" stroke="#2e2a25" stroke-width="3"/>
+    <use href="#curl" transform="translate(452 301) scale(.3)" stroke="#e76f51" stroke-width="4" fill="none"/>
+  </g>
+
+  <!-- ======== PELICAN ======== -->
+  <!-- tail -->
+  <path d="M276 420 Q244 414 230 394 Q254 396 272 408 Q266 388 278 372 Q288 390 284 410 Z" fill="#fffdf7" stroke="#2e2a25" stroke-width="3.5" stroke-linejoin="round"/>
+  <path d="M252 402 q10 2 16 10" stroke="#e3d3b0" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+  <!-- legs and webbed feet -->
+  <path d="M332 404 Q342 426 354 438" stroke="#f0a04b" stroke-width="10" stroke-linecap="round" fill="none"/>
+  <path d="M348 432 Q370 428 379 440 Q372 453 352 451 Q343 443 348 432 Z" fill="#f0a04b" stroke="#2e2a25" stroke-width="3"/>
+  <path d="M340 396 Q384 392 420 400" stroke="#f0a04b" stroke-width="10" stroke-linecap="round" fill="none"/>
+  <path d="M416 394 Q442 390 451 402 Q443 415 421 413 Q411 405 416 394 Z" fill="#f0a04b" stroke="#2e2a25" stroke-width="3"/>
+  <path d="M444 396 L454 394 M446 406 L456 406" stroke="#2e2a25" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- body -->
+  <path d="M270 430 C252 402 262 352 296 318 C308 306 322 300 334 302 C356 306 368 330 366 356 C364 386 352 408 332 416 C310 424 286 436 270 430 Z"
+        fill="#fffdf7" stroke="#2e2a25" stroke-width="3.5" stroke-linejoin="round"/>
+  <path d="M296 404 Q326 400 346 382" stroke="#efe2cc" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <use href="#swirl" transform="translate(318 366) scale(.8)" stroke="#e3d3b0" stroke-width="3" fill="none"/>
+  <use href="#curl" transform="translate(300 398) rotate(20) scale(.35)" stroke="#e3d3b0" stroke-width="3" fill="none"/>
+
+  <!-- big head -->
+  <circle cx="374" cy="244" r="58" fill="#fffdf7" stroke="#2e2a25" stroke-width="3.5"/>
+  <path d="M312 288 Q334 276 356 284 L350 312 L314 310 Z" fill="#fffdf7"/>
+
+  <!-- head tuft -->
+  <g fill="none" stroke="#2e2a25" stroke-width="3" stroke-linecap="round">
+    <path d="M350 190 Q338 174 348 160"/>
+    <path d="M364 186 Q358 166 372 154"/>
+    <path d="M378 187 Q380 168 392 160"/>
+  </g>
+
+  <!-- wing gripping the handlebar -->
+  <path d="M322 306 Q360 268 404 254 Q415 251 417 260 Q380 302 344 326 Q330 320 322 306 Z"
+        fill="#ece5d4" stroke="#2e2a25" stroke-width="3.5" stroke-linejoin="round"/>
+  <path d="M352 288 Q380 272 402 262 M344 302 Q372 288 396 274" stroke="#d6c8a4" stroke-width="2.5" fill="none"/>
+  <use href="#swirl" transform="translate(352 296) rotate(-18) scale(.55)" stroke="#d6c8a4" stroke-width="3" fill="none"/>
+  <circle cx="407" cy="256" r="7.5" fill="#ece5d4" stroke="#2e2a25" stroke-width="3"/>
+
+  <!-- face -->
+  <circle cx="390" cy="228" r="13" fill="#ffffff" stroke="#2e2a25" stroke-width="3"/>
+  <circle cx="393" cy="230" r="5.5" fill="#2e2a25"/>
+  <circle cx="395" cy="227.5" r="2" fill="#ffffff"/>
+  <path d="M372 206 Q386 198 402 204" stroke="#2e2a25" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <ellipse cx="352" cy="256" rx="9" ry="6" fill="#f6c8a0" opacity="0.75"/>
+  <use href="#curl" transform="translate(340 236) rotate(-15) scale(.3)" stroke="#e3d3b0" stroke-width="3" fill="none"/>
+
+  <!-- pouch -->
+  <path d="M436 248 C452 292 492 312 532 300 C556 292 572 280 580 268 L566 263 C540 276 500 278 470 264 C456 258 444 252 436 248 Z"
+        fill="#f7c98d" stroke="#2e2a25" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M472 290 Q508 300 542 288" stroke="#d9975b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <use href="#curl" transform="translate(500 282) scale(.28)" stroke="#e0a55e" stroke-width="3.5" fill="none"/>
+
+  <!-- upper bill -->
+  <path d="M420 212 Q502 222 588 250 Q598 254 594 263 Q589 270 578 269 L428 246 Q420 230 420 212 Z"
+        fill="#f5a442" stroke="#2e2a25" stroke-width="3.5" stroke-linejoin="round"/>
+  <path d="M588 250 Q598 254 594 263 Q589 270 578 269 Q586 260 588 250 Z" fill="#d97b2e"/>
+  <path d="M440 222 L470 226" stroke="#d97b2e" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

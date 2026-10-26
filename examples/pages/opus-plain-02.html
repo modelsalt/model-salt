@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mise — Dinner, decided.</title>
+<meta name="description" content="Mise plans your week of meals around your tastes, your pantry, and your schedule, then writes the grocery list for you.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F1E7;
+    --paper-2:#EFE7D8;
+    --card:#FFFDF8;
+    --ink:#1E261F;
+    --ink-soft:#4A544B;
+    --line:#DED4C2;
+    --green:#2F5D3A;
+    --green-deep:#1F3F28;
+    --tomato:#D9502F;
+    --butter:#F2C14E;
+    --sage:#A9BFA0;
+    --radius:18px;
+    --shadow:0 1px 0 rgba(30,38,31,.04), 0 12px 32px -12px rgba(30,38,31,.18);
+    --serif:"Fraunces", Georgia, "Times New Roman", serif;
+    --sans:"Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:var(--sans);font-size:17px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block;max-width:100%}
+  a{color:inherit}
+  .wrap{width:min(1180px, 100% - 48px);margin-inline:auto}
+  .eyebrow{
+    font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--tomato);
+    margin:0 0 14px;
+  }
+  h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.05;letter-spacing:-.02em;margin:0}
+  h2{font-size:clamp(34px, 4.6vw, 56px)}
+  h3{font-size:22px;letter-spacing:-.01em;line-height:1.2}
+  em{font-style:italic;font-weight:400}
+  .lede{font-size:clamp(18px, 1.6vw, 20px);color:var(--ink-soft);max-width:56ch}
+  :focus-visible{outline:3px solid var(--tomato);outline-offset:3px;border-radius:6px}
+  .skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:#fff;padding:8px 14px;border-radius:8px;z-index:100}
+  .skip:focus{left:8px}
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    font:600 16px/1 var(--sans);text-decoration:none;cursor:pointer;
+    padding:16px 24px;border-radius:999px;border:1.5px solid transparent;
+    transition:transform .15s ease, background .2s ease, box-shadow .2s ease;
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--green);color:#fff;box-shadow:0 8px 20px -8px rgba(47,93,58,.7)}
+  .btn-primary:hover{background:var(--green-deep)}
+  .btn-ghost{background:transparent;border-color:var(--ink);color:var(--ink)}
+  .btn-ghost:hover{background:var(--ink);color:var(--paper)}
+  .btn-sm{padding:11px 18px;font-size:15px}
+
+  /* Nav */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(246,241,231,.85);backdrop-filter:saturate(1.4) blur(10px);
+    border-bottom:1px solid transparent;transition:border-color .2s;
+  }
+  header.nav.scrolled{border-color:var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-size:26px;font-weight:600;text-decoration:none;letter-spacing:-.02em}
+  .logo-mark{width:30px;height:30px}
+  .nav-links{display:flex;gap:32px;list-style:none;margin:0;padding:0}
+  .nav-links a{text-decoration:none;font-weight:500;color:var(--ink-soft)}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-cta{display:flex;align-items:center;gap:18px}
+  .nav-cta .signin{text-decoration:none;font-weight:600}
+
+  /* Hero */
+  .hero{padding:72px 0 96px;position:relative;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .hero h1{font-size:clamp(52px, 7.6vw, 104px);margin-bottom:26px}
+  .hero h1 em{color:var(--green)}
+  .hero .actions{display:flex;flex-wrap:wrap;gap:14px;margin:34px 0 28px}
+  .proof{display:flex;align-items:center;gap:14px;font-size:15px;color:var(--ink-soft)}
+  .avatars{display:flex}
+  .avatars span{
+    width:34px;height:34px;border-radius:50%;border:2px solid var(--paper);margin-left:-10px;
+    display:grid;place-items:center;font-size:13px;font-weight:700;color:#fff;
+  }
+  .avatars span:first-child{margin-left:0}
+  .stars{color:var(--tomato);letter-spacing:2px}
+
+  .hero-art{position:relative;min-height:540px}
+  .blob{position:absolute;border-radius:50%;filter:blur(2px);z-index:0}
+  .blob.b1{width:420px;height:420px;background:var(--sage);opacity:.45;right:-40px;top:10px}
+  .blob.b2{width:180px;height:180px;background:var(--butter);opacity:.6;left:10px;bottom:40px}
+
+  .app{
+    position:relative;z-index:1;margin-left:auto;width:min(400px,100%);
+    background:var(--card);border-radius:28px;padding:22px;box-shadow:0 30px 60px -24px rgba(30,38,31,.35), 0 0 0 1px rgba(30,38,31,.06);
+    animation:float 7s ease-in-out infinite;
+  }
+  @keyframes float{50%{transform:translateY(-10px)}}
+  .app-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+  .app-top strong{font-family:var(--serif);font-size:22px}
+  .pill{font-size:12px;font-weight:700;padding:6px 10px;border-radius:999px;background:var(--paper-2);color:var(--ink-soft)}
+  .weekstrip{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:18px}
+  .weekstrip div{text-align:center;padding:8px 0;border-radius:12px;font-size:12px;font-weight:600;color:var(--ink-soft)}
+  .weekstrip div b{display:block;font-size:16px;color:var(--ink);font-weight:700}
+  .weekstrip div.on{background:var(--green);color:#cfe0d2}
+  .weekstrip div.on b{color:#fff}
+  .weekstrip i{display:block;width:5px;height:5px;border-radius:50%;background:var(--tomato);margin:4px auto 0}
+  .weekstrip .on i{background:var(--butter)}
+
+  .tonight{background:var(--paper);border-radius:20px;padding:18px;display:flex;gap:16px;align-items:center}
+  .tonight .plate{width:96px;height:96px;flex:none}
+  .tonight small{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--tomato)}
+  .tonight h4{font-family:var(--serif);font-size:20px;line-height:1.15;margin:4px 0 6px;font-weight:600}
+  .tonight p{margin:0;font-size:13px;color:var(--ink-soft)}
+  .app-row{display:flex;align-items:center;gap:12px;padding:14px 4px;border-bottom:1px dashed var(--line);font-size:14px}
+  .app-row:last-child{border-bottom:0}
+  .app-row .mini{width:40px;height:40px;flex:none}
+  .app-row span{flex:1}
+  .app-row span b{display:block;font-weight:600}
+  .app-row span em{font-style:normal;color:var(--ink-soft);font-size:13px}
+  .app-row .chk{width:22px;height:22px;border-radius:7px;border:1.5px solid var(--line)}
+  .app-row .chk.done{background:var(--green);border-color:var(--green);position:relative}
+  .app-row .chk.done::after{content:"";position:absolute;left:7px;top:3px;width:5px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .grocery-bar{margin-top:14px;background:var(--ink);color:var(--paper);border-radius:16px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;font-size:14px}
+  .grocery-bar b{font-size:15px}
+  .grocery-bar .go{background:var(--butter);color:var(--ink);font-weight:700;border-radius:999px;padding:7px 12px;font-size:13px}
+
+  .sticker{
+    position:absolute;z-index:2;background:var(--card);border-radius:16px;padding:12px 16px;
+    box-shadow:var(--shadow);font-size:14px;display:flex;gap:10px;align-items:center;
+  }
+  .sticker b{display:block;font-size:15px}
+  .sticker small{color:var(--ink-soft)}
+  .sticker .ic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;flex:none}
+  .sticker.s1{left:0;top:60px;animation:float 6s ease-in-out infinite .5s}
+  .sticker.s2{left:30px;bottom:30px;animation:float 8s ease-in-out infinite 1s}
+
+  /* Plate illustration */
+  .plate{
+    --a:#D9502F;--b:#A9BFA0;--c:#F2C14E;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at 36% 40%, var(--a) 0 17%, transparent 17.5%),
+      radial-gradient(circle at 63% 50%, var(--b) 0 15%, transparent 15.5%),
+      radial-gradient(circle at 45% 67%, var(--c) 0 12%, transparent 12.5%),
+      radial-gradient(circle at 60% 30%, var(--b) 0 6%, transparent 6.5%),
+      radial-gradient(circle, #fff 0 56%, #F1ECE2 57% 66%, #fff 67% 70%, #E7DFD0 71%);
+    box-shadow:0 8px 16px -8px rgba(30,38,31,.35);
+  }
+
+  /* Marquee strip */
+  .strip{background:var(--ink);color:var(--paper);padding:22px 0;overflow:hidden}
+  .marquee{display:flex;gap:48px;white-space:nowrap;animation:scroll 40s linear infinite;width:max-content}
+  .marquee span{font-family:var(--serif);font-size:24px;font-style:italic;display:flex;align-items:center;gap:48px}
+  .marquee span::after{content:"✦";font-style:normal;color:var(--butter);font-size:16px}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+
+  section{padding:110px 0}
+  .section-head{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:56px;flex-wrap:wrap}
+  .section-head .lede{margin:0}
+
+  /* Steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;counter-reset:step}
+  .step{background:var(--card);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);position:relative}
+  .step .num{font-family:var(--serif);font-size:72px;line-height:1;color:var(--tomato);font-style:italic;margin-bottom:22px;display:block}
+  .step p{color:var(--ink-soft);margin:10px 0 0}
+  .step .tagrow{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
+  .step .tagrow span{font-size:13px;padding:5px 10px;border-radius:999px;background:var(--paper-2);font-weight:600}
+
+  /* Demo */
+  .demo{background:var(--paper-2);border-block:1px solid var(--line)}
+  .controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:28px}
+  .controls .label{font-weight:700;margin-right:6px}
+  .chip{
+    font:600 15px/1 var(--sans);padding:11px 16px;border-radius:999px;cursor:pointer;
+    background:var(--card);border:1.5px solid var(--line);color:var(--ink);transition:all .15s;
+  }
+  .chip:hover{border-color:var(--ink)}
+  .chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .chip[aria-pressed="true"]::before{content:"✓ "}
+  .controls .spacer{flex:1}
+  .demo-grid{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
+  .week{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+  .day{
+    background:var(--card);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;
+    box-shadow:var(--shadow);min-height:228px;
+  }
+  .day.fresh{animation:pop .45s cubic-bezier(.2,.9,.3,1.3) both}
+  @keyframes pop{from{opacity:0;transform:translateY(8px) scale(.97)}}
+  .day-head{display:flex;justify-content:space-between;align-items:center}
+  .day-head b{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+  .swap{
+    border:0;background:var(--paper);border-radius:999px;padding:6px 10px;font:600 12px/1 var(--sans);
+    cursor:pointer;color:var(--ink);display:inline-flex;align-items:center;gap:5px;
+  }
+  .swap:hover{background:var(--butter)}
+  .day .plate{width:74px;height:74px}
+  .day h4{font-family:var(--serif);font-size:19px;line-height:1.15;margin:0;font-weight:600}
+  .day .meta{font-size:13px;color:var(--ink-soft);margin-top:auto;display:flex;gap:10px;flex-wrap:wrap}
+  .day.leftover{background:repeating-linear-gradient(-45deg,var(--card) 0 10px,#FBF6EC 10px 20px)}
+  .day.leftover h4 small{display:block;font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:4px}
+  .day.leftover .plate{opacity:.55;filter:grayscale(.2)}
+
+  .list{background:var(--card);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);position:sticky;top:96px}
+  .list-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:6px}
+  .list-head h3{font-size:24px}
+  .list-head span{font-size:14px;color:var(--ink-soft)}
+  .totals{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:14px 0}
+  .totals div{background:var(--paper);border-radius:12px;padding:10px;text-align:center}
+  .totals b{display:block;font-family:var(--serif);font-size:22px}
+  .totals small{font-size:12px;color:var(--ink-soft)}
+  .aisle{margin-top:14px}
+  .aisle h5{margin:0 0 6px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--tomato)}
+  .aisle ul{list-style:none;margin:0;padding:0}
+  .aisle li label{display:flex;align-items:center;gap:10px;padding:5px 0;font-size:15px;cursor:pointer}
+  .aisle input{accent-color:var(--green);width:17px;height:17px}
+  .aisle input:checked + span{text-decoration:line-through;color:var(--ink-soft)}
+  .aisle .qty{margin-left:auto;font-size:13px;color:var(--ink-soft)}
+  .list-scroll{max-height:420px;overflow:auto;padding-right:6px}
+  .empty{padding:40px;text-align:center;background:var(--card);border-radius:16px;grid-column:1/-1}
+  .toast{
+    position:fixed;left:50%;bottom:28px;transform:translate(-50%,120px);background:var(--ink);color:var(--paper);
+    padding:12px 20px;border-radius:999px;font-weight:600;font-size:15px;transition:transform .3s ease;z-index:80;
+  }
+  .toast.show{transform:translate(-50%,0)}
+
+  /* Features bento */
+  .bento{display:grid;grid-template-columns:repeat(6,1fr);gap:20px}
+  .feat{background:var(--card);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow);overflow:hidden;position:relative}
+  .feat p{color:var(--ink-soft);margin:10px 0 0}
+  .feat .icon{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;margin-bottom:22px}
+  .f1{grid-column:span 4;background:var(--green);color:#fff}
+  .f1 p{color:#CFE0D2;max-width:44ch}
+  .f2{grid-column:span 2;background:var(--butter)}
+  .f2 p{color:#4d3d10}
+  .f3,.f4,.f5{grid-column:span 2}
+  .f6{grid-column:span 6;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+  .pantry{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+  .pantry span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);padding:7px 12px;border-radius:999px;font-size:14px}
+  .pantry span.use{background:var(--butter);color:var(--ink);border-color:var(--butter);font-weight:600}
+  .bigstat{font-family:var(--serif);font-size:84px;line-height:1;margin-top:18px;letter-spacing:-.03em}
+  .macro{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+  .macro div{display:grid;grid-template-columns:70px 1fr 40px;gap:10px;align-items:center;font-size:14px}
+  .macro i{display:block;height:8px;border-radius:99px;background:var(--paper-2);position:relative;overflow:hidden}
+  .macro i::after{content:"";position:absolute;inset:0;width:var(--w);background:var(--c);border-radius:99px}
+  .household{display:flex;gap:-8px}
+  .people{display:flex;gap:10px;flex-wrap:wrap}
+  .person{background:var(--paper);border-radius:14px;padding:12px 14px;font-size:14px;min-width:140px}
+  .person b{display:block}
+  .person small{color:var(--ink-soft)}
+
+  /* Testimonials */
+  .quotes{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:20px}
+  blockquote{margin:0;background:var(--card);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+  blockquote p{font-family:var(--serif);font-size:21px;line-height:1.35;margin:0 0 24px;letter-spacing:-.01em}
+  blockquote.big{background:var(--tomato);color:#fff}
+  blockquote.big p{font-size:30px}
+  blockquote footer{margin-top:auto;display:flex;gap:12px;align-items:center;font-size:14px}
+  blockquote footer .av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-weight:700;color:#fff}
+  blockquote footer b{display:block;font-size:15px}
+  blockquote.big footer small{color:#FFE2D9}
+  blockquote footer small{color:var(--ink-soft)}
+
+  /* Pricing */
+  .pricing{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:900px;margin-inline:auto}
+  .toggle{display:inline-flex;background:var(--card);border-radius:999px;padding:5px;box-shadow:var(--shadow);margin:0 auto 40px}
+  .toggle button{border:0;background:none;font:600 15px/1 var(--sans);padding:11px 20px;border-radius:999px;cursor:pointer;color:var(--ink-soft)}
+  .toggle button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+  .toggle .save{color:var(--tomato);font-size:12px;margin-left:4px}
+  .toggle button[aria-pressed="true"] .save{color:var(--butter)}
+  .plan{background:var(--card);border-radius:24px;padding:36px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .plan.featured{background:var(--ink);color:var(--paper);position:relative}
+  .plan.featured .badge{position:absolute;top:-14px;right:28px;background:var(--butter);color:var(--ink);font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px}
+  .plan h3{font-size:28px}
+  .plan .desc{color:var(--ink-soft);margin:6px 0 22px}
+  .plan.featured .desc{color:#B9C2B9}
+  .price{font-family:var(--serif);font-size:64px;line-height:1;letter-spacing:-.03em}
+  .price small{font-family:var(--sans);font-size:16px;letter-spacing:0;color:var(--ink-soft);font-weight:500}
+  .plan.featured .price small{color:#B9C2B9}
+  .plan .billed{font-size:14px;color:var(--ink-soft);min-height:22px;margin:6px 0 24px}
+  .plan.featured .billed{color:#B9C2B9}
+  .plan ul{list-style:none;padding:0;margin:0 0 30px;display:flex;flex-direction:column;gap:12px}
+  .plan li{display:flex;gap:10px;align-items:flex-start}
+  .plan li::before{content:"";flex:none;width:20px;height:20px;margin-top:3px;border-radius:50%;background:var(--sage) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 10.5l2.5 2.5L14 7.5' fill='none' stroke='%231E261F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100%}
+  .plan.featured li::before{background-color:var(--butter)}
+  .plan .btn{margin-top:auto;justify-content:center}
+  .plan.featured .btn-primary{background:var(--tomato);box-shadow:none}
+  .plan.featured .btn-primary:hover{background:#bf4325}
+
+  /* FAQ */
+  .faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px}
+  details{border-bottom:1px solid var(--line);padding:22px 0}
+  details:first-of-type{border-top:1px solid var(--line)}
+  summary{cursor:pointer;list-style:none;font-family:var(--serif);font-size:22px;font-weight:600;display:flex;justify-content:space-between;gap:20px;letter-spacing:-.01em}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-family:var(--sans);font-weight:400;font-size:28px;line-height:1;color:var(--tomato);transition:transform .2s}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p{color:var(--ink-soft);margin:12px 0 0;max-width:60ch}
+
+  /* CTA */
+  .cta{padding:0 0 110px}
+  .cta-box{
+    background:var(--green);color:#fff;border-radius:32px;padding:80px 64px;position:relative;overflow:hidden;
+    display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;
+  }
+  .cta-box h2{font-size:clamp(40px,5.5vw,68px)}
+  .cta-box h2 em{color:var(--butter)}
+  .cta-box p{color:#CFE0D2;font-size:19px;margin:20px 0 0;max-width:46ch}
+  .signup{display:flex;flex-direction:column;gap:12px;position:relative;z-index:1}
+  .signup label{font-weight:600;font-size:15px}
+  .signup .row{display:flex;background:#fff;border-radius:999px;padding:6px}
+  .signup input{flex:1;min-width:0;border:0;background:none;font:16px var(--sans);padding:0 16px;color:var(--ink)}
+  .signup input:focus{outline:none}
+  .signup .row:focus-within{box-shadow:0 0 0 3px var(--butter)}
+  .signup .btn{background:var(--tomato);color:#fff}
+  .signup .btn:hover{background:#bf4325}
+  .signup small{color:#CFE0D2}
+  .signup .ok{color:var(--butter);font-weight:600;min-height:24px}
+  .cta-plates{position:absolute;right:-60px;top:-60px;display:flex;gap:20px;opacity:.18;pointer-events:none}
+  .cta-plates .plate{width:200px;height:200px}
+
+  footer.site{border-top:1px solid var(--line);padding:56px 0 40px;font-size:15px;color:var(--ink-soft)}
+  .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px}
+  .foot-grid h6{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin:0 0 14px}
+  .foot-grid ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+  .foot-grid a{text-decoration:none}
+  .foot-grid a:hover{color:var(--ink);text-decoration:underline}
+  .foot-bottom{display:flex;justify-content:space-between;margin-top:48px;padding-top:24px;border-top:1px solid var(--line);font-size:14px;flex-wrap:wrap;gap:12px}
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* Responsive */
+  @media (max-width:1020px){
+    .hero-grid{grid-template-columns:1fr}
+    .hero-art{min-height:auto;padding:20px 0 40px}
+    .app{margin-inline:auto}
+    .sticker.s1{left:0;top:0}
+    .demo-grid{grid-template-columns:1fr}
+    .list{position:static}
+    .bento{grid-template-columns:1fr 1fr}
+    .f1,.f2,.f3,.f4,.f5,.f6{grid-column:span 2}
+    .f3,.f4{grid-column:span 1}
+    .quotes{grid-template-columns:1fr 1fr}
+    .quotes .big{grid-column:span 2}
+    .faq-grid{grid-template-columns:1fr;gap:32px}
+    .cta-box{grid-template-columns:1fr;padding:56px 36px}
+  }
+  @media (max-width:760px){
+    body{font-size:16px}
+    .nav-links,.nav-cta .signin{display:none}
+    .steps{grid-template-columns:1fr}
+    section{padding:80px 0}
+    .bento{grid-template-columns:1fr}
+    .f1,.f2,.f3,.f4,.f5,.f6{grid-column:span 1}
+    .f6{grid-template-columns:1fr}
+    .quotes{grid-template-columns:1fr}
+    .quotes .big{grid-column:span 1}
+    .pricing{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr 1fr}
+    .sticker{display:none}
+    .blob.b1{width:300px;height:300px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#" class="logo" aria-label="Mise home">
+      <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="15" fill="#2F5D3A"/>
+        <circle cx="16" cy="16" r="10" fill="#F6F1E7"/>
+        <circle cx="13" cy="14" r="3.2" fill="#D9502F"/>
+        <circle cx="19.5" cy="16.5" r="2.6" fill="#F2C14E"/>
+        <circle cx="15" cy="20" r="2" fill="#A9BFA0"/>
+      </svg>
+      Mise
+    </a>
+    <nav aria-label="Primary">
+      <ul class="nav-links">
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#try">Try it</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a href="#" class="signin">Sign in</a>
+      <a href="#start" class="btn btn-primary btn-sm">Get started</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Meal planning for real weeknights</p>
+        <h1 id="hero-title">Dinner,<br><em>decided.</em></h1>
+        <p class="lede">Mise plans your week of meals around what you like, what's already in your fridge, and how much time you actually have, then writes the grocery list for you.</p>
+        <div class="actions">
+          <a href="#start" class="btn btn-primary">Plan my first week, free
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#try" class="btn btn-ghost">Try the demo</a>
+        </div>
+        <div class="proof">
+          <div class="avatars" aria-hidden="true">
+            <span style="background:#D9502F">AK</span>
+            <span style="background:#2F5D3A">JL</span>
+            <span style="background:#C99A2E">MR</span>
+            <span style="background:#5B7A8C">TS</span>
+          </div>
+          <div><span class="stars" aria-hidden="true">★★★★★</span><br><strong>4.9</strong> from 12,000+ home cooks</div>
+        </div>
+      </div>
+
+      <div class="hero-art" aria-label="Preview of the Mise app showing this week's meal plan">
+        <div class="blob b1"></div>
+        <div class="blob b2"></div>
+
+        <div class="sticker s1" aria-hidden="true">
+          <div class="ic" style="background:#E6EFE3">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2F5D3A" stroke-width="2.2" stroke-linecap="round"><path d="M12 2v6M8 4l4 4 4-4M4 14h16l-2 8H6z"/></svg>
+          </div>
+          <div><b>Uses your spinach</b><small>before it wilts Thursday</small></div>
+        </div>
+        <div class="sticker s2" aria-hidden="true">
+          <div class="ic" style="background:#FCEBD0">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B37B0E" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          </div>
+          <div><b>28 min average</b><small>cook time this week</small></div>
+        </div>
+
+        <div class="app" aria-hidden="true">
+          <div class="app-top">
+            <strong>This week</strong>
+            <span class="pill">Oct 20 – 26</span>
+          </div>
+          <div class="weekstrip">
+            <div>M<b>20</b><i></i></div>
+            <div>T<b>21</b><i></i></div>
+            <div class="on">W<b>22</b><i></i></div>
+            <div>T<b>23</b><i></i></div>
+            <div>F<b>24</b><i></i></div>
+            <div>S<b>25</b><i></i></div>
+            <div>S<b>26</b><i></i></div>
+          </div>
+          <div class="tonight">
+            <div class="plate" style="--a:#E58A5C;--b:#7FA36B;--c:#F4E3B5"></div>
+            <div>
+              <small>Tonight</small>
+              <h4>Miso-glazed salmon, sesame greens</h4>
+              <p>25 min · serves 2 · 540 kcal</p>
+            </div>
+          </div>
+          <div style="margin-top:8px">
+            <div class="app-row">
+              <div class="plate mini" style="--a:#C9A26B;--b:#E8D8B0;--c:#5F8A4E"></div>
+              <span><b>Crispy chickpea shawarma</b><em>Thu · 30 min</em></span>
+              <div class="chk"></div>
+            </div>
+            <div class="app-row">
+              <div class="plate mini" style="--a:#F0A64A;--b:#3B3B3B;--c:#8DB36A"></div>
+              <span><b>Sweet potato black bean tacos</b><em>Fri · 25 min</em></span>
+              <div class="chk"></div>
+            </div>
+            <div class="app-row">
+              <div class="plate mini" style="--a:#E2B34F;--b:#9BB47F;--c:#F7EBD0"></div>
+              <span><b>Coconut red lentil dal</b><em>Tue · cooked</em></span>
+              <div class="chk done"></div>
+            </div>
+          </div>
+          <div class="grocery-bar">
+            <div><b>Grocery list</b><br>24 items · est. $71</div>
+            <span class="go">Order →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip" aria-hidden="true">
+    <div class="marquee">
+      <span>No more 5:45pm fridge-staring</span><span>Less food in the bin</span><span>One list, every aisle sorted</span><span>Leftovers, on purpose</span><span>Weeknights under 30 minutes</span>
+      <span>No more 5:45pm fridge-staring</span><span>Less food in the bin</span><span>One list, every aisle sorted</span><span>Leftovers, on purpose</span><span>Weeknights under 30 minutes</span>
+    </div>
+  </div>
+
+  <!-- HOW -->
+  <section id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">How it works</p>
+          <h2 id="how-title">Three minutes on Sunday.<br><em>Seven good dinners.</em></h2>
+        </div>
+        <p class="lede">You tell Mise how you eat once. Every week after that, it does the thinking, so the only decision left is who's setting the table.</p>
+      </div>
+      <div class="steps">
+        <article class="step reveal">
+          <span class="num">01</span>
+          <h3>Tell us how you eat</h3>
+          <p>Diets, dislikes, allergies, the kid who won't touch mushrooms. Plus how long you're willing to cook on a Tuesday.</p>
+          <div class="tagrow"><span>Vegetarian</span><span>No cilantro</span><span>≤ 30 min</span><span>Serves 4</span></div>
+        </article>
+        <article class="step reveal">
+          <span class="num">02</span>
+          <h3>Get a week that fits</h3>
+          <p>Mise builds a balanced plan that reuses ingredients across meals, so half a bunch of herbs never goes to waste. Don't love one? Swap it in a tap.</p>
+          <div class="tagrow"><span>Shared ingredients</span><span>Planned leftovers</span></div>
+        </article>
+        <article class="step reveal">
+          <span class="num">03</span>
+          <h3>Shop in one go</h3>
+          <p>Your grocery list arrives sorted by aisle, minus what's already in your pantry. Check it off in-store or send it to delivery.</p>
+          <div class="tagrow"><span>Aisle-sorted</span><span>Pantry-aware</span><span>Delivery-ready</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMO -->
+  <section id="try" class="demo" aria-labelledby="try-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Try it, no sign-up</p>
+          <h2 id="try-title">Build a week <em>right here.</em></h2>
+        </div>
+        <p class="lede">Pick what matters to you. Watch the plan, the grocery list, and the budget update together. That's the whole idea.</p>
+      </div>
+
+      <div class="controls" role="group" aria-label="Meal preferences">
+        <span class="label">I want meals that are:</span>
+        <button class="chip" data-tag="veg" aria-pressed="false">Vegetarian</button>
+        <button class="chip" data-tag="quick" aria-pressed="false">Under 30 min</button>
+        <button class="chip" data-tag="budget" aria-pressed="false">Budget-friendly</button>
+        <button class="chip" data-tag="protein" aria-pressed="false">High-protein</button>
+        <span class="spacer"></span>
+        <button class="btn btn-primary btn-sm" id="regen">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg>
+          New week
+        </button>
+      </div>
+
+      <div class="demo-grid">
+        <div class="week" id="week" aria-live="polite"></div>
+        <aside class="list" aria-labelledby="list-title">
+          <div class="list-head">
+            <h3 id="list-title">Grocery list</h3>
+            <span id="list-count">0 items</span>
+          </div>
+          <div class="totals">
+            <div><b id="t-cost">$0</b><small>est. total</small></div>
+            <div><b id="t-time">0m</b><small>avg. cook</small></div>
+            <div><b id="t-left">0</b><small>leftover nights</small></div>
+          </div>
+          <div class="list-scroll" id="list"></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" aria-labelledby="feat-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Features</p>
+          <h2 id="feat-title">Smart where it counts.<br><em>Quiet everywhere else.</em></h2>
+        </div>
+      </div>
+      <div class="bento">
+        <article class="feat f1 reveal">
+          <div class="icon" style="background:rgba(255,255,255,.14)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F2C14E" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M4 10h16M8 6.5h.01M8 14h.01"/></svg>
+          </div>
+          <h3>Cooks from your pantry first</h3>
+          <p>Snap your fridge or scan a receipt. Mise prioritises what's about to expire and builds meals around it, so you buy less and bin less.</p>
+          <div class="pantry" aria-label="Example pantry items">
+            <span class="use">Spinach · 2 days</span><span class="use">Feta · 4 days</span><span>Rice</span><span>Canned tomatoes</span><span class="use">Half a lemon</span><span>Chickpeas</span><span>Eggs ×6</span><span>Garlic</span>
+          </div>
+        </article>
+        <article class="feat f2 reveal">
+          <h3>Families report wasting</h3>
+          <div class="bigstat">31%</div>
+          <p>less food in their first two months with Mise.</p>
+        </article>
+        <article class="feat f3 reveal">
+          <div class="icon" style="background:#E6EFE3">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2F5D3A" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 12h18M5 12a7 7 0 0 0 14 0M9 5c0 1.5 1 1.5 1 3M13 4c0 1.5 1 1.5 1 3"/></svg>
+          </div>
+          <h3>Leftovers, on purpose</h3>
+          <p>Cook once, eat twice. Mise scales Sunday's ragù so Wednesday's lunch is already handled.</p>
+        </article>
+        <article class="feat f4 reveal">
+          <div class="icon" style="background:#FCE3DA">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D9502F" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.5c-.5-1-1.5-1.5-2.5-1.5-1.5 0-2.5.8-2.5 2s1 1.7 2.5 2 2.5.8 2.5 2-1 2-2.5 2c-1 0-2-.5-2.5-1.5M12 6.5V8M12 16v1.5"/></svg>
+          </div>
+          <h3>Budget mode</h3>
+          <p>Set a weekly number. Mise plans to it and shows the estimated cost before you ever reach the checkout.</p>
+        </article>
+        <article class="feat f5 reveal">
+          <h3>Nutrition, minus the math</h3>
+          <p>Gentle daily balance without counting a thing.</p>
+          <div class="macro" aria-label="Example weekly nutrition balance">
+            <div><span>Protein</span><i style="--w:78%;--c:var(--tomato)"></i><span>78%</span></div>
+            <div><span>Fibre</span><i style="--w:92%;--c:var(--green)"></i><span>92%</span></div>
+            <div><span>Veg</span><i style="--w:85%;--c:var(--sage)"></i><span>85%</span></div>
+          </div>
+        </article>
+        <article class="feat f6 reveal">
+          <div>
+            <div class="icon" style="background:#E7ECF0">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5B7A8C" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.5c3 0 6 1.5 6 5"/></svg>
+            </div>
+            <h3>Built for the whole table</h3>
+            <p>Everyone gets a profile, and Mise finds the overlap. Share the list with your partner, let the kids vote on Friday, and stop texting "what do we need?"</p>
+          </div>
+          <div class="people" aria-label="Example household profiles">
+            <div class="person"><b>Sam</b><small>No shellfish</small></div>
+            <div class="person"><b>Priya</b><small>Vegetarian Mon–Thu</small></div>
+            <div class="person"><b>Leo, 7</b><small>Hates "green bits"</small></div>
+            <div class="person"><b>Ada, 4</b><small>Everything plain, please</small></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section aria-labelledby="love-title" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">From the kitchen table</p>
+          <h2 id="love-title">People are <em>eating better.</em></h2>
+        </div>
+      </div>
+      <div class="quotes">
+        <blockquote class="big reveal">
+          <p>"I used to spend Sunday afternoons with a notepad and three tabs of recipes. Now it's a cup of coffee and two taps. My grocery bill dropped by about forty bucks a week."</p>
+          <footer><span class="av" style="background:#1E261F">DM</span><div><b>Dana M.</b><small>Parent of three, Columbus</small></div></footer>
+        </blockquote>
+        <blockquote class="reveal">
+          <p>"The leftovers planning is genius. Cook once, lunch is sorted for two days."</p>
+          <footer><span class="av" style="background:#2F5D3A">RK</span><div><b>Rahul K.</b><small>Nurse, night shifts</small></div></footer>
+        </blockquote>
+        <blockquote class="reveal">
+          <p>"First app that actually respects 'my partner is vegetarian and I am not.'"</p>
+          <footer><span class="av" style="background:#C99A2E">EL</span><div><b>Erin L.</b><small>Home cook, Portland</small></div></footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="demo" aria-labelledby="price-title">
+    <div class="wrap" style="text-align:center">
+      <p class="eyebrow">Pricing</p>
+      <h2 id="price-title" style="margin-bottom:18px">Less than <em>one takeout order.</em></h2>
+      <p class="lede" style="margin:0 auto 32px">Start free. Upgrade when Mise has earned a spot on your fridge.</p>
+      <div class="toggle" role="group" aria-label="Billing period">
+        <button data-bill="month" aria-pressed="false">Monthly</button>
+        <button data-bill="year" aria-pressed="true">Yearly <span class="save">−33%</span></button>
+      </div>
+      <div class="pricing" style="text-align:left">
+        <article class="plan">
+          <h3>Free</h3>
+          <p class="desc">For trying out a calmer weeknight.</p>
+          <div class="price">$0<small> /forever</small></div>
+          <p class="billed">No card required</p>
+          <ul>
+            <li>3 planned dinners each week</li>
+            <li>Aisle-sorted grocery list</li>
+            <li>2,000+ tested recipes</li>
+            <li>Dietary &amp; allergy filters</li>
+          </ul>
+          <a href="#start" class="btn btn-ghost">Start free</a>
+        </article>
+        <article class="plan featured">
+          <span class="badge">Most popular</span>
+          <h3>Mise Plus</h3>
+          <p class="desc">For households who want the whole week handled.</p>
+          <div class="price"><span id="plus-price">$4</span><small> /month</small></div>
+          <p class="billed" id="plus-billed">Billed $48 yearly</p>
+          <ul>
+            <li>Full 7-day plans, breakfast to dinner</li>
+            <li>Pantry tracking &amp; expiry nudges</li>
+            <li>Budget mode with cost estimates</li>
+            <li>Up to 6 household profiles</li>
+            <li>One-tap grocery delivery</li>
+          </ul>
+          <a href="#start" class="btn btn-primary">Try Plus free for 14 days</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section aria-labelledby="faq-title">
+    <div class="wrap faq-grid">
+      <div class="reveal">
+        <p class="eyebrow">Questions</p>
+        <h2 id="faq-title">Good <em>questions.</em></h2>
+        <p class="lede" style="margin-top:18px">Still wondering? Email <a href="mailto:hello@mise.app">hello@mise.app</a>. A real person replies, usually before dinner.</p>
+      </div>
+      <div class="reveal">
+        <details open>
+          <summary>Do I have to cook every night?</summary>
+          <p>Not at all. Choose how many nights you want planned. Mise fills the gaps with leftovers, "fridge-clear" nights, or simply leaves them open for takeout.</p>
+        </details>
+        <details>
+          <summary>Can it handle allergies and mixed diets?</summary>
+          <p>Yes. Each person gets a profile. Allergies are hard rules and are never broken; preferences are soft and Mise finds dishes that work for everyone, or suggests easy split versions.</p>
+        </details>
+        <details>
+          <summary>Where do the recipes come from?</summary>
+          <p>Our test kitchen develops and cooks every recipe at least three times. You can also import your own from any website or a photo of grandma's recipe card.</p>
+        </details>
+        <details>
+          <summary>Which grocery services do you support?</summary>
+          <p>Send your list to most major delivery services in the US, UK, Canada, and Australia, or just use the in-app checklist at the store.</p>
+        </details>
+        <details>
+          <summary>Can I cancel anytime?</summary>
+          <p>Of course. Cancel in two taps from settings. Your saved recipes and plans stay with you on the Free plan.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta" id="start">
+    <div class="wrap">
+      <div class="cta-box reveal">
+        <div class="cta-plates" aria-hidden="true">
+          <div class="plate" style="--a:#F2C14E;--b:#fff;--c:#D9502F"></div>
+        </div>
+        <div>
+          <h2>Tonight's dinner is <em>already sorted.</em></h2>
+          <p>Join 120,000 households who've stopped asking "what's for dinner?" Your first week takes about three minutes.</p>
+        </div>
+        <form class="signup" id="signup" novalidate>
+          <label for="email">Get your first plan</label>
+          <div class="row">
+            <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+            <button class="btn btn-sm" type="submit">Start planning</button>
+          </div>
+          <small>Free forever plan · iOS, Android &amp; web</small>
+          <div class="ok" id="signup-msg" role="status"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#" class="logo" aria-label="Mise home" style="color:var(--ink)">
+          <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#2F5D3A"/><circle cx="16" cy="16" r="10" fill="#F6F1E7"/><circle cx="13" cy="14" r="3.2" fill="#D9502F"/><circle cx="19.5" cy="16.5" r="2.6" fill="#F2C14E"/><circle cx="15" cy="20" r="2" fill="#A9BFA0"/></svg>
+          Mise
+        </a>
+        <p style="max-width:32ch;margin-top:14px">Everything in its place, including dinner. Made with care in a very small kitchen.</p>
+      </div>
+      <div><h6>Product</h6><ul><li><a href="#how">How it works</a></li><li><a href="#features">Features</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#">Recipes</a></li></ul></div>
+      <div><h6>Company</h6><ul><li><a href="#">About</a></li><li><a href="#">Test kitchen</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li></ul></div>
+      <div><h6>Help</h6><ul><li><a href="#">Support</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="mailto:hello@mise.app">Contact</a></li></ul></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Mise Kitchen, Inc.</span>
+      <span>Plan less. Eat better.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+  // ---------- Data ----------
+  const AISLE = {
+    "Salmon fillets":"Protein","Chicken thighs":"Protein","Ground beef":"Protein","Italian sausages":"Protein",
+    "Halloumi":"Dairy","Firm tofu":"Protein","Ground turkey":"Protein","Shrimp":"Protein","Flank steak":"Protein","Eggs":"Dairy",
+    "Bok choy":"Produce","Cucumber":"Produce","Red onion":"Produce","Lemon":"Produce","Spinach":"Produce","Sweet potatoes":"Produce",
+    "Limes":"Produce","Cilantro":"Produce","Mushrooms":"Produce","Garlic":"Produce","Lettuce":"Produce","Scallions":"Produce",
+    "Bell peppers":"Produce","Potatoes":"Produce","Zucchini":"Produce","Cauliflower":"Produce","Parsley":"Produce","Peas (frozen)":"Produce",
+    "White miso":"Pantry","Sesame seeds":"Pantry","Chickpeas":"Pantry","Tahini":"Pantry","Black beans":"Pantry","Canned tomatoes":"Pantry",
+    "Gochujang":"Pantry","Red lentils":"Pantry","Coconut milk":"Pantry","Harissa":"Pantry","Peanut butter":"Pantry","Tikka paste":"Pantry",
+    "White beans":"Pantry","Pesto":"Pantry",
+    "Parmesan":"Dairy","Feta":"Dairy","Greek yogurt":"Dairy",
+    "Rice":"Grains & Bread","Flatbreads":"Grains & Bread","Orzo":"Grains & Bread","Corn tortillas":"Grains & Bread","Pasta":"Grains & Bread",
+    "Rice noodles":"Grains & Bread","Crusty bread":"Grains & Bread"
+  };
+  const AISLE_ORDER = ["Produce","Protein","Dairy","Pantry","Grains & Bread"];
+
+  const MEALS = [
+    {n:"Miso-glazed salmon with sesame greens", t:25, c:14, tags:["quick","protein"], col:["#E58A5C","#7FA36B","#F4E3B5"], i:["Salmon fillets","White miso","Bok choy","Rice","Sesame seeds"]},
+    {n:"Crispy chickpea shawarma bowls", t:30, c:8, tags:["veg","quick","budget","protein"], col:["#C9A26B","#E8D8B0","#5F8A4E"], i:["Chickpeas","Cucumber","Tahini","Flatbreads","Red onion"]},
+    {n:"One-pan lemon chicken orzo", t:35, c:11, tags:["protein"], col:["#E9C46A","#F7EBD0","#6E9B5A"], i:["Chicken thighs","Orzo","Lemon","Spinach","Parmesan"]},
+    {n:"Sweet potato & black bean tacos", t:25, c:7, tags:["veg","quick","budget"], col:["#F0A64A","#3B3B3B","#8DB36A"], i:["Black beans","Sweet potatoes","Corn tortillas","Limes","Cilantro"]},
+    {n:"Weeknight mushroom ragù", t:40, c:9, tags:["veg","budget"], col:["#7A5A44","#C0483A","#EADFC8"], i:["Mushrooms","Pasta","Canned tomatoes","Garlic","Parmesan"]},
+    {n:"Gochujang beef lettuce cups", t:20, c:13, tags:["quick","protein"], col:["#9C3B2B","#9BC27E","#F5EEDC"], i:["Ground beef","Gochujang","Lettuce","Rice","Scallions"]},
+    {n:"Coconut red lentil dal", t:30, c:5, tags:["veg","quick","budget","protein"], col:["#E2B34F","#9BB47F","#F7EBD0"], i:["Red lentils","Coconut milk","Spinach","Garlic","Rice"]},
+    {n:"Sheet-pan sausage & peppers", t:30, c:10, tags:["quick","protein"], col:["#8F4A32","#E4572E","#F2C14E"], i:["Italian sausages","Bell peppers","Red onion","Potatoes"]},
+    {n:"Halloumi & harissa traybake", t:35, c:12, tags:["veg","protein"], col:["#F1D9A0","#C9452E","#7FA36B"], i:["Halloumi","Harissa","Zucchini","Chickpeas","Lemon"]},
+    {n:"Peanut tofu noodles", t:20, c:8, tags:["veg","quick","budget","protein"], col:["#E8C98F","#C68B4E","#86B36A"], i:["Firm tofu","Rice noodles","Peanut butter","Limes","Scallions"]},
+    {n:"Turkey meatballs in tomato", t:40, c:11, tags:["protein"], col:["#A8553A","#D5452F","#EADFC8"], i:["Ground turkey","Canned tomatoes","Garlic","Pasta","Parmesan"]},
+    {n:"Green shakshuka with feta", t:25, c:7, tags:["veg","quick","budget","protein"], col:["#6E9B5A","#FFF6DF","#F2C14E"], i:["Eggs","Spinach","Zucchini","Feta","Flatbreads"]},
+    {n:"15-minute shrimp fried rice", t:15, c:12, tags:["quick","protein"], col:["#F09C7A","#F2D57E","#7FB069"], i:["Shrimp","Rice","Eggs","Peas (frozen)","Scallions"]},
+    {n:"Roasted cauliflower tikka", t:45, c:8, tags:["veg","budget"], col:["#E07A3F","#F7EBD0","#6E9B5A"], i:["Cauliflower","Greek yogurt","Tikka paste","Rice","Cilantro"]},
+    {n:"Pesto white bean soup", t:25, c:6, tags:["veg","quick","budget"], col:["#8DB36A","#F5EEDC","#5F8A4E"], i:["White beans","Pesto","Zucchini","Garlic","Crusty bread"]},
+    {n:"Steak with chimichurri potatoes", t:25, c:18, tags:["quick","protein"], col:["#7B3A2C","#5F8A4E","#E9C46A"], i:["Flank steak","Parsley","Potatoes","Garlic","Lettuce"]}
+  ];
+  const DAYS = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+
+  // ---------- State ----------
+  const active = new Set();
+  let week = [];
+
+  const $ = s => document.querySelector(s);
+  const weekEl = $("#week"), listEl = $("#list");
+
+  const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const pool = () => MEALS.filter(m => [...active].every(t => m.tags.includes(t)));
+  const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+
+  function generate() {
+    const p = shuffle(pool());
+    if (!p.length) { week = []; render(); return; }
+    // Cook 6 if possible, and plan one intentional leftover night (Thursday) to show the feature.
+    const cookCount = Math.min(p.length, 6);
+    const cooks = p.slice(0, cookCount);
+    week = [];
+    let k = 0;
+    for (let d = 0; d < 7; d++) {
+      const wantsLeftover = (d === 3) || k >= cooks.length;
+      if (wantsLeftover && week.length) {
+        const src = week.filter(x => !x.leftover);
+        week.push({ leftover: true, meal: src[src.length - 1].meal });
+      } else {
+        week.push({ leftover: false, meal: cooks[k++] });
+      }
+    }
+    render(true);
+  }
+
+  function swap(idx) {
+    const used = new Set(week.map(x => x.meal.n));
+    const options = pool().filter(m => !used.has(m.n));
+    if (!options.length) { toast("That's every match. Try loosening a filter."); return; }
+    week[idx] = { leftover: false, meal: options[Math.floor(Math.random() * options.length)] };
+    // keep leftover nights pointing at a meal that is still in the plan
+    week.forEach((x, i) => {
+      if (x.leftover) {
+        const prev = week.slice(0, i).filter(y => !y.leftover).pop();
+        if (prev) x.meal = prev.meal;
+      }
+    });
+    render(false, idx);
+  }
+
+  function plateStyle(col) { return `--a:${col[0]};--b:${col[1]};--c:${col[2]}`; }
+
+  function render(all, only) {
+    if (!week.length) {
+      weekEl.innerHTML = `<div class="empty"><h3>No matches, yet.</h3><p>Our test kitchen is working on it. Try removing a filter.</p></div>`;
+      renderList(); return;
+    }
+    weekEl.innerHTML = week.map((x, i) => {
+      const m = x.meal;
+      const fresh = (all || i === only) ? " fresh" : "";
+      const delay = all ? `style="animation-delay:${i * 45}ms"` : "";
+      if (x.leftover) {
+        return `<article class="day leftover${fresh}" ${delay}>
+          <div class="day-head"><b>${DAYS[i]}</b><button class="swap" data-i="${i}" aria-label="Replace ${DAYS[i]}'s leftovers with a new meal">↻ Cook instead</button></div>
+          <div class="plate" style="${plateStyle(m.col)}"></div>
+          <h4><small>Leftovers night</small>${esc(m.n)}</h4>
+          <div class="meta"><span>5 min reheat</span><span>$0</span></div>
+        </article>`;
+      }
+      return `<article class="day${fresh}" ${delay}>
+        <div class="day-head"><b>${DAYS[i]}</b><button class="swap" data-i="${i}" aria-label="Swap ${DAYS[i]}'s meal">↻ Swap</button></div>
+        <div class="plate" style="${plateStyle(m.col)}"></div>
+        <h4>${esc(m.n)}</h4>
+        <div class="meta"><span>⏱ ${m.t} min</span><span>≈ $${m.c}</span></div>
+      </article>`;
+    }).join("");
+    renderList();
+  }
+
+  function renderList() {
+    const cooked = week.filter(x => !x.leftover).map(x => x.meal);
+    const counts = new Map();
+    cooked.forEach(m => m.i.forEach(item => counts.set(item, (counts.get(item) || 0) + 1)));
+    const groups = {};
+    counts.forEach((q, item) => { const a = AISLE[item] || "Pantry"; (groups[a] ||= []).push([item, q]); });
+
+    const total = cooked.reduce((s, m) => s + m.c, 0);
+    const avg = cooked.length ? Math.round(cooked.reduce((s, m) => s + m.t, 0) / cooked.length) : 0;
+    $("#list-count").textContent = `${counts.size} items`;
+    $("#t-cost").textContent = `$${total}`;
+    $("#t-time").textContent = `${avg}m`;
+    $("#t-left").textContent = week.filter(x => x.leftover).length;
+
+    let uid = 0;
+    listEl.innerHTML = AISLE_ORDER.filter(a => groups[a]).map(a => `
+      <div class="aisle"><h5>${a}</h5><ul>
+        ${groups[a].sort((x, y) => x[0].localeCompare(y[0])).map(([item, q]) => `
+          <li><label><input type="checkbox" id="g${uid++}"><span>${esc(item)}</span>${q > 1 ? `<span class="qty">×${q} meals</span>` : ""}</label></li>`).join("")}
+      </ul></div>`).join("") || `<p style="color:var(--ink-soft)">Nothing to buy. Nice.</p>`;
+  }
+
+  // ---------- Events ----------
+  document.querySelectorAll(".chip").forEach(btn => btn.addEventListener("click", () => {
+    const t = btn.dataset.tag, on = btn.getAttribute("aria-pressed") !== "true";
+    btn.setAttribute("aria-pressed", on);
+    on ? active.add(t) : active.delete(t);
+    generate();
+  }));
+  $("#regen").addEventListener("click", generate);
+  weekEl.addEventListener("click", e => {
+    const b = e.target.closest(".swap");
+    if (b) swap(+b.dataset.i);
+  });
+
+  let toastTimer;
+  function toast(msg) {
+    const el = $("#toast");
+    el.textContent = msg; el.classList.add("show");
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove("show"), 2600);
+  }
+
+  // Pricing toggle
+  const PRICES = { month: ["$6", "Billed monthly · cancel anytime"], year: ["$4", "Billed $48 yearly"] };
+  document.querySelectorAll(".toggle button").forEach(b => b.addEventListener("click", () => {
+    document.querySelectorAll(".toggle button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    const [p, note] = PRICES[b.dataset.bill];
+    $("#plus-price").textContent = p; $("#plus-billed").textContent = note;
+  }));
+
+  // Signup
+  $("#signup").addEventListener("submit", e => {
+    e.preventDefault();
+    const v = $("#email").value.trim(), msg = $("#signup-msg");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) { msg.textContent = "Hmm, that email doesn't look quite right."; $("#email").focus(); return; }
+    msg.textContent = `You're in. Check ${v} for your first week's plan.`;
+    e.target.reset();
+  });
+
+  // Sticky nav border
+  const nav = $("#nav");
+  const onScroll = () => nav.classList.toggle("scrolled", scrollY > 8);
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+  // Reveal on scroll
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(entries => entries.forEach(en => {
+      if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+    }), { threshold: .12, rootMargin: "0px 0px -40px 0px" });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll(".reveal").forEach(el => el.classList.add("in"));
+  }
+
+  generate();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Sharp Square Background -->
+  <rect width="512" height="512" fill="url(#bg_gradient)"/>
+  
+  <!-- Subtle Geometric Grid Lines for Structure -->
+  <line x1="0" y1="512" x2="512" y2="0" stroke="white" stroke-opacity="0.05" stroke-width="2"/>
+  
+  <!-- The Sun (Offset to top-left) -->
+  <circle cx="210" cy="210" r="110" fill="url(#sun_gradient)" />
+  <circle cx="210" cy="210" r="130" fill="url(#sun_gradient)" fill-opacity="0.2" />
+
+  <!-- Rain / Wind Geometric Accents -->
+  <path d="M180 390L150 440" stroke="url(#rain_gradient)" stroke-width="12" stroke-linecap="square"/>
+  <path d="M240 390L210 440" stroke="url(#rain_gradient)" stroke-width="12" stroke-linecap="square"/>
+  <path d="M300 390L270 440" stroke="url(#rain_gradient)" stroke-width="12" stroke-linecap="square"/>
+
+  <!-- Frosted Glass Cloud (Sharp base, geometric curves) -->
+  <g filter="url(#drop_shadow)">
+    <path d="M150 350H370C408.66 350 440 318.66 440 280C440 243.47 411.98 213.51 376.35 210.27C364.8 164.18 323.16 130 273.5 130C214.68 130 167 177.68 167 236.5C167 240.4 167.21 244.25 167.62 248.04C135.03 255.44 110 284.78 110 320C110 336.57 123.43 350 140 350H150Z" 
+          fill="url(#cloud_gradient)" 
+           fill-opacity="0.85"
+          stroke="url(#cloud_border)" 
+          stroke-width="3"/>
+  </g>
+
+  <!-- Definitions for Gradients and Shadows -->
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg_gradient" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0B132B"/>
+      <stop offset="50%" stop-color="#1C2541"/>
+      <stop offset="100%" stop-color="#3A506B"/>
+    </linearGradient>
+
+    <!-- Sun Gradient -->
+    <linearGradient id="sun_gradient" x1="120" y1="100" x2="300" y2="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFBE0B"/>
+      <stop offset="100%" stop-color="#FB5607"/>
+    </linearGradient>
+
+    <!-- Cloud Gradient (Frosted Glass Effect) -->
+    <linearGradient id="cloud_gradient" x1="110" y1="130" x2="440" y2="350" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#E0FBFC" stop-opacity="0.4"/>
+    </linearGradient>
+
+    <!-- Cloud Border (Glass Highlight) -->
+    <linearGradient id="cloud_border" x1="110" y1="130" x2="440" y2="350" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.1"/>
+    </linearGradient>
+
+    <!-- Rain Gradient -->
+    <linearGradient id="rain_gradient" x1="0" y1="390" x2="0" y2="440" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00F5D4"/>
+      <stop offset="100%" stop-color="#00BBF9" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Drop Shadow for Depth -->
+    <filter id="drop_shadow" x="90" y="120" width="370" height="260" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="15" stdDeviation="10" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+</svg>

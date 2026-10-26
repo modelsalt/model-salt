@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#13214A"/>
+      <stop offset="1" stop-color="#070D24"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="512" cy="500" r="420" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4B5BA8" stop-opacity="0.55"/>
+      <stop offset="0.6" stop-color="#2A3772" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#13214A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cloud" x1="0" y1="250" x2="0" y2="560" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F2F3FF"/>
+      <stop offset="0.55" stop-color="#D3D9FA"/>
+      <stop offset="1" stop-color="#A9B4EC"/>
+    </linearGradient>
+    <linearGradient id="bolt" x1="0" y1="520" x2="0" y2="775" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF4C2"/>
+      <stop offset="0.6" stop-color="#FFD9A6"/>
+      <stop offset="1" stop-color="#FFB8A8"/>
+    </linearGradient>
+    <filter id="glowCloud" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="22" result="b"/>
+      <feColorMatrix in="b" type="matrix" values="0 0 0 0 0.72  0 0 0 0 0.77  0 0 0 0 1  0 0 0 0.55 0" result="g"/>
+      <feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowBolt" x="-60%" y="-30%" width="220%" height="160%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="b"/>
+      <feColorMatrix in="b" type="matrix" values="0 0 0 0 1  0 0 0 0 0.85  0 0 0 0 0.62  0 0 0 0.75 0" result="g"/>
+      <feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Square background, no rounded corners -->
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <rect width="1024" height="1024" fill="url(#halo)"/>
+
+  <!-- Faint pastel stars -->
+  <g fill="#E8E4FF" opacity="0.55">
+    <circle cx="190" cy="210" r="5"/>
+    <circle cx="842" cy="180" r="4"/>
+    <circle cx="870" cy="820" r="3.5"/>
+    <circle cx="160" cy="790" r="4"/>
+  </g>
+
+  <!-- Motif, centered -->
+  <g transform="translate(-10,-25)">
+    <!-- Bolt (drawn first so it emerges from beneath the cloud) -->
+    <path filter="url(#glowBolt)" fill="url(#bolt)" stroke-linejoin="round"
+          d="M548 540 L455 692 L522 692 L482 800 L612 638 L542 638 L592 540 Z"/>
+
+    <!-- Cloud -->
+    <g filter="url(#glowCloud)" fill="url(#cloud)">
+      <circle cx="400" cy="470" r="105"/>
+      <circle cx="540" cy="420" r="145"/>
+      <circle cx="665" cy="500" r="85"/>
+      <rect x="300" y="480" width="450" height="105" rx="52.5"/>
+    </g>
+
+    <!-- Soft top highlight on the cloud -->
+    <ellipse cx="510" cy="345" rx="70" ry="32" fill="#FFFFFF" opacity="0.35"/>
+  </g>
+</svg>

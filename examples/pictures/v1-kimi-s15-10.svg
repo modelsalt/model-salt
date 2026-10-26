@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <title>Pelican riding a bicycle</title>
+
+  <!-- background -->
+  <rect x="0" y="0" width="100" height="100" rx="16" fill="#e7f2f9"/>
+  <circle cx="17" cy="17" r="6" fill="#ffd873" stroke="#22303a" stroke-width="1.6"/>
+  <path d="M17 8V10.2 M17 23.8V26 M8 17H10.2 M23.8 17H26" stroke="#22303a" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M5 92.5H95" stroke="#22303a" stroke-width="2" stroke-linecap="round"/>
+  <path d="M9 72L15 72 M7 79L13.5 79 M9.5 86L15 86" stroke="#9fb3bd" stroke-width="1.6" stroke-linecap="round"/>
+
+  <!-- wheels -->
+  <g>
+    <circle cx="27" cy="79" r="13" fill="#263138"/>
+    <circle cx="27" cy="79" r="9.5" fill="#f4f8fa"/>
+    <path d="M18.5 79H35.5 M22.8 71.7L31.2 86.3 M31.2 71.7L22.8 86.3" stroke="#b6c6cf" stroke-width="0.9"/>
+    <circle cx="27" cy="79" r="1.8" fill="#263138"/>
+  </g>
+  <g>
+    <circle cx="75" cy="79" r="13" fill="#263138"/>
+    <circle cx="75" cy="79" r="9.5" fill="#f4f8fa"/>
+    <path d="M66.5 79H83.5 M70.8 71.7L79.2 86.3 M79.2 71.7L70.8 86.3" stroke="#b6c6cf" stroke-width="0.9"/>
+    <circle cx="75" cy="79" r="1.8" fill="#263138"/>
+  </g>
+
+  <!-- frame (dark under-stroke, red over-stroke) -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M50 77L27.5 78.5 M50 77L43.5 55.5 M43.5 55.5L27.5 78.5 M50 77L66.5 56 M43.5 55.5L66.5 54.5 M66.2 53.2L68.7 59.5 M68.7 59.5L74.5 78.5 M66.5 54L70 46L63.5 44.5"
+          stroke="#22303a" stroke-width="4.2"/>
+    <path d="M50 77L27.5 78.5 M50 77L43.5 55.5 M43.5 55.5L27.5 78.5 M50 77L66.5 56 M43.5 55.5L66.5 54.5 M66.2 53.2L68.7 59.5 M68.7 59.5L74.5 78.5 M66.5 54L70 46L63.5 44.5"
+          stroke="#e05252" stroke-width="2.2"/>
+    <path d="M43.5 55.5L42.3 51.3" stroke="#22303a" stroke-width="2.2"/>
+    <path d="M36.5 51L46.5 50.2" stroke="#22303a" stroke-width="3.2"/>
+  </g>
+
+  <!-- crank and pedals -->
+  <g stroke="#22303a" stroke-linecap="round">
+    <circle cx="50" cy="77" r="3.2" fill="#f4f8fa" stroke-width="1.6"/>
+    <circle cx="50" cy="77" r="1.1" fill="#22303a" stroke="none"/>
+    <path d="M50 77L56 82.2 M50 77L44 71.8" stroke-width="1.8"/>
+    <path d="M52.6 82.2L59.4 82.2 M40.6 71.8L47.4 71.8" stroke-width="2.6"/>
+  </g>
+
+  <!-- tail + far leg -->
+  <path d="M37.5 44.5L28.5 49.5L37 52.5Z" fill="#e8edf0" stroke="#22303a" stroke-width="1.6" stroke-linejoin="round"/>
+  <path d="M48.5 57L45 70.8" stroke="#3a434b" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M40.8 70.3L48.4 70.3L46.8 73.8L42.4 73.8Z" fill="#3a434b" stroke="#22303a" stroke-width="1" stroke-linejoin="round"/>
+
+  <!-- body -->
+  <path d="M60.5 39 C59.5 32.5 53 29.5 46.5 32 C39 34.8 35 41 36 47.5 C36.8 53.5 42.5 58.5 49.5 58.5 C56 58.5 60.5 52.5 61 46 C61.2 43.5 61 41 60.5 39 Z"
+        fill="#fdfdfb" stroke="#22303a" stroke-width="2" stroke-linejoin="round"/>
+
+  <!-- near leg + foot -->
+  <path d="M53 57.5 C54 65 55 73 56 81.5" stroke="#414a53" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+  <path d="M52 80.3L60.5 80.3L58.8 84.2L53.6 84.2Z" fill="#414a53" stroke="#22303a" stroke-width="1" stroke-linejoin="round"/>
+
+  <!-- wing reaching to the handlebar grip -->
+  <path d="M48.5 36.5 C55 34 61.5 37.5 65 43.5 L62.5 46.5 C57.5 45.5 51 47 45.5 51 C43 47.5 44.5 40.5 48.5 36.5 Z"
+        fill="#d7dee4" stroke="#22303a" stroke-width="1.8" stroke-linejoin="round"/>
+  <path d="M50.5 40.5 C54.5 40 58.5 41.8 61.5 44.5 M47.5 44.5 C51.5 44 55.5 45.2 58.5 47.2"
+        fill="none" stroke="#9aa8b2" stroke-width="0.9" stroke-linecap="round"/>
+
+  <!-- neck creases -->
+  <path d="M55.5 40 C55.8 33.5 58 29 62.5 26.3 M62.8 41 C62.6 35.8 64 31.5 67.6 28.7"
+        fill="none" stroke="#22303a" stroke-width="1.8" stroke-linecap="round"/>
+
+  <!-- bill -->
+  <path d="M70.5 27.6 C77.5 29 84.5 30 90 30.4 C89.3 33.2 84.5 34.8 78.5 34.2 C74.5 33.8 71.5 31.5 70.5 27.6 Z"
+        fill="#f7c57e" stroke="#22303a" stroke-width="1.8" stroke-linejoin="round"/>
+  <path d="M69.5 23.5 C77 24.5 84.5 26.5 90.5 29 L90.2 30.8 C84 29.5 76.5 28.5 70 27.8 Z"
+        fill="#f0a13e" stroke="#22303a" stroke-width="1.8" stroke-linejoin="round"/>
+  <path d="M89.6 28.8L91.2 29.6L89.9 30.8Z" fill="#22303a"/>
+
+  <!-- head + eye -->
+  <circle cx="66.5" cy="26.5" r="5" fill="#fdfdfb" stroke="#22303a" stroke-width="2"/>
+  <circle cx="65.2" cy="25.8" r="1.05" fill="#22303a"/>
+</svg>

@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450">
+  <!-- Flat background bands -->
+  <rect x="0" y="0" width="600" height="300" fill="#cfe3f5"/>
+  <rect x="0" y="300" width="600" height="150" fill="#e9dcc9"/>
+  <!-- Pastel sun -->
+  <circle cx="500" cy="80" r="42" fill="#fde9c4"/>
+
+  <!-- Soft shadows on the ground -->
+  <ellipse cx="240" cy="412" rx="92" ry="12" fill="#d6c7b3"/>
+  <ellipse cx="395" cy="368" rx="62" ry="9" fill="#d6c7b3"/>
+
+  <!-- FRONT WHEEL (farther away, foreshortened, three-quarter rear view) -->
+  <ellipse cx="392" cy="305" rx="44" ry="60" fill="#9fb0c4"/>
+  <ellipse cx="392" cy="305" rx="31" ry="46" fill="#dfe7f0"/>
+  <g fill="#b9c6d6">
+    <rect x="390.5" y="262" width="3" height="86"/>
+    <rect x="363" y="303.5" width="58" height="3"/>
+    <polygon points="372,272 376,270 412,338 408,340"/>
+    <polygon points="408,270 412,272 376,340 372,338"/>
+  </g>
+  <circle cx="392" cy="305" r="6" fill="#8a9bb0"/>
+
+  <!-- Fork -->
+  <polygon points="360,262 370,260 396,300 388,304" fill="#a8d8c8"/>
+
+  <!-- REAR WHEEL (closest to viewer) -->
+  <ellipse cx="236" cy="335" rx="66" ry="78" fill="#9fb0c4"/>
+  <ellipse cx="236" cy="335" rx="48" ry="60" fill="#dfe7f0"/>
+  <g fill="#b9c6d6">
+    <rect x="234" y="277" width="4" height="116"/>
+    <rect x="190" y="333" width="92" height="4"/>
+    <polygon points="206,289 211,286 268,382 263,385"/>
+    <polygon points="263,286 268,289 211,385 206,382"/>
+    <polygon points="193,312 196,307 279,360 276,365"/>
+    <polygon points="276,307 279,312 196,365 193,360"/>
+  </g>
+  <circle cx="236" cy="335" r="8" fill="#8a9bb0"/>
+
+  <!-- BMX FRAME (compact) -->
+  <!-- chainstay -->
+  <polygon points="236,331 236,339 286,346 286,334" fill="#a8d8c8"/>
+  <!-- seat stay -->
+  <polygon points="236,331 240,326 290,278 296,284" fill="#a8d8c8"/>
+  <!-- seat tube -->
+  <polygon points="282,334 292,334 298,276 288,274" fill="#a8d8c8"/>
+  <!-- down tube -->
+  <polygon points="280,338 290,344 370,262 362,256" fill="#a8d8c8"/>
+  <!-- top tube / crossbar -->
+  <polygon points="290,276 292,286 368,268 366,258" fill="#a8d8c8"/>
+  <!-- head tube -->
+  <polygon points="360,254 372,252 372,270 360,272" fill="#95c9b8"/>
+  <!-- crank + pedals -->
+  <circle cx="286" cy="340" r="11" fill="#b9a7d6"/>
+  <polygon points="284,338 288,338 300,364 296,366" fill="#8f7fb0"/>
+  <rect x="292" y="362" width="16" height="6" fill="#8f7fb0"/>
+  <polygon points="284,342 288,342 274,318 270,320" fill="#8f7fb0"/>
+  <rect x="262" y="314" width="16" height="6" fill="#8f7fb0"/>
+
+  <!-- Seat (small BMX saddle) -->
+  <ellipse cx="294" cy="271" rx="16" ry="6" fill="#b9a7d6"/>
+
+  <!-- Handlebars (tall BMX bars, seen beyond the pelican) -->
+  <polygon points="362,254 372,252 374,206 364,208" fill="#95c9b8"/>
+  <polygon points="318,200 420,194 420,204 318,210" fill="#95c9b8"/>
+  <ellipse cx="316" cy="205" rx="9" ry="6" fill="#f3b8c0"/>
+  <ellipse cx="421" cy="199" rx="9" ry="6" fill="#f3b8c0"/>
+
+  <!-- PELICAN, perched on the crossbar, back to viewer, head turned -->
+  <!-- tail (toward viewer, lower-left) -->
+  <polygon points="300,262 272,290 290,296 316,262" fill="#d9d2e3"/>
+  <!-- body -->
+  <ellipse cx="328" cy="232" rx="40" ry="44" fill="#f7eef0"/>
+  <!-- folded wings on the back -->
+  <path d="M296 220 C 300 190, 330 184, 346 212 C 350 236, 332 266, 304 262 C 290 250, 288 234, 296 220 Z" fill="#dcd4e6"/>
+  <path d="M318 214 C 334 190, 360 192, 366 220 C 368 246, 348 268, 326 262 C 314 250, 310 232, 318 214 Z" fill="#cfc6dd"/>
+  <!-- neck -->
+  <path d="M312 198 C 312 170, 330 150, 346 148 C 362 150, 360 180, 348 196 C 340 200, 324 206, 312 198 Z" fill="#f7eef0"/>
+  <!-- head -->
+  <circle cx="346" cy="146" r="22" fill="#f7eef0"/>
+  <!-- beak, long and pointing to the right in profile -->
+  <polygon points="360,140 450,156 446,164 360,158" fill="#f6c6a3"/>
+  <!-- pouch -->
+  <path d="M360 158 L 446 164 C 420 180, 380 182, 360 158 Z" fill="#fbe3b4"/>
+  <!-- eye -->
+  <circle cx="356" cy="142" r="3.5" fill="#6f6680"/>
+  <!-- feet gripping the crossbar -->
+  <polygon points="318,268 332,266 338,278 322,282 312,280" fill="#f3b996"/>
+  <polygon points="336,264 350,262 356,274 340,278 330,276" fill="#f3b996"/>
+</svg>

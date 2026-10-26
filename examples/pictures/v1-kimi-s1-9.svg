@@ -1,0 +1,74 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" role="img">
+  <title>A pelican standing on the pedals of a bicycle, pumping uphill</title>
+
+  <!-- sky -->
+  <rect width="800" height="600" fill="#E9F5F8"/>
+
+  <!-- open road, sloping uphill -->
+  <polygon points="0,564 800,364 800,600 0,600" fill="#C9D6DD"/>
+
+  <!-- whole scene tilted to the uphill grade -->
+  <g transform="rotate(-14 415 460)">
+
+    <!-- speed lines -->
+    <g stroke="#8FB9C9" stroke-linecap="round">
+      <line x1="95"  y1="345" x2="225" y2="345" stroke-width="9"/>
+      <line x1="130" y1="300" x2="240" y2="300" stroke-width="7"/>
+      <line x1="105" y1="395" x2="200" y2="395" stroke-width="7"/>
+      <line x1="160" y1="255" x2="235" y2="255" stroke-width="6"/>
+    </g>
+
+    <!-- soft shadow on the road -->
+    <ellipse cx="410" cy="464" rx="150" ry="9" fill="#A9BEC9" opacity="0.55"/>
+
+    <!-- wheels (front slightly larger for the three-quarter view) -->
+    <circle cx="320" cy="400" r="56" fill="none" stroke="#3A4750" stroke-width="13"/>
+    <circle cx="500" cy="400" r="62" fill="none" stroke="#3A4750" stroke-width="13"/>
+    <circle cx="320" cy="400" r="7" fill="#3A4750"/>
+    <circle cx="500" cy="400" r="7" fill="#3A4750"/>
+
+    <!-- frame -->
+    <path d="M 320 400 L 412 408 L 478 330 L 500 400 M 412 408 L 382 318 M 382 318 L 320 400"
+          fill="none" stroke="#E4572E" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- seat + handlebar (bar hooked slightly toward viewer) -->
+    <path d="M 366 314 L 398 310" stroke="#3A4750" stroke-width="10" stroke-linecap="round"/>
+    <path d="M 478 330 L 470 298 M 452 296 Q 470 286 490 292"
+          fill="none" stroke="#3A4750" stroke-width="8" stroke-linecap="round"/>
+
+    <!-- cranks + pedals -->
+    <path d="M 412 408 L 438 432 M 412 408 L 386 384" stroke="#3A4750" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="412" cy="408" r="8" fill="#3A4750"/>
+    <rect x="426" y="428" width="24" height="8" rx="4" fill="#3A4750"/>
+    <rect x="374" y="380" width="24" height="8" rx="4" fill="#3A4750"/>
+
+    <!-- pelican -->
+    <ellipse cx="322" cy="275" rx="24" ry="16" fill="#FDFEFE" transform="rotate(20 322 275)"/> <!-- tail -->
+
+    <!-- legs standing on the pedals -->
+    <path d="M 402 312 C 410 350 424 390 436 424" fill="none" stroke="#46525B" stroke-width="9" stroke-linecap="round"/>
+    <path d="M 390 316 C 384 336 382 356 386 376" fill="none" stroke="#46525B" stroke-width="9" stroke-linecap="round"/>
+
+    <!-- body blob, leaning into the climb -->
+    <ellipse cx="385" cy="255" rx="62" ry="70" fill="#FDFEFE" transform="rotate(-18 385 255)"/>
+
+    <!-- neck + wing -->
+    <path d="M 415 215 C 430 200 435 190 438 178" fill="none" stroke="#FDFEFE" stroke-width="26" stroke-linecap="round"/>
+    <ellipse cx="372" cy="262" rx="46" ry="26" fill="#DCE6EB" transform="rotate(-24 372 262)"/>
+
+    <!-- head -->
+    <circle cx="442" cy="160" r="27" fill="#FDFEFE"/>
+
+    <!-- pouch, then bill -->
+    <path d="M 462 164 C 488 202 528 212 576 174 C 546 186 498 182 464 173 Z" fill="#F5A83C"/>
+    <path d="M 458 150 C 502 145 550 156 578 172 C 549 169 503 165 460 165 Z" fill="#EE8434"/>
+
+    <!-- two eyes: head turned a touch toward viewer -->
+    <circle cx="452" cy="154" r="4.5" fill="#2F3A42"/>
+    <circle cx="438" cy="150" r="3.2" fill="#2F3A42"/>
+
+    <!-- feet gripping the pedals -->
+    <ellipse cx="438" cy="426" rx="13" ry="6.5" fill="#46525B"/>
+    <ellipse cx="386" cy="378" rx="12" ry="6" fill="#46525B"/>
+  </g>
+</svg>

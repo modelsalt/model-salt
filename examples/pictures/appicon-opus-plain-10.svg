@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <!-- Sky background -->
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2F80FF"/>
+      <stop offset="0.55" stop-color="#5A5CF2"/>
+      <stop offset="1" stop-color="#8B4FE2"/>
+    </linearGradient>
+
+    <!-- Sun -->
+    <radialGradient id="sun" cx="0.38" cy="0.35" r="0.75">
+      <stop offset="0" stop-color="#FFF5B8"/>
+      <stop offset="0.55" stop-color="#FFC93C"/>
+      <stop offset="1" stop-color="#FF9A1F"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FFD66B" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#FFD66B" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Cloud -->
+    <linearGradient id="cloud" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#D9E4FF"/>
+    </linearGradient>
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="170%">
+      <feDropShadow dx="0" dy="28" stdDeviation="30" flood-color="#1A1366" flood-opacity="0.35"/>
+    </filter>
+
+    <!-- Soft top-light sheen over the whole icon -->
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.14"/>
+      <stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Square background, no rounded corners -->
+  <rect width="1024" height="1024" fill="url(#sky)"/>
+
+  <!-- Faint background cloud for depth -->
+  <g fill="#FFFFFF" opacity="0.12">
+    <circle cx="210" cy="300" r="70"/>
+    <circle cx="290" cy="270" r="95"/>
+    <rect x="140" y="290" width="270" height="90" rx="45"/>
+  </g>
+
+  <!-- Sun glow -->
+  <circle cx="620" cy="380" r="360" fill="url(#glow)"/>
+
+  <!-- Sun rays -->
+  <g transform="translate(620 380)" stroke="#FFD24D" stroke-width="30" stroke-linecap="round">
+    <line x1="0" y1="-215" x2="0" y2="-262"/>
+    <line x1="0" y1="-215" x2="0" y2="-262" transform="rotate(45)"/>
+    <line x1="0" y1="-215" x2="0" y2="-262" transform="rotate(90)"/>
+    <line x1="0" y1="-215" x2="0" y2="-262" transform="rotate(135)"/>
+    <line x1="0" y1="-215" x2="0" y2="-262" transform="rotate(180)"/>
+    <line x1="0" y1="-215" x2="0" y2="-262" transform="rotate(225)"/>
+    <line x1="0" y1="-215" x2="0" y2="-262" transform="rotate(270)"/>
+    <line x1="0" y1="-215" x2="0" y2="-262" transform="rotate(315)"/>
+  </g>
+
+  <!-- Sun disc -->
+  <circle cx="620" cy="380" r="170" fill="url(#sun)"/>
+
+  <!-- Main cloud -->
+  <g filter="url(#shadow)" fill="url(#cloud)">
+    <circle cx="380" cy="565" r="130"/>
+    <circle cx="560" cy="500" r="170"/>
+    <circle cx="660" cy="640" r="120"/>
+    <rect x="220" y="560" width="540" height="200" rx="100"/>
+  </g>
+
+  <!-- Cloud highlight -->
+  <path d="M 440 420 A 150 150 0 0 1 640 360" fill="none"
+        stroke="#FFFFFF" stroke-width="18" stroke-linecap="round" opacity="0.9"/>
+
+  <!-- Overall sheen -->
+  <rect width="1024" height="1024" fill="url(#sheen)"/>
+</svg>

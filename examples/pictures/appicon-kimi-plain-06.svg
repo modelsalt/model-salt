@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5EBEFF"/>
+      <stop offset="1" stop-color="#1877D4"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFF9C4"/>
+      <stop offset="55%" stop-color="#FFE14D"/>
+      <stop offset="100%" stop-color="#FFB300"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cloud" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#D8EBFB"/>
+    </linearGradient>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0B4FA0" flood-opacity="0.30"/>
+    </filter>
+  </defs>
+
+  <!-- Square background, sharp corners -->
+  <rect width="512" height="512" fill="url(#sky)"/>
+
+  <!-- Sun glow -->
+  <circle cx="228" cy="216" r="135" fill="url(#glow)"/>
+
+  <!-- Sun rays -->
+  <g stroke="#FFD54A" stroke-width="14" stroke-linecap="round">
+    <line x1="320" y1="216" x2="348" y2="216"/>
+    <line x1="293.1" y1="281.1" x2="312.9" y2="300.9"/>
+    <line x1="228" y1="308" x2="228" y2="336"/>
+    <line x1="162.9" y1="281.1" x2="143.1" y2="300.9"/>
+    <line x1="136" y1="216" x2="108" y2="216"/>
+    <line x1="162.9" y1="150.9" x2="143.1" y2="131.1"/>
+    <line x1="228" y1="124" x2="228" y2="96"/>
+    <line x1="293.1" y1="150.9" x2="312.9" y2="131.1"/>
+  </g>
+
+  <!-- Sun -->
+  <circle cx="228" cy="216" r="75" fill="url(#sun)"/>
+
+  <!-- Distant clouds -->
+  <g fill="#FFFFFF" opacity="0.45">
+    <circle cx="392" cy="108" r="20"/>
+    <circle cx="420" cy="94" r="26"/>
+    <circle cx="448" cy="108" r="20"/>
+    <rect x="372" y="108" width="96" height="20" rx="10"/>
+  </g>
+  <g fill="#FFFFFF" opacity="0.35">
+    <circle cx="74" cy="452" r="16"/>
+    <circle cx="98" cy="440" r="21"/>
+    <circle cx="122" cy="452" r="16"/>
+    <rect x="58" y="452" width="80" height="16" rx="8"/>
+  </g>
+
+  <!-- Main cloud -->
+  <g fill="url(#cloud)" filter="url(#softShadow)">
+    <circle cx="255" cy="335" r="58"/>
+    <circle cx="325" cy="308" r="72"/>
+    <circle cx="395" cy="335" r="58"/>
+    <rect x="197" y="335" width="256" height="58" rx="29"/>
+  </g>
+
+  <!-- Cloud sheen -->
+  <ellipse cx="298" cy="262" rx="42" ry="16" fill="#FFFFFF" opacity="0.65" transform="rotate(-18 298 262)"/>
+</svg>

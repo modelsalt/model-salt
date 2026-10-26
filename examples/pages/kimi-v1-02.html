@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>supper. — Dinner, sorted.</title>
+<meta name="description" content="supper. A meal planner for families with no time. Five weeknights, one tap, zero panic.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   supper. — landing
+   dark editorial · charcoal / gold-lime · magazine flow
+   ============================================================ */
+:root{
+  --bg:        #13140f;
+  --bg-2:      #1a1c15;
+  --surface:   #20221a;
+  --ink:       #f3f0e4;
+  --muted:     #9b988a;
+  --faint:     #6d6b60;
+  --gold:      #d9a841;
+  --gold-soft: #e8c06a;
+  --lime:      #b6d94f;
+  --line:      rgba(243,240,228,.09);
+  --grad:      linear-gradient(100deg, var(--gold) 0%, var(--lime) 100%);
+  --serif: "Fraunces", Georgia, serif;
+  --sans:  "Inter", -apple-system, sans-serif;
+  --ease:  cubic-bezier(.22,1,.36,1);
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-weight:300;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection{ background:var(--lime); color:#13140f; }
+
+/* film grain */
+body::after{
+  content:"";
+  position:fixed; inset:0; z-index:120; pointer-events:none;
+  opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ambient glows */
+.glowfield{ position:fixed; inset:0; z-index:-1; pointer-events:none; }
+.glowfield i{
+  position:absolute; border-radius:50%; filter:blur(140px); opacity:.14;
+}
+.glowfield i:nth-child(1){ width:56vw; height:56vw; top:-22vw; left:-14vw; background:var(--gold); }
+.glowfield i:nth-child(2){ width:44vw; height:44vw; top:60vh; right:-18vw; background:var(--lime); opacity:.09; }
+.glowfield i:nth-child(3){ width:40vw; height:40vw; bottom:-16vw; left:22vw; background:var(--gold); opacity:.08; }
+
+.wrap{ width:min(1180px, 92vw); margin:0 auto; }
+
+/* ------------------------------------------------ nav */
+nav{
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  background:rgba(19,20,15,.62);
+  border-bottom:1px solid var(--line);
+}
+.nav-in{
+  width:min(1180px,92vw); margin:0 auto;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:1.05rem 0;
+}
+.logo{
+  font-family:var(--serif); font-weight:600; font-size:1.45rem;
+  letter-spacing:-.02em; color:var(--ink); text-decoration:none;
+}
+.logo em{ font-style:normal; background:var(--grad); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+.nav-cta{
+  font-size:.82rem; font-weight:500; letter-spacing:.04em;
+  color:#13140f; background:var(--grad);
+  padding:.6rem 1.3rem; border-radius:99px; text-decoration:none;
+  transition:transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+.nav-cta:hover{ transform:translateY(-2px); box-shadow:0 8px 30px rgba(217,168,65,.35); }
+
+/* ------------------------------------------------ hero */
+.hero{
+  min-height:100svh;
+  display:flex; align-items:center;
+  padding:9rem 0 5rem;
+  position:relative;
+}
+.hero-grid{
+  display:grid; grid-template-columns:1.05fr .95fr;
+  gap:4rem; align-items:center; width:100%;
+}
+.kicker{
+  display:inline-flex; align-items:center; gap:.7rem;
+  font-size:.72rem; letter-spacing:.32em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:2rem;
+}
+.kicker::before{ content:""; width:2.4rem; height:1px; background:var(--grad); }
+h1{
+  font-family:var(--serif); font-weight:300;
+  font-size:clamp(3.4rem, 7.4vw, 6.6rem);
+  line-height:.98; letter-spacing:-.03em; margin-bottom:1.6rem;
+}
+h1 em{
+  font-style:italic; font-weight:400;
+  background:var(--grad); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+.hero-sub{
+  color:var(--muted); font-size:1.08rem; max-width:26rem; margin-bottom:2.6rem;
+}
+
+/* store badges */
+.badges{ display:flex; gap:.9rem; flex-wrap:wrap; }
+.badge{
+  display:inline-flex; align-items:center; gap:.75rem;
+  background:var(--surface); border:1px solid var(--line);
+  border-radius:14px; padding:.62rem 1.15rem;
+  text-decoration:none; color:var(--ink);
+  transition:transform .35s var(--ease), border-color .35s, box-shadow .35s var(--ease);
+}
+.badge:hover{
+  transform:translateY(-3px);
+  border-color:rgba(182,217,79,.45);
+  box-shadow:0 10px 34px rgba(182,217,79,.14);
+}
+.badge svg{ width:24px; height:24px; flex-shrink:0; }
+.badge small{ display:block; font-size:.6rem; letter-spacing:.08em; color:var(--muted); text-transform:uppercase; line-height:1.2; }
+.badge strong{ display:block; font-size:.98rem; font-weight:600; line-height:1.25; letter-spacing:-.01em; }
+.fineprint{ margin-top:1.4rem; font-size:.78rem; color:var(--faint); letter-spacing:.05em; }
+.fineprint span{ color:var(--lime); }
+
+/* hero card stack */
+.hero-visual{ position:relative; height:520px; }
+.mini{
+  position:absolute; width:290px;
+  background:linear-gradient(160deg, rgba(38,41,29,.92), rgba(26,28,21,.92));
+  border:1px solid var(--line); border-radius:22px;
+  padding:1.4rem; backdrop-filter:blur(6px);
+  box-shadow:0 30px 80px rgba(0,0,0,.5);
+  transition:transform .6s var(--ease), box-shadow .6s var(--ease);
+}
+.mini:hover{ transform:translateY(-8px) rotate(0deg) !important; box-shadow:0 40px 100px rgba(0,0,0,.6), 0 0 60px rgba(217,168,65,.12); }
+.mini .day{ font-size:.62rem; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); margin-bottom:.8rem; }
+.mini .dish{ font-family:var(--serif); font-size:1.3rem; font-weight:400; letter-spacing:-.01em; margin-bottom:.3rem; }
+.mini .meta{ font-size:.74rem; color:var(--muted); }
+.mini:nth-child(1){ top:2%;  left:4%;  transform:rotate(-6deg); animation:float1 7s ease-in-out infinite; z-index:1; }
+.mini:nth-child(2){ top:30%; right:2%; transform:rotate(4deg);  animation:float2 8s ease-in-out infinite; z-index:2; }
+.mini:nth-child(3){ top:62%; left:12%; transform:rotate(-2deg); animation:float3 9s ease-in-out infinite; z-index:3; }
+@keyframes float1{ 50%{ transform:rotate(-6deg) translateY(-14px); } }
+@keyframes float2{ 50%{ transform:rotate(4deg)  translateY(12px); } }
+@keyframes float3{ 50%{ transform:rotate(-2deg) translateY(-10px); } }
+
+/* plates — overhead dish abstractions in pure CSS */
+.plate{
+  width:96px; height:96px; border-radius:50%; margin-bottom:1.1rem;
+  position:relative; flex-shrink:0;
+  box-shadow: inset 0 0 0 6px rgba(19,20,15,.55), inset 0 -10px 24px rgba(0,0,0,.45), 0 0 0 1px var(--line), 0 14px 34px rgba(0,0,0,.45);
+}
+.plate::after{
+  content:""; position:absolute; inset:10%; border-radius:50%;
+  background:radial-gradient(circle at 32% 28%, rgba(255,255,255,.28), transparent 46%);
+}
+.plate.pasta{  background:conic-gradient(from 210deg, #e8c06a, #c08b32, #f0d189, #b57d2c, #e8c06a); }
+.plate.tacos{  background:conic-gradient(from 40deg, #b6d94f, #d9a841 30%, #8fae3a 55%, #e8873a 78%, #b6d94f); }
+.plate.curry{  background:conic-gradient(from 120deg, #7fae52, #4f7a34, #9fc46a, #3f6329, #7fae52); }
+.plate.bowls{  background:conic-gradient(from 300deg, #d9a841, #8a5a24, #e8c06a, #a86f2e, #d9a841); }
+.plate.pizza{
+  background:
+    radial-gradient(circle at 30% 35%, #b8452e 0 9%, transparent 10%),
+    radial-gradient(circle at 62% 58%, #b8452e 0 8%, transparent 9%),
+    radial-gradient(circle at 55% 25%, #8fae3a 0 6%, transparent 7%),
+    conic-gradient(from 90deg, #f0d189, #ddb050, #f0d189, #d9a841, #f0d189);
+}
+.mini .plate{ width:74px; height:74px; }
+
+/* ------------------------------------------------ marquee */
+.marquee{
+  border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  overflow:hidden; padding:1.15rem 0; white-space:nowrap;
+  background:rgba(26,28,21,.5);
+}
+.marquee-track{ display:inline-flex; animation:scroll 26s linear infinite; }
+.marquee span{
+  font-family:var(--serif); font-style:italic; font-size:1.05rem;
+  color:var(--muted); padding:0 1.6rem; letter-spacing:.06em;
+}
+.marquee b{ color:var(--gold); font-weight:400; }
+@keyframes scroll{ to{ transform:translateX(-50%); } }
+
+/* ------------------------------------------------ sections */
+section{ padding:7.5rem 0; position:relative; }
+.sec-head{ max-width:640px; margin-bottom:4rem; }
+.sec-head.center{ margin-left:auto; margin-right:auto; text-align:center; }
+.sec-head.center .kicker::before{ display:none; }
+h2{
+  font-family:var(--serif); font-weight:300;
+  font-size:clamp(2.2rem, 4.6vw, 3.6rem);
+  line-height:1.06; letter-spacing:-.025em; margin-bottom:1.1rem;
+}
+h2 em{ font-style:italic; background:var(--grad); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+.sec-sub{ color:var(--muted); font-size:1rem; max-width:30rem; }
+.sec-head.center .sec-sub{ margin:0 auto; }
+
+/* ------------------------------------------------ the week — recipe cards */
+.week-grid{
+  display:grid; grid-template-columns:repeat(5,1fr); gap:1.4rem;
+}
+.card{
+  background:linear-gradient(165deg, rgba(38,41,29,.85), rgba(24,26,19,.9));
+  border:1px solid var(--line); border-radius:24px;
+  padding:1.7rem 1.5rem 1.6rem;
+  position:relative; overflow:hidden;
+  transition:transform .5s var(--ease), box-shadow .5s var(--ease), border-color .5s;
+}
+.card::before{
+  content:""; position:absolute; inset:0; border-radius:24px;
+  background:radial-gradient(120% 70% at 50% -10%, rgba(217,168,65,.14), transparent 60%);
+  opacity:0; transition:opacity .5s;
+}
+.card:hover{
+  transform:translateY(-10px);
+  border-color:rgba(217,168,65,.35);
+  box-shadow:0 30px 70px rgba(0,0,0,.55), 0 0 50px rgba(217,168,65,.1);
+}
+.card:hover::before{ opacity:1; }
+.card:hover .plate{ transform:rotate(14deg) scale(1.05); }
+.card .plate{ transition:transform .7s var(--ease); }
+.card .day{ font-size:.62rem; letter-spacing:.32em; text-transform:uppercase; color:var(--gold); margin-bottom:.9rem; }
+.card:nth-child(even) .day{ color:var(--lime); }
+.card .dish{ font-family:var(--serif); font-weight:400; font-size:1.32rem; letter-spacing:-.01em; line-height:1.2; margin-bottom:.4rem; }
+.card .meta{ font-size:.73rem; color:var(--muted); margin-bottom:1rem; }
+.card .tag{
+  display:inline-block; font-family:var(--serif); font-style:italic;
+  font-size:.82rem; color:var(--faint);
+  border-top:1px solid var(--line); padding-top:.8rem; width:100%;
+}
+@media(min-width:901px){
+  .card:nth-child(1){ transform:translateY(0); }
+  .card:nth-child(2){ margin-top:2.6rem; }
+  .card:nth-child(3){ margin-top:.8rem; }
+  .card:nth-child(4){ margin-top:3.4rem; }
+  .card:nth-child(5){ margin-top:1.6rem; }
+  .card:nth-child(2):hover, .card:nth-child(4):hover{ transform:translateY(-10px); }
+}
+
+/* ------------------------------------------------ CTA band */
+.cta-band{
+  border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  background:
+    radial-gradient(70% 130% at 50% 0%, rgba(217,168,65,.09), transparent 60%),
+    var(--bg-2);
+  text-align:center; padding:6rem 0;
+}
+.cta-band h2{ margin-bottom:2.2rem; }
+.cta-band .badges{ justify-content:center; }
+
+/* ------------------------------------------------ how it works */
+.steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:3.5rem; }
+.step .num{
+  font-family:var(--serif); font-style:italic; font-size:.95rem;
+  color:var(--gold); display:block; margin-bottom:1.1rem;
+}
+.step:nth-child(2) .num{ color:var(--lime); }
+.step h3{
+  font-family:var(--serif); font-weight:400; font-size:2rem;
+  letter-spacing:-.02em; margin-bottom:.55rem;
+}
+.step p{ color:var(--muted); font-size:.94rem; max-width:17rem; }
+.step{ border-top:1px solid var(--line); padding-top:1.6rem; }
+
+/* ------------------------------------------------ features */
+.features{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; }
+.feature{
+  border:1px solid var(--line); border-radius:22px; padding:2.1rem 1.9rem;
+  background:rgba(26,28,21,.55);
+  transition:transform .5s var(--ease), border-color .5s, box-shadow .5s var(--ease);
+}
+.feature:hover{
+  transform:translateY(-6px);
+  border-color:rgba(182,217,79,.3);
+  box-shadow:0 24px 60px rgba(0,0,0,.45), 0 0 44px rgba(182,217,79,.08);
+}
+.feature .dot{
+  width:38px; height:38px; border-radius:12px; margin-bottom:1.4rem;
+  background:var(--grad); opacity:.9;
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--serif); font-style:italic; color:#13140f; font-size:1rem;
+}
+.feature h3{ font-family:var(--serif); font-weight:400; font-size:1.45rem; letter-spacing:-.015em; margin-bottom:.5rem; }
+.feature p{ color:var(--muted); font-size:.9rem; }
+
+/* ------------------------------------------------ pull quote */
+.pullquote{ text-align:center; padding:8rem 0; }
+.pullquote blockquote{
+  font-family:var(--serif); font-weight:300; font-style:italic;
+  font-size:clamp(1.7rem, 3.6vw, 2.9rem);
+  line-height:1.25; letter-spacing:-.02em;
+  max-width:20ch; margin:0 auto 1.6rem;
+}
+.pullquote blockquote span{ background:var(--grad); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+.pullquote cite{ font-style:normal; font-size:.78rem; letter-spacing:.26em; text-transform:uppercase; color:var(--faint); }
+
+/* ------------------------------------------------ final CTA */
+.final{
+  text-align:center; padding:9rem 0 8rem;
+  background:
+    radial-gradient(60% 90% at 50% 110%, rgba(182,217,79,.1), transparent 65%),
+    radial-gradient(50% 70% at 50% -10%, rgba(217,168,65,.12), transparent 60%);
+  border-top:1px solid var(--line);
+}
+.final h2{ font-size:clamp(3rem, 7vw, 5.6rem); margin-bottom:1.2rem; }
+.final .sec-sub{ margin:0 auto 2.8rem; }
+.final .badges{ justify-content:center; }
+
+/* ------------------------------------------------ footer */
+footer{
+  border-top:1px solid var(--line); padding:2.4rem 0;
+}
+.foot-in{
+  display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+  font-size:.78rem; color:var(--faint); letter-spacing:.04em;
+}
+.foot-in .logo{ font-size:1.15rem; }
+
+/* ------------------------------------------------ reveal */
+.reveal{
+  opacity:0; transform:translateY(34px);
+  transition:opacity .9s var(--ease), transform .9s var(--ease);
+  transition-delay:var(--d, 0s);
+}
+.reveal.in{ opacity:1; transform:none; }
+@media(prefers-reduced-motion: reduce){
+  .reveal{ opacity:1; transform:none; transition:none; }
+  .mini, .marquee-track{ animation:none !important; }
+  html{ scroll-behavior:auto; }
+}
+
+/* ------------------------------------------------ responsive */
+@media(max-width:900px){
+  .hero-grid{ grid-template-columns:1fr; gap:3rem; }
+  .hero-visual{ height:420px; max-width:420px; margin:0 auto; width:100%; }
+  .week-grid{ grid-template-columns:repeat(2,1fr); }
+  .card{ margin-top:0 !important; }
+  .steps, .features{ grid-template-columns:1fr; gap:1.4rem; }
+  .step p{ max-width:none; }
+  section{ padding:5.5rem 0; }
+}
+@media(max-width:560px){
+  .week-grid{ grid-template-columns:1fr; }
+  .hero-visual{ height:380px; }
+  .mini{ width:240px; }
+  .badges{ flex-direction:column; align-items:stretch; }
+  .badge{ justify-content:center; }
+}
+</style>
+</head>
+<body>
+
+<div class="glowfield" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<!-- ======================= NAV ======================= -->
+<nav>
+  <div class="nav-in">
+    <a class="logo" href="#">supper<em>.</em></a>
+    <a class="nav-cta" href="#download">Get the app</a>
+  </div>
+</nav>
+
+<!-- ======================= HERO ======================= -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="kicker reveal">The Weeknight Issue — No. 01</p>
+      <h1 class="reveal" style="--d:.1s">Dinner,<br><em>sorted.</em></h1>
+      <p class="hero-sub reveal" style="--d:.2s">A meal planner for families with no time. Five weeknights, one tap, zero panic.</p>
+      <div class="badges reveal" style="--d:.3s">
+        <a class="badge" href="#download" aria-label="Download on the App Store">
+          <svg viewBox="0 0 384 512" fill="#f3f0e4" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+          <span><small>Download on the</small><strong>App Store</strong></span>
+        </a>
+        <a class="badge" href="#download" aria-label="Get it on Google Play">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <defs><linearGradient id="pg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#b6d94f"/><stop offset="1" stop-color="#d9a841"/>
+            </linearGradient></defs>
+            <path fill="url(#pg)" d="M4 2.5v19c0 .5.55.8.96.5l11.7-9.5c.34-.28.34-.72 0-1L4.96 2c-.41-.3-.96 0-.96.5z"/>
+          </svg>
+          <span><small>Get it on</small><strong>Google Play</strong></span>
+        </a>
+      </div>
+      <p class="fineprint reveal" style="--d:.4s">Free for 30 days <span>·</span> iOS &amp; Android <span>·</span> cancel anytime</p>
+    </div>
+
+    <div class="hero-visual reveal" style="--d:.25s" aria-hidden="true">
+      <div class="mini">
+        <div class="plate pasta"></div>
+        <p class="day">Monday</p>
+        <p class="dish">Lemon butter pasta</p>
+        <p class="meta">15 min · serves 4</p>
+      </div>
+      <div class="mini">
+        <div class="plate tacos"></div>
+        <p class="day">Tuesday</p>
+        <p class="dish">Sheet-pan tacos</p>
+        <p class="meta">20 min · serves 4</p>
+      </div>
+      <div class="mini">
+        <div class="plate pizza"></div>
+        <p class="day">Friday</p>
+        <p class="dish">Friday-night pizza</p>
+        <p class="meta">30 min · serves 6</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ======================= MARQUEE ======================= -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>pick <b>—</b> plan <b>—</b> plate <b>—</b> repeat <b>—</b></span><span>pick <b>—</b> plan <b>—</b> plate <b>—</b> repeat <b>—</b></span><span>pick <b>—</b> plan <b>—</b> plate <b>—</b> repeat <b>—</b></span><span>pick <b>—</b> plan <b>—</b> plate <b>—</b> repeat <b>—</b></span><span>pick <b>—</b> plan <b>—</b> plate <b>—</b> repeat <b>—</b></span><span>pick <b>—</b> plan <b>—</b> plate <b>—</b> repeat <b>—</b></span>
+  </div>
+</div>
+
+<!-- ======================= THE WEEK ======================= -->
+<section id="week">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="kicker">This week's spread</p>
+      <h2>Five dinners.<br><em>Zero panic.</em></h2>
+      <p class="sec-sub">Planned in one tap. Cooked in under thirty. Eaten without negotiation.</p>
+    </div>
+
+    <div class="week-grid">
+      <article class="card reveal" style="--d:0s">
+        <div class="plate pasta"></div>
+        <p class="day">Monday</p>
+        <h3 class="dish">Lemon butter pasta</h3>
+        <p class="meta">15 min · serves 4</p>
+        <p class="tag">the quiet one</p>
+      </article>
+      <article class="card reveal" style="--d:.08s">
+        <div class="plate tacos"></div>
+        <p class="day">Tuesday</p>
+        <h3 class="dish">Sheet-pan tacos</h3>
+        <p class="meta">20 min · serves 4</p>
+        <p class="tag">the loud favourite</p>
+      </article>
+      <article class="card reveal" style="--d:.16s">
+        <div class="plate curry"></div>
+        <p class="day">Wednesday</p>
+        <h3 class="dish">Mild green curry</h3>
+        <p class="meta">25 min · serves 4</p>
+        <p class="tag">the sneaky veg</p>
+      </article>
+      <article class="card reveal" style="--d:.24s">
+        <div class="plate bowls"></div>
+        <p class="day">Thursday</p>
+        <h3 class="dish">Crispy chicken bowls</h3>
+        <p class="meta">20 min · serves 4</p>
+        <p class="tag">clean-plate club</p>
+      </article>
+      <article class="card reveal" style="--d:.32s">
+        <div class="plate pizza"></div>
+        <p class="day">Friday</p>
+        <h3 class="dish">Friday-night pizza</h3>
+        <p class="meta">30 min · serves 6</p>
+        <p class="tag">the ritual</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= CTA BAND ======================= -->
+<div class="cta-band">
+  <div class="wrap reveal">
+    <p class="kicker" style="justify-content:center; display:inline-flex;">No more 5pm dread</p>
+    <h2>Dinner shouldn't be<br><em>a decision.</em></h2>
+    <div class="badges">
+      <a class="badge" href="#download" aria-label="Download on the App Store">
+        <svg viewBox="0 0 384 512" fill="#f3f0e4" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+        <span><small>Download on the</small><strong>App Store</strong></span>
+      </a>
+      <a class="badge" href="#download" aria-label="Get it on Google Play">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="url(#pg)" d="M4 2.5v19c0 .5.55.8.96.5l11.7-9.5c.34-.28.34-.72 0-1L4.96 2c-.41-.3-.96 0-.96.5z"/></svg>
+        <span><small>Get it on</small><strong>Google Play</strong></span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= HOW ======================= -->
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="kicker">How it works</p>
+      <h2>Three steps.<br><em>That's the recipe.</em></h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal" style="--d:0s">
+        <span class="num">— 01</span>
+        <h3>Pick</h3>
+        <p>Swipe the week. Keep what sounds good.</p>
+      </div>
+      <div class="step reveal" style="--d:.12s">
+        <span class="num">— 02</span>
+        <h3>Plan</h3>
+        <p>The list writes itself. Aisle by aisle.</p>
+      </div>
+      <div class="step reveal" style="--d:.24s">
+        <span class="num">— 03</span>
+        <h3>Plate</h3>
+        <p>Twenty minutes. One pan. Done.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= FEATURES ======================= -->
+<section id="features" style="padding-top:0">
+  <div class="wrap">
+    <div class="features">
+      <div class="feature reveal" style="--d:0s">
+        <div class="dot">✓</div>
+        <h3>Kid-approved</h3>
+        <p>Filters for the picky, the wary, the no-green-things.</p>
+      </div>
+      <div class="feature reveal" style="--d:.12s">
+        <div class="dot">≡</div>
+        <h3>The smart list</h3>
+        <p>Every ingredient, sorted by aisle. Tick as you go.</p>
+      </div>
+      <div class="feature reveal" style="--d:.24s">
+        <div class="dot">30</div>
+        <h3>Under thirty</h3>
+        <p>Nothing here outlasts a school-night attention span.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PULL QUOTE ======================= -->
+<section class="pullquote">
+  <div class="wrap reveal">
+    <blockquote>"6pm used to be the hardest hour. <span>Now it's the easiest.</span>"</blockquote>
+    <cite>Mara — parent of three, reformed panic-cooker</cite>
+  </div>
+</section>
+
+<!-- ======================= FINAL CTA ======================= -->
+<section class="final" id="download">
+  <div class="wrap reveal">
+    <p class="kicker" style="display:inline-flex;">Get supper.</p>
+    <h2>Tonight <em>counts.</em></h2>
+    <p class="sec-sub">Download supper. Dinner plans itself.</p>
+    <div class="badges">
+      <a class="badge" href="#" aria-label="Download on the App Store">
+        <svg viewBox="0 0 384 512" fill="#f3f0e4" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+        <span><small>Download on the</small><strong>App Store</strong></span>
+      </a>
+      <a class="badge" href="#" aria-label="Get it on Google Play">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="url(#pg)" d="M4 2.5v19c0 .5.55.8.96.5l11.7-9.5c.34-.28.34-.72 0-1L4.96 2c-.41-.3-.96 0-.96.5z"/></svg>
+        <span><small>Get it on</small><strong>Google Play</strong></span>
+      </a>
+    </div>
+    <p class="fineprint" style="margin-top:1.6rem">Free for 30 days <span>·</span> no card required</p>
+  </div>
+</section>
+
+<!-- ======================= FOOTER ======================= -->
+<footer>
+  <div class="wrap foot-in">
+    <a class="logo" href="#">supper<em>.</em></a>
+    <p>Made for weeknights.</p>
+    <p>© <span id="yr"></span> supper. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+// scroll reveal
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// footer year
+document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

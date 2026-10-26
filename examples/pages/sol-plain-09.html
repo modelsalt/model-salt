@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f5ed">
+<meta name="description" content="A little planning. A lot more living. Meet Sprout, your new favorite way to plan, shop, and cook.">
+<title>Sprout — Good food. Less thought.</title>
+<style>
+:root{--cream:#f7f5ed;--green:#233e32;--muted:#72796c;--orange:#e86c3b;--line:#dedfd2;--sage:#dce3ce}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:30px}
+body{margin:0;background:var(--cream);color:var(--green);font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--orange);outline-offset:5px}
+button{color:inherit}
+.wrap{width:min(1180px,calc(100% - 96px));margin:auto}
+nav{height:105px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.logo{font-size:31px;letter-spacing:-1.8px;font-weight:800;display:inline-flex;align-items:center;gap:7px}
+.logo svg{width:31px;height:35px}
+.nav-links{display:flex;gap:35px;font-size:13px}
+.nav-links a:hover{color:var(--orange)}
+.btn{border:0;background:var(--green);color:white;padding:17px 25px;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;gap:22px;font-size:13px;font-weight:600;transition:transform .2s,background .2s}
+.btn:hover{background:#365542;transform:translateY(-2px)}
+.btn.small{padding:13px 21px;font-size:12px}
+.btn.orange{background:var(--orange)}
+.btn.orange:hover{background:#cf5729}
+.arrow{font-size:20px;line-height:1}
+.eyebrow{text-transform:uppercase;letter-spacing:2px;font-size:10px;font-weight:700;display:flex;align-items:center;gap:9px}
+.eyebrow:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--orange)}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:70px 0 66px;align-items:center}
+h1,h2,h3,p{margin:0}
+h1,h2,.serif{font-family:Georgia,'Times New Roman',serif;font-weight:400}
+h1{font-size:clamp(55px,5.9vw,82px);line-height:1.035;letter-spacing:-4px;margin:24px 0}
+h1 em{color:var(--orange);font-weight:400}
+.hero-copy>p{font-size:15px;line-height:1.8;max-width:350px;color:var(--muted)}
+.hero-actions{display:flex;align-items:center;gap:23px;margin:28px 0 20px}
+.text-link{display:flex;align-items:center;gap:8px;font-size:12px;border:0;background:none;padding:8px 0}
+.play{border:1px solid #b9bfae;border-radius:50%;width:25px;height:25px;display:grid;place-items:center;font-size:8px}
+.micro{font-size:10px;color:var(--muted);display:flex;gap:14px}
+.micro span:before{content:"✓";color:var(--green);margin-right:5px}
+.social{display:flex;align-items:center;gap:12px;margin-top:35px}
+.avatars{display:flex;padding-left:0}
+.avatar{width:30px;height:30px;border-radius:50%;border:2px solid var(--cream);margin-left:-7px;display:grid;place-items:center;font-size:15px;background:#dfb695;overflow:hidden}
+.avatar:first-child{margin:0;background:#d4dbbb}
+.avatar:nth-child(3){background:#b7c6bd}
+.stars{font-size:10px;letter-spacing:2px;color:var(--orange);margin-bottom:4px}
+.social p{font-size:10px;color:var(--muted)}
+.social strong{color:var(--green)}
+.hero-art{height:510px;position:relative;background:#e3e7d5;border-radius:150px 150px 15px 15px;isolation:isolate}
+.hero-art:before{content:"";position:absolute;inset:23px;border:1px solid #c7cfb8;border-radius:140px 140px 10px 10px;z-index:-1}
+.art-caption{position:absolute;top:34px;left:0;right:0;text-align:center;font-size:10px;text-transform:uppercase;letter-spacing:2px}
+.hero-plate{position:absolute;width:100%;height:100%;top:-10px;filter:drop-shadow(0 18px 14px #38442b22);transform:rotate(-12deg)}
+.meal-label{position:absolute;bottom:27px;left:30px}
+.meal-label p{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:6px}
+.meal-label h3{font-family:Georgia,serif;font-size:23px;font-weight:400}
+.meal-label small{display:block;font-size:10px;color:#667057;margin-top:7px}
+.round-arrow{position:absolute;right:28px;bottom:29px;width:38px;height:38px;border-radius:50%;background:var(--green);color:white;border:0;font-size:21px}
+.floating{position:absolute;background:#fffdf7;border:1px solid #e8e8dd;box-shadow:0 12px 30px #24362c12;border-radius:10px}
+.week-card{top:100px;right:-27px;padding:15px 18px;transform:rotate(5deg);width:150px}
+.week-card b{font-size:11px}
+.days{display:flex;justify-content:space-between;margin-top:14px;font-size:8px;color:var(--muted)}
+.days span{display:flex;flex-direction:column;align-items:center;gap:7px}
+.days i{font-style:normal;width:17px;height:17px;border-radius:50%;background:#e5ebda;color:#59734b;display:grid;place-items:center}
+.days span:last-child i{background:var(--orange);color:#fff}
+.done-card{bottom:112px;left:-34px;display:flex;align-items:center;gap:10px;padding:13px 16px;transform:rotate(-5deg)}
+.done-icon{width:29px;height:29px;border-radius:50%;background:#e9eedf;display:grid;place-items:center}
+.done-card b{font-size:10px;display:block;margin-bottom:4px}
+.done-card p{font-size:9px;color:var(--muted)}
+.strip{border-block:1px solid var(--line);display:flex;justify-content:space-between;padding:23px 0;gap:20px}
+.strip>p{font-family:Georgia,serif;font-size:18px}
+.strip>p em{color:var(--orange)}
+.strip-items{display:flex;gap:35px;align-items:center;font-size:11px}
+.strip-items span{display:flex;align-items:center;gap:9px}
+.strip-items svg{width:18px;height:18px;stroke:var(--green);fill:none;stroke-width:1.5}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:32px}
+h2{font-size:43px;letter-spacing:-1.7px;line-height:1.12}
+.section-head .eyebrow{margin-bottom:15px}
+.section-head>p{font-size:12px;line-height:1.8;color:var(--muted);max-width:245px}
+.how{padding:70px 0}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.step{padding-top:23px;border-top:1px solid var(--line)}
+.step-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.number{font-family:Georgia,serif;font-style:italic;font-size:27px;color:#9ca68b}
+.step-icon{width:40px;height:40px;border-radius:12px;background:#e8ebdf;display:grid;place-items:center;font-size:21px}
+.step h3{font-size:16px;letter-spacing:-.4px;margin-bottom:12px}
+.step p{font-size:12px;line-height:1.8;color:var(--muted);max-width:270px}
+.recipes{background:#eeeee4;padding:55px 0 62px}
+.tabs{display:flex;background:#e2e3d7;padding:4px;border-radius:7px;gap:2px}
+.tab{background:transparent;border:0;border-radius:5px;padding:10px 15px;font-size:10px;white-space:nowrap}
+.tab[aria-selected="true"]{background:#fffef8;box-shadow:0 2px 5px #233e320a}
+.recipe-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:23px}
+.recipe{border:1px solid #dddfd0;background:#faf9f3;border-radius:10px;overflow:hidden;transition:transform .2s}
+.recipe:hover{transform:translateY(-5px)}
+.recipe-image{height:220px;background:#d9dfca;position:relative;overflow:hidden}
+.recipe:nth-child(2) .recipe-image{background:#e9d9bf}
+.recipe:nth-child(3) .recipe-image{background:#dbded4}
+.recipe-image>svg{width:100%;height:120%;position:absolute;top:-10%;filter:drop-shadow(0 10px 8px #233e3220)}
+.tag{position:absolute;top:14px;left:14px;background:#faf9f3eb;padding:6px 9px;border-radius:4px;text-transform:uppercase;font-size:8px;letter-spacing:.8px}
+.save{position:absolute;right:13px;top:13px;width:30px;height:30px;background:#faf9f3ee;border:0;border-radius:50%;font-size:17px}
+.save[aria-pressed="true"]{color:var(--orange)}
+.recipe-info{padding:19px}
+.recipe-info h3{font-family:Georgia,serif;font-size:21px;font-weight:400;margin-bottom:9px}
+.recipe-info>p{font-size:10px;color:var(--muted)}
+.recipe-bottom{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);margin-top:18px;padding-top:13px;font-size:10px}
+.recipe-bottom button{border:0;background:none;font-size:12px;padding:5px;color:var(--green)}
+.all-recipes{display:flex;justify-content:center;margin-top:26px;font-size:11px}
+.all-recipes button{background:none;border:0;border-bottom:1px solid #9aa58e;padding:8px 0;font-size:11px;display:flex;gap:20px}
+.cta{margin:65px auto;background:var(--green);color:#f7f5ed;border-radius:12px;padding:43px 50px;display:flex;align-items:center;justify-content:space-between;gap:35px;position:relative;overflow:hidden}
+.cta:after{content:"✳";position:absolute;font-size:270px;line-height:1;right:170px;top:-55px;color:#ffffff06;pointer-events:none}
+.cta h2{font-size:39px}
+.cta p{font-size:12px;color:#c3cdbb;margin-top:13px}
+.cta .btn{position:relative;z-index:1;white-space:nowrap}
+footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding:25px 0 32px}
+footer .logo{font-size:25px}
+footer .logo svg{width:23px}
+footer p{font-size:10px;color:var(--muted)}
+footer>a:last-child{font-size:11px}
+dialog{border:1px solid var(--line);background:var(--cream);color:var(--green);border-radius:16px;width:min(460px,calc(100% - 32px));padding:35px;box-shadow:0 30px 100px #233e3240;max-height:90vh}
+dialog::backdrop{background:#17291fc0;backdrop-filter:blur(5px)}
+.close{position:absolute;top:12px;right:15px;border:0;background:none;font-size:24px;color:var(--muted);padding:5px}
+dialog h2{font-size:34px;margin:16px 0 12px}
+dialog p{font-size:13px;line-height:1.7;color:var(--muted)}
+label{display:block;font-size:12px;margin:21px 0 8px}
+select{width:100%;border:1px solid #c9cfbf;border-radius:6px;background:#fffdf6;padding:12px;color:var(--green)}
+dialog .btn{margin-top:24px;width:100%}
+.plan-list{list-style:none;margin:20px 0 0;padding:0}
+.plan-list li{display:flex;justify-content:space-between;gap:15px;padding:13px 0;border-bottom:1px solid var(--line);font-size:12px}
+.plan-list li span{font-size:10px;color:var(--muted);flex-shrink:0}
+.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--green);color:#fff;padding:14px 24px;border-radius:8px;font-size:12px;box-shadow:0 5px 25px #233e3225;transition:.25s;z-index:10}
+.toast.visible{opacity:1;transform:translate(-50%,0)}
+.svg-library{position:absolute;width:0;height:0;overflow:hidden}
+@media(min-width:1500px){.hero{padding-top:85px;padding-bottom:85px}}
+@media(max-width:1000px){.wrap{width:calc(100% - 64px)}.hero{gap:25px}h1{font-size:65px}.hero-art{height:465px}.week-card{right:-15px}.done-card{left:-18px}.strip-items{gap:18px}.strip>p{font-size:16px}.recipe-image{height:180px}.tabs .tab{padding:10px}.section-head>p{max-width:210px}.recipe-info h3{font-size:18px}}
+@media(max-width:760px){.wrap{width:calc(100% - 40px)}nav{height:80px}.nav-links{display:none}.logo{font-size:28px}.hero{grid-template-columns:1fr;padding:45px 0 38px;gap:45px}.hero-copy{max-width:500px}h1{font-size:66px;letter-spacing:-3.5px}.hero-copy>p{max-width:370px}.hero-art{height:460px;width:calc(100% - 24px);max-width:490px;justify-self:center}.hero-plate{height:105%;top:-25px}.week-card{right:-12px;top:90px}.done-card{left:-13px}.strip{flex-direction:column;align-items:center;gap:20px;padding:25px 0}.strip-items{flex-wrap:wrap;justify-content:center;gap:18px;font-size:10px}.how{padding:48px 0}.section-head{align-items:start;flex-direction:column;gap:18px}h2{font-size:37px}.section-head>p{max-width:330px}.steps{gap:25px;grid-template-columns:1fr}.step{display:grid;grid-template-columns:55px 1fr;gap:0 18px;padding-top:18px}.step-top{grid-row:1/3;flex-direction:column;gap:12px;margin:0}.step h3{margin:5px 0 8px}.step p{max-width:100%}.recipes{padding:43px 0}.tabs{width:100%}.tab{flex:1}.recipe-grid{grid-template-columns:1fr}.recipe-image{height:260px}.recipe-image>svg{height:135%;top:-18%}.recipe-info h3{font-size:23px}.cta{margin:40px auto;flex-direction:column;align-items:start;padding:30px;gap:24px}.cta h2{font-size:35px}.cta p{line-height:1.7}.cta:after{right:-25px;top:0}footer{flex-wrap:wrap;gap:20px}footer p{order:3;width:100%}.social{margin-top:28px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<svg class="svg-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<defs>
+  <radialGradient id="ceramic"><stop offset="0" stop-color="#fffef7"/><stop offset=".78" stop-color="#fbfaf1"/><stop offset=".83" stop-color="#e4e4d8"/><stop offset=".88" stop-color="#fafbf2"/><stop offset="1" stop-color="#efefe3"/></radialGradient>
+  <linearGradient id="fish" x2="1" y2="1"><stop stop-color="#ef9f61"/><stop offset=".5" stop-color="#e27d40"/><stop offset="1" stop-color="#be5126"/></linearGradient>
+  <linearGradient id="avocado"><stop stop-color="#bad276"/><stop offset=".7" stop-color="#e2e9a2"/><stop offset="1" stop-color="#91ab55"/></linearGradient>
+  <filter id="shadow"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#485032" flood-opacity=".18"/></filter>
+  <pattern id="grain" width="19" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(-20)">
+    <rect width="19" height="16" fill="#dfc99e"/>
+    <ellipse cx="5" cy="5" rx="4.5" ry="2" fill="#f0e2bf" transform="rotate(23 5 5)"/>
+    <ellipse cx="14" cy="12" rx="4.5" ry="2" fill="#bba47e" transform="rotate(-20 14 12)"/>
+    <ellipse cx="13" cy="3" rx="3.5" ry="1.8" fill="#efdfb7"/>
+  </pattern>
+  <g id="leaf">
+    <path d="M0 0C-23-22-7-40 2-42C18-33 21-13 0 0" fill="#52783c"/>
+    <path d="M0 0L2-36" stroke="#9db369" fill="none" stroke-width="1.2"/>
+  </g>
+  <g id="broccoli">
+    <path d="M-5 10L-1-13L7-16L11 13Z" fill="#8da45e"/>
+    <g fill="#365d32">
+      <circle cx="-12" cy="-14" r="12"/><circle cx="4" cy="-22" r="15"/><circle cx="18" cy="-11" r="12"/>
+      <circle cx="-1" cy="-5" r="13"/>
+    </g>
+    <g fill="#537941"><circle cx="-14" cy="-18" r="6"/><circle cx="0" cy="-27" r="8"/><circle cx="17" cy="-16" r="6"/><circle cx="1" cy="-9" r="7"/></g>
+    <g fill="#83a159"><circle cx="-6" cy="-24" r="2"/><circle cx="7" cy="-28" r="2"/><circle cx="18" cy="-19" r="2"/><circle cx="-4" cy="-12" r="2"/></g>
+  </g>
+  <g id="tomato"><circle r="16" fill="#c95630"/><circle r="12" fill="#e97743"/><path d="M0-11L0 11M-9-6L9 6M-9 6L9-6" stroke="#f5b36d" stroke-width="2"/><circle r="3" fill="#f0ba70"/></g>
+  <symbol id="salmon-bowl" viewBox="0 0 500 500">
+    <circle cx="250" cy="250" r="190" fill="url(#ceramic)"/>
+    <circle cx="250" cy="250" r="154" fill="#b7bd87"/>
+    <path d="M118 258C100 181 161 112 240 108C305 104 380 164 393 227C320 216 257 279 236 378C174 374 132 321 118 258Z" fill="url(#grain)"/>
+    <g filter="url(#shadow)">
+      <g transform="translate(314 299) rotate(23)">
+        <use href="#leaf" transform="translate(-12 48) rotate(-80) scale(1.5)"/>
+        <use href="#leaf" transform="translate(19 45) rotate(46) scale(1.4)"/>
+        <use href="#leaf" transform="translate(5 25) rotate(-25) scale(1.4)"/>
+        <use href="#broccoli" transform="translate(27 20) scale(1.35)"/>
+        <use href="#broccoli" transform="translate(-13 61) scale(1.1)"/>
+        <use href="#broccoli" transform="translate(55 56) scale(1.15)"/>
+      </g>
+      <g transform="translate(180 292) rotate(-25)">
+        <path d="M-52-29C-48-61 41-68 62-35L59 44C23 60-29 59-58 33Z" fill="#9b552f"/>
+        <path d="M-53-35C-42-61 39-65 62-37L56 35C17 47-24 49-57 27Z" fill="url(#fish)"/>
+        <path d="M-43-29Q0-8 53-32M-46-12Q0 10 53-15M-48 5Q0 27 51 2M-48 21Q0 41 48 19" fill="none" stroke="#ffc48c" stroke-width="3" opacity=".85"/>
+        <path d="M-44-36L-37 23M-23-43L-17 30M0-46L5 32M24-44L27 27M45-39L45 20" fill="none" stroke="#9d4520" stroke-width="3" opacity=".45"/>
+      </g>
+      <g transform="translate(295 170) rotate(33)">
+        <path d="M-55 4C-30-59 39-48 66 9Q11 58-55 4" fill="#466335"/>
+        <path d="M-48 2C-22-47 35-40 59 7Q9 46-48 2" fill="url(#avocado)"/>
+        <path d="M-35-11L-22 23M-21-22L-7 29M-5-28L9 31M12-28L26 27M29-22L42 20" stroke="#f4f3bf" stroke-width="2.5"/>
+      </g>
+      <use href="#tomato" transform="translate(155 199)"/>
+      <use href="#tomato" transform="translate(178 172) scale(.8) rotate(30)"/>
+      <use href="#tomato" transform="translate(346 241) scale(.9)"/>
+      <g transform="translate(246 359) rotate(22)">
+        <path d="M-29 0A29 29 0 0 1 29 0Z" fill="#c8aa3c"/>
+        <path d="M-25-1A25 25 0 0 1 25-1Z" fill="#f3df86"/>
+        <path d="M0-2L0-23M0-2L-19-15M0-2L19-15" stroke="#fff8c5" stroke-width="2"/>
+      </g>
+    </g>
+    <g fill="#344f2d">
+      <ellipse cx="226" cy="238" rx="3" ry="7" transform="rotate(30 226 238)"/>
+      <ellipse cx="239" cy="225" rx="3" ry="7" transform="rotate(-35 239 225)"/>
+      <ellipse cx="204" cy="299" rx="2" ry="5" transform="rotate(30 204 299)"/>
+      <ellipse cx="147" cy="268" rx="2" ry="4"/>
+      <ellipse cx="270" cy="156" rx="2" ry="4"/>
+      <ellipse cx="307" cy="268" rx="2" ry="4"/>
+    </g>
+    <g fill="#fff0c0"><ellipse cx="174" cy="248" rx="1.5" ry="3"/><ellipse cx="193" cy="270" rx="1.5" ry="3"/><ellipse cx="161" cy="300" rx="1.5" ry="3"/><ellipse cx="211" cy="303" rx="1.5" ry="3"/></g>
+  </symbol>
+  <symbol id="green-bowl" viewBox="0 0 500 500">
+    <circle cx="250" cy="250" r="190" fill="url(#ceramic)"/>
+    <circle cx="250" cy="250" r="154" fill="#8fa866"/>
+    <circle cx="250" cy="250" r="141" fill="url(#grain)"/>
+    <g filter="url(#shadow)">
+      <use href="#leaf" transform="translate(170 245) rotate(-55) scale(2.3)"/>
+      <use href="#leaf" transform="translate(176 244) rotate(10) scale(2.2)"/>
+      <use href="#leaf" transform="translate(173 256) rotate(-110) scale(1.8)"/>
+      <use href="#broccoli" transform="translate(192 306) scale(1.8)"/>
+      <use href="#broccoli" transform="translate(296 328) rotate(35) scale(1.4)"/>
+      <g transform="translate(297 204) rotate(30)">
+        <path d="M-62 0C-40-73 45-73 68 0Q8 78-62 0" fill="#496c38"/>
+        <path d="M-53-2C-32-59 39-61 58-2Q9 59-53-2" fill="url(#avocado)"/>
+        <ellipse cx="5" cy="-1" rx="23" ry="27" fill="#b48848"/>
+        <ellipse cx="5" cy="-4" rx="18" ry="21" fill="#cea05b"/>
+      </g>
+      <use href="#tomato" transform="translate(256 281) scale(1.1)"/>
+      <use href="#tomato" transform="translate(220 177)"/>
+      <use href="#tomato" transform="translate(317 270)"/>
+      <g fill="#d9a05e" stroke="#c48e50" stroke-width="1">
+        <circle cx="231" cy="331" r="8"/><circle cx="249" cy="343" r="8"/><circle cx="250" cy="320" r="8"/><circle cx="273" cy="300" r="8"/><circle cx="214" cy="349" r="7"/><circle cx="332" cy="233" r="8"/><circle cx="349" cy="249" r="8"/><circle cx="340" cy="216" r="7"/>
+      </g>
+    </g>
+  </symbol>
+  <symbol id="pasta-bowl" viewBox="0 0 500 500">
+    <circle cx="250" cy="250" r="190" fill="url(#ceramic)"/>
+    <circle cx="250" cy="250" r="151" fill="#d7b976"/>
+    <g fill="none" stroke-linecap="round">
+      <path d="M144 240C110 155 247 115 328 176S367 311 271 345S144 283 207 204S346 242 304 284S198 320 172 258S256 151 305 218S271 312 223 288S216 208 258 222" stroke="#bb8b40" stroke-width="17"/>
+      <path d="M144 236C110 151 247 111 328 172S367 307 271 341S144 279 207 200S346 238 304 280S198 316 172 254S256 147 305 214S271 308 223 284S216 204 258 218" stroke="#efce80" stroke-width="10"/>
+      <path d="M160 189Q238 150 330 251T214 341M137 267Q246 342 342 202M190 155Q156 268 329 314" stroke="#f0d395" stroke-width="8"/>
+    </g>
+    <use href="#tomato" transform="translate(183 220) scale(1.1)"/>
+    <use href="#tomato" transform="translate(290 312)"/>
+    <use href="#tomato" transform="translate(320 211) scale(.9)"/>
+    <use href="#leaf" transform="translate(246 255) rotate(-60) scale(1.1)"/>
+    <use href="#leaf" transform="translate(245 254) rotate(35)"/>
+    <use href="#leaf" transform="translate(177 301) rotate(-30) scale(.7)"/>
+    <g fill="#fff5cf"><path d="M221 174L240 183L217 188Z"/><path d="M310 263L328 278L308 281Z"/><path d="M205 288L222 298L198 303Z"/><path d="M278 191L288 202L269 205Z"/></g>
+  </symbol>
+</defs>
+</svg>
+
+<header class="wrap">
+<nav aria-label="Main navigation">
+  <a class="logo" href="#" aria-label="Sprout home">
+    <svg viewBox="0 0 36 40" fill="none" aria-hidden="true"><path d="M18 35V18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M18 25C3 25 2 13 3 7C15 7 21 12 18 25Z" fill="currentColor"/><path d="M19 19C17 7 25 2 33 3C35 13 28 19 19 19Z" fill="currentColor"/></svg>
+    sprout<span style="color:var(--orange)">.</span>
+  </a>
+  <div class="nav-links">
+    <a href="#how-it-works">How it works</a>
+    <a href="#on-the-menu">On the menu</a>
+    <a href="#why-sprout">Why Sprout?</a>
+  </div>
+  <button class="btn small" data-start>Get started <span aria-hidden="true">↗</span></button>
+</nav>
+</header>
+
+<main>
+<section class="hero wrap">
+  <div class="hero-copy">
+    <div class="eyebrow">A fresh take on your everyday</div>
+    <h1>Good food.<br>Less thought.<br><em>More life.</em></h1>
+    <p>Meet your new mealtime rhythm. Recipes you’ll love, a plan that fits, and one less thing on your plate.</p>
+    <div class="hero-actions">
+      <button class="btn orange" data-start>Find your flavor <span class="arrow" aria-hidden="true">↗</span></button>
+      <a href="#how-it-works" class="text-link"><span class="play" aria-hidden="true">▶</span> See how it works</a>
+    </div>
+    <div class="micro"><span>Free to get started</span><span>No credit card needed</span></div>
+    <div class="social">
+      <div class="avatars" aria-hidden="true"><span class="avatar">👩🏽</span><span class="avatar">🧑🏻</span><span class="avatar">👨🏾</span><span class="avatar">👩🏼</span></div>
+      <div><div class="stars" aria-label="Five stars">★★★★★</div><p>Made for <strong>full plates & busy lives.</strong></p></div>
+    </div>
+  </div>
+  <div class="hero-art">
+    <div class="art-caption">A little planning. A whole lot of delicious.</div>
+    <svg class="hero-plate" viewBox="0 0 500 500" role="img" aria-label="Illustrated salmon bowl with avocado, broccoli, tomatoes, and grains"><use href="#salmon-bowl"/></svg>
+    <div class="floating week-card">
+      <b>Your week, sorted. <span aria-hidden="true">✳</span></b>
+      <div class="days"><span>M<i>✓</i></span><span>T<i>✓</i></span><span>W<i>✓</i></span><span>T<i>✓</i></span><span>F<i>↗</i></span></div>
+    </div>
+    <div class="floating done-card"><span class="done-icon" aria-hidden="true">✓</span><div><b>Shopping list? Done.</b><p>More time for the good stuff.</p></div></div>
+    <div class="meal-label"><p>Your next favorite dinner</p><h3>The feel-good salmon bowl</h3><small>25 min &nbsp; · &nbsp; Fresh, colorful, ridiculously good</small></div>
+    <button class="round-arrow" data-recipe="salmon" aria-label="View salmon bowl recipe">↗</button>
+  </div>
+</section>
+
+<div class="wrap strip" id="why-sprout">
+  <p>Less “what’s for dinner?” <em>More this.</em></p>
+  <div class="strip-items">
+    <span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg>Get your time back</span>
+    <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12c0-7 14-8 14-8s2 14-7 15C7 19 5 16 5 12Z"/><path d="m5 21 10-11"/></svg>Waste less, enjoy more</span>
+    <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20S2 14 2 8a5 5 0 0 1 10-1A5 5 0 0 1 22 8c0 6-10 12-10 12Z"/></svg>Eat what makes you happy</span>
+  </div>
+</div>
+
+<section class="how wrap" id="how-it-works">
+  <div class="section-head">
+    <div><div class="eyebrow">Small steps. Delicious possibilities.</div><h2>Your week. A little easier.</h2></div>
+    <p>From the first “what sounds good?”<br>to the very last bite. We’ve got you.</p>
+  </div>
+  <div class="steps">
+    <article class="step"><div class="step-top"><span class="number">01</span><span class="step-icon" aria-hidden="true">✳</span></div><h3>A plan that gets you.</h3><p>Your tastes, your schedule, your kind of food. Build a weekly menu that feels like you.</p></article>
+    <article class="step"><div class="step-top"><span class="number">02</span><span class="step-icon" aria-hidden="true">☷</span></div><h3>One list. Zero guesswork.</h3><p>Everything you need, all in one place. A smart shopping list that skips the back-and-forth.</p></article>
+    <article class="step"><div class="step-top"><span class="number">03</span><span class="step-icon" aria-hidden="true">♡</span></div><h3>Make room for the good stuff.</h3><p>Simple steps. Seriously good meals. Less time figuring it out, more time sitting down.</p></article>
+  </div>
+</section>
+
+<section class="recipes" id="on-the-menu">
+  <div class="wrap">
+    <div class="section-head">
+      <div><div class="eyebrow">Fresh inspiration, every week</div><h2>Looks good. Tastes better.</h2></div>
+      <div class="tabs" role="tablist" aria-label="Recipe category">
+        <button class="tab" role="tab" id="tab-favorites" aria-selected="true" aria-controls="recipe-panel" data-category="favorites">Crowd favorites</button>
+        <button class="tab" role="tab" id="tab-vegetarian" aria-selected="false" aria-controls="recipe-panel" tabindex="-1" data-category="vegetarian">Plant-powered</button>
+        <button class="tab" role="tab" id="tab-quick" aria-selected="false" aria-controls="recipe-panel" tabindex="-1" data-category="quick">Quick & easy</button>
+      </div>
+    </div>
+    <div class="recipe-grid" id="recipe-panel" role="tabpanel" aria-labelledby="tab-favorites"></div>
+    <div class="all-recipes"><button id="more-recipes">Meet your next favorite meal <span aria-hidden="true">↗</span></button></div>
+  </div>
+</section>
+
+<section class="cta wrap">
+  <div><h2>A good week starts<br>with something delicious.</h2><p>A little less planning. A little more living. Let’s dig in.</p></div>
+  <button class="btn orange" data-start>Make yourself at home <span class="arrow" aria-hidden="true">↗</span></button>
+</section>
+</main>
+
+<footer class="wrap">
+  <a class="logo" href="#">sprout<span style="color:var(--orange)">.</span></a>
+  <p>© <span id="year"></span> Sprout. Made for the everyday.</p>
+  <a href="#on-the-menu">Good things are cooking. ↗</a>
+</footer>
+
+<dialog id="planner" aria-labelledby="planner-title">
+  <button class="close" aria-label="Close planner">×</button>
+  <div class="eyebrow">Let’s find your rhythm</div>
+  <h2 id="planner-title">What’s your kind of good?</h2>
+  <p>A few little details. A delicious place to start.</p>
+  <form id="plan-form">
+    <label for="diet">What sounds good?</label>
+    <select id="diet"><option value="favorites">A little bit of everything</option><option value="vegetarian">All things plant-powered</option><option value="quick">Quick & easy dinners</option></select>
+    <label for="servings">How many at the table?</label>
+    <select id="servings"><option value="1">Just me</option><option value="2" selected>Two of us</option><option value="4">Four hungry people</option></select>
+    <button class="btn orange" type="submit">Make my starter plan <span aria-hidden="true">↗</span></button>
+  </form>
+  <div id="plan-result" hidden aria-live="polite"></div>
+</dialog>
+
+<dialog id="recipe-dialog" aria-labelledby="recipe-title">
+  <button class="close" aria-label="Close recipe">×</button>
+  <div class="eyebrow">Something delicious awaits</div>
+  <h2 id="recipe-title"></h2>
+  <p id="recipe-meta"></p>
+  <h3 style="font-size:14px;margin:24px 0 10px">Gather the good stuff</h3>
+  <p id="ingredients"></p>
+  <h3 style="font-size:14px;margin:24px 0 10px">Let’s cook</h3>
+  <p id="instructions"></p>
+  <button class="btn orange" id="add-to-plan">Add to my week <span aria-hidden="true">＋</span></button>
+</dialog>
+<div class="toast" role="status" aria-live="polite"></div>
+
+<script>
+const meals = {
+  salmon:{name:"The feel-good salmon bowl",time:25,tag:"A little of everything",art:"salmon-bowl",note:"Fresh & satisfying",ingredients:"For 2: 2 salmon fillets, 1 cup cooked brown rice, 1 avocado, 2 cups broccoli, a handful of cherry tomatoes, 1 lemon, 1 tbsp olive oil, salt and pepper.",steps:"Heat the oven to 200°C / 400°F. Toss the broccoli with half the oil and roast for 10 minutes. Add the seasoned salmon and roast for another 12–15 minutes, until it reaches 63°C / 145°F in the center. Divide the rice, avocado and tomatoes between bowls. Add the salmon and broccoli, then finish with lemon and the remaining oil."},
+  green:{name:"The everyday green goddess",time:20,tag:"Plant-powered",art:"green-bowl",note:"All the greens. All the goodness.",ingredients:"For 2: 1 can chickpeas, drained, 1 cup cooked quinoa, 1 avocado, 2 cups broccoli, 2 handfuls spinach, cherry tomatoes, 1 tbsp tahini, 1 lemon.",steps:"Steam the broccoli for 5–7 minutes. Warm the chickpeas and quinoa. Whisk the tahini with lemon juice and a splash of water. Arrange everything in two bowls, add the sliced avocado and tomatoes, and drizzle with the dressing."},
+  pasta:{name:"Your new favorite pesto pasta",time:15,tag:"Weeknight winner",art:"pasta-bowl",note:"Big flavor. Little effort.",ingredients:"For 2: 180g pasta, 3 tbsp basil pesto, 1 cup cherry tomatoes, a handful of basil, 2 tbsp grated Parmesan or a plant-based alternative.",steps:"Cook the pasta according to the packet, reserving a mug of cooking water. Halve the tomatoes. Toss the drained pasta with pesto, tomatoes and a splash of the reserved water until glossy. Finish with basil and Parmesan."},
+  chickpea:{name:"Golden chickpea & avocado bowl",time:20,tag:"Plant-powered",art:"green-bowl",note:"Colorful, cozy & completely plant-based",ingredients:"For 2: 1 can chickpeas, drained, 1 avocado, 1 cup cooked rice, 1 tsp smoked paprika, 1 tbsp olive oil, 2 handfuls greens, 1 lemon.",steps:"Dry the chickpeas and toss with oil and paprika. Cook in a hot pan for 8–10 minutes, stirring often. Divide the rice and greens between bowls, top with chickpeas and avocado, and squeeze over the lemon."},
+  lemon:{name:"Sunny lemon & basil linguine",time:15,tag:"15-minute magic",art:"pasta-bowl",note:"A little sunshine on your plate",ingredients:"For 2: 180g linguine, 1 lemon, 2 tbsp olive oil, 1 garlic clove, a handful of basil, 2 tbsp Parmesan or a plant-based alternative.",steps:"Cook the linguine according to the packet and reserve a mug of the water. Gently warm the oil with finely chopped garlic for 1 minute. Add lemon zest, a squeeze of juice and the pasta. Toss with a splash of pasta water, then finish with torn basil and Parmesan."}
+};
+const categories={favorites:["salmon","green","pasta"],vegetarian:["green","chickpea","lemon"],quick:["pasta","lemon","green"]};
+let activeCategory="favorites",selectedRecipe="salmon",toastTimer;
+const saved=new Set();
+const planned=new Set();
+const panel=document.querySelector("#recipe-panel");
+function notify(message){
+  const toast=document.querySelector(".toast");
+  toast.textContent=message;
+  toast.classList.add("visible");
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>toast.classList.remove("visible"),2600);
+}
+function renderRecipes(category){
+  activeCategory=category;
+  document.querySelectorAll(".tab").forEach(tab=>{
+    const active=tab.dataset.category===category;
+    tab.setAttribute("aria-selected",String(active));
+    tab.tabIndex=active?0:-1;
+  });
+  panel.setAttribute("aria-labelledby","tab-"+category);
+  panel.innerHTML=categories[category].map(id=>{
+    const m=meals[id];
+    return `<article class="recipe">
+      <div class="recipe-image">
+        <svg viewBox="0 0 500 500" role="img" aria-label="${m.name} illustration"><use href="#${m.art}"/></svg>
+        <span class="tag">${m.tag}</span>
+        <button class="save" data-save="${id}" aria-label="Save ${m.name}" aria-pressed="${saved.has(id)}">${saved.has(id)?"♥":"♡"}</button>
+      </div>
+      <div class="recipe-info"><h3>${m.name}</h3><p>${m.note}</p>
+        <div class="recipe-bottom"><span>◷ &nbsp;${m.time} min &nbsp; · &nbsp; 2 servings</span><button data-recipe="${id}" aria-label="View ${m.name} recipe">Let’s cook ↗</button></div>
+      </div></article>`;
+  }).join("");
+}
+const planner=document.querySelector("#planner");
+const recipeDialog=document.querySelector("#recipe-dialog");
+function openPlanner(){
+  document.querySelector("#plan-form").hidden=false;
+  document.querySelector("#plan-result").hidden=true;
+  document.querySelector("#planner-title").textContent="What’s your kind of good?";
+  document.querySelector("#diet").value=activeCategory;
+  planner.showModal();
+}
+document.addEventListener("click",event=>{
+  const start=event.target.closest("[data-start]");
+  if(start)openPlanner();
+  const recipeButton=event.target.closest("[data-recipe]");
+  if(recipeButton){
+    selectedRecipe=recipeButton.dataset.recipe;
+    const m=meals[selectedRecipe];
+    document.querySelector("#recipe-title").textContent=m.name;
+    document.querySelector("#recipe-meta").textContent=`${m.time} minutes · 2 servings · ${m.note}`;
+    document.querySelector("#ingredients").textContent=m.ingredients;
+    document.querySelector("#instructions").textContent=m.steps;
+    document.querySelector("#add-to-plan").textContent=planned.has(selectedRecipe)?"Added to your week ✓":"Add to my week ＋";
+    recipeDialog.showModal();
+  }
+  const saveButton=event.target.closest("[data-save]");
+  if(saveButton){
+    const id=saveButton.dataset.save;
+    saved.has(id)?saved.delete(id):saved.add(id);
+    renderRecipes(activeCategory);
+    const replacement=panel.querySelector(`[data-save="${id}"]`);
+    replacement.focus();
+    notify(saved.has(id)?"A good one, saved for later.":"Removed from your saved recipes.");
+  }
+  const tab=event.target.closest("[data-category]");
+  if(tab)renderRecipes(tab.dataset.category);
+});
+document.querySelector(".tabs").addEventListener("keydown",event=>{
+  if(!["ArrowLeft","ArrowRight","Home","End"].includes(event.key))return;
+  event.preventDefault();
+  const tabs=[...document.querySelectorAll(".tab")];
+  let index=tabs.indexOf(document.activeElement);
+  if(event.key==="Home")index=0;
+  else if(event.key==="End")index=tabs.length-1;
+  else index=(index+(event.key==="ArrowRight"?1:-1)+tabs.length)%tabs.length;
+  tabs[index].focus();
+  renderRecipes(tabs[index].dataset.category);
+});
+document.querySelectorAll("dialog").forEach(dialog=>{
+  dialog.querySelector(".close").addEventListener("click",()=>dialog.close());
+  dialog.addEventListener("click",event=>{
+    if(event.target!==dialog)return;
+    const bounds=dialog.getBoundingClientRect();
+    if(event.clientX<bounds.left||event.clientX>bounds.right||event.clientY<bounds.top||event.clientY>bounds.bottom)dialog.close();
+  });
+});
+document.querySelector("#plan-form").addEventListener("submit",event=>{
+  event.preventDefault();
+  const diet=document.querySelector("#diet").value;
+  const servings=document.querySelector("#servings").value;
+  const ids=categories[diet];
+  ids.forEach(id=>planned.add(id));
+  document.querySelector("#plan-form").hidden=true;
+  document.querySelector("#planner-title").textContent="Hello, delicious week.";
+  const result=document.querySelector("#plan-result");
+  result.hidden=false;
+  result.innerHTML=`<p>Your three-dinner starter plan for ${servings} ${servings==="1"?"person":"people"} is ready. Make each recipe ${Number(servings)/2}× its listed quantities.</p><ul class="plan-list">${ids.map((id,i)=>`<li><div><small>${["MONDAY","WEDNESDAY","FRIDAY"][i]}</small><br><br>${meals[id].name}</div><span>${meals[id].time} min</span></li>`).join("")}</ul><button class="btn orange" id="explore-plan">Explore my recipes ↗</button><p style="font-size:10px;margin-top:12px">This demo keeps your plan for this visit.</p>`;
+  document.querySelector("#explore-plan").addEventListener("click",()=>{
+    renderRecipes(diet);
+    planner.close();
+    document.querySelector("#on-the-menu").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});
+  });
+});
+document.querySelector("#add-to-plan").addEventListener("click",()=>{
+  planned.add(selectedRecipe);
+  document.querySelector("#add-to-plan").textContent="Added to your week ✓";
+  notify("A delicious addition to your week.");
+});
+document.querySelector("#more-recipes").addEventListener("click",openPlanner);
+document.querySelector("#year").textContent=new Date().getFullYear();
+renderRecipes("favorites");
+</script>
+</body>
+</html>

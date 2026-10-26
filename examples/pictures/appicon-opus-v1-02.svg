@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <!-- Subtle repeating pattern: staggered short dashes, like faint air currents -->
+    <pattern id="drift" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M6 12h14M30 36h14" stroke="#1C1838" stroke-width="4" stroke-linecap="butt"/>
+    </pattern>
+  </defs>
+
+  <!-- Square background, no rounded corners -->
+  <rect x="0" y="0" width="1024" height="1024" fill="#0B0920"/>
+  <rect x="0" y="0" width="1024" height="1024" fill="url(#drift)"/>
+
+  <!-- Wind lines: flat, sharp, geometric (squared spirals, miter joins, butt caps) -->
+  <g fill="none" stroke-width="18" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10">
+    <!-- Upper gust: cyan, curls upward -->
+    <path d="M360 450 H600 V390 H540 V420 H570" stroke="#00F0FF"/>
+    <!-- Main current: magenta, straight -->
+    <path d="M330 512 H694" stroke="#FF2BD6"/>
+    <!-- Lower gust: lime, curls downward -->
+    <path d="M380 574 H640 V634 H580 V604 H610" stroke="#C6FF00"/>
+  </g>
+</svg>

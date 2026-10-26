@@ -1,0 +1,294 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="100%" height="100%">
+  <defs>
+    <!-- Strict Square Clip (No Round Borders) -->
+    <clipPath id="square-canvas">
+      <rect width="1024" height="1024" rx="0" ry="0" />
+    </clipPath>
+
+    <!-- Main Cloud Union Shape -->
+    <clipPath id="main-cloud-clip">
+      <rect x="330" y="500" width="450" height="190" />
+      <circle cx="330" cy="565" r="125" />
+      <circle cx="465" cy="435" r="170" />
+      <circle cx="655" cy="465" r="145" />
+      <circle cx="780" cy="575" r="115" />
+    </clipPath>
+
+    <!-- Secondary Back Cloud Shape -->
+    <clipPath id="back-cloud-clip">
+      <rect x="480" y="390" width="340" height="140" />
+      <circle cx="480" cy="445" r="85" />
+      <circle cx="585" cy="355" r="120" />
+      <circle cx="730" cy="380" r="105" />
+      <circle cx="820" cy="455" r="75" />
+    </clipPath>
+
+    <!-- Sky Background Gradient -->
+    <linearGradient id="sky-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A1128" />
+      <stop offset="35%" stop-color="#1C315E" />
+      <stop offset="70%" stop-color="#227C9D" />
+      <stop offset="100%" stop-color="#48CAE4" />
+    </linearGradient>
+
+    <!-- Atmospheric Horizon Glow -->
+    <radialGradient id="horizon-glow" cx="80%" cy="85%" r="75%">
+      <stop offset="0%" stop-color="#ADE8F4" stop-opacity="0.4" />
+      <stop offset="50%" stop-color="#48CAE4" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#0A1128" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Sun Core Gradient -->
+    <linearGradient id="sun-grad" x1="20%" y1="15%" x2="80%" y2="85%">
+      <stop offset="0%" stop-color="#FFFDF0" />
+      <stop offset="25%" stop-color="#FFEA79" />
+      <stop offset="65%" stop-color="#FF9E00" />
+      <stop offset="100%" stop-color="#FF4800" />
+    </linearGradient>
+
+    <!-- Sun Outer Glow -->
+    <radialGradient id="sun-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFB703" stop-opacity="0.8" />
+      <stop offset="40%" stop-color="#FB8500" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#FB8500" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Frosted Glass Surface Gradient -->
+    <linearGradient id="glass-surface" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.85" />
+      <stop offset="45%" stop-color="#F0F9FF" stop-opacity="0.65" />
+      <stop offset="100%" stop-color="#CAE9FF" stop-opacity="0.40" />
+    </linearGradient>
+
+    <!-- Cloud 3D Puff Highlight -->
+    <radialGradient id="puff-light" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9" />
+      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Cloud 3D Puff Shadow -->
+    <radialGradient id="puff-shadow" cx="65%" cy="70%" r="60%">
+      <stop offset="0%" stop-color="#1D3557" stop-opacity="0.35" />
+      <stop offset="60%" stop-color="#457B9D" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#457B9D" stop-opacity="0" />
+    </radialGradient>
+
+    <!--Cloud Bottom Ambient Occlusion -->
+    <linearGradient id="cloud-base-shadow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1D3557" stop-opacity="0" />
+      <stop offset="65%" stop-color="#1D3557" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#0A1128" stop-opacity="0.35" />
+    </linearGradient>
+
+    <!-- Back Cloud Gradient -->
+    <linearGradient id="back-cloud-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#48CAE4" stop-opacity="0.15" />
+    </linearGradient>
+
+    <!-- Lightning Gradient -->
+    <linearGradient id="bolt-grad" x1="25%" y1="0%" x2="75%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="20%" stop-color="#FFF3B0" />
+      <stop offset="60%" stop-color="#FFBE0B" />
+      <stop offset="100%" stop-color="#FB5607" />
+    </linearGradient>
+
+    <!-- Raindrop Gradient -->
+    <linearGradient id="rain-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9" />
+      <stop offset="30%" stop-color="#90E0EF" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#0077B6" stop-opacity="0.3" />
+    </linearGradient>
+
+    <!-- Glassmorphism Refraction Blur -->
+    <filter id="frosted-blur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="35" />
+      <feColorMatrix type="matrix" values="
+        1.1 0   0   0   0.05
+        0   1.1 0   0   0.05
+        0   0   1.15 0  0.08
+        0   0   0   1   0" />
+    </filter>
+
+    <!-- Main Cloud Drop Shadow -->
+    <filter id="cloud-drop-shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="35" stdDeviation="30" flood-color="#050A18" flood-opacity="0.55" />
+      <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#0A1128" flood-opacity="0.3" />
+    </filter>
+
+    <!-- Lightning Glow Filter -->
+    <filter id="bolt-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="8" stdDeviation="18" flood-color="#FF9E00" flood-opacity="0.75" />
+      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#FFFFFF" flood-opacity="0.6" />
+    </filter>
+
+    <!-- Rain Glow Filter -->
+    <filter id="rain-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#0096C7" flood-opacity="0.5" />
+    </filter>
+
+    <!-- Reusable Raindrop Shape -->
+    <path id="raindrop" d="M 0,-45 C 8,-20 22,5 22,20 A 22,22 0 1,1 -22,20 C -22,5 -8,-20 0,-45 Z" />
+
+    <!-- Scene Base (Grouped for Glassmorphic Refraction) -->
+    <g id="background-scene">
+      <!-- Base Sky -->
+      <rect width="1024" height="1024" fill="url(#sky-grad)" />
+      <rect width="1024" height="1024" fill="url(#horizon-glow)" />
+
+      <!-- Meteorological Isobar Lines -->
+      <g fill="none" stroke="#FFFFFF" stroke-opacity="0.06" stroke-width="2.5">
+        <circle cx="320" cy="360" r="280" />
+        <circle cx="320" cy="360" r="380" stroke-dasharray="12 18" />
+        <circle cx="320" cy="360" r="480" />
+        <circle cx="320" cy="360" r="580" />
+        <circle cx="320" cy="360" r="680" stroke-dasharray="4 12" />
+        <circle cx="320" cy="360" r="780" />
+        <path d="M -100,700 Q 300,550 600,800 T 1124,750" stroke-opacity="0.08" stroke-width="3" />
+        <path d="M -100,850 Q 400,650 750,900 T 1124,900" stroke-opacity="0.05" stroke-width="2" />
+      </g>
+
+      <!-- Celestial Sun Rays / Flare -->
+      <g opacity="0.25">
+        <polygon points="320,360 -200,100 -100,-100" fill="url(#sun-glow)" />
+        <polygon points="320,360 150,-200 400,-200" fill="url(#sun-glow)" />
+        <polygon points="320,360 800,-150 950,50" fill="url(#sun-glow)" />
+        <polygon points="320,360 -200,500 -200,300" fill="url(#sun-glow)" />
+      </g>
+
+      <!-- Sun Ambient Glow -->
+      <circle cx="320" cy="360" r="420" fill="url(#sun-glow)" />
+
+      <!-- The Sun -->
+      <circle cx="320" cy="360" r="195" fill="url(#sun-grad)" />
+      <!-- Sun Inner Rim Highlight -->
+      <circle cx="320" cy="360" r="193.5" fill="none" stroke="#FFFFFF" stroke-opacity="0.6" stroke-width="3" />
+    </g>
+  </defs>
+
+  <!-- Main Icon Wrapper (Strictly Square) -->
+  <g clip-path="url(#square-canvas)">
+
+    <!-- 1. Render Background & Sun -->
+    <use href="#background-scene" />
+
+    <!-- 2. Secondary Back Cloud (Adds Depth) -->
+    <g clip-path="url(#back-cloud-clip)">
+      <use href="#background-scene" filter="url(#frosted-blur)" />
+      <rect x="350" y="200" width="600" height="400" fill="url(#back-cloud-grad)" />
+      <!-- Back Cloud Rim Light -->
+      <circle cx="480" cy="445" r="85" fill="none" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="4" />
+      <circle cx="585" cy="355" r="120" fill="none" stroke="#FFFFFF" stroke-opacity="0.4" stroke-width="4" />
+      <circle cx="730" cy="380" r="105" fill="none" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="4" />
+      <circle cx="820" cy="455" r="75" fill="none" stroke="#FFFFFF" stroke-opacity="0.25" stroke-width="4" />
+      <!-- Darken bottom of back cloud for separation -->
+      <rect x="350" y="380" width="600" height="160" fill="url(#cloud-base-shadow)" />
+    </g>
+
+    <!-- 3. Precipitation & Lightning (Tucked Behind Main Cloud Edge) -->
+    <g>
+      <!-- Raindrop 1 (Left) -->
+      <use href="#raindrop" transform="translate(310, 770) rotate(22) scale(1.1)" fill="url(#rain-grad)" filter="url(#rain-glow)" />
+      <ellipse cx="307" cy="775" rx="5" ry="12" transform="rotate(22 307 775)" fill="#FFFFFF" opacity="0.6" />
+
+      <!-- Raindrop 2 (Center-Left, Deep) -->
+      <use href="#raindrop" transform="translate(405, 885) rotate(22) scale(0.95)" fill="url(#rain-grad)" filter="url(#rain-glow)" opacity="0.85" />
+      <ellipse cx="403" cy="889" rx="4" ry="10" transform="rotate(22 403 889)" fill="#FFFFFF" opacity="0.5" />
+
+      <!-- Raindrop 3 (Right) -->
+      <use href="#raindrop" transform="translate(690, 795) rotate(22) scale(1.15)" fill="url(#rain-grad)" filter="url(#rain-glow)" />
+      <ellipse cx="687" cy="800" rx="5" ry="13" transform="rotate(22 687 800)" fill="#FFFFFF" opacity="0.6" />
+
+      <!-- Raindrop 4 (Far Right, High) -->
+      <use href="#raindrop" transform="translate(795, 735) rotate(22) scale(0.8)" fill="url(#rain-grad)" filter="url(#rain-glow)" opacity="0.7" />
+
+      <!-- Centerpiece Lightning Bolt -->
+      <g filter="url(#bolt-glow)">
+        <path d="M 555,620 
+                 L 445,785 
+                 C 440,792 445,800 454,800 
+                 L 530,800 
+                 L 475,955 
+                 C 472,964 482,970 488,962 
+                 L 655,755 
+                 C 661,748 656,738 647,738 
+                 L 568,738 
+                 L 630,620 
+                 Z" 
+              fill="url(#bolt-grad)" />
+        <!-- Lightning Crisp Inner Core -->
+        <path d="M 562,635 L 462,785 L 542,785 L 495,925 L 635,752 L 552,752 L 610,635 Z" 
+              fill="#FFFFFF" opacity="0.5" />
+      </g>
+    </g>
+
+    <!-- 4. Main Foreground Cloud (True Glassmorphism + 3D Volume) -->
+    <g filter="url(#cloud-drop-shadow)">
+      <g clip-path="url(#main-cloud-clip)">
+        
+        <!-- A. Refracted Background (Blurred Sun & Sky) -->
+        <use href="#background-scene" filter="url(#frosted-blur)" transform="scale(1.03)" transform-origin="550 550" />
+
+        <!-- B. Base Frosted Glass Tint -->
+        <rect x="180" y="250" width="750" height="460" fill="url(#glass-surface)" />
+
+        <!-- C. 3D Sculpted Puff Shadows (Bottom-Right of Lobes) -->
+        <circle cx="330" cy="565" r="125" fill="url(#puff-shadow)" />
+        <circle cx="780" cy="575" r="115" fill="url(#puff-shadow)" />
+        <circle cx="655" cy="465" r="145" fill="url(#puff-shadow)" />
+        <circle cx="465" cy="435" r="170" fill="url(#puff-shadow)" />
+
+        <!-- D. 3D Sculpted Puff Highlights (Top-Left of Lobes, Overlapping) -->
+        <!-- Far Right Lobe -->
+        <circle cx="780" cy="575" r="115" fill="url(#puff-light)" />
+        <!-- Far Left Lobe -->
+        <circle cx="330" cy="565" r="125" fill="url(#puff-light)" />
+        <!-- Center-Right Lobe (Casts subtle shadow on Far Right) -->
+        <circle cx="665" cy="475" r="145" fill="#1D3557" opacity="0.08" />
+        <circle cx="655" cy="465" r="145" fill="url(#puff-light)" />
+        <!-- Center-Left Hero Lobe (Casts subtle shadow on Center-Right & Far Left) -->
+        <circle cx="475" cy="445" r="170" fill="#1D3557" opacity="0.1" />
+        <circle cx="465" cy="435" r="170" fill="url(#puff-light)" />
+        <!-- Central Bridging Puff for Extra Plushness -->
+        <circle cx="550" cy="560" r="130" fill="url(#puff-light)" opacity="0.7" />
+
+        <!-- E. Global Cloud Bottom Shading (Weight & Grounding) -->
+        <rect x="180" y="480" width="750" height="210" fill="url(#cloud-base-shadow)" />
+
+        <!-- F. Internal Warm Bounce Light from Lightning -->
+        <radialGradient id="lightning-bounce" cx="50%" cy="100%" r="45%">
+          <stop offset="0%" stop-color="#FFBE0B" stop-opacity="0.45" />
+          <stop offset="60%" stop-color="#FB5607" stop-opacity="0.1" />
+          <stop offset="100%" stop-color="#FB5607" stop-opacity="0" />
+        </radialGradient>
+        <rect x="300" y="500" width="500" height="190" fill="url(#lightning-bounce)" />
+
+        <!-- G. Crisp Specular Rim Lighting (Top & Sun-facing Edges) -->
+        <g fill="none" stroke="#FFFFFF">
+          <!-- Sun-facing intense rim lights -->
+          <circle cx="465" cy="435" r="168.5" stroke-width="6" stroke-opacity="0.9" />
+          <circle cx="330" cy="565" r="123.5" stroke-width="5" stroke-opacity="0.85" />
+          <!-- Away-facing softer rim lights -->
+          <circle cx="655" cy="465" r="143.5" stroke-width="4" stroke-opacity="0.65" />
+          <circle cx="780" cy="575" r="113.5" stroke-width="3.5" stroke-opacity="0.5" />
+          <!-- Bottom flat edge glass refraction line -->
+          <line x1="205" y1="687" x2="895" y2="687" stroke-width="6" stroke-opacity="0.4" />
+        </g>
+
+      </g>
+    </g>
+
+    <!-- 5. Foreground Atmospheric Details -->
+    <!-- Subtle lens flare / glass orb overlapping sun and cloud -->
+    <circle cx="395" cy="485" r="45" fill="#FFFFFF" opacity="0.12" />
+    <circle cx="395" cy="485" r="44" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity="0.25" />
+    <circle cx="350" cy="420" r="18" fill="#FFF3B0" opacity="0.2" />
+
+    <!-- Framing Inner Border (Sharp Square, subtle bevel for app icon finish) -->
+    <rect width="1024" height="1024" fill="none" stroke="#FFFFFF" stroke-opacity="0.12" stroke-width="8" />
+    <rect width="1024" height="1024" fill="none" stroke="#000000" stroke-opacity="0.2" stroke-width="2" />
+
+  </g>
+</svg>

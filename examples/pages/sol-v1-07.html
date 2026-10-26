@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f6f4e9">
+<title>Sprig — A little plan. A healthier you.</title>
+<style>
+:root{--paper:#f6f4e9;--ink:#29382b;--green:#425d39;--orange:#ef784d;--line:#dcded0;--muted:#6d7465}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+button,input{font:inherit}button{cursor:pointer}
+.wrap{max-width:1240px;margin:auto;padding:0 54px}
+header{height:110px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:9px;font-size:32px;font-weight:750;letter-spacing:-2px}
+.logo svg{width:29px;height:36px}
+.header-note{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.dot{width:7px;height:7px;background:var(--orange);border-radius:50%}
+.hero{display:grid;grid-template-columns:1fr 1.1fr;align-items:center;min-height:620px;gap:15px;padding-bottom:55px}
+.eyebrow{font-size:10px;letter-spacing:2px;font-weight:bold;display:flex;align-items:center;gap:9px}
+.eyebrow:before{content:"";width:23px;height:1px;background:currentColor}
+h1,h2,h3,p{margin:0}
+h1{font:normal clamp(52px,5.7vw,78px)/1.04 Georgia,serif;letter-spacing:-3.6px;margin:25px 0}
+h1 em{color:var(--green);font-weight:normal}
+.intro{color:var(--muted);font-size:16px;line-height:1.8;max-width:350px}
+.primary{border:0;background:var(--green);color:white;border-radius:7px;display:inline-flex;align-items:center;justify-content:space-between;gap:38px;padding:18px 23px;font-size:13px;font-weight:700;transition:background .2s,transform .2s}
+.primary:hover{background:#2e4328;transform:translateY(-2px)}
+.hero .primary{margin-top:29px}
+.arrow{font-size:21px;line-height:16px;font-weight:normal}
+.fineprint{font-size:10px;color:var(--muted);margin-top:13px}
+.fineprint span{padding:0 7px}
+.art{position:relative;width:100%;isolation:isolate}
+.art>svg{width:100%;display:block;overflow:visible}
+.art-label{position:absolute;top:5%;right:2%;font:italic 17px/1.2 Georgia,serif;transform:rotate(7deg)}
+.nutrition{position:absolute;bottom:9%;left:0;background:#fffdf6;border:1px solid #e4e3d5;padding:15px 19px;border-radius:9px;box-shadow:0 8px 20px #29382b08;transform:rotate(-5deg);width:190px}
+.nutrition-top{display:flex;justify-content:space-between;font-size:10px;font-weight:700}
+.nutrition-top span:last-child{color:#6b8256}
+.meter{display:flex;gap:4px;margin:10px 0 7px}
+.meter i{height:5px;border-radius:2px;flex:1;background:#a4b68a}
+.meter i:last-child{background:#e6e8d9}
+.nutrition small{font-size:9px;color:var(--muted)}
+.caption{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;text-align:center;margin-top:-12px;color:var(--muted)}
+.ribbon{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:24px 0;gap:20px}
+.ribbon p{font:italic 18px Georgia,serif}
+.ribbon span{font-size:11px;white-space:nowrap}
+.ribbon b{color:var(--green);margin-right:7px}
+.features{padding:80px 0}
+.section-top{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:33px}
+h2{font:normal 42px/1.15 Georgia,serif;letter-spacing:-1.4px}
+.section-top p{font-size:12px;line-height:1.8;color:var(--muted);max-width:260px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:19px}
+.card{border:1px solid var(--line);border-radius:10px;padding:26px;min-height:245px;background:#faf9f1}
+.card-icon{width:43px;height:43px;border-radius:50%;display:grid;place-items:center;background:#e6ebd8;margin-bottom:24px}
+.card:nth-child(2) .card-icon{background:#f8e4d5}
+.card:nth-child(3) .card-icon{background:#f1ebce}
+.card-icon svg{width:23px;height:23px;fill:none;stroke:var(--green);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+h3{font:normal 23px Georgia,serif;letter-spacing:-.5px;margin-bottom:12px}
+.card p{font-size:12px;line-height:1.9;color:var(--muted)}
+.end{background:#e8ecdb;border-radius:12px;padding:43px;display:flex;align-items:center;justify-content:space-between;gap:30px}
+.end h2{font-size:35px;margin-bottom:12px}
+.end p{font-size:12px;color:var(--muted)}
+.tag{font-size:9px;letter-spacing:2px;font-weight:700;margin-bottom:14px}
+footer{display:flex;justify-content:space-between;align-items:center;padding:36px 0;font-size:10px;color:var(--muted)}
+footer .logo{font-size:22px}
+.footer-right{display:flex;gap:20px}
+.footer-right span:first-child{font-family:Georgia,serif;font-style:italic}
+dialog{border:1px solid var(--line);border-radius:16px;padding:35px;width:min(440px,calc(100% - 32px));background:var(--paper);color:var(--ink);box-shadow:0 30px 100px #16241933}
+dialog::backdrop{background:#1a291d66;backdrop-filter:blur(4px)}
+.close{position:absolute;right:13px;top:10px;background:none;border:0;font-size:26px;color:var(--muted)}
+dialog h2{font-size:35px;margin:15px 0}
+dialog p{font-size:14px;line-height:1.7;color:var(--muted)}
+label{display:block;font-size:12px;font-weight:bold;margin:25px 0 8px}
+input{width:100%;padding:14px;border:1px solid #bec5ae;background:#fffef7;border-radius:6px;color:var(--ink)}
+form .primary{width:100%;margin-top:12px}
+button:focus-visible,input:focus-visible{outline:3px solid var(--orange);outline-offset:4px}
+.success{padding:20px 0}
+.success-mark{font-size:38px;color:var(--green)}
+[hidden]{display:none!important}
+@media(max-width:850px){
+.wrap{padding:0 28px}h1{font-size:57px}.nutrition{width:165px;padding:12px}
+.ribbon{flex-wrap:wrap;justify-content:center}.ribbon p{width:100%;text-align:center}
+.cards{gap:12px}.card{padding:20px}.end{padding:30px}.end h2{font-size:30px}
+}
+@media(max-width:600px){
+.wrap{padding:0 23px}header{height:85px}.header-note{font-size:10px}
+.hero{display:flex;flex-direction:column;align-items:stretch;gap:24px;padding-top:27px;padding-bottom:35px}
+h1{font-size:60px;margin:21px 0;letter-spacing:-3px}
+.intro{font-size:15px;max-width:330px}.art{max-width:440px;align-self:center}
+.art-label{right:3%;font-size:16px}.nutrition{bottom:9%;width:170px}
+.caption{margin-top:-4px}.ribbon{gap:14px 20px;padding:23px 0}.ribbon span{font-size:10px}
+.features{padding:50px 0}.section-top{display:block}.section-top p{margin-top:17px}
+h2{font-size:35px}.cards{grid-template-columns:1fr;gap:13px}
+.card{min-height:0;padding:24px;display:grid;grid-template-columns:43px 1fr;column-gap:18px}
+.card-icon{grid-row:1/3;margin:0}.card h3{font-size:22px;margin-bottom:8px}.card p{grid-column:2}
+.end{display:block;padding:30px 24px}.end .primary{margin-top:24px;width:100%}
+.end h2{font-size:33px}.end p{line-height:1.7}footer{align-items:start;gap:20px}
+.footer-right{flex-direction:column;gap:10px;text-align:right}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="logo">
+    <svg viewBox="0 0 30 38" aria-hidden="true"><path d="M14 35V15M14 25C1 25 0 14 1 10c10 0 15 6 13 15M15 17C14 7 21 1 29 1c1 9-4 16-14 16" fill="#425d39" stroke="#425d39" stroke-width="2"/></svg>
+    sprig
+  </div>
+  <div class="header-note"><span class="dot"></span>A fresh take on meal planning</div>
+</header>
+<main>
+<section class="hero" aria-labelledby="headline">
+  <div>
+    <div class="eyebrow">GOOD FOOD. YOUR KIND OF GOOD.</div>
+    <h1 id="headline">Your goals.<br>Your plate.<br><em>All in balance.</em></h1>
+    <p class="intro">Meet the meal planner that puts your nutrition goals on the menu. Real food, a little structure, and plenty of room for you.</p>
+    <button class="primary" data-join>Find your balance <span class="arrow" aria-hidden="true">↗</span></button>
+    <p class="fineprint">Join the early-access list <span>·</span> A fresh start is coming</p>
+  </div>
+  <div class="art">
+    <div class="art-label">A little prep.<br>A lot of possibility.</div>
+    <svg viewBox="0 0 590 590" role="img" aria-labelledby="art-title">
+      <title id="art-title">A cook preparing a colorful, balanced bowl in a sunny kitchen</title>
+      <defs>
+        <clipPath id="scene"><path d="M66 276C66 130 148 54 282 59c139 5 222 110 234 255l-2 172H65Z"/></clipPath>
+        <pattern id="grain" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".6" fill="#5c6237" opacity=".06"/></pattern>
+      </defs>
+      <path d="M66 276C66 130 148 54 282 59c139 5 222 110 234 255l-2 172H65Z" fill="#e8ebd7"/>
+      <g clip-path="url(#scene)">
+        <path d="M62 352h460v145H62Z" fill="#d5dcc1"/>
+        <path d="M104 112h112v129H104Z" fill="#f5f2df" stroke="#c9d1b5" stroke-width="3"/>
+        <path d="M160 112v129m-56-65h112" stroke="#c9d1b5" stroke-width="3"/>
+        <path d="M110 232c37-31 63-22 99-51v53Z" fill="#c7d2ac"/>
+        <path d="M379 148h111" stroke="#8e9f78" stroke-width="5"/>
+        <path d="M399 148v29m45-29v29" stroke="#8e9f78" stroke-width="2"/>
+        <path d="M394 177v29q6 13 12 0v-29m32 0v29q6 13 12 0v-29" fill="#f1e5ba" stroke="#89966b" stroke-width="2"/>
+        <path d="M283 171c-10-16-11-38-2-54 11-20 45-25 63-8 18 16 15 40 4 57Z" fill="#303d2c"/>
+        <path d="M313 180v27l31 14 9-25-16-30" fill="#c77950"/>
+        <path d="M293 129c-6 17-5 40 7 49 12 9 30 7 37-8l6-38-29-12Z" fill="#dc9669"/>
+        <path d="M292 142c9-2 21-11 22-23 10 16 18 19 29 17l4-17-25-19-28 13Z" fill="#303d2c"/>
+        <path d="M338 145c13-7 16 9 4 14" fill="#dc9669"/>
+        <path d="m298 151 5 1m11 16c4 2 8 1 11-2" stroke="#643e2c" fill="none" stroke-width="2" stroke-linecap="round"/>
+        <path d="M296 201c-26 6-44 25-49 67l-8 92 149 9-14-112c-2-31-16-47-32-55l-19 18Z" fill="#f27d50"/>
+        <path d="M294 204l-7 40-22 114 101 4-19-117-6-40-16 17Z" fill="#f8edcf"/>
+        <path d="m298 246-10 78h57l-12-78Z" fill="#e9dfbc"/>
+        <path d="M288 281h51" stroke="#c3bc95" stroke-width="2"/>
+        <path d="M255 235c-17 9-26 29-42 49l-36-3-6 17 51 15c12 2 20-8 28-19l24-33Z" fill="#f27d50"/>
+        <path d="m179 282-17-8-20 4-8 10 35 11 12-4Z" fill="#dc9669"/>
+        <path d="M371 235c13 12 17 39 12 64-2 13-11 20-25 19l-50-14 5-18 38 4-8-30Z" fill="#f27d50"/>
+        <path d="m316 287-19-12-14 2-13 14 21 13 20 2Z" fill="#dc9669"/>
+        <path d="m283 277-27-24-5 7 24 27" fill="#cbd0b5" stroke="#657357" stroke-width="1.5"/>
+        <path d="M65 361h458v20H65Z" fill="#b28055"/>
+        <path d="M67 381h454v104H67Z" fill="#c89d70"/>
+        <path d="M91 403h187v81H91Zm211 0h187v81H302Z" fill="none" stroke="#b4875c" stroke-width="2"/>
+        <path d="M166 418h35m176 0h35" stroke="#735a3d" stroke-width="3" stroke-linecap="round"/>
+        <path d="M198 342h141l-15 16H210Z" fill="#e8c28d"/>
+        <path d="m237 338 13-8 11 9m14 1 10-12 14 9" fill="#657f43"/>
+        <circle cx="273" cy="334" r="5" fill="#ea8054"/>
+        <path d="m280 322 4-10m-5 6-6-5m10 1 7-4" stroke="#567142" stroke-width="3"/>
+        <path d="M104 322h48l-6 39h-35Z" fill="#ece5c9"/>
+        <path d="M127 326c-6-22-25-27-30-21 2 14 19 18 30 21m0-4c-2-26 12-39 22-36 3 15-8 28-22 36m0 1c7-16 24-22 29-13-4 12-20 15-29 13" fill="#69804c"/>
+        <path d="M128 344v-31" stroke="#47623a" stroke-width="2"/>
+        <path d="M418 333h49l-6 28h-37Z" fill="#758457"/>
+        <path d="M427 331c-10-10-4-18 0-23m15 23c-11-14 5-18 1-30m12 29c-7-9 4-13 0-20" fill="none" stroke="#94a17b" stroke-width="2" stroke-linecap="round"/>
+        <path d="M62 59h460v430H62Z" fill="url(#grain)"/>
+      </g>
+      <g transform="translate(367 356) rotate(12)">
+        <ellipse cx="38" cy="83" rx="76" ry="13" fill="#29382b" opacity=".08"/>
+        <path d="M-35 35C-28 111 104 111 112 35Z" fill="#f4e9cc" stroke="#d1c5a3" stroke-width="2"/>
+        <ellipse cx="38" cy="35" rx="74" ry="33" fill="#fff9e6" stroke="#d1c5a3" stroke-width="2"/>
+        <ellipse cx="38" cy="35" rx="64" ry="25" fill="#83945a"/>
+        <g fill="#d5bb75"><circle cx="23" cy="26" r="5"/><circle cx="38" cy="35" r="5"/><circle cx="15" cy="39" r="5"/><circle cx="31" cy="48" r="5"/><circle cx="48" cy="48" r="5"/><circle cx="48" cy="22" r="5"/></g>
+        <g fill="#e77b4f"><path d="m63 17 20 10-16 17-15-10Z"/><path d="m62 44 19-11 14 13-19 11Z"/></g>
+        <g fill="#48653b"><ellipse cx="-5" cy="25" rx="9" ry="15" transform="rotate(-40 -5 25)"/><ellipse cx="3" cy="44" rx="9" ry="15" transform="rotate(-55 3 44)"/></g>
+        <path d="M20 15q12-17 23 1" fill="#e8d484"/>
+      </g>
+      <g transform="translate(472 251) rotate(15)"><path d="M0 0c-10 12-9 32 2 39C15 33 16 12 0 0" fill="#6f884d"/><path d="M2 39 1 8" stroke="#dce4c8" stroke-width="1.5"/></g>
+      <path d="m84 265 5 10m-10-5 14-1" stroke="#a7b18b" stroke-width="2"/>
+    </svg>
+    <div class="nutrition">
+      <div class="nutrition-top"><span>A little more balanced</span><span>✓</span></div>
+      <div class="meter"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <small>Small steps. Feel-good progress.</small>
+    </div>
+    <div class="caption">Made for real life. And really good food.</div>
+  </div>
+</section>
+
+<div class="ribbon">
+  <p>Healthy looks different on everyone.</p>
+  <span><b>✓</b>Your goals, your pace</span>
+  <span><b>✓</b>Flexible by nature</span>
+  <span><b>✓</b>Joy is on the menu</span>
+</div>
+
+<section class="features" aria-labelledby="features-title">
+  <div class="section-top">
+    <h2 id="features-title">A plan that feels like you.</h2>
+    <p>A little guidance to eat well.<br>Enough flexibility to live well.</p>
+  </div>
+  <div class="cards">
+    <article class="card">
+      <div class="card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="m12 12 7-7m-3 0h3v3"/></svg></div>
+      <h3>Start with your goals.</h3>
+      <p>More protein? More plants? Find meals that fit your nutrition goals, tastes, and the way you actually eat.</p>
+    </article>
+    <article class="card">
+      <div class="card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 10h18m-14 5 3 3 7-5"/></svg></div>
+      <h3>Make room for life.</h3>
+      <p>Build your week around delicious, balanced meals. Swap a recipe or move a meal whenever life changes the plan.</p>
+    </article>
+    <article class="card">
+      <div class="card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l2 13H4L6 8Zm3 0V6a3 3 0 0 1 6 0v2m-6 6 2 2 4-4"/></svg></div>
+      <h3>Less figuring. More flavor.</h3>
+      <p>Your meals become one organized grocery list. Get what you need, skip the guesswork, and get to the good part.</p>
+    </article>
+  </div>
+</section>
+
+<section class="end" aria-labelledby="end-title">
+  <div>
+    <div class="tag">SMALL STEPS. GOOD THINGS.</div>
+    <h2 id="end-title">Your next chapter starts<br>with what’s on your plate.</h2>
+    <p>Be first to meet a more balanced way to plan.</p>
+  </div>
+  <button class="primary" data-join>Find your balance <span class="arrow" aria-hidden="true">↗</span></button>
+</section>
+</main>
+<footer>
+  <div class="logo">sprig</div>
+  <div class="footer-right"><span>A little plan. A healthier you.</span><span>© 2026 Sprig</span></div>
+</footer>
+</div>
+
+<dialog id="signup" aria-labelledby="signup-title">
+  <button class="close" aria-label="Close signup">×</button>
+  <div id="signup-content">
+    <div class="eyebrow">A FRESH START</div>
+    <h2 id="signup-title">Good things are growing.</h2>
+    <p>Try the early-access signup. This demo saves your email on this device only.</p>
+    <form id="signup-form">
+      <label for="email">Your email</label>
+      <input id="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+      <button class="primary" type="submit">Join the list <span class="arrow" aria-hidden="true">↗</span></button>
+    </form>
+  </div>
+  <div id="success" class="success" hidden>
+    <div class="success-mark" aria-hidden="true">✓</div>
+    <h2 id="success-title">A fresh start, saved.</h2>
+    <p id="save-message"></p>
+    <button class="primary" id="done" style="margin-top:24px">Sounds good <span aria-hidden="true">✓</span></button>
+  </div>
+</dialog>
+
+<script>
+const modal = document.getElementById("signup");
+const form = document.getElementById("signup-form");
+const content = document.getElementById("signup-content");
+const success = document.getElementById("success");
+const done = document.getElementById("done");
+
+document.querySelectorAll("[data-join]").forEach(button => {
+  button.addEventListener("click", () => modal.showModal());
+});
+document.querySelector(".close").addEventListener("click", () => modal.close());
+done.addEventListener("click", () => modal.close());
+
+modal.addEventListener("click", event => {
+  if (event.target !== modal) return;
+  const rect = modal.getBoundingClientRect();
+  if (
+    event.clientX < rect.left || event.clientX > rect.right ||
+    event.clientY < rect.top || event.clientY > rect.bottom
+  ) modal.close();
+});
+
+form.addEventListener("submit", event => {
+  event.preventDefault();
+  let saved = false;
+  try {
+    localStorage.setItem("sprig-early-access", document.getElementById("email").value);
+    saved = true;
+  } catch {}
+  document.getElementById("save-message").textContent = saved
+    ? "Your interest is saved on this device. This is a demo, so no email was sent or added to a mailing list."
+    : "Thanks for trying Sprig. Browser storage is unavailable, so your email wasn't saved.";
+  content.hidden = true;
+  success.hidden = false;
+  modal.setAttribute("aria-labelledby", "success-title");
+  done.focus();
+});
+</script>
+</body>
+</html>

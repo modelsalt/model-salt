@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- road strip -->
+  <rect x="30" y="360" width="340" height="7" rx="3" fill="#555"/>
+
+  <!-- rear wheel (hidden behind, just peeking) -->
+  <ellipse cx="200" cy="292" rx="7" ry="66" fill="#1c1c1c"/>
+
+  <!-- front wheel, head-on -->
+  <ellipse cx="200" cy="290" rx="12" ry="70" fill="#222"/>
+  <ellipse cx="200" cy="290" rx="4" ry="58" fill="#8a8a8a"/>
+  <circle cx="200" cy="290" r="6" fill="#444"/>
+
+  <!-- fork blades -->
+  <rect x="183" y="195" width="7" height="97" rx="3" fill="#c0392b"/>
+  <rect x="210" y="195" width="7" height="97" rx="3" fill="#c0392b"/>
+  <!-- head tube -->
+  <rect x="189" y="150" width="22" height="52" rx="4" fill="#c0392b"/>
+
+  <!-- pelican body (hunched, seen from the front) -->
+  <ellipse cx="200" cy="195" rx="72" ry="58" fill="#f4f4f4"/>
+
+  <!-- legs and feet on pedals -->
+  <rect x="160" y="238" width="10" height="26" rx="4" fill="#f39c12"/>
+  <rect x="230" y="238" width="10" height="26" rx="4" fill="#f39c12"/>
+  <ellipse cx="165" cy="266" rx="16" ry="7" fill="#f39c12"/>
+  <ellipse cx="235" cy="266" rx="16" ry="7" fill="#f39c12"/>
+
+  <!-- wings reaching down to the drops -->
+  <path d="M150 165 Q118 185 106 220 L134 226 Q148 200 170 180 Z" fill="#dcdcdc"/>
+  <path d="M250 165 Q282 185 294 220 L266 226 Q252 200 230 180 Z" fill="#dcdcdc"/>
+
+  <!-- dropped handlebars -->
+  <path d="M115 160 H285" stroke="#333" stroke-width="9" stroke-linecap="round" fill="none"/>
+  <path d="M115 160 C98 160 98 160 98 178 V212" stroke="#333" stroke-width="9" stroke-linecap="round" fill="none"/>
+  <path d="M285 160 C302 160 302 160 302 178 V212" stroke="#333" stroke-width="9" stroke-linecap="round" fill="none"/>
+
+  <!-- wing tips gripping the drops -->
+  <ellipse cx="100" cy="205" rx="12" ry="16" fill="#f4f4f4"/>
+  <ellipse cx="300" cy="205" rx="12" ry="16" fill="#f4f4f4"/>
+
+  <!-- neck extended low toward the viewer -->
+  <ellipse cx="200" cy="165" rx="30" ry="24" fill="#f4f4f4"/>
+
+  <!-- head -->
+  <circle cx="200" cy="182" r="30" fill="#ffffff"/>
+
+  <!-- eyes -->
+  <circle cx="186" cy="174" r="5" fill="#111"/>
+  <circle cx="214" cy="174" r="5" fill="#111"/>
+
+  <!-- beak, foreshortened straight at the viewer -->
+  <path d="M182 186 H218 L210 248 Q200 256 190 248 Z" fill="#f39c12"/>
+  <!-- pouch -->
+  <path d="M186 210 H214 L209 250 Q200 258 191 250 Z" fill="#f7b731"/>
+</svg>

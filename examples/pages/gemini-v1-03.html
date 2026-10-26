@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VerdantPrep — Whole-Food Macro Planning for Athletes</title>
+  <!-- Google Fonts: Fraunces (Serif) & Plus Jakarta Sans (Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-oat: #F6F3EC;
+      --bg-card: #FFFDF9;
+      --bg-sand: #EAE4D7;
+      --bg-forest: #1C3829;
+      --bg-forest-light: #274C38;
+      --accent-sage: #4A785E;
+      --accent-lime: #D4E89E;
+      --accent-terracotta: #C86D51;
+      --accent-amber: #D99B26;
+      --text-ink: #1B241E;
+      --text-muted: #5C665E;
+      --border-soft: rgba(28, 56, 41, 0.1);
+      --shadow-soft: 0 14px 36px -8px rgba(28, 56, 41, 0.06), 0 4px 12px -2px rgba(28, 56, 41, 0.04);
+      --shadow-hover: 0 20px 44px -10px rgba(28, 56, 41, 0.12), 0 6px 16px -4px rgba(28, 56, 41, 0.06);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-pill: 999px;
+      --font-serif: 'Fraunces', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-oat);
+      color: var(--text-ink);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+    }
+
+    body {
+      overflow-x: hidden;
+      background-image: radial-gradient(circle at 15% 10%, rgba(74, 120, 94, 0.06) 0%, transparent 45%),
+                        radial-gradient(circle at 85% 35%, rgba(200, 109, 81, 0.05) 0%, transparent 45%);
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, .serif {
+      font-family: var(--font-serif);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    /* Navigation */
+    header {
+      position: sticky;
+      top: 16px;
+      z-index: 100;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 253, 249, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-pill);
+      padding: 12px 24px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--bg-forest);
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+
+    .logo-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--bg-forest);
+      color: var(--accent-lime);
+      display: grid;
+      place-items: center;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--bg-forest);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: var(--radius-pill);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      border: none;
+      font-family: var(--font-sans);
+    }
+
+    .btn-primary {
+      background: var(--bg-forest);
+      color: #FFFDF9;
+    }
+
+    .btn-primary:hover {
+      background: var(--bg-forest-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(28, 56, 41, 0.2);
+    }
+
+    .btn-terracotta {
+      background: var(--accent-terracotta);
+      color: #FFFDF9;
+    }
+
+    .btn-terracotta:hover {
+      background: #b55d42;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--bg-forest);
+      border: 1.5px solid var(--bg-forest);
+    }
+
+    .btn-outline:hover {
+      background: var(--bg-forest);
+      color: #FFFDF9;
+    }
+
+    /* Main Container */
+    main {
+      max-width: 1280px;
+      margin: 40px auto 80px;
+      padding: 0 24px;
+    }
+
+    /* Hero Intro */
+    .hero-header {
+      text-align: center;
+      max-width: 820px;
+      margin: 56px auto 44px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-sand);
+      color: var(--bg-forest);
+      padding: 6px 16px;
+      border-radius: var(--radius-pill);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow span.dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-terracotta);
+    }
+
+    .hero-header h1 {
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      color: var(--bg-forest);
+      margin-bottom: 20px;
+    }
+
+    .hero-header h1 em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--accent-sage);
+    }
+
+    .hero-header p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 640px;
+      margin: 0 auto 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* Central Interactive Hub + Bento Grid */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 22px;
+      margin-top: 20px;
+    }
+
+    .bento-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .bento-card:hover {
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* Card 1: Central Interactive Macro & Calorie Hub (Spans 8 cols) */
+    .hub-macro-planner {
+      grid-column: span 8;
+      background: linear-gradient(165deg, #FFFDF9 0%, #F8F5EE 100%);
+    }
+
+    /* Card 2: Onboarding Quiz ("Build Your First Week") (Spans 4 cols) */
+    .hub-quiz-card {
+      grid-column: span 4;
+      background: var(--bg-forest);
+      color: #FFFDF9;
+      border: none;
+    }
+
+    /* Card 3: Cut / Bulk Adaptive Periodization (Spans 4 cols) */
+    .bento-periodization {
+      grid-column: span 4;
+    }
+
+    /* Card 4: Grocery Aisle Auto-Aggregator (Spans 4 cols) */
+    .bento-grocery {
+      grid-column: span 4;
+      background: var(--bg-sand);
+    }
+
+    /* Card 5: Batch Prep Timers & Storage (Spans 4 cols) */
+    .bento-prep {
+      grid-column: span 4;
+    }
+
+    /* Card 6: Wide Social Proof & Athlete Results (Spans 12 cols) */
+    .bento-athletes {
+      grid-column: span 12;
+      display: grid;
+      grid-template-columns: 1.1fr 1.9fr;
+      gap: 32px;
+      align-items: center;
+      background: linear-gradient(90deg, #EAE4D7 0%, #FFFDF9 100%);
+    }
+
+    /* Interactive Macro Planner Styles */
+    .hub-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .badge-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent-sage);
+      background: rgba(74, 120, 94, 0.12);
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-live::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      background: var(--accent-sage);
+      border-radius: 50%;
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.25); }
+    }
+
+    .controls-panel {
+      background: var(--bg-oat);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      margin-bottom: 24px;
+    }
+
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    .calorie-readout {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      color: var(--bg-forest);
+      font-weight: 700;
+    }
+
+    .calorie-readout span {
+      font-size: 0.95rem;
+      font-family: var(--font-sans);
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 10px;
+      background: #DCD5C7;
+      border-radius: 99px;
+      outline: none;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--bg-forest);
+      border: 3px solid var(--accent-lime);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+      cursor: grab;
+      transition: transform 0.15s ease;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.12);
+    }
+
+    .macro-splits {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-soft);
+    }
+
+    .split-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .split-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 7px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 0.83rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .split-btn.active {
+      background: var(--bg-forest);
+      color: #FFFDF9;
+      border-color: var(--bg-forest);
+    }
+
+    .macro-bars {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .macro-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .macro-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+    }
+
+    .dot-p { background: var(--accent-sage); }
+    .dot-c { background: var(--accent-amber); }
+    .dot-f { background: var(--accent-terracotta); }
+
+    /* Sample Daily Meal Cards */
+    .meals-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .meal-item {
+      background: #FFFDF9;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .meal-item:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent-sage);
+    }
+
+    .meal-slot-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .meal-cal-badge {
+      background: var(--bg-sand);
+      color: var(--bg-forest);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    .meal-title {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      color: var(--text-ink);
+      margin-bottom: 6px;
+    }
+
+    .meal-portion {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .meal-macros-mini {
+      display: flex;
+      justify-content: space-between;
+      background: var(--bg-oat);
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .meal-macros-mini span b {
+      color: var(--bg-forest);
+    }
+
+    /* Card 2: Onboarding Quiz Card */
+    .quiz-badge {
+      display: inline-block;
+      background: rgba(212, 232, 158, 0.16);
+      color: var(--accent-lime);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 14px;
+    }
+
+    .hub-quiz-card h3 {
+      font-size: 1.75rem;
+      color: #FFFDF9;
+      margin-bottom: 8px;
+    }
+
+    .hub-quiz-card p.quiz-sub {
+      color: rgba(255, 253, 249, 0.75);
+      font-size: 0.92rem;
+      margin-bottom: 20px;
+    }
+
+    .quiz-progress {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+
+    .progress-seg {
+      height: 5px;
+      flex: 1;
+      background: rgba(255, 253, 249, 0.18);
+      border-radius: 99px;
+      transition: background 0.3s;
+    }
+
+    .progress-seg.active {
+      background: var(--accent-lime);
+    }
+
+    .quiz-step {
+      display: none;
+      animation: fadeIn 0.28s ease;
+    }
+
+    .quiz-step.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .quiz-question {
+      font-weight: 600;
+      font-size: 0.98rem;
+      margin-bottom: 12px;
+      color: var(--accent-lime);
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .quiz-opt-btn {
+      background: rgba(255, 253, 249, 0.07);
+      border: 1px solid rgba(255, 253, 249, 0.16);
+      color: #FFFDF9;
+      padding: 12px 14px;
+      border-radius: 14px;
+      text-align: left;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s;
+    }
+
+    .quiz-opt-btn:hover, .quiz-opt-btn.selected {
+      background: rgba(212, 232, 158, 0.18);
+      border-color: var(--accent-lime);
+    }
+
+    .quiz-opt-btn span.opt-meta {
+      font-size: 0.76rem;
+      color: rgba(255, 253, 249, 0.65);
+    }
+
+    .email-gate-box {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 16px;
+      border-radius: 16px;
+      margin-bottom: 12px;
+      border: 1px solid rgba(212, 232, 158, 0.25);
+    }
+
+    .email-input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255, 253, 249, 0.95);
+      color: var(--text-ink);
+      font-size: 0.92rem;
+      margin: 10px 0;
+      font-family: var(--font-sans);
+    }
+
+    .quiz-nav-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .quiz-back {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.65);
+      font-size: 0.82rem;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    /* Feature Bento Cards */
+    .card-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-sage);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .bento-card h3 {
+      font-size: 1.45rem;
+      margin-bottom: 10px;
+    }
+
+    .bento-card p {
+      color: var(--text-muted);
+      font-size: 0.93rem;
+      line-height: 1.55;
+    }
+
+    /* Visual Widgets inside smaller Bento Cards */
+    .mini-chart {
+      margin-top: 22px;
+      background: var(--bg-oat);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      border: 1px solid var(--border-soft);
+    }
+
+    .chart-bars {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      height: 88px;
+      gap: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .bar-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      height: 100%;
+      justify-content: flex-end;
+    }
+
+    .bar-fill {
+      width: 100%;
+      border-radius: 6px 6px 2px 2px;
+      background: var(--accent-sage);
+      transition: height 0.3s ease;
+    }
+
+    .bar-fill.high {
+      background: var(--bg-forest);
+    }
+
+    .bar-fill.rest {
+      background: #C5D1C8;
+    }
+
+    .bar-days {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      padding-top: 8px;
+    }
+
+    /* Grocery Checklist Widget */
+    .grocery-list {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .grocery-row {
+      background: var(--bg-card);
+      padding: 10px 14px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      border: 1px solid var(--border-soft);
+      transition: opacity 0.2s;
+    }
+
+    .grocery-row.checked {
+      opacity: 0.55;
+      text-decoration: line-through;
+    }
+
+    .check-circle {
+      width: 18px;
+      height: 18px;
+      border-radius: 5px;
+      border: 2px solid var(--accent-sage);
+      display: inline-grid;
+      place-items: center;
+      margin-right: 10px;
+      font-size: 0.7rem;
+      color: #fff;
+    }
+
+    .grocery-row.checked .check-circle {
+      background: var(--accent-sage);
+    }
+
+    /* Prep Timeline Widget */
+    .prep-timeline {
+      margin-top: 20px;
+      background: var(--bg-oat);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      border: 1px solid var(--border-soft);
+    }
+
+    .prep-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px dashed var(--border-soft);
+      font-size: 0.84rem;
+    }
+
+    .prep-step:last-child {
+      border-bottom: none;
+    }
+
+    .prep-time {
+      background: var(--bg-forest);
+      color: var(--accent-lime);
+      font-weight: 700;
+      font-size: 0.74rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      min-width: 54px;
+      text-align: center;
+    }
+
+    /* Athlete Proof Card */
+    .athlete-quotes {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .quote-box {
+      background: var(--bg-card);
+      padding: 20px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-soft);
+    }
+
+    .quote-box p {
+      font-size: 0.9rem;
+      color: var(--text-ink);
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+
+    .athlete-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--bg-forest);
+    }
+
+    .athlete-stat {
+      background: rgba(74, 120, 94, 0.14);
+      color: var(--bg-forest);
+      padding: 3px 9px;
+      border-radius: var(--radius-pill);
+    }
+
+    /* Footer */
+    footer {
+      max-width: 1280px;
+      margin: 0 auto 48px;
+      padding: 32px 24px 0;
+      border-top: 1px solid var(--border-soft);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 1080px) {
+      .hub-macro-planner, .hub-quiz-card {
+        grid-column: span 12;
+      }
+      .bento-periodization, .bento-grocery, .bento-prep {
+        grid-column: span 4;
+      }
+      .bento-athletes {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .meals-grid {
+        grid-template-columns: 1fr;
+      }
+      .bento-periodization, .bento-grocery, .bento-prep {
+        grid-column: span 12;
+      }
+      .athlete-quotes {
+        grid-template-columns: 1fr;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Navigation -->
+  <header>
+    <nav class="navbar">
+      <a href="#" class="logo">
+        <div class="logo-mark">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/>
+            <path d="M8.5 8.5v.01"/>
+            <path d="M16 15.5v.01"/>
+            <path d="M12 12v.01"/>
+          </svg>
+        </div>
+        VerdantPrep
+      </a>
+      <ul class="nav-links">
+        <li><a href="#macro-engine">Macro Engine</a></li>
+        <li><a href="#features">Periodization</a></li>
+        <li><a href="#athletes">Athlete Logs</a></li>
+        <li><a href="#quiz-hub">Build Your Week</a></li>
+      </ul>
+      <a href="#quiz-hub" class="btn btn-primary">Build Your First Week</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-header">
+      <div class="eyebrow">
+        <span class="dot"></span> Culinary Precision for Strength & Conditioning
+      </div>
+      <h1>Hit your exact macros with <em>chef-crafted</em> whole foods.</h1>
+      <p>
+        Stop eating bland chicken and dry rice out of plastic tubs. VerdantPrep scales seasonal recipes gram-for-gram to your daily caloric target, training load, and cutting phase.
+      </p>
+      <div class="hero-actions">
+        <a href="#quiz-hub" class="btn btn-primary">Build Your First Week &rarr;</a>
+        <a href="#macro-engine" class="btn btn-outline">Test Live Macro Slider</a>
+      </div>
+    </section>
+
+    <!-- Central Interactive Hub & Bento Grid -->
+    <section class="bento-grid">
+
+      <!-- BENTO 1: Live Calorie & Macro Slider Hub (8 Cols) -->
+      <div class="bento-card hub-macro-planner" id="macro-engine">
+        <div>
+          <div class="hub-top">
+            <div>
+              <span class="badge-live">Interactive Macro Engine</span>
+              <h2 style="font-size: 1.85rem; margin-top: 8px; color: var(--bg-forest);">
+                Dial in your daily target. Watch portions adapt live.
+              </h2>
+            </div>
+            <div style="text-align: right;">
+              <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">MICRONUTRIENT SCORE</span>
+              <div class="serif" style="font-size: 1.4rem; color: var(--accent-sage);">98 / 100 Optimal</div>
+            </div>
+          </div>
+
+          <!-- Slider & Split Controls -->
+          <div class="controls-panel">
+            <div class="slider-header">
+              <div>
+                <span style="font-size: 0.82rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted);">Daily Calorie Target</span>
+                <div class="calorie-readout" id="calDisplay">2,250 <span>kcal / day</span></div>
+              </div>
+              <div class="macro-bars">
+                <div class="macro-pill"><span class="macro-dot dot-p"></span> Protein: <span id="pTotal">197g</span></div>
+                <div class="macro-pill"><span class="macro-dot dot-c"></span> Carbs: <span id="cTotal">225g</span></div>
+                <div class="macro-pill"><span class="macro-dot dot-f"></span> Fats: <span id="fTotal">63g</span></div>
+              </div>
+            </div>
+
+            <input type="range" id="calSlider" min="1500" max="3400" step="50" value="2250" aria-label="Daily Calorie Target" />
+
+            <div class="macro-splits">
+              <span style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted);">ATHLETIC PHASE PRESET:</span>
+              <div class="split-pills">
+                <button class="split-btn active" data-split="cut" onclick="setSplit('cut', this)">Shred / Cut (35P / 40C / 25F)</button>
+                <button class="split-btn" data-split="recomp" onclick="setSplit('recomp', this)">Lean Recomp (30P / 45C / 25F)</button>
+                <button class="split-btn" data-split="performance" onclick="setSplit('performance', this)">Endurance Prep (25P / 55C / 20F)</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamically Filtered Sample Daily Meal Plan -->
+          <div class="meals-grid" id="mealsContainer">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- BENTO 2: Interactive Onboarding Quiz ("Build Your First Week") (4 Cols) -->
+      <div class="bento-card hub-quiz-card" id="quiz-hub">
+        <div>
+          <span class="quiz-badge">60-Second Custom Blueprint</span>
+          <h3>Build Your First Week</h3>
+          <p class="quiz-sub">Answer 3 quick questions to generate a 7-day macro-scaled prep plan &amp; aisle-sorted grocery list.</p>
+
+          <div class="quiz-progress">
+            <div class="progress-seg active" id="prog-1"></div>
+            <div class="progress-seg" id="prog-2"></div>
+            <div class="progress-seg" id="prog-3"></div>
+            <div class="progress-seg" id="prog-4"></div>
+          </div>
+
+          <!-- Step 1: Primary Goal -->
+          <div class="quiz-step active" id="step-1">
+            <div class="quiz-question">1. What is your current training phase?</div>
+            <div class="quiz-options">
+              <button class="quiz-opt-btn" onclick="nextQuizStep(1, 'Aggressive Cut (-500 kcal)')">
+                <span>Aggressive Mini-Cut</span>
+                <span class="opt-meta">High satiety, 2.2g/kg P</span>
+              </button>
+              <button class="quiz-opt-btn" onclick="nextQuizStep(1, 'Body Recomposition')">
+                <span>Lean Body Recomposition</span>
+                <span class="opt-meta">Carb-cycled training days</span>
+              </button>
+              <button class="quiz-opt-btn" onclick="nextQuizStep(1, 'Hypertrophy & Surplus')">
+                <span>Clean Hypertrophy Bulk</span>
+                <span class="opt-meta">+300 kcal whole-food surplus</span>
+              </button>
+              <button class="quiz-opt-btn" onclick="nextQuizStep(1, 'Endurance / Hyrox Prep')">
+                <span>Endurance / Hyrox Prep</span>
+                <span class="opt-meta">High glycogen loading</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: Weekly Training Volume -->
+          <div class="quiz-step" id="step-2">
+            <div class="quiz-question">2. How many days per week do you train?</div>
+            <div class="quiz-options">
+              <button class="quiz-opt-btn" onclick="nextQuizStep(2, '3-4 Sessions / Week')">
+                <span>3–4 Sessions / Week</span>
+                <span class="opt-meta">Strength foundation</span>
+              </button>
+              <button class="quiz-opt-btn" onclick="nextQuizStep(2, '5-6 Sessions / Week')">
+                <span>5–6 Sessions / Week</span>
+                <span class="opt-meta">High output split</span>
+              </button>
+              <button class="quiz-opt-btn" onclick="nextQuizStep(2, 'Two-a-Days / Competitive')">
+                <span>Two-a-Days / Competitive</span>
+                <span class="opt-meta">Maximum recovery fuel</span>
+              </button>
+            </div>
+            <div class="quiz-nav-footer">
+              <button class="quiz-back" onclick="goStep(1)">&larr; Previous step</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Prep Style -->
+          <div class="quiz-step" id="step-3">
+            <div class="quiz-question">3. How do you prefer to meal prep?</div>
+            <div class="quiz-options">
+              <button class="quiz-opt-btn" onclick="nextQuizStep(3, '90-Min Sunday Batch Prep')">
+                <span>90-Min Sunday Batch Cook</span>
+                <span class="opt-meta">Cook once, eat for 4 days</span>
+              </button>
+              <button class="quiz-opt-btn" onclick="nextQuizStep(3, '15-Min Fresh Skillet Meals')">
+                <span>15-Min Fresh Express</span>
+                <span class="opt-meta">Quick post-workout plates</span>
+              </button>
+              <button class="quiz-opt-btn" onclick="nextQuizStep(3, 'High-Protein Plant-Forward')">
+                <span>Plant-Forward Athletic</span>
+                <span class="opt-meta">Tempeh, seitan, legumes</span>
+              </button>
+            </div>
+            <div class="quiz-nav-footer">
+              <button class="quiz-back" onclick="goStep(2)">&larr; Previous step</button>
+            </div>
+          </div>
+
+          <!-- Step 4: Email Gate -->
+          <div class="quiz-step" id="step-4">
+            <div class="quiz-question">Your 7-Day Blueprint is Ready!</div>
+            <div class="email-gate-box">
+              <div style="font-size: 0.82rem; color: var(--accent-lime); font-weight: 600;" id="quizSummaryText">
+                Phase: Aggressive Cut • 5-6x/wk
+              </div>
+              <p style="font-size: 0.82rem; color: rgba(255,253,249,0.8); margin-top: 4px;">
+                Enter your email to unlock your custom 7-day macro menu, gram-weight prep guide, and PDF grocery list.
+              </p>
+              <form onsubmit="submitQuizEmail(event)">
+                <input type="email" id="userEmail" class="email-input" placeholder="athlete@domain.com" required />
+                <button type="submit" class="btn btn-terracotta" style="width: 100%; padding: 11px;">
+                  Unlock My 7-Day Plan &rarr;
+                </button>
+              </form>
+            </div>
+            <div class="quiz-nav-footer">
+              <button class="quiz-back" onclick="goStep(1)">Start over</button>
+              <span style="font-size: 0.74rem; color: rgba(255,255,255,0.5);">Zero spam. Instant access.</span>
+            </div>
+          </div>
+
+          <!-- Step 5: Confirmation State -->
+          <div class="quiz-step" id="step-5">
+            <div style="padding: 18px 0; text-align: center;">
+              <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--accent-lime); color: var(--bg-forest); display: grid; place-items: center; margin: 0 auto 14px; font-weight: 700; font-size: 1.3rem;">✓</div>
+              <h4 style="font-size: 1.35rem; margin-bottom: 8px;">Week 1 Dispatched!</h4>
+              <p style="font-size: 0.88rem; color: rgba(255,253,249,0.8); margin-bottom: 16px;" id="confirmMsg">
+                We've sent your custom macro sheet &amp; Sunday prep protocol to your inbox.
+              </p>
+              <button class="btn btn-outline" style="border-color: var(--accent-lime); color: var(--accent-lime); padding: 8px 18px; font-size: 0.82rem;" onclick="goStep(1)">
+                Configure Another Phase
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div style="border-top: 1px solid rgba(255,255,255,0.12); padding-top: 14px; margin-top: 16px; display: flex; justify-content: space-between; font-size: 0.78rem; color: rgba(255,255,255,0.65);">
+          <span>✓ Raw &amp; Cooked Weight Toggle</span>
+          <span>✓ Barcode Sync</span>
+        </div>
+      </div>
+
+      <!-- BENTO 3: Carb Cycling & Periodization (4 Cols) -->
+      <div class="bento-card bento-periodization" id="features">
+        <div>
+          <div class="card-tag">Training Sync</div>
+          <h3>Automated Carb Cycling</h3>
+          <p>Sync your lifting split. VerdantPrep shifts complex carbohydrates around heavy leg and back days while keeping rest days lean and satiating.</p>
+        </div>
+        <div class="mini-chart">
+          <div style="display:flex; justify-content:space-between; font-size:0.75rem; font-weight:700; margin-bottom:8px;">
+            <span>GLYCOGEN ALLOCATION</span>
+            <span style="color:var(--accent-sage);">+65g Carbs on Lift Days</span>
+          </div>
+          <div class="chart-bars">
+            <div class="bar-col"><div class="bar-fill high" style="height: 85%;"></div></div>
+            <div class="bar-col"><div class="bar-fill" style="height: 68%;"></div></div>
+            <div class="bar-col"><div class="bar-fill rest" style="height: 42%;"></div></div>
+            <div class="bar-col"><div class="bar-fill high" style="height: 92%;"></div></div>
+            <div class="bar-col"><div class="bar-fill" style="height: 70%;"></div></div>
+            <div class="bar-col"><div class="bar-fill high" style="height: 80%;"></div></div>
+            <div class="bar-col"><div class="bar-fill rest" style="height: 40%;"></div></div>
+          </div>
+          <div class="bar-days">
+            <span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span><span>SUN</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BENTO 4: Exact-Gram Grocery Aggregator (4 Cols) -->
+      <div class="bento-card bento-grocery">
+        <div>
+          <div class="card-tag" style="color: var(--accent-terracotta);">Zero Food Waste</div>
+          <h3>Exact-Gram Grocery Lists</h3>
+          <p>No more half-used bunches of cilantro or mystery macros. Every ingredient across your 21 weekly meals is consolidated into exact raw weights.</p>
+        </div>
+        <div class="grocery-list">
+          <div class="grocery-row" onclick="this.classList.toggle('checked')">
+            <span><span class="check-circle">✓</span> Pasture-Raised Chicken Thighs</span>
+            <span style="color: var(--text-muted);">1,450 g</span>
+          </div>
+          <div class="grocery-row checked" onclick="this.classList.toggle('checked')">
+            <span><span class="check-circle">✓</span> Sprouted Jasmine Rice (Dry)</span>
+            <span style="color: var(--text-muted);">840 g</span>
+          </div>
+          <div class="grocery-row" onclick="this.classList.toggle('checked')">
+            <span><span class="check-circle">✓</span> Wild Alaskan Sockeye Salmon</span>
+            <span style="color: var(--text-muted);">620 g</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BENTO 5: Sunday Batch-Prep Sequencer (4 Cols) -->
+      <div class="bento-card bento-prep">
+        <div>
+          <div class="card-tag">Kitchen Workflow</div>
+          <h3>90-Minute Batch Protocol</h3>
+          <p>Multi-threaded cooking timelines orchestrate your oven, stovetop, and rice cooker simultaneously so 15 контейнеры finish at once.</p>
+        </div>
+        <div class="prep-timeline">
+          <div class="prep-step">
+            <span class="prep-time">00:00</span>
+            <span>Sheet-pan harissa sweet potatoes &amp; brassicas in at 425°F</span>
+          </div>
+          <div class="prep-step">
+            <span class="prep-time">00:15</span>
+            <span>Sear herb-marinated flank steak &amp; simmer bone-broth grains</span>
+          </div>
+          <div class="prep-step">
+            <span class="prep-time">00:45</span>
+            <span>Whisk greek-yogurt green goddess macro dressing &amp; portion</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BENTO 6: Athlete Logs & Social Proof (12 Cols) -->
+      <div class="bento-card bento-athletes" id="athletes">
+        <div>
+          <div class="card-tag">Proven in Prep</div>
+          <h3 style="font-size: 1.9rem;">Built for lifters who care about flavor &amp; bloodwork.</h3>
+          <p style="margin-top: 8px;">
+            Over 42,000 strength athletes, CrossFit competitors, and natural bodybuilders use VerdantPrep to hit stage-ready conditioning without micronutrient deficiencies.
+          </p>
+        </div>
+        <div class="athlete-quotes">
+          <div class="quote-box">
+            <p>"Dropped from 14.5% to 9.2% body fat in 10 weeks eating chimichurri steak bowls and lemon-ricotta protein pancakes. The raw-to-cooked weight converter alone saves me 20 minutes a day."</p>
+            <div class="athlete-meta">
+              <span>Marcus V. — 83kg Raw Powerlifter</span>
+              <span class="athlete-stat">-6.8 kg Cut</span>
+            </div>
+          </div>
+          <div class="quote-box">
+            <p>"Finally a macro app that doesn't suggest 4 scoops of whey a day. Every recipe uses real herbs, fermented sauces, and fibrous greens while hitting my 185g protein target."</p>
+            <div class="athlete-meta">
+              <span>Elena R. — Hyrox Pro Division</span>
+              <span class="athlete-stat">2,750 kcal Recomp</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <strong class="serif" style="color: var(--bg-forest); font-size: 1.1rem;">VerdantPrep</strong>
+      <span>— Whole-Food Athletic Nutrition Systems</span>
+    </div>
+    <div>
+      © 2025 VerdantPrep Labs. Crafted for precision macro tracking.
+    </div>
+  </footer>
+
+  <!-- Interactive Client-Side Logic -->
+  <script>
+    // State for Macro Engine
+    let currentCalories = 2250;
+    let currentSplit = 'cut'; // 'cut' (35P/40C/25F), 'recomp' (30P/45C/25F), 'performance' (25P/55C/20F)
+
+    const splitRatios = {
+      cut: { p: 0.35, c: 0.40, f: 0.25 },
+      recomp: { p: 0.30, c: 0.45, f: 0.25 },
+      performance: { p: 0.25, c: 0.55, f: 0.20 }
+    };
+
+    // Curated Whole-Food Athletic Catalog that scales dynamically
+    const mealCatalog = {
+      cut: [
+        {
+          slot: "Pre-Training Breakfast",
+          title: "Sourdough Tartine, Whipped Cottage Cheese & Poached Eggs",
+          baseGrams: "185g egg whites, 2 whole eggs, 95g sourdough, wild arugula",
+          calShare: 0.30
+        },
+        {
+          slot: "Post-Lift Lunch Bowl",
+          title: "Charred Harissa Chicken Thighs & Herbed Freekeh",
+          baseGrams: "210g chicken thigh, 145g cooked freekeh, pickled cabbage",
+          calShare: 0.38
+        },
+        {
+          slot: "Evening Recovery Plate",
+          title: "Miso-Glazed Wild Sockeye Salmon & Crispy Smashed Potatoes",
+          baseGrams: "195g wild salmon, 180g baby potatoes, steamed broccolini",
+          calShare: 0.32
+        }
+      ],
+      recomp: [
+        {
+          slot: "Morning Fuel",
+          title: "Cardamom Steel-Cut Oats, Whey Isolate & Roasted Pistachios",
+          baseGrams: "75g dry oats, 40g grass-fed whey, 120g blackberries",
+          calShare: 0.31
+        },
+        {
+          slot: "Midday Power Bowl",
+          title: "Chimichurri Grass-Fed Flank Steak & Crispy Jasmine Rice",
+          baseGrams: "190g flank steak, 185g jasmine rice, charred scallions",
+          calShare: 0.37
+        },
+        {
+          slot: "Restorative Dinner",
+          title: "Lemon-Oregano Turkey Kofta, Tzatziki & Roasted Sweet Potato",
+          baseGrams: "200g lean turkey kofta, 210g sweet potato, heirloom tomato",
+          calShare: 0.32
+        }
+      ],
+      performance: [
+        {
+          slot: "Glycogen Load Breakfast",
+          title: "Buckwheat Ricotta Hotcakes with Warm Wild-Berry Compote",
+          baseGrams: "110g buckwheat flour, 130g part-skim ricotta, pure maple",
+          calShare: 0.32
+        },
+        {
+          slot: "High-Output Lunch",
+          title: "Honey-Chipotle Glazed Chicken Breast, Black Beans & Basmati",
+          baseGrams: "180g chicken breast, 220g basmati rice, 80g black beans, lime",
+          calShare: 0.38
+        },
+        {
+          slot: "Evening Refuel",
+          title: "Homemade Bronze-Die Rigatoni with Wild Venison Ragù",
+          baseGrams: "175g lean venison, 115g dry pasta, Parmigiano-Reggiano",
+          calShare: 0.30
+        }
+      ]
+    };
+
+    const calSlider = document.getElementById('calSlider');
+    const calDisplay = document.getElementById('calDisplay');
+    const pTotal = document.getElementById('pTotal');
+    const cTotal = document.getElementById('cTotal');
+    const fTotal = document.getElementById('fTotal');
+    const mealsContainer = document.getElementById('mealsContainer');
+
+    function renderMacroPlan() {
+      const ratio = splitRatios[currentSplit];
+      const totalP = Math.round((currentCalories * ratio.p) / 4);
+      const totalC = Math.round((currentCalories * ratio.c) / 4);
+      const totalF = Math.round((currentCalories * ratio.f) / 9);
+
+      calDisplay.innerHTML = `${currentCalories.toLocaleString()} <span>kcal / day</span>`;
+      pTotal.textContent = `${totalP}g`;
+      cTotal.textContent = `${totalC}g`;
+      fTotal.textContent = `${totalF}g`;
+
+      const meals = mealCatalog[currentSplit];
+      const scaleFactor = (currentCalories / 2250).toFixed(2);
+
+      mealsContainer.innerHTML = meals.map(meal => {
+        const mealCal = Math.round(currentCalories * meal.calShare);
+        const mP = Math.round(totalP * meal.calShare);
+        const mC = Math.round(totalC * meal.calShare);
+        const mF = Math.round(totalF * meal.calShare);
+
+        return `
+          <div class="meal-item">
+            <div>
+              <div class="meal-slot-header">
+                <span>${meal.slot}</span>
+                <span class="meal-cal-badge">${mealCal} kcal</span>
+              </div>
+              <div class="meal-title">${meal.title}</div>
+              <div class="meal-portion">${meal.baseGrams} <strong>(${scaleFactor}x scale)</strong></div>
+            </div>
+            <div class="meal-macros-mini">
+              <span><b>${mP}g</b> Protein</span>
+              <span><b>${mC}g</b> Carbs</span>
+              <span><b>${mF}g</b> Fat</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    calSlider.addEventListener('input', (e) => {
+      currentCalories = parseInt(e.target.value, 10);
+      renderMacroPlan();
+    });
+
+    function setSplit(splitKey, btnEl) {
+      currentSplit = splitKey;
+      document.querySelectorAll('.split-btn').forEach(b => b.classList.remove('active'));
+      btnEl.classList.add('active');
+      renderMacroPlan();
+    }
+
+    // Quiz Logic ("Build Your First Week")
+    const quizAnswers = {
+      phase: 'Aggressive Cut',
+      volume: '5-6 Sessions / Week',
+      style: '90-Min Sunday Batch Prep'
+    };
+
+    function goStep(stepNum) {
+      document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('active'));
+      document.getElementById(`step-${stepNum}`).classList.add('active');
+
+      for (let i = 1; i <= 4; i++) {
+        const seg = document.getElementById(`prog-${i}`);
+        if (seg) {
+          seg.classList.toggle('active', i <= stepNum);
+        }
+      }
+    }
+
+    function nextQuizStep(currentStep, choiceText) {
+      if (currentStep === 1) quizAnswers.phase = choiceText;
+      if (currentStep === 2) quizAnswers.volume = choiceText;
+      if (currentStep === 3) {
+        quizAnswers.style = choiceText;
+        document.getElementById('quizSummaryText').textContent =
+          `${quizAnswers.phase} • ${quizAnswers.volume}`;
+      }
+      goStep(currentStep + 1);
+    }
+
+    function submitQuizEmail(e) {
+      e.preventDefault();
+      const email = document.getElementById('userEmail').value;
+      document.getElementById('confirmMsg').textContent =
+        `We've sent your ${quizAnswers.phase} menu (${currentCalories} kcal target) and exact-gram grocery list to ${email}.`;
+      document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('active'));
+      document.getElementById('step-5').classList.add('active');
+    }
+
+    // Initial render
+    renderMacroPlan();
+  </script>
+</body>
+</html>

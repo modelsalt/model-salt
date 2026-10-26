@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <!-- Pelican riding a bicycle: strict side profile, flat fills, no strokes, transparent background -->
+
+  <!-- ===== Rear wheel ===== -->
+  <g transform="translate(200 380)">
+    <circle r="90" fill="#2b2b2b"/>
+    <circle r="76" fill="#bdbdbd"/>
+    <circle r="68" fill="#2b2b2b" fill-opacity="0"/>
+    <g fill="#8a8a8a">
+      <rect x="-1.5" y="-76" width="3" height="152"/>
+      <rect x="-1.5" y="-76" width="3" height="152" transform="rotate(45)"/>
+      <rect x="-1.5" y="-76" width="3" height="152" transform="rotate(90)"/>
+      <rect x="-1.5" y="-76" width="3" height="152" transform="rotate(135)"/>
+    </g>
+    <circle r="9" fill="#555"/>
+  </g>
+
+  <!-- ===== Front wheel ===== -->
+  <g transform="translate(560 380)">
+    <circle r="90" fill="#2b2b2b"/>
+    <circle r="76" fill="#bdbdbd"/>
+    <g fill="#8a8a8a">
+      <rect x="-1.5" y="-76" width="3" height="152"/>
+      <rect x="-1.5" y="-76" width="3" height="152" transform="rotate(45)"/>
+      <rect x="-1.5" y="-76" width="3" height="152" transform="rotate(90)"/>
+      <rect x="-1.5" y="-76" width="3" height="152" transform="rotate(135)"/>
+    </g>
+    <circle r="9" fill="#555"/>
+  </g>
+
+  <!-- ===== Far-side leg (behind frame) ===== -->
+  <polygon points="322,185 338,188 318,300 304,296" fill="#c97a22"/>
+  <polygon points="304,296 318,300 312,404 298,404" fill="#c97a22"/>
+  <polygon points="282,406 320,406 314,416 276,414" fill="#c97a22"/>
+
+  <!-- ===== Chain ===== -->
+  <polygon points="200,371 340,357 340,361 200,375" fill="#444"/>
+  <polygon points="200,389 340,403 340,399 200,385" fill="#444"/>
+
+  <!-- ===== Frame ===== -->
+  <g fill="#d2452e">
+    <!-- chainstay -->
+    <rect x="200" y="375" width="140" height="10"/>
+    <!-- top tube -->
+    <rect x="300" y="235" width="220" height="10"/>
+    <!-- seat tube -->
+    <polygon points="344.8,378.7 304.8,228.7 295.2,231.3 335.2,381.3"/>
+    <!-- down tube -->
+    <polygon points="343.1,383.9 523.1,243.9 516.9,236.1 336.9,376.1"/>
+    <!-- seat stay -->
+    <polygon points="304.1,242.9 204.1,382.9 195.9,377.1 295.9,237.1"/>
+    <!-- fork -->
+    <polygon points="524.8,238.6 564.8,378.6 555.2,381.4 515.2,241.4"/>
+    <!-- head tube / stem -->
+    <polygon points="514,240 526,240 521,205 509,205"/>
+  </g>
+
+  <!-- Handlebar -->
+  <polygon points="510,208 548,196 546,190 508,202" fill="#333"/>
+  <circle cx="547" cy="193" r="5" fill="#333"/>
+
+  <!-- Seat post and saddle -->
+  <rect x="294" y="205" width="10" height="30" fill="#555"/>
+  <ellipse cx="296" cy="202" rx="34" ry="9" fill="#3a2a1e"/>
+
+  <!-- Chainring and cranks -->
+  <circle cx="340" cy="380" r="24" fill="#3c3c3c"/>
+  <circle cx="340" cy="380" r="14" fill="#6b6b6b"/>
+  <polygon points="337,377 379,351 383,357 343,384" fill="#2b2b2b"/>
+  <polygon points="337,383 301,407 297,401 343,377" fill="#2b2b2b"/>
+  <!-- pedals -->
+  <rect x="368" y="349" width="26" height="7" fill="#222"/>
+  <rect x="286" y="402" width="26" height="7" fill="#222"/>
+
+  <!-- ===== Pelican ===== -->
+  <!-- tail -->
+  <polygon points="262,150 232,168 240,182 272,172" fill="#e9e5db"/>
+  <!-- body -->
+  <ellipse cx="320" cy="150" rx="72" ry="50" fill="#f5f2ea"/>
+  <!-- wing -->
+  <ellipse cx="318" cy="158" rx="52" ry="26" fill="#d9d5cc" transform="rotate(-12 318 158)"/>
+  <!-- neck -->
+  <path d="M 348 125 Q 372 58 420 68 L 432 86 Q 392 92 376 152 Z" fill="#f5f2ea"/>
+  <!-- head -->
+  <circle cx="428" cy="68" r="24" fill="#f5f2ea"/>
+  <!-- beak upper -->
+  <polygon points="440,60 546,84 546,92 442,78" fill="#f2a33a"/>
+  <!-- beak pouch -->
+  <path d="M 442 78 L 546 92 Q 500 118 444 100 Z" fill="#f7c35b"/>
+  <!-- eye -->
+  <circle cx="436" cy="62" r="4" fill="#222"/>
+
+  <!-- Near-side leg -->
+  <polygon points="326,188 344,190 372,292 356,296" fill="#e8902a"/>
+  <polygon points="356,296 372,292 384,352 368,354" fill="#e8902a"/>
+  <!-- webbed foot -->
+  <polygon points="360,350 404,350 398,360 352,360" fill="#e8902a"/>
+
+  <!-- Wing-tip "hand" on handlebar -->
+  <path d="M 360 120 Q 450 150 540 188 L 536 198 Q 450 170 352 134 Z" fill="#e4e0d6"/>
+</svg>

@@ -1,0 +1,280 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <!-- Soft Sky Background Gradient -->
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#DDF6FA" />
+      <stop offset="100%" stop-color="#FFF9EB" />
+    </linearGradient>
+
+    <!-- Clip Paths for Clean Cell-Shading -->
+    <clipPath id="body-clip">
+      <path d="M 330 220 C 390 220, 420 260, 410 315 C 400 375, 315 390, 265 355 C 215 320, 200 265, 200 265 C 200 265, 250 280, 285 260 C 310 245, 315 220, 330 220 Z" />
+    </clipPath>
+
+    <clipPath id="pouch-clip">
+      <path d="M 385 110 C 385 110, 405 240, 485 230 C 565 220, 620 115, 620 115 Z" />
+    </clipPath>
+
+    <clipPath id="wing-clip">
+      <path d="M 290 240 C 335 200, 435 190, 480 235 C 460 280, 390 315, 315 295 C 280 285, 270 255, 290 240 Z" />
+    </clipPath>
+
+    <!-- Reusable Bicycle Wheel (Outlineless, Geometric) -->
+    <g id="wheel">
+      <!-- Spokes -->
+      <g fill="#E2E8F0">
+        <rect x="-2.5" y="-92" width="5" height="184" />
+        <rect x="-2.5" y="-92" width="5" height="184" transform="rotate(30)" />
+        <rect x="-2.5" y="-92" width="5" height="184" transform="rotate(60)" />
+        <rect x="-2.5" y="-92" width="5" height="184" transform="rotate(90)" />
+        <rect x="-2.5" y="-92" width="5" height="184" transform="rotate(120)" />
+        <rect x="-2.5" y="-92" width="5" height="184" transform="rotate(150)" />
+      </g>
+      <!-- Inner Rim (Cream) -->
+      <path d="M 0 -92 A 92 92 0 1 0 0 92 A 92 92 0 1 0 0 -92 Z M 0 -80 A 80 80 0 1 1 0 80 A 80 80 0 1 1 0 -80 Z" fill="#FFFDF9" fill-rule="evenodd" />
+      <!-- Rim Cell-Shadow -->
+      <path d="M 0 92 A 92 92 0 0 1 -92 0 L -80 0 A 80 80 0 0 0 0 80 Z" fill="#E2E8F0" />
+      <!-- Outer Tire (Dark Slate) -->
+      <path d="M 0 -110 A 110 110 0 1 0 0 110 A 110 110 0 1 0 0 -110 Z M 0 -90 A 90 90 0 1 1 0 90 A 90 90 0 1 1 0 -90 Z" fill="#2A2D34" fill-rule="evenodd" />
+      <!-- Tire Cell-Highlight -->
+      <path d="M -78 -78 A 110 110 0 0 1 78 -78 L 64 -64 A 90 90 0 0 0 -64 -64 Z" fill="#3F444E" />
+      <!-- Center Hub -->
+      <circle cx="0" cy="0" r="16" fill="#FFBE0B" />
+      <circle cx="0" cy="0" r="8" fill="#2A2D34" />
+    </g>
+  </defs>
+
+  <!-- 1. BACKGROUND SCENE -->
+  <rect width="800" height="600" fill="url(#sky)" />
+
+  <!-- Playful Sun -->
+  <circle cx="140" cy="120" r="55" fill="#FFE66D" />
+  <circle cx="140" cy="120" r="42" fill="#FFD166" />
+
+  <!-- Minimalist Flat Clouds -->
+  <g fill="#FFFFFF">
+    <!-- Left Cloud -->
+    <path d="M 60 220 L 210 220 A 15 15 0 0 0 210 190 L 195 190 A 35 35 0 0 0 130 170 A 25 25 0 0 0 85 190 L 60 190 A 15 15 0 0 0 60 220 Z" />
+    <path d="M 55 215 L 215 215 A 7 7 0 0 1 215 222 L 55 222 A 7 7 0 0 1 55 215 Z" fill="#E6F4F8" />
+    <!-- Right Cloud -->
+    <path d="M 560 140 L 730 140 A 18 18 0 0 0 730 104 L 710 104 A 40 40 0 0 0 635 85 A 28 28 0 0 0 585 104 L 560 104 A 18 18 0 0 0 560 140 Z" />
+    <path d="M 555 135 L 735 135 A 7 7 0 0 1 735 142 L 555 142 A 7 7 0 0 1 555 135 Z" fill="#E6F4F8" />
+  </g>
+
+  <!-- Ground & Shadow -->
+  <rect x="0" y="510" width="800" height="90" fill="#F4E8C1" />
+  <rect x="0" y="510" width="800" height="12" fill="#E5D4A0" />
+  <rect x="115" y="520" width="540" height="22" rx="11" fill="#D5C28A" />
+
+  <!-- 2. FAR PELICAN LEG (Behind Bicycle) -->
+  <g id="far-leg">
+    <!-- Far Crank Arm -->
+    <path d="M 353 425 L 323 365 A 7 7 0 0 1 337 359 L 367 419 Z" fill="#7D8597" />
+    <!-- Far Leg & Webbed Foot -->
+    <path d="M 325 335 L 270 345 A 12 12 0 0 0 264 366 L 322 371 L 336 355 Z" fill="#E0531F" />
+    <path d="M 312 365 L 368 365 C 372 348, 348 345, 330 355 Z" fill="#E0531F" />
+    <!-- Far Pedal -->
+    <rect x="312" y="357" width="36" height="10" rx="5" fill="#1F2227" />
+  </g>
+
+  <!-- 3. BICYCLE (Side Profile Facing Right) -->
+  <g id="bicycle">
+    <!-- Wheels -->
+    <use href="#wheel" x="190" y="420" />
+    <use href="#wheel" x="570" y="420" />
+
+    <!-- Rear Fender -->
+    <path d="M 70 420 A 120 120 0 0 1 285 347 L 273 357 A 106 106 0 0 0 84 420 Z" fill="#00A896" />
+    <path d="M 70 420 A 120 120 0 0 1 190 300 L 190 308 A 112 112 0 0 0 78 420 Z" fill="#38E4AE" />
+
+    <!-- Front Fender -->
+    <path d="M 465 362 A 120 120 0 0 1 655 335 L 645 345 A 106 106 0 0 0 478 369 Z" fill="#00A896" />
+    <path d="M 465 362 A 120 120 0 0 1 570 300 L 570 308 A 112 112 0 0 0 472 365 Z" fill="#38E4AE" />
+
+    <!-- Chain & Gearing -->
+    <path d="M 190 404 L 360 392 L 360 452 L 190 436 Z" fill="#7D8597" />
+    <path d="M 190 412 L 360 402 L 360 442 L 190 428 Z" fill="#FFF9EB" />
+    <circle cx="190" cy="420" r="18" fill="#5C6470" />
+
+    <!-- Seatpost & Stem (Silver) -->
+    <path d="M 278 300 L 258 235 L 274 235 L 294 300 Z" fill="#BDC3C7" />
+    <path d="M 286 300 L 266 235 L 274 235 L 294 300 Z" fill="#95A5A6" />
+
+    <path d="M 502 275 L 478 190 C 474 176, 464 175, 450 175 L 430 175 L 430 191 L 450 191 C 458 191, 461 194, 463 200 L 486 275 Z" fill="#BDC3C7" />
+    <path d="M 494 275 L 470 190 C 468 185, 465 183, 450 183 L 430 183 L 430 191 L 450 191 C 458 191, 461 194, 463 200 L 486 275 Z" fill="#95A5A6" />
+
+    <!-- Bicycle Frame (Vibrant Mint/Teal with Cell-Shading) -->
+    <!-- Chainstay (Rear Hub to Crank) -->
+    <path d="M 190 413 L 360 413 L 360 427 L 190 427 Z" fill="#00C49A" />
+    <path d="M 190 420 L 360 420 L 360 427 L 190 427 Z" fill="#009B77" />
+
+    <!-- Seatstay (Rear Hub to Seat Tube) -->
+    <path d="M 185 415 L 281 295 L 291 305 L 195 425 Z" fill="#00C49A" />
+    <path d="M 185 415 L 281 295 L 286 300 L 190 420 Z" fill="#52F2CE" />
+
+    <!-- Down Tube (Crank to Head Tube) -->
+    <path d="M 354 414 L 494 284 L 506 296 L 366 426 Z" fill="#00C49A" />
+    <path d="M 360 420 L 500 290 L 506 296 L 366 426 Z" fill="#009B77" />
+
+    <!-- Seat Tube (Crank to Saddle) -->
+    <path d="M 352 423 L 278 303 L 294 297 L 368 417 Z" fill="#00C49A" />
+    <path d="M 352 423 L 278 303 L 286 300 L 360 420 Z" fill="#009B77" />
+
+    <!-- Top Tube (Seat Tube to Head Tube - Curved Cruiser Style) -->
+    <path d="M 286 292 C 350 302, 420 292, 492 267 L 496 283 C 420 308, 350 318, 284 308 Z" fill="#00C49A" />
+    <path d="M 286 292 C 350 302, 420 292, 492 267 L 494 275 C 420 300, 350 310, 285 300 Z" fill="#52F2CE" />
+
+    <!-- Front Fork & Head Tube -->
+    <path d="M 482 268 L 562 424 L 578 416 L 498 260 Z" fill="#00C49A" />
+    <path d="M 490 264 L 570 420 L 578 416 L 498 260 Z" fill="#52F2CE" />
+    <!-- Head Tube Band -->
+    <path d="M 480 265 L 500 255 L 512 280 L 492 290 Z" fill="#FFBE0B" />
+
+    <!-- Frame Joints (Clean Geometric Caps) -->
+    <circle cx="190" cy="420" r="10" fill="#009B77" />
+    <circle cx="570" cy="420" r="10" fill="#009B77" />
+    <circle cx="286" cy="300" r="9" fill="#00C49A" />
+
+    <!-- Chainring / Crankset -->
+    <circle cx="360" cy="420" r="32" fill="#009B77" />
+    <circle cx="360" cy="420" r="26" fill="#FFBE0B" />
+    <circle cx="360" cy="420" r="20" fill="#FFD166" />
+    <circle cx="360" cy="420" r="8" fill="#7D8597" />
+
+    <!-- Bicycle Saddle -->
+    <path d="M 225 235 C 225 220, 250 220, 265 225 C 285 230, 310 230, 310 240 C 310 248, 285 250, 255 250 C 235 250, 225 245, 225 235 Z" fill="#FF595E" />
+    <path d="M 227 238 C 235 244, 245 244, 260 244 C 285 244, 308 242, 310 238 C 310 246, 285 250, 255 250 C 235 250, 225 245, 227 238 Z" fill="#D9383E" />
+
+    <!-- Bicycle Bell -->
+    <path d="M 455 175 A 12 12 0 0 1 479 175 Z" fill="#FFBE0B" />
+    <path d="M 455 175 A 12 12 0 0 1 467 163 L 467 175 Z" fill="#FFE66D" />
+    <rect x="464" y="175" width="6" height="4" fill="#2A2D34" />
+  </g>
+
+  <!-- 4. PELICAN (Full Side Profile Facing Right) -->
+  <g id="pelican">
+    <!-- Far Wing (Reaching for Handlebars) -->
+    <path d="M 330 235 C 370 215, 410 190, 440 180 C 445 198, 405 235, 345 255 Z" fill="#CBD5E1" />
+
+    <!-- Tail Feathers -->
+    <path d="M 215 265 L 165 240 L 185 270 L 155 265 L 185 288 L 168 295 L 220 295 Z" fill="#E2E8F0" />
+    <path d="M 215 275 L 155 265 L 185 288 L 168 295 L 220 295 Z" fill="#CBD5E1" />
+
+    <!-- Body / Torso & Neck -->
+    <!-- Base Shape -->
+    <path d="M 330 220 C 390 220, 420 260, 410 315 C 400 375, 315 390, 265 355 C 215 320, 200 265, 200 265 C 200 265, 250 280, 285 260 C 310 245, 315 220, 330 220 Z" fill="#FFFFFF" />
+    <!-- Clipped Body Shading & Highlights -->
+    <g clip-path="url(#body-clip)">
+      <!-- Soft Cell-Shadow on Belly & Lower Back -->
+      <path d="M 190 260 C 230 330, 320 365, 420 295 L 420 400 L 190 400 Z" fill="#E2E8F0" />
+      <!-- Warm Sun Highlight on Chest -->
+      <path d="M 330 210 C 405 210, 425 265, 410 325 C 395 270, 375 230, 320 220 Z" fill="#FFFDF7" />
+    </g>
+
+    <!-- Near Leg (Pedaling Downward) -->
+    <!-- Near Crank Arm -->
+    <path d="M 367 415 L 397 475 A 7 7 0 0 1 383 481 L 353 421 Z" fill="#BDC3C7" />
+    <circle cx="360" cy="420" r="5" fill="#2A2D34" />
+    <!-- Thigh (Feathered) -->
+    <path d="M 310 335 C 335 335, 355 360, 340 390 C 325 395, 295 375, 310 335 Z" fill="#E2E8F0" />
+    <!-- Lower Orange Leg -->
+    <path d="M 332 375 L 348 430 L 385 468 L 368 475 L 330 438 L 316 375 Z" fill="#FF7B00" />
+    <path d="M 332 375 L 348 430 L 340 434 L 323 375 Z" fill="#FFA200" />
+    <!-- Webbed Foot on Pedal -->
+    <path d="M 362 474 L 428 474 C 432 452, 398 448, 374 462 Z" fill="#FF7B00" />
+    <path d="M 378 463 L 428 474 C 428 462, 405 456, 378 463 Z" fill="#FFA200" />
+    <!-- Near Pedal -->
+    <rect x="372" y="472" width="40" height="10" rx="5" fill="#2A2D34" />
+    <rect x="378" y="474" width="28" height="4" rx="2" fill="#FFBE0B" />
+
+    <!-- Neck & Head -->
+    <!-- Head Tuft Feathers -->
+    <path d="M 315 88 L 280 92 L 302 104 L 275 114 L 312 118 Z" fill="#E2E8F0" />
+    <path d="M 315 100 L 275 114 L 312 118 Z" fill="#CBD5E1" />
+
+    <!-- Neck & Head Base (White) -->
+    <path d="M 300 255 C 295 195, 290 135, 310 100 C 325 72, 375 68, 390 95 C 402 118, 370 175, 385 245 Z" fill="#FFFFFF" />
+    <!-- Neck Cell-Shadow (Back of Neck) -->
+    <path d="M 300 255 C 295 195, 290 135, 310 100 C 316 88, 326 82, 338 80 C 318 105, 315 175, 325 255 Z" fill="#E2E8F0" />
+
+    <!-- Pelican Gular Pouch (Massive, Playful Coral-Pink) -->
+    <path d="M 385 110 C 385 110, 405 240, 485 230 C 565 220, 620 115, 620 115 Z" fill="#FF6B6B" />
+    <!-- Clipped Pouch Cell-Shading & Texture -->
+    <g clip-path="url(#pouch-clip)">
+      <!-- Bottom Pouch Shadow -->
+      <path d="M 375 165 C 425 220, 520 210, 625 110 L 625 250 L 375 250 Z" fill="#E64C4C" />
+      <!-- Center Pouch Highlight -->
+      <ellipse cx="490" cy="145" rx="65" ry="28" transform="rotate(-8 490 145)" fill="#FF8787" />
+      <!-- Subtle Geometric Striations -->
+      <path d="M 410 135 C 455 185, 520 175, 595 115" fill="none" stroke="#FF8787" stroke-width="4" stroke-linecap="round" opacity="0.5" />
+      <path d="M 425 165 C 465 205, 530 195, 605 115" fill="none" stroke="#CC3B3B" stroke-width="4" stroke-linecap="round" opacity="0.4" />
+    </g>
+
+    <!-- Upper Beak (Long, Vibrant Golden-Orange) -->
+    <!-- Beak Base -->
+    <path d="M 380 86 C 460 83, 555 95, 625 100 C 636 101, 640 112, 632 122 C 626 128, 616 125, 615 115 L 378 115 Z" fill="#FF9F1C" />
+    <!-- Upper Beak Highlight Ridge -->
+    <path d="M 380 86 C 460 83, 555 95, 625 100 C 632 101, 636 105, 636 110 C 555 103, 460 94, 379 97 Z" fill="#FFBE0B" />
+    <!-- Beak Tip Accent -->
+    <path d="M 615 100 L 625 100 C 636 101, 640 112, 632 122 C 626 128, 616 125, 615 115 Z" fill="#FF595E" />
+    <!-- Smile Line Shadow -->
+    <path d="M 378 112 L 615 112 L 615 116 L 378 116 Z" fill="#E07A00" />
+
+    <!-- Eye & Cheek Patch -->
+    <circle cx="364" cy="96" r="14" fill="#FFF3B0" />
+    <circle cx="364" cy="96" r="8.5" fill="#2A2D34" />
+    <circle cx="367" cy="93" r="3" fill="#FFFFFF" />
+    <!-- Rosy Cheek -->
+    <ellipse cx="354" cy="112" rx="9" ry="5" fill="#FF8787" opacity="0.6" />
+
+    <!-- Jaunty Sailor Cap (Playful Character Detail) -->
+    <g id="cap">
+      <!-- Cap Brim -->
+      <path d="M 320 75 C 335 72, 360 72, 375 78 C 365 84, 335 84, 320 75 Z" fill="#1D3557" />
+      <!-- Cap Dome -->
+      <path d="M 318 75 C 310 52, 345 42, 362 56 C 370 62, 370 72, 365 76 Z" fill="#FFFFFF" />
+      <!-- Cap Shadow -->
+      <path d="M 318 75 C 315 65, 322 55, 332 51 C 327 60, 328 68, 338 75 Z" fill="#E2E8F0" />
+      <!-- Blue Band -->
+      <path d="M 318 70 C 332 67, 352 68, 366 73 L 365 77 C 350 73, 332 72, 318 75 Z" fill="#457B9D" />
+      <!-- Little Red Pom-Pom -->
+      <circle cx="340" cy="48" r="5" fill="#FF595E" />
+    </g>
+
+    <!-- Near Wing (Curving Forward to Grip Handlebars) -->
+    <g clip-path="url(#wing-clip)">
+      <!-- Wing Base -->
+      <path d="M 290 240 C 335 200, 435 190, 480 235 C 460 280, 390 315, 315 295 C 280 285, 270 255, 290 240 Z" fill="#FFFFFF" />
+      <!-- Wing Top Highlight -->
+      <path d="M 290 240 C 335 200, 435 190, 480 235 C 430 208, 340 215, 290 250 Z" fill="#FFFDF7" />
+      <!-- Wing Bottom Cell-Shadow & Feather Scallops -->
+      <path d="M 275 270 C 320 280, 360 275, 395 255 C 390 275, 420 265, 440 245 C 435 265, 465 255, 485 235 L 485 320 L 275 320 Z" fill="#E2E8F0" />
+      <!-- Dark Slate Primary Wingtips -->
+      <path d="M 415 295 C 425 265, 445 245, 485 230 L 490 295 Z" fill="#3F444E" />
+      <path d="M 435 295 C 445 270, 460 255, 485 245 L 490 295 Z" fill="#2A2D34" />
+    </g>
+
+    <!-- Near Handlebar Grip (Overlapping Wingtip) -->
+    <rect x="415" y="170" width="38" height="16" rx="8" fill="#FF595E" />
+    <path d="M 415 178 L 453 178 A 8 8 0 0 1 445 186 L 423 186 A 8 8 0 0 1 415 178 Z" fill="#D9383E" />
+
+    <!-- Wingtip Feathers Curled Around Grip -->
+    <path d="M 422 178 C 422 164, 446 164, 446 178 C 446 188, 438 192, 434 192 C 426 192, 422 186, 422 178 Z" fill="#FFFFFF" />
+    <path d="M 426 182 C 430 186, 438 186, 444 180 C 444 188, 438 192, 434 192 C 426 192, 423 186, 426 182 Z" fill="#E2E8F0" />
+  </g>
+
+  <!-- 5. MOTION LINES &BREEZE DETAILS (Clean Minimalist Accents) -->
+  <g fill="#FFFFFF" opacity="0.85">
+    <rect x="45" y="320" width="55" height="6" rx="3" />
+    <rect x="25" y="335" width="30" height="6" rx="3" />
+    <rect x="65" y="450" width="45" height="6" rx="3" />
+    <rect x="665" y="485" width="50" height="6" rx="3" />
+  </g>
+  <g fill="#E5D4A0">
+    <rect x="60" y="545" width="45" height="8" rx="4" />
+    <rect x="380" y="560" width="65" height="8" rx="4" />
+    <rect x="670" y="540" width="55" height="8" rx="4" />
+    <circle cx="465" cy="564" r="4" />
+    <circle cx="120" cy="549" r="4" />
+  </g>
+</svg>

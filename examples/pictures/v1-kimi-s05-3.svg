@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" stroke-linecap="round" stroke-linejoin="round">
+  <title>A white pelican in a racing tuck riding a red bicycle</title>
+
+  <!-- ===== BACK WHEEL ===== -->
+  <g>
+    <circle cx="280" cy="480" r="88" fill="none" stroke="#2B2D42" stroke-width="14"/>
+    <circle cx="280" cy="480" r="74" fill="none" stroke="#C9CED6" stroke-width="5"/>
+    <g stroke="#AEB6C0" stroke-width="3">
+      <line x1="280" y1="480" x2="352" y2="480"/>
+      <line x1="280" y1="480" x2="330.9" y2="530.9"/>
+      <line x1="280" y1="480" x2="280" y2="552"/>
+      <line x1="280" y1="480" x2="229.1" y2="530.9"/>
+      <line x1="280" y1="480" x2="208" y2="480"/>
+      <line x1="280" y1="480" x2="229.1" y2="429.1"/>
+      <line x1="280" y1="480" x2="280" y2="408"/>
+      <line x1="280" y1="480" x2="330.9" y2="429.1"/>
+    </g>
+    <circle cx="280" cy="480" r="8" fill="#EDEFF2" stroke="#2B2D42" stroke-width="3"/>
+    <circle cx="280" cy="480" r="13" fill="none" stroke="#8B939E" stroke-width="4"/>
+  </g>
+
+  <!-- ===== FRONT WHEEL ===== -->
+  <g>
+    <circle cx="640" cy="480" r="88" fill="none" stroke="#2B2D42" stroke-width="14"/>
+    <circle cx="640" cy="480" r="74" fill="none" stroke="#C9CED6" stroke-width="5"/>
+    <g stroke="#AEB6C0" stroke-width="3">
+      <line x1="640" y1="480" x2="712" y2="480"/>
+      <line x1="640" y1="480" x2="690.9" y2="530.9"/>
+      <line x1="640" y1="480" x2="640" y2="552"/>
+      <line x1="640" y1="480" x2="589.1" y2="530.9"/>
+      <line x1="640" y1="480" x2="568" y2="480"/>
+      <line x1="640" y1="480" x2="589.1" y2="429.1"/>
+      <line x1="640" y1="480" x2="640" y2="408"/>
+      <line x1="640" y1="480" x2="690.9" y2="429.1"/>
+    </g>
+    <circle cx="640" cy="480" r="8" fill="#EDEFF2" stroke="#2B2D42" stroke-width="3"/>
+  </g>
+
+  <!-- ===== CHAIN ===== -->
+  <line x1="283" y1="470" x2="427" y2="467" stroke="#8B939E" stroke-width="3"/>
+  <line x1="283" y1="490" x2="427" y2="503" stroke="#8B939E" stroke-width="3"/>
+
+  <!-- ===== FRAME ===== -->
+  <g stroke="#E63946" fill="none">
+    <line x1="284" y1="483" x2="424" y2="487" stroke-width="10"/>
+    <line x1="284" y1="477" x2="383" y2="352" stroke-width="9"/>
+    <line x1="426" y1="484" x2="388" y2="349" stroke-width="11"/>
+    <line x1="390" y1="350" x2="597" y2="331" stroke-width="11"/>
+    <line x1="436" y1="476" x2="603" y2="341" stroke-width="11"/>
+    <line x1="595" y1="316" x2="610" y2="352" stroke-width="14"/>
+    <line x1="606" y1="344" x2="638" y2="475" stroke-width="11"/>
+  </g>
+  <circle cx="430" cy="485" r="12" fill="#E63946"/>
+
+  <!-- ===== SADDLE ===== -->
+  <line x1="385" y1="348" x2="371" y2="335" stroke="#8B939E" stroke-width="7"/>
+  <path d="M340 328 C356 316 382 314 398 326 C394 338 380 343 364 342 C350 341 342 336 340 328 Z"
+        fill="#7A4A2B" stroke="#2B2D42" stroke-width="3.5"/>
+
+  <!-- ===== STEM + DROP HANDLEBARS (yellow bar tape) ===== -->
+  <line x1="598" y1="320" x2="603" y2="297" stroke="#2B2D42" stroke-width="8"/>
+  <path d="M604 296 C622 284 648 290 652 308 C655 324 644 338 624 338"
+        fill="none" stroke="#2B2D42" stroke-width="13"/>
+  <path d="M604 296 C622 284 648 290 652 308 C655 324 644 338 624 338"
+        fill="none" stroke="#FFD43B" stroke-width="8"/>
+
+  <!-- ===== CRANKSET ===== -->
+  <circle cx="430" cy="485" r="21" fill="#CFD6DE" stroke="#2B2D42" stroke-width="4"/>
+  <line x1="430" y1="485" x2="458" y2="519" stroke="#2B2D42" stroke-width="8"/>
+  <line x1="430" y1="485" x2="390" y2="442" stroke="#2B2D42" stroke-width="8"/>
+  <circle cx="430" cy="485" r="4.5" fill="#2B2D42"/>
+  <rect x="446" y="522" width="30" height="11" rx="5" fill="#2B2D42"/>
+  <rect x="374" y="436" width="30" height="11" rx="5" fill="#2B2D42"/>
+
+  <!-- ===== FAR LEG (behind body) ===== -->
+  <path d="M414 356 C404 384 400 406 394 425" fill="none" stroke="#F08C00" stroke-width="12"/>
+  <path d="M376 426 Q394 417 414 427 Q406 439 388 440 Q378 435 376 426 Z"
+        fill="#F08C00" stroke="#2B2D42" stroke-width="3.5"/>
+  <path d="M396 424 L394 436 M404 426 L402 437" stroke="#D97E06" stroke-width="2" fill="none"/>
+
+  <!-- ===== TAIL ===== -->
+  <path d="M352 258 L270 232 L300 266 L262 268 L314 296 L352 282 Z"
+        fill="#FFFFFF" stroke="#2B2D42" stroke-width="4"/>
+
+  <!-- ===== BODY ===== -->
+  <ellipse cx="435" cy="292" rx="115" ry="70" transform="rotate(6 435 292)"
+           fill="#FFFFFF" stroke="#2B2D42" stroke-width="4"/>
+
+  <!-- ===== WING (tucked) ===== -->
+  <path d="M372 272 C404 254 470 254 508 282 C502 316 462 342 412 340 C384 338 364 312 372 272 Z"
+        fill="#F5F0E4" stroke="#2B2D42" stroke-width="4"/>
+  <path d="M398 296 C428 288 462 290 490 304" fill="none" stroke="#D9CFBB" stroke-width="3.5"/>
+  <path d="M408 318 C432 312 458 314 478 324" fill="none" stroke="#D9CFBB" stroke-width="3.5"/>
+
+  <!-- ===== NECK (stretched forward, aero tuck) ===== -->
+  <path d="M492 250 C544 222 582 216 622 222 L628 252 C586 246 550 252 510 280 Z"
+        fill="#FFFFFF" stroke="#2B2D42" stroke-width="4"/>
+
+  <!-- ===== HEAD ===== -->
+  <path d="M598 214 Q586 204 590 192 Q600 200 610 206 Z"
+        fill="#FFFFFF" stroke="#2B2D42" stroke-width="3.5"/>
+  <ellipse cx="630" cy="236" rx="37" ry="33" fill="#FFFFFF" stroke="#2B2D42" stroke-width="4"/>
+  <ellipse cx="616" cy="252" rx="9" ry="6" fill="#FFB3C1" opacity="0.5"/>
+  <circle cx="640" cy="228" r="5.5" fill="#2B2D42"/>
+  <circle cx="642" cy="226" r="1.8" fill="#FFFFFF"/>
+
+  <!-- ===== BILL + THROAT POUCH ===== -->
+  <path d="M664 243 C702 250 754 254 803 257 C794 286 748 306 708 302 C684 299 668 272 664 252 Z"
+        fill="#FFD08A" stroke="#2B2D42" stroke-width="4"/>
+  <path d="M662 226 C704 226 762 238 804 250 C808 252 808 257 803 258 C758 252 706 246 664 244 Z"
+        fill="#FFA940" stroke="#2B2D42" stroke-width="4"/>
+  <path d="M668 246 C712 250 760 254 798 256" fill="none" stroke="#E8940F" stroke-width="2.5"/>
+  <path d="M798 249 Q810 251 806 259 Q798 261 795 256 Z" fill="#F08C00" stroke="#2B2D42" stroke-width="3"/>
+
+  <!-- ===== NEAR LEG ===== -->
+  <path d="M455 352 C480 396 488 430 479 462 C472 488 467 501 464 510"
+        fill="none" stroke="#FFA940" stroke-width="13"/>
+  <path d="M446 512 Q464 503 486 513 Q478 525 458 526 Q448 521 446 512 Z"
+        fill="#FFA940" stroke="#2B2D42" stroke-width="3.5"/>
+  <path d="M466 510 L464 522 M475 512 L473 523" stroke="#E8940F" stroke-width="2" fill="none"/>
+</svg>

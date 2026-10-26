@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" width="600" height="900">
+  <title>Pelican riding a bicycle — one-line neon illustration</title>
+
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="68%" r="90%">
+      <stop offset="0" stop-color="#101033"/>
+      <stop offset="1" stop-color="#05050f"/>
+    </radialGradient>
+
+    <linearGradient id="neon" gradientUnits="userSpaceOnUse" x1="70" y1="430" x2="530" y2="790">
+      <stop offset="0"    stop-color="#1df2ff"/>
+      <stop offset="0.25" stop-color="#4d7bff"/>
+      <stop offset="0.5"  stop-color="#a44dff"/>
+      <stop offset="0.75" stop-color="#ff3fd4"/>
+      <stop offset="1"    stop-color="#ff5e8a"/>
+    </linearGradient>
+
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <path id="spark" d="M0 -7 L1.8 -1.8 L7 0 L1.8 1.8 L0 7 L-1.8 1.8 L-7 0 L-1.8 -1.8 Z"/>
+  </defs>
+
+  <!-- night sky -->
+  <rect width="600" height="900" fill="url(#bg)"/>
+
+  <!-- open space above: sparse sparkle + crescent moon -->
+  <path d="M500 79 A26 26 0 1 0 500 131 A32 32 0 1 1 500 79 Z" fill="#ffe9a8" opacity="0.85"/>
+  <use href="#spark" transform="translate(130 150)" fill="#7df9ff" opacity="0.8"/>
+  <use href="#spark" transform="translate(262 92) scale(0.7)" fill="#ffffff" opacity="0.65"/>
+  <use href="#spark" transform="translate(425 175) scale(1.25)" fill="#ff7ad9" opacity="0.8"/>
+  <use href="#spark" transform="translate(520 320) scale(0.8)" fill="#7df9ff" opacity="0.5"/>
+  <use href="#spark" transform="translate(88 332) scale(0.9)" fill="#b78bff" opacity="0.5"/>
+  <use href="#spark" transform="translate(330 235) scale(0.55)" fill="#ffffff" opacity="0.35"/>
+
+  <!-- ground glow + horizon -->
+  <ellipse cx="300" cy="788" rx="255" ry="11" fill="url(#neon)" opacity="0.10"/>
+  <path d="M36 782 H566" stroke="url(#neon)" stroke-width="2.5" opacity="0.3" stroke-linecap="round" fill="none"/>
+
+  <!-- speed lines -->
+  <g stroke="#7df9ff" stroke-width="3" stroke-linecap="round" opacity="0.45">
+    <path d="M24 648 H64"/>
+    <path d="M12 680 H60"/>
+    <path d="M30 712 H68"/>
+  </g>
+
+  <!-- ================= ONE CONTINUOUS LINE =================
+       beak -> head -> neck -> back -> tail -> belly -> legs/pedals
+       -> chainring -> wing -> handlebar -> fork -> front wheel/fender
+       -> basket -> frame -> saddle -> rear wheel/fender -> rack
+       -> bird body -> pouch -> back to start (closed loop) -->
+  <g filter="url(#glow)">
+    <path fill="none" stroke="url(#neon)" stroke-width="4.5"
+          stroke-linecap="round" stroke-linejoin="round" d="
+      M 305 575
+      C 322 552 340 532 352 524
+      C 362 520 374 519 384 520
+      C 390 523 392 538 397 562
+      L 413 612
+      C 418 640 425 668 432 700
+      C 470 676 492 668 509 672
+      C 492 684 462 692 432 700
+      C 452 724 466 750 473 771
+      C 452 752 438 726 432 700
+      L 355 672
+      A 82 82 0 0 1 432 618
+      A 82 82 0 0 1 514 700
+      A 82 82 0 0 1 432 782
+      A 82 82 0 0 1 355 672
+      L 339 716
+      A 94 94 0 1 1 524 716
+      L 496 596
+      L 505 542
+      L 448 536
+      L 456 590
+      L 496 596
+      L 476 539
+      L 398 560
+      C 352 548 296 566 243 590
+      L 240 580
+      C 230 571 214 572 206 580
+      C 217 587 232 590 243 590
+      L 168 700
+      C 205 678 228 670 245 672
+      C 222 686 192 694 168 700
+      C 148 728 134 752 127 771
+      C 146 748 158 722 168 700
+      L 91 672
+      A 82 82 0 0 1 168 618
+      A 82 82 0 0 1 250 700
+      A 82 82 0 0 1 168 782
+      A 82 82 0 0 1 91 672
+      L 75 716
+      A 94 94 0 1 1 261 716
+      L 192 598
+      L 96 600
+      L 168 700
+      L 282 690
+      L 243 590
+      C 300 628 362 632 413 612
+      L 282 690
+      C 284 662 280 642 272 624
+      C 282 648 292 676 300 700
+      L 314 706 L 303 710 L 313 714 L 299 713
+      L 290 717 L 318 719 L 304 716
+      L 282 690
+      L 282 664
+      A 26 26 0 0 1 282 716
+      A 26 26 0 0 1 282 664
+      L 282 690
+      L 260 664
+      L 244 660 L 256 668 L 242 668 L 258 672 L 276 670 L 262 668
+      C 256 650 258 636 272 624
+      C 246 630 214 628 196 624
+      L 176 620 L 190 612 L 174 604 L 192 598 L 180 588
+      C 200 564 220 542 250 531
+      C 278 521 300 524 312 538
+      C 324 512 324 486 310 464
+      C 300 448 290 438 278 433
+      C 268 427 256 427 249 434
+      c 2 -4 7 -4 7 0
+      c 0 4 -5 4 -7 0
+      C 228 436 186 444 144 456
+      C 140 458 140 460 142 462
+      C 150 474 162 486 178 493
+      C 196 501 222 497 240 484
+      C 250 476 254 468 256 460
+      C 262 482 268 508 272 532
+      C 276 550 288 566 305 575
+      Z"/>
+    <!-- the eye (one-line artists' traditional dot) -->
+    <circle cx="254" cy="443" r="3.2" fill="#ffd7f2"/>
+  </g>
+</svg>

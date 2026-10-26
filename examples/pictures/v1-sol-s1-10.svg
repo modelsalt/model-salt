@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A rounded cream and rust pelican pedals a step-through cruiser bicycle toward the left.</desc>
+
+  <rect width="800" height="600" rx="32" fill="#fff3dc"/>
+
+  <g stroke="#a5482e" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Ground -->
+    <path d="M126 532H674" fill="none" stroke-width="5" opacity=".2"/>
+
+    <!-- Wheels -->
+    <g fill="#fff3dc" stroke-width="10">
+      <circle cx="230" cy="435" r="91"/>
+      <circle cx="566" cy="435" r="91"/>
+    </g>
+    <g fill="none" stroke-width="3" opacity=".5">
+      <circle cx="230" cy="435" r="77"/>
+      <circle cx="566" cy="435" r="77"/>
+      <path d="M230 358V512M153 435H307M176 381L284 489M176 489L284 381
+               M566 358V512M489 435H643M512 381L620 489M512 489L620 381"/>
+    </g>
+
+    <!-- Far leg and pedal -->
+    <path d="M466 320Q494 360 439 399L418 422" fill="none" stroke-width="15"/>
+    <path d="M412 418l-24 8 31 9 18-10" fill="#a5482e" stroke-width="4"/>
+
+    <!-- Curved cruiser frame -->
+    <g fill="none" stroke-width="11">
+      <path d="M230 435L281 302"/>
+      <path d="M272 325Q305 418 399 435L481 322"/>
+      <path d="M281 302Q367 378 471 348"/>
+      <path d="M399 435H566L481 322"/>
+      <path d="M399 435L474 308"/>
+    </g>
+    <path d="M285 311L270 268Q264 253 241 255H219" fill="none" stroke-width="9"/>
+    <path d="M216 254H244" fill="none" stroke-width="14"/>
+    <path d="M451 307H497Q506 307 503 315H447Q440 310 451 307Z" fill="#a5482e" stroke-width="5"/>
+
+    <!-- Hubs and crank -->
+    <g fill="#a5482e" stroke-width="4">
+      <circle cx="230" cy="435" r="9"/>
+      <circle cx="566" cy="435" r="9"/>
+      <circle cx="399" cy="435" r="20" fill="#fff3dc"/>
+    </g>
+    <path d="M399 435L439 460" fill="none" stroke-width="7"/>
+    <path d="M423 464H458" fill="none" stroke-width="8"/>
+
+    <!-- Tail and body -->
+    <path d="M504 264Q547 253 565 232Q570 271 535 294" fill="#fff3dc" stroke-width="6"/>
+    <path d="M369 218Q402 207 455 218Q510 225 532 263
+             Q550 296 510 318Q473 341 420 317
+             Q383 300 365 268Z"
+          fill="#fff3dc" stroke-width="7"/>
+
+    <!-- Curved neck -->
+    <path d="M411 265Q353 269 337 235Q326 211 338 181
+             Q346 160 331 151Q312 140 304 158
+             Q298 173 307 186Q316 203 307 224
+             Q296 262 325 291Q351 319 400 302"
+          fill="#fff3dc" stroke-width="7"/>
+
+    <!-- Head -->
+    <path d="M292 168Q280 144 295 126Q308 111 329 120
+             Q350 128 349 151Q347 174 326 184Z"
+          fill="#fff3dc" stroke-width="6"/>
+
+    <!-- Pelican throat pouch and long bill -->
+    <path d="M307 165L119 168Q152 207 221 219Q278 229 307 179Z"
+          fill="#a5482e" stroke-width="5"/>
+    <path d="M308 153Q235 151 113 166Q108 168 118 173L307 175Z"
+          fill="#fff3dc" stroke-width="6"/>
+    <path d="M126 173Q208 186 282 178" fill="none" stroke="#fff3dc" stroke-width="3" opacity=".6"/>
+
+    <!-- Face -->
+    <circle cx="320" cy="143" r="6" fill="#a5482e" stroke="none"/>
+    <circle cx="318" cy="141" r="1.8" fill="#fff3dc" stroke="none"/>
+    <path d="M310 129Q318 124 326 128" fill="none" stroke-width="3"/>
+
+    <!-- Wing reaching the handlebars -->
+    <path d="M459 244Q423 226 394 250Q350 284 287 262
+             Q275 256 269 264Q268 274 283 280
+             Q355 317 416 287Q441 275 459 244Z"
+          fill="#fff3dc" stroke-width="6"/>
+    <path d="M416 257Q373 291 310 276" fill="none" stroke-width="4"/>
+
+    <!-- Near leg and webbed foot -->
+    <path d="M450 319Q431 347 414 369Q405 384 423 407L445 450"
+          fill="none" stroke-width="15"/>
+    <path d="M442 447Q451 445 459 453L475 463H427L436 454Z"
+          fill="#a5482e" stroke-width="4"/>
+
+    <!-- Feather accents -->
+    <path d="M489 286l11 9M475 293l10 10" fill="none" stroke-width="4"/>
+  </g>
+</svg>

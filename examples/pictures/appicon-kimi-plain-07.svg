@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8FD2FD"/>
+      <stop offset="0.5" stop-color="#4E9BE9"/>
+      <stop offset="1" stop-color="#2A66D2"/>
+    </linearGradient>
+    <radialGradient id="sunGrad" cx="0.5" cy="0.42" r="0.62">
+      <stop offset="0" stop-color="#FFF8D6"/>
+      <stop offset="0.55" stop-color="#FFDE68"/>
+      <stop offset="1" stop-color="#FFB43A"/>
+    </radialGradient>
+    <linearGradient id="cloudGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#D8E8F9"/>
+    </linearGradient>
+    <g id="cloud">
+      <circle cx="215" cy="325" r="58"/>
+      <circle cx="305" cy="293" r="76"/>
+      <circle cx="392" cy="327" r="54"/>
+      <rect x="157" y="325" width="289" height="58"/>
+    </g>
+  </defs>
+
+  <!-- Square background, sharp corners -->
+  <rect width="512" height="512" fill="url(#sky)"/>
+
+  <!-- Sun glow -->
+  <circle cx="225" cy="205" r="108" fill="#FFDF6B" opacity="0.28"/>
+
+  <!-- Sun rays -->
+  <g stroke="#FFD24D" stroke-width="16" stroke-linecap="round">
+    <line x1="225" y1="79"  x2="225" y2="111"/>
+    <line x1="225" y1="331" x2="225" y2="299"/>
+    <line x1="99"  y1="205" x2="131" y2="205"/>
+    <line x1="319" y1="205" x2="351" y2="205"/>
+    <line x1="136" y1="116" x2="158" y2="138"/>
+    <line x1="314" y1="116" x2="292" y2="138"/>
+    <line x1="136" y1="294" x2="158" y2="272"/>
+    <line x1="314" y1="294" x2="292" y2="272"/>
+  </g>
+
+  <!-- Sun -->
+  <circle cx="225" cy="205" r="72" fill="url(#sunGrad)"/>
+
+  <!-- Cloud shadow + cloud -->
+  <use xlink:href="#cloud" href="#cloud" fill="#14497F" opacity="0.22" transform="translate(0 14)"/>
+  <use xlink:href="#cloud" href="#cloud" fill="url(#cloudGrad)"/>
+
+  <!-- Distant small cloud for depth -->
+  <g fill="#FFFFFF" opacity="0.45">
+    <circle cx="95" cy="415" r="20"/>
+    <circle cx="125" cy="403" r="26"/>
+    <circle cx="155" cy="415" r="18"/>
+    <rect x="75" y="415" width="98" height="18"/>
+  </g>
+</svg>

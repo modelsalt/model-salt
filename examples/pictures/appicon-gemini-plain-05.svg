@@ -1,0 +1,39 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Sky Gradient -->
+    <linearGradient id="sky" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0052D4" />
+      <stop offset="50%" stop-color="#4364F7" />
+      <stop offset="100%" stop-color="#6FB1FC" />
+    </linearGradient>
+    <!-- Sun Gradient -->
+    <linearGradient id="sun" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF8008" />
+      <stop offset="100%" stop-color="#FFC837" />
+    </linearGradient>
+    <!-- Drop Shadow -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#001B44" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Sharp Square Background -->
+  <rect width="512" height="512" fill="url(#sky)" />
+
+  <!-- The Sun -->
+  <circle cx="310" cy="210" r="110" fill="url(#sun)" filter="url(#shadow)" />
+
+  <!-- Raindrops (Sharp Polygons) -->
+  <polygon points="160,380 140,430 170,430" fill="#00E5FF" />
+  <polygon points="240,410 220,460 250,460" fill="#00E5FF" />
+  <polygon points="320,380 300,430 330,430" fill="#00E5FF" />
+
+  <!-- The Cloud -->
+  <path d="M 130 350 
+           A 70 70 0 0 1 200 220 
+           A 90 90 0 0 1 370 250 
+           A 60 60 0 0 1 400 350 
+           Z" 
+        fill="#FFFFFF" 
+        filter="url(#shadow)" />
+</svg>

@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BatchCraft | Smart Family Batch-Cooking & Automated Grocery Lists</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #0E1015;
+            --bg-surface: #171A21;
+            --bg-elevated: #222631;
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --accent-lime: #CCFF00;
+            --accent-lime-hover: #b8e600;
+            --accent-coral: #FF5E5B;
+            --accent-coral-hover: #ff4743;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --glow-lime: rgba(204, 255, 0, 0.18);
+            --glow-coral: rgba(255, 94, 91, 0.18);
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-full: 9999px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, .brand-font {
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Sticky Navbar */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(14, 16, 21, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 1.35rem;
+            font-weight: 700;
+        }
+
+        .logo-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            background: linear-gradient(135deg, var(--accent-lime), #88cc00);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-deep);
+            font-weight: 800;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-lime);
+        }
+
+        .nav-cta {
+            background: var(--bg-elevated);
+            color: var(--accent-lime);
+            border: 1px solid rgba(204, 255, 0, 0.35);
+            padding: 0.55rem 1.15rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 0.88rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-lime);
+            color: var(--bg-deep);
+            box-shadow: 0 0 20px var(--glow-lime);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            padding: 5.5rem 0 6rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -120px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--glow-lime) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -120px;
+            left: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--glow-coral) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 3.5rem;
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 94, 91, 0.12);
+            border: 1px solid rgba(255, 94, 91, 0.35);
+            color: var(--accent-coral);
+            padding: 0.35rem 0.9rem;
+            border-radius: var(--radius-full);
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .badge-dot {
+            width: 7px;
+            height: 7px;
+            background: var(--accent-coral);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-coral);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 4.5vw, 3.85rem);
+            margin-bottom: 1.25rem;
+            color: var(--text-primary);
+        }
+
+        .highlight-lime {
+            color: var(--accent-lime);
+        }
+
+        .highlight-coral {
+            color: var(--accent-coral);
+        }
+
+        .hero p.lead {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.25rem;
+            max-width: 560px;
+        }
+
+        /* Inline Email Capture Form */
+        .email-capture-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            padding: 1.25rem;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            max-width: 560px;
+        }
+
+        .capture-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-lime);
+            margin-bottom: 0.75rem;
+        }
+
+        .capture-form {
+            display: flex;
+            gap: 0.65rem;
+        }
+
+        .capture-input {
+            flex: 1;
+            background: var(--bg-deep);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            color: var(--text-primary);
+            padding: 0.9rem 1.15rem;
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .capture-input:focus {
+            border-color: var(--accent-lime);
+            box-shadow: 0 0 0 3px rgba(204, 255, 0, 0.15);
+        }
+
+        .capture-btn {
+            background: var(--accent-lime);
+            color: var(--bg-deep);
+            border: none;
+            padding: 0.9rem 1.4rem;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: transform 0.15s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .capture-btn:hover {
+            background: var(--accent-lime-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 25px var(--glow-lime);
+        }
+
+        .capture-perks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.85rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .capture-perks span {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .capture-feedback {
+            display: none;
+            margin-top: 0.85rem;
+            padding: 0.85rem 1rem;
+            border-radius: var(--radius-md);
+            background: rgba(204, 255, 0, 0.1);
+            border: 1px solid var(--accent-lime);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        /* Hero App Preview Mockup */
+        .app-mockup {
+            background: var(--bg-surface);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 24px;
+            padding: 1.5rem;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
+            position: relative;
+        }
+
+        .mockup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 1.2rem;
+        }
+
+        .session-pill {
+            background: rgba(204, 255, 0, 0.12);
+            color: var(--accent-lime);
+            padding: 0.25rem 0.7rem;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .batch-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .timeline-card {
+            background: var(--bg-elevated);
+            border-radius: var(--radius-md);
+            padding: 0.95rem 1.1rem;
+            border-left: 3px solid var(--accent-lime);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .timeline-card.coral {
+            border-left-color: var(--accent-coral);
+        }
+
+        .timeline-card h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .timeline-card p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .tag-portion {
+            background: var(--bg-deep);
+            padding: 0.3rem 0.65rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .aisle-preview {
+            margin-top: 1.25rem;
+            background: var(--bg-deep);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .aisle-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent-coral);
+            margin-bottom: 0.65rem;
+            text-transform: uppercase;
+        }
+
+        .grocery-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.84rem;
+            padding: 0.35rem 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+        }
+
+        .grocery-row:last-child {
+            border-bottom: none;
+        }
+
+        /* Metrics Banner */
+        .metrics-bar {
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(23, 26, 33, 0.5);
+            padding: 2.25rem 0;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .metric-item h3 {
+            font-size: 2rem;
+            color: var(--accent-lime);
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-item:nth-child(even) h3 {
+            color: var(--accent-coral);
+        }
+
+        .metric-item p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+        }
+
+        /* Alternating Feature Rows */
+        .features-section {
+            padding: 6rem 0;
+        }
+
+        .section-intro {
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto 4.5rem;
+        }
+
+        .section-intro h2 {
+            font-size: clamp(2rem, 3.5vw, 2.75rem);
+            margin-bottom: 1rem;
+        }
+
+        .section-intro p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        .feature-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 6rem;
+        }
+
+        .feature-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .feature-row.reverse .feature-text {
+            order: 2;
+        }
+
+        .feature-row.reverse .feature-visual {
+            order: 1;
+        }
+
+        .feature-kicker {
+            color: var(--accent-lime);
+            font-weight: 700;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .feature-kicker.coral {
+            color: var(--accent-coral);
+        }
+
+        .feature-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.02rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .check-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: rgba(204, 255, 0, 0.15);
+            color: var(--accent-lime);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .check-icon.coral {
+            background: rgba(255, 94, 91, 0.15);
+            color: var(--accent-coral);
+        }
+
+        .feature-visual {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+        }
+
+        /* Visual Widgets inside Feature Rows */
+        .visual-step-grid {
+            display: grid;
+             gap: 1rem;
+        }
+
+        .step-box {
+            background: var(--bg-elevated);
+            padding: 1rem 1.25rem;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid var(--border-color);
+        }
+
+        .step-time {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            color: var(--accent-lime);
+            font-size: 0.9rem;
+        }
+
+        .cart-consolidation {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .cart-item-merged {
+            background: var(--bg-elevated);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .merged-sources {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.2rem;
+        }
+
+        .merged-qty {
+            background: rgba(255, 94, 91, 0.15);
+            color: var(--accent-coral);
+            font-weight: 700;
+            padding: 0.3rem 0.75rem;
+            border-radius: var(--radius-full);
+            font-size: 0.82rem;
+        }
+
+        /* Interactive Macro & Grocery Cost Calculator Section */
+        .calculator-section {
+            padding: 6rem 0;
+            background: linear-gradient(180deg, var(--bg-deep) 0%, #13161F 50%, var(--bg-deep) 100%);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .calc-wrapper {
+            background: var(--bg-surface);
+            border: 1px solid rgba(204, 255, 0, 0.22);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 3.5rem;
+            align-items: center;
+        }
+
+        .control-group {
+            margin-bottom: 2rem;
+        }
+
+        .control-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.75rem;
+        }
+
+        .control-header label {
+            font-weight: 600;
+            font-size: 0.98rem;
+        }
+
+        .control-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-lime);
+        }
+
+        .control-value.coral-text {
+            color: var(--accent-coral);
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            background: var(--bg-deep);
+            border-radius: 99px;
+            outline: none;
+            border: 1px solid var(--border-color);
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--accent-lime);
+            cursor: pointer;
+            box-shadow: 0 0 12px var(--accent-lime);
+            border: 3px solid var(--bg-deep);
+            transition: transform 0.15s ease;
+        }
+
+        input[type="range"].coral-slider::-webkit-slider-thumb {
+            background: var(--accent-coral);
+            box-shadow: 0 0 12px var(--accent-coral);
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.12);
+        }
+
+        .diet-pills {
+            display: flex;
+            gap: 0.6rem;
+            margin-top: 0.5rem;
+        }
+
+        .diet-pill {
+            flex: 1;
+            text-align: center;
+            padding: 0.6rem 0.75rem;
+            background: var(--bg-deep);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .diet-pill.active {
+            background: rgba(204, 255, 0, 0.12);
+            border-color: var(--accent-lime);
+            color: var(--accent-lime);
+        }
+
+        .calc-results {
+            background: var(--bg-deep);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .result-box {
+            background: var(--bg-surface);
+            padding: 1.15rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .result-box span.label {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            display: block;
+            margin-bottom: 0.35rem;
+        }
+
+        .result-box .big-num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .result-box .big-num.lime {
+            color: var(--accent-lime);
+        }
+
+        .result-box .big-num.coral {
+            color: var(--accent-coral);
+        }
+
+        .macro-breakdown {
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
+
+        .macro-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .macro-bar {
+            height: 12px;
+            background: var(--bg-elevated);
+            border-radius: 99px;
+            display: flex;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .bar-protein { background: var(--accent-lime); width: 32%; transition: width 0.3s ease; }
+        .bar-carbs { background: var(--accent-coral); width: 43%; transition: width 0.3s ease; }
+        .bar-fats { background: #64748B; width: 25%; transition: width 0.3s ease; }
+
+        .macro-legend {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.82rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+        }
+
+        /* Bottom CTA Section */
+        .bottom-cta {
+            padding: 6rem 0;
+        }
+
+        .cta-banner {
+            background: radial-gradient(circle at top right, rgba(204, 255, 0, 0.14), transparent 55%),
+                        radial-gradient(circle at bottom left, rgba(255, 94, 91, 0.14), transparent 55%),
+                        var(--bg-surface);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 28px;
+            padding: 4rem 2.5rem;
+            text-align: center;
+            max-width: 920px;
+            margin: 0 auto;
+        }
+
+        .cta-banner h2 {
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            margin-bottom: 1rem;
+        }
+
+        .cta-banner p {
+            color: var(--text-secondary);
+            max-width: 580px;
+            margin: 0 auto 2.25rem;
+            font-size: 1.05rem;
+        }
+
+        .cta-banner .email-capture-card {
+            margin: 0 auto;
+            background: var(--bg-deep);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 3.5rem 0 2.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.75rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-lime);
+        }
+
+        @media (max-width: 920px) {
+            .hero-grid,
+            .feature-row,
+            .calc-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .feature-row.reverse .feature-text {
+                order: 1;
+            }
+
+            .feature-row.reverse .feature-visual {
+                order: 2;
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .capture-form {
+                flex-direction: column;
+            }
+
+            .calc-wrapper {
+                padding: 1.5rem;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sticky Top Navbar -->
+    <header class="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo brand-font">
+                <span class="logo-icon">B</span>
+                <span>Batch<span class="highlight-lime">Craft</span></span>
+            </a>
+            <nav class="nav-links">
+                <a href="#how-it-works">Batch Workflow</a>
+                <a href="#grocery-automation">Auto-Groceries</a>
+                <a href="#calculator">Family Budget Calculator</a>
+            </nav>
+            <a href="#get-starter-plan" class="nav-cta">Get 7-Day Starter PDF</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="get-starter-plan">
+        <div class="container hero-grid">
+            <div>
+                <div class="badge">
+                    <span class="badge-dot"></span>
+                    Built for Busy Parents & Growing Families
+                </div>
+                <h1>
+                    Cook Once on Sunday. <span class="highlight-lime">Feed the Family</span> All Week.
+                </h1>
+                <p class="lead">
+                    Stop asking <em>"what's for dinner?"</em> at 6:00 PM. BatchCraft turns 90 minutes of guided weekend prep into 5 stress-free family dinners—with automated, aisle-sorted grocery lists.
+                </p>
+
+                <!-- Primary Inline Email Capture Form -->
+                <div class="email-capture-card">
+                    <div class="capture-label">
+                        <span>⚡ INSTANT BONUS:</span> Get our 7-Day Family Batch Meal Plan PDF + Early Access Invite
+                    </div>
+                    <form class="capture-form" onsubmit="handleLeadSubmit(event, 'hero-feedback')">
+                        <input 
+                            type="email" 
+                            class="capture-input" 
+                            placeholder="Enter your parent email address..." 
+                            required
+                            aria-label="Email address"
+                        >
+                        <button type="submit" class="capture-btn">Send Starter PDF & Invite →</button>
+                    </form>
+                    <div class="capture-perks">
+                        <span>✓ Kid-tested recipes</span>
+                        <span>✓ Complete prep timeline</span>
+                        <span>✓ Under $140/wk grocery list</span>
+                    </div>
+                    <div id="hero-feedback" class="capture-feedback">
+                        🎉 <strong>You're on the early access list!</strong> Your <em>7-Day Family Batch-Cooking Starter PDF</em> is downloading now (check your inbox for your invite code).
+                    </div>
+                </div>
+            </div>
+
+            <!-- App Interface Preview -->
+            <div class="app-mockup">
+                <div class="mockup-header">
+                    <div>
+                        <div style="font-size: 0.78rem; color: var(--text-secondary);">ACTIVE SUNDAY SESSION</div>
+                        <div class="brand-font" style="font-size: 1.15rem; font-weight: 700;">4-Person Family Prep</div>
+                    </div>
+                    <span class="session-pill">⏱ 85 Mins Total</span>
+                </div>
+
+                <div class="batch-timeline">
+                    <div class="timeline-card">
+                        <div>
+                            <h4>1. Sheet-Pan Honey Garlic Chicken & Veggies</h4>
+                            <p>Oven 400°F • Feeds Mon & Wed Dinners</p>
+                        </div>
+                        <span class="tag-portion">8 Portions</span>
+                    </div>
+                    <div class="timeline-card coral">
+                        <div>
+                            <h4>2. Slow-Cooker Carnitas & Black Bean Base</h4>
+                            <p>Simmer Lock • Tacos Tue & Burrito Bowls Thu</p>
+                        </div>
+                        <span class="tag-portion">10 Portions</span>
+                    </div>
+                    <div class="timeline-card">
+                        <div>
+                            <h4>3. Hidden-Veggie Marinara & Baked Ziti</h4>
+                            <p>Freezer-Ready • Friday Movie Night</p>
+                        </div>
+                        <span class="tag-portion">6 Portions</span>
+                    </div>
+                </div>
+
+                <div class="aisle-preview">
+                    <div class="aisle-header">
+                        <span>🛒 Auto-Generated Grocery List</span>
+                        <span>Aisle 4: Produce & Meat</span>
+                    </div>
+                    <div class="grocery-row">
+                        <span>Boneless Chicken Thighs (Recipes 1 & Lunch)</span>
+                        <strong class="highlight-lime">3.5 lbs</strong>
+                    </div>
+                    <div class="grocery-row">
+                        <span>Bell Peppers (Consolidated across 3 meals)</span>
+                        <strong class="highlight-lime">6 count</strong>
+                    </div>
+                    <div class="grocery-row">
+                        <span>Shredded Monterey Jack Cheese</span>
+                        <strong class="highlight-coral">16 oz bag</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics Bar -->
+    <section class="metrics-bar">
+        <div class="container metrics-grid">
+            <div class="metric-item">
+                <h3>6.5 hrs</h3>
+                <p>Saved on weeknight cooking & cleanup</p>
+            </div>
+            <div class="metric-item">
+                <h3>$340/mo</h3>
+                <p>Average family savings vs. last-minute takeout</p>
+            </div>
+            <div class="metric-item">
+                <h3>Zero</h3>
+                <p>Forgotten ingredients or mid-week store runs</p>
+            </div>
+            <div class="metric-item">
+                <h3>100%</h3>
+                <p>Picky-eater customizable side swaps</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alternating Feature Rows -->
+    <section class="features-section" id="how-it-works">
+        <div class="container">
+            <div class="section-intro">
+                <h2>Engineered for <span class="highlight-lime">Chaos-Free</span> Weeknights</h2>
+                <p>Most recipe apps give you five disconnected meals that leave your kitchen destroyed five nights a week. BatchCraft sequences overlapping ingredients into one streamlined weekend session.</p>
+            </div>
+
+            <!-- Row 1 -->
+            <div class="feature-row">
+                <div class="feature-text">
+                    <span class="feature-kicker">01 // Synchronized Batch Timelines</span>
+                    <h3>One Cutting Board. One Oven Preheat. Five Dinners Done.</h3>
+                    <p>
+                        BatchCraft’s smart kitchen scheduler tells you the exact order to chop, roast, and simmer so every burner and oven rack works in parallel. While your grains simmer, your sheet pans roast and your sauces blend.
+                    </p>
+                    <ul class="feature-list">
+                        <li><span class="check-icon">✓</span> Step-by-step audio & visual timers for multitasking parents</li>
+                        <li><span class="check-icon">✓</span> Smart container labeling instructions (Fridge vs. Freezer)</li>
+                        <li><span class="check-icon">✓</span> 10-minute weeknight reheating & crisping instructions</li>
+                    </ul>
+                </div>
+                <div class="feature-visual">
+                    <div class="visual-step-grid">
+                        <div class="step-box">
+                            <div>
+                                <strong>Min 00–15: Multi-Meal Chopping Block</strong>
+                                <div style="font-size: 0.82rem; color: var(--text-secondary);">Dice onions, peppers & garlic for all 4 weekly bases at once</div>
+                            </div>
+                            <span class="step-time">15m</span>
+                        </div>
+                        <div class="step-box">
+                            <div>
+                                <strong>Min 15–55: Dual-Rack Oven Roast</strong>
+                                <div style="font-size: 0.82rem; color: var(--text-secondary);">Top rack: Herb Chicken • Bottom rack: Sweet Potato Cubes</div>
+                            </div>
+                            <span class="step-time">40m</span>
+                        </div>
+                        <div class="step-box">
+                            <div>
+                                <strong>Min 55–85: Cool, Portion & Label</strong>
+                                <div style="font-size: 0.82rem; color: var(--text-secondary);">Stack into color-coded glass containers for Mon–Fri grab & heat</div>
+                            </div>
+                            <span class="step-time">30m</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 2 (Reversed) -->
+            <div class="feature-row reverse" id="grocery-automation">
+                <div class="feature-text">
+                    <span class="feature-kicker coral">02 // Automated Grocery Consolidation</span>
+                    <h3>Never Buy Three Half-Used Bunches of Cilantro Again.</h3>
+                    <p>
+                        Select your family's weekly batch plan and watch BatchCraft automatically merge tablespoons, cups, and ounces into exact supermarket package sizes—sorted by your local store's aisle layout.
+                    </p>
+                    <ul class="feature-list">
+                        <li><span class="check-icon coral">✓</span> One-tap Pantry Check removes staples you already own</li>
+                        <li><span class="check-icon coral">✓</span> Real-time partner sync so both parents can check off items</li>
+                        <li><span class="check-icon coral">✓</span> Direct 1-click export to Instacart, Walmart+, and Target Drive Up</li>
+                    </ul>
+                </div>
+                <div class="feature-visual">
+                    <div class="cart-consolidation">
+                        <div class="cart-item-merged">
+                            <div>
+                                <strong>Crushed Tomatoes (28 oz cans)</strong>
+                                <div class="merged-sources">Merged: Ziti Bake (1.5 cans) + Taco Chili (1.5 cans)</div>
+                            </div>
+                            <span class="merged-qty">Buy 3 Cans</span>
+                        </div>
+                        <div class="cart-item-merged">
+                            <div>
+                                <strong>Baby Spinach (Family Clamshell)</strong>
+                                <div class="merged-sources">Merged: Pasta Sauce + Lunch Wraps + Smoothies</div>
+                            </div>
+                            <span class="merged-qty">Buy 16 oz</span>
+                        </div>
+                        <div class="cart-item-merged">
+                            <div>
+                                <strong>Jasmine Rice (Dry Bulk)</strong>
+                                <div class="merged-sources">Merged: Teriyaki Bowls + Burrito Night</div>
+                            </div>
+                            <span class="merged-qty">Buy 2 lbs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="feature-row">
+                <div class="feature-text">
+                    <span class="feature-kicker">03 // Picky-Eater & Allergy Split-Prep</span>
+                    <h3>Same Base Ingredients. Customized for Kids & Adults.</h3>
+                    <p>
+                        No more cooking two separate dinners. BatchCraft shows you how to hold back a portion of plain protein or mild sauce before adding spicy seasonings or complex textures for the adults.
+                    </p>
+                    <ul class="feature-list">
+                        <li><span class="check-icon">✓</span> Automatic "Split Point" alerts during cooking</li>
+                        <li><span class="check-icon">✓</span> School-safe, nut-free lunchbox remix ideas using dinner leftovers</li>
+                        <li><span class="check-icon">✓</span> Balanced family macros verified by pediatric nutritionists</li>
+                    </ul>
+                </div>
+                <div class="feature-visual">
+                    <div style="background: var(--bg-elevated); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                        <div style="font-size: 0.8rem; color: var(--accent-lime); font-weight: 700; margin-bottom: 0.5rem;">SPLIT-PREP EXAMPLE: THAI PEANUT NOODLE NIGHT</div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+                            <div style="background: var(--bg-deep); padding: 1rem; border-radius: 10px; border-top: 3px solid var(--accent-lime);">
+                                <strong>🧒 Kids' Box (Mild)</strong>
+                                <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.4rem;">Sweet soy sesame noodles, crispy chicken strips & raw cucumber coins on the side.</p>
+                            </div>
+                            <div style="background: var(--bg-deep); padding: 1rem; border-radius: 10px; border-top: 3px solid var(--accent-coral);">
+                                <strong>🌶️ Parents' Box (Bold)</strong>
+                                <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.4rem;">Chili-lime peanut sauce tossed with charred cabbage, edamame & crushed peanuts.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Family Macro & Grocery Cost Calculator -->
+    <section class="calculator-section" id="calculator">
+        <div class="container">
+            <div class="section-intro">
+                <h2>Family <span class="highlight-lime">Grocery Cost</span> & Macro Calculator</h2>
+                <p>Slide to match your household size and weekly grocery budget. See how BatchCraft stretches your food dollars while hitting optimal family nutrition targets.</p>
+            </div>
+
+            <div class="calc-wrapper">
+                <!-- Interactive Controls -->
+                <div class="calc-controls">
+                    <div class="control-group">
+                        <div class="control-header">
+                            <label for="household-slider">Household Size (Adults + Kids)</label>
+                            <span class="control-value" id="household-display">4 People</span>
+                        </div>
+                        <input type="range" id="household-slider" min="2" max="8" value="4" step="1">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.4rem;">
+                            <span>2 (Couple/Parent+Child)</span>
+                            <span>5 (Growing Family)</span>
+                            <span>8 (Large Household)</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="control-header">
+                            <label for="budget-slider">Current Weekly Food Spend (Groceries + Takeout)</label>
+                            <span class="control-value coral-text" id="budget-display">$240 / wk</span>
+                        </div>
+                        <input type="range" id="budget-slider" class="coral-slider" min="100" max="500" value="240" step="10">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.4rem;">
+                            <span>$100/wk</span>
+                            <span>$300/wk</span>
+                            <span>$500/wk</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group" style="margin-bottom: 0;">
+                        <div class="control-header">
+                            <label>Weekly Batch Focus</label>
+                        </div>
+                        <div class="diet-pills">
+                            <div class="diet-pill active" onclick="setMacroMode('balanced', this)">Balanced Family</div>
+                            <div class="diet-pill" onclick="setMacroMode('highprotein', this)">Active / High-Protein</div>
+                            <div class="diet-pill" onclick="setMacroMode('budgetmax', this)">Max Budget Stretch</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Output Readout -->
+                <div class="calc-results">
+                    <div class="results-grid">
+                        <div class="result-box">
+                            <span class="label">BatchCraft Optimized Grocery Bill</span>
+                            <div class="big-num lime" id="res-optimized-cost">$136 / wk</div>
+                            <div style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.25rem;" id="res-per-serving">$3.40 per plated dinner</div>
+                        </div>
+                        <div class="result-box">
+                            <span class="label">Estimated Monthly Savings</span>
+                            <div class="big-num coral" id="res-monthly-savings">$416 / mo</div>
+                            <div style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.25rem;">By eliminating food waste & takeout</div>
+                        </div>
+                        <div class="result-box">
+                            <span class="label">Total Batch Meals Prepped</span>
+                            <div class="big-num" id="res-total-meals">20 Meals</div>
+                            <div style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.25rem;">5 family dinners × <span id="res-family-count">4</span> members</div>
+                        </div>
+                        <div class="result-box">
+                            <span class="label">Weekly Prep Protein Total</span>
+                            <div class="big-num lime" id="res-weekly-protein">720g</div>
+                            <div style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.25rem;" id="res-protein-serving">36g protein per adult portion</div>
+                        </div>
+                    </div>
+
+                    <div class="macro-breakdown">
+                        <div class="macro-header">
+                            <span>Daily Per-Person Dinner Macro Split</span>
+                            <strong id="res-calories" style="color: var(--text-primary);">~640 kcal / dinner</strong>
+                        </div>
+                        <div class="macro-bar">
+                            <div class="bar-protein" id="bar-p"></div>
+                            <div class="bar-carbs" id="bar-c"></div>
+                            <div class="bar-fats" id="bar-f"></div>
+                        </div>
+                        <div class="macro-legend">
+                            <div class="legend-item">
+                                <span class="dot" style="background: var(--accent-lime);"></span>
+                                <span id="leg-p">Protein: 32% (36g)</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="dot" style="background: var(--accent-coral);"></span>
+                                <span id="leg-c">Smart Carbs: 43% (58g)</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="dot" style="background: #64748B;"></span>
+                                <span id="leg-f">Healthy Fats: 25% (18g)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom Conversion CTA -->
+    <section class="bottom-cta">
+        <div class="container">
+            <div class="cta-banner">
+                <div class="badge">
+                    <span class="badge-dot"></span>
+                    Try This Sunday's Batch Plan Free
+                </div>
+                <h2>Get Your <span class="highlight-lime">7-Day Starter Meal Plan PDF</span> & Early Access</h2>
+                <p>
+                    Enter your email below and we’ll immediately generate your printable 7-Day Family Batch-Cooking Guide (complete with aisle-sorted grocery list and 90-minute prep timeline) plus your invite to the BatchCraft app beta.
+                </p>
+
+                <div class="email-capture-card">
+                    <form class="capture-form" onsubmit="handleLeadSubmit(event, 'bottom-feedback')">
+                        <input 
+                            type="email" 
+                            class="capture-input" 
+                            placeholder="Enter your best email for the PDF & invite..." 
+                            required
+                            aria-label="Email address"
+                        >
+                        <button type="submit" class="capture-btn">Download 7-Day PDF Plan →</button>
+                    </form>
+                    <div class="capture-perks" style="justify-content: center;">
+                        <span>🔒 No spam, ever</span>
+                        <span>📄 Instant PDF download</span>
+                        <span>📱 iOS & Android beta invite</span>
+                    </div>
+                    <div id="bottom-feedback" class="capture-feedback">
+                        🎉 <strong>Success!</strong> Your 7-Day Family Batch Starter Plan PDF has been generated and downloaded, and your early access invite is on its way to your inbox.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="logo brand-font" style="font-size: 1.15rem;">
+                <span class="logo-icon" style="width: 28px; height: 28px; font-size: 0.9rem;">B</span>
+                <span>Batch<span class="highlight-lime">Craft</span></span>
+            </div>
+            <div class="footer-links">
+                <a href="#how-it-works">Batch Workflow</a>
+                <a href="#grocery-automation">Auto-Groceries</a>
+                <a href="#calculator">Cost & Macro Calculator</a>
+                <a href="#get-starter-plan">7-Day Starter PDF</a>
+            </div>
+            <div>
+                © 2025 BatchCraft Labs Inc. Built for busy families.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Calculator State & Logic
+        const householdSlider = document.getElementById('household-slider');
+        const budgetSlider = document.getElementById('budget-slider');
+        let currentMacroMode = 'balanced';
+
+        const macroModes = {
+            balanced: {
+                costPerMeal: 3.40,
+                proteinPerMeal: 36,
+                carbsPerMeal: 58,
+                fatsPerMeal: 18,
+                kcal: 640,
+                pPct: 32,
+                cPct: 43,
+                fPct: 25
+            },
+            highprotein: {
+                costPerMeal: 3.85,
+                proteinPerMeal: 48,
+                carbsPerMeal: 46,
+                fatsPerMeal: 16,
+                kcal: 660,
+                pPct: 42,
+                cPct: 35,
+                fPct: 23
+            },
+            budgetmax: {
+                costPerMeal: 2.65,
+                proteinPerMeal: 30,
+                carbsPerMeal: 66,
+                fatsPerMeal: 15,
+                kcal: 615,
+                pPct: 28,
+                cPct: 50,
+                fPct: 22
+            }
+        };
+
+        function setMacroMode(mode, el) {
+            currentMacroMode = mode;
+            document.querySelectorAll('.diet-pill').forEach(pill => pill.classList.remove('active'));
+            el.classList.add('active');
+            updateCalculator();
+        }
+
+        function updateCalculator() {
+            const people = parseInt(householdSlider.value, 10);
+            const currentWeeklySpend = parseInt(budgetSlider.value, 10);
+            const profile = macroModes[currentMacroMode];
+
+            // Update slider labels
+            document.getElementById('household-display').textContent = `${people} People`;
+            document.getElementById('budget-display').textContent = `$${currentWeeklySpend} / wk`;
+
+            // 5 batch-prepped family dinners per week + leftover lunch efficiency
+            const totalMeals = people * 5;
+            // Scale discount slightly for bulk buying with larger families
+            const bulkFactor = 1 - ((people - 2) * 0.025);
+            const effectiveServingCost = (profile.costPerMeal * bulkFactor);
+            const optimizedWeeklyBill = Math.round(totalMeals * effectiveServingCost + (people * 12)); // includes staple buffer
+
+            const weeklySavings = Math.max(25, currentWeeklySpend - optimizedWeeklyBill);
+            const monthlySavings = Math.round(weeklySavings * 4.33);
+            const totalWeeklyProtein = totalMeals * profile.proteinPerMeal;
+
+            // Update DOM outputs
+            document.getElementById('res-optimized-cost').textContent = `$${optimizedWeeklyBill} / wk`;
+            document.getElementById('res-per-serving').textContent = `$${effectiveServingCost.toFixed(2)} per plated dinner`;
+            document.getElementById('res-monthly-savings').textContent = `$${monthlySavings} / mo`;
+            document.getElementById('res-total-meals').textContent = `${totalMeals} Dinners`;
+            document.getElementById('res-family-count').textContent = people;
+            document.getElementById('res-weekly-protein').textContent = `${totalWeeklyProtein}g`;
+            document.getElementById('res-protein-serving').textContent = `${profile.proteinPerMeal}g protein per portion`;
+
+            // Update Macro Bars
+            document.getElementById('res-calories').textContent = `~${profile.kcal} kcal / dinner`;
+            document.getElementById('bar-p').style.width = `${profile.pPct}%`;
+            document.getElementById('bar-c').style.width = `${profile.cPct}%`;
+            document.getElementById('bar-f').style.width = `${profile.fPct}%`;
+
+            document.getElementById('leg-p').textContent = `Protein: ${profile.pPct}% (${profile.proteinPerMeal}g)`;
+            document.getElementById('leg-c').textContent = `Smart Carbs: ${profile.cPct}% (${profile.carbsPerMeal}g)`;
+            document.getElementById('leg-f').textContent = `Healthy Fats: ${profile.fPct}% (${profile.fatsPerMeal}g)`;
+        }
+
+        householdSlider.addEventListener('input', updateCalculator);
+        budgetSlider.addEventListener('input', updateCalculator);
+        updateCalculator();
+
+        // Inline Email Capture & Instant Starter Meal Plan Download
+        function handleLeadSubmit(event, feedbackId) {
+            event.preventDefault();
+            const form = event.target;
+            const emailInput = form.querySelector('input[type="email"]');
+            const feedbackEl = document.getElementById(feedbackId);
+
+            if (!emailInput.value) return;
+
+            feedbackEl.style.display = 'block';
+
+            // Trigger an actual instant 7-Day Starter Plan file download for the user
+            const planContent = [
+                "=================================================================",
+                "BATCHCRAFT: 7-DAY FAMILY BATCH-COOKING STARTER PLAN (EARLY ACCESS)",
+                "=================================================================",
+                `Prepared for: ${emailInput.value}`,
+                "",
+                "SUNDAY 90-MINUTE BATCH SESSION:",
+                "1. Sheet-Pan Honey Garlic Chicken Thighs & Broccoli (Mon & Wed)",
+                "2. Slow-Cooker Crispy Carnitas & Black Bean Base (Tue Tacos & Thu Bowls)",
+                "3. Hidden-Veggie Marinara & Baked Ziti (Fri Family Movie Night)",
+                "4. Weekend Remix: 10-Min Quesadillas & Loaded Nachos (Sat/Sun)",
+                "",
+                "CONSOLIDATED GROCERY LIST (4-PERSON HOUSEHOLD):",
+                "[Produce] 6 Bell Peppers, 3 Crowns Broccoli, 2 Yellow Onions, 1 Garlic Bulb",
+                "[Meat]    3.5 lbs Boneless Chicken Thighs, 3 lbs Pork Shoulder",
+                "[Pantry]  2x 28oz Crushed Tomatoes, 2 lbs Jasmine Rice, 16oz Ziti Pasta",
+                "[Dairy]   16oz Shredded Monterey Jack, 15oz Ricotta, 8oz Mozzarella",
+                "================================================================="
+            ].join("\n");
+
+            const blob = new Blob([planContent], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'BatchCraft-7-Day-Family-Starter-Meal-Plan.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            emailInput.value = '';
+        }
+    </script>
+</body>
+</html>

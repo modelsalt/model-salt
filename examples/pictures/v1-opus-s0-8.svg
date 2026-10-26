@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <!-- Sky and ground -->
+  <rect width="400" height="300" fill="#BFE3F2"/>
+  <rect y="265" width="400" height="35" fill="#9CCB86"/>
+
+  <!-- Back leg (behind the bike) -->
+  <polyline points="172,146 160,186 174,209" fill="none" stroke="#D9772A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M166,209 L186,206 L178,215 Z" fill="#D9772A"/>
+
+  <!-- Wheels -->
+  <circle cx="110" cy="220" r="45" fill="none" stroke="#2B2D42" stroke-width="7"/>
+  <circle cx="290" cy="220" r="45" fill="none" stroke="#2B2D42" stroke-width="7"/>
+  <circle cx="110" cy="220" r="5" fill="#2B2D42"/>
+  <circle cx="290" cy="220" r="5" fill="#2B2D42"/>
+
+  <!-- Frame -->
+  <g fill="none" stroke="#E63946" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="110,220 190,220 168,150 110,220"/>
+    <polyline points="168,150 260,145 190,220"/>
+    <line x1="260" y1="145" x2="290" y2="220"/>
+    <line x1="260" y1="145" x2="256" y2="128"/>
+  </g>
+  <!-- Handlebar and seat -->
+  <line x1="248" y1="128" x2="270" y2="126" stroke="#2B2D42" stroke-width="6" stroke-linecap="round"/>
+  <rect x="154" y="144" width="28" height="7" rx="3" fill="#2B2D42"/>
+
+  <!-- Crank -->
+  <line x1="175" y1="210" x2="205" y2="230" stroke="#2B2D42" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="190" cy="220" r="7" fill="#2B2D42"/>
+
+  <!-- Tail -->
+  <path d="M152,118 L136,140 L158,136 Z" fill="#F4F1EA"/>
+
+  <!-- Body -->
+  <ellipse cx="178" cy="108" rx="30" ry="40" fill="#FFFFFF" transform="rotate(12 178 108)"/>
+
+  <!-- Neck -->
+  <path d="M176,80 Q178,52 196,40 L208,48 Q194,62 198,84 Z" fill="#FFFFFF"/>
+
+  <!-- Head -->
+  <circle cx="202" cy="44" r="14" fill="#FFFFFF"/>
+  <circle cx="205" cy="41" r="2.5" fill="#2B2D42"/>
+
+  <!-- Pouch and bill -->
+  <path d="M208,50 L286,56 Q262,78 222,72 Q210,64 208,50 Z" fill="#F6A84A"/>
+  <path d="M210,38 L292,52 L286,57 L210,50 Z" fill="#F28C28"/>
+
+  <!-- Wing reaching to handlebar -->
+  <path d="M184,86 Q228,96 258,124 L252,134 Q216,120 176,116 Z" fill="#F4F1EA"/>
+  <path d="M240,112 L258,124 L252,134 L236,124 Z" fill="#2B2D42"/>
+
+  <!-- Front leg and webbed foot on pedal -->
+  <polyline points="186,144 202,190 205,228" fill="none" stroke="#F28C28" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M196,230 L218,227 L208,237 Z" fill="#F28C28"/>
+</svg>

@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ladle — Meals planned. Groceries sorted. Evenings back.</title>
+<meta name="description" content="Ladle plans your week of meals around what you actually like, builds the grocery list, and keeps leftovers from going to waste.">
+<style>
+  :root {
+    --cream: #FBF7F0;
+    --cream-2: #F3ECDF;
+    --ink: #1F1B16;
+    --ink-2: #5A524A;
+    --ink-3: #8C8379;
+    --line: #E6DDCD;
+    --herb: #2F5D3A;
+    --herb-2: #3F7A4C;
+    --herb-soft: #E3EEE4;
+    --tomato: #D9532B;
+    --tomato-soft: #FBE5DC;
+    --butter: #F4C95D;
+    --butter-soft: #FBF0D1;
+    --radius: 18px;
+    --shadow: 0 20px 50px -20px rgba(31, 27, 22, .25);
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  ul { list-style: none; }
+  button { font: inherit; cursor: pointer; }
+
+  .wrap { width: min(1120px, 92vw); margin: 0 auto; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--herb);
+  }
+  .eyebrow::before { content: ""; width: 18px; height: 2px; background: var(--herb); border-radius: 2px; }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -.01em; line-height: 1.1; }
+  h2 { font-size: clamp(30px, 4vw, 44px); }
+  .lede { font-size: 18px; color: var(--ink-2); max-width: 56ch; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 14px 22px; border-radius: 999px; font-weight: 600; font-size: 15px;
+    border: 1.5px solid transparent; transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+    white-space: nowrap;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--ink); color: var(--cream); box-shadow: 0 10px 24px -10px rgba(31,27,22,.6); }
+  .btn-primary:hover { background: #000; }
+  .btn-ghost { border-color: var(--line); background: transparent; color: var(--ink); }
+  .btn-ghost:hover { background: var(--cream-2); }
+  .btn-herb { background: var(--herb); color: #fff; }
+  .btn-herb:hover { background: var(--herb-2); }
+
+  /* ---------- Nav ---------- */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(251, 247, 240, .85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent; transition: border-color .2s;
+  }
+  header.scrolled { border-bottom-color: var(--line); }
+  nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 24px; font-weight: 600; }
+  .logo svg { width: 32px; height: 32px; }
+  .nav-links { display: flex; gap: 32px; font-size: 15px; font-weight: 500; color: var(--ink-2); }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta { display: flex; gap: 10px; align-items: center; }
+  .nav-cta .btn { padding: 10px 18px; font-size: 14px; }
+  .menu-btn { display: none; background: none; border: 0; width: 40px; height: 40px; }
+  .menu-btn span { display: block; height: 2px; background: var(--ink); margin: 5px auto; width: 22px; border-radius: 2px; transition: .2s; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 72px 0 40px; position: relative; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center; }
+  .hero h1 { font-size: clamp(42px, 6vw, 72px); margin: 18px 0 22px; }
+  .hero h1 em { font-style: italic; color: var(--herb); }
+  .hero .lede { margin-bottom: 32px; }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .hero-note { font-size: 13px; color: var(--ink-3); margin-top: 14px; }
+  .hero-proof { display: flex; align-items: center; gap: 14px; margin-top: 40px; }
+  .avatars { display: flex; }
+  .avatars span {
+    width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--cream);
+    margin-left: -10px; display: grid; place-items: center; font-size: 12px; font-weight: 700; color: #fff;
+  }
+  .avatars span:first-child { margin-left: 0; }
+  .stars { color: var(--butter); letter-spacing: 2px; font-size: 14px; }
+  .hero-proof small { display: block; color: var(--ink-2); font-size: 13px; }
+
+  /* blob background */
+  .hero::before {
+    content: ""; position: absolute; right: -10%; top: -20%; width: 60%; height: 140%;
+    background: radial-gradient(ellipse at center, var(--butter-soft) 0%, rgba(251,247,240,0) 65%);
+    z-index: 0; pointer-events: none;
+  }
+  .hero .wrap { position: relative; z-index: 1; }
+
+  /* ---------- Phone mockup ---------- */
+  .mock { position: relative; display: flex; justify-content: center; }
+  .phone {
+    width: 320px; background: #fff; border-radius: 44px; padding: 14px;
+    box-shadow: var(--shadow), 0 0 0 1px var(--line); position: relative; z-index: 2;
+  }
+  .screen { background: var(--cream); border-radius: 32px; overflow: hidden; padding: 22px 18px 18px; min-height: 600px; }
+  .notch { width: 110px; height: 26px; background: #fff; border-radius: 0 0 20px 20px; margin: -22px auto 14px; }
+  .s-head { display: flex; justify-content: space-between; align-items: baseline; }
+  .s-head h4 { font-family: var(--serif); font-size: 22px; font-weight: 500; }
+  .s-head small { color: var(--ink-3); font-size: 12px; }
+  .days { display: flex; justify-content: space-between; margin: 16px 0 14px; }
+  .days span {
+    width: 34px; height: 44px; border-radius: 12px; display: grid; place-items: center;
+    font-size: 11px; font-weight: 600; color: var(--ink-3); background: #fff; line-height: 1.2; text-align: center;
+  }
+  .days span b { font-size: 13px; color: var(--ink); }
+  .days span.on { background: var(--ink); color: rgba(255,255,255,.7); }
+  .days span.on b { color: #fff; }
+  .meal {
+    display: flex; gap: 12px; align-items: center; background: #fff; border-radius: 16px; padding: 10px;
+    margin-bottom: 10px; border: 1px solid var(--line);
+  }
+  .meal .thumb { width: 52px; height: 52px; border-radius: 12px; flex-shrink: 0; display: grid; place-items: center; font-size: 24px; }
+  .meal .info { flex: 1; min-width: 0; }
+  .meal .info b { display: block; font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .meal .info small { font-size: 11px; color: var(--ink-3); }
+  .meal .tag { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 999px; }
+  .tag.leftover { background: var(--butter-soft); color: #8A6A12; }
+  .tag.fast { background: var(--herb-soft); color: var(--herb); }
+  .tag.new { background: var(--tomato-soft); color: var(--tomato); }
+  .s-label { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin: 14px 0 8px; }
+  .groc { background: #fff; border-radius: 16px; padding: 12px 14px; border: 1px solid var(--line); }
+  .groc li { display: flex; align-items: center; gap: 10px; font-size: 13px; padding: 6px 0; border-bottom: 1px dashed var(--line); }
+  .groc li:last-child { border-bottom: 0; }
+  .check { width: 16px; height: 16px; border-radius: 5px; border: 1.5px solid var(--line); flex-shrink: 0; }
+  .check.done { background: var(--herb); border-color: var(--herb); position: relative; }
+  .check.done::after { content: ""; position: absolute; left: 4px; top: 1px; width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+  .groc li.done span.t { color: var(--ink-3); text-decoration: line-through; }
+  .groc li .qty { margin-left: auto; color: var(--ink-3); font-size: 12px; }
+
+  .float {
+    position: absolute; background: #fff; border-radius: 14px; padding: 10px 14px; box-shadow: var(--shadow);
+    border: 1px solid var(--line); font-size: 13px; display: flex; gap: 10px; align-items: center; z-index: 3;
+    animation: bob 6s ease-in-out infinite;
+  }
+  .float b { display: block; font-size: 13px; }
+  .float small { color: var(--ink-3); font-size: 11px; }
+  .float .ic { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; font-size: 16px; }
+  .f1 { top: 80px; left: -20px; animation-delay: 0s; }
+  .f2 { bottom: 110px; right: -30px; animation-delay: -3s; }
+  @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+  /* ---------- Logos / stats strip ---------- */
+  .strip { padding: 36px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-top: 48px; }
+  .strip .wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; }
+  .stat b { font-family: var(--serif); font-size: 34px; font-weight: 500; display: block; }
+  .stat span { color: var(--ink-2); font-size: 14px; }
+
+  /* ---------- Features ---------- */
+  section { padding: 96px 0; }
+  .sec-head { max-width: 640px; margin-bottom: 56px; }
+  .sec-head h2 { margin: 14px 0 16px; }
+  .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .card {
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 28px;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+  .card .ic { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; font-size: 22px; margin-bottom: 20px; }
+  .card h3 { font-size: 22px; margin-bottom: 10px; }
+  .card p { color: var(--ink-2); font-size: 15px; }
+  .card.wide { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; }
+  .mini-week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+  .mini-week div { aspect-ratio: 1; border-radius: 8px; background: var(--cream-2); display: grid; place-items: center; font-size: 16px; }
+  .mini-week div.lo { background: var(--butter-soft); outline: 2px dashed var(--butter); outline-offset: -2px; }
+
+  /* ---------- How it works ---------- */
+  .how { background: var(--ink); color: var(--cream); }
+  .how .eyebrow { color: var(--butter); } .how .eyebrow::before { background: var(--butter); }
+  .how .lede { color: rgba(251,247,240,.7); }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; counter-reset: step; }
+  .step { position: relative; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.15); }
+  .step::before {
+    counter-increment: step; content: "0" counter(step);
+    font-family: var(--serif); font-size: 14px; color: var(--butter); letter-spacing: .1em;
+    position: absolute; top: -10px; left: 0; background: var(--ink); padding-right: 12px;
+  }
+  .step h3 { font-size: 24px; margin-bottom: 10px; }
+  .step p { color: rgba(251,247,240,.7); font-size: 15px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .chip { font-size: 12px; padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,.2); color: rgba(251,247,240,.85); }
+  .chip.on { background: var(--herb-2); border-color: var(--herb-2); color: #fff; }
+
+  /* ---------- Testimonials ---------- */
+  .quotes { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 20px; }
+  .quote { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; display: flex; flex-direction: column; }
+  .quote.big { background: var(--herb); color: #fff; border-color: var(--herb); }
+  .quote p { font-family: var(--serif); font-size: 20px; line-height: 1.4; flex: 1; }
+  .quote.big p { font-size: 28px; }
+  .quote .who { display: flex; align-items: center; gap: 12px; margin-top: 24px; font-size: 14px; }
+  .quote .who span.av { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 13px; }
+  .quote .who small { display: block; color: var(--ink-3); }
+  .quote.big .who small { color: rgba(255,255,255,.7); }
+
+  /* ---------- Pricing ---------- */
+  .pricing { background: var(--cream-2); }
+  .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 820px; margin: 0 auto; }
+  .plan { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; position: relative; }
+  .plan.pop { border: 2px solid var(--ink); }
+  .plan .badge { position: absolute; top: -13px; left: 32px; background: var(--tomato); color: #fff; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 999px; }
+  .plan h3 { font-size: 22px; }
+  .plan .price { font-family: var(--serif); font-size: 48px; margin: 12px 0 4px; }
+  .plan .price small { font-family: var(--sans); font-size: 15px; color: var(--ink-3); }
+  .plan .desc { color: var(--ink-2); font-size: 14px; margin-bottom: 24px; }
+  .plan ul { margin: 24px 0; display: grid; gap: 10px; }
+  .plan li { display: flex; gap: 10px; font-size: 15px; align-items: flex-start; }
+  .plan li::before { content: "✓"; color: var(--herb); font-weight: 700; flex-shrink: 0; }
+  .plan li.no::before { content: "–"; color: var(--ink-3); }
+  .plan li.no { color: var(--ink-3); }
+  .plan .btn { width: 100%; }
+
+  /* ---------- FAQ ---------- */
+  .faq-list { max-width: 760px; margin: 0 auto; border-top: 1px solid var(--line); }
+  .faq { border-bottom: 1px solid var(--line); }
+  .faq button {
+    width: 100%; text-align: left; background: none; border: 0; padding: 22px 0;
+    display: flex; justify-content: space-between; align-items: center; gap: 20px;
+    font-size: 18px; font-weight: 500; font-family: var(--serif); color: var(--ink);
+  }
+  .faq button::after { content: "+"; font-size: 24px; color: var(--ink-3); transition: transform .2s; flex-shrink: 0; }
+  .faq.open button::after { transform: rotate(45deg); }
+  .faq .a { max-height: 0; overflow: hidden; transition: max-height .3s ease; color: var(--ink-2); font-size: 15px; }
+  .faq .a p { padding-bottom: 22px; max-width: 64ch; }
+
+  /* ---------- CTA ---------- */
+  .cta { padding: 0 0 96px; }
+  .cta-box {
+    background: linear-gradient(135deg, var(--herb) 0%, #244A2E 100%); color: #fff;
+    border-radius: 28px; padding: 72px 48px; text-align: center; position: relative; overflow: hidden;
+  }
+  .cta-box::before, .cta-box::after {
+    content: ""; position: absolute; border-radius: 50%; border: 1px solid rgba(255,255,255,.12);
+  }
+  .cta-box::before { width: 520px; height: 520px; right: -160px; top: -200px; }
+  .cta-box::after { width: 320px; height: 320px; left: -100px; bottom: -160px; }
+  .cta-box h2 { font-size: clamp(32px, 4.5vw, 52px); max-width: 16ch; margin: 0 auto 16px; position: relative; }
+  .cta-box p { color: rgba(255,255,255,.75); max-width: 44ch; margin: 0 auto 32px; position: relative; }
+  .cta-box .btn-primary { background: #fff; color: var(--ink); position: relative; }
+  .cta-box .btn-primary:hover { background: var(--cream); }
+  .email {
+    display: flex; gap: 8px; max-width: 440px; margin: 0 auto; background: #fff; padding: 6px; border-radius: 999px; position: relative;
+  }
+  .email input { flex: 1; border: 0; background: none; padding: 10px 16px; font: inherit; outline: none; min-width: 0; color: var(--ink); }
+  .email .btn { padding: 10px 20px; }
+  .cta-box small { display: block; margin-top: 14px; color: rgba(255,255,255,.6); font-size: 13px; position: relative; }
+
+  /* ---------- Footer ---------- */
+  footer { border-top: 1px solid var(--line); padding: 48px 0 32px; font-size: 14px; color: var(--ink-2); }
+  .foot { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 40px; }
+  .foot h5 { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink); margin-bottom: 14px; }
+  .foot li { margin-bottom: 8px; }
+  .foot a:hover { color: var(--ink); }
+  .foot p { max-width: 30ch; margin-top: 12px; }
+  .foot-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-3); }
+
+  /* ---------- Reveal ---------- */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .float { animation: none; }
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 980px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 56px; }
+    .hero { text-align: center; padding-top: 48px; }
+    .hero .lede, .hero-actions, .hero-proof { justify-content: center; margin-left: auto; margin-right: auto; }
+    .features { grid-template-columns: 1fr 1fr; }
+    .card.wide { grid-column: span 2; }
+    .steps { grid-template-columns: 1fr; gap: 40px; }
+    .quotes { grid-template-columns: 1fr; }
+    .quote.big p { font-size: 24px; }
+    .foot { grid-template-columns: 1fr 1fr; }
+    .strip .wrap { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 720px) {
+    .nav-links, .nav-cta .btn-ghost { display: none; }
+    .menu-btn { display: block; }
+    .nav-links.open {
+      display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0;
+      background: var(--cream); padding: 20px 4vw 28px; border-bottom: 1px solid var(--line); gap: 18px;
+    }
+    section { padding: 64px 0; }
+    .features { grid-template-columns: 1fr; }
+    .card.wide { grid-column: span 1; grid-template-columns: 1fr; }
+    .plans { grid-template-columns: 1fr; }
+    .f1 { left: -4px; } .f2 { right: -4px; }
+    .phone { width: 290px; }
+    .cta-box { padding: 56px 24px; border-radius: 22px; }
+    .foot { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header id="top">
+  <nav class="wrap">
+    <a href="#top" class="logo" aria-label="Ladle home">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="16" fill="#2F5D3A"/>
+        <path d="M9 14h14l-1.2 6.5a3 3 0 0 1-3 2.5h-5.6a3 3 0 0 1-3-2.5L9 14Z" fill="#FBF7F0"/>
+        <path d="M17 14c0-3 2.5-4 2.5-6.5" stroke="#FBF7F0" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="12.5" cy="9.5" r="1.3" fill="#F4C95D"/>
+      </svg>
+      Ladle
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#" class="btn btn-ghost">Log in</a>
+      <a href="#cta" class="btn btn-primary">Start free</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Now on iOS &amp; Android</span>
+      <h1>Dinner, decided.<br>Before you're <em>hungry</em>.</h1>
+      <p class="lede">Ladle plans your week of meals around what you actually like, builds the grocery list, and turns Tuesday's roast into Thursday's lunch — so nothing goes to waste, including your evening.</p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn btn-primary">Plan my first week — free</a>
+        <a href="#how" class="btn btn-ghost">See how it works ↓</a>
+      </div>
+      <p class="hero-note">No credit card. Your first plan takes about 90 seconds.</p>
+      <div class="hero-proof">
+        <div class="avatars" aria-hidden="true">
+          <span style="background:#D9532B">JM</span>
+          <span style="background:#3F7A4C">AK</span>
+          <span style="background:#8A6A12">RP</span>
+          <span style="background:#5A524A">TL</span>
+        </div>
+        <div>
+          <div class="stars" aria-label="4.8 out of 5 stars">★★★★★</div>
+          <small><strong>4.8</strong> from 12,400+ home cooks</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="mock" aria-hidden="true">
+      <div class="float f1">
+        <div class="ic" style="background:var(--butter-soft)">🥕</div>
+        <div><b>3 items about to expire</b><small>Added a stir-fry for Wednesday</small></div>
+      </div>
+      <div class="float f2">
+        <div class="ic" style="background:var(--herb-soft)">🛒</div>
+        <div><b>Grocery list ready</b><small>23 items · ~$84 · 1 store</small></div>
+      </div>
+
+      <div class="phone">
+        <div class="screen">
+          <div class="notch"></div>
+          <div class="s-head">
+            <h4>This week</h4>
+            <small>Oct 20 – 26</small>
+          </div>
+          <div class="days">
+            <span><small>M</small><b>20</b></span>
+            <span><small>T</small><b>21</b></span>
+            <span><small>W</small><b>22</b></span>
+            <span class="on"><small>T</small><b>23</b></span>
+            <span><small>F</small><b>24</b></span>
+            <span><small>S</small><b>25</b></span>
+            <span><small>S</small><b>26</b></span>
+          </div>
+
+          <div class="meal">
+            <div class="thumb" style="background:var(--tomato-soft)">🍲</div>
+            <div class="info"><b>Harissa chicken traybake</b><small>35 min · serves 4</small></div>
+            <span class="tag new">New</span>
+          </div>
+          <div class="meal">
+            <div class="thumb" style="background:var(--butter-soft)">🥙</div>
+            <div class="info"><b>Chicken &amp; feta wraps</b><small>Uses Tuesday's chicken</small></div>
+            <span class="tag leftover">Leftover</span>
+          </div>
+          <div class="meal">
+            <div class="thumb" style="background:var(--herb-soft)">🍜</div>
+            <div class="info"><b>Ginger-scallion noodles</b><small>15 min · pantry</small></div>
+            <span class="tag fast">15 min</span>
+          </div>
+
+          <div class="s-label">Grocery list · Produce</div>
+          <ul class="groc">
+            <li class="done"><span class="check done"></span><span class="t">Lemons</span><span class="qty">3</span></li>
+            <li class="done"><span class="check done"></span><span class="t">Scallions</span><span class="qty">1 bunch</span></li>
+            <li><span class="check"></span><span class="t">Baby potatoes</span><span class="qty">1 kg</span></li>
+            <li><span class="check"></span><span class="t">Red onions</span><span class="qty">2</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="wrap">
+      <div class="stat reveal"><b>5.2 hrs</b><span>saved per week, on average</span></div>
+      <div class="stat reveal"><b>$47</b><span>less spent on groceries weekly</span></div>
+      <div class="stat reveal"><b>38%</b><span>less food thrown away</span></div>
+      <div class="stat reveal"><b>1.4M</b><span>dinners planned this year</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Why Ladle</span>
+      <h2>Not another recipe app. A plan that actually survives the week.</h2>
+      <p class="lede">Most planners hand you seven ambitious recipes and a 60-item list. Ladle plans like a person who's cooked on a Wednesday night.</p>
+    </div>
+    <div class="features">
+      <div class="card wide reveal">
+        <div>
+          <div class="ic" style="background:var(--butter-soft)">🔁</div>
+          <h3>Leftovers are planned, not discovered</h3>
+          <p>Cook once, eat twice — intentionally. Ladle chains meals together so Sunday's roast becomes Monday's sandwiches and Tuesday's soup, and shops for exactly that.</p>
+        </div>
+        <div class="mini-week" aria-hidden="true">
+          <div>🍗</div><div class="lo">🥪</div><div class="lo">🍲</div><div>🌮</div><div>🍝</div><div class="lo">🍱</div><div>🍕</div>
+        </div>
+      </div>
+      <div class="card reveal">
+        <div class="ic" style="background:var(--herb-soft)">🧠</div>
+        <h3>Learns your taste in a week</h3>
+        <p>Thumbs up, thumbs down, "too much chopping." Within a few days it stops suggesting things you'd never cook.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic" style="background:var(--tomato-soft)">🛒</div>
+        <h3>One list, sorted by aisle</h3>
+        <p>Every ingredient consolidated, de-duplicated, and grouped the way your store is laid out. Export to Instacart, Walmart, or paper.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic" style="background:var(--cream-2)">📅</div>
+        <h3>Knows when you're busy</h3>
+        <p>Connect your calendar. Late meeting Thursday? You'll get a 15-minute meal or a leftover night — not a braise.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic" style="background:var(--butter-soft)">🧊</div>
+        <h3>Pantry-first suggestions</h3>
+        <p>Tell it what's in the fridge. Ladle plans around what you already have before it asks you to buy anything.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>Ninety seconds to a week you don't have to think about.</h2>
+      <p class="lede">You answer a few questions. Ladle does the part that usually eats your Sunday afternoon.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <h3>Tell us about your table</h3>
+        <p>How many you're feeding, what's off the menu, how much time you've honestly got on weeknights.</p>
+        <div class="chips" aria-hidden="true">
+          <span class="chip on">2 adults, 1 kid</span><span class="chip on">No shellfish</span><span class="chip">Vegetarian</span><span class="chip on">≤ 30 min weeknights</span>
+        </div>
+      </div>
+      <div class="step reveal">
+        <h3>Get a plan, nudge it</h3>
+        <p>Seven dinners, linked by leftovers. Swap anything with one tap. Drag a meal to a different day and the list updates itself.</p>
+        <div class="chips" aria-hidden="true">
+          <span class="chip">↺ Swap</span><span class="chip">↔ Move</span><span class="chip">✕ Skip night</span>
+        </div>
+      </div>
+      <div class="step reveal">
+        <h3>Shop once, cook calmly</h3>
+        <p>One trip, one list. Step-by-step cook mode with timers, scaled for your household, and a heads-up when tomorrow needs something defrosted.</p>
+        <div class="chips" aria-hidden="true">
+          <span class="chip">Aisle-sorted list</span><span class="chip">Cook mode</span><span class="chip">Defrost reminders</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section id="love">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">From the kitchen</span>
+      <h2>People who stopped asking "what's for dinner?"</h2>
+    </div>
+    <div class="quotes">
+      <div class="quote big reveal">
+        <p>“I've tried every planner. This is the first one that understands I have forty minutes on a Tuesday and half a roast chicken in the fridge.”</p>
+        <div class="who">
+          <span class="av" style="background:#F4C95D;color:#1F1B16">JM</span>
+          <div>Jess M.<small>Parent of two, Portland</small></div>
+        </div>
+      </div>
+      <div class="quote reveal">
+        <p>“Our grocery bill dropped by about $200 a month. Mostly because we stopped buying cilantro we never used.”</p>
+        <div class="who">
+          <span class="av" style="background:var(--herb-soft);color:var(--herb)">AK</span>
+          <div>Arun K.<small>Cooking for two, Austin</small></div>
+        </div>
+      </div>
+      <div class="quote reveal">
+        <p>“The calendar sync is the killer feature. It just knows Thursdays are chaos and plans accordingly.”</p>
+        <div class="who">
+          <span class="av" style="background:var(--tomato-soft);color:var(--tomato)">RP</span>
+          <div>Rosa P.<small>Nurse, night shifts</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="sec-head reveal" style="text-align:center;margin-left:auto;margin-right:auto">
+      <span class="eyebrow" style="justify-content:center">Pricing</span>
+      <h2>Less than one takeout order a month.</h2>
+      <p class="lede" style="margin:0 auto">Start free. Upgrade when you want the whole household in on it.</p>
+    </div>
+    <div class="plans">
+      <div class="plan reveal">
+        <h3>Starter</h3>
+        <div class="price">$0<small> / forever</small></div>
+        <p class="desc">Everything you need to plan one week at a time.</p>
+        <a href="#cta" class="btn btn-ghost">Get started</a>
+        <ul>
+          <li>Weekly plan with leftover chaining</li>
+          <li>Aisle-sorted grocery list</li>
+          <li>Taste learning &amp; swaps</li>
+          <li>Cook mode with timers</li>
+          <li class="no">Calendar sync</li>
+          <li class="no">Shared household plan</li>
+          <li class="no">Pantry tracking</li>
+        </ul>
+      </div>
+      <div class="plan pop reveal">
+        <span class="badge">Most popular</span>
+        <h3>Household</h3>
+        <div class="price">$6<small> / month, billed yearly</small></div>
+        <p class="desc">For families and roommates who want one shared plan.</p>
+        <a href="#cta" class="btn btn-primary">Try 14 days free</a>
+        <ul>
+          <li>Everything in Starter</li>
+          <li>Calendar sync (Google, Apple, Outlook)</li>
+          <li>Up to 6 household members, one list</li>
+          <li>Pantry &amp; expiry tracking</li>
+          <li>Grocery delivery export</li>
+          <li>Budget targets per week</li>
+          <li>Priority support from real cooks</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal" style="text-align:center;margin-left:auto;margin-right:auto">
+      <span class="eyebrow" style="justify-content:center">Questions</span>
+      <h2>Things people ask before dinner.</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq">
+        <button aria-expanded="false">Can I use my own recipes?</button>
+        <div class="a"><p>Yes. Paste a link, snap a photo of a cookbook page, or type it in. Ladle extracts the ingredients and timing so your family favourites get planned and shopped like everything else.</p></div>
+      </div>
+      <div class="faq">
+        <button aria-expanded="false">What about allergies and diets?</button>
+        <div class="a"><p>Set hard exclusions (nuts, gluten, shellfish, etc.) and they never appear — not even as a swap. Diet preferences like vegetarian, low-carb, or halal shape the plan without being absolute, and you can mix them per household member.</p></div>
+      </div>
+      <div class="faq">
+        <button aria-expanded="false">Does it work if I only cook three nights a week?</button>
+        <div class="a"><p>Absolutely — in fact that's most people. Tell Ladle which nights you cook and it plans only those, with leftovers sized to cover the lunches or lazy nights in between.</p></div>
+      </div>
+      <div class="faq">
+        <button aria-expanded="false">Where does the grocery pricing come from?</button>
+        <div class="a"><p>Estimates are based on average prices for your region and update as you check items off. Connect a supported store and you'll see live prices before you shop.</p></div>
+      </div>
+      <div class="faq">
+        <button aria-expanded="false">Can I cancel anytime?</button>
+        <div class="a"><p>One tap, no email chain. Your plans and saved recipes stay on the free Starter tier.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta" id="cta">
+  <div class="wrap">
+    <div class="cta-box reveal">
+      <h2>Your next week of dinners is one email away.</h2>
+      <p>We'll send you a download link and your first sample plan — built from a few quick questions.</p>
+      <form class="email" onsubmit="event.preventDefault(); this.querySelector('input').value=''; document.getElementById('ctaNote').textContent='Check your inbox — your first plan is on its way. 🍋';">
+        <input type="email" placeholder="you@example.com" required aria-label="Email address">
+        <button class="btn btn-primary" type="submit">Send it</button>
+      </form>
+      <small id="ctaNote">Free forever on Starter. Unsubscribe anytime.</small>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a href="#top" class="logo" style="font-size:20px">
+          <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <circle cx="16" cy="16" r="16" fill="#2F5D3A"/>
+            <path d="M9 14h14l-1.2 6.5a3 3 0 0 1-3 2.5h-5.6a3 3 0 0 1-3-2.5L9 14Z" fill="#FBF7F0"/>
+            <path d="M17 14c0-3 2.5-4 2.5-6.5" stroke="#FBF7F0" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="12.5" cy="9.5" r="1.3" fill="#F4C95D"/>
+          </svg>
+          Ladle
+        </a>
+        <p>Meals planned. Groceries sorted. Evenings back. Made by people who also forget to defrost things.</p>
+      </div>
+      <div>
+        <h5>Product</h5>
+        <ul><li><a href="#features">Features</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#">Recipe library</a></li><li><a href="#">Changelog</a></li></ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul><li><a href="#">About</a></li><li><a href="#">Blog</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li></ul>
+      </div>
+      <div>
+        <h5>Support</h5>
+        <ul><li><a href="#faq">FAQ</a></li><li><a href="#">Help center</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Ladle Labs, Inc.</span>
+      <span>Made with leftovers in Portland, OR</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Sticky header shadow
+  const header = document.querySelector('header');
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 8);
+  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Mobile menu
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false');
+  }));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq').forEach(item => {
+    const btn = item.querySelector('button');
+    const ans = item.querySelector('.a');
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq.open').forEach(o => {
+        o.classList.remove('open');
+        o.querySelector('.a').style.maxHeight = null;
+        o.querySelector('button').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        ans.style.maxHeight = ans.scrollHeight + 'px';
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // Scroll reveal
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

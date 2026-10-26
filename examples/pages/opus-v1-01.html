@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sorted: Dinner, decided.</title>
+<meta name="description" content="Sorted plans the week's family dinners around what's already in your fridge. Free on iPhone and Android.">
+<style>
+  :root{
+    --accent:#E4572E;
+    --ink:#141414;
+    --muted:#6b6b6b;
+    --line:#ececec;
+    --soft:#f7f7f6;
+    --bg:#ffffff;
+    --radius:14px;
+    --max:1120px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+  .accent{color:var(--accent)}
+
+  /* Nav */
+  nav{display:flex;align-items:center;justify-content:space-between;padding:28px 0}
+  .logo{font-weight:800;font-size:22px;letter-spacing:-.03em;display:flex;align-items:center;gap:8px}
+  .logo i{width:10px;height:10px;border-radius:50%;background:var(--accent);display:inline-block}
+  nav ul{display:flex;gap:36px;list-style:none;font-size:15px;color:var(--muted)}
+  nav ul a:hover{color:var(--ink)}
+  .nav-cta{font-size:15px;font-weight:600;border-bottom:2px solid var(--accent);padding-bottom:2px}
+
+  /* Hero */
+  .hero{padding:72px 0 40px;text-align:center}
+  .eyebrow{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  h1{font-size:clamp(44px,7vw,88px);line-height:1;letter-spacing:-.045em;font-weight:800;margin:22px auto 26px;max-width:14ch}
+  .lede{font-size:clamp(18px,2vw,21px);color:var(--muted);max-width:560px;margin:0 auto}
+  .stores{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:40px}
+  .store{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:#fff;border-radius:12px;padding:10px 20px 10px 16px;min-width:180px;transition:transform .15s ease, background .15s ease}
+  .store:hover{transform:translateY(-2px);background:#000}
+  .store:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+  .store svg{width:26px;height:26px;flex:none}
+  .store span{display:flex;flex-direction:column;text-align:left;line-height:1.1}
+  .store small{font-size:11px;opacity:.75}
+  .store b{font-size:18px;font-weight:600;letter-spacing:-.01em}
+  .fine{font-size:13px;color:var(--muted);margin-top:16px}
+
+  /* Before / After */
+  .compare-wrap{margin:72px auto 0;max-width:980px}
+  .compare-labels{display:flex;justify-content:space-between;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;padding:0 4px}
+  .compare-labels .after-l{color:var(--accent)}
+  .compare{position:relative;height:520px;border-radius:22px;overflow:hidden;border:1px solid var(--line);background:#fff;user-select:none;touch-action:pan-y}
+  .panel{position:absolute;inset:0;padding:40px}
+  .before{background:var(--soft);clip-path:inset(0 calc(100% - var(--pos,50%)) 0 0);z-index:2}
+  .after{background:#fff}
+  .divider{position:absolute;top:0;bottom:0;left:var(--pos,50%);width:2px;background:var(--ink);z-index:3;transform:translateX(-1px);pointer-events:none}
+  .handle{position:absolute;top:50%;left:50%;width:52px;height:52px;border-radius:50%;background:var(--ink);transform:translate(-50%,-50%);display:grid;place-items:center;color:#fff;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+  .handle svg{width:24px;height:24px}
+  .compare input[type=range]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;z-index:4;margin:0}
+  .compare:focus-within .handle{outline:3px solid var(--accent);outline-offset:3px}
+
+  /* Before: chaos */
+  .note{position:absolute;background:#fff;border:1px solid #e2e2e2;border-radius:6px;padding:12px 14px;font-size:14px;color:#3a3a3a;box-shadow:0 4px 14px rgba(0,0,0,.06);font-family:"Bradley Hand","Segoe Print","Comic Sans MS",cursive;text-align:left}
+  .note.yellowish{background:#fbfbf3}
+  .text{position:absolute;background:#e9e9eb;border-radius:18px;padding:9px 14px;font-size:14px;color:#222;max-width:220px;text-align:left}
+  .text em{display:block;font-style:normal;font-size:11px;color:var(--muted);margin-bottom:2px}
+  .receipt{position:absolute;background:#fff;width:150px;padding:14px;font:12px/1.6 "Courier New",monospace;color:#444;border:1px dashed #cfcfcf;text-align:left}
+  .receipt b{display:block;border-top:1px dashed #ccc;margin-top:6px;padding-top:6px}
+  .clock{position:absolute;font-size:64px;font-weight:800;letter-spacing:-.04em;color:#d0d0d0}
+  .strike{text-decoration:line-through;color:#999}
+
+  /* After: plan */
+  .plan{position:absolute;inset:40px 40px 40px auto;width:min(560px,calc(100% - 80px));display:grid;grid-template-columns:1.4fr 1fr;gap:20px;text-align:left}
+  .card{border:1px solid var(--line);border-radius:var(--radius);padding:22px;background:#fff}
+  .card h4{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:14px;display:flex;justify-content:space-between}
+  .day{display:flex;gap:14px;align-items:baseline;padding:11px 0;border-top:1px solid var(--line);font-size:15px}
+  .day:first-of-type{border-top:0}
+  .day span{width:34px;font-size:12px;font-weight:700;color:var(--muted);flex:none}
+  .day p{flex:1;font-weight:600;letter-spacing:-.01em}
+  .day small{font-weight:400;color:var(--muted);font-size:12px;white-space:nowrap}
+  .day.today span,.day.today small{color:var(--accent)}
+  .list li{list-style:none;display:flex;align-items:center;gap:10px;font-size:14px;padding:7px 0}
+  .tick{width:16px;height:16px;border-radius:5px;border:1.5px solid #cfcfcf;flex:none}
+  .tick.on{background:var(--accent);border-color:var(--accent);position:relative}
+  .tick.on::after{content:"";position:absolute;left:4px;top:1px;width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .list .done{color:#aaa;text-decoration:line-through}
+  .stat{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+  .stat b{display:block;font-size:26px;color:var(--ink);letter-spacing:-.03em}
+  .after-tag{position:absolute;left:40px;bottom:40px;max-width:250px;font-size:15px;color:var(--muted);text-align:left}
+  .after-tag b{color:var(--ink);display:block;font-size:22px;letter-spacing:-.02em;margin-bottom:6px}
+  .hint{text-align:center;font-size:13px;color:var(--muted);margin-top:14px}
+
+  /* Sections */
+  section{padding:140px 0}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+  h2{font-size:clamp(34px,4.6vw,56px);line-height:1.04;letter-spacing:-.04em;font-weight:800}
+  .big-p{font-size:20px;color:var(--muted);margin-top:22px;max-width:30ch}
+  .pains{list-style:none;border-top:1px solid var(--line)}
+  .pains li{display:flex;gap:24px;padding:24px 0;border-bottom:1px solid var(--line);font-size:18px}
+  .pains li time{font-weight:700;color:var(--accent);width:70px;flex:none;font-variant-numeric:tabular-nums}
+
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:56px;margin-top:72px}
+  .step .n{font-size:14px;font-weight:700;color:var(--accent);letter-spacing:.06em}
+  .step h3{font-size:24px;letter-spacing:-.025em;margin:12px 0 10px;line-height:1.2}
+  .step p{color:var(--muted)}
+  .rule{height:1px;background:var(--line);border:0;max-width:calc(var(--max) - 56px);margin:0 auto}
+
+  .features{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:22px;overflow:hidden;margin-top:72px}
+  .feature{background:#fff;padding:44px}
+  .feature h3{font-size:22px;letter-spacing:-.02em;margin-bottom:10px}
+  .feature p{color:var(--muted);max-width:42ch}
+  .feature .k{font-size:44px;font-weight:800;letter-spacing:-.04em;margin-bottom:18px;line-height:1}
+
+  blockquote{max-width:820px;margin:0 auto;text-align:center}
+  blockquote p{font-size:clamp(26px,3.4vw,40px);line-height:1.2;letter-spacing:-.03em;font-weight:700}
+  blockquote cite{display:block;margin-top:28px;font-style:normal;color:var(--muted);font-size:15px}
+  blockquote cite b{color:var(--ink)}
+
+  .final{text-align:center;padding:150px 0 130px;border-top:1px solid var(--line)}
+  .final h2{max-width:13ch;margin:0 auto}
+  .final .lede{margin-top:22px}
+
+  footer{border-top:1px solid var(--line);padding:36px 0;font-size:14px;color:var(--muted)}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+  footer ul{display:flex;gap:28px;list-style:none;flex-wrap:wrap}
+  footer a:hover{color:var(--ink)}
+
+  @media (max-width:860px){
+    nav ul{display:none}
+    .split,.steps,.features{grid-template-columns:1fr}
+    .split{gap:40px}.steps{gap:44px}
+    section{padding:96px 0}
+    .compare{height:620px}
+    .panel{padding:24px}
+    .plan{inset:24px;width:auto;grid-template-columns:1fr;align-content:start}
+    .plan .list-card{display:none}
+    .after-tag{left:24px;bottom:24px}
+    .feature{padding:32px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <nav aria-label="Main">
+    <a href="#" class="logo"><i></i>Sorted</a>
+    <ul>
+      <li><a href="#problem">The problem</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#features">Features</a></li>
+    </ul>
+    <a href="#download" class="nav-cta">Get the app</a>
+  </nav>
+</header>
+
+<main>
+  <!-- HERO -->
+  <div class="hero wrap">
+    <p class="eyebrow">Meal planning for families</p>
+    <h1>“What’s for dinner?” <span class="accent">Answered.</span></h1>
+    <p class="lede">You get asked every night. Sorted answers for the whole week, using what's already in your fridge. It takes about five minutes on a Sunday.</p>
+
+    <div class="stores" id="download">
+      <a class="store" href="#" aria-label="Download on the App Store">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.6c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.82-.81-3-.79-1.54.02-2.96.9-3.76 2.28-1.6 2.78-.41 6.9 1.15 9.16.76 1.1 1.67 2.34 2.86 2.3 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.72 1.23-.02 2.01-1.12 2.76-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.39-.92-2.41-3.64zM14.1 5.86c.63-.77 1.06-1.83.94-2.89-.91.04-2.02.61-2.67 1.37-.58.67-1.1 1.76-.96 2.8 1.02.08 2.06-.52 2.69-1.28z"/></svg>
+        <span><small>Download on the</small><b>App Store</b></span>
+      </a>
+      <a class="store" href="#" aria-label="Get it on Google Play">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M3.6 1.8c-.3.2-.5.6-.5 1.1v18.2c0 .5.2.9.5 1.1l10.2-10.2L3.6 1.8z" opacity=".9"/><path fill="#fff" d="M17.2 8.6 5 1.6c-.5-.3-1-.3-1.4.2l10.2 10.2 3.4-3.4z" opacity=".7"/><path fill="#fff" d="M3.6 22.2c.4.4.9.5 1.4.2l12.2-7-3.4-3.4L3.6 22.2z" opacity=".55"/><path fill="#fff" d="m21.1 10.8-3.9-2.2-3.4 3.4 3.4 3.4 3.9-2.2c1.1-.6 1.1-1.8 0-2.4z"/></svg>
+        <span><small>GET IT ON</small><b>Google Play</b></span>
+      </a>
+    </div>
+    <p class="fine">Free to download · Plans for up to 8 people · No credit card</p>
+
+    <!-- BEFORE / AFTER -->
+    <div class="compare-wrap">
+      <div class="compare-labels"><span>Before: 5:47pm, Tuesday</span><span class="after-l">After: Sorted</span></div>
+      <div class="compare" id="compare" style="--pos:50%">
+
+        <div class="panel after" aria-label="After: an organised weekly dinner plan">
+          <div class="after-tag"><b>Week sorted.</b>Five dinners. One shop. Nothing wasted. Nobody asking.</div>
+          <div class="plan">
+            <div class="card">
+              <h4><span>This week</span><span class="accent">4 people</span></h4>
+              <div class="day"><span>MON</span><p>Chicken fajitas</p><small>25 min</small></div>
+              <div class="day today"><span>TUE</span><p>Zucchini &amp; pea pasta</p><small>Tonight · 20 min</small></div>
+              <div class="day"><span>WED</span><p>Sheet-pan sausages</p><small>30 min</small></div>
+              <div class="day"><span>THU</span><p>Leftover fajita bowls</p><small>10 min</small></div>
+              <div class="day"><span>FRI</span><p>Homemade pizza night</p><small>35 min</small></div>
+            </div>
+            <div class="card list-card">
+              <h4><span>Shop</span><span>6 items</span></h4>
+              <ul class="list">
+                <li><i class="tick on"></i><span class="done">Tortillas</span></li>
+                <li><i class="tick on"></i><span class="done">Penne</span></li>
+                <li><i class="tick"></i>Frozen peas</li>
+                <li><i class="tick"></i>Sausages ×8</li>
+                <li><i class="tick"></i>Mozzarella</li>
+                <li><i class="tick"></i>Red onions</li>
+              </ul>
+              <div class="stat"><b>$94</b>est. this week</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel before" aria-label="Before: fridge chaos and unanswered dinner questions">
+          <div class="clock" style="left:40px;top:28px">5:47</div>
+          <div class="note yellowish" style="left:44px;top:130px;transform:rotate(-4deg)">½ a zucchini??<br>use it or bin it</div>
+          <div class="note" style="left:210px;top:110px;transform:rotate(3deg)">CHICKEN<br>expires TUES ‼</div>
+          <div class="note yellowish" style="left:70px;top:250px;transform:rotate(2deg)">Emma: no mushrooms<br>Leo: <span class="strike">no green things</span><br>Leo: no ANYTHING</div>
+          <div class="receipt" style="left:290px;top:250px;transform:rotate(-6deg)">MILK ........ 4.29<br>CHIPS ....... 3.99<br>CHICKEN ..... 9.50<br>CHIPS ....... 3.99<br><b>TOTAL ..... 187.40</b></div>
+          <div class="note" style="left:40px;top:410px;transform:rotate(-2deg)">pizza again? (3rd time)</div>
+          <div class="text" style="left:470px;top:60px"><em>Leo</em>whats for dinner</div>
+          <div class="text" style="left:530px;top:118px"><em>Emma</em>mom what's for dinner</div>
+          <div class="text" style="left:490px;top:182px"><em>Dan</em>Dinner plan? I can grab something</div>
+          <div class="text" style="left:560px;top:250px"><em>Leo</em>DINNER??</div>
+          <div class="note" style="left:520px;top:330px;transform:rotate(4deg)">we have 3 jars of<br>mustard and no bread</div>
+          <div class="note yellowish" style="left:690px;top:420px;transform:rotate(-3deg)">order takeout?<br><span class="strike">$62</span></div>
+        </div>
+
+        <div class="divider"><div class="handle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></div></div>
+        <input type="range" min="0" max="100" value="50" id="slider" aria-label="Drag to compare before and after Sorted">
+      </div>
+      <p class="hint">Drag to go from chaos to sorted.</p>
+    </div>
+  </div>
+
+  <!-- PROBLEM -->
+  <section id="problem">
+    <div class="wrap split">
+      <div>
+        <h2>You don't hate cooking. You hate <span class="accent">deciding.</span></h2>
+        <p class="big-p">Four people, four opinions, one tired adult and a fridge full of half-used stuff. Every single night.</p>
+      </div>
+      <ul class="pains">
+        <li><time>5:30</time>You open the fridge. You stare. You close the fridge.</li>
+        <li><time>5:42</time>Someone asks what's for dinner. You don't know.</li>
+        <li><time>5:55</time>You find the chicken. It expired yesterday.</li>
+        <li><time>6:20</time>Takeout. Again. $60, and nobody even liked it.</li>
+        <li><time>Fri</time>You throw out a bag of vegetables you meant to use.</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- HOW -->
+  <section id="how">
+    <div class="wrap">
+      <h2 style="max-width:16ch">Five minutes on Sunday. Done until Friday.</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="n">01</div>
+          <h3>Snap your fridge.</h3>
+          <p>Take one photo or tick off what you've got. Sorted works out what needs using first.</p>
+        </div>
+        <div class="step">
+          <div class="n">02</div>
+          <h3>Get a plan everyone will eat.</h3>
+          <p>Five weeknight dinners that fit your family's allergies, dislikes and how much time you actually have.</p>
+        </div>
+        <div class="step">
+          <div class="n">03</div>
+          <h3>Shop once.</h3>
+          <p>A shopping list sorted by aisle and shared with your partner. It updates live, so you never both buy milk.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" style="padding-top:0">
+    <div class="wrap">
+      <h2 style="max-width:18ch">Built for weeknights, not food blogs.</h2>
+      <div class="features">
+        <div class="feature">
+          <div class="k accent">30 min</div>
+          <h3>Recipes for real weeknights</h3>
+          <p>Every recipe gets dinner on the table in 30 minutes or less. Nothing that needs a stand mixer or a free afternoon.</p>
+        </div>
+        <div class="feature">
+          <div class="k">1 profile</div>
+          <h3>Set up per person</h3>
+          <p>Leo won't eat onions. Emma's vegetarian on weekdays. Set it once and every plan follows it.</p>
+        </div>
+        <div class="feature">
+          <div class="k">−40%</div>
+          <h3>Less food in the bin</h3>
+          <p>Plans start with whatever expires soonest. Families using Sorted throw away about 40% less food.</p>
+        </div>
+        <div class="feature">
+          <div class="k">0</div>
+          <h3>Dinner questions</h3>
+          <p>The week's plan goes to everyone's phone. The kids can see what's for dinner without asking you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section style="padding-top:20px">
+    <div class="wrap">
+      <blockquote>
+        <p>“My kids check the app instead of asking me. That alone was worth it. We also stopped getting takeout three nights a week.”</p>
+        <cite><b>Priya M.</b>, mom of three, Columbus OH</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final">
+    <div class="wrap">
+      <h2>Stop deciding dinner at <span class="accent">5:47pm.</span></h2>
+      <p class="lede">Download Sorted free and plan this week before the kids get home.</p>
+      <div class="stores">
+        <a class="store" href="#" aria-label="Download on the App Store">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.6c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.780-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.82-.81-3-.79-1.54.02-2.96.9-3.76 2.28-1.6 2.78-.41 6.9 1.15 9.16.76 1.1 1.67 2.34 2.86 2.3 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.72 1.23-.02 2.01-1.12 2.76-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.39-.92-2.41-3.64zM14.1 5.86c.63-.77 1.06-1.83.94-2.89-.91.04-2.02.61-2.67 1.37-.58.67-1.1 1.76-.96 2.8 1.02.08 2.06-.52 2.69-1.28z"/></svg>
+          <span><small>Download on the</small><b>App Store</b></span>
+        </a>
+        <a class="store" href="#" aria-label="Get it on Google Play">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M3.6 1.8c-.3.2-.5.6-.5 1.1v18.2c0 .5.2.9.5 1.1l10.2-10.2L3.6 1.8z" opacity=".9"/><path fill="#fff" d="M17.2 8.6 5 1.6c-.5-.3-1-.3-1.4.2l10.2 10.2 3.4-3.4z" opacity=".7"/><path fill="#fff" d="M3.6 22.2c.4.4.9.5 1.4.2l12.2-7-3.4-3.4L3.6 22.2z" opacity=".55"/><path fill="#fff" d="m21.1 10.8-3.9-2.2-3.4 3.4 3.4 3.4 3.9-2.2c1.1-.6 1.1-1.8 0-2.4z"/></svg>
+          <span><small>GET IT ON</small><b>Google Play</b></span>
+        </a>
+      </div>
+      <p class="fine">iPhone, iPad &amp; Android · Free, with optional Family Plus at $4.99/mo</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Sorted Labs</span>
+    <ul>
+      <li><a href="#">Privacy</a></li>
+      <li><a href="#">Terms</a></li>
+      <li><a href="#">Help</a></li>
+      <li><a href="mailto:hello@sorted.app">hello@sorted.app</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var c = document.getElementById('compare'), s = document.getElementById('slider');
+    function set(v){ c.style.setProperty('--pos', v + '%'); }
+    s.addEventListener('input', function(){ set(s.value); });
+
+    // One gentle wiggle on load so visitors notice the slider is draggable
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      var t0 = null, touched = false;
+      s.addEventListener('pointerdown', function(){ touched = true; });
+      s.addEventListener('keydown', function(){ touched = true; });
+      function anim(t){
+        if (touched) return;
+        if (!t0) t0 = t;
+        var p = (t - t0) / 1800;
+        if (p > 1) { set(50); s.value = 50; return; }
+        var v = 50 - Math.sin(p * Math.PI * 2) * 22 * (1 - p);
+        set(v); s.value = v;
+        requestAnimationFrame(anim);
+      }
+      setTimeout(function(){ requestAnimationFrame(anim); }, 900);
+    }
+  })();
+</script>
+</body>
+</html>

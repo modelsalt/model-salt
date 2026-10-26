@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 520" width="720" height="520">
+  <title>Pelican riding a bicycle</title>
+
+  <!-- Rear wheel -->
+  <g fill="none" stroke-linecap="round">
+    <circle cx="235" cy="405" r="78" stroke="#3a3535" stroke-width="15"/>
+    <path d="M235 405 L301 405 M235 405 L282 452 M235 405 L235 471 M235 405 L188 452 M235 405 L169 405 M235 405 L188 358 M235 405 L235 339 M235 405 L282 358" stroke="#9aa4ab" stroke-width="3"/>
+    <circle cx="235" cy="405" r="68" stroke="#c3ccd2" stroke-width="5"/>
+    <circle cx="235" cy="405" r="8" fill="#6d767d" stroke="#3c3434" stroke-width="3"/>
+  </g>
+
+  <!-- Front wheel -->
+  <g fill="none" stroke-linecap="round">
+    <circle cx="485" cy="405" r="78" stroke="#3a3535" stroke-width="15"/>
+    <path d="M485 405 L551 405 M485 405 L532 452 M485 405 L485 471 M485 405 L438 452 M485 405 L419 405 M485 405 L438 358 M485 405 L485 339 M485 405 L532 358" stroke="#9aa4ab" stroke-width="3"/>
+    <circle cx="485" cy="405" r="68" stroke="#c3ccd2" stroke-width="5"/>
+    <circle cx="485" cy="405" r="8" fill="#6d767d" stroke="#3c3434" stroke-width="3"/>
+  </g>
+
+  <!-- Chain and rear cog -->
+  <path d="M333 388 L237 396 M333 420 L237 414" fill="none" stroke="#7c858c" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="235" cy="405" r="10" fill="none" stroke="#6d767d" stroke-width="4"/>
+
+  <!-- Frame (dark outline layer, then color layer) -->
+  <path id="frame" d="M235 405 L335 404 M235 405 L302 290 M335 404 L302 290 M302 290 L446 278 M335 404 L460 320 M446 278 L460 320 M458 316 L487 405 M446 278 L439 247 M439 247 C431 240 420 241 411 250" fill="none" stroke="#1c6e69" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <use href="#frame" stroke="#45c2bb" stroke-width="8"/>
+
+  <!-- Seat post and saddle -->
+  <path d="M302 290 L300 272" fill="none" stroke="#5d666c" stroke-width="8" stroke-linecap="round"/>
+  <path d="M302 290 L300 272" fill="none" stroke="#aeb8bf" stroke-width="4" stroke-linecap="round"/>
+  <path d="M268 272 C270 261 286 254 302 254 C320 254 332 261 332 268 C332 274 325 277 314 277 L286 277 C275 277 267 276 268 272 Z" fill="#7a4f3a" stroke="#3c3434" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- Chainring, cranks, pedals -->
+  <circle cx="335" cy="404" r="17" fill="#dfe4e8" stroke="#3c3434" stroke-width="4"/>
+  <path d="M335 404 L368 424 M335 404 L300 382" fill="none" stroke="#3c3434" stroke-width="7" stroke-linecap="round"/>
+  <rect x="354" y="420" width="28" height="9" rx="4.5" fill="#3c3434"/>
+  <rect x="286" y="377" width="28" height="9" rx="4.5" fill="#3c3434"/>
+
+  <!-- Handlebar grip -->
+  <circle cx="411" cy="250" r="7.5" fill="#3c3434"/>
+
+  <!-- Far leg and foot -->
+  <path d="M297 258 C301 300 303 336 300 366" fill="none" stroke="#3c3434" stroke-width="12" stroke-linecap="round"/>
+  <path d="M297 258 C301 300 303 336 300 366" fill="none" stroke="#d97a2b" stroke-width="7" stroke-linecap="round"/>
+  <ellipse cx="298" cy="370" rx="15" ry="7.5" transform="rotate(-6 298 370)" fill="#d97a2b" stroke="#3c3434" stroke-width="4"/>
+  <path d="M311 366 L302 369 M311 373 L302 372" fill="none" stroke="#3c3434" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Near leg and foot -->
+  <path d="M309 260 C320 296 332 328 344 356 C354 380 363 400 369 411" fill="none" stroke="#3c3434" stroke-width="12" stroke-linecap="round"/>
+  <path d="M309 260 C320 296 332 328 344 356 C354 380 363 400 369 411" fill="none" stroke="#f2913d" stroke-width="7" stroke-linecap="round"/>
+  <ellipse cx="370" cy="412" rx="17" ry="8" transform="rotate(-8 370 412)" fill="#f2913d" stroke="#3c3434" stroke-width="4"/>
+  <path d="M386 407 L376 410 M386 414 L376 413" fill="none" stroke="#3c3434" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Tail feather tuft -->
+  <path d="M258 224 Q232 208 206 204 Q218 220 226 231 Q210 231 197 236 Q213 246 228 251 Q215 259 207 267 Q234 265 256 254 Z" fill="#ffffff" stroke="#3c3434" stroke-width="4.5" stroke-linejoin="round"/>
+
+  <!-- Body -->
+  <path d="M246 252 C230 224 236 184 266 162 C290 145 324 148 342 172 C358 194 360 228 346 250 C334 270 302 278 276 270 C260 265 251 260 246 252 Z" fill="#ffffff" stroke="#3c3434" stroke-width="4.5" stroke-linejoin="round"/>
+  <path d="M266 246 C274 266 300 275 326 264 C318 273 296 277 280 270 C270 265 265 256 266 246 Z" fill="#e6ecf1"/>
+  <path d="M338 196 q9 4 11 13 M330 211 q9 4 10 12" fill="none" stroke="#b0bdc7" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- Neck -->
+  <path d="M308 180 C302 150 308 120 330 102 C336 97 346 98 350 105 C344 128 343 152 350 178 C338 188 318 189 308 180 Z" fill="#ffffff" stroke="#3c3434" stroke-width="4.5" stroke-linejoin="round"/>
+
+  <!-- Crest tuft and head -->
+  <path d="M340 76 Q330 60 335 46 Q343 57 347 67 Q349 51 359 43 Q363 57 359 69 Q369 59 379 57 Q373 71 361 77 Z" fill="#ffffff" stroke="#3c3434" stroke-width="4" stroke-linejoin="round"/>
+  <circle cx="352" cy="96" r="24" fill="#ffffff" stroke="#3c3434" stroke-width="4.5"/>
+
+  <!-- Pouch -->
+  <path d="M363 100 C368 124 388 141 412 141 C435 141 450 128 454 112 C430 120 392 114 363 100 Z" fill="#f9c186" stroke="#3c3434" stroke-width="4.5" stroke-linejoin="round"/>
+  <path d="M374 118 C390 129 410 133 428 128" fill="none" stroke="#e09a5a" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Upper beak -->
+  <path d="M360 84 C392 82 428 92 456 104 C462 107 461 113 454 113 C424 108 392 103 362 100 Z" fill="#f6a13b" stroke="#3c3434" stroke-width="4.5" stroke-linejoin="round"/>
+  <path d="M392 92 q14 2 26 6" fill="none" stroke="#ffd9a0" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+  <path d="M372 90 l7 1.5" fill="none" stroke="#b06f1e" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M447 100 C457 101 463 106 461 112 C459 117 450 117 445 112 Z" fill="#e07f2e" stroke="#3c3434" stroke-width="3.5" stroke-linejoin="round"/>
+
+  <!-- Eye and blush -->
+  <circle cx="354" cy="90" r="7" fill="#ffffff" stroke="#3c3434" stroke-width="3.5"/>
+  <circle cx="356" cy="91" r="3.2" fill="#2c2626"/>
+  <circle cx="357.3" cy="89.7" r="1.1" fill="#ffffff"/>
+  <ellipse cx="337" cy="108" rx="7" ry="4.5" fill="#f2a49b" opacity="0.55"/>
+
+  <!-- Wing resting on the handlebars -->
+  <path d="M302 174 C332 182 362 200 386 222 C398 233 407 242 415 250 C411 256 405 257 399 253 C395 257 388 256 383 251 C360 237 334 219 318 205 C306 196 300 185 302 174 Z" fill="#ffffff" stroke="#3c3434" stroke-width="4.5" stroke-linejoin="round"/>
+  <path d="M320 190 C342 204 364 220 384 236 M312 202 C330 216 350 230 368 242" fill="none" stroke="#b0bdc7" stroke-width="3.5" stroke-linecap="round"/>
+</svg>

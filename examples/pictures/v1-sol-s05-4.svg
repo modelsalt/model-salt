@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="560" viewBox="0 0 720 560" fill="none">
+  <title>Pelican riding a bicycle</title>
+  <desc>A white pelican in side profile reaches both wings toward the handlebars of a teal bicycle.</desc>
+
+  <rect width="720" height="560" rx="32" fill="#F6F1E7"/>
+  <ellipse cx="355" cy="482" rx="257" ry="15" fill="#DFDFD1"/>
+
+  <!-- Wheels -->
+  <g stroke="#BCC9C5" stroke-width="2">
+    <path d="M190 390V475M190 390V305M105 390H275M130 330L250 450M130 450L250 330"/>
+    <path d="M490 390V475M490 390V305M405 390H575M430 330L550 450M430 450L550 330"/>
+  </g>
+  <g stroke="#283A3E" stroke-width="11">
+    <circle cx="190" cy="390" r="85"/>
+    <circle cx="490" cy="390" r="85"/>
+  </g>
+  <g stroke="#FDFCF6" stroke-width="3">
+    <circle cx="190" cy="390" r="76"/>
+    <circle cx="490" cy="390" r="76"/>
+  </g>
+
+  <!-- Far leg and pedal -->
+  <path d="M303 291Q342 313 319 345L293 370" stroke="#CA913F" stroke-width="13" stroke-linecap="round"/>
+  <path d="M293 369L268 375Q260 379 276 382L304 380Z" fill="#DBA44A" stroke="#9B733A" stroke-width="3"/>
+  <path d="M317 393L286 377" stroke="#52686A" stroke-width="6"/>
+  <path d="M272 379H300" stroke="#283A3E" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- Bicycle frame -->
+  <g stroke="#208E89" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M190 390L268 294L317 393L190 390"/>
+    <path d="M268 294H448L317 393"/>
+    <path d="M448 294L490 390"/>
+    <path d="M268 294L255 270"/>
+    <path d="M448 294L435 254"/>
+  </g>
+  <path d="M433 254L428 239Q426 229 437 229H464" stroke="#52686A" stroke-width="8" stroke-linecap="round"/>
+  <path d="M448 229H470" stroke="#283A3E" stroke-width="10" stroke-linecap="round"/>
+  <path d="M235 268Q254 260 279 267" stroke="#283A3E" stroke-width="13" stroke-linecap="round"/>
+  <circle cx="317" cy="393" r="18" fill="#E0ECE5" stroke="#52686A" stroke-width="5"/>
+  <path d="M317 393L350 419" stroke="#52686A" stroke-width="6" stroke-linecap="round"/>
+  <g fill="#52686A">
+    <circle cx="190" cy="390" r="7"/>
+    <circle cx="490" cy="390" r="7"/>
+  </g>
+
+  <!-- Far wing reaching forward -->
+  <path d="M290 236Q340 200 392 216L449 231Q455 235 450 241Q445 246 433 242L377 232L311 270Z"
+        fill="#D6DDD8" stroke="#526467" stroke-width="3.5" stroke-linejoin="round"/>
+
+  <!-- Tail, body, and curved neck -->
+  <path d="M226 266Q192 268 168 245Q196 242 217 229
+           Q245 201 292 213
+           Q333 226 344 199
+           Q351 182 341 157
+           Q327 124 350 101
+           Q372 80 399 95
+           Q418 106 412 130
+           Q408 146 389 152
+           Q378 164 387 190
+           Q406 243 364 280
+           Q335 313 281 305
+           Q240 300 226 266Z"
+        fill="#FFFEF6" stroke="#526467" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- Long bill and throat pouch -->
+  <path d="M403 126L591 145Q572 158 536 168Q479 186 424 155Z"
+        fill="#E8B153" stroke="#8E733F" stroke-width="3.5" stroke-linejoin="round"/>
+  <path d="M403 119Q468 120 591 145L408 143Z"
+        fill="#F1C46B" stroke="#8E733F" stroke-width="3.5" stroke-linejoin="round"/>
+  <path d="M429 148Q474 166 535 153" stroke="#D59A40" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Face -->
+  <circle cx="390" cy="116" r="10" fill="#F1DCA4"/>
+  <circle cx="392" cy="115" r="4.5" fill="#263A3D"/>
+  <circle cx="393.5" cy="113.5" r="1.5" fill="white"/>
+  <path d="M351 103Q359 96 368 98" stroke="#D5DCD4" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Near wing reaching the handlebar -->
+  <path d="M259 237Q281 223 306 237
+           Q334 257 366 253
+           L435 235Q450 231 453 238
+           Q456 246 443 251
+           L375 274Q322 293 282 271
+           Q265 261 259 237Z"
+        fill="#EDF0E7" stroke="#526467" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M279 244Q311 272 353 265M288 256Q314 276 339 273"
+        stroke="#CBD4CD" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Near leg and webbed foot on the pedal -->
+  <path d="M292 300Q276 332 309 355L344 411"
+        stroke="#D7A04A" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M342 405Q350 407 356 414L377 422Q384 428 374 431L339 428Q333 424 337 416Z"
+        fill="#E7B052" stroke="#99743E" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M337 433H371" stroke="#283A3E" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- Gentle motion marks -->
+  <g stroke="#AEBDB5" stroke-width="4" stroke-linecap="round">
+    <path d="M104 278H140"/>
+    <path d="M83 298H128"/>
+    <path d="M104 318H120"/>
+  </g>
+</svg>

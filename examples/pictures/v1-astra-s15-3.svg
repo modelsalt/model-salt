@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican pedaling a mountain bike</title>
+  <desc id="desc">A cheerful white pelican with a yellow-orange bill rides a blue suspension mountain bicycle toward the lower left, seen from a front three-quarter angle.</desc>
+
+  <rect width="800" height="600" rx="32" fill="#eef7f7"/>
+  <ellipse cx="408" cy="515" rx="243" ry="26" fill="#d6e7e8"/>
+
+  <!-- Wheels, foreshortened in three-quarter perspective -->
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <g transform="translate(520 365) rotate(-14)">
+      <ellipse rx="65" ry="105" fill="#f9fcfc" stroke="#253947" stroke-width="19"/>
+      <ellipse rx="54" ry="93" fill="none" stroke="#a5bdc8" stroke-width="4"/>
+      <path d="M0-91V91M-53 0H53M-38-65 38 65M38-65-38 65"
+            fill="none" stroke="#bdcdd4" stroke-width="2.5"/>
+      <ellipse rx="68" ry="108" fill="none" stroke="#526472" stroke-width="4" stroke-dasharray="3 13"/>
+      <ellipse rx="10" ry="13" fill="#6b8593" stroke="#253947" stroke-width="3"/>
+    </g>
+
+    <!-- Far pedal and leg -->
+    <path d="M461 288 484 327 453 368" fill="none" stroke="#d58b30" stroke-width="13"/>
+    <path d="m448 361 29 8-13 12-35-5Z" fill="#f4ad3d" stroke="#253947" stroke-width="4"/>
+    <path d="m430 394 24-23m-13 4 32 3" fill="none" stroke="#253947" stroke-width="7"/>
+
+    <!-- Mountain bicycle frame -->
+    <path d="m520 365-90 29-1-113 91 84-159-67 69 96-87-44"
+          fill="none" stroke="#253947" stroke-width="16"/>
+    <path d="m520 365-90 29-1-113m91 84-159-67 69 96-87-44"
+          fill="none" stroke="#248cca" stroke-width="10"/>
+    <path d="m429 281-5-29" stroke="#667d8a" stroke-width="9"/>
+    <path d="m400 250 55-4q13 1 12 10l-56 7q-16-1-11-13" fill="#253947"/>
+
+    <!-- Rear shock -->
+    <path d="m434 315 37 30" stroke="#253947" stroke-width="12"/>
+    <path d="m438 314-2 12 13-4-2 13 13-4-2 13 13-4" fill="none" stroke="#e1eaf0" stroke-width="4"/>
+
+    <!-- Front wheel -->
+    <g transform="translate(284 420) rotate(-14)">
+      <ellipse rx="73" ry="117" fill="#f9fcfc" stroke="#253947" stroke-width="21"/>
+      <ellipse rx="61" ry="104" fill="none" stroke="#a5bdc8" stroke-width="4"/>
+      <path d="M0-102V102M-60 0H60M-43-73 43 73M43-73-43 73M-57-34 57 34M-29-91 29 91"
+            fill="none" stroke="#b5c8d1" stroke-width="2.5"/>
+      <ellipse rx="77" ry="120" fill="none" stroke="#526472" stroke-width="4" stroke-dasharray="3 14"/>
+      <ellipse rx="22" ry="33" fill="#e1eaed" stroke="#91a8b4" stroke-width="3"/>
+      <ellipse rx="9" ry="13" fill="#253947"/>
+    </g>
+
+    <!-- Suspension fork and straight handlebar -->
+    <path d="m349 294-62 126m84-118-64 126" fill="none" stroke="#253947" stroke-width="13"/>
+    <path d="m345 305-22 45m43-38-22 45" stroke="#cadbe4" stroke-width="8"/>
+    <path d="m323 350-35 70m56-63-37 71" stroke="#258fcd" stroke-width="10"/>
+    <path d="m353 303 12-39-9-17" fill="none" stroke="#253947" stroke-width="10"/>
+    <path d="m306 233 99 28" stroke="#6e8997" stroke-width="9"/>
+    <path d="m302 232 23 7m63 18 23 7" stroke="#253947" stroke-width="12"/>
+    <path d="M310 243q-32 43 17 95" fill="none" stroke="#536b78" stroke-width="3"/>
+
+    <!-- Tail and body -->
+    <path d="m482 250 53-24-17 37 22-1-46 37" fill="#dce7ed" stroke="#253947" stroke-width="5"/>
+    <path d="M359 201c27-30 87-27 116 7 25 28 35 73 4 94-26 19-85 8-114-15-26-22-31-60-6-86Z"
+          fill="#fffefa" stroke="#253947" stroke-width="5"/>
+
+    <!-- Near leg, turning the crank -->
+    <path d="m425 294-32 49 28 49" fill="none" stroke="#253947" stroke-width="17"/>
+    <path d="m425 294-32 49 28 49" fill="none" stroke="#efad42" stroke-width="10"/>
+    <circle cx="430" cy="394" r="15" fill="#d7e3e9" stroke="#253947" stroke-width="4"/>
+    <path d="m430 394-34 31m-16 0 37 1" stroke="#253947" stroke-width="7"/>
+    <path d="m416 389-20 21-21 2-8 10 47 1 17-15Z"
+          fill="#ffbf4e" stroke="#253947" stroke-width="4"/>
+
+    <!-- Curved neck -->
+    <path d="M388 254c-37-8-62-33-62-62 0-19 13-35 9-51-4-13-25-15-34-2-8 12-4 28 5 38l-29 17c-25-29-21-66 3-88 26-23 69-17 83 11 14 28-3 53 4 72 5 15 20 21 37 25"
+          fill="#fffefa" stroke="#253947" stroke-width="5"/>
+    <path d="M342 165c-10 32-1 56 30 70" fill="none" stroke="#dce7ed" stroke-width="10"/>
+
+    <!-- Wing reaching the handlebar -->
+    <path d="M443 226c-18-10-41-5-49 12l-13 12-44-13c-11-3-18 4-13 12 15 15 53 29 69 24 20-6 35-18 50-25"
+          fill="#edf3f5" stroke="#253947" stroke-width="5"/>
+    <path d="m340 247 34 13m-24-20 30 11" fill="none" stroke="#b8cbd4" stroke-width="3"/>
+
+    <!-- Head and expressive eyes -->
+    <path d="M276 127q-8-15-1-27l12 8 3-17 13 13" fill="#fffefa" stroke="#253947" stroke-width="4"/>
+    <ellipse cx="293" cy="141" rx="38" ry="36" fill="#fffefa" stroke="#253947" stroke-width="5"/>
+    <ellipse cx="273" cy="136" rx="7" ry="11" fill="#253947"/>
+    <ellipse cx="305" cy="145" rx="8" ry="12" fill="#253947"/>
+    <circle cx="275" cy="132" r="2.5" fill="white"/>
+    <circle cx="307" cy="141" r="3" fill="white"/>
+    <path d="m266 117 12-3m20 8 13 3" fill="none" stroke="#253947" stroke-width="3"/>
+
+    <!-- Long bill and generous pelican throat pouch -->
+    <path d="M270 158 159 225q53 41 99 12c21-15 35-42 41-63Z"
+          fill="#f6b443" stroke="#253947" stroke-width="5"/>
+    <path d="M267 154c-38 12-87 39-115 67-5 5-2 10 6 9l143-59q-7-16-34-17Z"
+          fill="#ffd268" stroke="#253947" stroke-width="5"/>
+    <path d="M175 229q49 20 76-5" fill="none" stroke="#e69531" stroke-width="4"/>
+    <path d="m291 178-12 7" stroke="#253947" stroke-width="3"/>
+  </g>
+</svg>

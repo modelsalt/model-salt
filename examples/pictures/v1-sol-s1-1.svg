@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="800" viewBox="0 0 450 800" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A golden pelican pedals a coral bicycle, viewed from a front three-quarter angle, in a warm portrait illustration.</desc>
+
+  <rect width="450" height="800" rx="28" fill="#FFF0CF"/>
+  <circle cx="232" cy="277" r="157" fill="#FFD379"/>
+  <ellipse cx="231" cy="729" rx="170" ry="21" fill="#F4C484"/>
+
+  <!-- Wheels: filled rings and spokes -->
+  <g fill-rule="evenodd">
+    <path fill="#823F3C" d="M143 491a59 107 0 1 1 0 214 59 107 0 1 1 0-214Zm0 12a48 95 0 1 0 0 190 48 95 0 1 0 0-190Z"/>
+    <path fill="#F3AA70" d="M143 507a45 91 0 1 1 0 182 45 91 0 1 1 0-182Zm0 5a40 86 0 1 0 0 172 40 86 0 1 0 0-172Z"/>
+  </g>
+  <g fill="#EAB37D">
+    <path d="M141 511h4v174h-4z"/>
+    <path d="m105 543 79 107-3 3-79-107z"/>
+    <path d="m103 649 78-107 3 3-78 107z"/>
+    <path d="M99 596h88v4H99z"/>
+  </g>
+
+  <!-- Rear triangle and saddle -->
+  <g fill="#ED715A">
+    <path d="m138 598 48-128 10 4-48 128z"/>
+    <path d="m141 592 82 31-4 11-82-31z"/>
+    <path d="m185 471 13-3 29 161-12 2z"/>
+    <path d="m189 477 87 58-7 12-87-59z"/>
+    <path d="m218 621 52-87 12 7-52 87z"/>
+  </g>
+  <path fill="#A95443" d="m183 440 11-2 8 43-12 2z"/>
+  <path fill="#823F3C" d="M160 437q25-12 56 0l6 10q-24 12-61 1-8-4-1-11Z"/>
+
+  <!-- Far leg -->
+  <path fill="#E89A39" d="M186 428q-12 46 6 76l38 43-9 42 12 4 17-49-38-54 1-51Z"/>
+  <path fill="#C56D36" d="m215 583 31 5 13 12-45-2-9-8Z"/>
+
+  <!-- Tail and body -->
+  <path fill="#D66B36" d="m138 397-49-24 27 46-36-4 48 29 35-10Z"/>
+  <path fill="#FFBD4A" d="M157 326q-46 12-48 65-1 62 63 77 58 15 80-30 21-40-12-78-31-35-83-34Z"/>
+  <path fill="#F39A35" d="M144 352q-27 33-10 66 13 28 52 29 36 0 45-31-29 17-51-4-21-20-36-60Z"/>
+  <path fill="#FFD373" d="M146 351q28-4 49 24l25 38q-36-3-57-23-18-18-17-39Z"/>
+
+  <!-- Long curved neck -->
+  <path fill="#FFBD4A" d="M199 379q53-20 47-62-3-20-20-42-22-29-6-51 15-21 38-9 22 12 9 36-7 12 5 35 34 65-4 107-21 24-55 24Z"/>
+  <path fill="#FFD373" d="M224 234q-13 17 6 43 19 25 20 47 1 35-27 55 42-12 42-49-1-29-22-58-15-22-4-38Z"/>
+
+  <!-- Head, bill, and throat pouch -->
+  <path fill="#FFD373" d="M218 226q-6-25 14-35 24-12 41 7 12 14 5 33l-19 18-29-5Z"/>
+  <path fill="#F29444" d="M262 225 366 267q-26 22-55 17-29-6-49-39Z"/>
+  <path fill="#EB673C" d="m263 215 113 48q9 5 0 10l-113-37Z"/>
+  <path fill="#FFB04D" d="m269 219 101 44-103-32Z"/>
+  <ellipse cx="256" cy="211" rx="6.5" ry="7.5" fill="#713E37"/>
+  <circle cx="258" cy="208" r="2" fill="#FFF0CF"/>
+  <path fill="#E4953C" d="m222 200-12-4 8 14Z"/>
+
+  <!-- Near leg and webbed foot on pedal -->
+  <path fill="#F5A43E" d="M182 438q-4 35 30 61l39 29-19 88 15 3 28-98-43-42-21-38Z"/>
+  <path fill="#D57837" d="m230 610 19 2 18 18-18-2-5 7-26-8Z"/>
+  <ellipse cx="222" cy="630" rx="15" ry="19" fill="#B95A43"/>
+  <ellipse cx="222" cy="630" rx="7" ry="10" fill="#F7B06B"/>
+  <path fill="#823F3C" d="m220 625 32 23-5 7-31-23Z"/>
+  <path fill="#823F3C" d="m238 646 36 4-1 10-37-4Z"/>
+
+  <!-- Steering assembly -->
+  <path fill="#D65E4E" d="m267 515 20-71 12 3-20 73Z"/>
+  <path fill="#ED715A" d="m268 523 28 124 13-3-28-125Z"/>
+  <path fill="#A65343" d="m289 446 8-29 9 3-7 29Z"/>
+  <path fill="#A65343" d="m256 405 70 25-4 11-70-25Z"/>
+  <path fill="#823F3C" d="M245 399q-4-4-7 2l-3 10q-2 5 4 7l20 7 5-17Z"/>
+  <path fill="#823F3C" d="m316 424 21 7q7 3 5 10l-3 8-28-10Z"/>
+
+  <!-- Wing reaching the handlebar -->
+  <path fill="#FFBD4A" d="M209 351q24 4 38 26l20 27-13 15q-27-13-47-39-12-17 2-29Z"/>
+  <path fill="#FFD373" d="M215 354q13 7 25 25l18 27-9 1-26-26q-13-14-8-27Z"/>
+  <path fill="#E79A36" d="m254 402 15 5 2 12-11 6-12-11Z"/>
+
+  <!-- Foreground wheel -->
+  <g fill-rule="evenodd">
+    <path fill="#823F3C" d="M305 550a61 99 0 1 1 0 198 61 99 0 1 1 0-198Zm0 12a49 87 0 1 0 0 174 49 87 0 1 0 0-174Z"/>
+    <path fill="#F3AA70" d="M305 567a45 82 0 1 1 0 164 45 82 0 1 1 0-164Zm0 5a40 77 0 1 0 0 154 40 77 0 1 0 0-154Z"/>
+  </g>
+  <g fill="#EAB37D">
+    <path d="M303 573h4v152h-4z"/>
+    <path d="m271 594 70 107-4 3-70-107z"/>
+    <path d="m268 700 68-106 4 3-68 106z"/>
+    <path d="M264 647h82v4h-82z"/>
+  </g>
+  <path fill="#F58062" d="m281 535 30 111-12 4-30-111Z"/>
+  <ellipse cx="305" cy="649" rx="10" ry="14" fill="#B95A43"/>
+  <ellipse cx="307" cy="647" rx="4" ry="6" fill="#FFD373"/>
+</svg>

@@ -1,0 +1,185 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#FDF9F1" />
+  <circle cx="420" cy="290" r="240" fill="#F4EAD5" />
+  
+  <!-- Ground Shadows -->
+  <line x1="80" y1="536" x2="720" y2="536" stroke="#E5D7BD" stroke-width="6" stroke-linecap="round" />
+  <line x1="120" y1="552" x2="450" y2="552" stroke="#E5D7BD" stroke-width="4" stroke-linecap="round" />
+  <line x1="520" y1="552" x2="640" y2="552" stroke="#E5D7BD" stroke-width="4" stroke-linecap="round" />
+
+  <!-- BACK WING (Extended forward for balance, riding no-handed) -->
+  <g id="back-wing">
+    <!-- Main wing shape -->
+    <path d="M 330 250 C 390 215, 490 195, 575 170 C 565 205, 535 215, 515 220 C 550 220, 560 235, 540 245 C 510 255, 485 250, 470 250 C 500 260, 495 275, 470 280 C 425 288, 370 285, 330 270 Z" fill="#D5D9DC" />
+    <!-- Geometric dark feather tips -->
+    <path d="M 480 192 C 515 184, 548 178, 575 170 C 565 205, 535 215, 515 220 C 550 220, 560 235, 540 245 C 510 255, 485 250, 470 250 C 500 260, 495 275, 470 280 C 455 283, 440 284, 425 284 L 465 225 Z" fill="#2A363B" />
+  </g>
+
+  <!-- BACK LEG (Pedaling up) -->
+  <g id="back-leg">
+    <!-- Thigh & Lower Leg -->
+    <polyline points="325,315 390,340 365,425" fill="none" stroke="#E06D3B" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Webbed Foot -->
+    <path d="M 360 420 L 405 425 L 395 437 L 350 432 Z" fill="#E06D3B" />
+    <!-- Back Pedal -->
+    <rect x="348" y="427" width="34" height="10" rx="5" fill="#1E2328" />
+  </g>
+
+  <!-- BICYCLE WHEELS & COMPONENTS -->
+  <g id="wheels">
+    <!-- Rear Wheel -->
+    <g transform="translate(210, 445)">
+      <!-- Spokes -->
+      <g stroke="#B8C2CC" stroke-width="2.5">
+        <line x1="-75" y1="0" x2="75" y2="0" />
+        <line x1="0" y1="-75" x2="0" y2="75" />
+        <line x1="-53" y1="-53" x2="53" y2="53" />
+        <line x1="-53" y1="53" x2="53" y2="-53" />
+        <line x1="-29" y1="-69" x2="29" y2="69" />
+        <line x1="-69" y1="-29" x2="69" y2="29" />
+        <line x1="-69" y1="29" x2="69" y2="-29" />
+        <line x1="-29" y1="69" x2="29" y2="-69" />
+      </g>
+      <!-- Outer Tire -->
+      <circle r="85" fill="none" stroke="#2A363B" stroke-width="14" />
+      <!-- Whitewall Tire Inner -->
+      <circle r="73" fill="none" stroke="#F7F3E8" stroke-width="10" />
+      <!-- Rim -->
+      <circle r="66" fill="none" stroke="#B8C2CC" stroke-width="4" />
+    </g>
+
+    <!-- Front Wheel -->
+    <g transform="translate(570, 445)">
+      <!-- Spokes -->
+      <g stroke="#B8C2CC" stroke-width="2.5">
+        <line x1="-75" y1="0" x2="75" y2="0" />
+        <line x1="0" y1="-75" x2="0" y2="75" />
+        <line x1="-53" y1="-53" x2="53" y2="53" />
+        <line x1="-53" y1="53" x2="53" y2="-53" />
+        <line x1="-29" y1="-69" x2="29" y2="69" />
+        <line x1="-69" y1="-29" x2="69" y2="29" />
+        <line x1="-69" y1="29" x2="69" y2="-29" />
+        <line x1="-29" y1="69" x2="29" y2="-69" />
+      </g>
+      <!-- Outer Tire -->
+      <circle r="85" fill="none" stroke="#2A363B" stroke-width="14" />
+      <!-- Whitewall Tire Inner -->
+      <circle r="73" fill="none" stroke="#F7F3E8" stroke-width="10" />
+      <!-- Rim -->
+      <circle r="66" fill="none" stroke="#B8C2CC" stroke-width="4" />
+    </g>
+  </g>
+
+  <!-- BICYCLE FRAME (Classic Vintage Cruiser) -->
+  <g id="cruiser-frame">
+    <!-- Rear Fender -->
+    <path d="M 113 445 A 97 97 0 0 1 285 383" fill="none" stroke="#1E7872" stroke-width="12" stroke-linecap="round" />
+    <!-- Front Fender -->
+    <path d="M 486 396 A 97 97 0 0 1 654 396" fill="none" stroke="#1E7872" stroke-width="12" stroke-linecap="round" />
+
+    <!-- Seat Post & Stem -->
+    <line x1="331" y1="350" x2="318" y2="310" stroke="#B8C2CC" stroke-width="10" stroke-linecap="round" />
+    <path d="M 526 300 L 515 260 C 510 245, 495 245, 480 250 L 425 270" fill="none" stroke="#B8C2CC" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- Swept-back Handlebars Grip -->
+    <rect x="395" y="263" width="38" height="14" rx="7" transform="rotate(-12 414 270)" fill="#B85B32" />
+
+    <!-- Cruiser Frame Tubes -->
+    <g fill="none" stroke="#28968E" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Chainstay -->
+      <line x1="210" y1="445" x2="365" y2="465" stroke-width="11" />
+      <!-- Seatstay (Curved) -->
+      <path d="M 210 445 C 245 395, 290 365, 331 350" stroke-width="10" />
+      <!-- Seat Tube -->
+      <line x1="365" y1="465" x2="331" y2="350" stroke-width="14" />
+      <!-- Sweeping Down Tube -->
+      <path d="M 365 465 C 440 465, 485 385, 538 345" stroke-width="14" />
+      <!-- Cantilever Top Tube (Classic Cruiser Arch) -->
+      <path d="M 275 375 C 335 330, 440 295, 526 300" stroke-width="14" />
+      <!-- Secondary Cruiser Tube -->
+      <path d="M 340 380 C 405 355, 465 340, 532 322" stroke-width="10" />
+      <!-- Head Tube -->
+      <line x1="523" y1="292" x2="541" y2="353" stroke-width="16" />
+      <!-- Front Fork -->
+      <path d="M 538 345 C 550 385, 560 415, 570 445" stroke-width="12" />
+    </g>
+
+    <!-- Hub Caps -->
+    <circle cx="210" cy="445" r="10" fill="#1E2328" />
+    <circle cx="570" cy="445" r="10" fill="#1E2328" />
+
+    <!-- Vintage Chainguard -->
+    <path d="M 210 433 L 365 435 A 30 30 0 0 1 395 465 L 210 455 Z" fill="#1E7872" />
+    <circle cx="365" cy="465" r="16" fill="#B8C2CC" />
+    <!-- Back Crank Arm (Behind Chainguard/Frame) -->
+    <line x1="365" y1="465" x2="365" y2="432" stroke="#9EA9B3" stroke-width="8" stroke-linecap="round" />
+
+    <!-- Cruiser Saddle (with springs) -->
+    <circle cx="300" cy="318" r="7" fill="none" stroke="#9EA9B3" stroke-width="3.5" />
+    <circle cx="304" cy="312" r="7" fill="none" stroke="#9EA9B3" stroke-width="3.5" />
+    <path d="M 280 305 C 280 288, 355 292, 365 305 C 350 320, 290 322, 280 305 Z" fill="#B85B32" />
+  </g>
+
+  <!-- PELICAN BODY & HEAD -->
+  <g id="pelican-body">
+    <!-- Tail Feathers -->
+    <path d="M 290 295 L 240 280 L 258 298 L 245 310 L 295 310 Z" fill="#2A363B" />
+    <path d="M 295 288 L 250 268 L 270 292 Z" fill="#EEF1F4" />
+
+    <!-- Main Body & Curved Neck (Seated casually upright) -->
+    <path d="M 285 295 
+             C 275 320, 330 335, 365 310 
+             C 400 285, 405 235, 380 205 
+             C 360 180, 350 155, 365 130 
+             C 380 105, 425 90, 425 65 
+             C 425 42, 385 40, 368 55 
+             C 350 70, 325 110, 320 145 
+             C 315 180, 325 205, 310 235 
+             C 295 265, 290 280, 285 295 Z" fill="#EEF1F4" />
+
+    <!-- Yellowish Crown / Tuft Feathers -->
+    <path d="M 380 48 L 350 38 L 365 55 L 342 52 L 362 67 Z" fill="#F2C14E" />
+    <path d="M 368 55 C 385 40, 425 42, 425 65 C 425 75, 412 83, 400 90 C 390 75, 380 65, 368 55 Z" fill="#F7D479" />
+
+    <!-- Giant Pelican Beak & Pouch -->
+    <!-- Huge Gular Pouch -->
+    <path d="M 418 72 C 425 150, 520 155, 588 80 Z" fill="#F29F3D" />
+    <!-- Geometric Pouch Shadow Fold -->
+    <path d="M 418 72 C 435 125, 505 130, 588 80 Z" fill="#E3892B" />
+    <!-- Upper Mandible -->
+    <path d="M 415 58 L 585 68 C 595 69, 598 76, 593 84 L 584 82 L 415 74 Z" fill="#F7C844" />
+    <!-- Reddish Beak Tip Hook -->
+    <path d="M 575 67.5 L 585 68 C 595 69, 598 76, 593 84 L 584 82 L 575 78 Z" fill="#E05A47" />
+
+    <!-- Eye Ring & Eye -->
+    <circle cx="403" cy="64" r="9" fill="#F7C844" />
+    <circle cx="403" cy="64" r="5" fill="#1E2328" />
+    <circle cx="405" cy="62" r="1.8" fill="#FFFFFF" />
+  </g>
+
+  <!-- FRONT LEG (Pedaling down) -->
+  <g id="front-leg">
+    <!-- Fluffy Feather Thigh Base -->
+    <path d="M 320 295 C 320 320, 355 320, 355 295 Z" fill="#DCE1E5" />
+    <!-- Thigh & Lower Leg -->
+    <polyline points="338,310 385,395 365,498" fill="none" stroke="#F28444" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Front Crank Arm -->
+    <line x1="365" y1="465" x2="365" y2="500" stroke="#B8C2CC" stroke-width="8" stroke-linecap="round" />
+    <circle cx="365" cy="465" r="6" fill="#2A363B" />
+    <!-- Webbed Foot -->
+    <path d="M 358 492 L 408 497 L 398 510 L 350 504 Z" fill="#F28444" />
+    <!-- Front Pedal -->
+    <rect x="348" y="497" width="34" height="10" rx="5" fill="#1E2328" />
+  </g>
+
+  <!-- FRONT WING (Swept back wide for balance, riding no-handed) -->
+  <g id="front-wing">
+    <!-- Main Wing Shape -->
+    <path d="M 345 235 C 275 200, 175 180, 75 160 C 85 195, 115 210, 140 215 C 100 220, 90 238, 115 248 C 145 260, 175 255, 195 255 C 160 268, 165 285, 195 290 C 245 298, 305 285, 345 265 Z" fill="#EEF1F4" />
+    <!-- Secondary Feather Layer (Light Grey) -->
+    <path d="M 270 212 C 215 195, 145 180, 75 160 C 85 195, 115 210, 140 215 C 100 220, 90 238, 115 248 C 145 260, 175 255, 195 255 C 160 268, 165 285, 195 290 C 215 293, 240 293, 260 288 L 245 245 Z" fill="#DCE1E5" />
+    <!-- Primary Feather Tips (Dark Charcoal) -->
+    <path d="M 190 185 C 150 175, 110 168, 75 160 C 85 195, 115 210, 140 215 C 100 220, 90 238, 115 248 C 145 260, 175 255, 195 255 C 160 268, 165 285, 195 290 C 208 292, 222 293, 235 292 L 195 230 Z" fill="#2A363B" />
+  </g>
+</svg>

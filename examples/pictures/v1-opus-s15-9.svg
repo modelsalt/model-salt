@@ -1,0 +1,246 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <!-- Woodcut hatching patterns -->
+    <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="10" stroke="#1b1b1b" stroke-width="2.2"/>
+    </pattern>
+    <pattern id="hatchFine" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)">
+      <line x1="0" y1="0" x2="0" y2="7" stroke="#1b1b1b" stroke-width="1.4"/>
+    </pattern>
+    <pattern id="cross" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#1b1b1b" stroke-width="1.8"/>
+      <line x1="0" y1="0" x2="9" y2="0" stroke="#1b1b1b" stroke-width="1.8"/>
+    </pattern>
+    <pattern id="skyLines" width="40" height="14" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="7" x2="40" y2="7" stroke="#9cc3d1" stroke-width="2"/>
+    </pattern>
+    <pattern id="vert" width="8" height="8" patternUnits="userSpaceOnUse">
+      <line x1="4" y1="0" x2="4" y2="8" stroke="#1b1b1b" stroke-width="1.8"/>
+    </pattern>
+    <pattern id="pathLines" width="60" height="12" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="6" x2="34" y2="6" stroke="#8a6d3b" stroke-width="2"/>
+    </pattern>
+
+    <!-- Tree (origin at trunk base) -->
+    <clipPath id="canopyClip">
+      <circle cx="0" cy="-290" r="110"/><circle cx="-75" cy="-230" r="80"/>
+      <circle cx="75" cy="-225" r="85"/><circle cx="0" cy="-380" r="80"/>
+      <circle cx="-60" cy="-330" r="70"/><circle cx="65" cy="-330" r="70"/>
+    </clipPath>
+    <g id="tree">
+      <ellipse cx="20" cy="4" rx="110" ry="16" fill="url(#hatch)" opacity="0.55"/>
+      <path d="M-18 0 L-13 -210 L13 -210 L18 0 Z" fill="#6b4a2b" stroke="#1b1b1b" stroke-width="4"/>
+      <path d="M2 0 L4 -210 L13 -210 L18 0 Z" fill="url(#vert)"/>
+      <path d="M-4 -190 L-40 -250 M6 -200 L45 -260" stroke="#1b1b1b" stroke-width="8" stroke-linecap="round"/>
+      <g stroke="#1b1b1b" stroke-width="4" fill="#4f8a3c">
+        <circle cx="0" cy="-290" r="110"/><circle cx="-75" cy="-230" r="80"/>
+        <circle cx="75" cy="-225" r="85"/><circle cx="0" cy="-380" r="80"/>
+        <circle cx="-60" cy="-330" r="70"/><circle cx="65" cy="-330" r="70"/>
+      </g>
+      <g clip-path="url(#canopyClip)">
+        <circle cx="0" cy="-290" r="106" fill="#4f8a3c"/>
+        <circle cx="-75" cy="-230" r="76" fill="#4f8a3c"/>
+        <circle cx="75" cy="-225" r="81" fill="#4f8a3c"/>
+        <circle cx="0" cy="-380" r="76" fill="#4f8a3c"/>
+        <circle cx="-60" cy="-330" r="66" fill="#4f8a3c"/>
+        <circle cx="65" cy="-330" r="66" fill="#4f8a3c"/>
+        <circle cx="60" cy="-180" r="150" fill="url(#hatch)" opacity="0.7"/>
+        <circle cx="90" cy="-150" r="90" fill="url(#cross)" opacity="0.6"/>
+        <path d="M-80 -360 q20 -15 40 0 M-20 -420 q20 -15 40 0 M-110 -260 q20 -15 40 0 M40 -300 q20 -15 40 0"
+              stroke="#cfe6a8" stroke-width="3" fill="none"/>
+      </g>
+    </g>
+
+    <clipPath id="bodyClip">
+      <ellipse cx="880" cy="480" rx="112" ry="162" transform="rotate(-8 880 480)"/>
+    </clipPath>
+    <clipPath id="pouchClip">
+      <path d="M992 232 L1232 272 Q1150 345 1060 322 Q1000 302 985 245 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="1920" height="1080" fill="#e4f0f2"/>
+  <rect width="1920" height="720" fill="url(#skyLines)" opacity="0.8"/>
+  <!-- Sun -->
+  <circle cx="1650" cy="160" r="70" fill="#f6dc8a" stroke="#1b1b1b" stroke-width="4"/>
+  <g stroke="#1b1b1b" stroke-width="3" stroke-linecap="round">
+    <line x1="1650" y1="60" x2="1650" y2="35"/><line x1="1650" y1="260" x2="1650" y2="285"/>
+    <line x1="1550" y1="160" x2="1525" y2="160"/><line x1="1750" y1="160" x2="1775" y2="160"/>
+    <line x1="1580" y1="90" x2="1562" y2="72"/><line x1="1720" y1="90" x2="1738" y2="72"/>
+    <line x1="1580" y1="230" x2="1562" y2="248"/><line x1="1720" y1="230" x2="1738" y2="248"/>
+  </g>
+  <!-- Clouds -->
+  <g fill="#fbfbf6" stroke="#1b1b1b" stroke-width="4">
+    <path d="M300 200 q20 -50 70 -35 q30 -45 85 -15 q50 -10 55 40 q30 25 -10 40 L310 230 q-40 -10 -10 -30 Z"/>
+    <path d="M1050 130 q15 -40 60 -28 q30 -38 75 -10 q45 -5 45 35 q25 20 -10 32 L1060 159 q-35 -8 -10 -29 Z"/>
+  </g>
+  <path d="M320 225 L500 225 M340 215 L480 215" stroke="#1b1b1b" stroke-width="1.6"/>
+  <path d="M1075 152 L1210 152 M1090 143 L1195 143" stroke="#1b1b1b" stroke-width="1.6"/>
+
+  <!-- Distant hills & grass -->
+  <path d="M0 730 Q300 680 640 715 T1300 705 T1920 720 L1920 1080 L0 1080 Z" fill="#9cc46a" stroke="#1b1b1b" stroke-width="4"/>
+  <path d="M0 760 Q300 720 640 750 T1300 740 T1920 755 L1920 800 L0 800 Z" fill="url(#hatchFine)" opacity="0.35"/>
+
+  <!-- Trees lining the path -->
+  <use href="#tree" xlink:href="#tree" transform="translate(520,780) scale(0.72)"/>
+  <use href="#tree" xlink:href="#tree" transform="translate(1520,790) scale(0.85)"/>
+  <use href="#tree" xlink:href="#tree" transform="translate(170,830) scale(1.1)"/>
+  <use href="#tree" xlink:href="#tree" transform="translate(1800,835) scale(1.15)"/>
+
+  <!-- Park path -->
+  <path d="M0 870 Q960 838 1920 880 L1920 1012 Q960 990 0 1022 Z" fill="#dcc391" stroke="#1b1b1b" stroke-width="4"/>
+  <path d="M0 870 Q960 838 1920 880 L1920 1012 Q960 990 0 1022 Z" fill="url(#pathLines)" opacity="0.7"/>
+  <path d="M0 1022 Q960 990 1920 1012 L1920 990 Q960 970 0 1000 Z" fill="url(#hatch)" opacity="0.4"/>
+  <!-- Grass tufts -->
+  <g stroke="#2f5a22" stroke-width="3" fill="none" stroke-linecap="round">
+    <path d="M80 1050 l6 -18 l4 18 l8 -14"/><path d="M420 1060 l5 -16 l5 16 l7 -12"/>
+    <path d="M760 1055 l6 -18 l4 18"/><path d="M1350 1058 l6 -18 l4 18 l8 -14"/>
+    <path d="M1700 1050 l5 -16 l5 16"/><path d="M330 845 l5 -14 l4 14"/>
+    <path d="M1250 835 l5 -14 l4 14 l6 -10"/><path d="M1650 850 l5 -14 l4 14"/>
+    <path d="M60 855 l5 -14 l4 14"/>
+  </g>
+
+  <!-- Bike shadow -->
+  <ellipse cx="940" cy="985" rx="320" ry="20" fill="url(#cross)" opacity="0.45"/>
+
+  <!-- ===== BICYCLE ===== -->
+  <!-- Wheels -->
+  <g fill="none" stroke="#1b1b1b">
+    <circle cx="700" cy="830" r="150" stroke-width="16"/>
+    <circle cx="700" cy="830" r="138" stroke-width="3" stroke="#888"/>
+    <circle cx="1180" cy="830" r="150" stroke-width="16"/>
+    <circle cx="1180" cy="830" r="138" stroke-width="3" stroke="#888"/>
+  </g>
+  <g stroke="#555" stroke-width="2">
+    <g transform="translate(700,830)">
+      <line x1="-138" y1="0" x2="138" y2="0"/><line x1="-138" y1="0" x2="138" y2="0" transform="rotate(30)"/>
+      <line x1="-138" y1="0" x2="138" y2="0" transform="rotate(60)"/><line x1="-138" y1="0" x2="138" y2="0" transform="rotate(90)"/>
+      <line x1="-138" y1="0" x2="138" y2="0" transform="rotate(120)"/><line x1="-138" y1="0" x2="138" y2="0" transform="rotate(150)"/>
+    </g>
+    <g transform="translate(1180,830)">
+      <line x1="-138" y1="0" x2="138" y2="0" transform="rotate(15)"/><line x1="-138" y1="0" x2="138" y2="0" transform="rotate(45)"/>
+      <line x1="-138" y1="0" x2="138" y2="0" transform="rotate(75)"/><line x1="-138" y1="0" x2="138" y2="0" transform="rotate(105)"/>
+      <line x1="-138" y1="0" x2="138" y2="0" transform="rotate(135)"/><line x1="-138" y1="0" x2="138" y2="0" transform="rotate(165)"/>
+    </g>
+  </g>
+  <circle cx="700" cy="830" r="12" fill="#ccc" stroke="#1b1b1b" stroke-width="3"/>
+  <circle cx="1180" cy="830" r="12" fill="#ccc" stroke="#1b1b1b" stroke-width="3"/>
+
+  <!-- Far crank & pedal -->
+  <line x1="920" y1="850" x2="882" y2="812" stroke="#444" stroke-width="10" stroke-linecap="round"/>
+  <rect x="862" y="806" width="40" height="11" rx="3" fill="#333" stroke="#1b1b1b" stroke-width="2"/>
+
+  <!-- Far leg (behind frame) -->
+  <path d="M868 600 Q935 690 885 806" fill="none" stroke="#1b1b1b" stroke-width="20" stroke-linecap="round"/>
+  <path d="M868 600 Q935 690 885 806" fill="none" stroke="#c9741f" stroke-width="13" stroke-linecap="round"/>
+  <path d="M858 806 L915 800 L912 813 L862 816 Z" fill="#c9741f" stroke="#1b1b1b" stroke-width="3"/>
+
+  <!-- Chain -->
+  <g stroke="#333" stroke-width="4">
+    <line x1="920" y1="814" x2="700" y2="815"/><line x1="920" y1="886" x2="700" y2="845"/>
+  </g>
+  <circle cx="700" cy="830" r="17" fill="none" stroke="#333" stroke-width="5"/>
+
+  <!-- Frame (bright teal) -->
+  <g stroke="#1b1b1b" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M700 830 L920 850 L870 660 L700 830"/>
+    <path d="M870 660 L1122 648 L1138 695 L920 850"/>
+    <path d="M1138 695 L1180 830"/>
+  </g>
+  <g stroke="#13b5c4" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M700 830 L920 850 L870 660 L700 830"/>
+    <path d="M870 660 L1122 648 L1138 695 L920 850"/>
+    <path d="M1138 695 L1180 830"/>
+  </g>
+  <!-- hatch shading on the frame underside -->
+  <g stroke="#0b6f78" stroke-width="2">
+    <path d="M940 840 l8 -10 M965 822 l8 -10 M990 804 l8 -10 M1015 786 l8 -10 M1040 768 l8 -10 M1065 750 l8 -10 M1090 732 l8 -10"/>
+    <path d="M750 838 l6 -9 M790 842 l6 -9 M830 845 l6 -9 M870 848 l6 -9"/>
+  </g>
+  <!-- Seat post & saddle -->
+  <line x1="870" y1="660" x2="862" y2="632" stroke="#1b1b1b" stroke-width="10"/>
+  <path d="M815 628 Q850 612 905 625 Q900 640 860 640 Q825 640 815 628 Z" fill="#3b2a1e" stroke="#1b1b1b" stroke-width="3"/>
+  <!-- Stem & handlebars -->
+  <path d="M1122 648 L1112 598 Q1108 584 1088 584 L1058 588" fill="none" stroke="#1b1b1b" stroke-width="12" stroke-linecap="round"/>
+  <path d="M1122 648 L1112 598 Q1108 584 1088 584 L1058 588" fill="none" stroke="#bdbdbd" stroke-width="6" stroke-linecap="round"/>
+  <line x1="1058" y1="588" x2="1082" y2="585" stroke="#1b1b1b" stroke-width="14" stroke-linecap="round"/>
+  <!-- Chainring -->
+  <circle cx="920" cy="850" r="36" fill="#d6d6d6" stroke="#1b1b1b" stroke-width="4"/>
+  <circle cx="920" cy="850" r="36" fill="url(#hatchFine)" opacity="0.5"/>
+  <circle cx="920" cy="850" r="8" fill="#1b1b1b"/>
+
+  <!-- ===== PELICAN ===== -->
+  <!-- Far wing (shaded, tip on handlebar) -->
+  <path d="M930 380 C1010 410, 1060 500, 1090 578 L1070 590 C1030 540, 970 480, 930 450 Z"
+        fill="#d9d6cc" stroke="#1b1b1b" stroke-width="4"/>
+  <path d="M930 380 C1010 410, 1060 500, 1090 578 L1070 590 C1030 540, 970 480, 930 450 Z" fill="url(#cross)" opacity="0.5"/>
+
+  <!-- Tail -->
+  <path d="M790 555 L728 602 L770 606 L740 625 L800 615 Z" fill="#f7f5ee" stroke="#1b1b1b" stroke-width="4"/>
+  <path d="M760 590 L790 590 M752 604 L795 604" stroke="#1b1b1b" stroke-width="1.5"/>
+
+  <!-- Body -->
+  <ellipse cx="880" cy="480" rx="112" ry="162" transform="rotate(-8 880 480)" fill="#f7f5ee" stroke="#1b1b1b" stroke-width="5"/>
+  <g clip-path="url(#bodyClip)">
+    <ellipse cx="790" cy="560" rx="95" ry="170" fill="url(#hatch)" opacity="0.55"/>
+    <ellipse cx="860" cy="640" rx="150" ry="55" fill="url(#cross)" opacity="0.45"/>
+    <path d="M830 380 q15 10 30 0 M850 420 q15 10 30 0 M820 455 q15 10 30 0 M880 470 q15 10 30 0 M840 510 q15 10 30 0 M900 520 q15 10 30 0"
+          stroke="#1b1b1b" stroke-width="1.6" fill="none"/>
+  </g>
+
+  <!-- Neck -->
+  <path d="M905 355 C870 300, 935 290, 955 240" fill="none" stroke="#1b1b1b" stroke-width="66" stroke-linecap="round"/>
+  <path d="M905 355 C870 300, 935 290, 955 240" fill="none" stroke="#f7f5ee" stroke-width="56" stroke-linecap="round"/>
+  <path d="M885 345 C860 305, 905 285, 920 260" fill="none" stroke="url(#hatchFine)" stroke-width="18" opacity="0.6"/>
+  <!-- Pale yellow chest patch -->
+  <path d="M925 350 q25 20 18 55 q-25 -5 -35 -40 Z" fill="#f3e3a6" opacity="0.8"/>
+
+  <!-- Head -->
+  <circle cx="958" cy="220" r="46" fill="#f7f5ee" stroke="#1b1b1b" stroke-width="5"/>
+  <path d="M915 200 q-25 -10 -30 -30 q20 8 32 10 q-15 -15 -12 -32 q15 18 30 22" fill="#f7f5ee" stroke="#1b1b1b" stroke-width="3"/>
+  <path d="M920 235 q10 20 30 25" stroke="url(#hatchFine)" stroke-width="12" fill="none" opacity="0.6"/>
+
+  <!-- Pouch -->
+  <path d="M992 232 L1232 272 Q1150 345 1060 322 Q1000 302 985 245 Z" fill="#f7c13c" stroke="#1b1b1b" stroke-width="4"/>
+  <g clip-path="url(#pouchClip)">
+    <path d="M980 300 Q1100 360 1240 280 L1240 360 L980 360 Z" fill="url(#hatch)" opacity="0.55"/>
+    <path d="M1010 260 Q1080 300 1180 285" stroke="#b07a10" stroke-width="2" fill="none"/>
+  </g>
+  <!-- Upper mandible with hooked tip -->
+  <path d="M985 200 L1240 256 Q1266 262 1258 282 Q1250 274 1232 272 L992 234 Q980 220 985 200 Z"
+        fill="#f2a516" stroke="#1b1b1b" stroke-width="4"/>
+  <path d="M1000 214 L1225 262" stroke="#b56d0a" stroke-width="2"/>
+  <path d="M1050 228 l6 -8 M1090 236 l6 -8 M1130 244 l6 -8 M1170 252 l6 -8 M1210 260 l6 -8" stroke="#1b1b1b" stroke-width="1.6"/>
+
+  <!-- Eye -->
+  <circle cx="970" cy="208" r="12" fill="#f4b183" stroke="#1b1b1b" stroke-width="2"/>
+  <circle cx="970" cy="208" r="6.5" fill="#1b1b1b"/>
+  <circle cx="972" cy="206" r="2" fill="#fff"/>
+
+  <!-- Near leg & webbed foot on the pedal -->
+  <line x1="920" y1="850" x2="965" y2="890" stroke="#444" stroke-width="10" stroke-linecap="round"/>
+  <path d="M918 598 Q995 705 965 880" fill="none" stroke="#1b1b1b" stroke-width="22" stroke-linecap="round"/>
+  <path d="M918 598 Q995 705 965 880" fill="none" stroke="#e8892b" stroke-width="15" stroke-linecap="round"/>
+  <path d="M960 690 l10 -4 M968 730 l10 -3 M970 770 l10 -2 M970 810 l10 -1" stroke="#1b1b1b" stroke-width="2"/>
+  <rect x="943" y="886" width="46" height="12" rx="3" fill="#333" stroke="#1b1b1b" stroke-width="2"/>
+  <path d="M935 884 L1008 876 L1003 893 L940 895 Z" fill="#e8892b" stroke="#1b1b1b" stroke-width="3"/>
+  <path d="M960 884 L1000 880 M960 889 L1002 887" stroke="#1b1b1b" stroke-width="1.5"/>
+
+  <!-- Near wing with black primaries, tip resting on handlebar grip -->
+  <path d="M870 370 C960 380, 1030 460, 1075 572 Q1082 594 1060 598 C1000 580, 930 545, 858 520 C828 470, 838 400, 870 370 Z"
+        fill="#f7f5ee" stroke="#1b1b1b" stroke-width="5"/>
+  <path d="M995 465 C1030 505, 1058 545, 1075 572 Q1082 594 1060 598 C1030 590, 990 572, 955 555 Z"
+        fill="#262422" stroke="#1b1b1b" stroke-width="3"/>
+  <path d="M970 520 L1060 590 M990 505 L1068 582 M1010 495 L1072 575" stroke="#6b6660" stroke-width="2"/>
+  <path d="M858 520 C930 545, 1000 580, 1060 598 L1050 585 C990 560, 920 530, 862 500 Z" fill="url(#hatch)" opacity="0.6"/>
+  <g stroke="#1b1b1b" stroke-width="2" fill="none">
+    <path d="M880 420 q40 5 75 40"/><path d="M870 455 q55 10 100 55"/>
+    <path d="M866 490 q50 15 90 45"/><path d="M900 395 q30 5 55 30"/>
+  </g>
+  <!-- Wing-tip "fingers" hooked over the grip -->
+  <path d="M1058 586 q12 -8 26 -2 M1060 594 q12 -6 24 0" stroke="#1b1b1b" stroke-width="3" fill="none"/>
+
+  <!-- Border, like a printed woodblock -->
+  <rect x="12" y="12" width="1896" height="1056" fill="none" stroke="#1b1b1b" stroke-width="10"/>
+</svg>

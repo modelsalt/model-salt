@@ -1,0 +1,307 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" width="100%" height="100%">
+  <defs>
+    <!-- Hand-drawn sketch filter with uneven, wobbly stroke texture -->
+    <filter id="sketch" x="-15%" y="-15%" width="130%" height="130%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="4" result="noise" seed="7"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="4.2" xChannelSelector="R" yChannelSelector="G" result="displaced"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="2.5" flood-color="#00f3ff" flood-opacity="0.35" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="displaced"/>
+      </feMerge>
+    </filter>
+
+    <filter id="sketch-pink" x="-15%" y="-15%" width="130%" height="130%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" seed="12"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.8" xChannelSelector="R" yChannelSelector="G" result="displaced"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#ff007f" flood-opacity="0.45" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="displaced"/>
+      </feMerge>
+    </filter>
+
+    <filter id="sketch-lime" x="-15%" y="-15%" width="130%" height="130%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" result="noise" seed="23"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G" result="displaced"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="2.5" flood-color="#aaff00" flood-opacity="0.4" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="displaced"/>
+      </feMerge>
+    </filter>
+
+    <!-- Cyberpunk Scribble Hatching Patterns -->
+    <pattern id="hatch-pink" width="12" height="12" patternTransform="rotate(35 0 0)" patternUnits="userSpaceOnUse">
+      <path d="M 0,3 L 12,2 M 0,9 L 12,10" stroke="#ff007f" stroke-width="1.4" stroke-opacity="0.55" fill="none"/>
+    </pattern>
+    <pattern id="hatch-cyan" width="10" height="10" patternTransform="rotate(-25 0 0)" patternUnits="userSpaceOnUse">
+      <path d="M 0,4 L 10,5 M 0,9 L 10,8" stroke="#00f3ff" stroke-width="1.2" stroke-opacity="0.5" fill="none"/>
+    </pattern>
+    <pattern id="hatch-lime" width="14" height="14" patternTransform="rotate(60 0 0)" patternUnits="userSpaceOnUse">
+      <path d="M 0,5 L 14,4" stroke="#aaff00" stroke-width="1.5" stroke-opacity="0.45" fill="none"/>
+    </pattern>
+
+    <!-- Background Gradient -->
+    <radialGradient id="bg-violet" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1d0938"/>
+      <stop offset="60%" stop-color="#110422"/>
+      <stop offset="100%" stop-color="#080112"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Dark Violet Background -->
+  <rect width="100%" height="100%" fill="url(#bg-violet)"/>
+
+  <!-- ================= ISOMETRIC 30-DEGREE CYBERPUNK GRID ================= -->
+  <g stroke-linecap="round" opacity="0.32" filter="url(#sketch)">
+    <!-- +30 deg Down-Right Grid Lines (dy/dx = +0.577) -->
+    <g stroke="#ff007f" stroke-width="1.2" stroke-dasharray="18 8 4 6">
+      <line x1="-100" y1="220" x2="800" y2="740"/>
+      <line x1="-50" y1="133" x2="950" y2="710"/>
+      <line x1="50" y1="75" x2="1050" y2="652"/>
+      <line x1="180" y1="35" x2="1100" y2="566"/>
+      <line x1="330" y1="6" x2="1150" y2="479"/>
+    </g>
+    <!-- -30 deg Up-Right Grid Lines (dy/dx = -0.577) -->
+    <g stroke="#00f3ff" stroke-width="1.2" stroke-dasharray="25 10 5 10">
+      <line x1="-100" y1="450" x2="750" y2="-40"/>
+      <line x1="-50" y1="536" x2="900" y2="-12"/>
+      <line x1="20" y1="611" x2="1000" y2="45"/>
+      <line x1="120" y1="669" x2="1050" y2="132"/>
+      <line x1="260" y1="703" x2="1150" y2="189"/>
+    </g>
+  </g>
+
+  <!-- Isometric Speed & Wind Lines (-30 deg axis) -->
+  <g stroke="#aaff00" stroke-linecap="round" filter="url(#sketch-lime)" opacity="0.75">
+    <path d="M 80,530 L 210,455 M 225,446 L 245,435" stroke-width="2.5"/>
+    <path d="M 140,260 L 260,190 M 275,182 L 295,170" stroke-width="2"/>
+    <path d="M 520,570 L 680,478" stroke-width="2.2" stroke-dasharray="30 12"/>
+    <path d="M 670,120 L 790,50" stroke-width="1.8"/>
+  </g>
+
+  <!-- Ground Shadow under Recumbent Bike (Isometric Axis) -->
+  <path d="M 220,515 L 745,212 L 785,235 L 260,538 Z" fill="#06000c" opacity="0.75" filter="url(#sketch)"/>
+  <path d="M 235,522 L 755,222" stroke="#ff007f" stroke-width="4" opacity="0.4" stroke-dasharray="15 10" filter="url(#sketch-pink)"/>
+
+  <!-- ================= FAR SIDE ELEMENTS (BACK WING & FAR LEG) ================= -->
+  <!-- Far Wing (Right Wing spread wide to the upper-left along the -30deg/isometric cross axis) -->
+  <g id="far-wing" filter="url(#sketch)">
+    <!-- Wing Fill & Hatching -->
+    <path d="M 330,275 C 275,215 190,145 105,130 C 115,165 140,185 160,192 C 125,195 140,220 175,222 C 150,230 165,248 200,248 C 185,258 205,272 235,270 C 265,268 300,285 320,295 Z" 
+          fill="#1b0936" stroke="#00f3ff" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M 330,275 C 275,215 190,145 105,130 C 115,165 140,185 160,192 C 125,195 140,220 175,222 C 150,230 165,248 200,248 C 185,258 205,272 235,270 C 265,268 300,285 320,295 Z" 
+          fill="url(#hatch-cyan)"/>
+    <!-- Second sketch pass for hand-drawn uneven look -->
+    <path d="M 326,272 C 270,210 185,148 100,133 M 105,130 C 120,160 155,188 195,198 M 142,218 C 175,222 215,228 245,235 M 168,245 C 205,248 240,255 275,262" 
+          fill="none" stroke="#aaff00" stroke-width="1.6" stroke-linecap="round"/>
+  </g>
+
+  <!-- Far Leg & Webbed Foot (Right leg kicked up high and carefree, clear of pedals) -->
+  <g id="far-leg" filter="url(#sketch-pink)">
+    <!-- Leg -->
+    <path d="M 455,305 C 495,265 550,215 595,175 M 460,310 C 502,268 555,220 600,180" 
+          fill="none" stroke="#ff007f" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- Carefree Webbed Foot Spread Open -->
+    <path d="M 595,175 L 615,120 C 625,132 632,135 645,128 C 648,142 655,148 668,146 L 600,180 Z" 
+          fill="#2a083d" stroke="#ff007f" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M 597,177 L 642,130 M 598,178 L 664,146" stroke="#aaff00" stroke-width="1.8" stroke-linecap="round"/>
+  </g>
+
+  <!-- ================= LONG-WHEELBASE RECUMBENT BICYCLE ================= -->
+  <!-- Aligned along the 30-degree Isometric Axis: Rear (250,450) to Front (710,185) -->
+  
+  <!-- Rear Wheel (Full size, centered at 250, 450) -->
+  <g id="rear-wheel" filter="url(#sketch)">
+    <!-- Tire Outer & Inner Sketch Ellipses (rotated -30 deg for isometric plane) -->
+    <g transform="translate(250, 450) rotate(-30)">
+      <ellipse cx="0" cy="0" rx="68" ry="56" fill="none" stroke="#ff007f" stroke-width="6"/>
+      <ellipse cx="1" cy="-1" rx="70" ry="54" fill="none" stroke="#ff007f" stroke-width="2" stroke-dasharray="25 8"/>
+      <ellipse cx="0" cy="0" rx="58" ry="47" fill="none" stroke="#00f3ff" stroke-width="2.8"/>
+      <ellipse cx="-1" cy="1" rx="56" ry="48" fill="none" stroke="#aaff00" stroke-width="1.2" stroke-dasharray="15 12"/>
+      <!-- Sketchy Spokes -->
+      <g stroke="#00f3ff" stroke-width="1.3" opacity="0.75">
+        <line x1="-57" y1="0" x2="57" y2="0"/>
+        <line x1="0" y1="-46" x2="0" y2="46"/>
+        <line x1="-40" y1="-33" x2="40" y2="33"/>
+        <line x1="-40" y1="33" x2="40" y2="-33"/>
+        <line x1="-52" y1="-18" x2="52" y2="18"/>
+        <line x1="-22" y1="-42" x2="22" y2="42"/>
+      </g>
+      <!-- Hub -->
+      <ellipse cx="0" cy="0" rx="9" ry="7" fill="#110422" stroke="#aaff00" stroke-width="3"/>
+    </g>
+  </g>
+
+  <!-- Front Wheel (Smaller recumbent front wheel, centered at 710, 185) -->
+  <g id="front-wheel" filter="url(#sketch)">
+    <g transform="translate(710, 185) rotate(-30)">
+      <ellipse cx="0" cy="0" rx="50" ry="40" fill="none" stroke="#ff007f" stroke-width="5.5"/>
+      <ellipse cx="-1" cy="1" rx="52" ry="39" fill="none" stroke="#ff007f" stroke-width="1.8" stroke-dasharray="20 6"/>
+      <ellipse cx="0" cy="0" rx="41" ry="33" fill="none" stroke="#00f3ff" stroke-width="2.5"/>
+      <ellipse cx="1" cy="-1" rx="40" ry="34" fill="none" stroke="#aaff00" stroke-width="1.2" stroke-dasharray="10 8"/>
+      <!-- Spokes -->
+      <g stroke="#00f3ff" stroke-width="1.3" opacity="0.75">
+        <line x1="-40" y1="0" x2="40" y2="0"/>
+        <line x1="0" y1="-32" x2="0" y2="32"/>
+        <line x1="-29" y1="-23" x2="29" y2="23"/>
+        <line x1="-29" y1="23" x2="29" y2="-23"/>
+      </g>
+      <!-- Hub -->
+      <ellipse cx="0" cy="0" rx="7" ry="6" fill="#110422" stroke="#aaff00" stroke-width="2.8"/>
+    </g>
+  </g>
+
+  <!-- Recumbent Long-Wheelbase Frame & Drivetrain -->
+  <g id="recumbent-frame" filter="url(#sketch-lime)">
+    <!-- Long Drive Chain & Idler Pulley -->
+    <g stroke="#ff007f" stroke-width="2.2" stroke-dasharray="5 4" fill="none">
+      <path d="M 250,443 L 490,322 L 732,162"/>
+      <path d="M 252,456 L 492,334 L 730,182"/>
+    </g>
+    <!-- Idler Gear -->
+    <circle cx="490" cy="328" r="8" fill="#110422" stroke="#00f3ff" stroke-width="2.5"/>
+
+    <!-- Rear Triangle / Stays -->
+    <path d="M 250,450 L 385,392 L 325,335 Z" fill="none" stroke="#aaff00" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M 248,448 L 388,390 L 322,338 Z" fill="none" stroke="#00f3ff" stroke-width="1.6" stroke-linejoin="round"/>
+
+    <!-- Long Low Main Boom Tube (Signature LWB Recumbent) -->
+    <path d="M 385,392 C 475,350 565,295 660,155 L 735,170" fill="none" stroke="#aaff00" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Double sketch line on frame -->
+    <path d="M 382,395 C 477,353 568,298 662,158 L 732,173" fill="none" stroke="#00f3ff" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Front Fork & Headtube -->
+    <path d="M 710,185 L 652,138 M 713,183 L 656,136" stroke="#aaff00" stroke-width="4" stroke-linecap="round"/>
+    
+    <!-- Long Laid-Back Steering Riser & Wide Swept Handlebars -->
+    <path d="M 654,137 C 630,90 570,120 495,180" fill="none" stroke="#00f3ff" stroke-width="3.8" stroke-linecap="round"/>
+    <path d="M 465,165 L 525,198" stroke="#ff007f" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- Front Bottom Bracket Boom & Unoccupied Pedals (Pelican is coasting feet-off!) -->
+    <g transform="translate(733, 171) rotate(-30)">
+      <ellipse cx="0" cy="0" rx="16" ry="13" fill="#1d0938" stroke="#ff007f" stroke-width="3"/>
+      <circle cx="0" cy="0" r="4" fill="#aaff00"/>
+      <!-- Cranks & Empty Pedals -->
+      <line x1="0" y1="0" x2="8" y2="-26" stroke="#00f3ff" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M -2,-26 L 18,-26" stroke="#aaff00" stroke-width="4.5" stroke-linecap="round"/>
+      <line x1="0" y1="0" x2="-8" y2="26" stroke="#00f3ff" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M -18,26 L 2,26" stroke="#aaff00" stroke-width="4.5" stroke-linecap="round"/>
+    </g>
+
+    <!-- Cyberpunk Whip Flag on Rear of Recumbent -->
+    <path d="M 305,345 C 265,245 225,165 185,95" fill="none" stroke="#00f3ff" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M 185,95 L 130,115 L 198,132 Z" fill="#ff007f" stroke="#aaff00" stroke-width="2" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Recumbent Bucket Seat & Mesh Backrest (Leaning Back at 35 deg) -->
+  <g id="recumbent-seat" filter="url(#sketch-pink)">
+    <!-- Seat Struts -->
+    <line x1="340" y1="345" x2="415" y2="375" stroke="#00f3ff" stroke-width="3"/>
+    <line x1="295" y1="305" x2="365" y2="375" stroke="#00f3ff" stroke-width="3"/>
+    <!-- Seat Pan & High Reclined Backrest -->
+    <path d="M 268,245 C 282,295 315,340 355,355 C 395,370 435,355 462,338 L 448,322 C 420,338 390,348 360,335 C 325,320 298,280 285,238 Z" 
+          fill="#26073a" stroke="#ff007f" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M 268,245 C 282,295 315,340 355,355 C 395,370 435,355 462,338 Z" fill="url(#hatch-pink)"/>
+  </g>
+
+  <!-- ================= PELICAN RIDER (LEANING BACK CAREFREE) ================= -->
+  <g id="pelican-body" filter="url(#sketch)">
+    <!-- Tail Feathers resting at bottom of seat -->
+    <path d="M 340,340 L 295,365 L 315,345 L 288,350 L 325,330 Z" fill="#180830" stroke="#00f3ff" stroke-width="2.5" stroke-linejoin="round"/>
+
+    <!-- Plump Reclining Torso leaning way back against the backrest -->
+    <path d="M 295,245 C 285,290 325,345 380,348 C 435,350 475,320 465,282 C 455,248 395,235 355,215 C 325,200 302,215 295,245 Z" 
+          fill="#14183d" stroke="#00f3ff" stroke-width="3.8" stroke-linejoin="round"/>
+    <!-- Torso Hatching & Sketch Contours -->
+    <path d="M 295,245 C 285,290 325,345 380,348 C 435,350 475,320 465,282 Z" fill="url(#hatch-cyan)"/>
+    <path d="M 300,250 C 292,292 330,340 385,344 C 438,346 470,315 460,280" fill="none" stroke="#ff007f" stroke-width="1.8" stroke-dasharray="35 10"/>
+    <!-- Belly Highlight Lines -->
+    <path d="M 365,230 C 405,248 442,265 452,292 M 380,248 C 412,262 435,275 442,295" fill="none" stroke="#aaff00" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- S-Curved Neck & Head (Relaxed, leaning back) -->
+    <path d="M 310,235 C 285,195 275,145 292,105 C 302,80 335,72 358,85 C 375,95 375,118 368,135 C 345,165 340,195 362,225" 
+          fill="#14183d" stroke="#00f3ff" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Sketchy Head Tuft Feathers -->
+    <path d="M 295,100 L 270,92 L 288,86 L 268,75 L 298,78 L 288,64 L 315,76" 
+          fill="#14183d" stroke="#aaff00" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Cheerful Eye & Cyberpunk Visor Accent -->
+    <ellipse cx="338" cy="100" rx="9" ry="10" fill="#110422" stroke="#aaff00" stroke-width="2.8"/>
+    <!-- Happy squinted lower eyelid arc -->
+    <path d="M 331,103 Q 338,96 345,102" fill="none" stroke="#00f3ff" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="340" cy="96" r="2.5" fill="#ff007f"/>
+    <!-- Cheek glow -->
+    <path d="M 322,112 L 330,110 M 325,116 L 333,114" stroke="#ff007f" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- ================= PELICAN BEAK & THROAT POUCH ================= -->
+  <!-- Slightly open in a cheerful grin with a relaxed, moderately curved pouch -->
+  <g id="pelican-beak" filter="url(#sketch-pink)">
+    <!-- Moderately Curved Throat Pouch (Relaxed & Cheerful) -->
+    <path d="M 342,126 C 362,178 415,188 465,152 C 492,132 512,102 522,82 C 472,102 415,118 342,126 Z" 
+          fill="#2d083a" stroke="#ff007f" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M 342,126 C 362,178 415,188 465,152 C 492,132 512,102 522,82 Z" fill="url(#hatch-pink)"/>
+    <!-- Pouch Texture & Stretch Sketch Lines -->
+    <path d="M 358,138 C 382,162 425,166 468,136 M 378,132 C 405,148 442,146 485,118" 
+          fill="none" stroke="#aaff00" stroke-width="1.6" stroke-linecap="round" opacity="0.85"/>
+
+    <!-- Open Mouth Grin Interior (Slightly Open Between Mandibles) -->
+    <path d="M 355,116 C 415,102 475,85 524,68 L 522,82 C 472,102 412,118 342,126 Z" 
+          fill="#10021c" stroke="#ff007f" stroke-width="2.5" stroke-linejoin="round"/>
+    <!-- Cheerful Tongue Hint -->
+    <path d="M 365,122 Q 405,110 435,106" fill="none" stroke="#00f3ff" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Upper Beak Mandible (Pointing along Isometric Forward-Right Axis) -->
+    <path d="M 358,92 C 412,78 475,58 525,46 C 534,44 538,54 532,64 L 525,68 C 475,85 415,102 352,116 C 345,118 340,112 346,105 Z" 
+          fill="#1b1438" stroke="#aaff00" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M 358,92 C 412,78 475,58 525,46 L 525,68 C 475,85 415,102 352,116 Z" fill="url(#hatch-lime)"/>
+    <!-- Upper Beak Ridge & Hook Detail -->
+    <path d="M 362,98 C 418,83 478,64 528,52" fill="none" stroke="#00f3ff" stroke-width="1.8" stroke-linecap="round"/>
+    <!-- Grin Corner Smile Crease -->
+    <path d="M 336,118 C 342,126 350,128 356,122" fill="none" stroke="#aaff00" stroke-width="2.8" stroke-linecap="round"/>
+  </g>
+
+  <!-- ================= NEAR SIDE ELEMENTS (NEAR LEG & NEAR WING) ================= -->
+  <!-- Near Leg & Webbed Foot (Left leg stretched out carefree to the side/front, off the pedals) -->
+  <g id="near-leg" filter="url(#sketch-pink)">
+    <!-- Feather Thigh Cuff -->
+    <path d="M 435,305 C 448,295 465,305 468,322 C 452,328 438,320 435,305 Z" fill="#14183d" stroke="#00f3ff" stroke-width="2.8"/>
+    <!-- Outstretched Carefree Leg -->
+    <path d="M 455,315 C 510,310 565,300 615,288 M 458,320 C 512,315 568,305 618,294" 
+          fill="none" stroke="#ff007f" stroke-width="4" stroke-linecap="round"/>
+    <!-- Big Webbed Foot Fanned Out -->
+    <path d="M 615,288 L 668,255 C 668,270 672,278 684,282 C 675,292 675,302 682,314 L 616,294 Z" 
+          fill="#2d083a" stroke="#ff007f" stroke-width="3.2" stroke-linejoin="round"/>
+    <path d="M 618,290 L 680,282 M 618,292 L 678,310" stroke="#aaff00" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- Near Wing (Left Wing spread wide toward the bottom-right viewer for balance) -->
+  <g id="near-wing" filter="url(#sketch)">
+    <!-- Main Spread Wing Shape -->
+    <path d="M 365,268 C 425,305 495,365 555,455 C 518,452 492,432 478,415 C 488,448 462,452 435,422 C 442,452 415,455 392,425 C 395,448 372,448 355,420 C 340,395 342,340 345,295 Z" 
+          fill="#161b42" stroke="#00f3ff" stroke-width="3.8" stroke-linejoin="round"/>
+    <!-- Wing Hatching -->
+    <path d="M 365,268 C 425,305 495,365 555,455 C 518,452 492,432 478,415 C 488,448 462,452 435,422 C 442,452 415,455 392,425 C 395,448 372,448 355,420 C 340,395 342,340 345,295 Z" 
+          fill="url(#hatch-cyan)"/>
+    <!-- Secondary Covert Feathers Row (Hot Pink & Lime Sketch Accents) -->
+    <path d="M 355,282 C 402,315 448,352 485,392 C 462,390 448,378 442,368 C 442,385 422,385 408,368 C 408,382 388,382 375,365 C 362,348 352,315 350,292" 
+          fill="#230a3d" stroke="#ff007f" stroke-width="2.6" stroke-linejoin="round"/>
+    <!-- Extra Uneven Hand-Drawn Feather Strokes -->
+    <path d="M 370,272 C 430,310 500,370 558,450 M 478,415 L 435,365 M 435,422 L 405,368 M 392,425 L 375,365" 
+          fill="none" stroke="#aaff00" stroke-width="1.8" stroke-linecap="round"/>
+  </g>
+
+  <!-- ================= CYBERPUNK SKETCH ACCENTS & MOTION DETAILS ================= -->
+  <g filter="url(#sketch-lime)" stroke-linecap="round" fill="none">
+    <!-- Carefree Musical / Joy Sparks around Pelican's Grinning Head -->
+    <path d="M 360,48 L 368,30 M 385,55 L 402,42 M 335,52 L 330,34" stroke="#aaff00" stroke-width="2.5"/>
+    <!-- Spinning Wheel Motion Arcs (Isometric) -->
+    <path d="M 168,468 C 162,430 185,392 225,375" stroke="#00f3ff" stroke-width="2" stroke-dasharray="12 8"/>
+    <path d="M 768,145 C 782,168 772,205 742,228" stroke="#ff007f" stroke-width="2" stroke-dasharray="10 6"/>
+    <!-- Wingtip Balance Swishes -->
+    <path d="M 85,115 C 65,135 68,165 88,185" stroke="#00f3ff" stroke-width="2"/>
+    <path d="M 572,445 C 585,465 575,490 550,502" stroke="#ff007f" stroke-width="2.2"/>
+  </g>
+</svg>

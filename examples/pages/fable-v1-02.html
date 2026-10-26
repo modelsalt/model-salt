@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forkcast — Meal planning that actually sticks</title>
+<meta name="description" content="Forkcast plans your week of meals, builds your grocery list, and keeps dinner fun. Join the early-access waitlist.">
+<style>
+  :root{
+    --ink:#1d1033;
+    --paper:#fff8f0;
+    --mango:#ff9f1c;
+    --berry:#ff4d6d;
+    --grape:#7b2cff;
+    --lime:#b8f24a;
+    --sky:#3fc1ff;
+    --mint:#2ee6a6;
+    --radius:1.5rem;
+    --step--1:clamp(.85rem,.8rem + .25vw,1rem);
+    --step-0:clamp(1rem,.95rem + .35vw,1.2rem);
+    --step-1:clamp(1.25rem,1.1rem + .8vw,1.7rem);
+    --step-2:clamp(1.6rem,1.3rem + 1.6vw,2.6rem);
+    --step-3:clamp(2.2rem,1.6rem + 3.2vw,4.4rem);
+    --step-4:clamp(2.8rem,1.8rem + 5.5vw,6.5rem);
+    --space:clamp(1rem,.6rem + 2vw,2.5rem);
+    --gutter:clamp(1rem,4vw,4rem);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Nunito","Avenir Next","Segoe UI",system-ui,sans-serif;
+    font-size:var(--step-0);line-height:1.55;color:var(--ink);background:var(--paper);
+    overflow-x:hidden;
+  }
+  img,svg{display:block;max-width:100%}
+  a{color:inherit}
+  h1,h2,h3{line-height:1.05;letter-spacing:-.02em;font-weight:900}
+  .wrap{width:min(100% - 2*var(--gutter),72rem);margin-inline:auto}
+  .section{padding-block:clamp(3.5rem,8vw,7rem)}
+  .eyebrow{
+    display:inline-block;font-size:var(--step--1);font-weight:800;letter-spacing:.12em;
+    text-transform:uppercase;padding:.35em 1em;border-radius:99px;
+    background:var(--ink);color:var(--lime);
+  }
+  .btn{
+    display:inline-flex;align-items:center;gap:.5em;font-weight:800;font-size:var(--step-0);
+    padding:.9em 1.6em;border-radius:99px;border:0;cursor:pointer;text-decoration:none;
+    color:#fff;background:linear-gradient(120deg,var(--berry),var(--mango));
+    box-shadow:0 .5rem 0 var(--ink);transform:translateY(0);
+    transition:transform .15s ease,box-shadow .15s ease;
+  }
+  .btn:hover,.btn:focus-visible{transform:translateY(-.25rem);box-shadow:0 .75rem 0 var(--ink)}
+  .btn:active{transform:translateY(.25rem);box-shadow:0 .25rem 0 var(--ink)}
+  .btn--ghost{background:#fff;color:var(--ink)}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--space);
+    padding-block:1.25rem;
+  }
+  .logo{display:flex;align-items:center;gap:.5rem;font-weight:900;font-size:var(--step-1);text-decoration:none}
+  .logo svg{width:2.2em;height:2.2em}
+  .nav ul{display:flex;flex-wrap:wrap;gap:clamp(.75rem,2vw,2rem);list-style:none;font-weight:800}
+  .nav ul a{text-decoration:none;position:relative;padding:.25em 0}
+  .nav ul a::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:.25em;border-radius:99px;
+    background:linear-gradient(90deg,var(--grape),var(--berry));transform:scaleX(0);
+    transform-origin:left;transition:transform .2s ease;
+  }
+  .nav ul a:hover::after{transform:scaleX(1)}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    background:
+      radial-gradient(60% 70% at 85% 10%,var(--sky) 0,transparent 60%),
+      radial-gradient(50% 60% at 10% 90%,var(--lime) 0,transparent 60%),
+      linear-gradient(135deg,var(--grape) 0%,var(--berry) 55%,var(--mango) 100%);
+    color:#fff;
+  }
+  .hero__grid{
+    display:flex;flex-wrap:wrap;align-items:center;gap:var(--space);
+    padding-block:clamp(2rem,6vw,5rem);
+  }
+  .hero__copy{flex:1 1 22rem}
+  .hero__art{flex:1 1 18rem;display:grid;place-items:center}
+  .hero h1{font-size:var(--step-4);margin:.5em 0 .35em}
+  .hero h1 span{
+    display:inline-block;padding:0 .2em;border-radius:.3em;
+    background:var(--lime);color:var(--ink);transform:rotate(-2deg);
+  }
+  .hero p{font-size:var(--step-1);max-width:34ch;font-weight:600;opacity:.95}
+  .hero .eyebrow{background:#fff;color:var(--grape)}
+
+  .waitlist{
+    display:flex;flex-wrap:wrap;gap:.6rem;margin-top:clamp(1.25rem,3vw,2rem);
+    background:#fff;padding:.5rem;border-radius:99px;box-shadow:0 .5rem 0 var(--ink);
+    max-width:34rem;
+  }
+  .waitlist input{
+    flex:1 1 12rem;min-width:0;border:0;outline:0;font:inherit;font-weight:700;
+    padding:.8em 1.2em;border-radius:99px;color:var(--ink);background:transparent;
+  }
+  .waitlist input::placeholder{color:#9c8fb5}
+  .waitlist input:focus{background:#f3eefc}
+  .waitlist .btn{box-shadow:none;flex:0 0 auto}
+  .waitlist .btn:hover{transform:scale(1.04);box-shadow:none}
+  .hero small{display:block;margin-top:.9rem;font-weight:700;opacity:.9;font-size:var(--step--1)}
+
+  .blob{width:min(100%,30rem);filter:drop-shadow(0 1.5rem 0 rgba(29,16,51,.25))}
+  .blob .wobble{animation:wobble 6s ease-in-out infinite;transform-origin:center}
+  .blob .float{animation:float 4s ease-in-out infinite}
+  .blob .float.d1{animation-delay:-1.2s}.blob .float.d2{animation-delay:-2.4s}
+  @keyframes wobble{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  @media (prefers-reduced-motion:reduce){.blob *{animation:none}}
+
+  .ticker{
+    display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem 1.5rem;
+    padding:.9rem var(--gutter);background:var(--ink);color:var(--lime);
+    font-weight:800;font-size:var(--step--1);letter-spacing:.06em;text-transform:uppercase;
+  }
+  .ticker span::before{content:"✦ ";color:var(--mango)}
+
+  /* ---------- WEEK PLAN ---------- */
+  .plan{background:var(--paper)}
+  .section__head{max-width:46ch;margin-bottom:clamp(2rem,4vw,3rem)}
+  .section__head h2{font-size:var(--step-3);margin:.4em 0 .3em}
+  .section__head p{font-size:var(--step-1);font-weight:600;color:#4b3b6b}
+  .week{
+    display:grid;gap:1rem;
+    grid-template-columns:repeat(auto-fit,minmax(min(100%,11rem),1fr));
+  }
+  .day{
+    background:#fff;border-radius:var(--radius);padding:1.1rem;
+    border:3px solid var(--ink);box-shadow:.4rem .4rem 0 var(--ink);
+    display:flex;flex-direction:column;gap:.6rem;
+    transition:transform .2s ease,box-shadow .2s ease;
+  }
+  .day:hover{transform:translate(-.25rem,-.25rem);box-shadow:.65rem .65rem 0 var(--ink)}
+  .day__name{
+    font-weight:900;font-size:var(--step--1);letter-spacing:.12em;text-transform:uppercase;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .day__name i{
+    font-style:normal;font-size:.8em;padding:.2em .6em;border-radius:99px;
+    background:var(--lime);color:var(--ink);
+  }
+  .day__art{
+    aspect-ratio:1;border-radius:1rem;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--c1),var(--c2));
+  }
+  .day__art svg{width:62%;height:62%;transition:transform .25s ease}
+  .day:hover .day__art svg{transform:scale(1.12) rotate(-6deg)}
+  .day h3{font-size:var(--step-0);line-height:1.2}
+  .day p{font-size:var(--step--1);color:#5e4e7e;font-weight:600}
+  .day--rest{
+    background:repeating-linear-gradient(-45deg,#fff 0 .6rem,#fff3df .6rem 1.2rem);
+    justify-content:center;text-align:center;
+  }
+  .plan__note{
+    margin-top:2rem;display:flex;flex-wrap:wrap;align-items:center;gap:1rem;
+    background:linear-gradient(120deg,var(--mint),var(--sky));
+    padding:1.25rem 1.5rem;border-radius:var(--radius);border:3px solid var(--ink);
+    font-weight:800;
+  }
+  .plan__note span{flex:1 1 20rem}
+
+  /* ---------- FEATURES ---------- */
+  .features{
+    background:
+      radial-gradient(40% 50% at 100% 0%,rgba(255,255,255,.3),transparent 60%),
+      linear-gradient(160deg,var(--sky),var(--grape));
+    color:#fff;
+  }
+  .features .section__head p{color:#eadfff}
+  .features .eyebrow{background:#fff;color:var(--grape)}
+  .feat-grid{
+    display:grid;gap:1.25rem;
+    grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr));
+  }
+  .feat{
+    position:relative;background:#fff;color:var(--ink);border-radius:var(--radius);
+    padding:clamp(1.25rem,3vw,2rem);border:3px solid var(--ink);box-shadow:.4rem .4rem 0 var(--ink);
+    transition:transform .2s ease;
+  }
+  .feat:hover{transform:rotate(-1.5deg) scale(1.02)}
+  .feat:nth-child(even):hover{transform:rotate(1.5deg) scale(1.02)}
+  .feat__icon{
+    width:4rem;height:4rem;border-radius:1.2rem;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--c1),var(--c2));border:3px solid var(--ink);
+    margin-bottom:1rem;
+  }
+  .feat__icon svg{width:60%;height:60%}
+  .feat h3{font-size:var(--step-1);margin-bottom:.4em}
+  .feat p{font-weight:600;color:#4b3b6b}
+
+  /* ---------- FINAL CTA ---------- */
+  .cta{
+    position:relative;overflow:hidden;text-align:center;
+    background:
+      radial-gradient(50% 60% at 0% 100%,var(--lime),transparent 60%),
+      radial-gradient(50% 60% at 100% 0%,var(--sky),transparent 60%),
+      linear-gradient(120deg,var(--mango),var(--berry));
+    color:#fff;
+  }
+  .cta__card{
+    position:relative;background:var(--ink);border-radius:2rem;
+    padding:clamp(2rem,6vw,4.5rem) clamp(1.25rem,5vw,4rem);
+    border:3px solid #fff;box-shadow:.6rem .6rem 0 #fff;
+  }
+  .cta h2{font-size:var(--step-3);max-width:20ch;margin:.3em auto .5em}
+  .cta h2 em{font-style:normal;color:var(--lime)}
+  .cta p{font-size:var(--step-1);font-weight:600;max-width:40ch;margin-inline:auto;opacity:.9}
+  .cta .waitlist{margin-inline:auto;box-shadow:0 .5rem 0 var(--berry)}
+  .cta .eyebrow{background:var(--lime);color:var(--ink)}
+  .cta__stars{
+    display:flex;flex-wrap:wrap;justify-content:center;gap:1rem 2rem;margin-top:2rem;
+    font-weight:800;font-size:var(--step--1);opacity:.85;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:2rem var(--gutter);display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;
+    font-weight:700;font-size:var(--step--1);color:#6b5c8a;
+  }
+  footer a{text-decoration:none}
+  footer a:hover{color:var(--grape);text-decoration:underline wavy}
+</style>
+</head>
+<body>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero" id="top">
+  <nav class="nav wrap" aria-label="Primary">
+    <a class="logo" href="#top" aria-label="Forkcast home">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="30" fill="#fff"/>
+        <circle cx="32" cy="32" r="22" fill="#ff9f1c"/>
+        <path d="M22 18v14a6 6 0 0 0 4 5.6V46h4V37.6A6 6 0 0 0 34 32V18h-3v12h-2V18h-3v12h-2V18z" fill="#1d1033"/>
+        <path d="M40 18c-3 0-5 4-5 10 0 3 1 5 3 6v12h4V18z" fill="#1d1033"/>
+      </svg>
+      Forkcast
+    </a>
+    <ul>
+      <li><a href="#plan">This week</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#join">Join waitlist</a></li>
+    </ul>
+  </nav>
+
+  <div class="wrap hero__grid">
+    <div class="hero__copy">
+      <span class="eyebrow">Launching early 2027</span>
+      <h1>Dinner, <span>sorted</span> for the whole week.</h1>
+      <p>Forkcast builds a week of meals around what you love, what's in your fridge, and how much time you actually have. Grocery list included.</p>
+
+      <form class="waitlist" action="#join" method="post" aria-label="Join the waitlist">
+        <label for="hero-email" class="visually-hidden" hidden>Email address</label>
+        <input id="hero-email" type="email" name="email" placeholder="you@example.com" required autocomplete="email">
+        <button class="btn" type="submit">Join the waitlist →</button>
+      </form>
+      <small>Free early access for the first 5,000 cooks. No spam, just dinner.</small>
+    </div>
+
+    <div class="hero__art" aria-hidden="true">
+      <!-- Playful plate illustration -->
+      <svg class="blob" viewBox="0 0 400 400">
+        <g class="wobble">
+          <path d="M200 30c70-10 150 40 160 120s-40 180-130 200S30 320 30 220 130 40 200 30z" fill="#fff" opacity=".18"/>
+          <circle cx="200" cy="205" r="140" fill="#fff"/>
+          <circle cx="200" cy="205" r="110" fill="#ffe8d1"/>
+          <!-- bowl of noodles -->
+          <path d="M110 215h180c0 50-40 80-90 80s-90-30-90-80z" fill="#ff4d6d"/>
+          <path d="M110 215h180c0 10-2 18-5 26H115c-3-8-5-16-5-26z" fill="#1d1033" opacity=".15"/>
+          <path d="M120 215c10-40 40-55 80-55s70 15 80 55z" fill="#ffd166"/>
+          <path d="M135 200c12-18 30-25 65-25s53 7 65 25" fill="none" stroke="#ff9f1c" stroke-width="8" stroke-linecap="round"/>
+          <path d="M150 205c10-10 25-15 50-15s40 5 50 15" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+          <!-- toppings -->
+          <circle cx="165" cy="188" r="12" fill="#2ee6a6"/>
+          <circle cx="235" cy="188" r="12" fill="#2ee6a6"/>
+          <ellipse cx="200" cy="180" rx="18" ry="11" fill="#fff" stroke="#ff9f1c" stroke-width="4"/>
+          <circle cx="200" cy="180" r="6" fill="#ff9f1c"/>
+          <!-- chopsticks -->
+          <path d="M250 110l50 115" stroke="#1d1033" stroke-width="9" stroke-linecap="round"/>
+          <path d="M270 100l40 125" stroke="#1d1033" stroke-width="9" stroke-linecap="round"/>
+          <!-- happy face on bowl -->
+          <circle cx="175" cy="245" r="6" fill="#1d1033"/>
+          <circle cx="225" cy="245" r="6" fill="#1d1033"/>
+          <path d="M185 262q15 14 30 0" fill="none" stroke="#1d1033" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="160" cy="258" r="7" fill="#ff9f1c" opacity=".8"/>
+          <circle cx="240" cy="258" r="7" fill="#ff9f1c" opacity=".8"/>
+        </g>
+        <!-- floating bits -->
+        <g class="float">
+          <path d="M70 110c0-16 14-28 30-24 12 3 18 14 15 26-4 12-16 18-28 14-10-3-17-8-17-16z" fill="#b8f24a"/>
+          <path d="M82 98c6 4 10 10 12 18" stroke="#1d1033" stroke-width="4" stroke-linecap="round" fill="none"/>
+        </g>
+        <g class="float d1">
+          <circle cx="330" cy="300" r="22" fill="#ff9f1c"/>
+          <path d="M330 276c-4-8 2-14 8-10" stroke="#2ee6a6" stroke-width="6" stroke-linecap="round" fill="none"/>
+        </g>
+        <g class="float d2">
+          <rect x="300" y="60" width="44" height="30" rx="8" fill="#3fc1ff"/>
+          <path d="M300 75h44" stroke="#fff" stroke-width="4"/>
+          <path d="M310 66l8 8m8-8l8 8" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+        </g>
+        <path d="M60 300l12-6 12 6-12 6z" fill="#fff"/>
+        <path d="M350 180l10-5 10 5-10 5z" fill="#fff"/>
+        <circle cx="90" cy="340" r="6" fill="#fff"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="ticker" aria-hidden="true">
+    <span>7 dinners in 60 seconds</span>
+    <span>Auto grocery list</span>
+    <span>Leftover-aware</span>
+    <span>Picky-eater proof</span>
+    <span>Zero "what's for dinner?"</span>
+  </div>
+</header>
+
+<main>
+<!-- ===================== SAMPLE WEEKLY PLAN ===================== -->
+<section class="section plan" id="plan">
+  <div class="wrap">
+    <div class="section__head">
+      <span class="eyebrow">A sample week</span>
+      <h2>Here's what a Forkcast week looks like.</h2>
+      <p>Generated for a family of four, two veggie nights, 30-minute weeknights, and Friday off. Swap any day with a tap.</p>
+    </div>
+
+    <div class="week">
+      <article class="day" style="--c1:#ff9f1c;--c2:#ff4d6d">
+        <div class="day__name">Mon <i>25 min</i></div>
+        <div class="day__art" aria-hidden="true">
+          <svg viewBox="0 0 64 64"><path d="M8 40c8-20 40-20 48 0z" fill="#ffd166"/><path d="M8 40h48v6H8z" fill="#fff"/><circle cx="22" cy="34" r="4" fill="#ff4d6d"/><circle cx="36" cy="30" r="4" fill="#2ee6a6"/><circle cx="44" cy="36" r="3" fill="#7b2cff"/></svg>
+        </div>
+        <h3>Sheet-pan fajita bowls</h3>
+        <p>Peppers, lime rice, charred corn.</p>
+      </article>
+
+      <article class="day" style="--c1:#2ee6a6;--c2:#3fc1ff">
+        <div class="day__name">Tue <i>20 min</i></div>
+        <div class="day__art" aria-hidden="true">
+          <svg viewBox="0 0 64 64"><circle cx="32" cy="34" r="22" fill="#fff"/><circle cx="32" cy="34" r="16" fill="#b8f24a"/><path d="M22 34q10-12 20 0" fill="none" stroke="#1d1033" stroke-width="3" stroke-linecap="round"/><circle cx="26" cy="28" r="3" fill="#ff4d6d"/><circle cx="38" cy="40" r="3" fill="#ff4d6d"/></svg>
+        </div>
+        <h3>Green goddess pasta</h3>
+        <p>Veggie night · uses Monday's herbs.</p>
+      </article>
+
+      <article class="day" style="--c1:#7b2cff;--c2:#ff4d6d">
+        <div class="day__name">Wed <i>30 min</i></div>
+        <div class="day__art" aria-hidden="true">
+          <svg viewBox="0 0 64 64"><path d="M14 20h36l-4 30H18z" fill="#fff"/><path d="M14 20h36v6H14z" fill="#ffd166"/><path d="M22 32h20M24 40h16" stroke="#ff9f1c" stroke-width="4" stroke-linecap="round"/><circle cx="48" cy="16" r="6" fill="#2ee6a6"/></svg>
+        </div>
+        <h3>Crispy tofu banh mi</h3>
+        <p>Quick pickles made Sunday.</p>
+      </article>
+
+      <article class="day" style="--c1:#ff4d6d;--c2:#ff9f1c">
+        <div class="day__name">Thu <i>15 min</i></div>
+        <div class="day__art" aria-hidden="true">
+          <svg viewBox="0 0 64 64"><path d="M10 44c0-14 10-24 22-24s22 10 22 24z" fill="#ff9f1c"/><path d="M10 44h44v4H10z" fill="#1d1033"/><circle cx="24" cy="36" r="4" fill="#fff"/><circle cx="38" cy="32" r="4" fill="#fff"/><circle cx="32" cy="40" r="3" fill="#2ee6a6"/></svg>
+        </div>
+        <h3>Leftover fajita quesadillas</h3>
+        <p>Leftover-aware · zero waste.</p>
+      </article>
+
+      <article class="day day--rest" style="--c1:#fff;--c2:#fff">
+        <div class="day__name" style="justify-content:center">Fri</div>
+        <div style="font-size:var(--step-2)" aria-hidden="true">🍕</div>
+        <h3>Night off!</h3>
+        <p>You picked "takeout Fridays". We respect that.</p>
+      </article>
+
+      <article class="day" style="--c1:#3fc1ff;--c2:#7b2cff">
+        <div class="day__name">Sat <i>45 min</i></div>
+        <div class="day__art" aria-hidden="true">
+          <svg viewBox="0 0 64 64"><rect x="12" y="14" width="40" height="36" rx="6" fill="#fff"/><rect x="18" y="20" width="28" height="14" rx="3" fill="#ff4d6d"/><path d="M20 42h24" stroke="#1d1033" stroke-width="4" stroke-linecap="round"/><circle cx="26" cy="27" r="3" fill="#ffd166"/><circle cx="38" cy="27" r="3" fill="#ffd166"/></svg>
+        </div>
+        <h3>Slow-cooker ragu lasagna</h3>
+        <p>Weekend project · makes 2 lunches.</p>
+      </article>
+
+      <article class="day" style="--c1:#b8f24a;--c2:#2ee6a6">
+        <div class="day__name">Sun <i>35 min</i></div>
+        <div class="day__art" aria-hidden="true">
+          <svg viewBox="0 0 64 64"><path d="M32 10l22 36H10z" fill="#ffd166"/><path d="M32 10l22 36H10z" fill="none" stroke="#1d1033" stroke-width="3" stroke-linejoin="round"/><circle cx="32" cy="36" r="5" fill="#ff4d6d"/><circle cx="24" cy="42" r="3" fill="#2ee6a6"/><circle cx="40" cy="42" r="3" fill="#7b2cff"/></svg>
+        </div>
+        <h3>Miso-glazed salmon + prep</h3>
+        <p>Plus 10 min prepping next week.</p>
+      </article>
+    </div>
+
+    <div class="plan__note">
+      <span>🛒 &nbsp;Your grocery list for this week: <strong>31 items, 1 store, about $118.</strong> Already sorted by aisle.</span>
+      <a class="btn btn--ghost" href="#join">Get my week →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FEATURES ===================== -->
+<section class="section features" id="features">
+  <div class="wrap">
+    <div class="section__head">
+      <span class="eyebrow">Why Forkcast</span>
+      <h2>Less deciding. More eating.</h2>
+      <p>Built for real kitchens: picky kids, odd schedules, half an onion in the crisper drawer.</p>
+    </div>
+
+    <div class="feat-grid">
+      <article class="feat" style="--c1:#ff9f1c;--c2:#ff4d6d">
+        <div class="feat__icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M24 6l4 10 11 1-8 7 3 11-10-6-10 6 3-11-8-7 11-1z" fill="#fff"/></svg>
+        </div>
+        <h3>Plans that learn your taste</h3>
+        <p>Thumbs-up a meal and we'll find more like it. Thumbs-down cilantro and it vanishes forever.</p>
+      </article>
+
+      <article class="feat" style="--c1:#2ee6a6;--c2:#3fc1ff">
+        <div class="feat__icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><rect x="8" y="10" width="32" height="30" rx="5" fill="#fff"/><path d="M14 20h20M14 27h20M14 34h12" stroke="#1d1033" stroke-width="3" stroke-linecap="round"/></svg>
+        </div>
+        <h3>One-tap grocery list</h3>
+        <p>Every plan becomes a list grouped by aisle, with quantities merged. Check things off as you shop.</p>
+      </article>
+
+      <article class="feat" style="--c1:#7b2cff;--c2:#ff4d6d">
+        <div class="feat__icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M10 28a14 14 0 0 1 24-10l4-4v12H26l4-4a8 8 0 0 0-14 6z" fill="#fff"/><path d="M38 20a14 14 0 0 1-24 10l-4 4V22h12l-4 4a8 8 0 0 0 14-6z" fill="#fff" opacity=".7"/></svg>
+        </div>
+        <h3>Leftovers, planned on purpose</h3>
+        <p>Monday's roast chicken becomes Thursday's tacos. Nothing dies in the back of the fridge.</p>
+      </article>
+
+      <article class="feat" style="--c1:#b8f24a;--c2:#2ee6a6">
+        <div class="feat__icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="16" fill="#fff"/><path d="M24 14v10l7 5" stroke="#1d1033" stroke-width="3" stroke-linecap="round" fill="none"/></svg>
+        </div>
+        <h3>Fits your actual week</h3>
+        <p>Tell us which nights are chaos. Those get 15-minute meals; the lazy Sunday gets the lasagna.</p>
+      </article>
+
+      <article class="feat" style="--c1:#3fc1ff;--c2:#7b2cff">
+        <div class="feat__icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><circle cx="18" cy="18" r="7" fill="#fff"/><circle cx="32" cy="18" r="7" fill="#fff" opacity=".8"/><path d="M8 38c0-8 5-12 10-12s10 4 10 12z" fill="#fff"/><path d="M22 38c0-8 5-12 10-12s10 4 10 12z" fill="#fff" opacity=".8"/></svg>
+        </div>
+        <h3>Shared with the household</h3>
+        <p>Everyone can vote on dinners, add to the list, and claim a cooking night. Yes, even the teenager.</p>
+      </article>
+
+      <article class="feat" style="--c1:#ff4d6d;--c2:#ff9f1c">
+        <div class="feat__icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M12 36V14l12-6 12 6v22z" fill="#fff"/><path d="M12 14l12 6 12-6M24 20v16" stroke="#1d1033" stroke-width="3" fill="none"/></svg>
+        </div>
+        <h3>Cook from your pantry</h3>
+        <p>Snap what's in the cupboard and Forkcast builds meals around it before suggesting anything new.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FINAL CTA ===================== -->
+<section class="section cta" id="join">
+  <div class="wrap">
+    <div class="cta__card">
+      <span class="eyebrow">Early access</span>
+      <h2>Be first in line when <em>Forkcast</em> opens its kitchen.</h2>
+      <p>Join the waitlist and we'll send your invite, plus a free printable week to tide you over.</p>
+
+      <form class="waitlist" action="#join" method="post" aria-label="Join the waitlist">
+        <label for="cta-email" hidden>Email address</label>
+        <input id="cta-email" type="email" name="email" placeholder="you@example.com" required autocomplete="email">
+        <button class="btn" type="submit">Save my spot →</button>
+      </form>
+
+      <div class="cta__stars">
+        <span>🥦 4,120 cooks already waiting</span>
+        <span>🔒 Unsubscribe anytime</span>
+        <span>📱 iOS &amp; Android</span>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <span>© 2026 Forkcast. Made with leftover enthusiasm.</span>
+  <nav aria-label="Footer">
+    <a href="#top">Back to top ↑</a> &nbsp;·&nbsp;
+    <a href="#plan">Sample week</a> &nbsp;·&nbsp;
+    <a href="#features">Features</a>
+  </nav>
+</footer>
+
+</body>
+</html>

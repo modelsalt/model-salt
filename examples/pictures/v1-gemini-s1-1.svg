@@ -1,0 +1,331 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 900" width="100%" height="100%">
+  <defs>
+    <!-- Crosshatching and Ink Patterns -->
+    <pattern id="hatch-left" width="8" height="8" patternTransform="rotate(35 0 0)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#111" stroke-width="1.2" />
+    </pattern>
+    <pattern id="hatch-right" width="8" height="8" patternTransform="rotate(-35 0 0)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#111" stroke-width="1.2" />
+    </pattern>
+    <pattern id="crosshatch-light" width="9" height="9" patternTransform="rotate(25 0 0)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#111" stroke-width="1" />
+      <line x1="0" y1="0" x2="9" y2="0" stroke="#111" stroke-width="1" />
+    </pattern>
+    <pattern id="crosshatch-dark" width="6" height="6" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#111" stroke-width="1.6" />
+      <line x1="0" y1="0" x2="6" y2="0" stroke="#111" stroke-width="1.6" />
+    </pattern>
+    <pattern id="pouch-texture" width="12" height="6" patternUnits="userSpaceOnUse">
+      <path d="M 0 3 Q 6 5 12 3" fill="none" stroke="#111" stroke-width="0.9" />
+      <line x1="6" y1="0" x2="6" y2="6" stroke="#111" stroke-width="0.6" stroke-dasharray="2,2" />
+    </pattern>
+    <pattern id="wire-mesh" width="14" height="14" patternUnits="userSpaceOnUse">
+      <path d="M 0 7 L 7 0 L 14 7 L 7 14 Z" fill="none" stroke="#111" stroke-width="1.4" />
+    </pattern>
+
+    <style>
+      .ink-thick { stroke: #111; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; fill: #fff; }
+      .ink-med { stroke: #111; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; fill: #fff; }
+      .ink-thin { stroke: #111; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .ink-fine { stroke: #111; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .no-fill { fill: none; }
+      .black-fill { fill: #111; stroke: #111; stroke-width: 2; stroke-linejoin: round; }
+    </style>
+  </defs>
+
+  <!-- Crisp White Background -->
+  <rect width="800" height="900" fill="#ffffff" />
+
+  <!-- ==================== BACKGROUND / SPEED LINES & GROUND ==================== -->
+  <g id="environment">
+    <!-- Ground Shadow & Hatching -->
+    <ellipse cx="400" cy="845" rx="180" ry="18" fill="url(#crosshatch-light)" />
+    <ellipse cx="400" cy="845" rx="95" ry="10" fill="url(#crosshatch-dark)" />
+    <path d="M 150 845 L 650 845" class="ink-med" />
+    <path d="M 220 855 L 580 855 M 280 863 L 490 863 M 180 840 L 240 840 M 560 840 L 630 840" class="ink-thin" />
+    
+    <!-- Radial Action / Wind Lines -->
+    <g class="ink-fine" stroke-dasharray="18, 12, 6, 12">
+      <line x1="120" y1="120" x2="30" y2="50" />
+      <line x1="680" y1="120" x2="770" y2="50" />
+      <line x1="80" y1="280" x2="10" y2="260" />
+      <line x1="720" y1="280" x2="790" y2="260" />
+      <line x1="110" y1="500" x2="30" y2="530" />
+      <line x1="690" y1="500" x2="770" y2="530" />
+    </g>
+  </g>
+
+  <!-- ==================== PELICAN: HUNCHED BODY & LEGS ==================== -->
+  <g id="pelican-body-and-legs">
+    <!-- Hunched Back / Torso (Aerodynamic Racing Crouch) -->
+    <path d="M 210 260 C 260 140, 540 140, 590 260 C 610 350, 540 460, 400 460 C 260 460, 190 350, 210 260 Z" class="ink-thick" />
+    <path d="M 210 260 C 260 155, 540 155, 590 260 C 560 200, 240 200, 210 260 Z" fill="url(#hatch-left)" />
+    <path d="M 225 320 C 250 430, 550 430, 575 320 C 540 455, 260 455, 225 320 Z" fill="url(#crosshatch-light)" />
+
+    <!-- Feather Texture on Torso -->
+    <path d="M 280 185 Q 300 200 320 185 M 350 175 Q 370 190 390 175 M 420 175 Q 440 190 460 175 M 490 185 Q 510 200 530 185" class="ink-thin" />
+    <path d="M 250 220 Q 270 235 290 220 M 510 220 Q 530 235 550 220" class="ink-thin" />
+
+    <!-- Left Leg (High Pedal Position) -->
+    <!-- Thigh/Knee bowed out -->
+    <path d="M 300 410 C 240 430, 230 480, 290 520 C 310 530, 335 510, 330 480" class="ink-thick" />
+    <path d="M 300 410 C 255 430, 245 480, 290 520 Z" fill="url(#hatch-right)" />
+    <!-- Scaly Lower Leg -->
+    <path d="M 285 515 L 298 605 L 316 605 L 305 515 Z" class="ink-med" />
+    <path d="M 287 530 L 306 530 M 290 545 L 308 545 M 292 560 L 310 560 M 294 575 L 312 575 M 296 590 L 314 590" class="ink-fine" />
+    
+    <!-- Right Leg (Low Pedal Position) -->
+    <!-- Thigh/Knee -->
+    <path d="M 500 410 C 560 440, 575 530, 520 590 C 500 605, 470 580, 480 540" class="ink-thick" />
+    <path d="M 500 410 C 545 440, 560 530, 520 590 Z" fill="url(#hatch-left)" />
+    <!-- Scaly Lower Leg -->
+    <path d="M 510 580 L 492 715 L 474 715 L 492 580 Z" class="ink-med" />
+    <path d="M 490 600 L 508 600 M 488 615 L 505 615 M 486 630 L 503 630 M 483 645 L 500 645 M 481 660 L 498 660 M 479 675 L 496 675 M 477 690 L 494 690" class="ink-fine" />
+
+    <!-- Pedals, Cranks & Webbed Feet -->
+    <!-- Left Pedal & Foot (Up) -->
+    <line x1="365" y1="650" x2="320" y2="615" stroke="#111" stroke-width="6" stroke-linecap="round" />
+    <rect x="265" y="610" width="75" height="12" rx="4" class="ink-med" fill="url(#crosshatch-dark)" />
+    <path d="M 298 600 C 275 595, 260 612, 268 620 C 280 615, 290 618, 302 622 C 314 618, 325 615, 336 620 C 342 612, 330 595, 316 600 Z" class="ink-med" />
+    <path d="M 285 605 L 278 616 M 305 604 L 303 618 M 320 605 L 326 616" class="ink-fine" />
+
+    <!-- Right Pedal & Foot (Down) -->
+    <line x1="435" y1="670" x2="475" y2="725" stroke="#111" stroke-width="6" stroke-linecap="round" />
+    <rect x="455" y="720" width="75" height="12" rx="4" class="ink-med" fill="url(#crosshatch-dark)" />
+    <path d="M 474 710 C 455 705, 445 722, 453 730 C 465 725, 478 728, 490 732 C 502 728, 515 725, 526 730 C 532 722, 520 705, 492 710 Z" class="ink-med" />
+    <path d="M 468 715 L 462 726 M 485 714 L 487 728 M 502 715 L 512 726" class="ink-fine" />
+  </g>
+
+  <!-- ==================== PELICAN: WIDE WINGS (AERODYNAMIC CROUCH) ==================== -->
+  <g id="pelican-wings">
+    <!-- Left Wing -->
+    <g id="left-wing">
+      <!-- Secondary Feathers (Underneath) -->
+      <path d="M 220 270 C 140 280, 90 250, 75 290 C 90 310, 120 305, 110 330 C 130 340, 160 330, 155 355 C 180 360, 210 345, 240 340 Z" class="ink-med" fill="url(#hatch-left)" />
+      <!-- Primary Wing Structure Bowed Out -->
+      <path d="M 245 230 C 140 160, 45 190, 35 280 C 30 330, 85 385, 165 390 C 185 392, 200 375, 190 360 C 140 350, 105 315, 125 285 C 145 255, 205 285, 255 300 Z" class="ink-thick" />
+      <!-- Wing Shading & Feather Lines -->
+      <path d="M 245 230 C 140 175, 55 200, 42 280 C 60 230, 140 210, 245 250 Z" fill="url(#crosshatch-light)" />
+      <path d="M 42 260 C 70 265, 100 280, 120 295 M 40 285 C 70 290, 95 305, 118 315 M 48 310 C 75 315, 100 325, 125 335 M 65 335 C 90 340, 115 345, 140 350" class="ink-thin" />
+      <path d="M 130 220 Q 110 240 120 260 M 165 215 Q 145 235 155 255 M 200 220 Q 180 240 190 260" class="ink-fine" />
+    </g>
+
+    <!-- Right Wing -->
+    <g id="right-wing">
+      <!-- Secondary Feathers (Underneath) -->
+      <path d="M 580 270 C 660 280, 710 250, 725 290 C 710 310, 680 305, 690 330 C 670 340, 640 330, 645 355 C 620 360, 590 345, 560 340 Z" class="ink-med" fill="url(#hatch-right)" />
+      <!-- Primary Wing Structure Bowed Out -->
+      <path d="M 555 230 C 660 160, 755 190, 765 280 C 770 330, 715 385, 635 390 C 615 392, 600 375, 610 360 C 660 350, 695 315, 675 285 C 655 255, 595 285, 545 300 Z" class="ink-thick" />
+      <!-- Wing Shading & Feather Lines -->
+      <path d="M 555 230 C 660 175, 745 200, 758 280 C 740 230, 660 210, 555 250 Z" fill="url(#crosshatch-light)" />
+      <path d="M 758 260 C 730 265, 700 280, 680 295 M 760 285 C 730 290, 705 305, 682 315 M 752 310 C 725 315, 700 325, 675 335 M 735 335 C 710 340, 685 345, 660 350" class="ink-thin" />
+      <path d="M 670 220 Q 690 240 680 260 M 635 215 Q 655 235 645 255 M 600 220 Q 620 240 610 260" class="ink-fine" />
+    </g>
+  </g>
+
+  <!-- ==================== BICYCLE: HANDLEBARS, FRAME, FENDERS & WHEEL ==================== -->
+  <g id="vintage-bicycle">
+    <!-- Head Tube & Stem (Behind Pouch/Basket) -->
+    <rect x="388" y="390" width="24" height="120" class="ink-thick" fill="url(#hatch-left)" />
+    <!-- Lugged Frame Details -->
+    <rect x="384" y="420" width="32" height="12" class="ink-med" />
+    <rect x="384" y="485" width="32" height="12" class="ink-med" />
+
+    <!-- Vintage Swept-Back Handlebars -->
+    <path d="M 388 398 C 330 398, 315 350, 255 355 C 215 358, 190 368, 155 370 L 155 386 C 190 384, 215 374, 255 371 C 305 368, 325 414, 388 414 Z" class="ink-thick" />
+    <path d="M 412 398 C 470 398, 485 350, 545 355 C 585 358, 610 368, 645 370 L 645 386 C 610 384, 585 374, 545 371 C 495 368, 475 414, 412 414 Z" class="ink-thick" />
+    <!-- Handlebar Stem Clamp -->
+    <ellipse cx="400" cy="405" rx="16" ry="14" class="ink-thick" />
+    <circle cx="400" cy="405" r="6" class="ink-med" fill="url(#crosshatch-dark)" />
+    <!-- Classic Brass Bell on Right Bar -->
+    <ellipse cx="515" cy="348" rx="18" ry="12" class="ink-med" />
+    <path d="M 497 348 Q 515 335 533 348" class="ink-thin" fill="url(#hatch-right)" />
+    <path d="M 533 352 L 542 358" class="ink-med" />
+
+    <!-- Handlebar Grips & Wing Feathers Wrapping Around Them -->
+    <!-- Left Grip & Wrapping Feathers -->
+    <rect x="130" y="365" width="55" height="24" rx="8" class="ink-thick" fill="url(#crosshatch-dark)" />
+    <path d="M 140 355 C 135 375, 142 398, 152 395 C 160 392, 156 368, 152 355 Z" class="ink-med" />
+    <path d="M 155 355 C 150 378, 158 400, 168 396 C 175 392, 172 368, 168 355 Z" class="ink-med" />
+    <path d="M 170 357 C 166 378, 174 398, 184 394 C 190 390, 186 368, 182 357 Z" class="ink-med" />
+    <!-- Brake Lever Left -->
+    <path d="M 185 385 L 140 408 L 136 402 L 180 380 Z" class="ink-med" />
+
+    <!-- Right Grip & Wrapping Feathers -->
+    <rect x="615" y="365" width="55" height="24" rx="8" class="ink-thick" fill="url(#crosshatch-dark)" />
+    <path d="M 660 355 C 665 375, 658 398, 648 395 C 640 392, 644 368, 648 355 Z" class="ink-med" />
+    <path d="M 645 355 C 650 378, 642 400, 632 396 C 625 392, 628 368, 632 355 Z" class="ink-med" />
+    <path d="M 630 357 C 634 378, 626 398, 616 394 C 610 390, 614 368, 618 357 Z" class="ink-med" />
+    <!-- Brake Lever Right -->
+    <path d="M 615 385 L 660 408 L 664 402 L 620 380 Z" class="ink-med" />
+
+    <!-- Brake Cables -->
+    <path d="M 182 385 C 240 450, 350 430, 392 480" class="ink-med" fill="none" />
+    <path d="M 618 385 C 560 450, 450 430, 408 480" class="ink-med" fill="none" />
+
+    <!-- Front Fork -->
+    <path d="M 380 510 C 350 515, 345 560, 348 705 L 364 705 C 362 570, 368 530, 392 525 L 408 525 C 432 530, 438 570, 436 705 L 452 705 C 455 560, 450 515, 420 510 Z" class="ink-thick" fill="url(#hatch-right)" />
+    <!-- Fork Crown -->
+    <rect x="372" y="502" width="56" height="16" rx="4" class="ink-thick" />
+
+    <!-- Vintage Headlamp (Mounted above fender) -->
+    <ellipse cx="400" cy="522" rx="22" ry="22" class="ink-thick" />
+    <ellipse cx="400" cy="522" rx="16" ry="16" class="ink-med" fill="url(#crosshatch-light)" />
+    <circle cx="400" cy="522" r="7" class="ink-thin" fill="#fff" />
+    <path d="M 388 512 L 412 532 M 388 532 L 412 512" class="ink-fine" />
+
+    <!-- Front Fender (Mudguard) with Dome Profile -->
+    <path d="M 366 610 C 366 530, 434 530, 434 610 L 424 610 C 424 555, 376 555, 376 610 Z" class="ink-thick" fill="url(#hatch-left)" />
+    <path d="M 396 544 L 404 544 L 404 568 L 396 568 Z" class="black-fill" /> <!-- Fender Crest -->
+    <!-- Fender Stay Rods -->
+    <line x1="354" y1="698" x2="369" y2="585" class="ink-med" />
+    <line x1="446" y1="698" x2="431" y2="585" class="ink-med" />
+
+    <!-- Narrow Front Wheel & Tire (Direct Front-On View) -->
+    <!-- Hub & Axle -->
+    <rect x="340" y="694" width="120" height="14" rx="4" class="ink-thick" fill="url(#crosshatch-dark)" />
+    <rect x="332" y="691" width="10" height="20" rx="2" class="ink-med" />
+    <rect x="458" y="691" width="10" height="20" rx="2" class="ink-med" />
+    <rect x="372" y="688" width="10" height="26" rx="2" class="ink-med" />
+    <rect x="418" y="688" width="10" height="26" rx="2" class="ink-med" />
+
+    <!-- Spokes (Radiating from wide hub flanges to narrow center rim) -->
+    <g class="ink-fine">
+      <!-- Top Spokes -->
+      <line x1="376" y1="688" x2="396" y2="575" />
+      <line x1="376" y1="688" x2="398" y2="610" />
+      <line x1="376" y1="688" x2="398" y2="645" />
+      <line x1="424" y1="688" x2="404" y2="575" />
+      <line x1="424" y1="688" x2="402" y2="610" />
+      <line x1="424" y1="688" x2="402" y2="645" />
+      <!-- Bottom Spokes -->
+      <line x1="376" y1="714" x2="396" y2="825" />
+      <line x1="376" y1="714" x2="398" y2="790" />
+      <line x1="376" y1="714" x2="398" y2="755" />
+      <line x1="424" y1="714" x2="404" y2="825" />
+      <line x1="424" y1="714" x2="402" y2="790" />
+      <line x1="424" y1="714" x2="402" y2="755" />
+    </g>
+
+    <!-- Rim (Visible edges around tire) -->
+    <rect x="380" y="560" width="40" height="282" rx="20" class="ink-med" fill="url(#hatch-right)" />
+
+    <!-- Narrow Tire -->
+    <rect x="385" y="552" width="30" height="296" rx="15" class="ink-thick" fill="url(#crosshatch-dark)" />
+    <!-- Tire Tread Highlight & Grooves -->
+    <rect x="394" y="555" width="12" height="290" rx="6" fill="url(#hatch-left)" stroke="#111" stroke-width="1.5" />
+    <path d="M 386 580 L 414 580 M 385 600 L 415 600 M 385 620 L 415 620 M 385 640 L 415 640 M 385 660 L 415 660 M 385 680 L 415 680 M 385 700 L 415 700 M 385 720 L 415 720 M 385 740 L 415 740 M 385 760 L 415 760 M 385 780 L 415 780 M 385 800 L 415 800 M 386 820 L 414 820" class="ink-thin" />
+
+    <!-- ==================== FRONT WIRE BASKET ==================== -->
+    <g id="wire-basket">
+      <!-- Basket Mounting Struts to Fork/Handlebars -->
+      <path d="M 330 370 L 330 410 M 470 370 L 470 410" stroke="#111" stroke-width="5" stroke-linecap="round" />
+      <path d="M 355 515 L 330 505 M 445 515 L 470 505" stroke="#111" stroke-width="4" stroke-linecap="round" />
+
+      <!-- Basket Back Rim & Shadowed Interior -->
+      <path d="M 275 395 L 525 395 L 490 510 L 310 510 Z" fill="url(#crosshatch-light)" stroke="#111" stroke-width="2.5" stroke-linejoin="round" />
+
+      <!-- Wire Mesh Body -->
+      <path d="M 275 395 L 525 395 L 490 510 L 310 510 Z" fill="url(#wire-mesh)" stroke="#111" stroke-width="4" stroke-linejoin="round" />
+
+      <!-- Vertical & Horizontal Structural Ribs -->
+      <line x1="315" y1="395" x2="340" y2="510" class="ink-med" />
+      <line x1="358" y1="395" x2="370" y2="510" class="ink-med" />
+      <line x1="400" y1="395" x2="400" y2="510" class="ink-med" />
+      <line x1="442" y1="395" x2="430" y2="510" class="ink-med" />
+      <line x1="485" y1="395" x2="460" y2="510" class="ink-med" />
+      
+      <line x1="286" y1="433" x2="514" y2="433" class="ink-med" />
+      <line x1="298" y1="471" x2="502" y2="471" class="ink-med" />
+
+      <!-- Thick Top Rolled Wire Rim -->
+      <rect x="268" y="389" width="264" height="10" rx="5" class="ink-thick" />
+      <!-- Bottom Rim -->
+      <rect x="306" y="506" width="188" height="7" rx="3.5" class="ink-med" />
+    </g>
+  </g>
+
+  <!-- ==================== PELICAN: HEAD, JOYFUL WIDE-OPEN BEAK & TAUT POUCH ==================== -->
+  <!-- Placed in front of handlebars and overlapping the top of the wire basket for strong 3D depth -->
+  <g id="pelican-head-and-beak">
+    <!-- Feathered Crest / Tuft on Top of Head (Blowing in the wind) -->
+    <path d="M 365 130 C 350 95, 330 85, 325 105 C 340 105, 350 115, 355 135 Z" class="ink-med" />
+    <path d="M 385 125 C 380 80, 365 65, 355 90 C 368 92, 375 108, 375 128 Z" class="ink-med" />
+    <path d="M 405 125 C 410 75, 425 65, 430 90 C 418 92, 412 108, 412 128 Z" class="ink-med" />
+    <path d="M 425 130 C 440 95, 460 85, 465 105 C 450 105, 440 115, 435 135 Z" class="ink-med" />
+
+    <!-- Head & Cheeks -->
+    <path d="M 330 195 C 325 140, 360 120, 400 120 C 440 120, 475 140, 470 195 C 480 215, 465 240, 400 240 C 335 240, 320 215, 330 195 Z" class="ink-thick" />
+    <path d="M 330 195 C 328 155, 355 130, 385 125 C 355 140, 345 170, 345 205 Z" fill="url(#hatch-left)" />
+    <path d="M 470 195 C 472 155, 445 130, 415 125 C 445 140, 455 170, 455 205 Z" fill="url(#hatch-right)" />
+
+    <!-- Expressive Joyful Eyes (Arched & Wide) -->
+    <!-- Left Eye -->
+    <ellipse cx="352" cy="175" rx="18" ry="22" class="ink-med" />
+    <ellipse cx="355" cy="175" rx="11" ry="15" class="ink-thin" fill="#fff" />
+    <circle cx="358" cy="175" r="7" class="black-fill" />
+    <circle cx="355" cy="171" r="2.5" fill="#fff" />
+    <!-- Joyful Lower Eyelid Cheek Squint -->
+    <path d="M 332 186 Q 352 174 370 188" class="ink-thick" fill="#fff" />
+    <!-- Eyebrow Ridge -->
+    <path d="M 326 158 Q 350 142 372 160" class="ink-thick" fill="none" />
+
+    <!-- Right Eye -->
+    <ellipse cx="448" cy="175" rx="18" ry="22" class="ink-med" />
+    <ellipse cx="445" cy="175" rx="11" ry="15" class="ink-thin" fill="#fff" />
+    <circle cx="442" cy="175" r="7" class="black-fill" />
+    <circle cx="439" cy="171" r="2.5" fill="#fff" />
+    <!-- Joyful Lower Eyelid Cheek Squint -->
+    <path d="M 468 186 Q 448 174 430 188" class="ink-thick" fill="#fff" />
+    <!-- Eyebrow Ridge -->
+    <path d="M 474 158 Q 450 142 428 160" class="ink-thick" fill="none" />
+
+    <!-- ==================== WIDE OPEN BEAK & STRETCHED GULAR POUCH ==================== -->
+    <!-- Outer Rim of Lower Mandible (Stretched Wide in Joyful Grin) -->
+    <path d="M 332 200 C 260 225, 250 320, 295 385 C 335 445, 465 445, 505 385 C 550 320, 540 225, 468 200 Z" class="ink-thick" />
+
+    <!-- Stretched Tight Gular Pouch (Exterior Shading & Striations) -->
+    <path d="M 276 280 C 265 340, 315 438, 400 438 C 485 438, 535 340, 524 280 C 500 390, 450 425, 400 425 C 350 425, 300 390, 276 280 Z" fill="url(#crosshatch-light)" />
+    <path d="M 295 385 C 335 445, 465 445, 505 385 C 470 425, 330 425, 295 385 Z" fill="url(#crosshatch-dark)" />
+
+    <!-- Inside of the Wide-Open Mouth / Deep Cavernous Pouch -->
+    <path d="M 338 208 C 282 230, 275 315, 312 372 C 345 422, 455 422, 488 372 C 525 315, 518 230, 462 208 Z" class="ink-med" fill="url(#pouch-texture)" />
+    
+    <!-- Deep Throat / Interior Crosshatch Shadow -->
+    <path d="M 338 208 C 300 230, 295 295, 325 345 C 355 390, 445 390, 475 345 C 505 295, 500 230, 462 208 Z" fill="url(#crosshatch-dark)" />
+    <ellipse cx="400" cy="275" rx="65" ry="50" class="black-fill" />
+
+    <!-- Joyful Tongue / Throat Detail -->
+    <path d="M 370 305 Q 400 280 430 305 Q 400 345 370 305 Z" class="ink-med" fill="url(#hatch-left)" />
+
+    <!-- Stretch Lines on the Taut Pouch (Radiating from bottom center) -->
+    <g class="ink-thin">
+      <path d="M 400 415 L 400 320" />
+      <path d="M 380 412 C 365 380, 355 350, 350 310" />
+      <path d="M 420 412 C 435 380, 445 350, 450 310" />
+      <path d="M 355 402 C 330 375, 315 340, 310 290" />
+      <path d="M 445 402 C 470 375, 485 340, 490 290" />
+      <path d="M 330 385 C 305 360, 292 320, 295 265" />
+      <path d="M 470 385 C 495 360, 508 320, 505 265" />
+    </g>
+
+    <!-- Upper Mandible (Foreshortened, Pointing Up & Towards Viewer) -->
+    <!-- Underside of Upper Beak (Roof of Mouth) -->
+    <path d="M 332 200 C 315 215, 355 155, 400 155 C 445 155, 485 215, 468 200 C 445 185, 425 175, 400 175 C 375 175, 355 185, 332 200 Z" class="ink-med" fill="url(#hatch-right)" />
+    <!-- Median Ridge on Roof of Mouth -->
+    <line x1="400" y1="160" x2="400" y2="205" class="ink-med" />
+
+    <!-- Top Bridge of Upper Beak (Foreshortened Triangle/Arch) -->
+    <path d="M 332 200 C 345 175, 370 135, 400 135 C 430 135, 455 175, 468 200 C 445 170, 425 155, 400 155 C 375 155, 355 170, 332 200 Z" class="ink-thick" />
+    <path d="M 350 182 C 365 160, 382 142, 400 142" class="ink-thin" />
+    <path d="M 450 182 C 435 160, 418 142, 400 142" class="ink-thin" />
+
+    <!-- Iconic Pelican Beak Nail (Hooked Tip at the Apex of the Upper Beak) -->
+    <path d="M 386 142 C 386 122, 414 122, 414 142 C 414 155, 406 168, 400 172 C 394 168, 386 155, 386 142 Z" class="ink-thick" />
+    <path d="M 392 135 C 398 130, 408 135, 408 148 C 408 156, 403 163, 400 166" class="ink-thin" fill="url(#hatch-left)" />
+
+    <!-- Joyful Breath / Laugh Lines Around Open Beak -->
+    <path d="M 255 245 Q 235 255 242 275 M 242 235 Q 218 250 228 278" class="ink-med" fill="none" />
+    <path d="M 545 245 Q 565 255 558 275 M 558 235 Q 582 250 572 278" class="ink-med" fill="none" />
+  </g>
+</svg>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <!-- Sharp-cornered square background (No round borders) -->
+  <rect width="512" height="512" rx="0" ry="0" fill="#1E242B" />
+
+  <!-- Central tightly clustered emblem with generous outer margins -->
+  <g>
+    <!-- Solid flat slate-gray backing disc for the emblem -->
+    <circle cx="256" cy="256" r="108" fill="#28303A" />
+
+    <!-- Uniform-weight monoline wind currents (24px stroke) -->
+    <g fill="none" stroke-width="24" stroke-linecap="round" stroke-linejoin="round">
+      
+      <!-- Upper Swirling Breeze Gust (Electric Cyan) -->
+      <path d="M 140 216 H 296 A 34 34 0 1 0 262 182" stroke="#00F0FF" />
+
+      <!-- Center High-Velocity Stream (Ice Cyan for crisp contrast) -->
+      <path d="M 124 264 H 348 A 28 28 0 1 1 320 292" stroke="#E0FCFF" />
+
+      <!-- Lower Trailing Gust (Electric Cyan) -->
+      <path d="M 164 312 H 244 A 26 26 0 1 0 218 338" stroke="#00F0FF" />
+      
+      <!-- Tail slipstream accent -->
+      <line x1="124" y1="312" x2="128" y2="312" stroke="#00F0FF" />
+    </g>
+  </g>
+</svg>

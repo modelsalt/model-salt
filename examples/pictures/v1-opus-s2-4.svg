@@ -1,0 +1,217 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6b5bd6"/>
+      <stop offset="0.55" stop-color="#e78ad4"/>
+      <stop offset="1" stop-color="#ffd48a"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3fd1d9"/>
+      <stop offset="0.5" stop-color="#5a8be0"/>
+      <stop offset="1" stop-color="#8a5ae0"/>
+    </linearGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e2a86f"/>
+      <stop offset="1" stop-color="#b9774a"/>
+    </linearGradient>
+    <linearGradient id="plume" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d9c9ff"/>
+      <stop offset="0.3" stop-color="#a9f0ff"/>
+      <stop offset="0.6" stop-color="#ffc2ea"/>
+      <stop offset="0.85" stop-color="#c8ffdf"/>
+      <stop offset="1" stop-color="#fff0a8"/>
+    </linearGradient>
+    <linearGradient id="wing" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7a5cff"/>
+      <stop offset="0.5" stop-color="#20c9d6"/>
+      <stop offset="1" stop-color="#ff5fa8"/>
+    </linearGradient>
+    <linearGradient id="pouch" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffd23f"/>
+      <stop offset="0.45" stop-color="#ff8a3d"/>
+      <stop offset="1" stop-color="#ff4fa0"/>
+    </linearGradient>
+    <linearGradient id="bill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe46b"/>
+      <stop offset="1" stop-color="#ff9a2e"/>
+    </linearGradient>
+    <linearGradient id="bike" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#00d2ff"/>
+      <stop offset="0.35" stop-color="#9b5cff"/>
+      <stop offset="0.7" stop-color="#ff3fa4"/>
+      <stop offset="1" stop-color="#ffb800"/>
+    </linearGradient>
+    <linearGradient id="legs" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffb347"/>
+      <stop offset="1" stop-color="#ff6fb5"/>
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop offset="0" stop-color="#fff7c2" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#fff7c2" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="walk">
+      <polygon points="250,270 350,270 640,600 -40,600"/>
+    </clipPath>
+  </defs>
+
+  <g stroke="#2b1d3a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+
+    <!-- Sky -->
+    <rect x="0" y="0" width="600" height="270" fill="url(#sky)" stroke="none"/>
+    <circle cx="470" cy="120" r="60" fill="url(#glow)" stroke="none"/>
+    <circle cx="470" cy="120" r="34" fill="#ffe9a3"/>
+    <!-- Clouds -->
+    <path d="M60,90 q10,-25 35,-15 q15,-22 40,-5 q25,-5 25,20 q0,15 -20,15 h-70 q-20,0 -10,-15z" fill="#fde8ff"/>
+    <path d="M380,55 q8,-18 28,-10 q14,-16 32,-2 q20,-2 18,16 q-2,10 -16,10 h-54 q-16,0 -8,-14z" fill="#e8f6ff"/>
+    <!-- Gulls -->
+    <path d="M150,150 q10,-10 20,0 q10,-10 20,0" fill="none" stroke-width="2.5"/>
+    <path d="M200,125 q7,-7 14,0 q7,-7 14,0" fill="none" stroke-width="2.5"/>
+
+    <!-- Sea -->
+    <rect x="0" y="270" width="600" height="330" fill="url(#sea)" stroke="none"/>
+    <line x1="0" y1="270" x2="600" y2="270"/>
+    <g stroke="#e9fbff" stroke-width="2.5" fill="none" opacity="0.8">
+      <path d="M30,300 q8,-6 16,0 q8,-6 16,0"/>
+      <path d="M520,320 q8,-6 16,0 q8,-6 16,0"/>
+      <path d="M40,380 q10,-7 20,0 q10,-7 20,0"/>
+      <path d="M510,400 q10,-7 20,0 q10,-7 20,0"/>
+      <path d="M180,290 q6,-4 12,0"/>
+      <path d="M410,292 q6,-4 12,0"/>
+    </g>
+
+    <!-- Boardwalk -->
+    <polygon points="250,270 350,270 640,600 -40,600" fill="url(#wood)"/>
+    <g clip-path="url(#walk)" stroke="#8a5530" stroke-width="2.5">
+      <line x1="0" y1="280" x2="600" y2="280"/>
+      <line x1="0" y1="292" x2="600" y2="292"/>
+      <line x1="0" y1="308" x2="600" y2="308"/>
+      <line x1="0" y1="330" x2="600" y2="330"/>
+      <line x1="0" y1="360" x2="600" y2="360"/>
+      <line x1="0" y1="400" x2="600" y2="400"/>
+      <line x1="0" y1="450" x2="600" y2="450"/>
+      <line x1="0" y1="515" x2="600" y2="515"/>
+      <line x1="0" y1="590" x2="600" y2="590"/>
+      <line x1="300" y1="270" x2="300" y2="600" stroke-width="1.5" opacity="0.5"/>
+    </g>
+
+    <!-- Railings -->
+    <g fill="#f3e3ff" stroke-width="2.5">
+      <line x1="250" y1="262" x2="-40" y2="500" stroke="#f3e3ff" stroke-width="7"/>
+      <line x1="250" y1="262" x2="-40" y2="500" fill="none" stroke-width="1.5"/>
+      <rect x="194" y="303" width="6" height="28"/>
+      <rect x="132" y="348" width="8" height="52"/>
+      <rect x="42" y="414" width="12" height="88"/>
+      <line x1="350" y1="262" x2="640" y2="500" stroke="#f3e3ff" stroke-width="7"/>
+      <line x1="350" y1="262" x2="640" y2="500" fill="none" stroke-width="1.5"/>
+      <rect x="400" y="303" width="6" height="28"/>
+      <rect x="460" y="348" width="8" height="52"/>
+      <rect x="546" y="414" width="12" height="88"/>
+    </g>
+
+    <!-- Lampposts -->
+    <g>
+      <circle cx="95" cy="205" r="30" fill="url(#glow)" stroke="none"/>
+      <rect x="90" y="215" width="10" height="250" fill="#5b3f8c"/>
+      <path d="M80,215 h30 l-5,-22 h-20z" fill="#fff3a8"/>
+      <path d="M78,193 h34 l-17,-14z" fill="#5b3f8c"/>
+      <rect x="82" y="460" width="26" height="10" rx="3" fill="#5b3f8c"/>
+      <circle cx="505" cy="205" r="30" fill="url(#glow)" stroke="none"/>
+      <rect x="500" y="215" width="10" height="250" fill="#5b3f8c"/>
+      <path d="M490,215 h30 l-5,-22 h-20z" fill="#fff3a8"/>
+      <path d="M488,193 h34 l-17,-14z" fill="#5b3f8c"/>
+      <rect x="492" y="460" width="26" height="10" rx="3" fill="#5b3f8c"/>
+    </g>
+
+    <!-- Shadow under lifted front wheel -->
+    <ellipse cx="300" cy="562" rx="70" ry="10" fill="#2b1d3a" opacity="0.25" stroke="none"/>
+
+    <!-- Rider, slight lean -->
+    <g transform="rotate(-5 300 540)">
+
+      <!-- Rear wheel (on the ground) -->
+      <ellipse cx="300" cy="480" rx="11" ry="58" fill="none" stroke-width="13"/>
+      <ellipse cx="300" cy="480" rx="11" ry="58" fill="none" stroke="#3a3550" stroke-width="8"/>
+      <!-- dust puffs -->
+      <circle cx="276" cy="536" r="8" fill="#f6e6d0"/>
+      <circle cx="324" cy="534" r="7" fill="#f6e6d0"/>
+      <circle cx="262" cy="530" r="5" fill="#f6e6d0"/>
+
+      <!-- Body -->
+      <ellipse cx="300" cy="300" rx="72" ry="88" fill="url(#plume)"/>
+      <path d="M262,330 q8,8 16,0 M322,330 q8,8 16,0 M285,355 q8,8 16,0 M300,370 q6,6 12,0" fill="none" stroke-width="2" opacity="0.6"/>
+
+      <!-- Legs -->
+      <line x1="270" y1="372" x2="246" y2="462" stroke-width="12"/>
+      <line x1="270" y1="372" x2="246" y2="462" stroke="url(#legs)" stroke-width="7"/>
+      <line x1="330" y1="372" x2="354" y2="416" stroke-width="12"/>
+      <line x1="330" y1="372" x2="354" y2="416" stroke="url(#legs)" stroke-width="7"/>
+
+      <!-- Cranks & pedals -->
+      <line x1="300" y1="445" x2="245" y2="470" stroke-width="8"/>
+      <line x1="300" y1="445" x2="355" y2="425" stroke-width="8"/>
+      <circle cx="300" cy="445" r="12" fill="url(#bike)"/>
+      <rect x="230" y="466" width="30" height="9" rx="3" fill="#4a4060"/>
+      <rect x="340" y="421" width="30" height="9" rx="3" fill="#4a4060"/>
+
+      <!-- Webbed feet -->
+      <g fill="url(#legs)">
+        <path d="M238,458 L220,482 Q230,476 236,488 Q245,478 254,488 Q260,476 270,482 L252,458 Z"/>
+        <path d="M245,462 L236,486 M245,462 L245,482 M245,462 L254,486" fill="none" stroke-width="1.8"/>
+        <path d="M348,412 L330,436 Q340,430 346,442 Q355,432 364,442 Q370,430 380,436 L362,412 Z"/>
+        <path d="M355,416 L346,440 M355,416 L355,436 M355,416 L364,440" fill="none" stroke-width="1.8"/>
+      </g>
+
+      <!-- Front wheel (lifted) & fork -->
+      <ellipse cx="300" cy="405" rx="15" ry="62" fill="none" stroke-width="15"/>
+      <ellipse cx="300" cy="405" rx="15" ry="62" fill="none" stroke="#3a3550" stroke-width="10"/>
+      <ellipse cx="300" cy="405" rx="8" ry="54" fill="none" stroke="url(#bike)" stroke-width="3"/>
+      <line x1="300" y1="355" x2="300" y2="455" stroke-width="1.5"/>
+      <line x1="284" y1="335" x2="290" y2="405" stroke-width="9"/>
+      <line x1="284" y1="335" x2="290" y2="405" stroke="url(#bike)" stroke-width="5"/>
+      <line x1="316" y1="335" x2="310" y2="405" stroke-width="9"/>
+      <line x1="316" y1="335" x2="310" y2="405" stroke="url(#bike)" stroke-width="5"/>
+      <circle cx="300" cy="405" r="7" fill="#ffe08a"/>
+      <!-- lift swooshes -->
+      <path d="M270,490 q30,10 60,0 M280,502 q20,7 40,0" fill="none" stroke="#fff" stroke-width="2.5" opacity="0.8"/>
+
+      <!-- Handlebars -->
+      <path d="M210,324 Q255,312 300,320 Q345,312 390,324" fill="none" stroke-width="14"/>
+      <path d="M210,324 Q255,312 300,320 Q345,312 390,324" fill="none" stroke="url(#bike)" stroke-width="8"/>
+      <rect x="292" y="318" width="16" height="20" rx="3" fill="url(#bike)"/>
+      <circle cx="300" cy="336" r="18" fill="url(#glow)" stroke="none"/>
+      <circle cx="300" cy="336" r="8" fill="#fff3a8"/>
+
+      <!-- Wings gripping the bars -->
+      <path d="M245,238 C198,250 176,292 196,334 C210,346 232,338 240,320 C250,295 258,268 245,238 Z" fill="url(#wing)"/>
+      <path d="M198,318 q8,10 16,4 q6,10 16,2" fill="none" stroke-width="2"/>
+      <path d="M355,238 C402,250 424,292 404,334 C390,346 368,338 360,320 C350,295 342,268 355,238 Z" fill="url(#wing)"/>
+      <path d="M402,318 q-8,10 -16,4 q-6,10 -16,2" fill="none" stroke-width="2"/>
+      <ellipse cx="208" cy="326" rx="14" ry="11" fill="url(#wing)"/>
+      <ellipse cx="392" cy="326" rx="14" ry="11" fill="url(#wing)"/>
+
+      <!-- Neck & head -->
+      <path d="M280,240 L284,200 L316,200 L320,240 Z" fill="url(#plume)"/>
+      <circle cx="300" cy="168" r="40" fill="url(#plume)"/>
+      <path d="M292,130 q-6,-22 8,-26 q-2,12 6,4 q4,14 -6,22" fill="#ffd6f5"/>
+
+      <!-- Eyes -->
+      <ellipse cx="275" cy="160" rx="12" ry="10" fill="#ffc2ea" stroke="none"/>
+      <ellipse cx="325" cy="160" rx="12" ry="10" fill="#ffc2ea" stroke="none"/>
+      <circle cx="275" cy="160" r="8" fill="#fff"/>
+      <circle cx="325" cy="160" r="8" fill="#fff"/>
+      <circle cx="276" cy="161" r="4.5" fill="#2b1d3a" stroke="none"/>
+      <circle cx="324" cy="161" r="4.5" fill="#2b1d3a" stroke="none"/>
+      <circle cx="277.5" cy="159" r="1.5" fill="#fff" stroke="none"/>
+      <circle cx="325.5" cy="159" r="1.5" fill="#fff" stroke="none"/>
+
+      <!-- Pouch (front view, hanging below the bill) -->
+      <path d="M287,192 C258,222 256,284 295,302 L305,302 C344,284 342,222 313,192 Z" fill="url(#pouch)"/>
+      <path d="M276,240 q24,14 48,0 M280,268 q20,12 40,0" fill="none" stroke-width="1.8" opacity="0.6"/>
+
+      <!-- Upper bill with hooked tip -->
+      <path d="M285,178 Q300,170 315,178 L307,298 Q300,312 293,298 Z" fill="url(#bill)"/>
+      <line x1="300" y1="182" x2="300" y2="292" stroke-width="1.5" opacity="0.6"/>
+      <path d="M294,298 Q300,316 306,298" fill="#ff6a3d"/>
+    </g>
+  </g>
+</svg>

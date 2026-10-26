@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MacroMeal — Meal planning built around your macros</title>
+<meta name="description" content="MacroMeal plans your week of meals to hit your protein, carb, fat and calorie targets. Join the waitlist.">
+<style>
+  :root{
+    --green-900:#0f3d2e;
+    --green-700:#1b6b4a;
+    --green-500:#2e9e6a;
+    --green-300:#8fd4b0;
+    --green-100:#e6f5ec;
+    --green-50:#f4fbf7;
+    --ink:#17271f;
+    --muted:#5b6b63;
+    --line:#d9e8df;
+    --white:#ffffff;
+    --radius:16px;
+    --shadow:0 10px 30px rgba(15,61,46,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);
+    background:var(--white);
+    line-height:1.6;
+  }
+  img,svg{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .container{width:min(1120px,92%);margin:0 auto}
+  h1,h2,h3{line-height:1.15;letter-spacing:-.01em}
+  h1{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:800}
+  h2{font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:800;color:var(--green-900)}
+  h3{font-size:1.15rem;font-weight:700}
+  p.lead{font-size:1.15rem;color:var(--muted)}
+  .eyebrow{
+    display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--green-700);background:var(--green-100);
+    padding:.35rem .8rem;border-radius:999px;margin-bottom:1rem;
+  }
+  section{padding:5rem 0}
+  .section-head{max-width:620px;margin:0 auto 3rem;text-align:center}
+  .section-head p{color:var(--muted);margin-top:.75rem}
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+    padding:.85rem 1.5rem;border-radius:999px;font-weight:700;font-size:1rem;
+    border:2px solid transparent;cursor:pointer;transition:transform .15s,background .15s,color .15s;
+  }
+  .btn:hover{transform:translateY(-1px)}
+  .btn-primary{background:var(--green-500);color:var(--white)}
+  .btn-primary:hover{background:var(--green-700)}
+  .btn-ghost{background:transparent;color:var(--green-700);border-color:var(--green-300)}
+  .btn-ghost:hover{background:var(--green-100)}
+
+  /* Header */
+  header{
+    position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{display:flex;align-items:center;gap:.6rem;font-weight:800;font-size:1.25rem;color:var(--green-900)}
+  .logo-mark{width:34px;height:34px}
+  .nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+  .nav-links a{font-weight:600;color:var(--muted)}
+  .nav-links a:hover{color:var(--green-700)}
+  .nav-toggle{
+    display:none;background:none;border:0;cursor:pointer;padding:.4rem;
+    flex-direction:column;gap:5px;
+  }
+  .nav-toggle span{display:block;width:24px;height:2.5px;background:var(--green-900);border-radius:2px;transition:.2s}
+  .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+  .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+  .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+
+  /* Hero */
+  .hero{
+    padding:5rem 0 4rem;
+    background:linear-gradient(180deg,var(--green-50) 0%,var(--white) 100%);
+  }
+  .hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:3rem;align-items:center}
+  .hero h1 span{color:var(--green-500)}
+  .hero p.lead{margin:1.25rem 0 2rem;max-width:520px}
+  .waitlist-form{display:flex;gap:.6rem;max-width:520px;flex-wrap:wrap}
+  .waitlist-form input{
+    flex:1 1 260px;padding:.9rem 1.2rem;font-size:1rem;border-radius:999px;
+    border:2px solid var(--line);outline:none;background:var(--white);
+  }
+  .waitlist-form input:focus{border-color:var(--green-500)}
+  .form-note{font-size:.85rem;color:var(--muted);margin-top:.75rem}
+  .hero-stats{display:flex;gap:2rem;margin-top:2.5rem;flex-wrap:wrap}
+  .hero-stats div strong{display:block;font-size:1.5rem;color:var(--green-900)}
+  .hero-stats div span{font-size:.85rem;color:var(--muted)}
+  .hero-art{position:relative}
+  .hero-art svg{width:100%;height:auto}
+
+  /* Features */
+  .features{background:var(--white)}
+  .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+  .card{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:2rem;box-shadow:var(--shadow);transition:transform .2s;
+  }
+  .card:hover{transform:translateY(-4px)}
+  .icon{
+    width:56px;height:56px;border-radius:14px;background:var(--green-100);
+    display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;
+  }
+  .icon svg{width:30px;height:30px}
+  .card p{color:var(--muted);margin-top:.5rem;font-size:.97rem}
+
+  /* How it works */
+  .how{background:var(--green-50)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;counter-reset:step}
+  .step{text-align:center;padding:1rem}
+  .step-art{
+    width:150px;height:150px;margin:0 auto 1.25rem;border-radius:50%;
+    background:var(--white);border:2px solid var(--green-100);
+    display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);
+  }
+  .step-art svg{width:90px;height:90px}
+  .step-num{
+    display:inline-block;width:30px;height:30px;line-height:30px;border-radius:50%;
+    background:var(--green-500);color:var(--white);font-weight:800;font-size:.9rem;margin-bottom:.75rem;
+  }
+  .step p{color:var(--muted);margin-top:.5rem;font-size:.97rem}
+
+  /* Testimonials */
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+  .quote{position:relative;display:flex;flex-direction:column}
+  .quote .stars{color:#f2b01e;letter-spacing:.1em;font-size:.95rem;margin-bottom:.75rem}
+  .quote blockquote{font-size:1rem;color:var(--ink);flex:1}
+  .quote .who{display:flex;align-items:center;gap:.8rem;margin-top:1.5rem}
+  .avatar{
+    width:44px;height:44px;border-radius:50%;background:var(--green-300);color:var(--green-900);
+    display:flex;align-items:center;justify-content:center;font-weight:800;
+  }
+  .who strong{display:block;font-size:.95rem}
+  .who span{font-size:.82rem;color:var(--muted)}
+
+  /* Pricing */
+  .pricing{background:var(--green-50)}
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;align-items:stretch}
+  .plan{display:flex;flex-direction:column;position:relative}
+  .plan.featured{border:2px solid var(--green-500);background:var(--white)}
+  .plan .badge{
+    position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+    background:var(--green-500);color:var(--white);font-size:.75rem;font-weight:700;
+    padding:.3rem .9rem;border-radius:999px;letter-spacing:.06em;text-transform:uppercase;
+  }
+  .plan .price{font-size:2.5rem;font-weight:800;color:var(--green-900);margin:.75rem 0 .25rem}
+  .plan .price small{font-size:1rem;font-weight:600;color:var(--muted)}
+  .plan .for{color:var(--muted);font-size:.92rem}
+  .plan ul{list-style:none;margin:1.5rem 0 2rem;flex:1}
+  .plan li{padding:.45rem 0;display:flex;gap:.6rem;align-items:flex-start;font-size:.95rem}
+  .plan li::before{
+    content:"";flex:0 0 18px;height:18px;margin-top:.2rem;border-radius:50%;
+    background:var(--green-100) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231b6b4a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 13l4 4L19 7'/%3E%3C/svg%3E") center/11px no-repeat;
+  }
+  .plan .btn{width:100%}
+
+  /* Footer CTA */
+  .cta{
+    background:var(--green-900);color:var(--white);text-align:center;
+    padding:5rem 0;position:relative;overflow:hidden;
+  }
+  .cta h2{color:var(--white)}
+  .cta p{color:var(--green-300);margin:1rem auto 2rem;max-width:520px}
+  .cta .waitlist-form{margin:0 auto;justify-content:center}
+  .cta .waitlist-form input{border-color:transparent}
+  .cta .form-note{color:var(--green-300)}
+  .cta .leaf{position:absolute;opacity:.12;width:260px}
+  .cta .leaf.l{left:-60px;bottom:-60px}
+  .cta .leaf.r{right:-60px;top:-60px;transform:rotate(180deg)}
+
+  footer{background:var(--green-900);color:var(--green-300);padding:1.75rem 0;border-top:1px solid rgba(255,255,255,.08)}
+  .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.9rem}
+  .foot ul{display:flex;gap:1.5rem;list-style:none}
+  .foot a:hover{color:var(--white)}
+
+  /* Responsive */
+  @media (max-width:900px){
+    .hero-grid,.feature-grid,.steps,.testi-grid,.price-grid{grid-template-columns:1fr}
+    .hero-art{order:-1;max-width:420px;margin:0 auto}
+    .hero{padding-top:3rem}
+    section{padding:3.5rem 0}
+    .nav-toggle{display:flex}
+    .nav-links{
+      position:absolute;top:72px;left:0;right:0;flex-direction:column;align-items:flex-start;
+      gap:0;background:var(--white);border-bottom:1px solid var(--line);
+      padding:.5rem 4%;display:none;
+    }
+    .nav-links.open{display:flex}
+    .nav-links li{width:100%}
+    .nav-links a{display:block;padding:.9rem 0;border-bottom:1px solid var(--line)}
+    .nav-links li:last-child a{border:0;margin:.5rem 0}
+    .plan.featured{order:-1}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="container nav">
+    <a href="#top" class="logo" aria-label="MacroMeal home">
+      <svg class="logo-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <circle cx="20" cy="20" r="18" fill="#2e9e6a"/>
+        <path d="M20 30c-5-3-9-7-9-12a9 9 0 0 1 18 0c0 5-4 9-9 12z" fill="#e6f5ec"/>
+        <path d="M20 12v18" stroke="#2e9e6a" stroke-width="2" stroke-linecap="round"/>
+        <path d="M20 18c2-2 4-2 6-1M20 23c-2-2-4-2-6-1" stroke="#2e9e6a" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      MacroMeal
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#waitlist" class="btn btn-primary" style="padding:.6rem 1.2rem">Join waitlist</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">Launching early 2027</span>
+      <h1>Hit your macros <span>every single day</span> — without the spreadsheet.</h1>
+      <p class="lead">MacroMeal builds your week of meals around your protein, carb, fat and calorie targets. Set your goal, pick your foods, and let the plan do the math.</p>
+      <form class="waitlist-form" action="#" method="post" onsubmit="return handleWaitlist(event)">
+        <label for="email-hero" class="sr-only" style="position:absolute;left:-9999px">Email address</label>
+        <input id="email-hero" type="email" name="email" placeholder="you@example.com" required>
+        <button type="submit" class="btn btn-primary">Join the waitlist</button>
+      </form>
+      <p class="form-note">Free during beta. No spam, unsubscribe anytime.</p>
+      <div class="hero-stats">
+        <div><strong>±3g</strong><span>average macro accuracy</span></div>
+        <div><strong>12 min</strong><span>to plan a full week</span></div>
+        <div><strong>6,400+</strong><span>on the waitlist</span></div>
+      </div>
+    </div>
+
+    <div class="hero-art" aria-hidden="true">
+      <!-- Simple illustration: plate with macro ring -->
+      <svg viewBox="0 0 480 420" fill="none">
+        <ellipse cx="240" cy="380" rx="190" ry="18" fill="#e6f5ec"/>
+        <!-- phone -->
+        <rect x="70" y="40" width="200" height="340" rx="28" fill="#0f3d2e"/>
+        <rect x="82" y="56" width="176" height="308" rx="20" fill="#ffffff"/>
+        <rect x="100" y="76" width="90" height="10" rx="5" fill="#d9e8df"/>
+        <rect x="100" y="94" width="60" height="8" rx="4" fill="#e6f5ec"/>
+        <!-- macro ring -->
+        <circle cx="170" cy="170" r="50" stroke="#e6f5ec" stroke-width="14"/>
+        <circle cx="170" cy="170" r="50" stroke="#2e9e6a" stroke-width="14" stroke-dasharray="314" stroke-dashoffset="90" stroke-linecap="round" transform="rotate(-90 170 170)"/>
+        <circle cx="170" cy="170" r="32" stroke="#8fd4b0" stroke-width="10" stroke-dasharray="201" stroke-dashoffset="70" stroke-linecap="round" transform="rotate(-90 170 170)"/>
+        <text x="170" y="176" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" font-weight="800" fill="#0f3d2e">1,980</text>
+        <!-- macro bars -->
+        <rect x="100" y="240" width="140" height="8" rx="4" fill="#e6f5ec"/>
+        <rect x="100" y="240" width="118" height="8" rx="4" fill="#2e9e6a"/>
+        <rect x="100" y="262" width="140" height="8" rx="4" fill="#e6f5ec"/>
+        <rect x="100" y="262" width="90" height="8" rx="4" fill="#8fd4b0"/>
+        <rect x="100" y="284" width="140" height="8" rx="4" fill="#e6f5ec"/>
+        <rect x="100" y="284" width="70" height="8" rx="4" fill="#1b6b4a"/>
+        <rect x="100" y="312" width="140" height="34" rx="17" fill="#2e9e6a"/>
+        <!-- plate -->
+        <circle cx="340" cy="270" r="96" fill="#ffffff" stroke="#d9e8df" stroke-width="6"/>
+        <circle cx="340" cy="270" r="72" fill="#f4fbf7"/>
+        <!-- chicken -->
+        <path d="M300 262c6-20 30-28 48-18 10 6 12 20 4 30-10 12-34 14-46 6-6-4-8-12-6-18z" fill="#f3d9b1"/>
+        <path d="M312 260c10-8 24-10 34-4" stroke="#e0bd86" stroke-width="3" stroke-linecap="round"/>
+        <!-- broccoli -->
+        <circle cx="372" cy="298" r="14" fill="#2e9e6a"/>
+        <circle cx="386" cy="286" r="11" fill="#1b6b4a"/>
+        <circle cx="360" cy="286" r="10" fill="#1b6b4a"/>
+        <rect x="369" y="306" width="6" height="14" rx="3" fill="#8fd4b0"/>
+        <!-- rice -->
+        <ellipse cx="310" cy="300" rx="26" ry="16" fill="#fff"/>
+        <ellipse cx="310" cy="300" rx="26" ry="16" stroke="#d9e8df" stroke-width="3"/>
+        <!-- floating leaf -->
+        <path d="M400 110c30-24 70-20 80-4-16 24-54 36-80 4z" fill="#8fd4b0"/>
+        <path d="M402 110c24-6 50-10 76-4" stroke="#1b6b4a" stroke-width="2" stroke-linecap="round"/>
+        <!-- tag -->
+        <rect x="290" y="130" width="128" height="40" rx="20" fill="#ffffff" stroke="#d9e8df" stroke-width="3"/>
+        <circle cx="312" cy="150" r="8" fill="#2e9e6a"/>
+        <text x="330" y="155" font-family="system-ui,sans-serif" font-size="14" font-weight="700" fill="#0f3d2e">48g protein</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Features</span>
+      <h2>Built for people who actually track.</h2>
+      <p>Not another recipe feed. MacroMeal treats your targets as the starting point and works backwards to a plan you'll stick to.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1b6b4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l6 3"/></svg>
+        </div>
+        <h3>Macro-first planning</h3>
+        <p>Set protein, carbs, fat and calories per day — or per meal. Every plan lands within a few grams of target, automatically.</p>
+      </div>
+      <div class="card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1b6b4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 15l5-5 4 4 7-7"/><path d="M16 7h4v4"/></svg>
+        </div>
+        <h3>Cut, bulk or maintain</h3>
+        <p>Pick a phase and a weekly rate. MacroMeal adjusts calories as your weight trends, so you're never guessing when to drop or add.</p>
+      </div>
+      <div class="card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1b6b4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/><circle cx="18" cy="18" r="3"/></svg>
+        </div>
+        <h3>Swap without breaking the day</h3>
+        <p>Out of salmon? Swap it for any food and the rest of your day rebalances to keep totals intact.</p>
+      </div>
+      <div class="card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1b6b4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h14l-1 12H6z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+        </div>
+        <h3>Grocery list that's already weighed</h3>
+        <p>One tap turns the week into a shopping list in grams and servings, grouped by aisle, with meal-prep batches pre-calculated.</p>
+      </div>
+      <div class="card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1b6b4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M8 15h4"/></svg>
+        </div>
+        <h3>Training-day aware</h3>
+        <p>Higher carbs on leg day, lower on rest days. Link your training split and your plan periodises itself.</p>
+      </div>
+      <div class="card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1b6b4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg>
+        </div>
+        <h3>Verified food data</h3>
+        <p>Entries are cross-checked against USDA and manufacturer labels, so the numbers you log are the numbers you eat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">How it works</span>
+      <h2>Three steps. Twelve minutes. Seven days sorted.</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-art">
+          <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <rect x="20" y="18" width="60" height="64" rx="8" fill="#e6f5ec"/>
+            <rect x="30" y="32" width="40" height="6" rx="3" fill="#8fd4b0"/>
+            <rect x="30" y="46" width="40" height="6" rx="3" fill="#8fd4b0"/>
+            <rect x="30" y="46" width="28" height="6" rx="3" fill="#2e9e6a"/>
+            <rect x="30" y="60" width="40" height="6" rx="3" fill="#8fd4b0"/>
+            <rect x="30" y="60" width="16" height="6" rx="3" fill="#2e9e6a"/>
+            <circle cx="58" cy="49" r="5" fill="#fff" stroke="#1b6b4a" stroke-width="2"/>
+          </svg>
+        </div>
+        <span class="step-num">1</span>
+        <h3>Set your targets</h3>
+        <p>Enter your macros directly or let MacroMeal calculate them from bodyweight, activity and goal.</p>
+      </div>
+      <div class="step">
+        <div class="step-art">
+          <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <circle cx="35" cy="40" r="14" fill="#e6f5ec" stroke="#2e9e6a" stroke-width="3"/>
+            <circle cx="65" cy="40" r="14" fill="#e6f5ec" stroke="#8fd4b0" stroke-width="3"/>
+            <circle cx="50" cy="66" r="14" fill="#e6f5ec" stroke="#1b6b4a" stroke-width="3"/>
+            <path d="M30 40l4 4 7-8" stroke="#2e9e6a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M45 66l4 4 7-8" stroke="#1b6b4a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M60 36l10 8M70 36l-10 8" stroke="#8fd4b0" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="step-num">2</span>
+        <h3>Pick the foods you like</h3>
+        <p>Tick what you eat, cross out what you don't, add your go-to recipes. No tofu if you hate tofu.</p>
+      </div>
+      <div class="step">
+        <div class="step-art">
+          <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <rect x="18" y="26" width="64" height="50" rx="8" fill="#e6f5ec"/>
+            <g fill="#2e9e6a">
+              <rect x="26" y="36" width="10" height="10" rx="2"/><rect x="40" y="36" width="10" height="10" rx="2"/><rect x="54" y="36" width="10" height="10" rx="2"/><rect x="68" y="36" width="8" height="10" rx="2" fill="#8fd4b0"/>
+              <rect x="26" y="50" width="10" height="10" rx="2"/><rect x="40" y="50" width="10" height="10" rx="2" fill="#8fd4b0"/><rect x="54" y="50" width="10" height="10" rx="2"/>
+            </g>
+            <circle cx="72" cy="66" r="12" fill="#1b6b4a"/>
+            <path d="M66 66l4 4 8-8" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="step-num">3</span>
+        <h3>Get your week</h3>
+        <p>A full seven-day plan, grocery list and prep schedule. Swap anything, and the numbers stay on target.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section id="reviews">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">From the beta</span>
+      <h2>Lifters, runners and coaches already on it.</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="card quote">
+        <div class="stars">★★★★★</div>
+        <blockquote>"I used to spend Sunday night in a spreadsheet trying to make 180g protein fit under 2,100 kcal. Now it takes one tap and it's closer than my spreadsheet ever was."</blockquote>
+        <div class="who">
+          <div class="avatar">JR</div>
+          <div><strong>Jess R.</strong><span>Powerlifter, 12-week cut</span></div>
+        </div>
+      </div>
+      <div class="card quote">
+        <div class="stars">★★★★★</div>
+        <blockquote>"The training-day carb cycling is the feature I didn't know I needed. Long-run days get the carbs, rest days don't, and I never have to think about it."</blockquote>
+        <div class="who">
+          <div class="avatar">DO</div>
+          <div><strong>Daniel O.</strong><span>Marathon runner</span></div>
+        </div>
+      </div>
+      <div class="card quote">
+        <div class="stars">★★★★★</div>
+        <blockquote>"I coach 30 clients. Being able to hand them a plan that hits their numbers <em>and</em> uses food they'll actually cook has cut my check-in time in half."</blockquote>
+        <div class="who">
+          <div class="avatar">MK</div>
+          <div><strong>Maya K.</strong><span>Online nutrition coach</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Pricing</span>
+      <h2>Simple plans. Free while we're in beta.</h2>
+      <p>Waitlist members lock in launch pricing for their first year.</p>
+    </div>
+    <div class="price-grid">
+      <div class="card plan">
+        <h3>Starter</h3>
+        <div class="price">$0 <small>/ month</small></div>
+        <p class="for">For getting your targets dialled in.</p>
+        <ul>
+          <li>Daily macro &amp; calorie targets</li>
+          <li>3-day meal plans</li>
+          <li>Food swaps with rebalancing</li>
+          <li>Basic grocery list</li>
+        </ul>
+        <a href="#waitlist" class="btn btn-ghost">Join waitlist</a>
+      </div>
+      <div class="card plan featured">
+        <span class="badge">Most popular</span>
+        <h3>Athlete</h3>
+        <div class="price">$9 <small>/ month</small></div>
+        <p class="for">For anyone running a structured cut or bulk.</p>
+        <ul>
+          <li>Everything in Starter</li>
+          <li>Full 7-day plans &amp; prep schedule</li>
+          <li>Training-day carb cycling</li>
+          <li>Auto-adjusting calories from weight trend</li>
+          <li>Per-meal macro targets</li>
+          <li>Sync with MyFitnessPal, Apple Health &amp; Garmin</li>
+        </ul>
+        <a href="#waitlist" class="btn btn-primary">Join waitlist</a>
+      </div>
+      <div class="card plan">
+        <h3>Coach</h3>
+        <div class="price">$29 <small>/ month</small></div>
+        <p class="for">For coaches managing multiple clients.</p>
+        <ul>
+          <li>Everything in Athlete</li>
+          <li>Up to 50 client profiles</li>
+          <li>Shared plans &amp; adherence tracking</li>
+          <li>Custom recipe library</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#waitlist" class="btn btn-ghost">Join waitlist</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER CTA ============ -->
+<section class="cta" id="waitlist">
+  <svg class="leaf l" viewBox="0 0 200 200" fill="none" aria-hidden="true"><path d="M20 180C20 80 100 20 180 20c0 90-60 160-160 160z" fill="#8fd4b0"/><path d="M30 170C70 120 120 70 170 30" stroke="#0f3d2e" stroke-width="4" stroke-linecap="round"/></svg>
+  <svg class="leaf r" viewBox="0 0 200 200" fill="none" aria-hidden="true"><path d="M20 180C20 80 100 20 180 20c0 90-60 160-160 160z" fill="#8fd4b0"/><path d="M30 170C70 120 120 70 170 30" stroke="#0f3d2e" stroke-width="4" stroke-linecap="round"/></svg>
+  <div class="container" style="position:relative">
+    <span class="eyebrow" style="background:rgba(255,255,255,.1);color:var(--green-300)">Early access</span>
+    <h2>Stop doing macro math by hand.</h2>
+    <p>Join the waitlist and be first in when MacroMeal opens. Beta is free, and waitlist members keep launch pricing for a year.</p>
+    <form class="waitlist-form" action="#" method="post" onsubmit="return handleWaitlist(event)">
+      <label for="email-footer" style="position:absolute;left:-9999px">Email address</label>
+      <input id="email-footer" type="email" name="email" placeholder="you@example.com" required>
+      <button type="submit" class="btn btn-primary">Join the waitlist</button>
+    </form>
+    <p class="form-note">We'll email you once when your invite is ready. That's it.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container foot">
+    <div>© 2026 MacroMeal. Made for people who weigh their rice.</div>
+    <ul>
+      <li><a href="#">Privacy</a></li>
+      <li><a href="#">Terms</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  var toggle = document.querySelector('.nav-toggle');
+  var links = document.getElementById('nav-links');
+  toggle.addEventListener('click', function () {
+    var open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  // Close menu when a link is clicked
+  links.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      links.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Smooth scrolling for in-page anchors (with sticky-header offset)
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href');
+      if (id.length < 2) return;
+      var target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      var y = target.getBoundingClientRect().top + window.pageYOffset - 72;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    });
+  });
+
+  // Waitlist form (front-end only; wire the action to your backend)
+  function handleWaitlist(e) {
+    e.preventDefault();
+    var form = e.target;
+    var email = form.querySelector('input[type="email"]').value;
+    form.innerHTML = '<p style="font-weight:700;color:#2e9e6a;padding:.6rem 0">✓ You\'re on the list — we\'ll email ' + email.replace(/</g,'&lt;') + ' when it\'s your turn.</p>';
+    return false;
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <title>A pelican riding a bicycle</title>
+  <rect width="800" height="600" fill="#ffffff"/>
+
+  <!-- Front wheel (farther away: smaller, higher) -->
+  <circle cx="245" cy="380" r="76" fill="none" stroke="#2B2D42" stroke-width="18"/>
+  <circle cx="245" cy="380" r="9" fill="#2B2D42"/>
+
+  <!-- Rear wheel (closer: bigger, lower) -->
+  <circle cx="515" cy="425" r="92" fill="none" stroke="#2B2D42" stroke-width="20"/>
+  <circle cx="515" cy="425" r="10" fill="#2B2D42"/>
+
+  <!-- Bicycle frame -->
+  <g stroke="#2EC4B6" stroke-width="14" stroke-linecap="round" fill="none">
+    <path d="M390 400 L515 425"/>                    <!-- chain stay -->
+    <path d="M390 400 L462 300"/>                    <!-- seat tube -->
+    <path d="M462 300 L292 282"/>                    <!-- top tube -->
+    <path d="M292 282 L390 400"/>                    <!-- down tube -->
+    <path d="M288 288 L245 380" stroke-width="12"/>  <!-- fork -->
+    <path d="M462 300 L515 425" stroke-width="11"/>  <!-- seat stay -->
+    <path d="M296 276 C288 255 280 246 264 244" stroke-width="12"/> <!-- handlebar -->
+  </g>
+
+  <!-- Crankset and pedals -->
+  <path d="M362 348 L390 400 L418 452" stroke="#2B2D42" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <circle cx="390" cy="400" r="16" fill="#2B2D42"/>
+  <rect x="346" y="340" width="32" height="11" rx="5" fill="#2B2D42" transform="rotate(6 362 345)"/>
+  <rect x="402" y="446" width="34" height="12" rx="6" fill="#2B2D42" transform="rotate(-8 419 452)"/>
+
+  <!-- Far leg (behind body) -->
+  <path d="M372 288 C360 308 357 328 362 344" stroke="#E76F51" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <ellipse cx="360" cy="345" rx="14" ry="8" fill="#E76F51" transform="rotate(8 360 345)"/>
+
+  <!-- Tail (fanned toward the viewer) -->
+  <path d="M468 206 C500 190 536 196 558 220 C540 246 508 256 474 248 Z"
+        fill="#FFFFFF" stroke="#2B2D42" stroke-width="6" stroke-linejoin="round"/>
+
+  <!-- Body, horizontal with belly resting on the top tube -->
+  <ellipse cx="410" cy="235" rx="98" ry="56" fill="#FFFFFF" stroke="#2B2D42"
+           stroke-width="6" transform="rotate(-6 410 235)"/>
+
+  <!-- Neck, arched forward (dark under-stroke for outline) -->
+  <path d="M330 230 C298 214 262 204 234 198 C218 194 208 188 202 178"
+        fill="none" stroke="#2B2D42" stroke-width="42" stroke-linecap="round"/>
+  <path d="M330 230 C298 214 262 204 234 198 C218 194 208 188 202 178"
+        fill="none" stroke="#FFFFFF" stroke-width="30" stroke-linecap="round"/>
+
+  <!-- Head -->
+  <circle cx="196" cy="174" r="27" fill="#FFFFFF" stroke="#2B2D42" stroke-width="6"/>
+
+  <!-- Beak -->
+  <path d="M176 170 C138 174 98 186 64 201 C60 204 62 209 68 209 C108 203 148 197 180 194 C182 186 181 178 176 170 Z"
+        fill="#FFD166" stroke="#2B2D42" stroke-width="5" stroke-linejoin="round"/>
+
+  <!-- Pouch -->
+  <path d="M170 192 C138 200 106 212 84 226 C80 242 96 254 120 251 C152 246 174 228 181 205 C178 199 174 195 170 192 Z"
+        fill="#FF9F1C" stroke="#2B2D42" stroke-width="5" stroke-linejoin="round"/>
+
+  <!-- Eye -->
+  <circle cx="188" cy="166" r="5" fill="#2B2D42"/>
+
+  <!-- Near leg and webbed foot on pedal -->
+  <path d="M404 290 C416 330 419 392 417 446" stroke="#F4A261" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <ellipse cx="421" cy="453" rx="17" ry="9" fill="#F4A261" stroke="#2B2D42"
+           stroke-width="4" transform="rotate(-8 421 453)"/>
+
+  <!-- Near wing, lifted for balance -->
+  <path d="M350 234 C378 200 438 178 492 186 C476 214 432 242 382 250 C366 248 354 242 350 234 Z"
+        fill="#DCE4E8" stroke="#2B2D42" stroke-width="5" stroke-linejoin="round"/>
+</svg>

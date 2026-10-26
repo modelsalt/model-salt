@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="650" viewBox="0 0 700 650" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A long-legged cream pelican rides an ochre penny-farthing, seen from behind at a three-quarter angle, with its long bill in profile.</desc>
+
+  <rect width="700" height="650" rx="32" fill="#f7efdc"/>
+  <ellipse cx="353" cy="574" rx="209" ry="19" fill="#e5d7ba"/>
+
+  <!-- Small trailing wheel -->
+  <ellipse cx="222" cy="510" rx="45" ry="61" fill="#513e30"/>
+  <ellipse cx="222" cy="510" rx="34" ry="49" fill="#f7efdc"/>
+  <g fill="#c5ae83">
+    <path d="M219 462h5v96h-5z"/>
+    <path d="m188 507 68 3v5l-68-3z"/>
+    <path d="m199 474 49 68-4 3-49-68z"/>
+    <path d="m246 477 4 3-49 65-4-3z"/>
+  </g>
+
+  <!-- Large front wheel, elliptical in perspective -->
+  <ellipse cx="439" cy="424" rx="112" ry="151" fill="#513e30"/>
+  <ellipse cx="439" cy="424" rx="99" ry="137" fill="#c29443"/>
+  <ellipse cx="439" cy="424" rx="94" ry="132" fill="#f7efdc"/>
+  <g fill="#c9b58e">
+    <path d="M436 292h6v264h-6z"/>
+    <path d="m345 421 188 1v6l-188-1z"/>
+    <path d="m371 328 140 187-5 4-140-187z"/>
+    <path d="m507 328 5 4-141 188-5-4z"/>
+    <path d="m401 302 5-2 71 246-5 2z"/>
+    <path d="m472 300 5 2-71 246-5-2z"/>
+    <path d="m350 370 3-5 174 112-3 5z"/>
+    <path d="m524 365 3 5-174 112-3-5z"/>
+  </g>
+
+  <!-- Sweeping frame and fork -->
+  <path d="M216 509c23-27 43-65 57-109l31-111 15 4-31 112c-16 48-37 85-62 112z" fill="#a97935"/>
+  <path d="m310 290 97-27 5 15-97 28z" fill="#a97935"/>
+  <path d="m402 248 13-3 31 180-14 3z" fill="#bc8b38"/>
+  <path d="m413 255 11-2 37 166-10 3z" fill="#8c632f"/>
+  <ellipse cx="439" cy="424" rx="13" ry="17" fill="#795531"/>
+  <ellipse cx="222" cy="510" rx="8" ry="11" fill="#795531"/>
+
+  <!-- Saddle and raised handlebar -->
+  <path d="M284 281c12-9 40-10 58-3l-7 13-45 2z" fill="#513e30"/>
+  <path d="m402 259-7-46 11-2 7 46z" fill="#795531"/>
+  <path d="M377 207h67v10h-67z" fill="#a97935"/>
+  <rect x="369" y="204" width="25" height="16" rx="7" fill="#513e30"/>
+  <rect x="433" y="204" width="26" height="16" rx="7" fill="#513e30"/>
+
+  <!-- Far leg and pedal -->
+  <path d="M335 265c6 27 12 47 29 63l48 60-10 8-55-59c-17-19-23-43-27-68z" fill="#b9873d"/>
+  <path d="m403 386 27 5 8 12-38-2-7-7z" fill="#bb873c"/>
+  <path d="m416 397 26 24-5 6-26-24z" fill="#795531"/>
+  <rect x="397" y="399" width="34" height="8" rx="3" fill="#513e30"/>
+
+  <!-- Pelican's upright neck and profile -->
+  <path d="M305 216c17-24 24-39 21-65l-5-34c-3-27 10-49 32-51 25-3 41 14 40 34-1 16-12 28-28 30-5 24 12 42 7 66-3 19-17 34-32 46z" fill="#fff9e9"/>
+  <path d="M337 116c3 35 18 62 1 94l-18 11c23-45 4-67 17-105z" fill="#e1d2b4"/>
+
+  <!-- Long bill and throat pouch -->
+  <path d="M377 103 527 118c-32 15-67 44-101 39-24-3-41-23-49-39z" fill="#c99744"/>
+  <path d="m377 99 158 17c7 1 7 6-1 7l-158-9z" fill="#e5b655"/>
+  <path d="M386 120c14 18 28 27 45 27 20 0 45-13 64-20-27 22-49 32-69 28-19-3-33-16-40-35z" fill="#b48035"/>
+  <circle cx="366" cy="95" r="5" fill="#513e30"/>
+  <circle cx="367" cy="93.5" r="1.5" fill="#fff9e9"/>
+
+  <!-- Far wing reaching the handlebar -->
+  <path d="M340 186c36-2 57 14 105 18l-3 12c-48 5-87-3-105-15z" fill="#d9c9a9"/>
+
+  <!-- Back and folded near wing -->
+  <path d="M309 177c-28 3-52 23-55 50-3 27 14 48 45 53 30 6 62-11 70-38 9-31-16-65-60-65z" fill="#fff9e9"/>
+  <path d="M272 211c3 27 20 47 52 51l-34 28-28-10-20 9 13-31c-5-17 1-35 17-47z" fill="#e1d2b4"/>
+  <path d="M283 203c15-14 37-9 54 1 17 9 30 15 47 16-5 12-18 18-33 15-20-3-34-15-44-16 9 13 20 21 34 27-32 1-55-16-58-43z" fill="#f0e5cc"/>
+
+  <!-- Long near leg bent to the forward pedal -->
+  <path d="M301 271c5 23 11 50 27 70l63 45 41 53-11 9-46-52-65-45c-20-25-26-50-28-76z" fill="#d5a24b"/>
+  <path d="m423 437 21 5 18 17-20-2-13 4-15-15z" fill="#c18e3b"/>
+  <path d="m438 420 11 27-8 4-11-27z" fill="#795531"/>
+  <rect x="426" y="454" width="40" height="9" rx="4" fill="#513e30"/>
+</svg>

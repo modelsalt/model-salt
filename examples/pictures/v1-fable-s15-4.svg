@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" width="600" height="500">
+  <!-- Ground line -->
+  <line x1="40" y1="432" x2="560" y2="432" stroke="#222" stroke-width="5" stroke-linecap="round"/>
+
+  <g stroke="#222" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+
+    <!-- ===== Rear wheel (further away, three-quarter view) ===== -->
+    <ellipse cx="205" cy="388" rx="27" ry="38" fill="#444"/>
+    <ellipse cx="205" cy="388" rx="14" ry="22" fill="#ddd"/>
+    <ellipse cx="205" cy="388" rx="4" ry="5" fill="#222"/>
+
+    <!-- ===== Folding frame ===== -->
+    <!-- low main beam from rear hub to front stem -->
+    <path d="M205 388 L245 332 L375 318" fill="none" stroke-width="9"/>
+    <!-- hinge clasp in the middle of the beam -->
+    <rect x="300" y="313" width="22" height="24" rx="4" fill="#f4b400"/>
+    <!-- rear stay -->
+    <path d="M205 388 L262 352" fill="none" stroke-width="7"/>
+    <!-- tall seat post + saddle -->
+    <path d="M258 352 L246 238" fill="none" stroke-width="8"/>
+    <path d="M214 236 Q240 220 282 236 L268 246 Q244 240 222 246 Z" fill="#333"/>
+    <!-- crank / bottom bracket -->
+    <circle cx="288" cy="372" r="9" fill="#777"/>
+
+    <!-- ===== Front wheel (closer, slightly larger) ===== -->
+    <ellipse cx="395" cy="392" rx="32" ry="40" fill="#444"/>
+    <ellipse cx="395" cy="392" rx="17" ry="24" fill="#ddd"/>
+    <ellipse cx="395" cy="392" rx="4" ry="5" fill="#222"/>
+    <!-- fork + tall folding handlebar stem -->
+    <path d="M395 392 L388 322 L376 222" fill="none" stroke-width="9"/>
+    <!-- stem hinge -->
+    <rect x="378" y="262" width="20" height="16" rx="3" fill="#f4b400"/>
+    <!-- handlebars curving toward viewer -->
+    <path d="M330 224 Q376 206 424 224" fill="none" stroke-width="9"/>
+    <!-- grips -->
+    <ellipse cx="330" cy="226" rx="9" ry="7" fill="#c33"/>
+    <ellipse cx="424" cy="226" rx="9" ry="7" fill="#c33"/>
+
+    <!-- ===== Pelican ===== -->
+    <!-- far leg to rear pedal -->
+    <path d="M276 318 L266 348" fill="none" stroke="#f08a1d" stroke-width="10"/>
+    <path d="M276 318 L266 348" fill="none" stroke-width="4"/>
+    <!-- rear pedal + far foot -->
+    <rect x="250" y="343" width="26" height="9" rx="3" fill="#333"/>
+    <path d="M254 342 L246 334 L280 332 L278 342 Z" fill="#f08a1d"/>
+
+    <!-- body (plump, upright on saddle) -->
+    <ellipse cx="282" cy="268" rx="58" ry="62" fill="#fff"/>
+    <!-- tail feathers -->
+    <path d="M228 288 L204 300 L232 306 Z" fill="#fff"/>
+
+    <!-- near leg to front pedal -->
+    <path d="M300 322 L318 384" fill="none" stroke="#f08a1d" stroke-width="12"/>
+    <path d="M300 322 L318 384" fill="none" stroke-width="4"/>
+    <!-- front pedal + near webbed foot -->
+    <rect x="304" y="384" width="34" height="10" rx="3" fill="#333"/>
+    <path d="M308 384 L296 372 L312 376 L318 364 L326 376 L344 372 L336 384 Z" fill="#f08a1d"/>
+
+    <!-- far wing reaching to far grip -->
+    <path d="M258 236 Q286 214 326 230 Q296 244 262 252 Z" fill="#e8e8e8"/>
+    <!-- near wing reaching to near grip -->
+    <path d="M308 222 Q364 204 420 226 Q370 248 324 258 Q300 246 308 222 Z" fill="#fff"/>
+    <!-- wing tips wrapping grips -->
+    <path d="M322 222 Q332 236 324 240" fill="none"/>
+    <path d="M416 222 Q428 236 418 242" fill="none"/>
+
+    <!-- neck -->
+    <path d="M296 212 Q300 180 322 160 Q342 150 348 164 Q340 190 318 220 Z" fill="#fff"/>
+
+    <!-- head -->
+    <circle cx="342" cy="142" r="34" fill="#fff"/>
+    <!-- head crest -->
+    <path d="M312 122 Q318 100 336 112" fill="#fff"/>
+    <!-- eye (three-quarter: toward the viewer side) -->
+    <circle cx="356" cy="134" r="8" fill="#fff"/>
+    <circle cx="358" cy="135" r="4" fill="#222" stroke="none"/>
+
+    <!-- beak: upper mandible angled toward the viewer -->
+    <path d="M362 146 L458 170 Q456 180 446 182 L366 164 Z" fill="#f4b400"/>
+    <!-- hanging pouch -->
+    <path d="M366 164 L446 182 Q430 220 396 218 Q370 210 366 164 Z" fill="#f08a1d"/>
+    <!-- beak hook tip -->
+    <path d="M452 168 Q464 174 456 184" fill="none"/>
+  </g>
+</svg>

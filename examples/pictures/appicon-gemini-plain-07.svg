@@ -1,0 +1,46 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Sky Background Gradient -->
+    <linearGradient id="sky" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f2027" />
+      <stop offset="50%" stop-color="#203a43" />
+      <stop offset="100%" stop-color="#2c5364" />
+    </linearGradient>
+    
+    <!-- Sun Gradient -->
+    <linearGradient id="sun" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF416C" />
+      <stop offset="100%" stop-color="#FF4B2B" />
+    </linearGradient>
+
+    <!-- Frosted Glass Effect -->
+    <linearGradient id="cloud" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#E0EAFC" stop-opacity="0.4" />
+    </linearGradient>
+  </defs>
+
+  <!-- Sharp Square Background (No rounded corners) -->
+  <rect width="512" height="512" fill="url(#sky)" />
+
+  <!-- Geometric Sun Rays (Sharp Triangles) -->
+  <polygon points="0,512 512,0 512,512" fill="#ffffff" fill-opacity="0.05" />
+  <polygon points="150,512 512,150 512,512" fill="#ffffff" fill-opacity="0.05" />
+
+  <!-- The Sun -->
+  <circle cx="320" cy="192" r="110" fill="url(#sun)" />
+
+  <!-- Rain Lines (Sharp angled rectangles) -->
+  <rect x="140" y="340" width="12" height="80" fill="#00d2ff" transform="rotate(15 140 340)" />
+  <rect x="200" y="360" width="12" height="100" fill="#00d2ff" transform="rotate(15 200 360)" />
+  <rect x="260" y="340" width="12" height="80" fill="#00d2ff" transform="rotate(15 260 340)" />
+
+  <!-- Geometric Cloud (Anchored to the bottom-left sharp corner) -->
+  <path d="M 0,512 L 0,320 A 90,90 0 0,1 130,260 A 110,110 0 0,1 320,300 A 80,80 0 0,1 400,420 L 400,512 Z" fill="url(#cloud)" />
+  
+  <!-- Foreground Cloud Shadow/Layer (Anchored to bottom-right sharp corner) -->
+  <path d="M 150,512 A 100,100 0 0,1 300,400 A 90,90 0 0,1 450,430 L 512,430 L 512,512 Z" fill="#FFFFFF" fill-opacity="0.3" />
+
+  <!-- Sharp Border Frame (Optional: emphasizes the 90-degree corners) -->
+  <rect width="512" height="512" fill="none" stroke="#ffffff" stroke-width="16" stroke-opacity="0.1" />
+</svg>

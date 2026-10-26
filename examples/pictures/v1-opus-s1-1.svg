@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="800" height="600">
+  <!-- Duotone: cream #F2E8CF + navy #1B3A5C. Filled shapes only, no strokes. -->
+  <rect width="400" height="300" fill="#F2E8CF"/>
+
+  <g fill="#1B3A5C">
+    <!-- Ground line -->
+    <rect x="0" y="250" width="400" height="4"/>
+
+    <!-- Speed lines -->
+    <rect x="22" y="92" width="80" height="4" rx="2"/>
+    <rect x="44" y="118" width="58" height="4" rx="2"/>
+    <rect x="12" y="150" width="62" height="4" rx="2"/>
+    <rect x="30" y="182" width="44" height="4" rx="2"/>
+    <rect x="8" y="214" width="56" height="4" rx="2"/>
+
+    <!-- Wheels (rings via even-odd) -->
+    <path fill-rule="evenodd" d="M80,210 a40,40 0 1,0 80,0 a40,40 0 1,0 -80,0 Z M86,210 a34,34 0 1,0 68,0 a34,34 0 1,0 -68,0 Z"/>
+    <path fill-rule="evenodd" d="M250,210 a40,40 0 1,0 80,0 a40,40 0 1,0 -80,0 Z M256,210 a34,34 0 1,0 68,0 a34,34 0 1,0 -68,0 Z"/>
+    <!-- Spokes -->
+    <g transform="translate(120 210)">
+      <rect x="-34" y="-0.8" width="68" height="1.6"/>
+      <rect x="-34" y="-0.8" width="68" height="1.6" transform="rotate(45)"/>
+      <rect x="-34" y="-0.8" width="68" height="1.6" transform="rotate(90)"/>
+      <rect x="-34" y="-0.8" width="68" height="1.6" transform="rotate(135)"/>
+      <circle r="5"/>
+    </g>
+    <g transform="translate(290 210)">
+      <rect x="-34" y="-0.8" width="68" height="1.6"/>
+      <rect x="-34" y="-0.8" width="68" height="1.6" transform="rotate(45)"/>
+      <rect x="-34" y="-0.8" width="68" height="1.6" transform="rotate(90)"/>
+      <rect x="-34" y="-0.8" width="68" height="1.6" transform="rotate(135)"/>
+      <circle r="5"/>
+    </g>
+
+    <!-- Frame tubes -->
+    <rect x="0" y="-2.5" width="75.2" height="5" transform="translate(120 210) rotate(3.8)"/>
+    <rect x="0" y="-2.5" width="83.4" height="5" transform="translate(120 210) rotate(-46)"/>
+    <rect x="0" y="-2.5" width="72.8" height="5" transform="translate(195 215) rotate(-105.9)"/>
+    <rect x="0" y="-2.5" width="87.1" height="5" transform="translate(178 150) rotate(3.3)"/>
+    <rect x="0" y="-3" width="88.5" height="6" transform="translate(195 215) rotate(-34.4)"/>
+    <rect x="0" y="-2.5" width="79" height="5" transform="translate(290 210) rotate(-108.4)"/>
+    <!-- Stem + handlebar -->
+    <rect x="0" y="-2.5" width="22.7" height="5" transform="translate(265 135) rotate(-131.4)"/>
+    <rect x="236" y="115" width="20" height="6" rx="3"/>
+    <!-- Seat post + saddle -->
+    <rect x="171" y="132" width="5" height="16"/>
+    <path d="M156,131 C164,126 182,126 190,130 L187,136 L160,136 Z"/>
+
+    <!-- Chainring + cranks + pedals -->
+    <path fill-rule="evenodd" d="M183,215 a12,12 0 1,0 24,0 a12,12 0 1,0 -24,0 Z M187,215 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0 Z"/>
+    <circle cx="195" cy="215" r="3.5"/>
+    <rect x="0" y="-2" width="21" height="4" transform="translate(195 215) rotate(58.6)"/>
+    <rect x="0" y="-2" width="21" height="4" transform="translate(195 215) rotate(-121.4)"/>
+    <rect x="198" y="231" width="16" height="4" rx="1"/>
+    <rect x="176" y="195" width="16" height="4" rx="1"/>
+  </g>
+
+  <!-- ===== Pelican ===== -->
+  <!-- Far leg (cream halo, then navy) -->
+  <g fill="#F2E8CF">
+    <rect x="0" y="-5" width="42.2" height="10" transform="translate(182 124) rotate(53.7)"/>
+    <rect x="0" y="-5" width="42.5" height="10" transform="translate(207 158) rotate(119.6)"/>
+  </g>
+  <g fill="#1B3A5C">
+    <rect x="0" y="-3" width="42.2" height="6" transform="translate(182 124) rotate(53.7)"/>
+    <rect x="0" y="-3" width="42.5" height="6" transform="translate(207 158) rotate(119.6)"/>
+    <circle cx="207" cy="158" r="3.5"/>
+    <path d="M176,197 L196,190 L199,197 L178,200 Z"/>
+  </g>
+
+  <!-- Tail -->
+  <path fill="#1B3A5C" d="M158,116 L126,128 L124,136 L134,134 L130,141 L162,132 Z"/>
+
+  <!-- Body -->
+  <ellipse cx="178" cy="98" rx="28" ry="40" fill="#1B3A5C" transform="rotate(15 178 98)"/>
+
+  <!-- Neck -->
+  <path fill="#1B3A5C" d="M172,68 C166,44 184,34 194,24 L212,34 C202,44 190,52 198,72 Z"/>
+
+  <!-- Head -->
+  <circle cx="204" cy="30" r="13" fill="#1B3A5C"/>
+
+  <!-- Beak: upper bill, pouch, hook -->
+  <g fill="#1B3A5C">
+    <path d="M211,23 L290,50 L287,55 L212,39 Z"/>
+    <path d="M213,38 L287,54 C272,67 242,78 223,68 C214,62 211,50 213,38 Z"/>
+    <circle cx="289" cy="54" r="3.2"/>
+  </g>
+  <!-- Mouth line (cream sliver) -->
+  <path fill="#F2E8CF" d="M214,35.5 L286,51.5 L285.5,53.3 L214,38.2 Z"/>
+
+  <!-- Eye -->
+  <circle cx="208" cy="28" r="4" fill="#F2E8CF"/>
+  <circle cx="209" cy="28" r="1.8" fill="#1B3A5C"/>
+
+  <!-- Wing reaching to handlebar -->
+  <path fill="#1B3A5C" d="M180,64 C210,68 238,94 250,112 L243,123 C228,112 206,106 186,106 C174,98 172,76 180,64 Z"/>
+  <!-- Wing edge + feather slits (cream) -->
+  <g fill="#F2E8CF">
+    <path d="M180,61 C212,65 240,92 253,111 L250,114 C236,95 210,70 180,65 Z"/>
+    <path d="M190,96 C204,94 220,100 232,110 C220,103 204,98 190,99 Z"/>
+    <path d="M188,86 C202,84 216,90 226,98 C214,92 202,89 188,89 Z"/>
+    <path d="M190,76 C200,75 210,80 218,86 C208,81 198,79 190,79 Z"/>
+  </g>
+  <!-- Wingtip "fingers" gripping the handlebar -->
+  <g fill="#1B3A5C">
+    <rect x="242" y="112" width="5" height="12" rx="2.5"/>
+    <rect x="247.5" y="112" width="5" height="12" rx="2.5"/>
+    <rect x="253" y="113" width="4.5" height="10" rx="2.2"/>
+  </g>
+
+  <!-- Near leg (cream halo, then navy) -->
+  <g fill="#F2E8CF">
+    <rect x="0" y="-5.5" width="58.8" height="11" transform="translate(188 122) rotate(54.7)"/>
+    <rect x="0" y="-5.5" width="64" height="11" transform="translate(222 170) rotate(104.5)"/>
+    <circle cx="222" cy="170" r="6"/>
+  </g>
+  <g fill="#1B3A5C">
+    <rect x="0" y="-3.5" width="58.8" height="7" transform="translate(188 122) rotate(54.7)"/>
+    <rect x="0" y="-3.5" width="64" height="7" transform="translate(222 170) rotate(104.5)"/>
+    <circle cx="222" cy="170" r="4"/>
+    <!-- Webbed foot on the pedal -->
+    <path d="M200,229 L218,224 L224,231 L216,233 L210,236 L200,236 Z"/>
+  </g>
+</svg>

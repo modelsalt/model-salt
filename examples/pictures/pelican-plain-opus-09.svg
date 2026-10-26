@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <!-- Sky and ground -->
+  <rect width="400" height="300" fill="#bfe6ff"/>
+  <circle cx="345" cy="50" r="28" fill="#ffd84d"/>
+  <rect y="275" width="400" height="25" fill="#7cc46a"/>
+  <line x1="0" y1="275" x2="400" y2="275" stroke="#5a9e4b" stroke-width="2"/>
+
+  <!-- Wheels -->
+  <g fill="none" stroke="#333" stroke-width="5">
+    <circle cx="110" cy="220" r="55"/>
+    <circle cx="290" cy="220" r="55"/>
+  </g>
+  <!-- Spokes -->
+  <g stroke="#999" stroke-width="1.5">
+    <line x1="55" y1="220" x2="165" y2="220"/>
+    <line x1="110" y1="165" x2="110" y2="275"/>
+    <line x1="71" y1="181" x2="149" y2="259"/>
+    <line x1="149" y1="181" x2="71" y2="259"/>
+    <line x1="235" y1="220" x2="345" y2="220"/>
+    <line x1="290" y1="165" x2="290" y2="275"/>
+    <line x1="251" y1="181" x2="329" y2="259"/>
+    <line x1="329" y1="181" x2="251" y2="259"/>
+  </g>
+  <circle cx="110" cy="220" r="5" fill="#555"/>
+  <circle cx="290" cy="220" r="5" fill="#555"/>
+
+  <!-- Frame -->
+  <g stroke="#d6332f" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <line x1="110" y1="220" x2="190" y2="220"/>
+    <line x1="110" y1="220" x2="170" y2="145"/>
+    <line x1="190" y1="220" x2="170" y2="145"/>
+    <line x1="170" y1="145" x2="265" y2="145"/>
+    <line x1="190" y1="220" x2="265" y2="145"/>
+    <line x1="265" y1="145" x2="290" y2="220"/>
+    <!-- Handlebar stem and bars -->
+    <line x1="265" y1="145" x2="258" y2="122"/>
+    <path d="M250 122 Q262 116 280 122"/>
+  </g>
+  <!-- Seat -->
+  <line x1="170" y1="145" x2="168" y2="136" stroke="#333" stroke-width="4"/>
+  <ellipse cx="166" cy="134" rx="16" ry="5" fill="#333"/>
+
+  <!-- Crank and pedals -->
+  <circle cx="190" cy="220" r="10" fill="none" stroke="#333" stroke-width="3"/>
+  <line x1="208" y1="206" x2="172" y2="234" stroke="#333" stroke-width="4" stroke-linecap="round"/>
+  <rect x="201" y="202" width="16" height="5" rx="2" fill="#222"/>
+  <rect x="164" y="232" width="16" height="5" rx="2" fill="#222"/>
+
+  <!-- Back leg -->
+  <g stroke="#f08a24" stroke-width="5" stroke-linecap="round" fill="none">
+    <polyline points="175,125 195,182 172,232"/>
+  </g>
+  <path d="M164 234 L182 234 L172 226 Z" fill="#f08a24"/>
+
+  <!-- Tail feathers -->
+  <path d="M135 105 L105 95 L112 108 L100 115 L138 118 Z" fill="#e8e8e8" stroke="#888" stroke-width="1.5"/>
+
+  <!-- Body -->
+  <ellipse cx="172" cy="108" rx="44" ry="28" fill="#f7f7f7" stroke="#888" stroke-width="2" transform="rotate(-12 172 108)"/>
+  <!-- Wing -->
+  <path d="M150 98 Q180 80 205 100 Q185 118 150 112 Z" fill="#dcdcdc" stroke="#888" stroke-width="1.5"/>
+  <!-- Wing reaching to handlebar -->
+  <path d="M200 100 Q232 108 256 121" stroke="#dcdcdc" stroke-width="9" stroke-linecap="round" fill="none"/>
+  <path d="M200 100 Q232 108 256 121" stroke="#888" stroke-width="1" fill="none"/>
+
+  <!-- Front leg -->
+  <g stroke="#f08a24" stroke-width="5" stroke-linecap="round" fill="none">
+    <polyline points="185,128 222,165 210,204"/>
+  </g>
+  <path d="M201 206 L219 206 L210 198 Z" fill="#f08a24"/>
+
+  <!-- Neck -->
+  <path d="M198 92 Q215 80 210 62 Q206 45 222 40" stroke="#f7f7f7" stroke-width="16" stroke-linecap="round" fill="none"/>
+  <path d="M190 84 Q205 75 202 60 Q198 40 222 32" stroke="#888" stroke-width="1.5" fill="none"/>
+  <path d="M206 98 Q224 84 218 64 Q215 50 228 48" stroke="#888" stroke-width="1.5" fill="none"/>
+
+  <!-- Head -->
+  <circle cx="228" cy="40" r="15" fill="#f7f7f7" stroke="#888" stroke-width="2"/>
+  <!-- Crest -->
+  <path d="M220 27 Q224 18 232 24" stroke="#f0d36b" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+  <!-- Beak pouch -->
+  <path d="M238 46 Q275 78 318 56 L240 50 Z" fill="#f5a623" stroke="#c97c10" stroke-width="1.5"/>
+  <!-- Upper beak -->
+  <path d="M238 36 L322 52 Q324 56 318 56 L238 48 Z" fill="#ffc94a" stroke="#c97c10" stroke-width="1.5"/>
+  <circle cx="320" cy="54" r="2" fill="#c97c10"/>
+
+  <!-- Eye -->
+  <circle cx="232" cy="37" r="3.5" fill="#222"/>
+  <circle cx="233" cy="36" r="1.2" fill="#fff"/>
+
+  <!-- Motion lines -->
+  <g stroke="#fff" stroke-width="3" stroke-linecap="round" opacity="0.8">
+    <line x1="20" y1="150" x2="45" y2="150"/>
+    <line x1="10" y1="175" x2="40" y2="175"/>
+    <line x1="25" y1="200" x2="48" y2="200"/>
+  </g>
+</svg>

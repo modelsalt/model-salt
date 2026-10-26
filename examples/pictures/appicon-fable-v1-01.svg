@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <!-- Sun: warm radial gradient -->
+    <radialGradient id="sunFill" cx="45%" cy="40%" r="65%">
+      <stop offset="0%"  stop-color="#FFF3B0"/>
+      <stop offset="55%" stop-color="#FFC43D"/>
+      <stop offset="100%" stop-color="#FF9A1F"/>
+    </radialGradient>
+
+    <!-- Cloud: cool sky-blue gradient -->
+    <linearGradient id="cloudFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"  stop-color="#FFFFFF"/>
+      <stop offset="45%" stop-color="#DCEFFF"/>
+      <stop offset="100%" stop-color="#9CC9F5"/>
+    </linearGradient>
+
+    <!-- Subtle inner glow for the cloud -->
+    <filter id="innerGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="14" result="blur"/>
+      <feOffset dx="0" dy="6" result="off"/>
+      <feComposite in="off" in2="SourceAlpha" operator="arithmetic"
+                   k2="-1" k3="1" result="inner"/>
+      <feFlood flood-color="#FFFFFF" flood-opacity="0.9"/>
+      <feComposite in2="inner" operator="in" result="glow"/>
+      <feMerge>
+        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode in="glow"/>
+      </feMerge>
+    </filter>
+
+    <!-- Soft inner glow for the sun -->
+    <filter id="sunGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="18" result="blur"/>
+      <feComposite in="blur" in2="SourceAlpha" operator="arithmetic"
+                   k2="-1" k3="1" result="inner"/>
+      <feFlood flood-color="#FFFBE6" flood-opacity="0.85"/>
+      <feComposite in2="inner" operator="in" result="glow"/>
+      <feMerge>
+        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode in="glow"/>
+      </feMerge>
+    </filter>
+
+    <!-- Gentle drop shadow under the cloud -->
+    <filter id="cloudShadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#5A9BD8" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+
+  <!-- Pure white square background, no rounding -->
+  <rect x="0" y="0" width="1024" height="1024" fill="#FFFFFF"/>
+
+  <!-- Motif group: centered, ~60% of the square (approx. 614px wide, 205px margins) -->
+  <g>
+    <!-- Sun rays -->
+    <g stroke="#FFB32B" stroke-width="22" stroke-linecap="round" opacity="0.9">
+      <line x1="430" y1="222" x2="430" y2="268"/>
+      <line x1="553" y1="257" x2="522" y2="290"/>
+      <line x1="300" y1="257" x2="331" y2="290"/>
+      <line x1="248" y1="380" x2="294" y2="380"/>
+      <line x1="590" y1="380" x2="612" y2="380"/>
+    </g>
+
+    <!-- Sun -->
+    <circle cx="430" cy="385" r="112" fill="url(#sunFill)" filter="url(#sunGlow)"/>
+
+    <!-- Cloud (overlaps lower-right of the sun) -->
+    <g filter="url(#cloudShadow)">
+      <path filter="url(#innerGlow)" fill="url(#cloudFill)"
+        d="M345 650
+           C 285 650, 250 605, 250 560
+           C 250 510, 292 472, 342 474
+           C 362 405, 428 362, 500 372
+           C 548 378, 592 410, 612 452
+           C 630 445, 650 442, 670 445
+           C 735 452, 782 505, 778 568
+           C 775 618, 735 650, 686 650
+           Z"/>
+    </g>
+  </g>
+
+  <!-- App name: short, small type along the bottom edge -->
+  <text x="512" y="930"
+        text-anchor="middle"
+        font-family="'Inter', 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif"
+        font-size="56" font-weight="600" letter-spacing="10"
+        fill="#5A9BD8">NIMBUS</text>
+</svg>

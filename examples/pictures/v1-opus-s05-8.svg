@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 420" width="500" height="420">
+  <!-- Sky & ground -->
+  <rect width="500" height="420" fill="#bfe6f5"/>
+  <circle cx="420" cy="70" r="34" fill="#ffd95a"/>
+  <rect y="370" width="500" height="50" fill="#8bc96b"/>
+
+  <!-- Wheels -->
+  <g fill="none" stroke="#2f2f3a">
+    <circle cx="130" cy="300" r="68" stroke-width="10"/>
+    <circle cx="370" cy="300" r="68" stroke-width="10"/>
+    <g stroke-width="2.5" stroke="#8a8a96">
+      <line x1="130" y1="236" x2="130" y2="364"/>
+      <line x1="66" y1="300" x2="194" y2="300"/>
+      <line x1="85" y1="255" x2="175" y2="345"/>
+      <line x1="175" y1="255" x2="85" y2="345"/>
+      <line x1="370" y1="236" x2="370" y2="364"/>
+      <line x1="306" y1="300" x2="434" y2="300"/>
+      <line x1="325" y1="255" x2="415" y2="345"/>
+      <line x1="415" y1="255" x2="325" y2="345"/>
+    </g>
+  </g>
+  <circle cx="130" cy="300" r="7" fill="#2f2f3a"/>
+  <circle cx="370" cy="300" r="7" fill="#2f2f3a"/>
+
+  <!-- Far leg & far pedal (behind frame) -->
+  <line x1="240" y1="300" x2="222" y2="272" stroke="#555" stroke-width="6" stroke-linecap="round"/>
+  <polyline points="222,198 258,238 224,268" fill="none" stroke="#d98a1c" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="212,266 240,266 230,278 208,276" fill="#d98a1c"/>
+
+  <!-- Frame -->
+  <g stroke="#e4572e" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <polyline points="130,300 240,300 215,205 130,300"/>
+    <polyline points="215,205 330,198 240,300"/>
+    <line x1="330" y1="198" x2="370" y2="300"/>
+    <line x1="330" y1="198" x2="338" y2="168"/>
+  </g>
+  <!-- Handlebar -->
+  <line x1="330" y1="170" x2="356" y2="162" stroke="#2f2f3a" stroke-width="8" stroke-linecap="round"/>
+  <!-- Chainring -->
+  <circle cx="240" cy="300" r="15" fill="#f2f2f2" stroke="#2f2f3a" stroke-width="4"/>
+  <!-- Seat -->
+  <rect x="192" y="198" width="42" height="11" rx="5" fill="#2f2f3a"/>
+
+  <!-- Tail -->
+  <polygon points="182,168 148,186 158,196 186,192" fill="#d9d9d9"/>
+
+  <!-- Body -->
+  <ellipse cx="218" cy="155" rx="42" ry="54" fill="#fafafa" transform="rotate(12 218 155)"/>
+  <ellipse cx="228" cy="165" rx="22" ry="34" fill="#ffffff" transform="rotate(12 228 165)"/>
+
+  <!-- Neck -->
+  <path d="M220 115 Q212 82 232 62 L254 72 Q240 92 248 122 Z" fill="#fafafa"/>
+
+  <!-- Head -->
+  <circle cx="244" cy="64" r="22" fill="#fafafa"/>
+  <path d="M228 48 Q240 30 258 44 Q246 40 236 50 Z" fill="#f5d36b"/>
+
+  <!-- Beak & pouch -->
+  <path d="M256 74 L338 92 Q308 124 266 96 Z" fill="#f7c35f"/>
+  <polygon points="254,58 336,84 340,91 256,76" fill="#f5a623"/>
+  <path d="M254 76 Q262 84 270 79" fill="none" stroke="#b5651d" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Happy eye & blush -->
+  <path d="M240 62 Q247 53 254 62" fill="none" stroke="#222" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="246" cy="76" r="5" fill="#ff9fb0" opacity="0.8"/>
+
+  <!-- Near leg & near pedal -->
+  <line x1="240" y1="300" x2="260" y2="330" stroke="#555" stroke-width="6" stroke-linecap="round"/>
+  <polyline points="226,200 282,248 262,326" fill="none" stroke="#f0a030" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="248,326 284,326 274,340 244,338" fill="#f0a030"/>
+  <rect x="250" y="328" width="22" height="5" rx="2" fill="#2f2f3a"/>
+
+  <!-- Wing reaching to handlebar -->
+  <path d="M220 118 Q290 124 344 158 L348 174 Q290 172 226 176 Q206 150 220 118 Z" fill="#e6e6e6"/>
+  <path d="M334 154 L354 160 L356 176 L338 176 Z" fill="#4a4a55"/>
+</svg>

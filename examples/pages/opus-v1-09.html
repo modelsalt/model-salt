@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Larder: cook what you've got, waste less, spend less</title>
+<meta name="description" content="Larder plans your week's meals around the food already in your kitchen, so you buy less, waste less and save money.">
+<style>
+  :root{
+    --ink:#1b1530; --cream:#fff8ec; --tomato:#ff5a3c; --sun:#ffd23f;
+    --mint:#3ddc97; --sky:#4cc9f0; --grape:#8b5cf6; --pink:#ff8fc7;
+    --radius:28px; --border:3px solid var(--ink); --shadow:6px 6px 0 var(--ink);
+    --font: ui-rounded, "SF Pro Rounded", "Nunito", "Varela Round", "Quicksand", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font);color:var(--ink);background:var(--cream);line-height:1.55;font-size:18px;overflow-x:hidden}
+  svg{display:block}
+  a{color:inherit}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{line-height:1.08;letter-spacing:-.02em;font-weight:900}
+  h1{font-size:clamp(2.6rem,6vw,4.6rem)}
+  h2{font-size:clamp(2rem,4.2vw,3.2rem)}
+  h3{font-size:1.5rem}
+  .skip{position:absolute;left:-999px;top:8px;background:var(--sun);padding:8px 14px;border:var(--border);border-radius:12px;z-index:100}
+  .skip:focus{left:8px}
+  :focus-visible{outline:3px dashed var(--grape);outline-offset:4px}
+
+  .chip{display:inline-flex;align-items:center;gap:8px;background:#fff;border:var(--border);border-radius:999px;padding:6px 16px;font-weight:800;font-size:.9rem;box-shadow:3px 3px 0 var(--ink)}
+  .squiggle{position:relative;white-space:nowrap;z-index:0}
+  .squiggle::after{content:"";position:absolute;left:-4px;right:-4px;bottom:.06em;height:.38em;background:var(--sun);border-radius:10px;z-index:-1;transform:rotate(-1.5deg)}
+
+  /* header */
+  header{position:sticky;top:0;z-index:50;background:var(--cream);border-bottom:var(--border)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:76px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.6rem;text-decoration:none}
+  .logo-mark{width:42px;height:42px;border-radius:14px;background:var(--tomato);border:var(--border);display:grid;place-items:center;box-shadow:3px 3px 0 var(--ink);transform:rotate(-6deg)}
+  .nav-links{display:flex;align-items:center;gap:30px;list-style:none;font-weight:800}
+  .nav-links a{text-decoration:none}
+  .nav-links a:not(.btn):hover{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px;text-decoration-color:var(--tomato)}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--mint);border:var(--border);border-radius:999px;padding:10px 22px;font-weight:900;text-decoration:none;box-shadow:4px 4px 0 var(--ink);transition:transform .12s, box-shadow .12s}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+  .menu-btn{display:none;width:50px;height:50px;border:var(--border);border-radius:16px;background:var(--sun);box-shadow:3px 3px 0 var(--ink);cursor:pointer;align-items:center;justify-content:center}
+  .menu-btn span,.menu-btn span::before,.menu-btn span::after{display:block;width:22px;height:3px;background:var(--ink);border-radius:3px;position:relative;transition:transform .2s, background .2s}
+  .menu-btn span::before,.menu-btn span::after{content:"";position:absolute;left:0}
+  .menu-btn span::before{top:-7px}.menu-btn span::after{top:7px}
+  .menu-btn[aria-expanded="true"] span{background:transparent}
+  .menu-btn[aria-expanded="true"] span::before{transform:translateY(7px) rotate(45deg)}
+  .menu-btn[aria-expanded="true"] span::after{transform:translateY(-7px) rotate(-45deg)}
+
+  /* store badges */
+  .badges{display:flex;flex-wrap:wrap;gap:14px}
+  .store{display:inline-flex;align-items:center;gap:12px;background:var(--ink);color:#fff;text-decoration:none;border:3px solid var(--ink);border-radius:18px;padding:10px 22px 10px 16px;min-width:190px;box-shadow:5px 5px 0 var(--tomato);transition:transform .12s, box-shadow .12s}
+  .store:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--tomato)}
+  .store:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--tomato)}
+  .store small{display:block;font-size:.72rem;font-weight:600;opacity:.85;line-height:1.1}
+  .store strong{display:block;font-size:1.25rem;line-height:1.1;font-weight:800}
+  .store.alt{box-shadow:5px 5px 0 var(--mint)}
+  .store.alt:hover{box-shadow:7px 7px 0 var(--mint)}
+  .store.alt:active{box-shadow:2px 2px 0 var(--mint)}
+
+  /* hero */
+  .hero{padding:72px 0 96px}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+  .hero p.lead{font-size:1.25rem;max-width:34ch;margin:22px 0 32px;font-weight:600}
+  .hero .chip{margin-bottom:22px;background:var(--pink)}
+  .proof{display:flex;align-items:center;gap:14px;margin-top:28px;font-weight:700;font-size:.95rem}
+  .faces{display:flex}
+  .faces i{width:38px;height:38px;border-radius:50%;border:var(--border);margin-left:-10px;display:block}
+  .faces i:first-child{margin-left:0;background:var(--sky)}
+  .faces i:nth-child(2){background:var(--sun)}
+  .faces i:nth-child(3){background:var(--grape)}
+  .faces i:nth-child(4){background:var(--mint)}
+
+  .phone-stage{position:relative;display:flex;justify-content:center}
+  .blob{position:absolute;width:420px;height:420px;background:var(--sun);border:var(--border);border-radius:44% 56% 62% 38% / 42% 40% 60% 58%;top:50%;left:50%;transform:translate(-50%,-50%) rotate(8deg)}
+  .phone{position:relative;width:290px;background:#fff;border:var(--border);border-radius:44px;padding:14px;box-shadow:10px 10px 0 var(--ink);transform:rotate(3deg)}
+  .phone-screen{background:var(--cream);border:var(--border);border-radius:32px;padding:18px 14px;min-height:500px;text-align:left}
+  .notch{width:90px;height:20px;background:var(--ink);border-radius:999px;margin:0 auto 16px}
+  .ps-title{font-weight:900;font-size:1.15rem;margin-bottom:4px}
+  .ps-sub{font-size:.78rem;font-weight:700;opacity:.7;margin-bottom:14px}
+  .meal{display:flex;align-items:center;gap:10px;background:#fff;border:var(--border);border-radius:18px;padding:10px;margin-bottom:10px;box-shadow:3px 3px 0 var(--ink)}
+  .meal .em{width:42px;height:42px;border-radius:12px;border:var(--border);display:grid;place-items:center;font-size:1.3rem;flex:none}
+  .meal b{display:block;font-size:.85rem;line-height:1.2}
+  .meal span{font-size:.72rem;font-weight:700;opacity:.7}
+  .meal .tag-use{display:inline-block;opacity:1;background:var(--mint);border:2px solid var(--ink);border-radius:999px;padding:0 7px;font-size:.62rem;font-weight:900;margin-top:3px}
+  .ps-total{margin-top:14px;background:var(--tomato);color:#fff;border:var(--border);border-radius:18px;padding:12px;text-align:center;font-weight:900}
+  .ps-total small{display:block;font-size:.72rem;opacity:.9;font-weight:700}
+  .sticker{position:absolute;border:var(--border);border-radius:999px;font-weight:900;padding:10px 16px;box-shadow:4px 4px 0 var(--ink);font-size:.95rem;z-index:2}
+  .sticker.s1{background:var(--mint);top:30px;left:-10px;transform:rotate(-10deg)}
+  .sticker.s2{background:var(--sky);bottom:60px;right:-14px;transform:rotate(8deg)}
+
+  /* ticker */
+  .ticker{background:var(--ink);color:var(--cream);padding:18px 0;font-weight:900;font-size:1.25rem}
+  .ticker ul{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 40px;list-style:none}
+  .ticker li::before{content:"✦";color:var(--sun);margin-right:12px}
+
+  /* sections */
+  section{padding:104px 0}
+  .section-head{text-align:center;max-width:680px;margin:0 auto 64px}
+  .section-head p{font-size:1.15rem;font-weight:600;margin-top:16px}
+  .section-head .chip{margin-bottom:18px;background:var(--sun)}
+
+  /* how it works */
+  .steps{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+  .step{border:var(--border);border-radius:var(--radius);padding:34px 28px 30px;box-shadow:var(--shadow);transition:transform .15s}
+  .step:nth-child(1){background:var(--sky);transform:rotate(-1.5deg)}
+  .step:nth-child(2){background:var(--sun);transform:rotate(1deg);margin-top:28px}
+  .step:nth-child(3){background:var(--mint);transform:rotate(-1deg)}
+  .step:hover{transform:rotate(0) translateY(-6px)}
+  .step-num{width:66px;height:66px;border-radius:22px;background:#fff;border:var(--border);display:grid;place-items:center;font-size:2rem;font-weight:900;box-shadow:4px 4px 0 var(--ink);margin-bottom:22px}
+  .step h3{margin-bottom:10px}
+  .step p{font-weight:600}
+  .mini{margin-top:20px;background:#fff;border:var(--border);border-radius:18px;padding:12px 14px;font-size:.88rem;font-weight:700}
+  .mini .row{display:flex;justify-content:space-between;gap:8px;padding:3px 0}
+  .mini .row + .row{border-top:2px dashed rgba(27,21,48,.2)}
+  .pill{display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:1px 9px;font-size:.75rem;font-weight:900;margin:3px 3px 0 0;background:var(--cream)}
+  .pill.hot{background:var(--tomato);color:#fff}
+  .strike{text-decoration:line-through;opacity:.55}
+
+  /* savings */
+  .savings{background:var(--grape);border-top:var(--border);border-bottom:var(--border);color:#fff}
+  .savings .section-head .chip{color:var(--ink)}
+  .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .stat{background:#fff;color:var(--ink);border:var(--border);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow);text-align:center}
+  .stat .big{font-size:3.6rem;font-weight:900;line-height:1;letter-spacing:-.03em}
+  .stat:nth-child(1) .big{color:var(--tomato)}
+  .stat:nth-child(2) .big{color:#0fa968}
+  .stat:nth-child(3) .big{color:var(--grape)}
+  .stat p{font-weight:700;margin-top:10px}
+  .quote{margin:56px auto 0;max-width:760px;background:var(--pink);color:var(--ink);border:var(--border);border-radius:var(--radius);padding:32px 36px;box-shadow:var(--shadow);transform:rotate(-1deg);font-size:1.3rem;font-weight:800}
+  .quote cite{display:block;font-style:normal;font-size:1rem;margin-top:14px;font-weight:700}
+
+  /* faq */
+  .faq-list{max-width:820px;margin:0 auto;display:grid;gap:18px}
+  .faq-item{background:#fff;border:var(--border);border-radius:24px;box-shadow:5px 5px 0 var(--ink);overflow:hidden}
+  .faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;font:inherit;font-weight:900;font-size:1.15rem;text-align:left;color:var(--ink);padding:22px 26px;cursor:pointer}
+  .faq-icon{flex:none;width:36px;height:36px;border-radius:12px;border:var(--border);background:var(--sun);display:grid;place-items:center;font-size:1.4rem;line-height:1;transition:transform .2s, background .2s}
+  .faq-q[aria-expanded="true"] .faq-icon{transform:rotate(45deg);background:var(--tomato);color:#fff}
+  .faq-a{padding:0 26px 24px;font-weight:600}
+  .faq-a[hidden]{display:none}
+
+  /* final cta */
+  .final{padding:40px 0 110px}
+  .final-card{background:var(--tomato);border:var(--border);border-radius:40px;box-shadow:10px 10px 0 var(--ink);padding:64px 48px;text-align:center;color:#fff;position:relative;overflow:hidden}
+  .final-card h2{max-width:16ch;margin:0 auto 16px;position:relative}
+  .final-card p{font-size:1.2rem;font-weight:700;max-width:46ch;margin:0 auto 34px;position:relative}
+  .final-card .badges{justify-content:center;position:relative}
+  .final-card .store{box-shadow:5px 5px 0 var(--sun)}
+  .final-card .store:hover{box-shadow:7px 7px 0 var(--sun)}
+  .dot{position:absolute;border:var(--border);border-radius:50%}
+  .dot.d1{width:120px;height:120px;background:var(--sun);top:-40px;left:-30px}
+  .dot.d2{width:80px;height:80px;background:var(--mint);bottom:-24px;right:60px}
+  .dot.d3{width:44px;height:44px;background:var(--sky);top:40px;right:40px}
+
+  footer{border-top:var(--border);padding:36px 0;font-weight:700;font-size:.95rem}
+  .foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px}
+  .foot ul{display:flex;gap:24px;list-style:none}
+  .foot a{text-decoration:none}
+  .foot a:hover{text-decoration:underline}
+
+  /* responsive */
+  @media (max-width:920px){
+    .hero-grid{grid-template-columns:1fr;text-align:center}
+    .hero p.lead{margin-left:auto;margin-right:auto}
+    .hero .badges,.proof{justify-content:center}
+    .steps,.stat-grid{grid-template-columns:1fr;max-width:520px;margin:0 auto}
+    .step:nth-child(2){margin-top:0}
+  }
+  @media (max-width:760px){
+    .menu-btn{display:flex}
+    .nav-links{position:absolute;top:76px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--sun);border-bottom:var(--border);padding:12px 24px 24px;display:none}
+    .nav-links.open{display:flex}
+    .nav-links li a:not(.btn){display:block;padding:14px 0;border-bottom:2px dashed rgba(27,21,48,.3);font-size:1.2rem}
+    .nav-links li:last-child{margin-top:18px}
+    .nav-links .btn{justify-content:center;width:100%}
+    section{padding:76px 0}
+    .blob{width:320px;height:320px}
+    .phone{width:260px}
+    .final-card{padding:52px 22px}
+    .store{min-width:0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important;scroll-behavior:auto!important}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header>
+  <nav class="wrap nav" aria-label="Main">
+    <a href="#top" class="logo" aria-label="Larder home">
+      <span class="logo-mark" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1b1530" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16a8 8 0 0 1-16 0Z" fill="#fff8ec"/><path d="M9 7c0-2 2-2 2-4M14 7c0-2 2-2 2-4"/></svg>
+      </span>
+      Larder
+    </a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu"><span></span></button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#savings">Savings</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#download" class="btn">Get the app</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="chip">🥕 New: free on iPhone &amp; Android</span>
+        <h1>Cook what you’ve got. <span class="squiggle">Bin less.</span> Spend less.</h1>
+        <p class="lead">Larder plans your week’s dinners around the food already in your fridge, then writes a shopping list with only what’s missing. Less waste, smaller grocery bill.</p>
+        <div class="badges">
+          <a class="store" href="#" aria-label="Download Larder on the App Store">
+            <svg width="28" height="32" viewBox="0 0 24 28" fill="#fff" aria-hidden="true"><path d="M19.6 14.9c0-3 2.5-4.5 2.6-4.6-1.4-2.1-3.6-2.4-4.4-2.4-1.9-.2-3.6 1.1-4.6 1.1-.9 0-2.4-1.1-4-1-2 0-3.9 1.2-5 3-2.1 3.7-.5 9.2 1.5 12.2 1 1.5 2.2 3.1 3.8 3 1.5-.1 2.1-1 4-1 1.8 0 2.4 1 4 .9 1.6 0 2.7-1.5 3.7-3 1.2-1.7 1.6-3.3 1.7-3.4-.1 0-3.3-1.2-3.3-4.8ZM16.6 5.9c.8-1 1.4-2.4 1.2-3.9-1.2.1-2.7.8-3.5 1.8-.8.9-1.5 2.3-1.3 3.7 1.4.1 2.7-.7 3.6-1.6Z"/></svg>
+            <span><small>Download on the</small><strong>App Store</strong></span>
+          </a>
+          <a class="store alt" href="#" aria-label="Get Larder on Google Play">
+            <svg width="28" height="30" viewBox="0 0 26 28" aria-hidden="true"><path d="M2 1.5 15 14 2 26.5c-.6-.3-1-.9-1-1.7V3.2c0-.8.4-1.4 1-1.7Z" fill="#4cc9f0"/><path d="m19.3 9.8-4.3 4.2 4.3 4.2 4.9-2.8c1.4-.8 1.4-2.1 0-2.9l-4.9-2.7Z" fill="#ffd23f"/><path d="M15 14 2 26.5c.5.3 1.2.2 1.9-.2l15.4-8.1L15 14Z" fill="#ff5a3c"/><path d="M15 14 19.3 9.8 3.9 1.7C3.2 1.3 2.5 1.2 2 1.5L15 14Z" fill="#3ddc97"/></svg>
+            <span><small>Get it on</small><strong>Google Play</strong></span>
+          </a>
+        </div>
+        <div class="proof">
+          <div class="faces" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <span>★★★★★ 4.8 from 12,000+ home cooks</span>
+        </div>
+      </div>
+
+      <div class="phone-stage" aria-hidden="true">
+        <div class="blob"></div>
+        <div class="sticker s1">−£38 this week!</div>
+        <div class="sticker s2">0 bags binned 🎉</div>
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="notch"></div>
+            <div class="ps-title">This week’s dinners</div>
+            <div class="ps-sub">Built from 14 things in your fridge</div>
+            <div class="meal"><div class="em" style="background:var(--sun)">🍳</div><div><b>Spinach &amp; feta frittata</b><span>Mon · 20 min · £1.10/serve</span><br><span class="tag-use">uses up spinach</span></div></div>
+            <div class="meal"><div class="em" style="background:var(--tomato)">🍝</div><div><b>Roast veg pasta bake</b><span>Tue · 35 min · £0.95/serve</span><br><span class="tag-use">uses up peppers</span></div></div>
+            <div class="meal"><div class="em" style="background:var(--sky)">🍛</div><div><b>Chickpea &amp; sweet potato curry</b><span>Wed · 30 min · £0.80/serve</span></div></div>
+            <div class="meal"><div class="em" style="background:var(--mint)">🌯</div><div><b>Leftover curry wraps</b><span>Thu · 10 min · £0.60/serve</span><br><span class="tag-use">uses up Wed leftovers</span></div></div>
+            <div class="ps-total"><small>Shopping list</small>Just 6 items · £11.40</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-label="Highlights">
+    <ul class="wrap">
+      <li>Fridge-first recipes</li>
+      <li>Price per serving</li>
+      <li>Use-it-up alerts</li>
+      <li>Leftovers planned in</li>
+    </ul>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="chip">Three steps, about five minutes</span>
+        <h2>How Larder works</h2>
+        <p>You don’t need to count calories or learn a system. Tell it what you’ve got and it does the planning.</p>
+      </div>
+      <ol class="steps">
+        <li class="step">
+          <div class="step-num">1</div>
+          <h3>Tell it what’s in your kitchen</h3>
+          <p>Snap your fridge, scan a receipt or tap items in. Larder notes what needs eating soon.</p>
+          <div class="mini">
+            <span class="pill hot">spinach · 2 days</span><span class="pill hot">peppers · 3 days</span><span class="pill">chickpeas</span><span class="pill">feta</span><span class="pill">rice</span><span class="pill">eggs ×6</span>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-num">2</div>
+          <h3>Get a week of meals that use it up</h3>
+          <p>Recipes are picked to finish what goes off first, and leftovers are planned into later meals.</p>
+          <div class="mini">
+            <div class="row"><span>Mon</span><span>Frittata</span></div>
+            <div class="row"><span>Tue</span><span>Pasta bake</span></div>
+            <div class="row"><span>Wed</span><span>Chickpea curry</span></div>
+            <div class="row"><span>Thu</span><span>Curry wraps ♻️</span></div>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-num">3</div>
+          <h3>Shop for only what’s missing</h3>
+          <p>Your list covers the gaps, sorted by aisle and priced, so you know the total before you get to the till.</p>
+          <div class="mini">
+            <div class="row"><span>Pasta 500g</span><span>£0.75</span></div>
+            <div class="row"><span class="strike">Eggs</span><span>have ✓</span></div>
+            <div class="row"><span>Tortilla wraps</span><span>£1.20</span></div>
+            <div class="row"><b>Total</b><b>£11.40</b></div>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- SAVINGS -->
+  <section class="savings" id="savings">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="chip">Real kitchens, real receipts</span>
+        <h2>Less in the bin, more in your pocket</h2>
+        <p>Average results from Larder users after their first month.</p>
+      </div>
+      <div class="stat-grid">
+        <div class="stat"><div class="big">£35</div><p>saved on groceries every week</p></div>
+        <div class="stat"><div class="big">62%</div><p>less food thrown away</p></div>
+        <div class="stat"><div class="big">5 min</div><p>to plan a whole week</p></div>
+      </div>
+      <blockquote class="quote">
+        “I used to buy a bag of spinach every week and bin half of it every week. Now Larder makes me a frittata on Monday. Our shop has gone from £95 to about £60.”
+        <cite>Priya, cooks for a family of four in Leeds</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="chip">Good questions</span>
+        <h2>Frequently asked</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" aria-controls="a1" id="q1">Is Larder really free?<span class="faq-icon" aria-hidden="true">+</span></button>
+          <div class="faq-a" id="a1" role="region" aria-labelledby="q1" hidden>Yes. Planning, pantry tracking and shopping lists are free with no ads. Larder Plus (£2.49/month) adds family sharing and price comparison across supermarkets, but you can save money without it.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" aria-controls="a2" id="q2">Do I have to log everything in my kitchen?<span class="faq-icon" aria-hidden="true">+</span></button>
+          <div class="faq-a" id="a2" role="region" aria-labelledby="q2" hidden>No. Start with whatever’s about to go off, even three items is enough. Scanning receipts keeps things up to date, and Larder ticks items off as you cook.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" aria-controls="a3" id="q3">Can it handle dietary needs and picky eaters?<span class="faq-icon" aria-hidden="true">+</span></button>
+          <div class="faq-a" id="a3" role="region" aria-labelledby="q3" hidden>Yes. Set vegetarian, vegan, gluten-free, dairy-free or nut-free, and add any ingredients someone in your house won’t eat. You can swap any meal with one tap.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" aria-controls="a4" id="q4">How does it know grocery prices?<span class="faq-icon" aria-hidden="true">+</span></button>
+          <div class="faq-a" id="a4" role="region" aria-labelledby="q4" hidden>Larder uses typical prices from major supermarkets and updates them weekly. Scanned receipts make the estimates match where you actually shop.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" aria-controls="a5" id="q5">Which phones does it work on?<span class="faq-icon" aria-hidden="true">+</span></button>
+          <div class="faq-a" id="a5" role="region" aria-labelledby="q5" hidden>iPhone running iOS 16 or later, and Android 9 or later. Your plan and pantry sync between devices, so the whole household can see the list.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final" id="download">
+    <div class="wrap">
+      <div class="final-card">
+        <span class="dot d1" aria-hidden="true"></span><span class="dot d2" aria-hidden="true"></span><span class="dot d3" aria-hidden="true"></span>
+        <h2>Your fridge already has dinner in it.</h2>
+        <p>Get Larder free and plan this week’s meals before you go shopping.</p>
+        <div class="badges">
+          <a class="store" href="#" aria-label="Download Larder on the App Store">
+            <svg width="28" height="32" viewBox="0 0 24 28" fill="#fff" aria-hidden="true"><path d="M19.6 14.9c0-3 2.5-4.5 2.6-4.6-1.4-2.1-3.6-2.4-4.4-2.4-1.9-.2-3.6 1.1-4.6 1.1-.9 0-2.4-1.1-4-1-2 0-3.9 1.2-5 3-2.1 3.7-.5 9.2 1.5 12.2 1 1.5 2.2 3.1 3.8 3 1.5-.1 2.1-1 4-1 1.8 0 2.4 1 4 .9 1.6 0 2.7-1.5 3.7-3 1.2-1.7 1.6-3.3 1.7-3.4-.1 0-3.3-1.2-3.3-4.8ZM16.6 5.9c.8-1 1.4-2.4 1.2-3.9-1.2.1-2.7.8-3.5 1.8-.8.9-1.5 2.3-1.3 3.7 1.4.1 2.7-.7 3.6-1.6Z"/></svg>
+            <span><small>Download on the</small><strong>App Store</strong></span>
+          </a>
+          <a class="store" href="#" aria-label="Get Larder on Google Play">
+            <svg width="28" height="30" viewBox="0 0 26 28" aria-hidden="true"><path d="M2 1.5 15 14 2 26.5c-.6-.3-1-.9-1-1.7V3.2c0-.8.4-1.4 1-1.7Z" fill="#4cc9f0"/><path d="m19.3 9.8-4.3 4.2 4.3 4.2 4.9-2.8c1.4-.8 1.4-2.1 0-2.9l-4.9-2.7Z" fill="#ffd23f"/><path d="M15 14 2 26.5c.5.3 1.2.2 1.9-.2l15.4-8.1L15 14Z" fill="#ff5a3c"/><path d="M15 14 19.3 9.8 3.9 1.7C3.2 1.3 2.5 1.2 2 1.5L15 14Z" fill="#3ddc97"/></svg>
+            <span><small>Get it on</small><strong>Google Play</strong></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 Larder. Made for people who hate binning food.</span>
+    <ul>
+      <li><a href="#">Privacy</a></li>
+      <li><a href="#">Terms</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const menuBtn = document.querySelector('.menu-btn');
+  const navLinks = document.getElementById('nav-links');
+  function setMenu(open){
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    navLinks.classList.toggle('open', open);
+  }
+  menuBtn.addEventListener('click', () => setMenu(menuBtn.getAttribute('aria-expanded') !== 'true'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      document.getElementById(btn.getAttribute('aria-controls')).hidden = open;
+    });
+  });
+</script>
+</body>
+</html>

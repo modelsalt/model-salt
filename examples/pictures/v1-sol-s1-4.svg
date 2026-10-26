@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640" viewBox="0 0 640 640" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A white pelican with an orange bill pedals a blue step-through city bicycle, seen from the side.</desc>
+
+  <rect width="640" height="640" fill="#f4f8fa"/>
+  <ellipse cx="320" cy="548" rx="246" ry="12" fill="#e1e9ed"/>
+
+  <g stroke="#394b56" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Wheels -->
+    <g fill="#fcfdfd">
+      <circle cx="174" cy="450" r="94"/>
+      <circle cx="466" cy="450" r="94"/>
+    </g>
+    <g fill="none" stroke="#b6c4cc">
+      <circle cx="174" cy="450" r="85"/>
+      <circle cx="466" cy="450" r="85"/>
+      <path d="M174 365V535M89 450H259M114 390L234 510M114 510L234 390
+               M466 365V535M381 450H551M406 390L526 510M406 510L526 390"/>
+    </g>
+
+    <!-- Mudguards -->
+    <path d="M77 429A100 100 0 0 1 269 420L261 423A92 92 0 0 0 85 431Z" fill="#82b7d3"/>
+    <path d="M370 421A100 100 0 0 1 564 435L556 436A92 92 0 0 0 378 424Z" fill="#82b7d3"/>
+
+    <!-- Far leg and pedal -->
+    <path d="M280 319L324 365L341 414" fill="none"/>
+    <path d="M337 404L346 413L367 420Q371 427 360 429L333 427L328 420Z" fill="#e7a148"/>
+    <path d="M329 432H360" fill="none"/>
+
+    <!-- Low step-through frame -->
+    <path d="M174 450L264 351L301 450Z" fill="#d7e8f1"/>
+    <path d="M174 450L264 351L301 450H174Z" fill="none"/>
+    <path d="M258 338L292 444Q298 459 314 452L423 351L416 338L310 435L272 336Z" fill="#3c91c0"/>
+    <path d="M267 355Q310 426 413 359L418 371Q309 442 271 375Z" fill="#3c91c0"/>
+    <path d="M409 333L455 451H468L423 328Z" fill="#3c91c0"/>
+    <path d="M174 450L292 446L295 455L174 458Z" fill="#6aaacb"/>
+    <circle cx="174" cy="450" r="7" fill="#e0e8ed"/>
+    <circle cx="466" cy="450" r="7" fill="#e0e8ed"/>
+
+    <!-- Saddle and handlebars -->
+    <path d="M262 340L254 313" fill="none"/>
+    <path d="M229 307Q252 302 278 309Q286 318 271 320H239Q224 319 229 307Z" fill="#52616b"/>
+    <path d="M416 331L401 287Q398 277 411 275H432" fill="none"/>
+    <path d="M422 271H443V280H422Z" fill="#52616b"/>
+    <path d="M434 281Q465 302 449 374" fill="none" stroke="#94a7b2"/>
+
+    <!-- Pelican tail and body -->
+    <path d="M214 268L163 250L180 277L163 280L211 299Z" fill="#d4dce2"/>
+    <path d="M192 262
+             Q218 232 269 239
+             Q292 241 300 223
+             Q306 206 299 181
+             Q285 142 307 119
+             Q324 102 347 115
+             Q365 126 357 148
+             Q350 167 333 171
+             Q337 204 349 231
+             Q367 273 335 301
+             Q312 324 264 317
+             Q211 312 192 287
+             Q183 274 192 262Z" fill="#fff"/>
+
+    <!-- Folded wing -->
+    <path d="M212 264Q257 242 302 279Q273 309 231 291Q214 284 212 264Z" fill="#dce2e7"/>
+    <path d="M229 271Q254 283 284 282M231 280Q252 292 274 290" fill="none"/>
+
+    <!-- Wing reaching to the handlebar -->
+    <path d="M305 246Q341 247 368 267L425 271
+             Q435 274 425 281L362 282Q330 274 311 264Z" fill="#eef1f4"/>
+
+    <!-- Bill and throat pouch -->
+    <path d="M348 141L522 151Q489 167 459 171L357 165Z" fill="#f5aa48"/>
+    <path d="M354 157L501 156
+             Q455 199 400 188
+             Q369 183 354 157Z" fill="#f5c278"/>
+    <path d="M349 140L522 151L506 157L352 155Z" fill="#f49b34"/>
+    <path d="M517 151L527 153L519 161" fill="#e58b2f"/>
+
+    <!-- Eye -->
+    <circle cx="338" cy="133" r="7" fill="#f7d58b"/>
+    <circle cx="340" cy="133" r="2.5" fill="#394b56" stroke="none"/>
+
+    <!-- Near leg and webbed foot -->
+    <path d="M271 310L253 359L293 404L283 415L235 366
+             Q231 361 234 353L251 310Z" fill="#e8a64f"/>
+    <path d="M282 404L295 405L307 418L327 423
+             Q332 430 322 432L284 430L273 421Z" fill="#f3b253"/>
+
+    <!-- Crank and pedals -->
+    <circle cx="301" cy="450" r="20" fill="#e7edf1"/>
+    <circle cx="301" cy="450" r="6" fill="#9aaeb9"/>
+    <path d="M301 450L290 428" fill="none"/>
+    <rect x="274" y="427" width="34" height="7" rx="3" fill="#52616b"/>
+  </g>
+</svg>

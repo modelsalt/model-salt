@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="900" height="600" role="img" aria-labelledby="title desc">
+  <title id="title">A pelican joyfully riding a folding bicycle</title>
+  <desc id="desc">Minimal single-weight contour line art in muted earth tones: a pelican with wings spread wide rides a small-wheeled folding commuter bike, placed off-center with open sky and tiny distant birds.</desc>
+
+  <rect width="900" height="600" fill="#F7F1E3"/>
+
+  <!-- tiny distant birds -->
+  <g fill="none" stroke="#C89B3C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M624,146 C630,137 637,136 642,143 C647,136 654,137 660,146"/>
+    <path d="M702,108 C707,101 713,100 717,106 C721,100 727,101 732,108"/>
+    <path d="M756,172 C761,165 767,164 771,170 C775,164 781,165 786,172"/>
+  </g>
+
+  <!-- ground -->
+  <path d="M132,527 L448,527" fill="none" stroke="#8A8B5C" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- folding commuter bike (olive) -->
+  <g fill="none" stroke="#6F7A4A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <!-- small wheels + spokes + hubs -->
+    <circle cx="200" cy="470" r="55"/>
+    <circle cx="380" cy="470" r="55"/>
+    <path d="M200,470 L255,470 M200,470 L227.5,517.6 M200,470 L172.5,517.6 M200,470 L145,470 M200,470 L172.5,422.4 M200,470 L227.5,422.4"/>
+    <path d="M380,470 L435,470 M380,470 L407.5,517.6 M380,470 L352.5,517.6 M380,470 L325,470 M380,470 L352.5,422.4 M380,470 L407.5,422.4"/>
+    <circle cx="200" cy="470" r="5"/>
+    <circle cx="380" cy="470" r="5"/>
+    <!-- frame -->
+    <path d="M200,470 L272,466"/>
+    <path d="M248,384 L202,470"/>
+    <path d="M272,466 L250,376"/>
+    <path d="M250,378 C285,360 325,356 358,364"/>
+    <circle cx="305" cy="363" r="6"/>
+    <path d="M352,394 L272,466"/>
+    <path d="M348,398 L358,360"/>
+    <path d="M350,396 L380,470"/>
+    <!-- tall folding posts -->
+    <path d="M250,376 L246,350"/>
+    <path d="M358,360 L368,320"/>
+    <circle cx="363" cy="340" r="4"/>
+    <path d="M368,320 C358,313 348,311 340,315"/>
+    <!-- saddle -->
+    <path d="M226,346 C236,338 258,338 268,346"/>
+    <path d="M230,350 L264,350"/>
+    <!-- chainring, cranks, pedals -->
+    <circle cx="272" cy="466" r="18"/>
+    <path d="M272,466 L292,502"/>
+    <path d="M284,502 L300,502"/>
+    <path d="M272,466 L254,432"/>
+    <path d="M246,432 L262,432"/>
+    <!-- rear rack -->
+    <path d="M238,390 L180,398"/>
+    <path d="M180,398 L196,464"/>
+    <path d="M180,398 L180,410"/>
+  </g>
+
+  <!-- pelican (warm brown) -->
+  <g fill="none" stroke="#6B4F2E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <!-- rear wing, spread wide -->
+    <path d="M282,304 C238,246 182,212 126,198 C145,222 168,246 192,266 C218,288 244,306 266,320"/>
+    <path d="M262,300 C226,268 190,240 152,216"/>
+    <path d="M248,312 C214,290 184,266 156,240"/>
+    <!-- front wing, spread wide -->
+    <path d="M292,310 C355,205 415,185 486,178 C470,200 448,220 424,240 C392,266 350,296 314,318"/>
+    <path d="M320,296 C360,252 408,220 456,200"/>
+    <path d="M330,308 C366,278 408,248 446,226"/>
+    <!-- body -->
+    <path d="M212,318 C232,292 268,286 294,300 C312,288 330,272 338,252"/>
+    <path d="M300,330 C288,352 258,362 236,354 C220,348 210,334 212,318"/>
+    <path d="M344,268 C332,292 318,314 302,330"/>
+    <!-- tail feathers -->
+    <path d="M214,318 L188,300 M212,324 L182,316 M214,328 L192,336"/>
+    <!-- head + tuft -->
+    <circle cx="353" cy="250" r="15"/>
+    <path d="M350,236 C343,229 343,220 350,214"/>
+    <!-- legs + feet on pedals -->
+    <path d="M266,352 C276,395 286,450 292,498"/>
+    <path d="M284,503 L306,503 M306,503 L315,498 M306,503 L314,508"/>
+    <path d="M246,350 C238,380 240,408 252,430"/>
+    <path d="M246,433 L268,433"/>
+  </g>
+
+  <!-- beak with pouch (ochre) -->
+  <g fill="none" stroke="#B8862F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M363,243 C398,247 428,253 450,258"/>
+    <path d="M450,258 C454,260 454,265 450,267"/>
+    <path d="M366,254 C396,259 424,261 448,260"/>
+    <path d="M448,262 C442,288 404,298 372,276"/>
+  </g>
+
+  <!-- eye -->
+  <circle cx="357" cy="246" r="2.5" fill="#6B4F2E"/>
+</svg>

@@ -1,0 +1,221 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 650" width="100%" height="100%">
+  <defs>
+    <style>
+      .outline { stroke: #1E2538; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+      .outline-thin { stroke: #1E2538; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .tire-back { stroke: #1E2538; stroke-width: 22; fill: none; }
+      .tire-front { stroke: #31394D; stroke-width: 14; fill: none; }
+      .rim { stroke: #E2E8F0; stroke-width: 5; fill: none; }
+      .frame-main { stroke: #00A896; stroke-width: 15; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .frame-outline { stroke: #1E2538; stroke-width: 27; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .chrome-outline { stroke: #1E2538; stroke-width: 18; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .chrome-fill { stroke: #E2E8F0; stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .fender-outline { stroke: #1E2538; stroke-width: 28; stroke-linecap: round; fill: none; }
+      .fender-fill { stroke: #02C39A; stroke-width: 14; stroke-linecap: round; fill: none; }
+    </style>
+  </defs>
+
+  <!-- Background Circle & Ground -->
+  <circle cx="400" cy="310" r="260" fill="#FFF3D6" />
+  <circle cx="190" cy="150" r="35" fill="#FFAA5A" />
+  
+  <!-- stylized clouds -->
+  <path d="M 140 200 L 250 200 A 20 20 0 0 0 250 160 A 30 30 0 0 0 195 145 A 25 25 0 0 0 140 170 Z" fill="#FFFFFF" />
+  <path d="M 520 130 L 630 130 A 15 15 0 0 0 630 100 A 25 25 0 0 0 580 90 A 20 20 0 0 0 520 110 Z" fill="#FFFFFF" />
+
+  <!-- Ground Shadow (Three-Quarter Angle) -->
+  <ellipse cx="425" cy="545" rx="260" ry="38" fill="#E8D8B5" transform="rotate(6 425 545)" />
+  <line x1="120" y1="510" x2="720" y2="575" class="outline" stroke-dasharray="600 20 40 20" />
+
+  <!-- ================= FAR WING (PELICAN) ================= -->
+  <g id="far-wing">
+    <!-- Wing Base -->
+    <path d="M 410 220 C 480 140, 610 120, 680 140 C 660 185, 620 215, 580 230 C 550 245, 480 265, 420 265 Z" fill="#CBD5E1" class="outline" />
+    <!-- Black Primary Feathers (Far) -->
+    <path d="M 580 230 C 620 215, 660 185, 680 140 C 695 155, 685 180, 660 190 C 675 200, 660 220, 635 220 C 645 230, 625 245, 600 240 C 585 245, 560 245, 540 238 Z" fill="#334155" class="outline" />
+  </g>
+
+  <!-- ================= BICYCLE: REAR WHEEL (3/4 View) ================= -->
+  <g id="rear-wheel" transform="translate(260, 445) rotate(-8)">
+    <!-- Spokes -->
+    <g class="outline-thin">
+      <line x1="-70" y1="0" x2="70" y2="0" />
+      <line x1="0" y1="-90" x2="0" y2="90" />
+      <line x1="-50" y1="-63" x2="50" y2="63" />
+      <line x1="-50" y1="63" x2="50" y2="-63" />
+    </g>
+    <!-- Tire & Rim -->
+    <ellipse cx="0" cy="0" rx="70" ry="90" class="tire-back" />
+    <ellipse cx="0" cy="0" rx="70" ry="90" class="tire-front" />
+    <ellipse cx="0" cy="0" rx="58" ry="76" class="rim" />
+    <!-- Rear Hub -->
+    <ellipse cx="0" cy="0" rx="10" ry="14" fill="#94A3B8" class="outline" />
+  </g>
+
+  <!-- Rear Fender -->
+  <path d="M 185 430 A 75 95 -8 0 1 315 375" class="fender-outline" />
+  <path d="M 185 430 A 75 95 -8 0 1 315 375" class="fender-fill" />
+
+  <!-- ================= BICYCLE: FAR PEDAL & REAR FRAME ================= -->
+  <!-- Far Pedal & Crank (Behind Frame) -->
+  <line x1="390" y1="470" x2="365" y2="430" class="chrome-outline" />
+  <line x1="390" y1="470" x2="365" y2="430" class="chrome-fill" />
+  <rect x="345" y="420" width="36" height="14" rx="5" fill="#334155" class="outline" transform="rotate(-10 363 427)" />
+
+  <!-- Cruiser Frame (Sweeping geometry in 3/4 perspective) -->
+  <g id="bicycle-frame">
+    <!-- Frame Outlines (Thick) -->
+    <!-- Rear Stays -->
+    <path d="M 260 445 L 365 340" class="frame-outline" />
+    <path d="M 260 445 L 390 470" class="frame-outline" />
+    <!-- Seat Tube -->
+    <line x1="390" y1="470" x2="355" y2="310" class="frame-outline" />
+    <!-- Cruiser Sweeping Down Tube -->
+    <path d="M 390 470 C 445 470, 480 410, 508 320" class="frame-outline" />
+    <!-- Cruiser Curved Cantilever Top Tube -->
+    <path d="M 295 390 C 350 325, 430 325, 502 295" class="frame-outline" />
+    <!-- Head Tube -->
+    <line x1="498" y1="275" x2="514" y2="335" class="frame-outline" />
+
+    <!-- Frame Color Fill (Teal) -->
+    <path d="M 260 445 L 365 340" class="frame-main" stroke="#028090" />
+    <path d="M 260 445 L 390 470" class="frame-main" />
+    <line x1="390" y1="470" x2="355" y2="310" class="frame-main" />
+    <path d="M 390 470 C 445 470, 480 410, 508 320" class="frame-main" />
+    <path d="M 295 390 C 350 325, 430 325, 502 295" class="frame-main" stroke="#02C39A" />
+    <line x1="498" y1="275" x2="514" y2="335" class="frame-main" />
+  </g>
+
+  <!-- Chain Guard & Crankset -->
+  <path d="M 255 435 L 395 445 A 30 35 0 0 1 395 495 L 255 460 A 12 15 0 0 1 255 435 Z" fill="#02C39A" class="outline" />
+  <ellipse cx="390" cy="470" rx="18" ry="22" fill="#E2E8F0" class="outline" />
+  <!-- Near Crank & Pedal (Spinning Free) -->
+  <line x1="390" y1="470" x2="415" y2="515" class="chrome-outline" />
+  <line x1="390" y1="470" x2="415" y2="515" class="chrome-fill" />
+  <rect x="397" y="508" width="38" height="15" rx="5" fill="#1E2538" class="outline" transform="rotate(-12 415 515)" />
+
+  <!-- Seat Post & Wide Cruiser Saddle -->
+  <line x1="355" y1="310" x2="348" y2="280" class="chrome-outline" />
+  <line x1="355" y1="310" x2="348" y2="280" class="chrome-fill" />
+  <!-- Saddle Springs -->
+  <circle cx="328" cy="285" r="7" fill="#94A3B8" class="outline" />
+  <!-- Saddle -->
+  <path d="M 305 268 C 305 250, 385 255, 395 270 C 395 288, 315 292, 305 268 Z" fill="#D97706" class="outline" />
+
+  <!-- ================= BICYCLE: FRONT WHEEL & FORK (3/4 View) ================= -->
+  <!-- Far Fork Blade -->
+  <path d="M 508 325 C 525 390, 545 440, 575 480" class="frame-outline" />
+  <path d="M 508 325 C 525 390, 545 440, 575 480" class="frame-main" stroke="#028090" />
+
+  <!-- Front Wheel (Larger & Closer in 3/4 View) -->
+  <g id="front-wheel" transform="translate(565, 485) rotate(-10)">
+    <!-- Spokes -->
+    <g class="outline-thin">
+      <line x1="-82" y1="0" x2="82" y2="0" />
+      <line x1="0" y1="-105" x2="0" y2="105" />
+      <line x1="-58" y1="-74" x2="58" y2="74" />
+      <line x1="-58" y1="74" x2="58" y2="-74" />
+    </g>
+    <!-- Tire & Rim -->
+    <ellipse cx="0" cy="0" rx="82" ry="105" class="tire-back" />
+    <ellipse cx="0" cy="0" rx="82" ry="105" class="tire-front" />
+    <ellipse cx="0" cy="0" rx="68" ry="89" class="rim" />
+    <!-- Front Hub -->
+    <ellipse cx="0" cy="0" rx="12" ry="16" fill="#94A3B8" class="outline" />
+  </g>
+
+  <!-- Front Fender -->
+  <path d="M 480 435 A 88 110 -10 0 1 620 400" class="fender-outline" />
+  <path d="M 480 435 A 88 110 -10 0 1 620 400" class="fender-fill" />
+
+  <!-- Near Fork Blade -->
+  <path d="M 510 330 C 520 395, 535 445, 565 485" class="frame-outline" />
+  <path d="M 510 330 C 520 395, 535 445, 565 485" class="frame-main" />
+
+  <!-- ================= SWEPT-BACK CRUISER HANDLEBARS (FAR SIDE) ================= -->
+  <!-- Far Handlebar sweeping away & back -->
+  <path d="M 492 240 C 515 200, 565 190, 535 235" class="chrome-outline" />
+  <path d="M 492 240 C 515 200, 565 190, 535 235" class="chrome-fill" />
+  <!-- Far Grip -->
+  <path d="M 548 215 L 530 242" stroke="#1E2538" stroke-width="24" stroke-linecap="round" />
+  <path d="M 548 215 L 530 242" stroke="#D97706" stroke-width="12" stroke-linecap="round" />
+
+  <!-- Stem -->
+  <path d="M 498 275 L 490 240" class="chrome-outline" />
+  <path d="M 498 275 L 490 240" class="chrome-fill" />
+
+  <!-- ================= THE PELICAN (NATURALISTIC PERCH) ================= -->
+  <g id="pelican">
+    <!-- Far Leg & Webbed Foot (Gripping Saddle Front) -->
+    <line x1="365" y1="225" x2="368" y2="262" stroke="#1E2538" stroke-width="18" stroke-linecap="round" />
+    <line x1="365" y1="225" x2="368" y2="262" stroke="#F97316" stroke-width="8" stroke-linecap="round" />
+    <path d="M 358 260 L 388 262 L 378 276 L 352 270 Z" fill="#F97316" class="outline" />
+
+    <!-- Near Leg & Webbed Foot (Gripping Saddle Center) -->
+    <line x1="342" y1="230" x2="345" y2="270" stroke="#1E2538" stroke-width="18" stroke-linecap="round" />
+    <line x1="342" y1="230" x2="345" y2="270" stroke="#FB923C" stroke-width="8" stroke-linecap="round" />
+    <path d="M 332 268 L 368 272 L 355 290 L 325 280 Z" fill="#FB923C" class="outline" />
+
+    <!-- Tail Feathers -->
+    <path d="M 300 220 L 255 235 L 268 212 L 250 195 L 295 195 Z" fill="#F8FAFC" class="outline" />
+
+    <!-- Plump Bird Body (Perched upright/angled on saddle) -->
+    <path d="M 290 210 C 280 165, 340 155, 395 180 C 445 200, 445 145, 435 120 C 425 95, 455 95, 468 120 C 482 150, 480 225, 425 250 C 375 270, 305 255, 290 210 Z" fill="#F8FAFC" class="outline" />
+    <!-- Subtle Body Shading -->
+    <path d="M 305 225 C 335 255, 395 258, 430 235 C 405 262, 340 265, 305 225 Z" fill="#E2E8F0" />
+
+    <!-- Head & S-Curved Neck (Turned slightly toward viewer in 3/4 view) -->
+    <path d="M 410 185 C 400 145, 395 100, 415 70 C 430 45, 475 45, 485 75 C 495 100, 465 130, 465 160 C 465 185, 470 205, 450 220" fill="#F8FAFC" class="outline" />
+    
+    <!-- Tufted Crest on Back of Head -->
+    <path d="M 418 66 L 395 55 L 408 75 L 388 72 L 408 86" fill="#E2E8F0" class="outline" />
+
+    <!-- Huge Gular Pouch (Resting proudly over chest, 3/4 angle toward viewer) -->
+    <path d="M 465 92 C 460 155, 520 205, 585 180 C 635 160, 650 120, 648 112 Z" fill="#FF758F" class="outline" />
+    <!-- Pouch Fold Detail -->
+    <path d="M 480 115 C 495 155, 540 175, 595 155" fill="none" stroke="#E0536E" stroke-width="5" stroke-linecap="round" />
+
+    <!-- Upper Mandible (Long Flat Beak) -->
+    <path d="M 462 72 C 515 72, 605 85, 652 105 C 658 108, 655 122, 646 118 C 642 116, 640 112, 635 112 C 575 112, 505 105, 460 95 Z" fill="#FFB703" class="outline" />
+    <!-- Beak Ridge Line -->
+    <path d="M 475 82 L 635 105" fill="none" stroke="#FB8500" stroke-width="4" stroke-linecap="round" />
+
+    <!-- Pelican Eye (Turned toward viewer) -->
+    <circle cx="452" cy="78" r="14" fill="#FEF08A" class="outline-thin" />
+    <circle cx="454" cy="78" r="7" fill="#1E2538" />
+    <circle cx="451" cy="75" r="2.5" fill="#FFFFFF" />
+    <!-- Cheek Patch -->
+    <ellipse cx="445" cy="96" rx="8" ry="5" fill="#FCA5A5" />
+
+    <!-- ================= NEAR WING (SPREAD WIDE FOR BALANCE) ================= -->
+    <g id="near-wing">
+      <!-- Main White/Grey Wing Structure -->
+      <path d="M 355 195 C 270 140, 150 95, 65 115 C 75 155, 110 185, 145 195 C 165 215, 215 235, 260 235 C 305 245, 355 240, 375 215 Z" fill="#F8FAFC" class="outline" />
+      
+      <!-- Black Primary Feathers (Near Wing Tip) -->
+      <path d="M 65 115 C 50 130, 68 158, 98 158 C 82 175, 102 195, 132 188 C 122 205, 145 218, 172 208 C 168 222, 195 230, 218 218 C 195 185, 145 150, 65 115 Z" fill="#1E2538" class="outline" />
+      
+      <!-- Geometric Secondary Feather Details -->
+      <path d="M 155 148 C 185 170, 230 185, 275 188" fill="none" class="outline" />
+      <path d="M 210 180 L 195 205" fill="none" class="outline" />
+      <path d="M 250 188 L 240 215" fill="none" class="outline" />
+      <path d="M 290 192 L 285 220" fill="none" class="outline" />
+    </g>
+  </g>
+
+  <!-- ================= SWEPT-BACK CRUISER HANDLEBARS (NEAR SIDE) ================= -->
+  <!-- Foreground Handlebar (Untouched by wings, showing clear cruiser sweep) -->
+  <path d="M 490 240 C 460 230, 415 255, 395 295" class="chrome-outline" />
+  <path d="M 490 240 C 460 230, 415 255, 395 295" class="chrome-fill" />
+  <!-- Classic Bike Bell -->
+  <ellipse cx="442" cy="240" rx="10" ry="7" fill="#FBBF24" class="outline-thin" />
+  <!-- Near Grip -->
+  <path d="M 412 270 L 392 300" stroke="#1E2538" stroke-width="26" stroke-linecap="round" />
+  <path d="M 412 270 L 392 300" stroke="#D97706" stroke-width="14" stroke-linecap="round" />
+
+  <!-- Motion / Balance Swooshes -->
+  <path d="M 45 95 C 30 115, 30 145, 45 165" fill="none" class="outline-thin" />
+  <path d="M 695 115 C 715 135, 715 165, 695 185" fill="none" class="outline-thin" />
+  <line x1="120" y1="435" x2="155" y2="440" class="outline-thin" />
+  <line x1="100" y1="460" x2="145" y2="465" class="outline-thin" />
+</svg>

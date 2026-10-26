@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <!-- Sky background: deep blue to bright day blue -->
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1E5BD6"/>
+      <stop offset="1" stop-color="#5FB6FF"/>
+    </linearGradient>
+    <!-- Sun -->
+    <radialGradient id="sun" cx="0.4" cy="0.35" r="0.75">
+      <stop offset="0" stop-color="#FFF4B0"/>
+      <stop offset="0.55" stop-color="#FFD24A"/>
+      <stop offset="1" stop-color="#FF9A1F"/>
+    </radialGradient>
+    <!-- Cloud shading -->
+    <linearGradient id="cloud" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#DCE9F7"/>
+    </linearGradient>
+    <!-- Raindrop -->
+    <linearGradient id="drop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#CFEAFF"/>
+      <stop offset="1" stop-color="#7FCBFF"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0B2E73" flood-opacity="0.35"/>
+    </filter>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+  </defs>
+
+  <!-- Square background, sharp corners -->
+  <rect width="1024" height="1024" fill="url(#sky)"/>
+
+  <!-- Subtle light rays from top-left -->
+  <g opacity="0.12" fill="#FFFFFF">
+    <polygon points="0,0 1024,0 0,520"/>
+    <polygon points="0,0 700,0 0,300"/>
+  </g>
+
+  <!-- Sun glow -->
+  <circle cx="610" cy="360" r="220" fill="#FFD24A" opacity="0.55" filter="url(#glow)"/>
+  <!-- Sun -->
+  <circle cx="610" cy="360" r="170" fill="url(#sun)"/>
+
+  <!-- Cloud -->
+  <g filter="url(#shadow)">
+    <path fill="url(#cloud)" d="
+      M 250 690
+      a 120 120 0 0 1 60 -224
+      a 160 160 0 0 1 300 -70
+      a 130 130 0 0 1 200 110
+      a 100 100 0 0 1 -10 184
+      Z"/>
+    <!-- Flat bottom edge -->
+    <rect x="250" y="600" width="550" height="90" fill="url(#cloud)"/>
+  </g>
+  <!-- Cloud underside shading -->
+  <rect x="250" y="665" width="550" height="25" fill="#C4D8F0" opacity="0.6"/>
+
+  <!-- Raindrops -->
+  <g fill="url(#drop)">
+    <path d="M 370 760 q 0 -20 22 -46 q 22 26 22 46 a 22 22 0 0 1 -44 0 Z"/>
+    <path d="M 470 820 q 0 -20 22 -46 q 22 26 22 46 a 22 22 0 0 1 -44 0 Z"/>
+    <path d="M 570 760 q 0 -20 22 -46 q 22 26 22 46 a 22 22 0 0 1 -44 0 Z"/>
+    <path d="M 670 820 q 0 -20 22 -46 q 22 26 22 46 a 22 22 0 0 1 -44 0 Z"/>
+  </g>
+</svg>

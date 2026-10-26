@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-labelledby="title desc">
+  <title id="title">Pelican riding a bicycle</title>
+  <desc id="desc">A white pelican with a black bill rides a white mixte bicycle to the left, seen from a slightly low angle. Its right wing holds the handlebar, its left wing is folded, and its webbed feet rest on the pedals.</desc>
+
+  <rect width="800" height="600" fill="#eee"/>
+  <ellipse cx="414" cy="536" rx="268" ry="15" fill="#ddd"/>
+
+  <g stroke="#111" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Wheels, viewed from just below their hubs -->
+    <g fill="white">
+      <ellipse cx="590" cy="437" rx="92" ry="96"/>
+      <ellipse cx="230" cy="453" rx="92" ry="96"/>
+    </g>
+    <g fill="none">
+      <ellipse cx="590" cy="437" rx="82" ry="86"/>
+      <ellipse cx="230" cy="453" rx="82" ry="86"/>
+      <path d="M590 351V523M508 437H672M532 376L648 498M532 498L648 376
+               M230 367V539M148 453H312M172 392L288 514M172 514L288 392"/>
+    </g>
+
+    <!-- Rear fork and bottom stays -->
+    <path d="M489 319L596 435L588 441L481 325Z" fill="white"/>
+    <path d="M427 423L590 432L590 442L425 433Z" fill="white"/>
+
+    <!-- Mixte frame: two long sloping stays to the rear axle -->
+    <path d="M315 322L594 431L590 438L312 330Z" fill="white"/>
+    <path d="M313 337L591 442L588 449L310 345Z" fill="white"/>
+    <path d="M310 343L426 422L486 320L494 325L430 435L305 351Z" fill="white"/>
+    <path d="M483 306L493 307L435 429L426 425Z" fill="white"/>
+
+    <!-- Front fork, steering stem and handlebar -->
+    <path d="M301 318L311 320L242 449L230 455L227 447L234 442Z" fill="white"/>
+    <path d="M304 320L321 283L312 279L295 316Z" fill="white"/>
+    <path d="M319 282C301 268 282 271 275 284L272 299" fill="none"/>
+    <path d="M266 298L280 302" fill="none"/>
+    <path d="M476 305V282" fill="none"/>
+    <path d="M449 280Q474 271 506 279L507 290L452 291Z" fill="#111"/>
+
+    <!-- Crank and far pedal -->
+    <circle cx="430" cy="428" r="24" fill="white"/>
+    <circle cx="430" cy="428" r="7" fill="#111"/>
+    <path d="M430 428L463 396" fill="none"/>
+    <path d="M450 399L477 394" fill="none"/>
+
+    <!-- Far leg and webbed foot -->
+    <path d="M489 286Q516 327 475 360L460 389" fill="none"/>
+    <path d="M460 382L450 392L444 400L478 397L468 387Z" fill="white"/>
+
+    <!-- Tail and body -->
+    <path d="M533 259L584 242L565 269L591 263L558 292" fill="white"/>
+    <path d="M397 207
+             C423 188 474 192 511 216
+             C553 240 562 270 537 290
+             C516 307 475 310 444 294
+             C414 279 388 255 397 207Z" fill="white"/>
+
+    <!-- Folded left wing -->
+    <path d="M469 219
+             C509 219 538 249 534 279
+             C510 280 483 264 469 241
+             Q459 227 469 219Z" fill="white"/>
+    <path d="M492 241Q508 264 527 272M486 250Q498 268 514 274" fill="none"/>
+
+    <!-- Neck and head -->
+    <path d="M432 257
+             C398 252 368 227 362 195
+             C357 173 363 163 352 153
+             C337 140 313 145 307 162
+             C296 190 322 218 340 238
+             C356 258 374 278 404 282
+             Q425 282 432 257Z" fill="white"/>
+    <path d="M308 153Q314 133 326 137L324 146Q339 132 344 143" fill="white"/>
+
+    <!-- Long black bill and throat pouch -->
+    <path d="M310 171L124 194
+             Q173 200 214 204
+             Q274 241 315 190Z" fill="#111"/>
+    <path d="M137 195L298 184" fill="none" stroke="white"/>
+    <circle cx="326" cy="165" r="5" fill="#111"/>
+
+    <!-- Right wing reaches the handlebar -->
+    <path d="M422 222
+             C401 221 381 235 361 252
+             L312 277
+             Q301 281 304 289
+             Q307 296 318 291
+             L379 272
+             Q412 261 431 242
+             Q441 228 422 222Z" fill="white"/>
+    <path d="M316 278L308 288M325 275L318 287" fill="none"/>
+
+    <!-- Near leg and foot on the lower pedal -->
+    <path d="M462 295Q446 328 414 350L399 429" fill="none"/>
+    <path d="M399 421L390 435L377 445L413 447L407 433Z" fill="white"/>
+    <path d="M430 428L394 451" fill="none"/>
+    <path d="M378 451H415" fill="none"/>
+
+    <g fill="white">
+      <circle cx="230" cy="453" r="7"/>
+      <circle cx="590" cy="437" r="7"/>
+    </g>
+  </g>
+</svg>

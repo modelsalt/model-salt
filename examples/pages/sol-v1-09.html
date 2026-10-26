@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f8f6ef">
+<meta name="description" content="Meet Sprig. A little planning for better eating. Build a week of meals around your goals, tastes, and real life.">
+<title>Sprig — A good week starts on your plate.</title>
+<style>
+@import none;
+:root{--paper:#f8f6ef;--ink:#263d30;--muted:#697368;--orange:#cf4c2b;--green:#dfe8d7;--line:#dedfd4;--white:#fffefa;--serif:Georgia,'Times New Roman',serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.6 Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+button,input{font:inherit}button,a{-webkit-tap-highlight-color:transparent}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--orange);outline-offset:5px}
+.wrap{width:min(1200px,calc(100% - 80px));margin:auto}
+header{position:sticky;top:0;z-index:10;background:rgba(248,246,239,.96);border-bottom:1px solid var(--line)}
+.nav{height:88px;display:flex;align-items:center;justify-content:space-between;gap:28px}
+.logo{display:inline-flex;align-items:center;gap:8px;font-size:33px;font-weight:800;letter-spacing:-2px}
+.logo svg{width:29px;height:35px}
+.navlinks{display:flex;gap:32px;font-size:13px}
+.navlinks a:hover,footer a:hover{color:var(--orange)}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:22px;padding:14px 23px;border:1px solid var(--ink);border-radius:6px;font-size:13px;font-weight:600;line-height:1.4;background:var(--ink);color:var(--white);transition:transform .2s,background .2s}
+.button:hover{background:#3d5541;transform:translateY(-2px)}
+.button.orange{background:var(--orange);border-color:var(--orange)}
+.button.orange:hover{background:#af3c20}
+.button.outline{background:transparent;color:var(--ink)}
+.button.outline:hover{background:var(--green)}
+.arrow{font-size:20px;line-height:1}
+.eyebrow{display:flex;align-items:center;gap:9px;text-transform:uppercase;font-size:10px;letter-spacing:2px;font-weight:700}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--orange)}
+.hero{padding:78px 0 67px;display:grid;grid-template-columns:1fr 1.13fr;gap:56px;align-items:center}
+h1,h2,h3,p{margin:0}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(54px,5.3vw,76px);line-height:1.04;letter-spacing:-3.6px;margin:25px 0}
+h1 em{color:var(--orange);font-weight:400}
+.hero-copy>p{max-width:385px;color:var(--muted);font-size:16px;line-height:1.85}
+.hero-actions{display:flex;align-items:center;gap:24px;margin-top:30px}
+.text-link{font-size:12px;border-bottom:1px solid var(--ink);padding-bottom:3px}
+.fine{font-size:10px;color:var(--muted);margin-top:13px}
+.hero-note{margin-top:34px;display:flex;align-items:center;gap:12px;font-size:11px}
+.tiny-leaf{display:grid;place-items:center;background:var(--green);border-radius:50%;width:31px;height:31px;font-size:16px}
+.visual{position:relative;padding:24px 0 33px}
+.visual:before{content:"";position:absolute;inset:-17px -22px 5px 15px;background:#e8ebdf;border-radius:47% 47% 43% 42%;transform:rotate(-7deg)}
+.planner{position:relative;background:var(--white);border:1px solid #d9ddd0;border-radius:12px;box-shadow:0 20px 50px #263d3010;transform:rotate(-2deg);overflow:hidden}
+.planner-top{display:flex;justify-content:space-between;align-items:center;padding:19px 22px;border-bottom:1px solid #e9e9df}
+.mini-logo{font-size:19px;font-weight:800;letter-spacing:-1px}
+.mini-label{font-size:9px;color:var(--muted)}
+.avatar{border-radius:50%;background:#eddbc4;width:26px;height:26px;display:grid;place-items:center;font-size:9px;font-weight:700}
+.planner-main{padding:23px}
+.plan-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px}
+.plan-heading h3{font-family:var(--serif);font-size:24px;font-weight:400;letter-spacing:-.7px}
+.plan-heading span{font-size:9px;background:var(--green);padding:5px 8px;border-radius:4px}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:19px}
+.day{text-align:center;font-size:9px;color:var(--muted);padding:7px 0}
+.day b{display:block;font-size:13px;margin-top:3px;color:var(--ink)}
+.day.active{background:var(--ink);border-radius:6px;color:#e1e7da}
+.day.active b{color:white}
+.meals{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.meal{border:1px solid #e5e5da;border-radius:7px;overflow:hidden;background:#fff}
+.meal-art{height:107px;display:grid;place-items:center;background:#eee9dc}
+.meal:nth-child(2) .meal-art{background:#e6eadc}
+.meal:nth-child(3) .meal-art{background:#eee2d8}
+.meal-art svg{width:96px;height:96px;filter:drop-shadow(0 4px 3px #3f3d2420)}
+.meal-text{padding:10px 9px}
+.meal-text small{font-size:7px;letter-spacing:1px;color:var(--muted);text-transform:uppercase}
+.meal-text h4{font-size:10px;line-height:1.5;margin:4px 0 8px}
+.meal-text p{font-size:8px;color:var(--muted)}
+.nutrition{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding:13px 11px;background:#f4f4ec;border-radius:5px}
+.nutrition div{font-size:8px;color:var(--muted)}
+.nutrition b{display:block;color:var(--ink);font-size:12px}
+.nutrition .balanced{font-size:9px;color:var(--ink);display:flex;align-items:center;gap:6px}
+.check{display:inline-grid;place-items:center;background:var(--ink);color:white;border-radius:50%;width:17px;height:17px;font-size:10px}
+.floating{position:absolute;right:-18px;bottom:5px;display:flex;align-items:center;gap:11px;background:var(--white);padding:14px 19px;border:1px solid var(--line);border-radius:8px;box-shadow:0 9px 20px #263d3009;transform:rotate(3deg)}
+.floating .check{width:29px;height:29px;background:var(--green);color:var(--ink);font-size:15px}
+.floating b{display:block;font-size:12px}.floating p{font-size:10px;color:var(--muted)}
+.ribbon{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.ribbon-inner{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;font-size:11px}
+.ribbon-inner>span:first-child{color:var(--muted);font-family:var(--serif);font-size:19px;font-style:italic}
+.ribbon-item{display:flex;align-items:center;gap:10px}.ribbon-item i{font-style:normal;font-size:17px;color:#788764}
+.section{padding:86px 0}
+.section-title{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:34px}
+h2{font-family:var(--serif);font-size:43px;font-weight:400;line-height:1.15;letter-spacing:-1.6px}
+.section-title .eyebrow{margin-bottom:15px}
+.section-title>p{max-width:290px;font-size:13px;color:var(--muted)}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feature{border:1px solid var(--line);border-radius:9px;padding:27px;background:#fbfaf5}
+.feature-number{display:flex;align-items:center;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:23px}
+.feature-icon{width:33px;height:33px;display:grid;place-items:center;border-radius:50%;background:var(--green);color:var(--ink);font-size:18px}
+.feature h3{font-family:var(--serif);font-size:25px;font-weight:400;letter-spacing:-.6px;margin-bottom:10px}
+.feature p{font-size:12px;color:var(--muted);line-height:1.85}
+.feature-foot{margin-top:25px;border-top:1px solid var(--line);padding-top:14px;font-size:10px}
+.everyday{display:grid;grid-template-columns:1fr 1fr;background:#e7ecdf;border-radius:12px;overflow:hidden}
+.everyday-art{min-height:365px;position:relative;display:grid;place-items:center;background:#d9e2ce;padding:30px}
+.big-plate{width:260px;height:260px;transform:rotate(-12deg);filter:drop-shadow(8px 13px 9px #52613c25)}
+.art-caption{position:absolute;bottom:22px;left:25px;font-size:9px;letter-spacing:1.3px;text-transform:uppercase}
+.recipe-tag{position:absolute;top:25px;right:24px;background:var(--paper);border-radius:5px;padding:8px 12px;font-size:10px;transform:rotate(5deg)}
+.everyday-copy{padding:47px}
+.everyday-copy h2{font-size:38px;margin:17px 0}
+.everyday-copy>p{font-size:13px;color:#596852}
+.use-list{margin-top:23px;display:grid;gap:12px;font-size:12px}
+.use-list span{display:flex;gap:10px;align-items:center}
+.faq{display:grid;grid-template-columns:.8fr 1.2fr;gap:90px}
+.faq h2{margin-top:17px}
+.faq-intro p{font-size:13px;color:var(--muted);margin-top:18px}
+details{border-bottom:1px solid var(--line)}
+details:first-child{border-top:1px solid var(--line)}
+summary{padding:20px 30px 20px 0;cursor:pointer;list-style:none;position:relative;font-size:14px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";position:absolute;right:5px;font-size:21px;top:15px;font-weight:400}
+details[open] summary:after{content:"−"}
+details p{font-size:13px;color:var(--muted);padding:0 25px 21px 0;max-width:520px}
+.cta{background:var(--ink);border-radius:12px;padding:53px;text-align:center;color:var(--paper);position:relative;overflow:hidden}
+.cta:before,.cta:after{content:"";position:absolute;width:220px;height:330px;border:1px solid #68775b;border-radius:50%;transform:rotate(35deg);left:-150px;top:-20px}
+.cta:after{left:auto;right:-150px;transform:rotate(-35deg)}
+.cta .eyebrow{justify-content:center;color:#becab3}
+.cta h2{font-size:48px;margin:17px 0}
+.cta p{color:#c1cbbb;font-size:13px;margin-bottom:24px}
+.cta .button{background:#e5edce;color:var(--ink);border-color:#e5edce}
+.cta .button:hover{background:white}
+.cta small{display:block;color:#bcc8b6;font-size:10px;margin-top:12px}
+footer{padding:32px 0}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:25px}
+footer .logo{font-size:26px}footer .logo svg{width:23px}
+footer p,footer a:not(.logo){font-size:10px;color:var(--muted)}
+.footer-links{display:flex;gap:24px}
+dialog{border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);max-width:440px;width:calc(100% - 32px);padding:34px}
+dialog::backdrop{background:#17251cb0;backdrop-filter:blur(4px)}
+.close{position:absolute;right:12px;top:9px;border:0;background:transparent;font-size:25px;color:var(--muted)}
+dialog h2{font-size:32px;margin:15px 0}
+dialog p{font-size:13px;color:var(--muted)}
+fieldset{border:0;margin:20px 0;padding:0}
+legend{font-size:12px;font-weight:bold;margin-bottom:12px}
+.option{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:5px;margin-bottom:8px;font-size:13px;cursor:pointer}
+.option:has(input:checked){background:var(--green);border-color:#829375}
+input{accent-color:var(--ink)}
+dialog .button{width:100%}
+#recommendation{display:none;margin-top:20px;background:var(--green);padding:18px;border-radius:7px}
+#recommendation p{margin-top:8px}
+@media(min-width:1450px){.hero{padding-top:105px;padding-bottom:90px}}
+@media(max-width:1000px){.wrap{width:calc(100% - 48px)}.hero{gap:30px}.hero-actions{gap:15px}h1{font-size:59px}.planner-main{padding:16px}.meal-art{height:90px}.meal-art svg{width:80px;height:80px}.floating{right:-8px}.everyday-copy{padding:32px}.faq{gap:45px}}
+@media(max-width:760px){.nav{height:73px;gap:15px}.logo{font-size:29px}.navlinks{gap:18px;font-size:11px}.nav>.button{padding:10px 13px;font-size:11px}.hero{grid-template-columns:1fr;padding:47px 0 40px;gap:32px}.hero-copy{max-width:520px}h1{font-size:65px;max-width:500px}.hero-copy>p{max-width:440px}.hero-note{margin-top:23px}.visual{max-width:560px;width:100%;margin:auto;padding:20px 12px 30px}.visual:before{inset:0 0 20px 10px}.meal-art{height:120px}.meal-art svg{width:108px;height:108px}.floating{right:0}.ribbon-inner{flex-wrap:wrap;justify-content:center;column-gap:25px;row-gap:12px}.ribbon-inner>span:first-child{width:100%;text-align:center}.section{padding:58px 0}.section-title{display:block}.section-title>p{margin-top:18px;max-width:400px}.features{grid-template-columns:1fr;gap:14px}.feature{padding:23px}.feature-number{margin-bottom:12px}.feature-foot{margin-top:17px}.everyday{grid-template-columns:1fr}.everyday-art{min-height:320px}.everyday-copy{padding:30px}.faq{grid-template-columns:1fr;gap:28px}.cta{padding:39px 23px}.cta h2{font-size:40px}.footer-inner{flex-wrap:wrap}footer p{order:3;width:100%}}
+@media(max-width:420px){.wrap{width:calc(100% - 36px)}.navlinks a:nth-child(2){display:none}.navlinks{gap:12px}h1{font-size:56px;letter-spacing:-2.8px}.hero-actions{gap:20px}.hero-actions .button{padding:14px 17px}.meal-art{height:92px}.meal-art svg{width:82px;height:82px}.meals{gap:6px}.planner-main{padding:13px}.meal-text{padding:8px 6px}.meal-text h4{font-size:9px}.plan-heading h3{font-size:21px}.nutrition{padding:10px 7px;gap:7px}.nutrition .balanced{font-size:8px}.ribbon-item{font-size:10px;gap:5px}h2{font-size:36px}.floating{padding:10px 12px}.floating b{font-size:11px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<!-- All illustrations are embedded; this page needs no external assets. -->
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+<defs>
+<symbol id="sprig" viewBox="0 0 32 40">
+<path d="M15 37C16 24 20 14 26 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M20 22C6 24 2 15 3 7c13 0 20 5 17 15ZM24 14C21 5 26 1 31 0c2 9-1 13-7 14Z" fill="currentColor"/>
+</symbol>
+<symbol id="bowl" viewBox="0 0 200 200">
+<circle cx="100" cy="100" r="92" fill="#fdfcf5"/>
+<circle cx="100" cy="100" r="79" fill="#e6dfca"/>
+<circle cx="100" cy="100" r="73" fill="#c5b67b"/>
+<g fill="#e8d9ad">
+<ellipse cx="82" cy="55" rx="6" ry="3" transform="rotate(35 82 55)"/><ellipse cx="67" cy="66" rx="6" ry="3" transform="rotate(-25 67 66)"/><ellipse cx="94" cy="67" rx="6" ry="3"/><ellipse cx="71" cy="85" rx="6" ry="3" transform="rotate(45 71 85)"/><ellipse cx="53" cy="88" rx="6" ry="3"/><ellipse cx="88" cy="86" rx="6" ry="3" transform="rotate(-25 88 86)"/><ellipse cx="99" cy="47" rx="6" ry="3"/><ellipse cx="50" cy="70" rx="6" ry="3"/><ellipse cx="106" cy="85" rx="6" ry="3"/>
+</g>
+<g fill="#567644">
+<ellipse cx="54" cy="114" rx="18" ry="27" transform="rotate(-30 54 114)"/><ellipse cx="68" cy="142" rx="18" ry="24" transform="rotate(-50 68 142)"/><ellipse cx="42" cy="100" rx="12" ry="20" transform="rotate(15 42 100)"/><ellipse cx="93" cy="151" rx="16" ry="22" transform="rotate(35 93 151)"/>
+</g>
+<g fill="#8fa55d"><path d="M43 108q14 6 23 26-22-1-23-26Z"/><path d="M56 133q25-7 35 17-23 9-35-17Z"/></g>
+<g transform="rotate(30 134 76)">
+<rect x="110" y="39" width="48" height="72" rx="14" fill="#d38959"/>
+<path d="M113 55h42M111 67h46M111 80h46M114 93h40" stroke="#a15d38" stroke-width="3" opacity=".8"/>
+<path d="M116 45v57M126 42v65" stroke="#e9b781" stroke-width="3" opacity=".7"/>
+</g>
+<g fill="#b9482c" stroke="#eb9b61" stroke-width="3">
+<circle cx="134" cy="127" r="13"/><circle cx="153" cy="113" r="11"/><circle cx="125" cy="151" r="12"/>
+</g>
+<g fill="#f2d9a0"><circle cx="132" cy="124" r="2"/><circle cx="139" cy="131" r="2"/><circle cx="151" cy="109" r="2"/><circle cx="128" cy="149" r="2"/></g>
+<path d="M162 131a42 42 0 0 1-22 35l-10-20Z" fill="#d8d285" stroke="#f2edbb" stroke-width="5"/>
+<g fill="#334e33"><ellipse cx="99" cy="109" rx="5" ry="12" transform="rotate(35 99 109)"/><ellipse cx="110" cy="119" rx="5" ry="12" transform="rotate(-40 110 119)"/><ellipse cx="89" cy="119" rx="5" ry="11" transform="rotate(-35 89 119)"/></g>
+<g fill="#f6ecd4"><circle cx="117" cy="65" r="2"/><circle cx="130" cy="80" r="2"/><circle cx="145" cy="67" r="2"/><circle cx="124" cy="95" r="2"/></g>
+</symbol>
+<symbol id="breakfast" viewBox="0 0 200 200">
+<circle cx="100" cy="100" r="90" fill="#fdfcf5"/><circle cx="100" cy="100" r="73" fill="#ddd1b6"/><circle cx="100" cy="100" r="66" fill="#f0e5cd"/>
+<g fill="#ae8758"><ellipse cx="71" cy="70" rx="9" ry="5" transform="rotate(25 71 70)"/><ellipse cx="85" cy="56" rx="8" ry="5"/><ellipse cx="58" cy="91" rx="7" ry="5"/><ellipse cx="71" cy="106" rx="8" ry="5"/><ellipse cx="96" cy="76" rx="7" ry="5"/><ellipse cx="52" cy="115" rx="7" ry="5"/><ellipse cx="77" cy="129" rx="7" ry="5"/></g>
+<g fill="#485570"><circle cx="112" cy="61" r="10"/><circle cx="132" cy="72" r="10"/><circle cx="113" cy="83" r="9"/><circle cx="139" cy="94" r="10"/><circle cx="122" cy="106" r="10"/><circle cx="148" cy="113" r="8"/></g>
+<g fill="#f8e9ae" stroke="#d8bf7d" stroke-width="1.5"><circle cx="99" cy="120" r="14"/><circle cx="108" cy="141" r="14"/><circle cx="85" cy="146" r="14"/></g>
+<path d="M89 95q-24-26-32-6 18 20 32 6Z" fill="#607b45"/><path d="M87 97q-4-30 17-23 5 20-17 23Z" fill="#7e964b"/>
+</symbol>
+<symbol id="salad" viewBox="0 0 200 200">
+<circle cx="100" cy="100" r="91" fill="#fdfcf5"/><circle cx="100" cy="100" r="76" fill="#d7dfbd"/>
+<g fill="#77934f"><ellipse cx="68" cy="70" rx="23" ry="16" transform="rotate(-30 68 70)"/><ellipse cx="119" cy="58" rx="26" ry="17" transform="rotate(20 119 58)"/><ellipse cx="144" cy="96" rx="18" ry="28"/><ellipse cx="106" cy="142" rx="29" ry="18"/><ellipse cx="57" cy="117" rx="18" ry="27"/></g>
+<g fill="#bdce87"><ellipse cx="93" cy="84" rx="18" ry="25" transform="rotate(40 93 84)"/><ellipse cx="130" cy="124" rx="16" ry="24" transform="rotate(-35 130 124)"/></g>
+<g fill="#bd5837" stroke="#ed9a70" stroke-width="3"><circle cx="69" cy="100" r="12"/><circle cx="123" cy="80" r="12"/><circle cx="85" cy="137" r="11"/></g>
+<g fill="#f3eee0"><rect x="91" y="105" width="17" height="17" rx="3" transform="rotate(20 99 113)"/><rect x="64" y="64" width="15" height="15" rx="3" transform="rotate(-20 72 72)"/><rect x="128" y="108" width="15" height="15" rx="3" transform="rotate(30 135 115)"/></g>
+<g fill="#d5b56c"><circle cx="102" cy="59" r="5"/><circle cx="48" cy="99" r="5"/><circle cx="110" cy="129" r="5"/><circle cx="148" cy="78" r="5"/><circle cx="76" cy="120" r="5"/></g>
+</symbol>
+</defs>
+</svg>
+
+<header>
+<nav class="wrap nav" aria-label="Main navigation">
+<a class="logo" href="#" aria-label="Sprig home"><svg aria-hidden="true"><use href="#sprig"/></svg>sprig</a>
+<div class="navlinks">
+<a href="#features">Why Sprig</a>
+<a href="#everyday">Real-life ready</a>
+<a href="#faq">FAQs</a>
+</div>
+<button class="button" data-start>Find your plan <span class="arrow" aria-hidden="true">↗</span></button>
+</nav>
+</header>
+
+<main>
+<section class="wrap hero" aria-labelledby="hero-title">
+<div class="hero-copy">
+<div class="eyebrow"><span class="dot"></span>Less planning. More living.</div>
+<h1 id="hero-title">Your goals.<br>Your meals.<br><em>Your week, sorted.</em></h1>
+<p>Skip the “what’s for dinner?” spiral. Meet a meal plan that fits your nutrition goals, your tastes, and your actual life.</p>
+<div class="hero-actions">
+<button class="button orange" data-start>Find your plan <span class="arrow" aria-hidden="true">↗</span></button>
+<a class="text-link" href="#features">Meet your new routine ↓</a>
+</div>
+<div class="fine">A fresh start. No complicated spreadsheets required.</div>
+<div class="hero-note"><span class="tiny-leaf" aria-hidden="true">✳</span>Good food. A little structure. A lot more headspace.</div>
+</div>
+
+<div class="visual" role="img" aria-label="Example Sprig weekly planner: Monday's meals are berry overnight oats, a Mediterranean salad, and a salmon grain bowl, with daily nutrition at a glance.">
+<div class="planner">
+<div class="planner-top"><span class="mini-logo">sprig<span style="color:#8b9a72">.</span></span><span class="mini-label">YOUR LITTLE CORNER OF CALM</span><span class="avatar">JD</span></div>
+<div class="planner-main">
+<div class="plan-heading"><h3>A good week ahead.</h3><span>✧ Your weekly plan</span></div>
+<div class="week">
+<div class="day active">MON<b>19</b></div><div class="day">TUE<b>20</b></div><div class="day">WED<b>21</b></div><div class="day">THU<b>22</b></div><div class="day">FRI<b>23</b></div><div class="day">SAT<b>24</b></div><div class="day">SUN<b>25</b></div>
+</div>
+<div class="meals">
+<div class="meal"><div class="meal-art"><svg><use href="#breakfast"/></svg></div><div class="meal-text"><small>Breakfast</small><h4>Berry overnight<br>oats</h4><p>10 min · 24g protein</p></div></div>
+<div class="meal"><div class="meal-art"><svg><use href="#salad"/></svg></div><div class="meal-text"><small>Lunch</small><h4>Mediterranean<br>crunch salad</h4><p>15 min · 28g protein</p></div></div>
+<div class="meal"><div class="meal-art"><svg><use href="#bowl"/></svg></div><div class="meal-text"><small>Dinner</small><h4>Feel-good salmon<br>grain bowl</h4><p>25 min · 42g protein</p></div></div>
+</div>
+<div class="nutrition"><div class="balanced"><span class="check">✓</span> A little of everything</div><div><b>94g</b>Protein</div><div><b>128g</b>Carbs</div><div><b>48g</b>Fats</div></div>
+<div class="mini-label" style="margin-top:9px;text-align:right;font-size:8px">Illustrative meal plan · nutrition is an estimate</div>
+</div>
+</div>
+<div class="floating"><span class="check">✓</span><div><b>Decisions off your plate.</b><p>Your grocery list? Sorted, too.</p></div></div>
+</div>
+</section>
+
+<div class="ribbon">
+<div class="wrap ribbon-inner">
+<span>A little planning goes a long way.</span>
+<span class="ribbon-item"><i aria-hidden="true">✧</i> Built around your goals</span>
+<span class="ribbon-item"><i aria-hidden="true">◷</i> Made for busy days</span>
+<span class="ribbon-item"><i aria-hidden="true">♧</i> Real food, real flexibility</span>
+</div>
+</div>
+
+<section class="wrap section" id="features">
+<div class="section-title">
+<div><div class="eyebrow"><span class="dot"></span>Your week, with less work</div><h2>A plan that takes things<br>off your plate.</h2></div>
+<p>Keep your nutrition goals in sight, without making food a full-time job.</p>
+</div>
+<div class="features">
+<article class="feature"><div class="feature-number"><span>01 / MAKE IT YOURS</span><span class="feature-icon" aria-hidden="true">✳</span></div><h3>Your goals set the menu.</h3><p>More protein? More plants? Build your week around the way you want to eat, with nutrition in view.</p><div class="feature-foot">A little more intention in every meal ↗</div></article>
+<article class="feature"><div class="feature-number"><span>02 / SKIP THE GUESSWORK</span><span class="feature-icon" aria-hidden="true">▦</span></div><h3>A whole week. Handled.</h3><p>See breakfast, lunch, and dinner in one happy place. Swap a meal when your cravings or calendar change.</p><div class="feature-foot">Less deciding. More getting on with it. ↗</div></article>
+<article class="feature"><div class="feature-number"><span>03 / SHOP WITH A PLAN</span><span class="feature-icon" aria-hidden="true">☷</span></div><h3>One list. One less thing.</h3><p>Your meals become a tidy grocery list. Check what’s already in your kitchen, then pick up just what you need.</p><div class="feature-foot">From “what do I need?” to done. ↗</div></article>
+</div>
+</section>
+
+<section class="wrap" id="everyday">
+<div class="everyday">
+<div class="everyday-art">
+<span class="recipe-tag">Big on flavor. Easy on your evening.</span>
+<svg class="big-plate" role="img" aria-label="Illustrated salmon grain bowl with leafy greens, tomatoes, and lemon"><use href="#bowl"/></svg>
+<span class="art-caption">The feel-good salmon bowl · 25 minutes</span>
+</div>
+<div class="everyday-copy">
+<div class="eyebrow">For the beautifully busy</div>
+<h2>Room for your goals.<br>And your real life.</h2>
+<p>A late workout. An empty fridge. A sudden craving for pasta. Your meal plan should bend with your week.</p>
+<div class="use-list">
+<span><span class="check" aria-hidden="true">✓</span>Quick meals for the post-workout rush</span>
+<span><span class="check" aria-hidden="true">✓</span>Prep-ahead lunches for full calendars</span>
+<span><span class="check" aria-hidden="true">✓</span>Flexible swaps when plans change</span>
+</div>
+</div>
+</div>
+</section>
+
+<section class="wrap section faq" id="faq">
+<div class="faq-intro"><div class="eyebrow"><span class="dot"></span>A few good questions</div><h2>Food for thought.</h2><p>Getting into a new routine should feel simple.<br>Let’s start here.</p></div>
+<div>
+<details open><summary>Do I need to know my nutrition targets?</summary><p>No. You can start with a simple preference, like adding more plants or making time for balanced meals. If you already have nutrition targets, use them to guide your choices.</p></details>
+<details><summary>Can I change the meals in my plan?</summary><p>Absolutely. Swap meals to fit your tastes and schedule. A meal plan is there to give your week structure, with room to change your mind.</p></details>
+<details><summary>Will I need lots of time to cook?</summary><p>Choose quick recipes for busy evenings and prep-ahead options for the week. Recipe times help you pick what fits before you get cooking.</p></details>
+<details><summary>Is Sprig a meal delivery service?</summary><p>Sprig helps you plan what to cook and what to buy. You choose your groceries and prepare the meals yourself.</p></details>
+</div>
+</section>
+
+<section class="wrap">
+<div class="cta">
+<div class="eyebrow">A little plan. A fresh perspective.</div>
+<h2>Make room for a better week.</h2>
+<p>Less time thinking about food. More time enjoying it.</p>
+<button class="button" data-start>Find your plan <span class="arrow" aria-hidden="true">↗</span></button>
+<small>Your next good habit starts with one small step.</small>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="wrap footer-inner">
+<a class="logo" href="#" aria-label="Sprig home"><svg aria-hidden="true"><use href="#sprig"/></svg>sprig</a>
+<p>© <span id="year">2026</span> Sprig. A little planning. A lot of possibility.</p>
+<div class="footer-links"><a href="#features">Why Sprig</a><a href="#faq">Questions?</a><a href="#hero-title">Back to top ↑</a></div>
+</div>
+</footer>
+
+<dialog id="start-dialog" aria-labelledby="dialog-title">
+<button class="close" aria-label="Close" id="close-dialog">×</button>
+<div class="eyebrow"><span class="dot"></span>Your fresh start</div>
+<h2 id="dialog-title">What’s on your mind?</h2>
+<p>Try a little taste of planning with Sprig.</p>
+<form id="goal-form">
+<fieldset>
+<legend>Choose your focus</legend>
+<label class="option"><input type="radio" name="goal" value="balanced" checked> Make everyday eating easier</label>
+<label class="option"><input type="radio" name="goal" value="protein"> Make room for more protein</label>
+<label class="option"><input type="radio" name="goal" value="plants"> Put more plants on my plate</label>
+</fieldset>
+<button class="button orange" type="submit">Show my starting point <span aria-hidden="true">↗</span></button>
+</form>
+<div id="recommendation" role="status" aria-live="polite"></div>
+<p style="font-size:10px;margin-top:17px">This is an interactive preview. No account or personal information needed.</p>
+</dialog>
+
+<script>
+const dialog = document.getElementById('start-dialog');
+let opener;
+document.querySelectorAll('[data-start]').forEach(button => {
+  button.addEventListener('click', () => {
+    opener = button;
+    document.getElementById('goal-form').hidden = false;
+    document.getElementById('recommendation').style.display = 'none';
+    dialog.showModal();
+  });
+});
+document.getElementById('close-dialog').addEventListener('click', () => dialog.close());
+dialog.addEventListener('click', event => {
+  const bounds = dialog.getBoundingClientRect();
+  if (event.target === dialog && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) dialog.close();
+});
+dialog.addEventListener('close', () => opener?.focus());
+document.getElementById('goal-form').addEventListener('submit', event => {
+  event.preventDefault();
+  const goal = new FormData(event.target).get('goal');
+  const suggestions = {
+    balanced: ['Start with a little structure.', 'Try berry overnight oats for breakfast, a Mediterranean salad for lunch, and a salmon grain bowl for dinner. Pick one meal to prep ahead to make tomorrow easier.'],
+    protein: ['Make protein part of your routine.', 'Start with yogurt and oats, a lentil and feta lunch, and salmon with grains for dinner. Choose portions around your own needs and appetite.'],
+    plants: ['Give plants the starring role.', 'Try berry oats, a chickpea crunch salad, and a roasted tofu grain bowl. Prep a batch of grains and wash your greens to get a head start.']
+  };
+  const [title, copy] = suggestions[goal];
+  const result = document.getElementById('recommendation');
+  result.replaceChildren();
+  const heading = document.createElement('strong');
+  heading.textContent = title;
+  const paragraph = document.createElement('p');
+  paragraph.textContent = copy;
+  result.append(heading, paragraph);
+  event.target.hidden = true;
+  result.style.display = 'block';
+});
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

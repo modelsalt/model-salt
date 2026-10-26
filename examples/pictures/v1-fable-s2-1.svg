@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000">
+  <!-- Palette: cream #f1faee, navy #1d3557, orange #f4a261 -->
+  <rect width="1000" height="1000" fill="#f1faee"/>
+
+  <!-- Grass strip -->
+  <rect x="0" y="840" width="1000" height="160" fill="#1d3557"/>
+  <path d="M0 840 L20 800 L40 840 L70 790 L95 840 L130 805 L160 840 L200 795 L230 840 L270 810 L300 840 L340 800 L370 840 L410 812 L440 840 L480 798 L510 840 L550 808 L580 840 L620 795 L650 840 L690 810 L720 840 L760 800 L790 840 L830 812 L860 840 L900 795 L930 840 L965 808 L1000 840 Z" fill="#1d3557"/>
+
+  <!-- Small flowers -->
+  <g stroke="#1d3557" stroke-width="6" stroke-linecap="round">
+    <line x1="110" y1="840" x2="110" y2="780"/>
+    <line x1="560" y1="840" x2="560" y2="790"/>
+    <line x1="900" y1="840" x2="900" y2="775"/>
+    <line x1="420" y1="840" x2="420" y2="800"/>
+  </g>
+  <g fill="#f4a261">
+    <circle cx="110" cy="770" r="18"/><circle cx="92" cy="780" r="12"/><circle cx="128" cy="780" r="12"/>
+    <circle cx="560" cy="780" r="16"/><circle cx="544" cy="790" r="11"/><circle cx="576" cy="790" r="11"/>
+    <circle cx="900" cy="765" r="18"/><circle cx="882" cy="775" r="12"/><circle cx="918" cy="775" r="12"/>
+    <circle cx="420" cy="792" r="13"/>
+  </g>
+  <g fill="#f1faee">
+    <circle cx="110" cy="772" r="6"/><circle cx="560" cy="782" r="5"/><circle cx="900" cy="767" r="6"/><circle cx="420" cy="793" r="4"/>
+  </g>
+
+  <!-- Bicycle -->
+  <g fill="none" stroke="#1d3557" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Wheels -->
+    <circle cx="270" cy="700" r="140"/>
+    <circle cx="730" cy="700" r="140"/>
+    <!-- Spokes -->
+    <g stroke-width="5">
+      <line x1="270" y1="560" x2="270" y2="840"/><line x1="130" y1="700" x2="410" y2="700"/>
+      <line x1="171" y1="601" x2="369" y2="799"/><line x1="369" y1="601" x2="171" y2="799"/>
+      <line x1="730" y1="560" x2="730" y2="840"/><line x1="590" y1="700" x2="870" y2="700"/>
+      <line x1="631" y1="601" x2="829" y2="799"/><line x1="829" y1="601" x2="631" y2="799"/>
+    </g>
+    <!-- Frame -->
+    <line x1="270" y1="700" x2="480" y2="700"/>   <!-- chainstay -->
+    <line x1="270" y1="700" x2="420" y2="470"/>   <!-- seatstay -->
+    <line x1="480" y1="700" x2="420" y2="470"/>   <!-- seat tube -->
+    <line x1="480" y1="700" x2="665" y2="450"/>   <!-- down tube -->
+    <line x1="420" y1="470" x2="665" y2="450"/>   <!-- top tube -->
+    <line x1="665" y1="450" x2="730" y2="700"/>   <!-- fork / head tube -->
+    <!-- Handlebar -->
+    <path d="M665 450 L655 400 Q690 380 725 395"/>
+    <!-- Seat post + saddle -->
+    <line x1="420" y1="470" x2="415" y2="440"/>
+    <path d="M370 440 L460 440" stroke-width="22"/>
+    <!-- Crank + pedals -->
+    <circle cx="480" cy="700" r="30" fill="#1d3557"/>
+    <line x1="480" y1="700" x2="515" y2="760"/>
+    <line x1="500" y1="760" x2="540" y2="760" stroke-width="16"/>
+    <line x1="480" y1="700" x2="445" y2="640"/>
+    <line x1="425" y1="640" x2="465" y2="640" stroke-width="16"/>
+  </g>
+
+  <!-- Pelican (side-saddle: both legs dangling on the near side) -->
+  <g stroke="#1d3557" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Legs -->
+    <path d="M430 420 Q450 500 470 570" fill="none"/>
+    <path d="M410 425 Q425 510 440 590" fill="none"/>
+    <!-- Webbed feet -->
+    <path d="M470 570 L455 600 L480 595 L500 605 L495 575 Z" fill="#f4a261"/>
+    <path d="M440 590 L425 620 L450 615 L470 625 L465 595 Z" fill="#f4a261"/>
+
+    <!-- Tail -->
+    <path d="M330 370 L265 345 L290 385 L255 410 L320 400 Z" fill="#f1faee"/>
+
+    <!-- Body -->
+    <ellipse cx="420" cy="360" rx="115" ry="80" fill="#f1faee"/>
+
+    <!-- Wing reaching to handlebar -->
+    <path d="M470 330 Q560 340 650 395 Q560 380 480 380 Z" fill="#f1faee"/>
+
+    <!-- Neck -->
+    <path d="M490 320 Q520 260 540 200" fill="none" stroke-width="40"/>
+    <path d="M490 320 Q520 260 540 200" fill="none" stroke="#f1faee" stroke-width="18"/>
+
+    <!-- Head -->
+    <circle cx="555" cy="185" r="48" fill="#f1faee"/>
+
+    <!-- Beak (top) and pouch -->
+    <path d="M590 170 L740 185 L740 200 L590 200 Z" fill="#f4a261"/>
+    <path d="M590 200 L740 200 Q700 260 600 240 Z" fill="#f4a261"/>
+
+    <!-- Eye -->
+    <circle cx="572" cy="172" r="7" fill="#1d3557" stroke="none"/>
+  </g>
+</svg>

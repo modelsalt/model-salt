@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plateful — Meal planning, minus the mental load</title>
+<meta name="description" content="Plateful builds your weekly meal plan, writes your grocery list, and tracks your pantry — so dinner is decided before you're even hungry.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FFF8EE;
+    --cream-2: #FDEFDD;
+    --ink: #20241F;
+    --ink-soft: #4A5248;
+    --green: #2D6A4F;
+    --green-dark: #1B4332;
+    --orange: #EE6C4D;
+    --orange-soft: #FBE3DB;
+    --yellow: #F4D35E;
+    --white: #FFFFFF;
+    --border: #E8DFCE;
+    --shadow: 0 20px 45px -18px rgba(27, 67, 50, .25);
+    --radius: 20px;
+    --font-head: "Fraunces", Georgia, serif;
+    --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 { font-family: var(--font-head); line-height: 1.12; font-weight: 600; letter-spacing: -0.01em; }
+
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  ul { list-style: none; }
+
+  .wrap { width: min(1140px, 92%); margin-inline: auto; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; gap: .5rem;
+    padding: .85rem 1.6rem; border-radius: 999px;
+    font-weight: 600; font-size: .95rem; cursor: pointer;
+    border: 2px solid transparent; transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+  }
+  .btn-primary { background: var(--orange); color: var(--white); box-shadow: 0 10px 24px -10px rgba(238,108,77,.7); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -10px rgba(238,108,77,.8); }
+  .btn-ghost { border-color: var(--ink); background: transparent; }
+  .btn-ghost:hover { background: var(--ink); color: var(--cream); }
+  .btn:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    backdrop-filter: blur(12px);
+    background: rgba(255, 248, 238, .85);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: .9rem 0; }
+  .logo { font-family: var(--font-head); font-weight: 700; font-size: 1.35rem; display: flex; align-items: center; gap: .45rem; }
+  .logo-dot { width: 34px; height: 34px; border-radius: 10px; background: var(--green); color: var(--cream);
+    display: grid; place-items: center; font-size: 1rem; }
+  .nav-links { display: flex; gap: 2rem; font-size: .92rem; font-weight: 500; color: var(--ink-soft); }
+  .nav-links a:hover { color: var(--green); }
+  .nav-cta { display: flex; align-items: center; gap: 1rem; }
+  .nav-cta .btn { padding: .6rem 1.3rem; }
+  .menu-toggle { display: none; background: none; border: 0; font-size: 1.5rem; cursor: pointer; }
+
+  /* ---------- Hero ---------- */
+  .hero { position: relative; padding: 5rem 0 6rem; }
+  .hero::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background:
+      radial-gradient(600px 400px at 85% 15%, rgba(244, 211, 94, .28), transparent 65%),
+      radial-gradient(700px 500px at 5% 90%, rgba(45, 106, 79, .12), transparent 65%);
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 3rem; align-items: center; }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: var(--orange-soft); color: #B3401F;
+    font-weight: 600; font-size: .8rem; letter-spacing: .04em; text-transform: uppercase;
+    padding: .4rem .9rem; border-radius: 999px; margin-bottom: 1.4rem;
+  }
+  .hero h1 { font-size: clamp(2.6rem, 5.2vw, 4.1rem); margin-bottom: 1.2rem; }
+  .hero h1 em { font-style: italic; color: var(--green); }
+  .hero p.lead { font-size: 1.15rem; color: var(--ink-soft); max-width: 32rem; margin-bottom: 2rem; }
+
+  .signup { display: flex; gap: .6rem; max-width: 30rem; margin-bottom: .8rem; }
+  .signup input {
+    flex: 1; padding: .85rem 1.2rem; border-radius: 999px;
+    border: 2px solid var(--border); background: var(--white);
+    font: inherit; font-size: .95rem; min-width: 0;
+  }
+  .signup input:focus { outline: none; border-color: var(--green); }
+  .fineprint { font-size: .82rem; color: var(--ink-soft); }
+
+  .proof { display: flex; align-items: center; gap: .9rem; margin-top: 2.2rem; }
+  .avatars { display: flex; }
+  .avatars span {
+    width: 38px; height: 38px; border-radius: 50%; border: 3px solid var(--cream);
+    display: grid; place-items: center; font-size: .8rem; font-weight: 700; color: var(--white);
+    margin-left: -10px;
+  }
+  .avatars span:first-child { margin-left: 0; }
+  .stars { color: #E9B949; letter-spacing: .1em; font-size: .9rem; }
+  .proof small { color: var(--ink-soft); }
+
+  /* ---------- Phone mockup ---------- */
+  .hero-visual { position: relative; display: flex; justify-content: center; }
+  .phone {
+    width: 300px; border-radius: 42px; background: var(--ink);
+    padding: 12px; box-shadow: var(--shadow); transform: rotate(2.5deg);
+  }
+  .screen { background: var(--cream); border-radius: 32px; overflow: hidden; padding: 1rem 1rem 1.4rem; min-height: 560px; }
+  .statusbar { display: flex; justify-content: space-between; font-size: .7rem; font-weight: 600; padding: .2rem .4rem .8rem; }
+  .screen h4 { font-family: var(--font-head); font-size: 1.15rem; margin-bottom: .9rem; }
+  .screen h4 span { display: block; font-family: var(--font-body); font-size: .72rem; font-weight: 500; color: var(--ink-soft); }
+
+  .days { display: flex; gap: .4rem; margin-bottom: 1rem; }
+  .days b {
+    flex: 1; text-align: center; font-size: .68rem; font-weight: 600;
+    padding: .45rem 0; border-radius: 10px; background: var(--white); color: var(--ink-soft);
+  }
+  .days b.on { background: var(--green); color: var(--cream); }
+
+  .meal-card { background: var(--white); border-radius: 16px; overflow: hidden; margin-bottom: .8rem; border: 1px solid var(--border); }
+  .meal-img { height: 92px; display: grid; place-items: center; font-size: 2.2rem; }
+  .mi-1 { background: linear-gradient(135deg, #FBE3DB, #F7C9B8); }
+  .mi-2 { background: linear-gradient(135deg, #DCE9E2, #BFD9CC); }
+  .meal-body { padding: .7rem .8rem; }
+  .meal-tag { font-size: .6rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--orange); }
+  .meal-body strong { display: block; font-size: .82rem; margin: .15rem 0 .35rem; }
+  .meal-meta { display: flex; gap: .4rem; }
+  .meal-meta i { font-style: normal; font-size: .62rem; background: var(--cream-2); padding: .18rem .5rem; border-radius: 999px; color: var(--ink-soft); }
+
+  .grocery { background: var(--green-dark); color: var(--cream); border-radius: 16px; padding: .8rem .9rem; font-size: .75rem; }
+  .grocery strong { display: block; font-size: .82rem; margin-bottom: .45rem; }
+  .bar { height: 6px; border-radius: 999px; background: rgba(255,255,255,.2); overflow: hidden; }
+  .bar i { display: block; height: 100%; width: 66%; background: var(--yellow); border-radius: inherit; }
+  .grocery small { display: block; margin-top: .4rem; opacity: .8; font-size: .65rem; }
+
+  .float-card {
+    position: absolute; background: var(--white); border-radius: 14px; box-shadow: var(--shadow);
+    padding: .7rem 1rem; font-size: .8rem; font-weight: 600; display: flex; align-items: center; gap: .55rem;
+    animation: float 5s ease-in-out infinite;
+  }
+  .fc-1 { top: 12%; left: 0; }
+  .fc-2 { bottom: 16%; right: 0; animation-delay: 2.2s; }
+  .fc-1 .pill { width: 30px; height: 30px; border-radius: 9px; background: var(--orange-soft); display: grid; place-items: center; }
+  .fc-2 .pill { width: 30px; height: 30px; border-radius: 9px; background: #DCE9E2; display: grid; place-items: center; }
+  .float-card small { display: block; font-weight: 500; color: var(--ink-soft); font-size: .68rem; }
+
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+  /* ---------- Stats ---------- */
+  .stats { background: var(--green-dark); color: var(--cream); padding: 3rem 0; }
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; text-align: center; }
+  .stats b { font-family: var(--font-head); font-size: clamp(2rem, 4vw, 2.8rem); display: block; color: var(--yellow); }
+  .stats span { font-size: .9rem; opacity: .85; }
+
+  /* ---------- Sections ---------- */
+  section { padding: 5.5rem 0; }
+  .section-head { text-align: center; max-width: 40rem; margin: 0 auto 3.2rem; }
+  .section-head .kicker { color: var(--orange); font-weight: 700; text-transform: uppercase; letter-spacing: .1em; font-size: .78rem; }
+  .section-head h2 { font-size: clamp(1.9rem, 3.6vw, 2.7rem); margin: .6rem 0 .8rem; }
+  .section-head p { color: var(--ink-soft); }
+
+  /* ---------- Features ---------- */
+  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+  .feature {
+    background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 1.8rem; transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .feature:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+  .feature .icon {
+    width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center;
+    font-size: 1.4rem; margin-bottom: 1.1rem; background: var(--cream-2);
+  }
+  .feature:nth-child(2) .icon { background: var(--orange-soft); }
+  .feature:nth-child(3) .icon { background: #DCE9E2; }
+  .feature:nth-child(4) .icon { background: #F6EFD4; }
+  .feature:nth-child(5) .icon { background: #E7E3F4; }
+  .feature:nth-child(6) .icon { background: #FBE3DB; }
+  .feature h3 { font-size: 1.2rem; margin-bottom: .5rem; }
+  .feature p { font-size: .92rem; color: var(--ink-soft); }
+
+  /* ---------- How it works ---------- */
+  .how { background: var(--cream-2); }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; counter-reset: step; }
+  .step { position: relative; padding-top: 1rem; }
+  .step::before {
+    counter-increment: step; content: counter(step, decimal-leading-zero);
+    font-family: var(--font-head); font-size: 3.4rem; font-weight: 700; color: var(--green);
+    opacity: .28; display: block; line-height: 1; margin-bottom: .8rem;
+  }
+  .step h3 { font-size: 1.25rem; margin-bottom: .5rem; }
+  .step p { color: var(--ink-soft); font-size: .94rem; }
+
+  /* ---------- Testimonials ---------- */
+  .quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+  .quote {
+    background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 1.8rem; display: flex; flex-direction: column; gap: 1rem;
+  }
+  .quote .stars { font-size: .85rem; }
+  .quote p { font-size: .96rem; }
+  .quote footer { display: flex; align-items: center; gap: .8rem; margin-top: auto; }
+  .quote .face { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; color: var(--white); font-size: .85rem; }
+  .quote footer b { display: block; font-size: .9rem; }
+  .quote footer small { color: var(--ink-soft); }
+
+  /* ---------- Pricing ---------- */
+  .pricing { background: var(--cream-2); }
+  .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; align-items: stretch; }
+  .plan {
+    background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 2rem; display: flex; flex-direction: column;
+  }
+  .plan.featured { background: var(--green-dark); color: var(--cream); border-color: var(--green-dark); transform: scale(1.04); box-shadow: var(--shadow); }
+  .plan .badge { align-self: flex-start; background: var(--yellow); color: var(--ink); font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: .25rem .7rem; border-radius: 999px; margin-bottom: 1rem; }
+  .plan h3 { font-size: 1.3rem; }
+  .price { font-family: var(--font-head); font-size: 2.6rem; font-weight: 700; margin: .8rem 0 1.2rem; }
+  .price small { font-family: var(--font-body); font-size: .85rem; font-weight: 500; opacity: .7; }
+  .plan ul { display: grid; gap: .6rem; font-size: .9rem; margin-bottom: 1.8rem; }
+  .plan ul li::before { content: "✓ "; font-weight: 700; color: var(--green); }
+  .plan.featured ul li::before { color: var(--yellow); }
+  .plan .btn { margin-top: auto; justify-content: center; }
+  .plan.featured .btn-primary { background: var(--orange); }
+
+  /* ---------- FAQ ---------- */
+  .faq-list { max-width: 44rem; margin: 0 auto; display: grid; gap: .8rem; }
+  details {
+    background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 1.1rem 1.4rem;
+  }
+  summary { cursor: pointer; font-weight: 600; font-size: .98rem; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; font-size: 1.4rem; color: var(--green); transition: transform .2s ease; }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p { margin-top: .7rem; color: var(--ink-soft); font-size: .92rem; }
+
+  /* ---------- Final CTA ---------- */
+  .cta-banner {
+    background: var(--green); color: var(--cream); border-radius: 28px;
+    padding: 4rem 2rem; text-align: center; position: relative; overflow: hidden;
+  }
+  .cta-banner::before, .cta-banner::after {
+    content: "🥦"; position: absolute; font-size: 5rem; opacity: .18;
+  }
+  .cta-banner::before { top: -10px; left: 4%; transform: rotate(-18deg); }
+  .cta-banner::after { content: "🍋"; bottom: -14px; right: 5%; transform: rotate(14deg); }
+  .cta-banner h2 { font-size: clamp(1.9rem, 3.6vw, 2.6rem); margin-bottom: .8rem; }
+  .cta-banner p { opacity: .9; margin-bottom: 1.8rem; }
+  .cta-banner .btn-primary { background: var(--yellow); color: var(--ink); box-shadow: none; }
+
+  /* ---------- Footer ---------- */
+  .site-footer { padding: 3.5rem 0 2rem; font-size: .88rem; color: var(--ink-soft); }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem; }
+  .footer-grid h4 { font-family: var(--font-body); font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink); margin-bottom: .9rem; }
+  .footer-grid ul { display: grid; gap: .5rem; }
+  .footer-grid a:hover { color: var(--green); }
+  .copyright { border-top: 1px solid var(--border); padding-top: 1.5rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; }
+
+  /* ---------- Reveal animation ---------- */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .float-card { animation: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; text-align: center; }
+    .hero p.lead, .signup { margin-inline: auto; }
+    .proof { justify-content: center; }
+    .hero-visual { margin-top: 1rem; }
+    .features-grid, .steps, .quotes, .plans { grid-template-columns: 1fr 1fr; }
+    .plan.featured { transform: none; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 620px) {
+    .nav-links, .nav-cta .btn-ghost { display: none; }
+    .menu-toggle { display: block; }
+    .nav-links.open {
+      display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0;
+      background: var(--cream); border-bottom: 1px solid var(--border); padding: 1rem 4%; gap: 1rem;
+    }
+    .features-grid, .steps, .quotes, .plans, .stats-grid { grid-template-columns: 1fr; }
+    .signup { flex-direction: column; }
+    .signup .btn { justify-content: center; }
+    .float-card { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#" class="logo"><span class="logo-dot">🍽️</span>Plateful</a>
+    <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#pricing" class="btn btn-ghost">Log in</a>
+      <a href="#download" class="btn btn-primary">Get the app</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" style="padding-top:4.5rem">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">✨ New · Pantry tracking just launched</span>
+      <h1>Dinner, decided.<br><em>Every single week.</em></h1>
+      <p class="lead">Plateful builds your weekly meal plan, writes your grocery list, and keeps track of what's already in your pantry — so "what's for dinner?" answers itself.</p>
+      <form class="signup" id="signupForm">
+        <input type="email" placeholder="Enter your email" required aria-label="Email address">
+        <button type="submit" class="btn btn-primary">Start free →</button>
+      </form>
+      <p class="fineprint">Free 14-day trial · No credit card required · Cancel anytime</p>
+      <div class="proof">
+        <div class="avatars" aria-hidden="true">
+          <span style="background:#2D6A4F">JM</span>
+          <span style="background:#EE6C4D">AK</span>
+          <span style="background:#B08968">RS</span>
+          <span style="background:#6C5B7B">+</span>
+        </div>
+        <div>
+          <div class="stars" aria-label="4.9 out of 5 stars">★★★★★</div>
+          <small>4.9 · 12,400+ App Store reviews</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="float-card fc-1"><span class="pill">🥑</span><div>Avocados added<small>to Saturday's grocery list</small></div></div>
+      <div class="float-card fc-2"><span class="pill">⚡</span><div>25-minute meals<small>auto-picked for busy nights</small></div></div>
+      <div class="phone">
+        <div class="screen">
+          <div class="statusbar"><span>9:41</span><span>●●● 🔋</span></div>
+          <h4><span>Tuesday, March 12</span>Good evening, Ana 👋</h4>
+          <div class="days"><b>M</b><b class="on">T</b><b>W</b><b>T</b><b>F</b><b>S</b><b>S</b></div>
+          <div class="meal-card">
+            <div class="meal-img mi-1">🍝</div>
+            <div class="meal-body">
+              <span class="meal-tag">Tonight</span>
+              <strong>Sheet-pan gnocchi & roasted veg</strong>
+              <div class="meal-meta"><i>⏱ 25 min</i><i>🌱 Vegetarian</i><i>👨‍👩‍👧 Serves 4</i></div>
+            </div>
+          </div>
+          <div class="meal-card">
+            <div class="meal-img mi-2">🌮</div>
+            <div class="meal-body">
+              <span class="meal-tag">Tomorrow</span>
+              <strong>Crispy black bean tacos</strong>
+              <div class="meal-meta"><i>⏱ 20 min</i><i>🌾 GF option</i></div>
+            </div>
+          </div>
+          <div class="grocery">
+            <strong>🛒 This week's groceries</strong>
+            <div class="bar"><i></i></div>
+            <small>12 of 18 items checked off</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS ============ -->
+<div class="stats">
+  <div class="wrap stats-grid">
+    <div class="reveal"><b data-count="2000000" data-suffix="+">0</b><span>meals planned and counting</span></div>
+    <div class="reveal"><b data-count="45" data-suffix=" min">0</b><span>saved per week, on average</span></div>
+    <div class="reveal"><b data-count="31" data-suffix="%">0</b><span>less food waste reported by members</span></div>
+  </div>
+</div>
+
+<!-- ============ FEATURES ============ -->
+<section id="features">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Why Plateful</span>
+      <h2>Everything between "I'm hungry" and "dinner's ready"</h2>
+      <p>One app that replaces your recipe bookmarks, sticky notes, and the 6 p.m. grocery-store panic.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature reveal"><div class="icon">🗓️</div><h3>Smart weekly plans</h3><p>Tell Plateful your tastes, schedule, and goals. It drafts a week of meals you'll actually want to cook — swap anything with one tap.</p></div>
+      <div class="feature reveal"><div class="icon">🛒</div><h3>Instant grocery lists</h3><p>Your plan becomes an organized, aisle-sorted list. Check items off in-store or send it straight to delivery.</p></div>
+      <div class="feature reveal"><div class="icon">🥫</div><h3>Pantry tracking</h3><p>Log what you already have and Plateful plans around it — using up the spinach before it becomes soup you didn't ask for.</p></div>
+      <div class="feature reveal"><div class="icon">🌱</div><h3>Every diet, one table</h3><p>Vegetarian, gluten-free, dairy-free, picky toddler — set filters per person and get meals that work for everyone.</p></div>
+      <div class="feature reveal"><div class="icon">⚡</div><h3>15-minute weeknights</h3><p>Flag your busiest nights and Plateful fills them with fast, low-dish-count recipes. Slow Sundays get the showstoppers.</p></div>
+      <div class="feature reveal"><div class="icon">👨‍👩‍👧</div><h3>Shared with your people</h3><p>Sync the plan and list with your household. Anyone can add requests, claim a night to cook, or check off groceries.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section id="how" class="how">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">How it works</span>
+      <h2>From zero to planned in five minutes</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><h3>Tell us your tastes</h3><p>A quick quiz covers cuisines you love, ingredients you avoid, how many you're feeding, and how much time you have.</p></div>
+      <div class="step reveal"><h3>Get your weekly plan</h3><p>Every Sunday, a fresh plan lands in your app — breakfasts, lunches, dinners, and snacks, all balanced and varied.</p></div>
+      <div class="step reveal"><h3>Shop, cook, repeat</h3><p>Take the auto-built list to the store, follow step-by-step recipes in cook mode, and rate meals so next week gets even better.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section id="love">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Member love</span>
+      <h2>Weeknight wins, in their words</h2>
+    </div>
+    <div class="quotes">
+      <article class="quote reveal">
+        <div class="stars">★★★★★</div>
+        <p>"I used to spend Sunday dreading the week. Now my plan and grocery list are done before my coffee is. We've cut our takeout spending in half."</p>
+        <footer><span class="face" style="background:#2D6A4F">JM</span><div><b>Jess M.</b><small>Parent of two, Austin</small></div></footer>
+      </article>
+      <article class="quote reveal">
+        <div class="stars">★★★★★</div>
+        <p>"The pantry feature is magic. It noticed I had chickpeas and half a jar of curry paste and planned around them. That's real money not going in the trash."</p>
+        <footer><span class="face" style="background:#EE6C4D">AK</span><div><b>Amara K.</b><small>Grad student, Chicago</small></div></footer>
+      </article>
+      <article class="quote reveal">
+        <div class="stars">★★★★★</div>
+        <p>"My partner and I share the list and split cooking nights. The 'who's making dinner' argument is officially retired from our household."</p>
+        <footer><span class="face" style="background:#6C5B7B">RS</span><div><b>Ravi S.</b><small>Newlywed, Seattle</small></div></footer>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section id="pricing" class="pricing">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Pricing</span>
+      <h2>Less than one takeout order</h2>
+      <p>Start free. Upgrade when you're ready. Every paid plan includes a 14-day trial.</p>
+    </div>
+    <div class="plans">
+      <div class="plan reveal">
+        <h3>Taste</h3>
+        <div class="price">$0<small> / forever</small></div>
+        <ul>
+          <li>1 weekly meal plan</li>
+          <li>Basic grocery list</li>
+          <li>50 starter recipes</li>
+          <li>1 household member</li>
+        </ul>
+        <a href="#download" class="btn btn-ghost">Start free</a>
+      </div>
+      <div class="plan featured reveal">
+        <span class="badge">Most popular</span>
+        <h3>Pro</h3>
+        <div class="price">$6<small> / month</small></div>
+        <ul>
+          <li>Unlimited custom plans</li>
+          <li>Aisle-sorted grocery lists</li>
+          <li>Full pantry tracking</li>
+          <li>All dietary filters</li>
+          <li>1,500+ recipe library</li>
+        </ul>
+        <a href="#download" class="btn btn-primary">Try Pro free</a>
+      </div>
+      <div class="plan reveal">
+        <h3>Family</h3>
+        <div class="price">$10<small> / month</small></div>
+        <ul>
+          <li>Everything in Pro</li>
+          <li>Up to 6 household members</li>
+          <li>Per-person dietary filters</li>
+          <li>Shared lists & cook-night rotation</li>
+        </ul>
+        <a href="#download" class="btn btn-ghost">Try Family free</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">FAQ</span>
+      <h2>Good questions</h2>
+    </div>
+    <div class="faq-list">
+      <details class="reveal"><summary>Do I have to follow the plan exactly?</summary><p>Not at all. Swap any meal, drag dinners between days, or add your own recipes. The plan is a starting point, not a contract — Plateful adjusts your grocery list automatically when you change things.</p></details>
+      <details class="reveal"><summary>What if my household has different diets?</summary><p>Set dietary preferences per person — say, one vegetarian and one gluten-free eater — and Plateful prioritizes meals everyone can share, or suggests simple modifications (like a GF pasta swap) when it can't.</p></details>
+      <details class="reveal"><summary>Can I import my own recipes?</summary><p>Yes. Paste a link from almost any recipe site and Plateful pulls in the ingredients and steps, so your family favorites can live right alongside ours in your weekly plan.</p></details>
+      <details class="reveal"><summary>Does the grocery list work with delivery services?</summary><p>Pro and Family plans can send your list to major grocery delivery services with one tap, or you can shop in-store with the built-in check-off mode.</p></details>
+      <details class="reveal"><summary>Can I cancel anytime?</summary><p>Absolutely — no contracts, no cancellation fees. If you cancel, you keep Pro access until the end of your billing period, and your plans and recipes stay saved on the free tier.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section id="download" style="padding-top:0">
+  <div class="wrap">
+    <div class="cta-banner reveal">
+      <h2>Never answer "what's for dinner?" again.</h2>
+      <p>Join 200,000+ households planning calmer, tastier weeks with Plateful.</p>
+      <a href="#" class="btn btn-primary">Download Plateful free</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="#" class="logo" style="margin-bottom:.8rem"><span class="logo-dot">🍽️</span>Plateful</a>
+        <p style="max-width:22rem;margin-top:.6rem">Meal planning that thinks like a home cook. Made with care in Portland, OR.</p>
+      </div>
+      <div><h4>Product</h4><ul><li><a href="#features">Features</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#">iOS app</a></li><li><a href="#">Android app</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Blog</a></li><li><a href="#">Careers</a></li><li><a href="#">Press kit</a></li></ul></div>
+      <div><h4>Support</h4><ul><li><a href="#faq">FAQ</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul></div>
+    </div>
+    <div class="copyright">
+      <span>© 2025 Plateful, Inc. All rights reserved.</span>
+      <span>Made with 🥕 and good intentions.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  const toggle = document.getElementById('menuToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  // Scroll-reveal animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Animated stat counters
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = +el.dataset.count;
+      const suffix = el.dataset.suffix || '';
+      const duration = 1400;
+      const start = performance.now();
+      const fmt = n => target >= 10000
+        ? (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M'
+        : Math.round(n).toLocaleString();
+      (function tick(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = fmt(target * eased) + (p === 1 ? suffix : '');
+        if (p < 1) requestAnimationFrame(tick);
+      })(start);
+      statObserver.unobserve(el);
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('[data-count]').forEach(el => statObserver.observe(el));
+
+  // Signup form feedback
+  document.getElementById('signupForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    btn.textContent = "You're on the list! 🎉";
+    btn.style.background = '#2D6A4F';
+    e.target.querySelector('input').value = '';
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <!-- Palette: cream #F2E8CF, orange #E07A2F, navy #23395B -->
+  <defs>
+    <g id="spokes" stroke="#23395B" stroke-width="1">
+      <line x1="-42" y1="0" x2="42" y2="0"/>
+      <line x1="-42" y1="0" x2="42" y2="0" transform="rotate(30)"/>
+      <line x1="-42" y1="0" x2="42" y2="0" transform="rotate(60)"/>
+      <line x1="-42" y1="0" x2="42" y2="0" transform="rotate(90)"/>
+      <line x1="-42" y1="0" x2="42" y2="0" transform="rotate(120)"/>
+      <line x1="-42" y1="0" x2="42" y2="0" transform="rotate(150)"/>
+      <line x1="-42" y1="0" x2="42" y2="0" transform="rotate(15)"/>
+      <line x1="-42" y1="0" x2="42" y2="0" transform="rotate(45)"/>
+      <line x1="-42" y1="0" x2="42" y2="0" transform="rotate(75)"/>
+      <line x1="-42" y1="0" x2="42" y2="0" transform="rotate(105)"/>
+      <line x1="-42" y1="0" x2="42" y2="0" transform="rotate(135)"/>
+      <line x1="-42" y1="0" x2="42" y2="0" transform="rotate(165)"/>
+    </g>
+    <g id="wheel">
+      <circle r="45" fill="none" stroke="#23395B" stroke-width="6"/>
+      <circle r="45" fill="none" stroke="#F2E8CF" stroke-width="1" stroke-dasharray="3 5"/>
+      <circle r="40" fill="none" stroke="#23395B" stroke-width="1.5"/>
+      <use href="#spokes"/>
+      <circle r="5" fill="#E07A2F" stroke="#23395B" stroke-width="1.5"/>
+      <circle r="1.5" fill="#23395B"/>
+    </g>
+  </defs>
+
+  <!-- Sky -->
+  <rect x="0" y="0" width="400" height="300" fill="#F2E8CF"/>
+
+  <!-- Sun -->
+  <g transform="translate(340 58)" stroke="#E07A2F" stroke-width="3" stroke-linecap="round">
+    <line x1="0" y1="-36" x2="0" y2="-46"/>
+    <line x1="0" y1="-36" x2="0" y2="-46" transform="rotate(30)"/>
+    <line x1="0" y1="-36" x2="0" y2="-46" transform="rotate(60)"/>
+    <line x1="0" y1="-36" x2="0" y2="-46" transform="rotate(90)"/>
+    <line x1="0" y1="-36" x2="0" y2="-46" transform="rotate(120)"/>
+    <line x1="0" y1="-36" x2="0" y2="-46" transform="rotate(150)"/>
+    <line x1="0" y1="-36" x2="0" y2="-46" transform="rotate(180)"/>
+    <line x1="0" y1="-36" x2="0" y2="-46" transform="rotate(210)"/>
+    <line x1="0" y1="-36" x2="0" y2="-46" transform="rotate(240)"/>
+    <line x1="0" y1="-36" x2="0" y2="-46" transform="rotate(270)"/>
+    <line x1="0" y1="-36" x2="0" y2="-46" transform="rotate(300)"/>
+    <line x1="0" y1="-36" x2="0" y2="-46" transform="rotate(330)"/>
+    <circle r="28" fill="#E07A2F" stroke="none"/>
+    <circle r="20" fill="none" stroke="#F2E8CF" stroke-width="1.5" stroke-dasharray="4 4"/>
+  </g>
+
+  <!-- Clouds (navy silhouettes under cream = outline only) -->
+  <g>
+    <g fill="#23395B">
+      <ellipse cx="60" cy="50" rx="34" ry="13"/>
+      <circle cx="48" cy="42" r="15"/>
+      <circle cx="70" cy="36" r="18"/>
+    </g>
+    <g fill="#F2E8CF">
+      <ellipse cx="60" cy="50" rx="32" ry="11"/>
+      <circle cx="48" cy="42" r="13"/>
+      <circle cx="70" cy="36" r="16"/>
+    </g>
+    <g fill="#23395B">
+      <ellipse cx="270" cy="30" rx="26" ry="10"/>
+      <circle cx="262" cy="24" r="11"/>
+      <circle cx="279" cy="21" r="13"/>
+    </g>
+    <g fill="#F2E8CF">
+      <ellipse cx="270" cy="30" rx="24" ry="8"/>
+      <circle cx="262" cy="24" r="9"/>
+      <circle cx="279" cy="21" r="11"/>
+    </g>
+    <g fill="#23395B">
+      <ellipse cx="340" cy="135" rx="30" ry="10"/>
+      <circle cx="330" cy="128" r="12"/>
+      <circle cx="350" cy="125" r="14"/>
+    </g>
+    <g fill="#F2E8CF">
+      <ellipse cx="340" cy="135" rx="28" ry="8"/>
+      <circle cx="330" cy="128" r="10"/>
+      <circle cx="350" cy="125" r="12"/>
+    </g>
+  </g>
+
+  <!-- Ground -->
+  <rect x="0" y="275" width="400" height="25" fill="#23395B"/>
+  <g fill="#F2E8CF">
+    <rect x="20" y="285" width="30" height="3"/>
+    <rect x="160" y="290" width="40" height="3"/>
+    <rect x="300" y="284" width="35" height="3"/>
+  </g>
+
+  <!-- Motion lines and dust -->
+  <g stroke="#23395B" stroke-width="2.5" stroke-linecap="round">
+    <line x1="40" y1="200" x2="72" y2="200"/>
+    <line x1="25" y1="220" x2="70" y2="220"/>
+    <line x1="45" y1="240" x2="76" y2="240"/>
+  </g>
+  <g fill="#E07A2F">
+    <circle cx="80" cy="268" r="5"/>
+    <circle cx="68" cy="262" r="3.5"/>
+    <circle cx="58" cy="270" r="4"/>
+    <circle cx="92" cy="263" r="2.5"/>
+  </g>
+
+  <!-- Bike + rider, tilted back for the wheelie around the rear axle -->
+  <g transform="rotate(-17 130 230)">
+
+    <!-- Wheels -->
+    <use href="#wheel" x="130" y="230"/>
+    <use href="#wheel" x="290" y="230"/>
+
+    <!-- Chain: chainring, cog, chain runs -->
+    <circle cx="130" cy="230" r="8" fill="none" stroke="#E07A2F" stroke-width="3"/>
+    <line x1="200" y1="219" x2="130" y2="222" stroke="#23395B" stroke-width="2.5" stroke-dasharray="3 1.5"/>
+    <line x1="200" y1="251" x2="130" y2="238" stroke="#23395B" stroke-width="2.5" stroke-dasharray="3 1.5"/>
+    <circle cx="200" cy="235" r="16" fill="none" stroke="#23395B" stroke-width="3" stroke-dasharray="2 2"/>
+    <circle cx="200" cy="235" r="13" fill="#E07A2F" stroke="#23395B" stroke-width="1.5"/>
+    <circle cx="200" cy="235" r="6" fill="#F2E8CF" stroke="#23395B" stroke-width="1.5"/>
+
+    <!-- Back crank + pedal -->
+    <line x1="200" y1="235" x2="186" y2="212" stroke="#23395B" stroke-width="4" stroke-linecap="round"/>
+    <rect x="178" y="208" width="16" height="6" rx="1.5" fill="#E07A2F" stroke="#23395B" stroke-width="1.5"/>
+
+    <!-- Frame -->
+    <g stroke="#23395B" stroke-width="5" stroke-linecap="round" fill="none">
+      <line x1="130" y1="230" x2="200" y2="235"/>
+      <line x1="130" y1="230" x2="185" y2="165"/>
+      <line x1="200" y1="235" x2="185" y2="165"/>
+      <line x1="185" y1="165" x2="265" y2="162"/>
+      <line x1="200" y1="235" x2="270" y2="185"/>
+      <line x1="263" y1="155" x2="272" y2="190"/>
+      <line x1="272" y1="190" x2="290" y2="230"/>
+    </g>
+    <g stroke="#E07A2F" stroke-width="1.5" stroke-linecap="round">
+      <line x1="195" y1="166" x2="255" y2="164"/>
+      <line x1="210" y1="228" x2="262" y2="191"/>
+    </g>
+    <!-- Seat post, saddle -->
+    <rect x="182" y="152" width="5" height="14" fill="#23395B"/>
+    <ellipse cx="180" cy="152" rx="16" ry="5" fill="#23395B"/>
+    <!-- Stem + handlebar -->
+    <line x1="263" y1="155" x2="258" y2="140" stroke="#23395B" stroke-width="4" stroke-linecap="round"/>
+    <line x1="258" y1="140" x2="244" y2="138" stroke="#23395B" stroke-width="4" stroke-linecap="round"/>
+    <rect x="236" y="134" width="12" height="8" rx="3" fill="#E07A2F" stroke="#23395B" stroke-width="1.5"/>
+
+    <!-- Pelican: back leg -->
+    <g stroke="#E07A2F" stroke-width="4" stroke-linecap="round">
+      <line x1="182" y1="140" x2="205" y2="178"/>
+      <line x1="205" y1="178" x2="187" y2="208"/>
+    </g>
+    <ellipse cx="187" cy="207" rx="9" ry="3.5" fill="#E07A2F" stroke="#23395B" stroke-width="1.2"/>
+
+    <!-- Tail feathers -->
+    <g fill="#F2E8CF" stroke="#23395B" stroke-width="1.5">
+      <ellipse cx="140" cy="135" rx="20" ry="6" transform="rotate(10 140 135)"/>
+      <ellipse cx="143" cy="128" rx="20" ry="6" transform="rotate(-5 143 128)"/>
+      <ellipse cx="145" cy="142" rx="18" ry="5.5" transform="rotate(22 145 142)"/>
+    </g>
+
+    <!-- Body -->
+    <ellipse cx="185" cy="125" rx="42" ry="27" transform="rotate(-12 185 125)" fill="#F2E8CF" stroke="#23395B" stroke-width="2"/>
+    <!-- Chest feathers -->
+    <g fill="none" stroke="#23395B" stroke-width="1">
+      <circle cx="214" cy="120" r="4"/>
+      <circle cx="218" cy="128" r="4"/>
+      <circle cx="212" cy="134" r="4"/>
+      <circle cx="220" cy="137" r="3.5"/>
+      <circle cx="206" cy="141" r="3.5"/>
+    </g>
+
+    <!-- Neck -->
+    <ellipse cx="220" cy="90" rx="9" ry="26" transform="rotate(22 220 90)" fill="#F2E8CF" stroke="#23395B" stroke-width="2"/>
+    <ellipse cx="214" cy="104" rx="10" ry="8" fill="#F2E8CF"/>
+    <g fill="none" stroke="#23395B" stroke-width="0.8">
+      <circle cx="221" cy="86" r="2.5"/>
+      <circle cx="217" cy="94" r="2.5"/>
+      <circle cx="226" cy="78" r="2.5"/>
+    </g>
+
+    <!-- Head -->
+    <circle cx="232" cy="64" r="15" fill="#F2E8CF" stroke="#23395B" stroke-width="2"/>
+    <!-- Crest -->
+    <g fill="#E07A2F" stroke="#23395B" stroke-width="1">
+      <ellipse cx="224" cy="49" rx="7" ry="3" transform="rotate(-35 224 49)"/>
+      <ellipse cx="219" cy="53" rx="6" ry="2.5" transform="rotate(-20 219 53)"/>
+    </g>
+
+    <!-- Pouch + beak -->
+    <ellipse cx="268" cy="79" rx="29" ry="10" transform="rotate(14 268 79)" fill="#E07A2F" stroke="#23395B" stroke-width="1.5"/>
+    <g stroke="#23395B" stroke-width="0.8" fill="none">
+      <ellipse cx="262" cy="80" rx="12" ry="4" transform="rotate(14 262 80)"/>
+    </g>
+    <ellipse cx="270" cy="70" rx="33" ry="5" transform="rotate(14 270 70)" fill="#E07A2F" stroke="#23395B" stroke-width="1.5"/>
+    <circle cx="301" cy="78" r="3.5" fill="#E07A2F" stroke="#23395B" stroke-width="1.5"/>
+    <line x1="246" y1="65" x2="292" y2="76" stroke="#23395B" stroke-width="0.8"/>
+
+    <!-- Eye -->
+    <circle cx="236" cy="60" r="4.5" fill="#23395B"/>
+    <circle cx="237.5" cy="58.5" r="1.5" fill="#F2E8CF"/>
+    <ellipse cx="236" cy="54" rx="6" ry="1.5" fill="#23395B" transform="rotate(-10 236 54)"/>
+
+    <!-- Wing with feather groups, reaching for the handlebar -->
+    <g>
+      <ellipse cx="205" cy="122" rx="36" ry="15" transform="rotate(18 205 122)" fill="#F2E8CF" stroke="#23395B" stroke-width="2"/>
+      <!-- Coverts: scalloped rows -->
+      <g fill="#F2E8CF" stroke="#23395B" stroke-width="1">
+        <ellipse cx="184" cy="113" rx="6" ry="4"/>
+        <ellipse cx="194" cy="116" rx="6" ry="4"/>
+        <ellipse cx="204" cy="119" rx="6" ry="4"/>
+        <ellipse cx="214" cy="123" rx="6" ry="4"/>
+        <ellipse cx="189" cy="121" rx="6" ry="4"/>
+        <ellipse cx="199" cy="124" rx="6" ry="4"/>
+        <ellipse cx="209" cy="128" rx="6" ry="4"/>
+        <ellipse cx="219" cy="131" rx="5.5" ry="3.5"/>
+      </g>
+      <!-- Primaries -->
+      <g fill="#23395B">
+        <ellipse cx="234" cy="134" rx="12" ry="3" transform="rotate(25 234 134)"/>
+        <ellipse cx="232" cy="139" rx="12" ry="3" transform="rotate(35 232 139)"/>
+        <ellipse cx="229" cy="143" rx="11" ry="2.8" transform="rotate(45 229 143)"/>
+        <ellipse cx="225" cy="146" rx="10" ry="2.5" transform="rotate(55 225 146)"/>
+      </g>
+      <!-- Secondaries -->
+      <g fill="none" stroke="#23395B" stroke-width="1.2">
+        <line x1="180" y1="130" x2="196" y2="138"/>
+        <line x1="190" y1="133" x2="206" y2="141"/>
+        <line x1="200" y1="136" x2="215" y2="143"/>
+      </g>
+    </g>
+
+    <!-- Front leg -->
+    <g stroke="#E07A2F" stroke-width="4" stroke-linecap="round">
+      <line x1="195" y1="145" x2="222" y2="200"/>
+      <line x1="222" y1="200" x2="212" y2="254"/>
+    </g>
+    <circle cx="222" cy="200" r="3" fill="#E07A2F" stroke="#23395B" stroke-width="1"/>
+
+    <!-- Front crank + pedal + webbed foot -->
+    <line x1="200" y1="235" x2="213" y2="258" stroke="#23395B" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="200" cy="235" r="3" fill="#23395B"/>
+    <rect x="205" y="255" width="17" height="6" rx="1.5" fill="#E07A2F" stroke="#23395B" stroke-width="1.5"/>
+    <ellipse cx="215" cy="253" rx="10" ry="4" fill="#E07A2F" stroke="#23395B" stroke-width="1.2"/>
+    <g stroke="#23395B" stroke-width="0.8">
+      <line x1="210" y1="253" x2="223" y2="251"/>
+      <line x1="210" y1="253" x2="223" y2="255"/>
+    </g>
+  </g>
+</svg>

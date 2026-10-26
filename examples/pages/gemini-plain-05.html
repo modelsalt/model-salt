@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nourish - Smart Meal Planning Made Simple</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind Config for Custom Colors/Fonts -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            light: '#ecfdf5', // emerald 50
+                            DEFAULT: '#10b981', // emerald 500
+                            dark: '#047857', // emerald 700
+                        },
+                        accent: {
+                            DEFAULT: '#f97316', // orange 500
+                            hover: '#ea580c', // orange 600
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom styles for subtle animations */
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 antialiased bg-white selection:bg-brand selection:text-white">
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-100 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+                    <div class="w-10 h-10 rounded-xl bg-brand flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-brand/30">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <span class="font-bold text-2xl tracking-tight text-gray-900">Nourish</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#features" class="text-gray-600 hover:text-brand font-medium transition">Features</a>
+                    <a href="#how-it-works" class="text-gray-600 hover:text-brand font-medium transition">How it Works</a>
+                    <a href="#testimonials" class="text-gray-600 hover:text-brand font-medium transition">Reviews</a>
+                    <a href="#pricing" class="text-gray-600 hover:text-brand font-medium transition">Pricing</a>
+                    <a href="#cta" class="bg-gray-900 hover:bg-gray-800 text-white px-5 py-2.5 rounded-full font-medium transition shadow-md hover:shadow-lg">
+                        Get the App
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-gray-900 focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-4 pt-2 pb-6 space-y-3 shadow-xl">
+            <a href="#features" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-brand hover:bg-brand-light">Features</a>
+            <a href="#how-it-works" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-brand hover:bg-brand-light">How it Works</a>
+            <a href="#testimonials" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-brand hover:bg-brand-light">Reviews</a>
+            <a href="#pricing" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-brand hover:bg-brand-light">Pricing</a>
+            <a href="#cta" class="block w-full text-center mt-4 bg-brand text-white px-5 py-3 rounded-xl font-medium shadow-md">Download Free</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Text Content -->
+                <div class="lg:col-span-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-100 text-accent font-semibold text-sm mb-6">
+                        <span class="flex h-2 w-2 rounded-full bg-accent"></span>
+                        #1 App for Stress-Free Dinners
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 tracking-tight leading-[1.15] mb-6">
+                        Stop wondering <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand to-teal-600">"What's for dinner?"</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl text-gray-600 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Get personalized weekly meal plans, automated grocery lists, and delicious 30-minute recipes tailored to your diet and budget.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#cta" class="bg-accent hover:bg-accent-hover text-white font-semibold px-8 py-4 rounded-full shadow-lg shadow-accent/30 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2 text-lg">
+                            Start 14-Day Free Trial <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </a>
+                        <a href="#how-it-works" class="bg-white hover:bg-gray-50 text-gray-700 font-semibold px-8 py-4 rounded-full border border-gray-200 transition flex items-center justify-center gap-2 text-lg">
+                            <i class="fa-solid fa-play text-brand"></i> See How It Works
+                        </a>
+                    </div>
+
+                    <div class="mt-10 flex items-center justify-center lg:justify-start gap-4 text-sm text-gray-500 font-medium">
+                        <div class="flex -space-x-2">
+                            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="User">
+                            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80" alt="User">
+                            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" alt="User">
+                        </div>
+                        <div>
+                            <span class="text-yellow-400"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                            <span class="text-gray-800 font-bold">4.9/5</span> from 10,000+ happy cooks
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image/Visual -->
+                <div class="lg:col-span-6 relative">
+                    <!-- Decorative background blob -->
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-light rounded-full blur-3xl -z-10 opacity-70"></div>
+                    
+                    <div class="relative mx-auto max-w-md lg:max-w-none float-animation">
+                        <img src="https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&w=1000&q=80" alt="Healthy Food Bowl" class="rounded-3xl shadow-2xl border-8 border-white object-cover h-[500px] w-full">
+                        
+                        <!-- Floating UI Card 1 -->
+                        <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-gray-50 flex items-center gap-4">
+                            <div class="bg-green-100 p-3 rounded-xl text-brand text-xl">
+                                <i class="fa-solid fa-check-double"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-400 font-semibold uppercase">Grocery List</p>
+                                <p class="text-gray-800 font-bold">Auto-sorted by aisle!</p>
+                            </div>
+                        </div>
+
+                        <!-- Floating UI Card 2 -->
+                        <div class="absolute top-8 -right-6 bg-white p-4 rounded-2xl shadow-xl border border-gray-50 flex items-center gap-3">
+                            <div class="bg-orange-100 p-2.5 rounded-full text-accent">
+                                <i class="fa-solid fa-fire"></i>
+                            </div>
+                            <div class="pr-2">
+                                <p class="text-xs text-gray-400 font-medium">Prep time</p>
+                                <p class="text-sm font-bold text-gray-800">Under 20 mins</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS / SOCIAL PROOF -->
+    <section class="border-y border-gray-100 bg-gray-50/50 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <p class="text-3xl font-extrabold text-brand">2M+</p>
+                    <p class="text-sm text-gray-500 font-medium mt-1">Meals Planned</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-extrabold text-brand">$400</p>
+                    <p class="text-sm text-gray-500 font-medium mt-1">Avg. Monthly Savings</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-extrabold text-brand">0%</p>
+                    <p class="text-sm text-gray-500 font-medium mt-1">Food Waste Goal</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-extrabold text-brand">4.9★</p>
+                    <p class="text-sm text-gray-500 font-medium mt-1">App Store Rating</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section id="features" class="py-20 lg:py-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-brand font-bold tracking-wide uppercase text-sm mb-2">Features</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-gray-900">Everything you need to eat better</h3>
+                <p class="mt-4 text-lg text-gray-600">We take the cognitive load out of cooking so you can actually enjoy your time in the kitchen.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-lg shadow-gray-100/50 hover:shadow-xl transition group">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-light text-brand flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">AI-Powered Personalization</h4>
+                    <p class="text-gray-600 leading-relaxed">Keto? Vegan? Picky kids? Gluten-free? Tell us what you like and we'll craft the perfect weekly menu in seconds.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-lg shadow-gray-100/50 hover:shadow-xl transition group">
+                    <div class="w-14 h-14 rounded-2xl bg-orange-50 text-accent flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">1-Click Grocery Delivery</h4>
+                    <p class="text-gray-600 leading-relaxed">Your meal plan automatically generates a categorized shopping list. Export it to Instacart, Walmart, or Amazon Fresh instantly.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-lg shadow-gray-100/50 hover:shadow-xl transition group">
+                    <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-500 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">Zero Food Waste</h4>
+                    <p class="text-gray-600 leading-relaxed">Our smart algorithm overlaps ingredients across recipes. Buy one bunch of cilantro, and use it all week long.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how-it-works" class="py-20 bg-brand-light/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-brand font-bold tracking-wide uppercase text-sm mb-2">Workflow</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-gray-900">How Nourish Works</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+                <!-- Connecting Line (Desktop) -->
+                <div class="hidden md:block absolute top-12 left-1/6 right-1/6 h-0.5 bg-brand/20 -z-10"></div>
+
+                <!-- Step 1 -->
+                <div class="text-center relative">
+                    <div class="w-24 h-24 mx-auto bg-white rounded-full shadow-xl flex items-center justify-center border-4 border-brand-light mb-6">
+                        <span class="text-3xl font-extrabold text-brand">1</span>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-2">Set Your Preferences</h4>
+                    <p class="text-gray-600">Select your dietary needs, allergies, household size, and how much time you want to spend cooking.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="text-center relative">
+                    <div class="w-24 h-24 mx-auto bg-white rounded-full shadow-xl flex items-center justify-center border-4 border-brand-light mb-6">
+                        <span class="text-3xl font-extrabold text-brand">2</span>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-2">Shop Smarter</h4>
+                    <p class="text-gray-600">Check off what you already have in your pantry and take your auto-sorted list to the store (or order online).</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="text-center relative">
+                    <div class="w-24 h-24 mx-auto bg-white rounded-full shadow-xl flex items-center justify-center border-4 border-brand-light mb-6">
+                        <span class="text-3xl font-extrabold text-brand">3</span>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-2">Cook with Confidence</h4>
+                    <p class="text-gray-600">Follow our step-by-step, hands-free cooking mode with built-in timers and video guides.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="py-20 lg:py-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-16">Loved by busy people everywhere</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-gray-50 p-8 rounded-3xl">
+                    <div class="text-yellow-400 mb-4 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 italic">"Nourish literally saved my sanity. With two kids and a full-time job, deciding what to cook at 5 PM was torture. Now I don't even think about it, I just follow the app."</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=100&q=80" alt="Sarah" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <h5 class="font-bold text-gray-900">Sarah Jenkins</h5>
+                            <p class="text-xs text-gray-500">Working Mom of 2</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-gray-50 p-8 rounded-3xl">
+                    <div class="text-yellow-400 mb-4 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 italic">"My grocery bill dropped by $150 in the first month. I used to buy random ingredients and let them rot. Nourish makes sure I use everything I buy."</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80" alt="Marcus" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <h5 class="font-bold text-gray-900">Marcus Chen</h5>
+                            <p class="text-xs text-gray-500">Software Engineer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-gray-50 p-8 rounded-3xl">
+                    <div class="text-yellow-400 mb-4 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 italic">"I didn't know how to cook before downloading this. The recipes are actually easy, and they taste like restaurant food. I've lost 10lbs just by not ordering takeout!"</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=100&q=80" alt="David" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <h5 class="font-bold text-gray-900">David Ross</h5>
+                            <p class="text-xs text-gray-500">Recent Grad</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="py-20 bg-gray-900 text-white rounded-t-[3rem]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-brand font-bold tracking-wide uppercase text-sm mb-2">Pricing</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold">Costs less than one takeout meal</h3>
+                <p class="mt-4 text-gray-400 text-lg">Start with a 14-day free trial. Cancel anytime with one click.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Basic Plan -->
+                <div class="bg-gray-800 p-8 rounded-3xl border border-gray-700 flex flex-col justify-between">
+                    <div>
+                        <h4 class="text-xl font-semibold text-gray-300">Monthly</h4>
+                        <div class="mt-4 flex items-baseline text-5xl font-extrabold">
+                            $7.99
+                            <span class="ml-1 text-xl font-medium text-gray-400">/mo</span>
+                        </div>
+                        <p class="mt-2 text-sm text-gray-400">Billed monthly.</p>
+
+                        <ul class="mt-8 space-y-4">
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> Unlimited Meal Plans</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> Automated Grocery Lists</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> Access to 5,000+ Recipes</li>
+                        </ul>
+                    </div>
+                    <a href="#cta" class="mt-8 block w-full py-4 px-6 border border-gray-600 rounded-xl text-center font-semibold hover:bg-gray-700 transition">Start Free Trial</a>
+                </div>
+
+                <!-- Pro Plan (Highlighted) -->
+                <div class="bg-gradient-to-b from-brand-dark to-gray-800 p-8 rounded-3xl border-2 border-brand relative flex flex-col justify-between shadow-2xl shadow-brand/20">
+                    <div class="absolute top-0 right-8 -translate-y-1/2 bg-brand text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                        Most Popular • Save 50%
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold text-brand-light">Annual</h4>
+                        <div class="mt-4 flex items-baseline text-5xl font-extrabold">
+                            $3.99
+                            <span class="ml-1 text-xl font-medium text-gray-300">/mo</span>
+                        </div>
+                        <p class="mt-2 text-sm text-brand-light">Billed as $47.88 per year.</p>
+
+                        <ul class="mt-8 space-y-4">
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> <b>Everything in Monthly</b></li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> Macro & Calorie Tracking</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> Grocery Delivery Integration</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> Family Sharing (up to 4 users)</li>
+                        </ul>
+                    </div>
+                    <a href="#cta" class="mt-8 block w-full py-4 px-6 bg-brand hover:bg-emerald-400 text-white rounded-xl text-center font-bold transition shadow-lg">Start 14-Day Free Trial</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section id="cta" class="bg-gray-900 pt-10 pb-24 border-t border-gray-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-accent rounded-3xl p-8 sm:p-16 text-center text-white shadow-2xl relative overflow-hidden">
+                <!-- Decorative circles -->
+                <div class="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-white opacity-10"></div>
+                <div class="absolute -bottom-24 -left-24 w-64 h-64 rounded-full bg-white opacity-10"></div>
+
+                <h2 class="text-3xl sm:text-5xl font-extrabold mb-6 relative z-10">Ready to take back your evenings?</h2>
+                <p class="text-lg sm:text-xl text-orange-100 mb-10 max-w-2xl mx-auto relative z-10">Join over 500,000 people who are saving time, money, and stress every single week with Nourish.</p>
+                
+                <div class="flex flex-col sm:flex-row justify-center gap-4 relative z-10">
+                    <button class="bg-gray-900 hover:bg-black text-white px-6 py-3.5 rounded-xl flex items-center justify-center gap-3 transition transform hover:scale-105 shadow-lg">
+                        <i class="fa-brands fa-apple text-3xl"></i>
+                        <div class="text-left">
+                            <div class="text-[10px] uppercase tracking-wider text-gray-300">Download on the</div>
+                            <div class="text-base font-bold leading-tight">App Store</div>
+                        </div>
+                    </button>
+                    <button class="bg-gray-900 hover:bg-black text-white px-6 py-3.5 rounded-xl flex items-center justify-center gap-3 transition transform hover:scale-105 shadow-lg">
+                        <i class="fa-brands fa-google-play text-2xl"></i>
+                        <div class="text-left">
+                            <div class="text-[10px] uppercase tracking-wider text-gray-300">Get it on</div>
+                            <div class="text-base font-bold leading-tight">Google Play</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-950 text-gray-400 py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-brand flex items-center justify-center text-white text-sm font-bold">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <span class="font-bold text-xl text-white">Nourish</span>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-6 text-sm">
+                <a href="#" class="hover:text-white transition">About Us</a>
+                <a href="#" class="hover:text-white transition">Recipe Index</a>
+                <a href="#" class="hover:text-white transition">Blog</a>
+                <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition">Terms of Service</a>
+            </div>
+
+            <div class="flex gap-4 text-lg">
+                <a href="#" class="hover:text-brand transition"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-brand transition"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="#" class="hover:text-brand transition"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" class="hover:text-brand transition"><i class="fa-brands fa-pinterest"></i></a>
+            </div>
+        </div>
+        <div class="text-center text-xs text-gray-600 mt-8">
+            &copy; 2023 Nourish App Inc. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Simple JS for Mobile Menu -->
+    <script>
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

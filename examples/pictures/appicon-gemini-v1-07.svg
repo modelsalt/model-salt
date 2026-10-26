@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="100%" height="100%">
+  <defs>
+    <!-- Strict Square Clip Path (No Rounded Borders) -->
+    <clipPath id="sharp-square">
+      <rect x="0" y="0" width="1024" height="1024" rx="0" ry="0" />
+    </clipPath>
+
+    <!-- Background Sky Gradient -->
+    <linearGradient id="sky-base" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38C6F4" />
+      <stop offset="50%" stop-color="#0093E9" />
+      <stop offset="100%" stop-color="#0052B4" />
+    </linearGradient>
+
+    <!-- Full-Bleed Overlapping Plane Gradients -->
+    <linearGradient id="plane-left" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.28" />
+      <stop offset="100%" stop-color="#80D8FF" stop-opacity="0.05" />
+    </linearGradient>
+
+    <linearGradient id="plane-right" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#002B66" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#00B4D8" stop-opacity="0.1" />
+    </linearGradient>
+
+    <linearGradient id="plane-bottom" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.04" />
+    </linearGradient>
+
+    <!-- Warm Sunny Yellow Gradients -->
+    <linearGradient id="sun-core" x1="25%" y1="15%" x2="75%" y2="85%">
+      <stop offset="0%" stop-color="#FFFDE7" />
+      <stop offset="25%" stop-color="#FFEE58" />
+      <stop offset="70%" stop-color="#FFB300" />
+      <stop offset="100%" stop-color="#FF6F00" />
+    </linearGradient>
+
+    <radialGradient id="sun-corona" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFF59D" stop-opacity="0.6" />
+      <stop offset="55%" stop-color="#FFC107" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#FF8F00" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Glassmorphic Cumulus Cloud Gradients -->
+    <linearGradient id="cloud-glass-body" x1="30%" y1="15%" x2="70%" y2="95%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.88" />
+      <stop offset="55%" stop-color="#F0F8FF" stop-opacity="0.68" />
+      <stop offset="100%" stop-color="#B3E5FC" stop-opacity="0.48" />
+    </linearGradient>
+
+    <linearGradient id="cloud-glass-rim" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95" />
+      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#81D4FA" stop-opacity="0.25" />
+    </linearGradient>
+
+    <linearGradient id="plane-border" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.5" />
+      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.4" />
+    </linearGradient>
+
+    <!-- Soft Glass Drop Shadow -->
+    <filter id="cloud-depth" x="-15%" y="-15%" width="130%" height="135%">
+      <feDropShadow dx="0" dy="28" stdDeviation="24" flood-color="#002966" flood-opacity="0.32" />
+    </filter>
+
+    <!-- Subsurface Sun Refraction Blur (Seen Through the Cloud) -->
+    <filter id="sun-refraction" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="32" />
+    </filter>
+
+    <!-- Classic Standard Cumulus Silhouette Path -->
+    <path id="cumulus-shape" d="
+      M 270 760
+      L 770 760
+      A 125 125 0 0 0 895 635
+      A 125 125 0 0 0 785 511
+      A 145 145 0 0 0 645 385
+      A 145 145 0 0 0 583 399
+      A 195 195 0 0 0 218 480
+      A 145 145 0 0 0 125 615
+      A 145 145 0 0 0 270 760
+      Z" />
+
+    <clipPath id="cloud-clip">
+      <use href="#cumulus-shape" />
+    </clipPath>
+  </defs>
+
+  <!-- Main Square Canvas (Strict 0px Corner Radius) -->
+  <g clip-path="url(#sharp-square)">
+    
+    <!-- 1. Base Daytime Sky -->
+    <rect x="0" y="0" width="1024" height="1024" fill="url(#sky-base)" />
+
+    <!-- 2. Full-Bleed Overlapping Atmospheric Glass Planes (Back) -->
+    <!-- Upper-Left Refracting Sky Plane -->
+    <polygon points="0,0 1024,0 1024,240 0,680" fill="url(#plane-left)" />
+    <line x1="0" y1="680" x2="1024" y2="240" stroke="url(#plane-border)" stroke-width="2" />
+
+    <!-- Mid-Right Refracting Sky Plane -->
+    <polygon points="1024,0 1024,1024 0,1024 0,420" fill="url(#plane-right)" />
+    <line x1="0" y1="420" x2="1024" y2="0" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="2" />
+
+    <!-- 3. Classic Sun Motif (Upper Right) -->
+    <!-- Outer Warm Glow -->
+    <circle cx="670" cy="340" r="360" fill="url(#sun-corona)" />
+
+    <!-- Translucent Glassmorphic Halo Ring (Classic Signage Ray Motif) -->
+    <circle cx="670" cy="340" r="245" 
+            fill="#FFFDE7" fill-opacity="0.14" 
+            stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="2" />
+
+    <!-- Core Sun Disc -->
+    <circle cx="670" cy="340" r="190" 
+            fill="url(#sun-core)" 
+            stroke="#FFF9C4" stroke-width="3" stroke-opacity="0.8" />
+
+    <!-- 4. Full-Bleed Foreground Glass Plane (Bisecting Behind the Cloud) -->
+    <polygon points="0,630 1024,810 1024,1024 0,1024" fill="url(#plane-bottom)" />
+    <line x1="0" y1="630" x2="1024" y2="810" stroke="url(#plane-border)" stroke-width="2.5" />
+
+    <!-- 5. Semi-Translucent Glassmorphic Cumulus Cloud (Center-Left) -->
+    <!-- Cloud Shadow + Base Frosted Body -->
+    <use href="#cumulus-shape" fill="url(#cloud-glass-body)" filter="url(#cloud-depth)" />
+
+    <!-- Internal Glass Refraction Effects (Clipped to Cloud Silhouette) -->
+    <g clip-path="url(#cloud-clip)">
+      <!-- Diffused Warm Sunlight Bleed Through the Frosted Cloud -->
+      <circle cx="670" cy="340" r="215" fill="#FFB300" fill-opacity="0.55" filter="url(#sun-refraction)" />
+      <circle cx="670" cy="340" r="165" fill="#FFF176" fill-opacity="0.5" filter="url(#sun-refraction)" />
+
+      <!-- Full-Bleed Horizon Line Refracting Inside the Cloud -->
+      <polygon points="0,615 1024,795 1024,1024 0,1024" fill="#FFFFFF" fill-opacity="0.16" />
+
+      <!-- Inner Volume Cushion Highlight -->
+      <path d="M 218 480 A 195 195 0 0 1 583 399 A 145 145 0 0 1 785 511" 
+            fill="none" stroke="#FFFFFF" stroke-width="28" stroke-linecap="round" 
+            opacity="0.35" filter="url(#sun-refraction)" />
+    </g>
+
+    <!-- Crisp Specular Glass Rim Border -->
+    <use href="#cumulus-shape" fill="none" stroke="url(#cloud-glass-rim)" stroke-width="5" />
+
+    <!-- 6. Full-Bleed Foreground Corner Glass Shard (Bottom-Left Anchor) -->
+    <polygon points="0,840 520,1024 0,1024" fill="#FFFFFF" fill-opacity="0.12" />
+    <line x1="0" y1="840" x2="520" y2="1024" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="2" />
+
+    <!-- 7. Sharp Outer Square Frame Highlight (Enforces 90-Degree Edges) -->
+    <rect x="2" y="2" width="1020" height="1020" fill="none" stroke="#FFFFFF" stroke-opacity="0.25" stroke-width="4" />
+  </g>
+</svg>

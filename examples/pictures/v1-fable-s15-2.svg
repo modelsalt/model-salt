@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Sky -->
+  <rect x="0" y="0" width="400" height="200" fill="#bcd9ee"/>
+  <!-- Distant ground strip -->
+  <rect x="0" y="190" width="400" height="20" fill="#9fbf7a"/>
+
+  <!-- Road (receding toward horizon) -->
+  <polygon points="150,205 250,205 400,400 0,400" fill="#5a5d63"/>
+  <!-- Road edge lines -->
+  <polygon points="152,205 157,205 12,400 0,400" fill="#e8e8e8"/>
+  <polygon points="243,205 248,205 400,400 388,400" fill="#e8e8e8"/>
+  <!-- Center lane markings, growing toward viewer -->
+  <rect x="198" y="212" width="4" height="10" fill="#f2d35b"/>
+  <rect x="197" y="232" width="6" height="16" fill="#f2d35b"/>
+  <rect x="195" y="262" width="10" height="24" fill="#f2d35b"/>
+  <rect x="192" y="304" width="16" height="36" fill="#f2d35b"/>
+  <rect x="188" y="362" width="24" height="38" fill="#f2d35b"/>
+
+  <!-- Bicycle: three-quarter front view -->
+  <!-- Rear wheel (farther, smaller, foreshortened) -->
+  <ellipse cx="140" cy="302" rx="22" ry="46" fill="#2b2b2b"/>
+  <ellipse cx="140" cy="302" rx="16" ry="38" fill="#5a5d63"/>
+  <line x1="140" y1="264" x2="140" y2="340" stroke="#9a9a9a" stroke-width="2"/>
+  <line x1="126" y1="285" x2="154" y2="319" stroke="#9a9a9a" stroke-width="2"/>
+  <line x1="126" y1="319" x2="154" y2="285" stroke="#9a9a9a" stroke-width="2"/>
+  <circle cx="140" cy="302" r="4" fill="#2b2b2b"/>
+
+  <!-- Frame -->
+  <line x1="140" y1="302" x2="200" y2="240" stroke="#2b2b2b" stroke-width="6" stroke-linecap="round"/>
+  <line x1="200" y1="240" x2="262" y2="248" stroke="#2b2b2b" stroke-width="6" stroke-linecap="round"/>
+  <line x1="140" y1="302" x2="210" y2="310" stroke="#2b2b2b" stroke-width="6" stroke-linecap="round"/>
+  <line x1="210" y1="310" x2="200" y2="240" stroke="#2b2b2b" stroke-width="6" stroke-linecap="round"/>
+  <line x1="210" y1="310" x2="262" y2="248" stroke="#2b2b2b" stroke-width="6" stroke-linecap="round"/>
+  <!-- Seat post and seat -->
+  <line x1="200" y1="240" x2="196" y2="218" stroke="#2b2b2b" stroke-width="5" stroke-linecap="round"/>
+  <ellipse cx="194" cy="216" rx="16" ry="6" fill="#2b2b2b"/>
+  <!-- Crank and pedals -->
+  <circle cx="210" cy="310" r="8" fill="#2b2b2b"/>
+  <line x1="210" y1="310" x2="228" y2="326" stroke="#2b2b2b" stroke-width="4" stroke-linecap="round"/>
+  <rect x="222" y="322" width="16" height="7" rx="2" fill="#444"/>
+  <line x1="210" y1="310" x2="192" y2="294" stroke="#2b2b2b" stroke-width="4" stroke-linecap="round"/>
+  <rect x="182" y="290" width="16" height="7" rx="2" fill="#444"/>
+
+  <!-- Fork and handlebars -->
+  <line x1="262" y1="248" x2="270" y2="222" stroke="#2b2b2b" stroke-width="6" stroke-linecap="round"/>
+  <line x1="262" y1="248" x2="268" y2="330" stroke="#2b2b2b" stroke-width="6" stroke-linecap="round"/>
+  <line x1="238" y1="214" x2="300" y2="224" stroke="#2b2b2b" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="236" cy="213" r="6" fill="#444"/>
+  <circle cx="302" cy="225" r="6" fill="#444"/>
+
+  <!-- Front wheel (closer, larger, slightly turned toward viewer) -->
+  <ellipse cx="268" cy="330" rx="32" ry="58" fill="#2b2b2b"/>
+  <ellipse cx="268" cy="330" rx="24" ry="49" fill="#5a5d63"/>
+  <line x1="268" y1="282" x2="268" y2="378" stroke="#9a9a9a" stroke-width="2"/>
+  <line x1="248" y1="305" x2="288" y2="355" stroke="#9a9a9a" stroke-width="2"/>
+  <line x1="248" y1="355" x2="288" y2="305" stroke="#9a9a9a" stroke-width="2"/>
+  <line x1="246" y1="330" x2="290" y2="330" stroke="#9a9a9a" stroke-width="2"/>
+  <circle cx="268" cy="330" r="5" fill="#2b2b2b"/>
+
+  <!-- Pelican -->
+  <!-- Legs -->
+  <line x1="204" y1="246" x2="228" y2="322" stroke="#e8a33c" stroke-width="6" stroke-linecap="round"/>
+  <line x1="196" y1="246" x2="192" y2="292" stroke="#d9922f" stroke-width="6" stroke-linecap="round"/>
+  <ellipse cx="230" cy="324" rx="10" ry="4" fill="#e8a33c"/>
+  <ellipse cx="190" cy="292" rx="9" ry="4" fill="#d9922f"/>
+
+  <!-- Tail -->
+  <ellipse cx="160" cy="222" rx="22" ry="12" fill="#e9e2d0"/>
+  <!-- Body -->
+  <ellipse cx="200" cy="222" rx="50" ry="40" fill="#f7f3e8"/>
+  <ellipse cx="206" cy="236" rx="36" ry="24" fill="#ebe4d2"/>
+  <!-- Far wing -->
+  <ellipse cx="176" cy="214" rx="16" ry="30" transform="rotate(35 176 214)" fill="#ddd5c0"/>
+  <!-- Near wing reaching to handlebar -->
+  <ellipse cx="226" cy="222" rx="16" ry="34" transform="rotate(-40 226 222)" fill="#f0ebdd"/>
+  <ellipse cx="240" cy="214" rx="8" ry="8" fill="#f0ebdd"/>
+
+  <!-- Neck -->
+  <ellipse cx="214" cy="178" rx="15" ry="28" fill="#f7f3e8"/>
+  <!-- Head -->
+  <circle cx="222" cy="146" r="24" fill="#fbf8f0"/>
+  <!-- Beak: upper mandible angled toward viewer -->
+  <polygon points="236,142 300,164 238,156" fill="#f2a93b"/>
+  <!-- Pouch -->
+  <ellipse cx="258" cy="166" rx="26" ry="11" transform="rotate(18 258 166)" fill="#f6c25c"/>
+  <polygon points="238,156 300,164 246,176" fill="#e9a23a"/>
+  <!-- Beak tip hook -->
+  <circle cx="300" cy="164" r="4" fill="#e39430"/>
+  <!-- Eye -->
+  <circle cx="232" cy="140" r="5" fill="#2b2b2b"/>
+  <circle cx="234" cy="138" r="1.6" fill="#ffffff"/>
+  <!-- Crest tuft -->
+  <circle cx="208" cy="126" r="7" fill="#fbf8f0"/>
+  <circle cx="216" cy="122" r="6" fill="#fbf8f0"/>
+</svg>

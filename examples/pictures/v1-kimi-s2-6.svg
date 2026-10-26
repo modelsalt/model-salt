@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <title>Pelican coasting on a parked time-trial bicycle</title>
+  <desc>Woodcut-style scene viewed from behind the pelican: it sits on a rainbow disc-wheel time-trial bike leaning on its kickstand, feet resting on the frame, wings relaxed.</desc>
+
+  <defs>
+    <linearGradient id="bodyBow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e23b3b"/>
+      <stop offset=".22" stop-color="#f07f2e"/>
+      <stop offset=".42" stop-color="#f4d13c"/>
+      <stop offset=".62" stop-color="#4fae4f"/>
+      <stop offset=".82" stop-color="#3b7dd8"/>
+      <stop offset="1" stop-color="#7b4fc9"/>
+    </linearGradient>
+    <linearGradient id="wingBow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f4d13c"/>
+      <stop offset=".5" stop-color="#3b7dd8"/>
+      <stop offset="1" stop-color="#7b4fc9"/>
+    </linearGradient>
+    <linearGradient id="beakBow" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0" stop-color="#e23b3b"/>
+      <stop offset="1" stop-color="#f4d13c"/>
+    </linearGradient>
+    <linearGradient id="frameBow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e23b3b"/>
+      <stop offset=".25" stop-color="#f07f2e"/>
+      <stop offset=".45" stop-color="#f4d13c"/>
+      <stop offset=".65" stop-color="#4fae4f"/>
+      <stop offset=".85" stop-color="#3b7dd8"/>
+      <stop offset="1" stop-color="#7b4fc9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- paper background -->
+  <rect width="800" height="600" fill="#f5ecd7"/>
+
+  <!-- woodcut sun -->
+  <g stroke="#2b1d12" stroke-width="3" fill="none">
+    <circle cx="655" cy="105" r="42" fill="#ffd23f"/>
+    <circle cx="655" cy="105" r="30" stroke-width="1.5" stroke-dasharray="4 5"/>
+    <path d="M705 105 L723 105 M698 80 L714 67 M680 62 L689 49 M655 55 L655 37 M630 62 L621 49 M612 80 L596 67 M605 105 L587 105 M612 130 L596 143 M630 148 L621 161 M655 155 L655 173 M680 148 L689 161 M698 130 L714 143" stroke-width="3"/>
+  </g>
+
+  <!-- clouds -->
+  <g fill="#fdfaf1" stroke="#2b1d12" stroke-width="3">
+    <path d="M90 95 Q105 68 130 82 Q142 58 166 72 Q192 60 201 84 Q222 84 219 100 Q216 113 199 111 L106 113 Q88 111 90 95 Z"/>
+    <path d="M470 62 Q482 42 502 52 Q513 34 533 45 Q554 38 561 57 Q578 58 575 71 Q572 82 558 80 L483 82 Q468 80 470 62 Z"/>
+  </g>
+  <g stroke="#3a2a1a" stroke-width="1.5" fill="none">
+    <path d="M104 108 L196 106 M118 112 L182 111"/>
+    <path d="M484 76 L560 74 M496 81 L548 80"/>
+  </g>
+
+  <!-- ground -->
+  <path d="M40 520 L760 520" stroke="#2b1d12" stroke-width="3.5" fill="none"/>
+  <g stroke="#3a2a1a" stroke-width="1.5" fill="none">
+    <path d="M380 526 L560 526 M395 532 L545 532 M415 538 L525 538 M440 544 L505 544"/>
+    <path d="M250 524 L345 524 M268 530 L330 530"/>
+    <path d="M116 520 L112 506 M122 520 L122 504 M128 520 L133 507"/>
+    <path d="M596 520 L591 507 M602 520 L602 505 M608 520 L613 508"/>
+    <path d="M696 520 L692 508 M702 520 L702 506 M708 520 L713 509"/>
+  </g>
+
+  <!-- ===================== BIKE + BIRD (leaning on kickstand) ===================== -->
+  <g transform="rotate(-2.5 450 420)">
+
+    <!-- front disc wheel (rainbow rings) -->
+    <g stroke="#2b1d12" stroke-width="3">
+      <ellipse cx="300" cy="410" rx="45" ry="88" fill="#2b1d12"/>
+      <ellipse cx="300" cy="410" rx="39" ry="77" fill="#e23b3b"/>
+      <ellipse cx="300" cy="410" rx="33" ry="64" fill="#f07f2e"/>
+      <ellipse cx="300" cy="410" rx="26" ry="50" fill="#f4d13c"/>
+      <ellipse cx="300" cy="410" rx="19" ry="36" fill="#4fae4f"/>
+      <ellipse cx="300" cy="410" rx="12" ry="22" fill="#3b7dd8"/>
+      <ellipse cx="300" cy="410" rx="6" ry="10" fill="#7b4fc9"/>
+    </g>
+
+    <!-- rear disc wheel (rainbow rings) -->
+    <g stroke="#2b1d12" stroke-width="3">
+      <ellipse cx="465" cy="415" rx="62" ry="102" fill="#2b1d12"/>
+      <ellipse cx="465" cy="415" rx="55" ry="95" fill="#e23b3b"/>
+      <ellipse cx="465" cy="415" rx="46" ry="79" fill="#f07f2e"/>
+      <ellipse cx="465" cy="415" rx="37" ry="63" fill="#f4d13c"/>
+      <ellipse cx="465" cy="415" rx="28" ry="47" fill="#4fae4f"/>
+      <ellipse cx="465" cy="415" rx="19" ry="31" fill="#3b7dd8"/>
+      <ellipse cx="465" cy="415" rx="10" ry="15" fill="#7b4fc9"/>
+    </g>
+    <g stroke="#3a2a1a" stroke-width="1.5" fill="none" opacity=".8">
+      <path d="M420 350 C440 330 490 330 510 355"/>
+      <path d="M262 355 C280 338 320 338 338 356"/>
+    </g>
+
+    <!-- frame: dark underlay, then rainbow core -->
+    <g fill="none" stroke-linecap="round">
+      <g stroke="#2b1d12" stroke-width="9">
+        <path d="M325 292 L450 430 M320 285 L438 300 M438 300 L450 430 M438 302 L465 415 M450 430 L465 415 M322 290 L300 410 M318 282 L328 296"/>
+      </g>
+      <g stroke="url(#frameBow)" stroke-width="5">
+        <path d="M325 292 L450 430 M320 285 L438 300 M438 300 L450 430 M438 302 L465 415 M450 430 L465 415 M322 290 L300 410 M318 282 L328 296"/>
+      </g>
+    </g>
+
+    <!-- aero bars -->
+    <g fill="none" stroke-linecap="round">
+      <path d="M320 284 L288 276 M315 281 L272 258 M310 287 L268 268" stroke="#2b1d12" stroke-width="8"/>
+      <path d="M320 284 L288 276 M315 281 L272 258 M310 287 L268 268" stroke="url(#frameBow)" stroke-width="4"/>
+      <rect x="290" y="266" width="18" height="9" rx="4" fill="#7b4fc9" stroke="#2b1d12" stroke-width="2.5" transform="rotate(-18 299 270)"/>
+    </g>
+
+    <!-- seat post, crank with EMPTY pedal (coasting), hubs -->
+    <path d="M443 360 L450 430" stroke="#2b1d12" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <circle cx="450" cy="430" r="10" fill="none" stroke="#2b1d12" stroke-width="4"/>
+    <path d="M450 430 L480 455" stroke="#2b1d12" stroke-width="6" stroke-linecap="round"/>
+    <rect x="470" y="452" width="20" height="8" rx="2" fill="#f4d13c" stroke="#2b1d12" stroke-width="2.5"/>
+    <circle cx="465" cy="415" r="5" fill="#2b1d12"/>
+    <circle cx="300" cy="410" r="4" fill="#2b1d12"/>
+
+    <!-- kickstand (parked) -->
+    <path d="M446 434 L404 516" stroke="#2b1d12" stroke-width="6" stroke-linecap="round"/>
+    <path d="M396 517 L416 519" stroke="#2b1d12" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- ===================== PELICAN (from behind, over-the-shoulder) ===================== -->
+
+    <!-- tail feathers -->
+    <g stroke="#2b1d12" stroke-width="3">
+      <path d="M425 360 C420 375 418 388 424 398 C430 390 432 376 433 362 Z" fill="#3b7dd8"/>
+      <path d="M442 362 C440 378 440 392 447 400 C453 391 454 377 453 362 Z" fill="#7b4fc9"/>
+      <path d="M458 360 C458 374 460 386 468 394 C472 384 470 372 466 360 Z" fill="#7b4fc9"/>
+    </g>
+
+    <!-- body -->
+    <path d="M430 195 C385 205 372 250 380 300 C386 340 410 362 445 362 C480 362 500 335 498 295 C496 250 478 205 445 195 Z"
+          fill="url(#bodyBow)" stroke="#2b1d12" stroke-width="4"/>
+
+    <!-- wings hanging relaxed -->
+    <g stroke="#2b1d12" stroke-width="4">
+      <path d="M392 215 C372 235 362 280 368 325 C372 345 384 352 392 344 C400 320 402 260 402 225 Z" fill="url(#wingBow)"/>
+      <path d="M478 215 C500 240 508 285 501 330 C497 350 483 356 476 345 C469 315 469 260 470 225 Z" fill="url(#wingBow)"/>
+    </g>
+
+    <!-- neck and back of head -->
+    <path d="M424 206 C416 180 413 158 420 138 C424 126 434 122 442 126 C452 132 452 150 449 168 C447 184 447 196 449 206 Z"
+          fill="#f07f2e" stroke="#2b1d12" stroke-width="4"/>
+    <path d="M417 132 C412 112 424 96 441 97 C458 98 467 114 461 132 C456 145 446 150 437 149 C428 148 420 143 417 132 Z"
+          fill="#e23b3b" stroke="#2b1d12" stroke-width="4"/>
+
+    <!-- crest tufts -->
+    <g fill="#7b4fc9" stroke="#2b1d12" stroke-width="3">
+      <path d="M452 108 Q464 94 476 95 Q465 103 460 113 Z"/>
+      <path d="M458 119 Q471 110 481 114 Q469 119 462 126 Z"/>
+    </g>
+
+    <!-- beak pointing forward (away from viewer), pouch hint beneath -->
+    <path d="M420 110 C384 100 344 104 306 124 L300 132 L310 138 C346 128 384 126 418 128 Z"
+          fill="url(#beakBow)" stroke="#2b1d12" stroke-width="4"/>
+    <path d="M300 132 L310 138 L306 124 Z" fill="#2b1d12"/>
+    <path d="M312 130 C348 118 386 114 417 117" stroke="#2b1d12" stroke-width="2" fill="none"/>
+    <path d="M314 139 C350 146 392 142 416 130" stroke="#2b1d12" stroke-width="2.5" fill="none"/>
+
+    <!-- feet lifted off pedals, resting on the frame -->
+    <g fill="#ff7f2a" stroke="#2b1d12" stroke-width="3">
+      <path d="M412 374 L400 388 L408 390 L412 384 L416 391 L420 384 L426 389 L424 374 Z"/>
+      <path d="M470 372 L462 386 L468 388 L472 382 L477 389 L481 382 L487 387 L484 372 Z"/>
+    </g>
+    <path d="M425 358 L416 376 M462 356 L470 374" stroke="#2b1d12" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- ============ woodcut hatching on the bird ============ -->
+    <g stroke="#3a2a1a" stroke-width="1.5" fill="none" opacity=".85">
+      <path d="M398 235 C392 270 396 310 412 340"/>
+      <path d="M412 228 C406 268 411 312 428 344"/>
+      <path d="M428 224 C424 266 429 314 444 346"/>
+      <path d="M470 235 C476 272 472 312 458 340"/>
+      <path d="M484 250 C488 282 484 314 472 336"/>
+      <path d="M384 240 C378 270 376 305 380 332"/>
+      <path d="M392 244 C387 275 386 308 389 334"/>
+      <path d="M486 242 C492 272 493 308 489 334"/>
+      <path d="M478 246 C483 276 483 310 480 336"/>
+      <path d="M422 150 C430 154 440 154 448 148"/>
+      <path d="M420 165 C430 170 442 170 450 163"/>
+      <path d="M421 182 C431 187 443 186 449 179"/>
+      <path d="M330 122 C360 114 390 112 414 117"/>
+      <path d="M335 130 C362 124 390 122 413 124"/>
+    </g>
+  </g>
+
+  <!-- woodcut print border -->
+  <rect x="14" y="14" width="772" height="572" fill="none" stroke="#2b1d12" stroke-width="5"/>
+  <rect x="26" y="26" width="748" height="548" fill="none" stroke="#2b1d12" stroke-width="1.5"/>
+</svg>

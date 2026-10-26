@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" fill="none">
+  <title>Pelican leaning into a turn on a penny-farthing</title>
+  <desc>A blue and teal pelican steers with both wings, seen slightly from above and from its left, drawn with loose sketch lines.</desc>
+
+  <rect width="800" height="600" fill="#f4fafb"/>
+  <path d="M159 527Q380 568 649 531" stroke="#d3e7eb" stroke-width="3"/>
+  <path d="M176 540Q368 571 617 546" stroke="#e1eef0" stroke-width="2"/>
+
+  <!-- Small trailing wheel and large driving wheel -->
+  <g transform="rotate(-12 243 466)">
+    <ellipse cx="243" cy="466" rx="49" ry="59" fill="#e4f0f3" stroke="#294f68" stroke-width="6"/>
+    <ellipse cx="245" cy="465" rx="43" ry="54" stroke="#6c94a3" stroke-width="1.5"/>
+    <path d="M243 408V524M194 466H292M210 424L277 508M207 506L278 426"
+          stroke="#91b0bb" stroke-width="1.5"/>
+    <ellipse cx="242" cy="467" rx="51" ry="58" stroke="#294f68" stroke-width="1.2"/>
+  </g>
+
+  <g transform="rotate(-12 493 398)">
+    <ellipse cx="493" cy="398" rx="116" ry="143" fill="#e8f3f5" stroke="#294f68" stroke-width="7"/>
+    <ellipse cx="493" cy="398" rx="108" ry="135" stroke="#7dabb7" stroke-width="2"/>
+    <g stroke="#a1bfc8" stroke-width="1.5">
+      <path d="M493 263V533M385 398H601M417 303L569 493M417 493L569 303"/>
+      <path d="M451 273L535 523M393 346L593 450M393 450L593 346M451 523L535 273"/>
+    </g>
+    <ellipse cx="496" cy="397" rx="117" ry="141" stroke="#466f83" stroke-width="1.3"/>
+    <path d="M411 303Q463 236 533 264M586 476Q555 540 484 538"
+          stroke="#294f68" stroke-width="2" stroke-linecap="round"/>
+    <ellipse cx="493" cy="398" rx="10" ry="12" fill="#294f68"/>
+  </g>
+
+  <!-- Sweeping frame, saddle, and steering -->
+  <path d="M243 466Q306 442 329 358Q349 281 436 271"
+        stroke="#285c71" stroke-width="13" stroke-linecap="round"/>
+  <path d="M243 463Q303 441 327 356Q350 283 434 270"
+        stroke="#5ba8b1" stroke-width="7" stroke-linecap="round"/>
+  <path d="M493 398L437 251L426 224" stroke="#285c71" stroke-width="12"/>
+  <path d="M489 394L433 250L423 224" stroke="#55a5ae" stroke-width="5"/>
+  <path d="M356 287L354 265" stroke="#294f68" stroke-width="8"/>
+  <path d="M326 264Q347 249 378 258L385 267Q356 280 326 270Z"
+        fill="#294f68" stroke="#294f68" stroke-width="3"/>
+  <path d="M332 261Q353 254 374 260" stroke="#91bec9" stroke-width="2"/>
+  <path d="M391 234L423 217L477 225" stroke="#294f68" stroke-width="7" stroke-linecap="round"/>
+  <path d="M387 237L402 229M464 225L482 227" stroke="#438d9e" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- Far leg and pedal -->
+  <path d="M371 255L420 294L470 360" stroke="#6195a8" stroke-width="12" stroke-linejoin="round"/>
+  <path d="M463 356L482 363L495 359" stroke="#294f68" stroke-width="9" stroke-linecap="round"/>
+  <path d="M493 398L478 362M468 362H495" stroke="#294f68" stroke-width="5"/>
+
+  <!-- Far wing reaching the handlebar -->
+  <path d="M366 185Q422 172 451 201L473 224L456 230Q421 211 386 220Z"
+        fill="#9bc5d0" stroke="#345f76" stroke-width="2.5"/>
+  <path d="M384 192Q429 188 468 224" stroke="#fff" stroke-width="3"/>
+
+  <!-- Body leans inward, away from the wheel's axis -->
+  <path d="M303 211L269 224L296 237L281 245L320 247
+           Q338 274 371 265Q405 254 408 220
+           Q411 189 390 169Q355 154 327 177Z"
+        fill="#d3e8ed" stroke="#294f68" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M309 211Q321 175 357 171Q388 168 400 195
+           Q372 180 348 200L329 240Z" fill="#fff"/>
+  <path d="M298 234Q331 268 367 263Q399 258 407 225M302 216L277 225"
+        stroke="#527c90" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Long curved neck and head -->
+  <path d="M368 200Q393 172 373 145Q358 122 373 99
+           Q386 78 411 85Q436 91 440 113L425 133
+           Q408 129 405 143Q414 176 399 204Z"
+        fill="#e7f3f6" stroke="#294f68" stroke-width="3"/>
+  <path d="M380 192Q397 174 387 147Q371 121 385 102Q396 91 412 95"
+        stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+  <path d="M374 144Q364 124 376 104M404 147Q415 173 403 193"
+        stroke="#759cad" stroke-width="1.4"/>
+
+  <!-- Long bill and generous pelican pouch -->
+  <path d="M428 111L563 148L546 157L425 132Z"
+        fill="#59a9b7" stroke="#294f68" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M425 132L548 155Q482 187 443 169Q425 158 425 132Z"
+        fill="#a3d3db" stroke="#294f68" stroke-width="2.5"/>
+  <path d="M434 136Q447 167 478 170L535 157"
+        stroke="#e7f8fa" stroke-width="3" stroke-linecap="round"/>
+  <path d="M436 119L545 149M432 135L551 154"
+        stroke="#36758b" stroke-width="1.3"/>
+  <ellipse cx="419" cy="110" rx="4.5" ry="5" fill="#23495f"/>
+  <circle cx="420" cy="108" r="1.4" fill="white"/>
+  <path d="M407 99L419 96" stroke="#294f68" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Near wing also grips the steering bar -->
+  <path d="M332 188Q352 184 370 206L393 229L405 232
+           L400 242L381 240Q345 224 327 207Z"
+        fill="#bedde5" stroke="#294f68" stroke-width="3"/>
+  <path d="M337 195Q355 201 382 229M334 203Q353 215 371 226"
+        stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+  <path d="M330 207Q350 230 382 240L398 243"
+        stroke="#537f93" stroke-width="1.3"/>
+
+  <!-- Near foot pushes the lower pedal -->
+  <path d="M350 258L367 309L425 365L469 423"
+        stroke="#345f76" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M352 263L373 309L430 365L472 419"
+        stroke="#8cbac9" stroke-width="6" stroke-linecap="round"/>
+  <path d="M493 398L476 431M458 435L491 429"
+        stroke="#294f68" stroke-width="5" stroke-linecap="round"/>
+  <path d="M464 416L485 423L495 432L458 438L453 431Z"
+        fill="#5ca8b8" stroke="#294f68" stroke-width="2.5"/>
+  <path d="M462 427L481 431" stroke="#d2edf2" stroke-width="2"/>
+
+  <!-- Light, imperfect pencil echoes -->
+  <g stroke="#7196a6" stroke-width="1.3" stroke-linecap="round">
+    <path d="M318 182Q338 163 363 166M288 242L316 250"/>
+    <path d="M370 97Q388 74 414 84M443 168Q470 183 499 174"/>
+    <path d="M318 363Q307 413 283 434M443 271L484 379"/>
+    <path d="M184 478Q180 441 201 420M523 543Q563 534 587 501"/>
+  </g>
+</svg>

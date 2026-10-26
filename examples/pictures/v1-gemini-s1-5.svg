@@ -1,0 +1,253 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="100%" height="100%">
+  <defs>
+    <!-- Clip path for Pelicans torso cel-shading -->
+    <clipPath id="torso-clip">
+      <path d="M 330 330 C 260 330, 250 540, 310 600 C 350 640, 450 640, 490 600 C 550 540, 540 330, 470 330 Z" />
+    </clipPath>
+    <!-- Clip path for Jersey stripes -->
+    <clipPath id="jersey-clip">
+      <path d="M 330 330 C 275 330, 260 470, 285 540 L 515 540 C 540 470, 525 330, 470 330 Z" />
+    </clipPath>
+    <!-- Clip path for Head cel-shading -->
+    <clipPath id="head-clip">
+      <circle cx="400" cy="190" r="65" />
+    </clipPath>
+    <!-- Clip path for Beak Pouch cel-shading -->
+    <clipPath id="pouch-clip">
+      <path d="M 270 215 C 270 390, 340 445, 400 445 C 460 445, 530 390, 530 215 Z" />
+    </clipPath>
+    <!-- Clip path for Cap cel-shading -->
+    <clipPath id="cap-clip">
+      <path d="M 340 160 C 340 100, 460 100, 460 160 Z" />
+    </clipPath>
+  </defs>
+
+  <!-- ================= BACKGROUND ================= -->
+  <!-- Vibrant High-Saturation Cyan Sky -->
+  <rect width="800" height="1000" fill="#00E5FF" />
+  
+  <!-- Minimalist Geometric Sun & Clouds -->
+  <circle cx="400" cy="480" r="320" fill="#FFFF00" />
+  <!-- Cel-shaded sun shadow -->
+  <path d="M 400 160 A 320 320 0 0 1 720 480 A 320 320 0 0 1 400 800 Z" fill="#FFEA00" />
+
+  <!-- Road / Ground -->
+  <rect x="0" y="900" width="800" height="100" fill="#2962FF" />
+  <rect x="0" y="900" width="800" height="18" fill="#00B0FF" />
+  
+  <!-- Cast Shadow on Ground -->
+  <ellipse cx="400" cy="935" rx="160" ry="18" fill="#0039CB" />
+
+
+  <!-- ================= PELICAN LOWER BODY & LEGS ================= -->
+  <!-- Pelvis / Shorts Base -->
+  <path d="M 285 530 C 295 605, 350 635, 400 635 C 450 635, 505 605, 515 530 Z" fill="#2962FF" />
+  <path d="M 400 530 L 400 635 C 450 635, 505 605, 515 530 Z" fill="#0039CB" />
+
+  <!-- RIGHT LEG (Viewer's Left - Pedal High) -->
+  <!-- Short Leg Opening -->
+  <path d="M 290 545 L 365 565 L 350 620 L 270 595 Z" fill="#2962FF" />
+  <path d="M 327 555 L 365 565 L 350 620 L 312 608 Z" fill="#0039CB" />
+  <!-- Orange Leg (Bent High) -->
+  <path d="M 290 590 C 260 620, 290 660, 315 695 L 340 695 C 325 655, 310 625, 330 600 Z" fill="#FF6D00" />
+  <!-- Leg Cel-Shade -->
+  <path d="M 310 595 C 295 620, 310 655, 328 695 L 340 695 C 325 655, 310 625, 330 600 Z" fill="#DD2C00" />
+  <!-- Webbed Foot (High) -->
+  <path d="M 325 685 L 265 715 L 290 722 L 315 718 L 355 715 Z" fill="#FF9100" />
+  <path d="M 325 685 L 315 718 L 355 715 Z" fill="#FF6D00" />
+
+  <!-- LEFT LEG (Viewer's Right - Pedal Low) -->
+  <!-- Short Leg Opening -->
+  <path d="M 510 545 L 435 565 L 450 635 L 525 615 Z" fill="#0039CB" />
+  <!-- Orange Leg (Extended Low) -->
+  <path d="M 465 615 C 485 680, 480 730, 465 795 L 490 795 C 510 730, 515 680, 500 605 Z" fill="#FF6D00" />
+  <!-- Leg Cel-Shade -->
+  <path d="M 482 610 C 500 680, 495 730, 478 795 L 490 795 C 510 730, 515 680, 500 605 Z" fill="#DD2C00" />
+  <!-- Webbed Foot (Low) -->
+  <path d="M 475 785 L 535 815 L 510 822 L 485 818 L 445 815 Z" fill="#FF9100" />
+  <path d="M 475 785 L 485 818 L 445 815 Z" fill="#DD2C00" />
+
+
+  <!-- ================= PELICAN TORSO & WINGS ================= -->
+  <!-- Torso Base (White Feathers) -->
+  <g clip-path="url(#torso-clip)">
+    <rect x="240" y="320" width="320" height="330" fill="#FFFFFF" />
+    <!-- Cel-Shading on Right Side -->
+    <rect x="400" y="320" width="160" height="330" fill="#E0F7FA" />
+    
+    <!-- Racing Jersey (Vibrant Red & Yellow Stripes) -->
+    <g clip-path="url(#jersey-clip)">
+      <rect x="240" y="320" width="320" height="230" fill="#FF1744" />
+      <!-- Jersey Stripes -->
+      <rect x="240" y="440" width="320" height="28" fill="#FFEA00" />
+      <rect x="240" y="485" width="320" height="18" fill="#00E676" />
+      <!-- Jersey Cel-Shading -->
+      <rect x="400" y="320" width="160" height="230" fill="#D50000" opacity="0.45" />
+    </g>
+  </g>
+
+  <!-- RIGHT WING (Viewer's Left - Gripping Drop Bar) -->
+  <path d="M 315 350 C 200 370, 140 470, 185 570 C 195 590, 235 585, 230 560 C 205 490, 245 430, 315 415 Z" fill="#FFFFFF" />
+  <!-- Wing Cel-Shade (Inner/Underside) -->
+  <path d="M 315 390 C 235 410, 185 480, 210 565 C 218 580, 235 575, 230 560 C 205 490, 245 430, 315 415 Z" fill="#B2EBF2" />
+  <!-- Jersey Sleeve (Left) -->
+  <path d="M 325 340 C 265 350, 230 385, 220 430 L 275 445 C 285 415, 300 405, 325 400 Z" fill="#FF1744" />
+  <path d="M 245 410 C 235 420, 225 425, 220 430 L 275 445 C 280 430, 285 420, 295 415 Z" fill="#D50000" />
+
+  <!-- LEFT WING (Viewer's Right - Gripping Drop Bar) -->
+  <path d="M 485 350 C 600 370, 660 470, 615 570 C 605 590, 565 585, 570 560 C 595 490, 555 430, 485 415 Z" fill="#E0F7FA" />
+  <!-- Wing Cel-Shade -->
+  <path d="M 485 390 C 565 410, 615 480, 590 565 C 582 580, 565 575, 570 560 C 595 490, 555 430, 485 415 Z" fill="#80DEEA" />
+  <!-- Jersey Sleeve (Right) -->
+  <path d="M 475 340 C 535 350, 570 385, 580 430 L 525 445 C 515 415, 500 405, 475 400 Z" fill="#D50000" />
+
+
+  <!-- ================= BICYCLE (FRONT-ON ROAD RACER) ================= -->
+  <!-- Pedals & Crank Arms (Behind Front Wheel, Connected to Bottom Bracket) -->
+  <!-- Bottom Bracket Hub -->
+  <circle cx="400" cy="745" r="22" fill="#212121" />
+  <!-- Right Crank & High Pedal (Viewer's Left) -->
+  <path d="M 392 745 L 335 700 L 348 690 L 405 735 Z" fill="#616161" />
+  <rect x="275" y="705" width="75" height="14" rx="7" fill="#212121" />
+  <rect x="285" y="708" width="35" height="8" rx="4" fill="#FF1744" />
+  <!-- Left Crank & Low Pedal (Viewer's Right) -->
+  <path d="M 408 745 L 465 800 L 452 810 L 395 755 Z" fill="#424242" />
+  <rect x="450" y="805" width="75" height="14" rx="7" fill="#212121" />
+  <rect x="480" y="808" width="35" height="8" rx="4" fill="#D50000" />
+
+  <!-- Diamond Frame Seat Tube / Down Tube (Foreshortened) -->
+  <rect x="388" y="470" width="24" height="270" fill="#00E676" />
+  <rect x="400" y="470" width="12" height="270" fill="#00C853" />
+
+  <!-- Front Fork (Sleek Aero Blades) -->
+  <path d="M 385 550 L 415 550 L 448 755 L 430 755 L 400 585 L 370 755 L 352 755 Z" fill="#00E676" />
+  <!-- Fork Cel-Shading -->
+  <path d="M 400 550 L 415 550 L 448 755 L 430 755 L 400 585 Z" fill="#00C853" />
+
+  <!-- Head Tube -->
+  <rect x="382" y="465" width="36" height="95" rx="8" fill="#00E676" />
+  <rect x="400" y="465" width="18" height="95" rx="4" fill="#00C853" />
+  <!-- Head Tube Badge -->
+  <polygon points="400,485 410,510 400,535 390,510" fill="#FFEA00" />
+
+  <!-- Front Wheel Shadows & Spokes -->
+  <!-- Radial Spokes (Minimalist Geometric Diamond Web) -->
+  <polygon points="400,580 432,750 400,920 368,750" fill="#E0F7FA" opacity="0.7" />
+  <polygon points="400,620 422,750 400,880 378,750" fill="#FFFFFF" opacity="0.9" />
+
+  <!-- Front Wheel Hub & Axle -->
+  <rect x="345" y="743" width="110" height="14" rx="7" fill="#424242" />
+  <rect x="375" y="738" width="50" height="24" rx="6" fill="#FF1744" />
+  <rect x="400" y="738" width="25" height="24" rx="4" fill="#D50000" />
+
+  <!-- Front Tire (Foreshortened Vertical Racing Slick) -->
+  <rect x="382" y="570" width="36" height="365" rx="18" fill="#212121" />
+  <!-- Tire Cel-Shade Highlight & Shadow -->
+  <rect x="387" y="575" width="10" height="355" rx="5" fill="#424242" />
+  <rect x="400" y="570" width="18" height="365" rx="9" fill="#000000" opacity="0.35" />
+
+  <!-- Handlebar Stem -->
+  <rect x="386" y="435" width="28" height="45" rx="8" fill="#212121" />
+  <rect x="380" y="440" width="40" height="28" rx="8" fill="#424242" />
+  <circle cx="400" cy="454" r="8" fill="#FFEA00" />
+
+  <!-- Drop Handlebars (Direct Front View) -->
+  <!-- Top Bar -->
+  <rect x="210" y="444" width="380" height="20" rx="10" fill="#212121" />
+  <rect x="210" y="447" width="380" height="6" rx="3" fill="#616161" />
+  
+  <!-- Left Drop Hook (Viewer's Left) -->
+  <path d="M 220 444 C 165 444, 155 555, 200 585 C 218 595, 240 585, 235 568 C 232 555, 218 560, 210 555 C 185 535, 195 464, 220 464 Z" fill="#FF1744" />
+  <!-- Right Drop Hook (Viewer's Right) -->
+  <path d="M 580 444 C 635 444, 645 555, 600 585 C 582 595, 560 585, 565 568 C 568 555, 582 560, 590 555 C 615 535, 605 464, 580 464 Z" fill="#D50000" />
+
+  <!-- Brake Hoods & Levers (Vertical Drops) -->
+  <!-- Left Hood -->
+  <rect x="172" y="420" width="24" height="45" rx="8" transform="rotate(-12 184 442)" fill="#212121" />
+  <path d="M 180 460 L 168 535 L 178 537 L 192 460 Z" fill="#E0E0E0" />
+  <!-- Right Hood -->
+  <rect x="604" y="420" width="24" height="45" rx="8" transform="rotate(12 616 442)" fill="#212121" />
+  <path d="M 620 460 L 632 535 L 622 537 L 608 460 Z" fill="#9E9E9E" />
+
+  <!-- Wing-Tip Feathers Overlapping the Drops (Gripping Effect) -->
+  <!-- Left Grip Feathers -->
+  <ellipse cx="195" cy="545" rx="26" ry="12" transform="rotate(-15 195 545)" fill="#FFFFFF" />
+  <ellipse cx="200" cy="562" rx="24" ry="11" transform="rotate(-10 200 562)" fill="#E0F7FA" />
+  <ellipse cx="208" cy="577" rx="20" ry="10" transform="rotate(-5 208 577)" fill="#B2EBF2" />
+  <!-- Right Grip Feathers -->
+  <ellipse cx="605" cy="545" rx="26" ry="12" transform="rotate(15 605 545)" fill="#E0F7FA" />
+  <ellipse cx="600" cy="562" rx="24" ry="11" transform="rotate(10 600 562)" fill="#B2EBF2" />
+  <ellipse cx="592" cy="577" rx="20" ry="10" transform="rotate(5 592 577)" fill="#80DEEA" />
+
+
+  <!-- ================= PELICAN HEAD & ENORMOUS BEAK (FRONT EMPHASIS) ================= -->
+  <!-- Neck Base -->
+  <rect x="365" y="230" width="70" height="120" fill="#FFFFFF" />
+  <rect x="400" y="230" width="35" height="120" fill="#E0F7FA" />
+
+  <!-- Cast Shadow of Beak onto Torso/Jersey -->
+  <path d="M 285 330 C 300 445, 355 480, 400 480 C 445 480, 500 445, 515 330 Z" fill="#000000" opacity="0.18" />
+
+  <!-- Head Base -->
+  <g clip-path="url(#head-clip)">
+    <circle cx="400" cy="190" r="65" fill="#FFFFFF" />
+    <rect x="400" y="125" width="65" height="130" fill="#E0F7FA" />
+  </g>
+
+  <!-- Eyes (Wide & Focused Ahead) -->
+  <!-- Left Eye -->
+  <circle cx="342" cy="190" r="22" fill="#FFEA00" />
+  <circle cx="342" cy="190" r="14" fill="#FFFFFF" />
+  <circle cx="345" cy="190" r="8" fill="#212121" />
+  <circle cx="342" cy="187" r="3" fill="#FFFFFF" />
+  <!-- Right Eye -->
+  <circle cx="458" cy="190" r="22" fill="#FFD600" />
+  <circle cx="458" cy="190" r="14" fill="#E0F7FA" />
+  <circle cx="455" cy="190" r="8" fill="#212121" />
+  <circle cx="452" cy="187" r="3" fill="#FFFFFF" />
+
+  <!-- Enormous Throat Pouch (Gular Sac - Direct Front View) -->
+  <g clip-path="url(#pouch-clip)">
+    <path d="M 270 215 C 270 390, 340 445, 400 445 C 460 445, 530 390, 530 215 Z" fill="#FF6D00" />
+    <!-- Pouch Center Fold Line / Shading -->
+    <path d="M 370 215 C 375 370, 390 445, 400 445 C 410 445, 425 370, 430 215 Z" fill="#FF9100" />
+    <!-- Pouch Cel-Shade (Right Half) -->
+    <rect x="400" y="215" width="140" height="240" fill="#DD2C00" opacity="0.55" />
+    <!-- Bottom Rim Highlight -->
+    <ellipse cx="360" cy="380" rx="25" ry="50" transform="rotate(-20 360 380)" fill="#FFAB40" opacity="0.4" />
+  </g>
+
+  <!-- Upper Mandible (Foreshortened Top Beak Arching Toward Viewer) -->
+  <path d="M 260 220 C 310 190, 490 190, 540 220 C 515 265, 455 290, 400 290 C 345 290, 285 265, 260 220 Z" fill="#FFEA00" />
+  <!-- Upper Mandible Cel-Shading -->
+  <path d="M 400 197 C 462 197, 518 207, 540 220 C 515 265, 455 290, 400 290 Z" fill="#FFD600" />
+  
+  <!-- Central Ridge of the Beak (Leading to the Tip) -->
+  <path d="M 382 195 L 418 195 L 432 285 L 368 285 Z" fill="#FFF59D" />
+  <path d="M 400 195 L 418 195 L 432 285 L 400 285 Z" fill="#FFEA00" />
+
+  <!-- Prominent Red/Orange Nail (Hooked Tip of the Beak Dead-Center) -->
+  <path d="M 368 275 C 368 250, 432 250, 432 275 C 432 308, 412 325, 400 325 C 388 325, 368 308, 368 275 Z" fill="#FF1744" />
+  <!-- Nail Cel-Shade & Highlight -->
+  <path d="M 400 256 C 416 256, 432 262, 432 275 C 432 308, 412 325, 400 325 Z" fill="#D50000" />
+  <ellipse cx="386" cy="278" rx="7" ry="12" fill="#FF8A80" />
+
+
+  <!-- ================= CYCLING CAP ================= -->
+  <!-- Cap Crown -->
+  <g clip-path="url(#cap-clip)">
+    <rect x="330" y="90" width="140" height="80" fill="#FF1744" />
+    <!-- Central Racing Stripe -->
+    <rect x="386" y="90" width="28" height="80" fill="#FFEA00" />
+    <!-- Crown Cel-Shading -->
+    <rect x="400" y="90" width="70" height="80" fill="#D50000" opacity="0.4" />
+  </g>
+  
+  <!-- Flipped-Up Cycling Cap Visor (Classic Roadie Style) -->
+  <path d="M 332 162 C 332 120, 468 120, 468 162 C 440 148, 360 148, 332 162 Z" fill="#2962FF" />
+  <path d="M 400 130 C 434 130, 468 141, 468 162 C 454 155, 427 151, 400 151 Z" fill="#0039CB" />
+  
+  <!--Jaunty Feather Tuft Sticking Out Top -->
+  <path d="M 400 112 C 390 85, 415 70, 430 65 C 425 85, 415 100, 405 112 Z" fill="#FFFFFF" />
+  <path d="M 405 112 C 415 95, 435 85, 448 85 C 438 100, 420 110, 405 112 Z" fill="#E0F7FA" />
+</svg>

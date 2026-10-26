@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="100%" height="100%">
+  <defs>
+    <!-- 1. BACKGROUND: Smooth Vertical Linear Gradient (Top to Bottom) -->
+    <linearGradient id="skyVerticalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0099CC" />
+      <stop offset="55%" stop-color="#00C6FF" />
+      <stop offset="100%" stop-color="#66ECFF" />
+    </linearGradient>
+
+    <!-- Diagonal Atmospheric Light Wash (Reinforces Corner-to-Corner Split) -->
+    <linearGradient id="diagonalSunWash" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE680" stop-opacity="0.45" />
+      <stop offset="48%" stop-color="#FFD000" stop-opacity="0.12" />
+      <stop offset="52%" stop-color="#0088CC" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#005580" stop-opacity="0.25" />
+    </linearGradient>
+
+    <!-- 2. SUN GRADIENTS: Glossy 3D Golden Yellow Sphere -->
+    <radialGradient id="sun3DBase" cx="38%" cy="35%" r="60%" fx="30%" fy="28%">
+      <stop offset="0%" stop-color="#FFF7CC" />
+      <stop offset="28%" stop-color="#FFCC00" />
+      <stop offset="72%" stop-color="#FF9900" />
+      <stop offset="92%" stop-color="#E66000" />
+      <stop offset="100%" stop-color="#FFB700" /> <!-- Rim bounce light -->
+    </radialGradient>
+
+    <!-- Sun Outer Radiant Glow -->
+    <radialGradient id="sunCorona" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFD700" stop-opacity="0.85" />
+      <stop offset="45%" stop-color="#FFAE00" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#FF9900" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Glossy Specular Highlight for 3D Surfaces -->
+    <linearGradient id="glossHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- 3. CLOUD GRADIENTS: 3D Crisp White + Subsurface Scattering -->
+    <linearGradient id="cloudBase3D" x1="25%" y1="15%" x2="75%" y2="95%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="65%" stop-color="#F2FBFF" />
+      <stop offset="100%" stop-color="#B8E8FF" />
+    </linearGradient>
+
+    <!-- Subsurface Scattering (Warm Golden Light penetrating Cloud from Top-Left) -->
+    <radialGradient id="sssWarmGlow" cx="28%" cy="22%" r="58%">
+      <stop offset="0%" stop-color="#FFF2B2" stop-opacity="0.95" />
+      <stop offset="35%" stop-color="#FFCC33" stop-opacity="0.65" />
+      <stop offset="70%" stop-color="#FF9900" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Individual Puff 3D Shading (Cool Cyan Ambient Occlusion) -->
+    <radialGradient id="puff3D" cx="35%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="1" />
+      <stop offset="60%" stop-color="#F5FCFF" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#99E0FF" stop-opacity="0.85" />
+    </radialGradient>
+
+    <!-- Soft 3D Drop Shadow Filter -->
+    <filter id="dropShadow3D" x="-20%" y="-20%" width="150%" height="150%">
+      <feDropShadow dx="18" dy="36" stdDeviation="32" flood-color="#004C73" flood-opacity="0.38" />
+    </filter>
+
+    <!-- Soft Blur for Subsurface Scattering & Ambient Glows -->
+    <filter id="sssBlur" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="24" />
+    </filter>
+  </defs>
+
+  <!-- SHARP SQUARE BASE (No rounded corners: rx="0" ry="0") -->
+  <rect x="0" y="0" width="1024" height="1024" rx="0" ry="0" fill="url(#skyVerticalGrad)" />
+
+  <!-- Subtle Diagonal Atmospheric Split Overlay (Top-Left Warm to Bottom-Right Cool) -->
+  <rect x="0" y="0" width="1024" height="1024" rx="0" ry="0" fill="url(#diagonalSunWash)" />
+
+  <!-- Subtle Diagonal Light Ray Seam (Corner-to-Corner Composition Guide) -->
+  <polygon points="0,0 1024,0 1024,1024" fill="#FFFFFF" opacity="0.05" />
+
+  <!-- ================= RADIANT SUN (Upper-Left Diagonal Zone) ================= -->
+  <g id="radiant-sun">
+    <!-- Outer Radiant Corona -->
+    <circle cx="330" cy="330" r="390" fill="url(#sunCorona)" />
+
+    <!-- Main 3D Glossy Sun Sphere -->
+    <circle cx="330" cy="330" r="220" fill="url(#sun3DBase)" filter="url(#dropShadow3D)" />
+
+    <!-- Subsurface Inner Rim Glow on Sun -->
+    <circle cx="330" cy="330" r="216" fill="none" stroke="#FFF8D6" stroke-width="6" opacity="0.6" />
+
+    <!-- Top Glossy Specular Reflection -->
+    <ellipse cx="290" cy="215" rx="115" ry="62" transform="rotate(-18 290 215)" fill="url(#glossHighlight)" />
+  </g>
+
+  <!-- ================= CUMULUS CLOUD (Lower-Right Diagonal Zone) ================= -->
+  <g id="cumulus-cloud" filter="url(#dropShadow3D)">
+    <!-- Unified Cloud Silhouette Base -->
+    <path d="M 330,780
+             C 210,780 150,695 190,595
+             C 215,535 280,510 325,525
+             C 365,405 495,355 615,415
+             C 655,370 745,365 805,425
+             C 885,445 925,535 895,625
+             C 940,685 900,780 805,780
+             Z"
+          fill="url(#cloudBase3D)" />
+
+    <!-- 3D Volumetric Puffs (Layered for sculptural depth) -->
+    <!-- Far Right Puff -->
+    <circle cx="800" cy="635" r="145" fill="url(#puff3D)" />
+    <!-- Upper Right Puff -->
+    <circle cx="735" cy="510" r="130" fill="url(#puff3D)" />
+    <!-- Central Dominant Cumulus Dome -->
+    <circle cx="535" cy="535" r="195" fill="url(#puff3D)" />
+    <!-- Left Sun-Facing Puff -->
+    <circle cx="330" cy="635" r="145" fill="url(#puff3D)" />
+    <!-- Bottom Center Bridging Puff -->
+    <ellipse cx="585" cy="680" rx="260" ry="110" fill="url(#cloudBase3D)" />
+
+    <!-- SUBSURFACE SCATTERING (SSS): Golden sunlight bleeding through the top-left cloud edges -->
+    <path d="M 330,780
+             C 210,780 150,695 190,595
+             C 215,535 280,510 325,525
+             C 365,405 495,355 615,415
+             C 655,370 745,365 805,425
+             C 885,445 925,535 895,625
+             C 940,685 900,780 805,780
+             Z"
+          fill="url(#sssWarmGlow)" />
+
+    <!-- Concentrated SSS Golden Core on the Sun-Cloud Overlap -->
+    <circle cx="385" cy="485" r="155" fill="#FFCC00" opacity="0.38" filter="url(#sssBlur)" />
+    <circle cx="265" cy="575" r="110" fill="#FFD966" opacity="0.45" filter="url(#sssBlur)" />
+
+    <!-- Glossy 3D Specular Highlights on Cloud Domes -->
+    <!-- Center Dome Gloss -->
+    <ellipse cx="515" cy="415" rx="110" ry="52" transform="rotate(-12 515 415)" fill="url(#glossHighlight)" />
+    <!-- Right Dome Gloss -->
+    <ellipse cx="730" cy="430" rx="68" ry="32" transform="rotate(10 730 430)" fill="url(#glossHighlight)" />
+    <!-- Left Sun-Lit Dome Gloss (Warm Tinted) -->
+    <ellipse cx="300" cy="545" rx="75" ry="38" transform="rotate(-22 300 545)" fill="url(#glossHighlight)" />
+
+    <!-- Crisp Translucent Rim Light along Top-Left Edge -->
+    <path d="M 192,590 C 215,535 280,510 325,525 C 365,405 495,355 615,415 C 655,370 745,365 805,425"
+          fill="none" stroke="#FFFDF5" stroke-width="8" stroke-linecap="round" opacity="0.85" />
+  </g>
+</svg>

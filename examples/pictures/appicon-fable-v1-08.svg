@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <!-- Sky: deep black at top fading toward charcoal near the horizon -->
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000000"/>
+      <stop offset="1" stop-color="#3a3a3a"/>
+    </linearGradient>
+    <!-- Sun: bright white core softening to light gray at the rim -->
+    <radialGradient id="sun" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.65" stop-color="#f2f2f2"/>
+      <stop offset="1" stop-color="#bdbdbd"/>
+    </radialGradient>
+    <!-- Sun glow: soft halo bleeding into the dark sky -->
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Cloud: lit white on top shading to mid-gray at its underside -->
+    <linearGradient id="cloud" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.6" stop-color="#e0e0e0"/>
+      <stop offset="1" stop-color="#8a8a8a"/>
+    </linearGradient>
+    <!-- Ground band: near-black horizon strip -->
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1c1c1c"/>
+      <stop offset="1" stop-color="#000000"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Square background, hard corners -->
+  <rect width="1024" height="1024" fill="url(#sky)"/>
+
+  <!-- Sun halo and sun, rising behind the horizon -->
+  <circle cx="620" cy="700" r="420" fill="url(#glow)"/>
+  <circle cx="620" cy="700" r="250" fill="url(#sun)"/>
+
+  <!-- Horizon line / ground band anchored to the bottom edge -->
+  <rect x="0" y="880" width="1024" height="144" fill="url(#ground)"/>
+  <rect x="0" y="876" width="1024" height="6" fill="#ffffff" opacity="0.85"/>
+
+  <!-- Cloud resting on the horizon, overlapping the lower part of the sun -->
+  <g fill="url(#cloud)">
+    <rect x="140" y="760" width="560" height="120"/>
+    <circle cx="260" cy="760" r="120"/>
+    <circle cx="420" cy="690" r="190"/>
+    <circle cx="590" cy="750" r="130"/>
+    <circle cx="160" cy="820" r="60"/>
+  </g>
+</svg>

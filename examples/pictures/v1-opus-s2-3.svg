@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
+  <title>A pelican riding a road bike, seen from behind</title>
+  <!-- plain solid background -->
+  <rect width="400" height="500" fill="#FFE0BD"/>
+
+  <g fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- ground line -->
+    <line x1="70" y1="462" x2="330" y2="462" stroke="#E89A6B"/>
+
+    <!-- ===== farthest: drop handlebars ===== -->
+    <g stroke="#B3204D">
+      <path d="M200,182 L138,182 Q126,182 126,196 L126,218 Q126,226 134,226"/>
+      <path d="M200,182 L262,182 Q274,182 274,196 L274,218 Q274,226 266,226"/>
+      <path d="M132,182 Q136,168 146,174"/>
+      <path d="M268,182 Q264,168 254,174"/>
+      <!-- front wheel peeking above the rear one -->
+      <rect x="193" y="268" width="14" height="178" rx="7" fill="#FFE0BD"/>
+      <!-- bottom bracket axle, cranks, pedals -->
+      <line x1="172" y1="375" x2="230" y2="375"/>
+      <line x1="172" y1="375" x2="172" y2="332"/>
+      <line x1="152" y1="332" x2="172" y2="332"/>
+      <line x1="230" y1="375" x2="230" y2="427"/>
+      <line x1="230" y1="427" x2="250" y2="427"/>
+      <!-- chainring seen edge-on, plus chain -->
+      <rect x="221" y="335" width="5" height="80" rx="2.5" fill="#FFE0BD"/>
+      <line x1="223" y1="336" x2="217" y2="358"/>
+      <line x1="223" y1="414" x2="220" y2="410"/>
+    </g>
+
+    <!-- ===== pelican legs and webbed feet ===== -->
+    <g stroke="#F0641E">
+      <path d="M168,186 L150,262 L161,322"/>
+      <path d="M161,322 L148,333 Q161,328 174,333 Z" fill="#FFE0BD"/>
+      <path d="M232,186 L247,276 L240,416"/>
+      <path d="M240,416 L227,428 Q240,423 253,428 Z" fill="#FFE0BD"/>
+    </g>
+
+    <!-- ===== saddle ===== -->
+    <path d="M178,196 Q200,184 222,196 Q200,204 178,196 Z" stroke="#B3204D" fill="#FFE0BD"/>
+
+    <!-- ===== pelican, sitting bolt upright ===== -->
+    <g stroke="#6E1F4C">
+      <!-- body -->
+      <path d="M200,92 C236,92 253,118 254,150 C256,178 240,196 200,198 C160,196 144,178 146,150 C147,118 164,92 200,92 Z" fill="#FFE0BD"/>
+      <!-- back feather chevrons -->
+      <path d="M186,128 L200,138 L214,128"/>
+      <path d="M182,150 L200,162 L218,150"/>
+      <path d="M185,172 L200,182 L215,172"/>
+      <!-- tail fanned over the saddle -->
+      <path d="M180,190 Q184,212 192,215 Q200,221 208,215 Q216,212 220,190" fill="#FFE0BD"/>
+      <path d="M190,200 L193,212 M200,201 L200,217 M210,200 L207,212"/>
+
+      <!-- left wing reaching to the hood -->
+      <path d="M166,108 C138,112 117,134 115,154 C113,170 123,181 134,184 L142,177 C134,171 132,163 136,155 C142,145 151,138 154,126 Z" fill="#FFE0BD"/>
+      <path d="M122,160 Q128,170 136,172 M128,146 Q134,156 142,156"/>
+      <!-- right wing -->
+      <path d="M234,108 C262,112 283,134 285,154 C287,170 277,181 266,184 L258,177 C266,171 268,163 264,155 C258,145 249,138 246,126 Z" fill="#FFE0BD"/>
+      <path d="M278,160 Q272,170 264,172 M272,146 Q266,156 258,156"/>
+    </g>
+
+    <!-- pouch bulging out on either side of the head (beak points away from us) -->
+    <g stroke="#F0641E">
+      <path d="M185,52 Q172,70 190,76"/>
+      <path d="M215,52 Q228,70 210,76"/>
+    </g>
+
+    <!-- neck and head -->
+    <g stroke="#6E1F4C">
+      <path d="M189,100 C185,82 187,66 190,56 L210,56 C213,66 215,82 211,100 Z" fill="#FFE0BD" stroke="none"/>
+      <path d="M189,100 C185,82 187,66 190,56"/>
+      <path d="M211,100 C215,82 213,66 210,56"/>
+      <circle cx="200" cy="44" r="20" fill="#FFE0BD"/>
+      <!-- crest tuft -->
+      <path d="M195,26 Q190,15 199,13"/>
+      <path d="M205,26 Q208,17 215,20"/>
+    </g>
+
+    <!-- ===== nearest: rear of the bike ===== -->
+    <g stroke="#B3204D">
+      <!-- seat post and rear reflector -->
+      <line x1="200" y1="218" x2="200" y2="238"/>
+      <rect x="194" y="221" width="12" height="9" rx="2" stroke="#E11D48" fill="#FFE0BD"/>
+      <!-- seat stays -->
+      <line x1="185" y1="372" x2="198" y2="238"/>
+      <line x1="215" y1="372" x2="202" y2="238"/>
+      <!-- rear tire and rim -->
+      <rect x="192" y="282" width="16" height="180" rx="8" fill="#FFE0BD"/>
+      <rect x="196" y="290" width="8" height="164" rx="4"/>
+      <!-- hub / axle -->
+      <line x1="182" y1="372" x2="218" y2="372"/>
+      <!-- cassette -->
+      <line x1="211" y1="358" x2="211" y2="386"/>
+      <line x1="214" y1="361" x2="214" y2="383"/>
+      <line x1="217" y1="364" x2="217" y2="380"/>
+      <!-- rear derailleur -->
+      <path d="M217,382 L220,392"/>
+      <circle cx="220" cy="396" r="3.5"/>
+      <circle cx="220" cy="408" r="3.5"/>
+    </g>
+  </g>
+</svg>

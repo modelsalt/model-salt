@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="600" viewBox="0 0 640 600" fill="none">
+  <title>Pelican riding a bicycle</title>
+  <desc>A rounded white pelican, viewed from a front three-quarter angle, stands on the pedals of a muted green bicycle.</desc>
+
+  <rect width="640" height="600" rx="32" fill="#F5F2E9"/>
+  <ellipse cx="332" cy="519" rx="199" ry="21" fill="#DEDCD2"/>
+
+  <!-- Wheels: the nearer wheel is larger -->
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <ellipse cx="225" cy="404" rx="57" ry="91" fill="#F5F2E9" stroke="#344343" stroke-width="13"/>
+    <ellipse cx="225" cy="404" rx="47" ry="79" stroke="#A9B4AC" stroke-width="3"/>
+    <g stroke="#B1BAB2" stroke-width="2">
+      <path d="M225 325V483M178 404H272M192 348L258 460M192 460L258 348"/>
+    </g>
+
+    <!-- Far pedal and leg -->
+    <path d="M317 273Q345 310 329 346L349 374" stroke="#B98A4C" stroke-width="15"/>
+    <path d="M343 364Q361 364 370 378L338 380Z" fill="#D7A259" stroke="#655744" stroke-width="3"/>
+    <path d="M333 384L350 376" stroke="#576563" stroke-width="7"/>
+    <path d="M337 381L373 376" stroke="#344343" stroke-width="8"/>
+
+    <!-- Bicycle frame -->
+    <g stroke="#647E74" stroke-width="11">
+      <path d="M225 404L277 324L320 414L225 404"/>
+      <path d="M277 324L386 342L320 414"/>
+      <path d="M386 342L423 438"/>
+    </g>
+    <path d="M277 324L266 302" stroke="#8B9891" stroke-width="7"/>
+    <path d="M243 298Q263 294 285 303" stroke="#344343" stroke-width="13"/>
+    <path d="M225 404L320 414" stroke="#344343" stroke-width="4"/>
+    <circle cx="320" cy="414" r="18" fill="#D6DCD4" stroke="#536760" stroke-width="5"/>
+    <circle cx="225" cy="404" r="7" fill="#647E74"/>
+
+    <ellipse cx="430" cy="429" rx="69" ry="103" fill="#F5F2E9" stroke="#344343" stroke-width="14"/>
+    <ellipse cx="430" cy="429" rx="58" ry="91" stroke="#A9B4AC" stroke-width="3"/>
+    <g stroke="#B1BAB2" stroke-width="2">
+      <path d="M430 338V520M372 429H488M389 365L471 493M389 493L471 365"/>
+    </g>
+    <path d="M386 342L430 429" stroke="#647E74" stroke-width="11"/>
+    <circle cx="430" cy="429" r="9" fill="#536760" stroke="#344343" stroke-width="3"/>
+
+    <!-- Raised handlebar -->
+    <path d="M386 342L376 291L367 270" stroke="#84958B" stroke-width="8"/>
+    <path d="M330 261Q358 251 367 270Q393 263 417 281" stroke="#536760" stroke-width="8"/>
+    <path d="M323 261L342 257M407 276L424 285" stroke="#344343" stroke-width="10"/>
+
+    <!-- Tail and rounded body, lifted clear of the saddle -->
+    <path d="M252 237Q220 238 194 213Q195 249 231 267" fill="#DFE2D9" stroke="#4A5550" stroke-width="4"/>
+    <path d="M266 172Q219 183 224 230Q228 275 280 283Q327 290 350 247L345 194Z"
+          fill="#FFFEF5" stroke="#4A5550" stroke-width="4"/>
+
+    <!-- Neck -->
+    <path d="M285 216Q309 181 305 145Q302 107 334 99Q368 93 380 123Q388 144 369 169Q349 196 351 235"
+          fill="#FFFEF5" stroke="#4A5550" stroke-width="4"/>
+    <path d="M333 165Q320 194 324 213" stroke="#DFE2D9" stroke-width="10"/>
+
+    <!-- Far wing reaches the far grip -->
+    <path d="M333 204Q368 218 411 274Q397 284 383 269L343 242"
+          fill="#E5E7DE" stroke="#4A5550" stroke-width="4"/>
+
+    <!-- Near wing reaches the near grip -->
+    <path d="M255 204Q270 190 289 213L335 254Q342 266 331 272Q317 277 301 263L263 242"
+          fill="#F0F0E7" stroke="#4A5550" stroke-width="4"/>
+    <path d="M255 218Q275 239 298 250M253 231Q270 248 286 252"
+          stroke="#C5CCC3" stroke-width="4"/>
+
+    <!-- Standing near leg and webbed foot -->
+    <path d="M276 277L269 334L292 416" stroke="#655744" stroke-width="18"/>
+    <path d="M276 277L269 334L292 416" stroke="#DBAD69" stroke-width="11"/>
+    <path d="M287 405Q305 403 322 421L309 426L298 422L281 426Z"
+          fill="#E2AF64" stroke="#655744" stroke-width="3"/>
+    <path d="M320 414L301 432M282 432H322" stroke="#344343" stroke-width="7"/>
+
+    <!-- Pelican head and unmistakable long bill with throat pouch -->
+    <path d="M348 139Q385 135 470 186Q445 222 404 214Q369 205 348 157Z"
+          fill="#E3BB7D" stroke="#665B47" stroke-width="4"/>
+    <path d="M345 135Q383 126 482 185Q484 190 474 191L350 153Z"
+          fill="#E6C38A" stroke="#665B47" stroke-width="4"/>
+    <path d="M369 159L458 187" stroke="#C89555" stroke-width="3"/>
+    <path d="M320 109Q327 99 338 101" stroke="#DFE2D9" stroke-width="5"/>
+    <ellipse cx="346" cy="126" rx="10" ry="12" fill="#E8E4CA"/>
+    <ellipse cx="348" cy="127" rx="5" ry="7" fill="#293A36"/>
+    <circle cx="350" cy="124" r="2" fill="white"/>
+    <path d="M335 108Q345 103 353 109" stroke="#4A5550" stroke-width="3"/>
+  </g>
+</svg>

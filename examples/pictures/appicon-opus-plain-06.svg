@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <!-- Sky background -->
+    <linearGradient id="sky" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#1D3FB8"/>
+      <stop offset="0.55" stop-color="#2F7BEA"/>
+      <stop offset="1" stop-color="#5EC4FF"/>
+    </linearGradient>
+
+    <!-- Soft light bloom in the sky -->
+    <radialGradient id="bloom" cx="0.64" cy="0.36" r="0.55">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Sun body -->
+    <radialGradient id="sun" cx="0.38" cy="0.32" r="0.75">
+      <stop offset="0" stop-color="#FFF4B0"/>
+      <stop offset="0.45" stop-color="#FFD23F"/>
+      <stop offset="1" stop-color="#FF9F1C"/>
+    </radialGradient>
+
+    <!-- Sun halo -->
+    <radialGradient id="halo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0.55" stop-color="#FFD23F" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#FFD23F" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Cloud shading -->
+    <linearGradient id="cloud" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#DCE9FA"/>
+    </linearGradient>
+
+    <!-- Cloud shadow -->
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="22"/>
+      <feOffset dx="0" dy="24" result="blur"/>
+      <feFlood flood-color="#0B2A7A" flood-opacity="0.35"/>
+      <feComposite in2="blur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background (square, no rounded corners) -->
+  <rect width="1024" height="1024" fill="url(#sky)"/>
+  <rect width="1024" height="1024" fill="url(#bloom)"/>
+
+  <g transform="translate(0,30)">
+    <!-- Sun -->
+    <circle cx="650" cy="360" r="290" fill="url(#halo)"/>
+    <circle cx="650" cy="360" r="170" fill="url(#sun)"/>
+    <!-- Sun highlight -->
+    <ellipse cx="595" cy="295" rx="60" ry="38" fill="#FFFFFF" opacity="0.35"
+             transform="rotate(-30 595 295)"/>
+
+    <!-- Cloud -->
+    <g filter="url(#shadow)" fill="url(#cloud)">
+      <circle cx="340" cy="620" r="120"/>
+      <circle cx="520" cy="560" r="170"/>
+      <circle cx="720" cy="640" r="110"/>
+      <rect x="230" y="600" width="600" height="180" rx="90"/>
+    </g>
+
+    <!-- Cloud top highlight -->
+    <path d="M410 520 A170 170 0 0 1 600 410" fill="none" stroke="#FFFFFF"
+          stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+  </g>
+</svg>

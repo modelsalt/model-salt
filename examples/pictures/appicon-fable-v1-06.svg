@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- Square background, sharp corners -->
+  <rect x="0" y="0" width="1024" height="1024" fill="#1E5BC6"/>
+
+  <!-- Single-weight line art, white strokes only, no fills -->
+  <g fill="none" stroke="#FFFFFF" stroke-width="56" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Cloud outline -->
+    <path d="
+      M 300 560
+      H 712
+      A 104 104 0 0 0 712 352
+      A 24 24 0 0 1 688 332
+      A 168 168 0 0 0 364 318
+      A 20 20 0 0 1 344 336
+      A 112 112 0 0 0 300 560
+      Z"/>
+
+    <!-- Three falling raindrops, slight diagonal -->
+    <line x1="400" y1="652" x2="364" y2="740"/>
+    <line x1="528" y1="652" x2="492" y2="740"/>
+    <line x1="656" y1="652" x2="620" y2="740"/>
+  </g>
+</svg>

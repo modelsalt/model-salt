@@ -1,0 +1,16 @@
+{
+  "name": "model-salt",
+  "owner": {
+    "name": "Model Salt"
+  },
+  "plugins": [
+    {
+      "name": "model-salt",
+      "source": "./plugin",
+      "description": "Varied results for creative requests that are still exactly what was asked: the model calls model_salt before a creative task and follows what it returns."
+    }
+  ],
+  "metadata": {
+    "description": "Model Salt: varied, faithful results for creative requests"
+  }
+}

@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <title>Pelican Riding a Bicycle</title>
+  <desc>A solid silhouette of a stoic pelican riding a touring bicycle in side profile, one wing pressed to its chest and the other steering, against a blue sky with small clouds.</desc>
+
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3f8fd2"/>
+      <stop offset="1" stop-color="#c8e9fb"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="800" height="600" fill="url(#sky)"/>
+
+  <!-- Clouds -->
+  <g fill="#ffffff" opacity="0.95">
+    <circle cx="108" cy="120" r="20"/>
+    <circle cx="140" cy="106" r="28"/>
+    <circle cx="176" cy="116" r="22"/>
+    <ellipse cx="142" cy="124" rx="52" ry="16"/>
+  </g>
+  <g fill="#ffffff" opacity="0.85">
+    <circle cx="382" cy="74" r="15"/>
+    <circle cx="406" cy="62" r="21"/>
+    <circle cx="432" cy="73" r="15"/>
+    <ellipse cx="407" cy="78" rx="40" ry="12"/>
+  </g>
+  <g fill="#ffffff" opacity="0.9">
+    <circle cx="628" cy="146" r="17"/>
+    <circle cx="656" cy="131" r="24"/>
+    <circle cx="686" cy="144" r="17"/>
+    <ellipse cx="657" cy="150" rx="44" ry="13"/>
+  </g>
+
+  <!-- Ground -->
+  <path d="M0,536 C150,526 300,534 420,531 C560,528 680,535 800,530 L800,600 L0,600 Z" fill="#14263a"/>
+
+  <!-- Bicycle -->
+  <g stroke="#14263a" fill="none" stroke-linecap="round">
+    <!-- Spokes -->
+    <g stroke-width="2.5" opacity="0.9">
+      <path d="M280,460 L350,460 M280,460 L329,509 M280,460 L280,530 M280,460 L231,509
+               M280,460 L210,460 M280,460 L231,411 M280,460 L280,390 M280,460 L329,411"/>
+      <path d="M540,460 L610,460 M540,460 L589,509 M540,460 L540,530 M540,460 L491,509
+               M540,460 L470,460 M540,460 L491,411 M540,460 L540,390 M540,460 L589,411"/>
+    </g>
+    <!-- Wheels -->
+    <circle cx="280" cy="460" r="70" stroke-width="9"/>
+    <circle cx="540" cy="460" r="70" stroke-width="9"/>
+    <!-- Fenders -->
+    <path d="M201,446 A80,80 0 0 1 353,426" stroke-width="6"/>
+    <path d="M465,433 A80,80 0 0 1 609,420" stroke-width="6"/>
+    <!-- Frame -->
+    <g stroke-width="8">
+      <path d="M280,460 L400,468"/>
+      <path d="M280,460 L362,332"/>
+      <path d="M400,468 L362,332"/>
+      <path d="M362,335 L500,322"/>
+      <path d="M400,468 L512,358"/>
+      <path d="M500,318 L516,362"/>
+      <path d="M516,362 L540,460"/>
+      <path d="M362,332 L357,313"/>
+    </g>
+    <!-- Chain and chainring -->
+    <path d="M398,455 L283,449 M398,481 L283,471" stroke-width="3"/>
+    <circle cx="400" cy="468" r="14" stroke-width="5"/>
+    <!-- Cranks -->
+    <path d="M400,468 L372,428 M400,468 L430,506" stroke-width="7"/>
+    <!-- Rear rack -->
+    <path d="M250,368 L318,368" stroke-width="6"/>
+    <path d="M256,368 L274,455 M312,368 L289,457" stroke-width="4"/>
+    <!-- Stem and drop handlebars -->
+    <path d="M501,318 L507,292" stroke-width="7"/>
+    <path d="M507,292 C523,286 539,290 542,301 C545,313 538,326 526,330 C518,333 511,330 512,323" stroke-width="7"/>
+  </g>
+
+  <!-- Pedals -->
+  <g fill="#14263a">
+    <rect x="360" y="425" width="30" height="8" rx="3"/>
+    <rect x="420" y="503" width="30" height="8" rx="3"/>
+    <!-- Hubs -->
+    <circle cx="280" cy="460" r="6"/>
+    <circle cx="540" cy="460" r="6"/>
+  </g>
+
+  <!-- Pannier with flap line -->
+  <rect x="236" y="372" width="76" height="72" rx="10" fill="#14263a"/>
+  <path d="M240,392 L308,392" stroke="#c8e9fb" stroke-width="3" opacity="0.6" fill="none"/>
+
+  <!-- Frame bag with zipper -->
+  <path d="M382,346 L492,333 C497,332 499,336 496,340 L413,452 C410,456 406,455 405,450 L377,353 C375,348 378,346 382,346 Z" fill="#14263a"/>
+  <path d="M392,352 L484,341" stroke="#c8e9fb" stroke-width="2.5" opacity="0.6" fill="none"/>
+
+  <!-- Saddle -->
+  <path d="M330,309 C335,301 348,298 362,301 L384,305 C389,307 389,313 383,315 L342,319 C332,319 327,315 330,309 Z" fill="#14263a"/>
+
+  <!-- Pelican -->
+  <g fill="#14263a">
+    <!-- Rear leg and webbed foot (raised pedal) -->
+    <path d="M358,318 C352,345 352,375 358,400 C360,412 364,420 370,426 L384,426
+             C378,414 375,398 376,380 C377,358 380,338 386,322 Z"/>
+    <path d="M362,422 C372,419 386,422 394,428 L398,433 L390,434 L397,438 L386,440
+             L366,439 C356,436 355,428 362,422 Z"/>
+    <!-- Front leg and webbed foot (lower pedal) -->
+    <path d="M392,320 C402,345 412,380 420,420 C425,450 428,475 430,496 L444,498
+             C444,470 440,435 432,400 C425,368 418,340 410,320 Z"/>
+    <path d="M420,498 C432,495 448,498 456,504 L460,510 L450,511 L458,515 L444,517
+             L424,515 C414,511 413,503 420,498 Z"/>
+
+    <!-- Body -->
+    <path d="M272,292
+             C284,246 319,206 364,196
+             C394,190 420,206 432,236
+             C442,263 435,296 412,316
+             C395,331 360,333 335,325
+             C309,318 285,308 272,292 Z"/>
+
+    <!-- Steering wing reaching to the handlebars -->
+    <path d="M416,228
+             C448,238 474,257 494,281
+             C505,293 516,306 527,316
+             L519,329
+             C507,322 493,311 481,297
+             C463,277 443,258 414,246
+             C410,240 411,233 416,228 Z"/>
+
+    <!-- Head, neck, beak and pouch -->
+    <path d="M398,214
+             C407,186 424,165 450,158
+             C471,152 492,157 501,170
+             C547,174 599,185 631,197
+             C637,200 635,207 627,208
+             C600,207 565,205 540,204
+             C548,223 542,245 522,252
+             C505,246 499,226 502,207
+             C496,219 486,226 474,229
+             C462,244 452,250 440,252
+             C424,249 408,234 398,214 Z"/>
+
+    <!-- Folded wing pressed to chest (outlined against body) -->
+    <path d="M395,222
+             C360,235 340,265 345,300
+             C348,318 360,330 378,330
+             C400,330 420,310 424,285
+             C427,262 415,238 395,222 Z"
+          stroke="#c8e9fb" stroke-width="3"/>
+
+    <!-- Stoic, deadpan eye -->
+    <ellipse cx="475" cy="179" rx="6" ry="2.8" fill="#eaf7ff"/>
+  </g>
+</svg>

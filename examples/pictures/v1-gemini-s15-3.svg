@@ -1,0 +1,274 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 900" width="100%" height="100%">
+  <defs>
+    <!-- Soft Pastel Background Gradient -->
+    <linearGradient id="pastel-sky" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#DDF6EC" /> <!-- Soft Mint -->
+      <stop offset="50%" stop-color="#FFF9D6" /> <!-- Butter Yellow -->
+      <stop offset="100%" stop-color="#FFD8C9" /> <!-- Soft Peach -->
+    </linearGradient>
+
+    <linearGradient id="pastel-sun" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFF5B8" /> <!-- Butter Yellow -->
+      <stop offset="100%" stop-color="#FFC6B3" /> <!-- Peach -->
+    </linearGradient>
+
+    <style>
+      .silhouette {
+        fill: #6E5D8D; /* Deep Pastel Lavender for the solid single-color silhouette */
+        stroke: #6E5D8D;
+        stroke-linejoin: round;
+        stroke-linecap: round;
+      }
+      .silhouette-stroke-only {
+        fill: none;
+        stroke: #6E5D8D;
+        stroke-linejoin: round;
+        stroke-linecap: round;
+      }
+      .bg-cloud {
+        fill: #F3EBF8; /* Very Pale Lavender */
+        opacity: 0.7;
+      }
+    </style>
+  </defs>
+
+  <!-- ================= BACKGROUND (Pastel Palette) ================= -->
+  <rect width="800" height="900" fill="url(#pastel-sky)" />
+
+  <!-- Decorative Pastel Sun/Moon -->
+  <circle cx="400" cy="400" r="290" fill="url(#pastel-sun)" />
+  <circle cx="400" cy="400" r="230" fill="#DDF6EC" opacity="0.4" />
+
+  <!-- Soft Pastel Clouds -->
+  <path class="bg-cloud" d="M 80 280 Q 110 240 160 260 Q 210 220 260 260 Q 300 250 320 280 Z" />
+  <path class="bg-cloud" d="M 520 200 Q 560 150 620 180 Q 670 160 700 200 Z" />
+  <path class="bg-cloud" d="M 60 560 Q 100 520 150 550 Q 180 530 210 560 Z" />
+  
+  <!-- Pastel Ground Horizon -->
+  <ellipse cx="400" cy="830" rx="340" ry="35" fill="#E3D7F4" />
+  <ellipse cx="400" cy="830" rx="220" ry="18" fill="#C9B6E4" />
+
+  <!-- ================= SOLID SINGLE-COLOR SILHOUETTE ================= -->
+  <!-- Direct front-on view, cautious wobbly posture, knocked knees, looking down at pedals -->
+  <g id="pelican-and-cruiser">
+
+    <!-- WOBBLY MOTION LINES (Floating silhouette accents) -->
+    <path class="silhouette-stroke-only" stroke-width="5" d="M 105 320 Q 85 350 95 385" />
+    <path class="silhouette-stroke-only" stroke-width="4" d="M 85 335 Q 70 355 78 378" />
+    <path class="silhouette-stroke-only" stroke-width="5" d="M 695 270 Q 715 300 705 335" />
+    <path class="silhouette-stroke-only" stroke-width="4" d="M 715 285 Q 730 305 722 328" />
+    
+    <!-- Sweat drops from cautious concentration -->
+    <path class="silhouette" d="M 330 95 Q 320 115 330 120 Q 340 115 330 95 Z" />
+    <path class="silhouette" d="M 310 120 Q 298 135 306 142 Q 315 138 310 120 Z" />
+    <path class="silhouette" d="M 485 110 Q 495 130 485 135 Q 475 130 485 110 Z" />
+
+    <!-- PELICAN BODY & TAIL (Wide awkward load on the cruiser saddle) -->
+    <path class="silhouette" d="
+      M 310 290
+      C 265 325, 250 400, 290 455
+      C 325 495, 475 495, 510 455
+      C 550 400, 535 325, 490 290
+      Z" />
+    
+    <!-- Tail feathers sticking out the back/bottom of the seat -->
+    <path class="silhouette" d="
+      M 340 475
+      L 325 510 L 355 495 L 365 520 L 385 495 L 405 520 L 420 490 L 445 505 L 435 475
+      Z" />
+
+    <!-- Vintage Cruiser Saddle & Springs (Visible beneath pelican's hips) -->
+    <path class="silhouette" stroke-width="8" d="M 315 470 Q 400 500 485 470 Q 450 495 350 495 Z" />
+    <!-- Saddle Springs -->
+    <path class="silhouette-stroke-only" stroke-width="5" d="M 345 485 L 335 495 L 355 502 L 345 512" />
+    <path class="silhouette-stroke-only" stroke-width="5" d="M 455 485 L 465 495 L 445 502 L 455 512" />
+
+    <!-- PELICAN WINGS (Tense, elbows flared out, feathers gripping the tilted cruiser handlebars) -->
+    <!-- Left Wing (Viewer's Left - Tilted Down) -->
+    <path class="silhouette" d="
+      M 315 300
+      C 230 280, 145 305, 135 360
+      C 128 395, 145 440, 175 458
+      C 192 468, 212 455, 205 438
+      C 195 415, 198 385, 235 375
+      C 260 368, 285 385, 300 400
+      Z" />
+    <!-- Wingtip primary feathers wrapping around the left grip -->
+    <ellipse class="silhouette" cx="182" cy="452" rx="22" ry="15" transform="rotate(-15 182 452)" />
+    <path class="silhouette" d="M 140 365 Q 115 375 128 390 Q 118 405 138 412 Q 130 428 152 432 Z" />
+
+    <!-- Right Wing (Viewer's Right - Tilted Up) -->
+    <path class="silhouette" d="
+      M 485 300
+      C 570 250, 650 265, 665 320
+      C 675 355, 655 398, 622 412
+      C 605 418, 588 405, 595 388
+      C 605 368, 600 340, 565 335
+      C 540 330, 515 360, 495 385
+      Z" />
+    <!-- Wingtip primary feathers wrapping around the right grip -->
+    <ellipse class="silhouette" cx="615" cy="402" rx="22" ry="15" transform="rotate(18 615 402)" />
+    <path class="silhouette" d="M 660 320 Q 685 328 672 345 Q 682 358 662 368 Q 670 382 648 388 Z" />
+
+    <!-- PELICAN NECK, HEAD & POUCH (Craned forward and down, staring intently at the pedals) -->
+    <!-- Neck -->
+    <path class="silhouette" d="
+      M 350 310
+      C 325 245, 330 165, 365 135
+      C 388 118, 422 118, 445 138
+      C 475 168, 468 245, 445 310
+      Z" />
+    <!-- Tuft of feathers on top of the head -->
+    <path class="silhouette" d="
+      M 385 125
+      L 372 95 L 395 112 L 405 85 L 415 112 L 435 98 L 420 125
+      Z" />
+    <!-- Protruding Brow / Eyes (Squinting down in extreme concentration) -->
+    <circle class="silhouette" cx="358" cy="175" r="18" />
+    <circle class="silhouette" cx="448" cy="175" r="18" />
+    
+    <!-- Huge Foreshortened Beak & Gular Pouch pointing down at the pedals (X:406, Y:395) -->
+    <!-- Bulging throat pouch resting over the chest -->
+    <path class="silhouette" d="
+      M 342 185
+      C 305 245, 312 340, 368 382
+      C 392 400, 418 400, 442 382
+      C 498 340, 505 245, 468 185
+      Z" />
+    <!-- Upper Mandible Ridges & Hooked Tip -->
+    <path class="silhouette" d="
+      M 365 180
+      L 388 395
+      Q 405 422 422 395
+      L 445 180
+      Z" />
+    <!-- Distinct Hook at the tip of the beak -->
+    <ellipse class="silhouette" cx="405" cy="402" rx="14" ry="18" />
+
+
+    <!-- VINTAGE CRUISER BICYCLE (Direct Front-On View, Tilted ~5 deg from Wobbling) -->
+    
+    <!-- Swept-Back Cruiser Handlebars -->
+    <path class="silhouette-stroke-only" stroke-width="14" d="
+      M 150 458
+      L 215 445
+      C 260 438, 285 455, 315 505
+      Q 355 560, 398 525
+      Q 442 552, 478 492
+      C 505 440, 530 415, 575 410
+      L 640 398" />
+    <!-- Handlebar Grips with Vintage Tassels/Streamers flying out from wobble -->
+    <path class="silhouette-stroke-only" stroke-width="22" d="M 145 459 L 195 449" />
+    <path class="silhouette-stroke-only" stroke-width="4" d="M 140 460 Q 105 475 95 510" />
+    <path class="silhouette-stroke-only" stroke-width="4" d="M 140 460 Q 115 485 115 520" />
+    <path class="silhouette-stroke-only" stroke-width="4" d="M 140 460 Q 125 490 132 522" />
+
+    <path class="silhouette-stroke-only" stroke-width="22" d="M 590 407 L 642 397" />
+    <path class="silhouette-stroke-only" stroke-width="4" d="M 646 396 Q 685 405 700 440" />
+    <path class="silhouette-stroke-only" stroke-width="4" d="M 646 396 Q 675 415 682 450" />
+    <path class="silhouette-stroke-only" stroke-width="4" d="M 646 396 Q 662 420 662 455" />
+
+    <!-- Classic Cruiser Bell on Right Bar -->
+    <ellipse class="silhouette" cx="545" cy="402" rx="16" ry="11" transform="rotate(-10 545 402)" />
+    <path class="silhouette" d="M 560 395 L 572 390 L 568 402 Z" />
+
+    <!-- Curved Vintage Frame & Stem (Foreshortened front view) -->
+    <!-- Seat Post & Head Tube -->
+    <path class="silhouette-stroke-only" stroke-width="18" d="M 400 480 L 398 585" />
+    <!-- Curved Cruiser Twin-Bar / Swan Frame Tubes bowing out slightly in perspective -->
+    <path class="silhouette-stroke-only" stroke-width="11" d="M 400 495 C 365 540, 365 615, 398 675" />
+    <path class="silhouette-stroke-only" stroke-width="11" d="M 400 495 C 435 540, 435 615, 402 675" />
+
+    <!-- Vintage Retro Bullet Headlight & Bracket -->
+    <ellipse class="silhouette" cx="398" cy="552" rx="24" ry="26" />
+    <path class="silhouette" d="M 372 545 Q 398 530 424 545 L 420 532 Q 398 520 376 532 Z" />
+
+    <!-- Cruiser Front Fork & Balloon Fender -->
+    <!-- Wide Curved Fork Blades -->
+    <path class="silhouette-stroke-only" stroke-width="13" d="
+      M 398 575
+      C 355 585, 348 635, 355 715" />
+    <path class="silhouette-stroke-only" stroke-width="13" d="
+      M 398 575
+      C 442 585, 448 635, 442 715" />
+    <!-- Classic Flared Front Fender Dome -->
+    <path class="silhouette" d="
+      M 358 625
+      C 358 565, 438 565, 438 625
+      Q 398 610 358 625
+      Z" />
+    <!-- Fender Struts/Braces -->
+    <path class="silhouette-stroke-only" stroke-width="4" d="M 352 712 L 330 665 L 365 655" />
+    <path class="silhouette-stroke-only" stroke-width="4" d="M 445 712 L 468 665 L 432 655" />
+
+    <!-- Rear Wheel (Slightly visible behind/offset due to the nervous wobble) -->
+    <path class="silhouette-stroke-only" stroke-width="20" stroke-dasharray="14 5" d="M 418 650 L 412 818" />
+
+    <!-- Front Balloon Tire (Direct front-on view, leaning slightly with the wobble) -->
+    <path class="silhouette-stroke-only" stroke-width="38" d="M 398 600 L 400 830" />
+    <!-- Tire Tread Notches along the silhouette edge -->
+    <path class="silhouette-stroke-only" stroke-width="44" stroke-dasharray="8 14" d="M 398 608 L 400 822" />
+    <!-- Front Hub & Axle Nuts -->
+    <path class="silhouette-stroke-only" stroke-width="14" d="M 340 715 L 458 715" />
+    <circle class="silhouette" cx="340" cy="715" r="10" />
+    <circle class="silhouette" cx="458" cy="715" r="10" />
+
+
+    <!-- PELICAN LEGS, KNOCKED KNEES, WEBBED FEET & PEDALS -->
+    <!-- Bottom Bracket & Crankset -->
+    <circle class="silhouette" cx="400" cy="685" r="22" />
+    <!-- Chain guard silhouette on viewer's left (bike's right side) -->
+    <path class="silhouette" d="M 372 650 C 355 650, 355 715, 372 715 Z" />
+
+    <!-- Left Leg (Viewer's Left - Pedal High at X:285, Y:620) -->
+    <!-- Crank Arm -->
+    <path class="silhouette-stroke-only" stroke-width="11" d="M 390 680 L 325 680 L 325 620 L 265 620" />
+    <!-- Pedal Block -->
+    <rect class="silhouette" x="242" y="611" width="65" height="18" rx="6" transform="rotate(-8 275 620)" />
+    
+    <!-- Knock-Kneed Left Leg (Angles sharply INWARD from hip to knobby knee, then OUT to pedal) -->
+    <!-- Upper Leg (Hip X:330, Y:465 -> Inward Knocked Knee X:368, Y:542) -->
+    <path class="silhouette-stroke-only" stroke-width="16" d="M 330 465 L 368 542" />
+    <!-- Lower Leg (Knocked Knee X:368, Y:542 -> Ankle X:278, Y:595) -->
+    <path class="silhouette-stroke-only" stroke-width="13" d="M 368 542 L 278 595" />
+    <!-- Big Knobby Knee Joint -->
+    <circle class="silhouette" cx="368" cy="542" r="15" />
+    <!-- Big Awkward Webbed Foot splayed over the left pedal -->
+    <path class="silhouette" d="
+      M 278 590
+      L 225 618
+      Q 248 632 260 622
+      Q 275 638 290 622
+      Q 308 632 320 615
+      Z" />
+
+    <!-- Right Leg (Viewer's Right - Pedal Low at X:515, Y:735) -->
+    <!-- Crank Arm -->
+    <path class="silhouette-stroke-only" stroke-width="11" d="M 410 690 L 475 690 L 475 735 L 535 735" />
+    <!-- Pedal Block -->
+    <rect class="silhouette" x="492" y="726" width="65" height="18" rx="6" transform="rotate(6 525 735)" />
+
+    <!-- Knock-Kneed Right Leg (Angles sharply INWARD from hip to knobby knee, almost touching left knee) -->
+    <!-- Upper Leg (Hip X:470, Y:465 -> Inward Knocked Knee X:428, Y:555) -->
+    <path class="silhouette-stroke-only" stroke-width="16" d="M 470 465 L 428 555" />
+    <!-- Lower Leg (Knocked Knee X:428, Y:555 -> Ankle X:522, Y:710) -->
+    <path class="silhouette-stroke-only" stroke-width="13" d="M 428 555 L 522 710" />
+    <!-- Big Knobby Knee Joint -->
+    <circle class="silhouette" cx="428" cy="555" r="15" />
+    <!-- Big Awkward Webbed Foot splayed over the right pedal -->
+    <path class="silhouette" d="
+      M 522 705
+      L 480 735
+      Q 502 748 515 738
+      Q 532 752 548 738
+      Q 565 748 575 730
+      Z" />
+
+    <!-- Little nervous vibration lines around the knocked knees -->
+    <path class="silhouette-stroke-only" stroke-width="3" d="M 342 532 Q 332 542 342 552" />
+    <path class="silhouette-stroke-only" stroke-width="3" d="M 454 545 Q 464 555 454 565" />
+
+    <!-- Ground Contact Shadow (Solid Silhouette) -->
+    <ellipse class="silhouette" cx="400" cy="832" rx="75" ry="9" />
+  </g>
+</svg>

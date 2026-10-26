@@ -1,0 +1,289 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 650" width="100%" height="100%">
+  <defs>
+    <style>
+      /* Cool-toned Duotone Palette:
+         Dark Slate Blue: #152A4A
+         Vibrant Cyan:    #25B4D2
+         Cool Ice White:  #F0FAFC
+      */
+      .bg { fill: #F0FAFC; }
+      
+      .line {
+        fill: none;
+        stroke: #152A4A;
+        stroke-width: 5.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      
+      .fill-white {
+        fill: #F0FAFC;
+        stroke: #152A4A;
+        stroke-width: 5.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      
+      .fill-cyan {
+        fill: #25B4D2;
+        stroke: #152A4A;
+        stroke-width: 5.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      
+      .fill-dark {
+        fill: #152A4A;
+        stroke: #152A4A;
+        stroke-width: 5.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .shadow {
+        fill: #25B4D2;
+        stroke: none;
+      }
+
+      .tire {
+        fill: none;
+        stroke: #152A4A;
+        stroke-width: 14;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .rim {
+        fill: none;
+        stroke: #25B4D2;
+        stroke-width: 5.5;
+      }
+    </style>
+
+    <!-- Wheel Component -->
+    <g id="wheel">
+      <!-- Spokes -->
+      <line x1="-88" y1="0" x2="88" y2="0" class="line" />
+      <line x1="0" y1="-88" x2="0" y2="88" class="line" />
+      <line x1="-62" y1="-62" x2="62" y2="62" class="line" />
+      <line x1="-62" y1="62" x2="62" y2="-62" class="line" />
+      <line x1="-81" y1="-34" x2="81" y2="34" class="line" />
+      <line x1="-34" y1="-81" x2="34" y2="81" class="line" />
+      <line x1="-81" y1="34" x2="81" y2="-34" class="line" />
+      <line x1="-34" y1="81" x2="34" y2="-81" class="line" />
+      <!-- Inner Cyan Rim -->
+      <circle cx="0" cy="0" r="81" class="rim" />
+      <!-- Outer Dark Tire -->
+      <circle cx="0" cy="0" r="88" class="tire" />
+      <!-- Hub -->
+      <circle cx="0" cy="0" r="12" class="fill-white" />
+      <circle cx="0" cy="0" r="4" class="fill-dark" />
+    </g>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" class="bg" />
+
+  <!-- ================= GROUND & MOTION INDICATORS ================= -->
+  <g id="ground-and-motion">
+    <!-- Ground Shadows (Separated from tires to show mid-air bounce) -->
+    <ellipse cx="220" cy="605" rx="60" ry="8" class="shadow" />
+    <ellipse cx="560" cy="605" rx="60" ry="8" class="shadow" />
+    <ellipse cx="390" cy="605" rx="22" ry="5" class="shadow" />
+
+    <!-- Ground Line (Broken Monoline) -->
+    <line x1="70" y1="605" x2="140" y2="605" class="line" />
+    <line x1="160" y1="605" x2="635" y2="605" class="line" />
+    <line x1="655" y1="605" x2="710" y2="605" class="line" />
+    <line x1="730" y1="605" x2="745" y2="605" class="line" />
+
+    <!-- Bounce & Impact Arcs under Wheels -->
+    <!-- Front Wheel Bounce -->
+    <path d="M 185 572 Q 220 584 255 572" class="line" />
+    <path d="M 202 584 Q 220 591 238 584" class="line" />
+    <line x1="155" y1="562" x2="140" y2="572" class="line" />
+    <line x1="285" y1="562" x2="300" y2="572" class="line" />
+
+    <!-- Rear Wheel Bounce -->
+    <path d="M 525 572 Q 560 584 595 572" class="line" />
+    <path d="M 542 584 Q 560 591 578 584" class="line" />
+    <line x1="495" y1="562" x2="480" y2="572" class="line" />
+    <line x1="625" y1="562" x2="640" y2="572" class="line" />
+
+    <!-- Forward Speed Lines & Air Puffs -->
+    <line x1="650" y1="260" x2="710" y2="260" class="line" />
+    <line x1="670" y1="280" x2="740" y2="280" class="line" />
+    <line x1="640" y1="420" x2="695" y2="420" class="line" />
+    <line x1="665" y1="440" x2="685" y2="440" class="line" />
+    <path d="M 450 110 Q 465 95 485 105" class="line" />
+    <path d="M 470 125 Q 485 115 500 125" class="line" />
+  </g>
+
+  <!-- ================= FAR SIDE PELICAN ANATOMY (Behind Bike) ================= -->
+  <g id="far-side-pelican">
+    <!-- Far Wing reaching for far handlebar grip -->
+    <path d="M 410 215 Q 350 235 310 250" class="line" />
+    
+    <!-- Far Leg (Coasting effortlessly forward, slightly bent) -->
+    <!-- Drumstick -->
+    <path d="M 435 305 L 365 340 L 395 360 Z" class="fill-white" />
+    <!-- Lower Leg (Tarsus) -->
+    <line x1="375" y1="348" x2="320" y2="395" class="line" />
+    <!-- Webbed Foot (Coasting in the air near the front fender) -->
+    <path d="M 320 395 L 275 385 Q 270 400 282 408 Q 278 420 292 425 L 325 408 Z" class="fill-cyan" />
+    <line x1="320" y1="395" x2="282" y2="408" class="line" />
+  </g>
+
+  <!-- ================= TALL DUTCH STEP-THROUGH BICYCLE ================= -->
+  <g id="dutch-bicycle">
+    <!-- Wheels (Positioned at Y=460, floating 50px above the Y=605 ground) -->
+    <use href="#wheel" x="220" y="460" />
+    <use href="#wheel" x="560" y="460" />
+
+    <!-- Fenders (Mudguards) with Stays -->
+    <!-- Front Fender -->
+    <line x1="220" y1="460" x2="145" y2="395" class="line" />
+    <line x1="220" y1="460" x2="322" y2="450" class="line" />
+    <path d="M 135 405 A 102 102 0 0 1 322 465" class="line" />
+    
+    <!-- Rear Fender & Classic Dutch Coat/Skirt Guard -->
+    <path d="M 458 460 A 102 102 0 0 1 662 460 L 560 460 Z" class="fill-cyan" />
+    <line x1="560" y1="460" x2="645" y2="402" class="line" />
+    <line x1="560" y1="460" x2="662" y2="450" class="line" />
+
+    <!-- Rear Luggage Rack -->
+    <path d="M 465 352 L 645 352 L 635 365 L 485 365 Z" class="fill-white" />
+    <line x1="535" y1="365" x2="560" y2="460" class="line" />
+    <line x1="615" y1="365" x2="560" y2="460" class="line" />
+
+    <!-- Step-Through Frame (Omafiets Geometry) -->
+    <!-- Seat Tube -->
+    <line x1="390" y1="460" x2="455" y2="310" class="line" />
+    <!-- Seat Stay -->
+    <line x1="442" y1="340" x2="560" y2="460" class="line" />
+    <!-- Swept Step-Through Down Tube -->
+    <path d="M 272 280 C 315 390, 340 445, 390 460" class="line" />
+    <!-- Low Curved Top/Mid Tube -->
+    <path d="M 278 310 C 325 395, 355 425, 405 425" class="line" />
+    
+    <!-- Front Fork & Head Tube -->
+    <path d="M 220 460 Q 235 420 264 320 L 280 260" class="line" />
+    <!-- Head Tube Accents -->
+    <line x1="258" y1="320" x2="270" y2="323" class="line" />
+    <line x1="274" y1="260" x2="286" y2="263" class="line" />
+
+    <!-- Tall Swept-Back Gooseneck Stem & Handlebars -->
+    <path d="M 277 260 L 292 195 C 296 180, 315 180, 330 205 C 345 230, 345 250, 315 260" class="line" />
+    
+    <!-- Classic Vintage Headlamp -->
+    <line x1="274" y1="272" x2="250" y2="262" class="line" />
+    <path d="M 230 245 C 258 245, 258 285, 230 285 Z" class="fill-cyan" />
+    <ellipse cx="230" cy="265" rx="5" ry="20" class="fill-white" />
+    <!-- Light Beam / Motion Shine -->
+    <line x1="212" y1="255" x2="195" y2="250" class="line" />
+    <line x1="210" y1="270" x2="190" y2="270" class="line" />
+
+    <!-- Fully Enclosed Dutch Chain Guard (Chainglider) -->
+    <path d="M 390 432 L 560 442 A 18 18 0 0 1 560 478 L 390 488 A 28 28 0 0 1 390 432 Z" class="fill-white" />
+    <path d="M 392 446 L 558 453 A 7 7 0 0 1 558 467 L 392 474 A 14 14 0 0 1 392 446 Z" class="fill-cyan" />
+    <circle cx="390" cy="460" r="9" class="fill-dark" />
+
+    <!-- Seatpost & Sprung Cruiser Saddle -->
+    <line x1="455" y1="310" x2="465" y2="285" class="line" />
+    <!-- Saddle Springs -->
+    <circle cx="485" cy="296" r="6" class="fill-white" />
+    <circle cx="485" cy="306" r="6" class="fill-white" />
+    <!-- Saddle Body -->
+    <path d="M 425 282 C 425 268, 495 262, 505 282 C 510 295, 455 298, 425 282 Z" class="fill-dark" />
+  </g>
+
+  <!-- ================= PELICAN (Full Side Profile Facing Left) ================= -->
+  <g id="pelican-main">
+    <!-- Tail Feathers -->
+    <path d="M 525 245 L 590 225 L 575 248 L 595 262 L 535 272 Z" class="fill-white" />
+    <line x1="535" y1="255" x2="575" y2="248" class="line" />
+
+    <!-- Main Plump Body -->
+    <path d="M 385 190 
+             C 350 245, 385 315, 455 305 
+             C 510 300, 555 275, 555 240 
+             C 555 195, 485 160, 425 180 Z" class="fill-white" />
+
+    <!-- Near Leg (Actively Pedaling Downward) -->
+    <!-- Fluffy Thigh / Drumstick -->
+    <path d="M 435 285 C 430 325, 455 345, 465 355 C 475 345, 490 315, 475 285" class="fill-white" />
+    <!-- Lower Leg (Tarsus) -->
+    <line x1="465" y1="350" x2="425" y2="495" class="line" />
+    <!-- Near Crank Arm (Behind foot, in front of chain guard) -->
+    <line x1="390" y1="460" x2="412" y2="515" class="line" />
+    <circle cx="390" cy="460" r="6" class="fill-white" />
+    <!-- Webbed Foot (Planted firmly on the lower pedal) -->
+    <path d="M 425 495 L 372 508 Q 368 518 382 522 L 432 515 Z" class="fill-cyan" />
+    <line x1="425" y1="495" x2="388" y2="514" class="line" />
+    <!-- Pedal Platform (Underneath foot) -->
+    <rect x="380" y="514" width="44" height="10" rx="5" class="fill-dark" />
+
+    <!-- Head and Curved S-Neck -->
+    <path d="M 385 205
+             C 375 165, 435 125, 425 85
+             C 420 55, 385 45, 355 55
+             C 340 60, 330 70, 330 78
+             L 335 130
+             C 365 130, 390 120, 385 95
+             C 390 125, 345 165, 360 220" class="fill-white" />
+    
+    <!-- Tuft of Feathers on Crown -->
+    <path d="M 412 62 L 435 52 L 422 68 L 442 66 L 422 78" class="fill-white" />
+
+    <!-- Giant Pelican Beak & Gular Pouch -->
+    <!-- Massive Cyan Throat Pouch -->
+    <path d="M 118 88 
+             C 118 190, 255 210, 345 150 
+             C 350 135, 340 115, 335 110 
+             Z" class="fill-cyan" />
+    <!-- Pouch Motion Striations / Folds -->
+    <path d="M 155 115 C 185 160, 265 168, 325 132" class="line" />
+    <path d="M 205 135 C 235 158, 280 160, 318 142" class="line" />
+
+    <!-- Long Upper Mandible with Hooked Tip -->
+    <path d="M 332 70 
+             L 125 75 
+             C 110 75, 102 85, 108 98 
+             C 112 104, 120 100, 122 92 
+             L 338 112 
+             Z" class="fill-white" />
+    <!-- Nostril Slit -->
+    <line x1="295" y1="82" x2="275" y2="83" class="line" />
+
+    <!-- Expressive Eye (Focused Forward) -->
+    <circle cx="356" cy="80" r="12" class="fill-cyan" />
+    <circle cx="354" cy="80" r="5" class="fill-dark" />
+    <!-- Determined /Jaunty Eyebrow Ridge -->
+    <path d="M 342 66 Q 356 62 368 70" class="line" />
+
+    <!-- Near Wing & Primary Feathers Wrapped Around the Handlebar Grip -->
+    <!-- Handlebar Grip Base (Protruding slightly) -->
+    <path d="M 335 245 L 285 268" stroke="#152A4A" stroke-width="16" stroke-linecap="round" />
+    <circle cx="285" cy="268" r="8" class="fill-cyan" />
+
+    <!-- Upper Wing & Secondary Coverts Sweeping Forward -->
+    <path d="M 465 200 
+             C 495 210, 495 255, 455 268 
+             C 415 280, 365 275, 325 258 
+             C 330 235, 375 205, 435 198 Z" class="fill-white" />
+    
+    <!-- Wing Scallop Detail -->
+    <path d="M 455 225 C 435 242, 395 248, 365 240" class="line" />
+    <path d="M 465 242 C 445 258, 410 262, 385 255" class="line" />
+
+    <!-- Cyan & Dark Primary Feathers Curled Tightly Around the Grip (X:295-320, Y:255-265) -->
+    <!-- Finger/Feather 1 (Innermost) -->
+    <path d="M 340 245 C 320 238, 305 248, 312 268 C 316 278, 330 274, 330 262" class="fill-cyan" />
+    <!-- Finger/Feather 2 (Middle) -->
+    <path d="M 332 248 C 308 242, 294 254, 302 273 C 306 283, 320 278, 320 266" class="fill-cyan" />
+    <!-- Finger/Feather 3 (Outermost) -->
+    <path d="M 324 252 C 298 248, 284 260, 292 278 C 296 288, 310 282, 310 270" class="fill-cyan" />
+    <!-- Thumb/Alula Feather (Tucked over top of bar) -->
+    <path d="M 330 238 C 312 232, 298 238, 295 248 C 305 252, 318 250, 328 246" class="fill-dark" />
+  </g>
+</svg>

@@ -1,0 +1,478 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 850" width="100%" height="100%">
+  <defs>
+    <!-- Earthy Organic Palette & Technical Styles -->
+    <style>
+      .bg { fill: #EAE2D3; }
+      .grid-line { stroke: #D5CBB8; stroke-width: 1; fill: none; }
+      .grid-major { stroke: #C2B59E; stroke-width: 1.5; stroke-dasharray: 6 6; fill: none; }
+      
+      .solid-stroke { stroke: #2B2118; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+      .thick-stroke { stroke: #2B2118; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .thin-stroke { stroke: #2B2118; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+      
+      .dashed-accent { stroke: #2B2118; stroke-width: 1.5; stroke-dasharray: 5 5; fill: none; stroke-linecap: round; }
+      .dotted-accent { stroke: #2B2118; stroke-width: 2; stroke-dasharray: 1 6; fill: none; stroke-linecap: round; }
+      
+      .tech-guide { stroke: #B85A3A; stroke-width: 1.25; stroke-dasharray: 8 4 2 4; fill: none; }
+      .tech-guide-solid { stroke: #B85A3A; stroke-width: 1; fill: none; }
+      
+      .fill-olive { fill: #5E6B47; }
+      .fill-olive-dark { fill: #434E32; }
+      .fill-olive-light { fill: #7A8861; }
+      
+      .fill-terracotta { fill: #C86D51; }
+      .fill-terracotta-dark { fill: #A45037; }
+      
+      .fill-sand { fill: #F4EFE6; }
+      .fill-sand-Mid { fill: #E2D7C5; }
+      .fill-sand-dark { fill: #C7B9A3; }
+      
+      .fill-brown { fill: #5C4332; }
+      .fill-brown-dark { fill: #3B2B20; }
+      .fill-ochre { fill: #D99B52; }
+      
+      .shadow { fill: #C8BDA8; }
+      .text-tech { font-family: 'Courier New', Courier, monospace; font-size: 11px; fill: #5C4332; font-weight: bold; letter-spacing: 1px; }
+    </style>
+
+    <!-- Isometric Wheel Template (Steep High-Angle Projection) -->
+    <g id="iso-wheel">
+      <!-- Outer Tire Thickness (Extrusion) -->
+      <ellipse cx="0" cy="6" rx="52" ry="62" class="fill-brown-dark solid-stroke" />
+      <!-- Tire Top Face -->
+      <ellipse cx="0" cy="0" rx="52" ry="62" class="fill-brown solid-stroke" />
+      <!-- Tire Tread Accent -->
+      <ellipse cx="0" cy="0" rx="48" ry="57" class="dotted-accent" style="stroke: #EAE2D3;" />
+      <!-- Whitewall / Sand Rim -->
+      <ellipse cx="0" cy="0" rx="43" ry="51" class="fill-sand-Mid solid-stroke" />
+      <!-- Inner Wheel Cutout -->
+      <ellipse cx="0" cy="0" rx="38" ry="45" class="bg solid-stroke" />
+      <!-- Spokes -->
+      <g class="thin-stroke">
+        <line x1="-38" y1="0" x2="38" y2="0" />
+        <line x1="0" y1="-45" x2="0" y2="45" />
+        <line x1="-27" y1="-32" x2="27" y2="32" />
+        <line x1="-27" y1="32" x2="27" y2="-32" />
+        <line x1="-35" y1="-17" x2="35" y2="17" />
+        <line x1="-19" y1="-39" x2="19" y2="39" />
+        <line x1="-35" y1="17" x2="35" y2="-17" />
+        <line x1="-19" y1="39" x2="19" y2="-39" />
+      </g>
+      <!-- Structural Spoke Tension Circle -->
+      <ellipse cx="0" cy="0" rx="22" ry="26" class="dashed-accent" />
+      <!-- Hub -->
+      <ellipse cx="0" cy="2" rx="9" ry="11" class="fill-olive-dark solid-stroke" />
+      <ellipse cx="0" cy="-3" rx="9" ry="11" class="fill-olive-light solid-stroke" />
+      <ellipse cx="0" cy="-3" rx="4" ry="5" class="fill-sand solid-stroke" />
+    </g>
+
+    <!-- Technical Target Node -->
+    <g id="tech-node">
+      <circle cx="0" cy="0" r="6" class="tech-guide-solid" />
+      <circle cx="0" cy="0" r="2" fill="#B85A3A" />
+      <line x1="-10" y1="0" x2="10" y2="0" class="tech-guide-solid" />
+      <line x1="0" y1="-10" x2="0" y2="10" class="tech-guide-solid" />
+    </g>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="850" class="bg" />
+
+  <!-- High-Angle Isometric Grid (Steep 45-degree diamond projection for bird's-eye view) -->
+  <g id="isometric-grid">
+    <!-- X-Axis Lines (Slope +1) -->
+    <line x1="-400" y1="400" x2="400" y2="1200" class="grid-line" />
+    <line x1="-300" y1="300" x2="500" y2="1100" class="grid-line" />
+    <line x1="-200" y1="200" x2="600" y2="1000" class="grid-major" />
+    <line x1="-100" y1="100" x2="700" y2="900" class="grid-line" />
+    <line x1="0" y1="0" x2="800" y2="800" class="grid-major" />
+    <line x1="100" y1="-100" x2="900" y2="700" class="grid-line" />
+    <line x1="200" y1="-200" x2="1000" y2="600" class="grid-major" />
+    <line x1="300" y1="-300" x2="1100" y2="500" class="grid-line" />
+    <line x1="400" y1="-400" x2="1200" y2="400" class="grid-line" />
+
+    <!-- Y-Axis Lines (Slope -1) -->
+    <line x1="400" y1="-400" x2="-400" y2="400" class="grid-line" />
+    <line x1="500" y1="-300" x2="-300" y2="500" class="grid-line" />
+    <line x1="600" y1="-200" x2="-200" y2="600" class="grid-major" />
+    <line x1="700" y1="-100" x2="-100" y2="700" class="grid-line" />
+    <line x1="800" y1="0" x2="0" y2="800" class="grid-major" />
+    <line x1="900" y1="100" x2="100" y2="900" class="grid-line" />
+    <line x1="1000" y1="200" x2="200" y2="1000" class="grid-major" />
+    <line x1="1100" y1="300" x2="300" y2="1100" class="grid-line" />
+    <line x1="1200" y1="400" x2="400" y2="1200" class="grid-line" />
+  </g>
+
+  <!-- Ground Shadow Plane & Elevation Projections -->
+  <g id="ground-plane">
+    <!-- Isometric Bounding Box Footprint -->
+    <polygon points="180,450 500,770 620,650 300,330" fill="none" class="tech-guide" />
+    
+    <!-- Cast Shadows on Ground -->
+    <ellipse cx="280" cy="490" rx="55" ry="65" class="shadow" />
+    <ellipse cx="520" cy="730" rx="55" ry="65" class="shadow" />
+    <path d="M 280,490 L 520,730" stroke="#C8BDA8" stroke-width="45" stroke-linecap="round" />
+    <ellipse cx="385" cy="595" rx="65" ry="55" class="shadow" />
+
+    <!-- Vertical Drop Lines (Z-Axis Plumb Lines) -->
+    <line x1="280" y1="440" x2="280" y2="490" class="tech-guide" />
+    <line x1="520" y1="680" x2="520" y2="730" class="tech-guide" />
+    <line x1="390" y1="550" x2="390" y2="600" class="tech-guide" />
+    <line x1="560" y1="190" x2="560" y2="690" class="tech-guide" />
+    <use href="#tech-node" x="560" y="690" />
+    <text x="572" y="694" class="text-tech">BILL_PROJ_XY</text>
+  </g>
+
+  <!-- ==========================================
+       LAYER 1: REAR BICYCLE ASSEMBLY
+       ========================================== -->
+  <g id="rear-bicycle">
+    <!-- Rear Wheel -->
+    <use href="#iso-wheel" x="280" y="440" />
+    
+    <!-- Rear Mudguard / Fender (Olive Green) -->
+    <path d="M 230,425 A 54,64 0 0 1 325,405 L 333,415 A 48,58 0 0 0 238,435 Z" class="fill-olive solid-stroke" />
+    <path d="M 234,430 A 51,61 0 0 1 329,410" class="dashed-accent" />
+
+    <!-- Rear Luggage Rack (Terracotta) -->
+    <g id="rear-rack">
+      <!-- Rack Stays -->
+      <line x1="280" y1="440" x2="255" y2="365" class="thick-stroke" />
+      <line x1="280" y1="440" x2="295" y2="345" class="thick-stroke" />
+      <!-- Isometric Rack Platform -->
+      <polygon points="245,355 285,335 335,385 295,405" class="fill-terracotta solid-stroke" />
+      <line x1="258" y1="368" x2="298" y2="348" class="thin-stroke" />
+      <line x1="270" y1="380" x2="310" y2="360" class="thin-stroke" />
+      <line x1="282" y1="392" x2="322" y2="372" class="thin-stroke" />
+    </g>
+
+    <!-- Chain Guard (Full Dutch Style - Olive Dark + Sand Trim) -->
+    <g id="chain-guard">
+      <path d="M 280,422 L 390,528 A 24,28 0 0 1 390,572 L 280,458 A 16,18 0 0 1 280,422 Z" class="fill-olive-dark solid-stroke" />
+      <path d="M 284,430 L 386,534 A 16,19 0 0 1 386,564 L 284,450 Z" class="fill-olive solid-stroke" />
+      <line x1="290" y1="440" x2="380" y2="548" class="dashed-accent" style="stroke: #F4EFE6;" />
+      <circle cx="385" cy="550" r="8" class="fill-terracotta solid-stroke" />
+    </g>
+
+    <!-- Rear Frame Stays -->
+    <line x1="280" y1="440" x2="390" y2="550" class="thick-stroke" />
+    <line x1="280" y1="440" x2="345" y2="415" class="fill-olive" stroke="#5E6B47" stroke-width="9" stroke-linecap="round" />
+    <line x1="280" y1="440" x2="345" y2="415" class="solid-stroke" fill="none" />
+  </g>
+
+  <!-- ==========================================
+       LAYER 2: RIGHT LEG & PEDAL (FAR SIDE)
+       ========================================== -->
+  <g id="right-leg-assembly">
+    <!-- Far Crank & Pedal -->
+    <line x1="390" y1="550" x2="415" y2="525" class="thick-stroke" />
+    <polygon points="405,515 435,515 430,530 400,530" class="fill-brown solid-stroke" />
+    <!-- Right Webbed Foot (Terracotta, Symmetrical Mechanical Placement) -->
+    <polygon points="415,495 445,515 430,530 405,525" class="fill-terracotta-dark solid-stroke" />
+    <line x1="415" y1="505" x2="435" y2="520" class="thin-stroke" />
+    <!-- Right Leg (Vertical Stiff Cylinder) -->
+    <line x1="395" y1="380" x2="418" y2="508" stroke="#A45037" stroke-width="10" stroke-linecap="round" />
+    <line x1="395" y1="380" x2="418" y2="508" class="solid-stroke" />
+    <!-- Mechanical Knee Joint -->
+    <circle cx="407" cy="445" r="7" class="fill-ochre solid-stroke" />
+  </g>
+
+  <!-- ==========================================
+       LAYER 3: CENTER BICYCLE FRAME & FRONT WHEEL
+       ========================================== -->
+  <g id="center-front-bicycle">
+    <!-- Front Wheel -->
+    <use href="#iso-wheel" x="520" y="680" />
+
+    <!-- Front Mudguard / Fender -->
+    <path d="M 468,665 A 54,64 0 0 1 560,640 L 566,652 A 48,58 0 0 0 476,675 Z" class="fill-olive solid-stroke" />
+    <path d="M 472,670 A 51,61 0 0 1 563,646" class="dashed-accent" />
+
+    <!-- Front Fork -->
+    <path d="M 520,680 L 490,545 L 495,515" fill="none" stroke="#2B2118" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M 520,680 L 490,545 L 495,515" fill="none" stroke="#5E6B47" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="520" cy="680" r="5" class="fill-terracotta solid-stroke" />
+
+    <!-- Classic Dutch Curved Step-Through Frame -->
+    <g id="dutch-frame">
+      <!-- Seat Tube -->
+      <line x1="390" y1="550" x2="340" y2="390" stroke="#2B2118" stroke-width="14" stroke-linecap="round" />
+      <line x1="390" y1="550" x2="340" y2="390" stroke="#5E6B47" stroke-width="8" stroke-linecap="round" />
+      
+      <!-- Curved Step-Through Down Tube (Double-tube classic swan neck) -->
+      <path d="M 492,525 C 430,545 425,585 390,550" fill="none" stroke="#2B2118" stroke-width="14" stroke-linecap="round" />
+      <path d="M 492,525 C 430,545 425,585 390,550" fill="none" stroke="#5E6B47" stroke-width="8" stroke-linecap="round" />
+      
+      <path d="M 495,495 C 425,515 415,545 362,465" fill="none" stroke="#2B2118" stroke-width="12" stroke-linecap="round" />
+      <path d="M 495,495 C 425,515 415,545 362,465" fill="none" stroke="#5E6B47" stroke-width="6" stroke-linecap="round" />
+      <!-- Structural Accent Line along Frame -->
+      <path d="M 493,510 C 428,530 420,565 376,508" class="dashed-accent" />
+
+      <!-- Head Tube -->
+      <line x1="490" y1="535" x2="498" y2="480" stroke="#2B2118" stroke-width="16" stroke-linecap="round" />
+      <line x1="490" y1="535" x2="498" y2="480" stroke="#F4EFE6" stroke-width="10" stroke-linecap="round" />
+      <!-- Frame Lugs -->
+      <circle cx="498" cy="480" r="6" class="fill-terracotta solid-stroke" />
+      <circle cx="490" cy="535" r="5" class="fill-terracotta solid-stroke" />
+    </g>
+
+    <!-- Front Wicker/Rattan Basket (Isometric Box on Front Carrier) -->
+    <g id="front-basket">
+      <!-- Support Struts -->
+      <line x1="520" y1="680" x2="545" y2="525" class="solid-stroke" />
+      <line x1="498" y1="495" x2="530" y2="510" class="thick-stroke" />
+      <!-- Basket Base / Faces -->
+      <polygon points="505,490 545,470 585,510 545,530" class="fill-ochre solid-stroke" />
+      <polygon points="505,490 545,530 535,575 495,535" class="fill-brown solid-stroke" />
+      <polygon points="545,530 585,510 575,555 535,575" class="fill-terracotta-dark solid-stroke" />
+      <!-- Basket Weave Technical Lines -->
+      <line x1="500" y1="512" x2="540" y2="552" class="dashed-accent" style="stroke: #F4EFE6;" />
+      <line x1="540" y1="552" x2="580" y2="532" class="dashed-accent" style="stroke: #F4EFE6;" />
+      <line x1="525" y1="510" x2="515" y2="555" class="thin-stroke" />
+      <line x1="565" y1="520" x2="555" y2="565" class="thin-stroke" />
+      <!-- Retro Chrome/Sand Headlight -->
+      <ellipse cx="565" cy="565" rx="10" ry="8" class="fill-olive-dark solid-stroke" />
+      <ellipse cx="572" cy="568" rx="6" ry="9" class="fill-sand solid-stroke" />
+    </g>
+
+    <!-- Wide Sprung Leather Saddle (Brown) -->
+    <g id="saddle">
+      <!-- Seat Springs -->
+      <path d="M 325,380 L 335,390 L 325,395 L 335,405" fill="none" class="solid-stroke" />
+      <path d="M 345,375 L 355,385 L 345,390 L 355,400" fill="none" class="solid-stroke" />
+      <!-- Saddle Body -->
+      <path d="M 310,365 C 310,340 355,345 375,380 C 385,395 365,405 345,395 C 325,385 310,385 310,365 Z" class="fill-brown-dark solid-stroke" />
+      <path d="M 314,360 C 314,338 355,342 375,375 C 382,388 365,398 345,388 C 325,378 314,378 314,360 Z" class="fill-brown solid-stroke" />
+      <path d="M 322,360 C 328,350 350,355 365,375" class="dotted-accent" style="stroke: #EAE2D3;" />
+    </g>
+  </g>
+
+  <!-- ==========================================
+       LAYER 4: LEFT LEG & PEDAL (NEAR SIDE)
+       ========================================== -->
+  <g id="left-leg-assembly">
+    <!-- Near Crank Arm & Pedal (Downstroke Position) -->
+    <circle cx="385" cy="550" r="10" class="fill-sand-dark solid-stroke" />
+    <line x1="385" y1="550" x2="365" y2="590" class="thick-stroke" />
+    <!-- Isometric Pedal Block -->
+    <polygon points="348,585 378,585 372,600 342,600" class="fill-brown solid-stroke" />
+    <!-- Left Webbed Foot (Terracotta) -->
+    <polygon points="355,565 382,588 362,600 342,590" class="fill-terracotta solid-stroke" />
+    <line x1="355" y1="575" x2="370" y2="592" class="thin-stroke" />
+    <line x1="350" y1="580" x2="360" y2="594" class="thin-stroke" />
+    <!-- Left Leg (Stiff Vertical Cylinder) -->
+    <line x1="355" y1="405" x2="358" y2="572" stroke="#2B2118" stroke-width="14" stroke-linecap="round" />
+    <line x1="355" y1="405" x2="358" y2="572" stroke="#C86D51" stroke-width="8" stroke-linecap="round" />
+    <!-- Mechanical Knee Joint -->
+    <circle cx="356" cy="485" r="8" class="fill-ochre solid-stroke" />
+    <circle cx="356" cy="485" r="3" class="fill-brown-dark" />
+  </g>
+
+  <!-- ==========================================
+       LAYER 5: PELICAN BODY, NECK, HEAD & WINGS
+       (Stiff, Symmetrical, Robotic Posture)
+       ========================================== -->
+  <g id="pelican-construct">
+    
+    <!-- Far Wing (Right Wing - Symmetrical Reaching to Right Handlebar) -->
+    <g id="right-wing">
+      <!-- Upper Wing Segment -->
+      <polygon points="390,275 430,265 475,375 445,385" class="fill-sand-Mid solid-stroke" />
+      <line x1="410" y1="275" x2="460" y2="375" class="dashed-accent" />
+      <!-- Forearm / Primary Feathers Reaching to Right Grip -->
+      <polygon points="475,375 445,385 480,435 505,420" class="fill-olive solid-stroke" />
+      <!-- Robotic Wing Joint -->
+      <ellipse cx="460" cy="380" rx="10" ry="8" class="fill-terracotta solid-stroke" />
+    </g>
+
+    <!-- Tail Feathers (Geometric Stepped Array) -->
+    <g id="tail">
+      <polygon points="315,345 270,335 280,315 330,325" class="fill-olive-dark solid-stroke" />
+      <polygon points="320,335 275,320 290,305 335,320" class="fill-sand-dark solid-stroke" />
+      <polygon points="325,325 285,305 305,295 340,315" class="fill-sand solid-stroke" />
+    </g>
+
+    <!-- Torso / Body (Faceted Isometric Hull / Pod) -->
+    <g id="torso">
+      <!-- Lower Belly / Undercarriage -->
+      <path d="M 315,335 C 315,385 375,405 410,375 L 430,315 L 330,295 Z" class="fill-sand-dark solid-stroke" />
+      <!-- Main Isometric Body Cylinder/Egg -->
+      <path d="M 315,335 C 310,285 350,250 395,260 C 435,270 445,315 430,355 C 415,390 365,390 335,365 C 320,352 316,345 315,335 Z" class="fill-sand solid-stroke" />
+      
+      <!-- Structural Contour & Centerline Accents -->
+      <path d="M 335,270 C 375,260 415,290 420,345" class="dashed-accent" />
+      <path d="M 320,315 C 355,335 405,335 432,315" class="dotted-accent" />
+      
+      <!-- Mechanical Chest Plate / Collar -->
+      <ellipse cx="385" cy="275" rx="34" ry="26" class="fill-sand-Mid solid-stroke" />
+      <ellipse cx="385" cy="272" rx="24" ry="18" class="fill-olive-light dashed-accent" />
+    </g>
+
+    <!-- Swept-Back Dutch Handlebars (Positioned between torso/wings) -->
+    <g id="handlebars">
+      <!-- Quill Stem rising from Head Tube -->
+      <line x1="498" y1="480" x2="498" y2="425" stroke="#2B2118" stroke-width="11" stroke-linecap="round" />
+      <line x1="498" y1="480" x2="498" y2="425" stroke="#EAE2D3" stroke-width="5" stroke-linecap="round" />
+      <circle cx="498" cy="425" r="7" class="fill-ochre solid-stroke" />
+      
+      <!-- Swept-Back Handlebar Tubing (Symmetrical U-Bow) -->
+      <!-- Right Bar (Upper/Far in Iso) -->
+      <path d="M 498,425 C 515,405 515,410 485,422" fill="none" stroke="#2B2118" stroke-width="9" stroke-linecap="round" />
+      <path d="M 498,425 C 515,405 515,410 485,422" fill="none" stroke="#EAE2D3" stroke-width="4" stroke-linecap="round" />
+      <!-- Left Bar (Lower/Near in Iso) -->
+      <path d="M 498,425 C 495,450 475,465 440,455" fill="none" stroke="#2B2118" stroke-width="9" stroke-linecap="round" />
+      <path d="M 498,425 C 495,450 475,465 440,455" fill="none" stroke="#EAE2D3" stroke-width="4" stroke-linecap="round" />
+
+      <!-- Right Grip (Terracotta) & Wing Tip Clasp -->
+      <line x1="495" y1="418" x2="472" y2="428" stroke="#2B2118" stroke-width="13" stroke-linecap="round" />
+      <line x1="495" y1="418" x2="472" y2="428" stroke="#C86D51" stroke-width="8" stroke-linecap="round" />
+      <!-- Right Wing Feather Clasp -->
+      <ellipse cx="480" cy="425" rx="10" ry="7" class="fill-sand solid-stroke" />
+
+      <!-- Left Grip (Terracotta) -->
+      <line x1="452" y1="458" x2="428" y2="448" stroke="#2B2118" stroke-width="13" stroke-linecap="round" />
+      <line x1="452" y1="458" x2="428" y2="448" stroke="#C86D51" stroke-width="8" stroke-linecap="round" />
+      
+      <!-- Brass Bell -->
+      <ellipse cx="482" cy="442" rx="6" ry="5" class="fill-ochre solid-stroke" />
+    </g>
+
+    <!-- Near Wing (Left Wing - Symmetrical Reaching to Left Handlebar) -->
+    <g id="left-wing">
+      <!-- Shoulder Joint -->
+      <ellipse cx="360" cy="315" rx="18" ry="22" class="fill-sand-Mid solid-stroke" />
+      <!-- Upper Wing Arm -->
+      <polygon points="345,310 380,310 405,415 370,420" class="fill-sand solid-stroke" />
+      <!-- Olive Covert Feathers -->
+      <polygon points="348,330 382,330 398,395 363,400" class="fill-olive-light solid-stroke" />
+      <line x1="365" y1="315" x2="387" y2="410" class="dashed-accent" />
+      <!-- Elbow Pivot -->
+      <circle cx="388" cy="415" r="9" class="fill-terracotta solid-stroke" />
+      <circle cx="388" cy="415" r="3" class="fill-sand" />
+      <!-- Forearm / Primary Feathers Clamping Left Handlebar Grip -->
+      <polygon points="375,418 400,410 445,445 430,460" class="fill-olive-dark solid-stroke" />
+      <line x1="382" y1="425" x2="435" y2="452" class="thin-stroke" style="stroke: #EAE2D3;" />
+      <!-- Left Wing Tip Clasp -->
+      <ellipse cx="436" cy="452" rx="11" ry="8" class="fill-sand solid-stroke" />
+    </g>
+
+    <!-- Stiff Vertical Neck (Straight Up along Z-Axis) -->
+    <g id="neck-vertical">
+      <!-- Cylinder Extrusion -->
+      <path d="M 367,272 L 367,135 A 18,13 0 0 0 403,135 L 403,272 A 18,13 0 0 1 367,272 Z" class="fill-sand solid-stroke" />
+      <!-- Right-side Isometric Shading on Neck -->
+      <path d="M 385,285 L 385,148 A 18,13 0 0 0 403,135 L 403,272 A 18,13 0 0 1 385,285 Z" class="fill-sand-Mid" />
+      <!-- Redraw Neck Outline & Technical Rings -->
+      <path d="M 367,272 L 367,135 A 18,13 0 0 0 403,135 L 403,272 A 18,13 0 0 1 367,272 Z" fill="none" class="solid-stroke" />
+      
+      <!-- Robotic/Segmented Neck Rings -->
+      <path d="M 367,240 A 18,13 0 0 0 403,240" class="dashed-accent" />
+      <path d="M 367,205 A 18,13 0 0 0 403,205" class="dashed-accent" />
+      <path d="M 367,170 A 18,13 0 0 0 403,170" class="dashed-accent" />
+      <!-- Vertical Center Plumb Line -->
+      <line x1="385" y1="145" x2="385" y2="285" class="dotted-accent" />
+    </g>
+
+    <!-- Pelican Head & Horizontal Bill -->
+    <g id="head-and-bill">
+      <!-- Geometric Crest Feathers (Rear of Head) -->
+      <polygon points="365,125 340,115 352,102 372,110" class="fill-olive solid-stroke" />
+      <polygon points="370,115 348,100 362,92 380,105" class="fill-sand-dark solid-stroke" />
+
+      <!-- Cranium (Isometric Faceted Dome) -->
+      <path d="M 363,135 C 360,105 372,92 390,95 C 408,98 412,115 408,135 C 403,148 368,148 363,135 Z" class="fill-sand solid-stroke" />
+      <!-- Top of Head Cap (High-Angle View visibility) -->
+      <ellipse cx="386" cy="105" rx="18" ry="12" class="fill-sand-Mid thin-stroke" />
+
+      <!-- Horizontal Bill & Gular Pouch (Projecting Forward Along Isometric X-Axis: +1, +1) -->
+      <!-- Massive Lower Gular Pouch (Terracotta / Ochre) -->
+      <path d="M 390,130 L 560,295 C 535,330 480,315 440,275 C 400,235 385,175 390,130 Z" class="fill-terracotta solid-stroke" />
+      
+      <!-- Pouch Shadow / Dimensionality -->
+      <path d="M 390,130 L 560,295 C 545,315 505,305 460,260 C 415,215 395,160 390,130 Z" class="fill-terracotta-dark" />
+      
+      <!-- Pouch Structural Striations & Dashed Pleats -->
+      <path d="M 390,130 L 560,295 C 535,330 480,315 440,275 C 400,235 385,175 390,130 Z" fill="none" class="solid-stroke" />
+      <path d="M 396,155 C 425,210 475,260 545,302" class="dashed-accent" style="stroke: #F4EFE6;" />
+      <path d="M 402,180 C 435,230 475,270 525,306" class="dashed-accent" style="stroke: #2B2118;" />
+      <path d="M 412,210 C 440,250 475,280 505,305" class="dotted-accent" />
+
+      <!-- Upper Mandible (Flat Top Plane Visible from Bird's-Eye View, Strictly Parallel to Isometric X-Axis) -->
+      <!-- Left/Bottom Bevel of Upper Bill -->
+      <polygon points="392,122 405,112 568,275 560,295 390,130" class="fill-ochre solid-stroke" />
+      <!-- Top Flat Surface of Bill -->
+      <polygon points="398,115 412,107 575,270 562,280" class="fill-sand-Mid solid-stroke" />
+      <!-- Center Ridge of Bill -->
+      <line x1="405" y1="111" x2="568" y2="275" class="thin-stroke" />
+      <!-- Hooked Tip of Bill (Terracotta) -->
+      <polygon points="562,280 575,270 582,285 565,298 558,292" class="fill-terracotta-dark solid-stroke" />
+
+      <!-- Robotic / Technical Eye (Stiff Stare) -->
+      <circle cx="395" cy="118" r="7" class="fill-sand-dark solid-stroke" />
+      <circle cx="395" cy="118" r="4" class="fill-ochre thin-stroke" />
+      <circle cx="395" cy="118" r="2" class="fill-brown-dark" />
+      <!-- Eye Crosshair -->
+      <line x1="386" y1="118" x2="404" y2="118" class="thin-stroke" />
+      <line x1="395" y1="109" x2="395" y2="127" class="thin-stroke" />
+    </g>
+  </g>
+
+  <!-- ==========================================
+       LAYER 6: TECHNICAL ANNOTATIONS & OVERLAYS
+       ========================================== -->
+  <g id="technical-ui">
+    <!-- Vertical Axis Line through Pelican Neck/Head -->
+    <line x1="385" y1="35" x2="385" y2="110" class="tech-guide" />
+    <use href="#tech-node" x="385" y="55" />
+    <text x="395" y="59" class="text-tech">Z_AXIS: 90.0° [STIFF_POSTURE]</text>
+
+    <!-- Isometric Bill Alignment Line (Parallel to X-Axis: Slope +1) -->
+    <line x1="412" y1="87" x2="595" y2="270" class="tech-guide" />
+    <line x1="412" y1="107" x2="412" y2="87" class="tech-guide-solid" />
+    <line x1="575" y1="270" x2="595" y2="270" class="tech-guide-solid" />
+    <text x="485" y="150" class="text-tech" transform="rotate(45, 485, 150)">BILL_HORIZ_0.0°</text>
+
+    <!-- Wheelbase Dimension Line -->
+    <line x1="210" y1="510" x2="450" y2="750" class="tech-guide-solid" />
+    <line x1="280" y1="440" x2="205" y2="515" class="tech-guide" />
+    <line x1="520" y1="680" x2="445" y2="755" class="tech-guide" />
+    <use href="#tech-node" x="210" y="510" />
+    <use href="#tech-node" x="450" y="750" />
+    <text x="275" y="645" class="text-tech" transform="rotate(45, 275, 645)">WHEELBASE: 1080MM (DUTCH_CRUISER)</text>
+
+    <!-- High-Angle Viewpoint Indicator (Top Left) -->
+    <g transform="translate(50, 60)">
+      <rect x="0" y="0" width="215" height="85" class="fill-sand solid-stroke" />
+      <rect x="5" y="5" width="205" height="75" fill="none" class="dashed-accent" />
+      <text x="15" y="25" class="text-tech">FIG 01. PELICAN_OMAFIT</text>
+      <text x="15" y="43" class="text-tech">PROJ: ISOMETRIC HIGH-ANGLE</text>
+      <text x="15" y="61" class="text-tech">ELEV: +60.0° BIRD'S-EYE</text>
+      <circle cx="190" cy="22" r="6" class="fill-terracotta solid-stroke" />
+      <circle cx="190" cy="42" r="6" class="fill-olive solid-stroke" />
+      <circle cx="190" cy="62" r="6" class="fill-brown solid-stroke" />
+    </g>
+
+    <!-- Isometric Compass / Axis Triad (Bottom Left) -->
+    <g transform="translate(90, 730)">
+      <circle cx="0" cy="0" r="38" class="fill-sand thin-stroke" />
+      <circle cx="0" cy="0" r="32" class="dotted-accent" />
+      <!-- Z Axis -->
+      <line x1="0" y1="0" x2="0" y2="-45" class="solid-stroke" />
+      <polygon points="0,-50 -4,-40 4,-40" fill="#2B2118" />
+      <text x="-4" y="-55" class="text-tech">Z</text>
+      <!-- X Axis (+1, +1) -->
+      <line x1="0" y1="0" x2="32" y2="32" class="solid-stroke" />
+      <polygon points="36,36 26,32 32,26" fill="#2B2118" />
+      <text x="40" y="44" class="text-tech">X</text>
+      <!-- Y Axis (-1, +1) -->
+      <line x1="0" y1="0" x2="-32" y2="32" class="solid-stroke" />
+      <polygon points="-36,36 -32,26 -26,32" fill="#2B2118" />
+      <text x="-50" y="44" class="text-tech">Y</text>
+      <circle cx="0" cy="0" r="3" fill="#B85A3A" />
+    </g>
+
+    <!-- Outer Technical Frame Border -->
+    <rect x="20" y="20" width="760" height="810" fill="none" class="solid-stroke" />
+    <rect x="26" y="26" width="748" height="798" fill="none" class="thin-stroke" />
+  </g>
+</svg>

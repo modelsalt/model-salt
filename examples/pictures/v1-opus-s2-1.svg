@@ -1,0 +1,186 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <defs>
+    <clipPath id="bodyClip">
+      <path d="M128,132 C134,106 162,92 194,94 C216,96 224,116 216,136 C206,154 176,157 154,150 C144,147 136,143 122,143 Z"/>
+    </clipPath>
+    <clipPath id="wingClip">
+      <path d="M192,108 C178,80 162,54 140,30 L128,26 L132,40 L117,34 L123,50 L106,46 L116,62 L101,62 L117,76 L109,83 L134,89 C150,101 170,114 192,121 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Whole scene tipped slightly: the wobble -->
+  <g transform="rotate(-5 200 275)">
+
+    <!-- ===================== BICYCLE ===================== -->
+    <g id="bicycle" stroke-linecap="round" stroke-linejoin="round">
+      <!-- wobble marks under the wheels -->
+      <path d="M70,284 q8,-5 16,0 q8,5 16,0" fill="none" stroke="#6B4226" stroke-width="2" opacity="0.6"/>
+      <path d="M262,284 q8,-5 16,0 q8,5 16,0 q8,-5 16,0" fill="none" stroke="#6B4226" stroke-width="2" opacity="0.6"/>
+
+      <!-- rear wheel -->
+      <circle cx="120" cy="225" r="50" fill="none" stroke="#3E2716" stroke-width="7"/>
+      <circle cx="120" cy="225" r="45" fill="none" stroke="#D49A3A" stroke-width="1.6"/>
+      <g stroke="#A0522D" stroke-width="1.1">
+        <line x1="120" y1="180" x2="120" y2="270"/>
+        <line x1="75" y1="225" x2="165" y2="225"/>
+        <line x1="88" y1="193" x2="152" y2="257"/>
+        <line x1="152" y1="193" x2="88" y2="257"/>
+        <line x1="103" y1="183" x2="137" y2="267"/>
+        <line x1="78" y1="208" x2="162" y2="242"/>
+      </g>
+      <circle cx="120" cy="225" r="5" fill="#6B4226"/>
+
+      <!-- front wheel -->
+      <circle cx="280" cy="225" r="50" fill="none" stroke="#3E2716" stroke-width="7"/>
+      <circle cx="280" cy="225" r="45" fill="none" stroke="#D49A3A" stroke-width="1.6"/>
+      <g stroke="#A0522D" stroke-width="1.1">
+        <line x1="280" y1="180" x2="280" y2="270"/>
+        <line x1="235" y1="225" x2="325" y2="225"/>
+        <line x1="248" y1="193" x2="312" y2="257"/>
+        <line x1="312" y1="193" x2="248" y2="257"/>
+        <line x1="263" y1="183" x2="297" y2="267"/>
+        <line x1="238" y1="208" x2="322" y2="242"/>
+      </g>
+      <circle cx="280" cy="225" r="5" fill="#6B4226"/>
+
+      <!-- chain -->
+      <path d="M190,218 L120,219 M190,242 L120,231" fill="none" stroke="#6B4226" stroke-width="1.8" stroke-dasharray="2 1.5"/>
+      <circle cx="120" cy="225" r="7" fill="none" stroke="#6B4226" stroke-width="2"/>
+
+      <!-- frame -->
+      <g fill="none" stroke="#C4623A" stroke-width="6">
+        <path d="M120,225 L190,230 L176,158"/>          <!-- chainstay + seat tube -->
+        <path d="M120,225 L176,160"/>                   <!-- seat stay -->
+        <path d="M176,160 L262,154"/>                   <!-- top tube -->
+        <path d="M190,230 L266,170"/>                   <!-- down tube -->
+        <path d="M262,150 L268,176"/>                   <!-- head tube -->
+      </g>
+      <path d="M268,176 Q276,200 280,225" fill="none" stroke="#A0522D" stroke-width="4.5"/> <!-- fork -->
+      <!-- frame highlights -->
+      <g fill="none" stroke="#E8A070" stroke-width="1.2" opacity="0.8">
+        <path d="M180,158 L258,153"/>
+        <path d="M194,226 L262,172"/>
+      </g>
+
+      <!-- stem + handlebar (yanked sideways in panic) -->
+      <path d="M262,150 L258,134" fill="none" stroke="#6B4226" stroke-width="4"/>
+      <path d="M246,130 Q262,126 280,136 Q286,140 284,146" fill="none" stroke="#6B4226" stroke-width="4"/>
+      <path d="M280,136 Q286,140 284,148" fill="none" stroke="#3E2716" stroke-width="6"/>
+
+      <!-- saddle -->
+      <path d="M160,151 Q176,144 194,150 Q190,156 172,155 Q162,155 160,151 Z" fill="#3E2716"/>
+      <line x1="176" y1="155" x2="176" y2="160" stroke="#6B4226" stroke-width="3"/>
+
+      <!-- chainring + cranks -->
+      <circle cx="190" cy="230" r="12" fill="none" stroke="#6B4226" stroke-width="3"/>
+      <circle cx="190" cy="230" r="3" fill="#3E2716"/>
+      <line x1="190" y1="230" x2="172" y2="214" stroke="#3E2716" stroke-width="3.5"/>
+      <line x1="190" y1="230" x2="208" y2="246" stroke="#3E2716" stroke-width="3.5"/>
+      <rect x="164" y="211" width="14" height="5" rx="1.5" fill="#6B4226"/>
+      <rect x="200" y="244" width="16" height="5" rx="1.5" fill="#3E2716"/>
+    </g>
+
+    <!-- ===================== PELICAN ===================== -->
+    <g id="pelican" stroke-linecap="round" stroke-linejoin="round">
+
+      <!-- far wing: flung back and down, darker -->
+      <path d="M168,104 C142,94 114,84 84,79 L77,88 L92,92 L75,100 L94,103 L79,113 L100,113 L89,123 L112,119 C132,121 152,123 170,126 Z"
+            fill="#A0522D" stroke="#6B4226" stroke-width="1.5"/>
+      <g fill="none" stroke="#6B4226" stroke-width="1" opacity="0.8">
+        <path d="M150,101 q-6,6 -12,1 q-6,6 -12,1 q-6,6 -12,1"/>
+        <path d="M158,112 q-6,6 -12,1 q-6,6 -12,1 q-6,6 -12,1 q-6,6 -12,1"/>
+        <path d="M110,92 L88,90 M108,101 L84,104 M108,110 L88,116"/>
+      </g>
+
+      <!-- far leg -->
+      <path d="M180,145 L201,182 L174,211" fill="none" stroke="#A65A2A" stroke-width="5"/>
+      <path d="M174,211 L162,214 L168,209 L163,207 L178,208 Z" fill="#A65A2A" stroke="#6B4226" stroke-width="1"/>
+
+      <!-- tail feathers -->
+      <path d="M132,130 L110,130 L118,136 L104,140 L120,142 L112,149 L134,144 Z" fill="#D9B98A" stroke="#6B4226" stroke-width="1.3"/>
+
+      <!-- body -->
+      <path d="M128,132 C134,106 162,92 194,94 C216,96 224,116 216,136 C206,154 176,157 154,150 C144,147 136,143 122,143 Z"
+            fill="#EAD7B5" stroke="#6B4226" stroke-width="2"/>
+      <!-- belly shading, seen from below -->
+      <path d="M130,140 C160,150 196,152 216,136 C206,154 176,157 154,150 C144,147 136,143 122,143 Z" fill="#C9A57A" opacity="0.7"/>
+      <!-- layered feather scallops -->
+      <g clip-path="url(#bodyClip)" fill="none" stroke="#9C6B40" stroke-width="1.1" opacity="0.85">
+        <path d="M152,104 q6,7 12,0 q6,7 12,0 q6,7 12,0 q6,7 12,0"/>
+        <path d="M140,114 q6,7 12,0 q6,7 12,0 q6,7 12,0 q6,7 12,0 q6,7 12,0 q6,7 12,0"/>
+        <path d="M134,124 q6,7 12,0 q6,7 12,0 q6,7 12,0 q6,7 12,0 q6,7 12,0 q6,7 12,0 q6,7 12,0"/>
+        <path d="M140,135 q6,7 12,0 q6,7 12,0 q6,7 12,0 q6,7 12,0 q6,7 12,0 q6,7 12,0"/>
+        <path d="M152,145 q6,6 12,0 q6,6 12,0 q6,6 12,0 q6,6 12,0"/>
+      </g>
+
+      <!-- neck -->
+      <path d="M206,108 C198,90 204,74 222,64" fill="none" stroke="#6B4226" stroke-width="19"/>
+      <path d="M206,108 C198,90 204,74 222,64" fill="none" stroke="#EAD7B5" stroke-width="15"/>
+      <g fill="none" stroke="#9C6B40" stroke-width="0.9" opacity="0.8">
+        <path d="M200,98 q4,4 8,0 q4,4 8,0"/>
+        <path d="M201,86 q4,4 8,0 q4,4 8,0"/>
+        <path d="M206,75 q4,4 8,0 q4,4 8,0"/>
+      </g>
+
+      <!-- head -->
+      <ellipse cx="228" cy="60" rx="15" ry="13" fill="#EAD7B5" stroke="#6B4226" stroke-width="2"/>
+      <!-- ruffled crest, standing on end -->
+      <path d="M214,54 L202,44 L212,50 L206,38 L218,48 L218,36 L224,47" fill="#D9B98A" stroke="#6B4226" stroke-width="1.3"/>
+
+      <!-- pouch (big and visible from below) -->
+      <path d="M238,68 L312,77 C302,97 272,107 248,99 C237,93 233,80 238,68 Z"
+            fill="#D97B4F" stroke="#8A3E22" stroke-width="1.8"/>
+      <g fill="none" stroke="#A84A2A" stroke-width="1" opacity="0.8">
+        <path d="M246,80 Q270,92 300,82"/>
+        <path d="M244,89 Q266,99 290,90"/>
+      </g>
+      <!-- upper beak -->
+      <path d="M236,53 L312,69 Q322,73 314,79 L238,68 Z" fill="#D49A3A" stroke="#6B4226" stroke-width="1.8"/>
+      <path d="M244,58 L306,71" fill="none" stroke="#A8732A" stroke-width="1"/>
+      <path d="M312,70 Q320,73 314,79" fill="#C4623A" stroke="#6B4226" stroke-width="1"/>
+
+      <!-- wide, nervous eye -->
+      <circle cx="231" cy="56" r="5.5" fill="#FFF4E0" stroke="#6B4226" stroke-width="1.2"/>
+      <circle cx="232" cy="56" r="2.6" fill="#3E2716"/>
+      <circle cx="233" cy="55" r="0.9" fill="#FFF4E0"/>
+      <path d="M224,47 Q230,44 238,48" fill="none" stroke="#6B4226" stroke-width="1.6"/>
+
+      <!-- sweat drops -->
+      <path d="M212,30 q-4,6 0,8 q4,-2 0,-8 Z" fill="#E8C27A" stroke="#6B4226" stroke-width="1"/>
+      <path d="M250,32 q-3,5 0,7 q3,-2 0,-7 Z" fill="#E8C27A" stroke="#6B4226" stroke-width="1"/>
+      <path d="M244,42 q-3,4 0,6 q3,-2 0,-6 Z" fill="#E8C27A" stroke="#6B4226" stroke-width="1"/>
+
+      <!-- near leg -->
+      <path d="M196,146 L223,190 L208,242" fill="none" stroke="#C87533" stroke-width="6"/>
+      <path d="M208,242 L222,248 L215,249 L220,253 L206,250 L198,247 Z" fill="#C87533" stroke="#6B4226" stroke-width="1.2"/>
+
+      <!-- near wing: flung high, feathers splayed -->
+      <path d="M192,108 C178,80 162,54 140,30 L128,26 L132,40 L117,34 L123,50 L106,46 L116,62 L101,62 L117,76 L109,83 L134,89 C150,101 170,114 192,121 Z"
+            fill="#E8C27A" stroke="#6B4226" stroke-width="2"/>
+      <g clip-path="url(#wingClip)" fill="none" stroke="#9C6B40" stroke-width="1" opacity="0.9">
+        <!-- coverts -->
+        <path d="M150,58 q4,6 9,2 q4,6 9,2"/>
+        <path d="M140,70 q4,6 9,2 q4,6 9,2 q4,6 9,2 q4,6 9,2"/>
+        <path d="M138,82 q4,6 9,2 q4,6 9,2 q4,6 9,2 q4,6 9,2"/>
+        <path d="M150,96 q4,6 9,2 q4,6 9,2 q4,6 9,2"/>
+      </g>
+      <!-- primaries, darker tips -->
+      <g fill="none" stroke="#6B4226" stroke-width="1.3">
+        <path d="M146,46 L130,30"/>
+        <path d="M142,54 L119,38"/>
+        <path d="M138,62 L108,50"/>
+        <path d="M134,70 L104,63"/>
+        <path d="M132,78 L113,78"/>
+      </g>
+      <path d="M128,26 L132,40 L117,34 L123,50 L106,46 L116,62 L101,62 L117,76 L109,83 L118,84 L112,74 L121,68 L112,58 L124,56 L118,44 L130,46 L126,32 Z"
+            fill="#6B4226" opacity="0.55"/>
+
+      <!-- flap / motion arcs -->
+      <g fill="none" stroke="#A0522D" stroke-width="1.6" opacity="0.7">
+        <path d="M98,40 Q90,56 94,74"/>
+        <path d="M112,20 Q100,30 96,44"/>
+        <path d="M70,86 Q64,100 70,114"/>
+      </g>
+    </g>
+  </g>
+</svg>

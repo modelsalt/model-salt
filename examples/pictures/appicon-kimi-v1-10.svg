@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#69B7F2"/>
+      <stop offset="1" stop-color="#3E7CC2"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FFD870" stop-opacity="0.55"/>
+      <stop offset="0.55" stop-color="#FFD870" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="#FFD870" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Full-bleed sky-blue field, sharp square corners, no frame -->
+  <rect width="512" height="512" fill="url(#sky)"/>
+
+  <!-- Soft outer glow around the hero -->
+  <circle cx="256" cy="256" r="205" fill="url(#glow)"/>
+
+  <!-- Hero: one clear sun disc with short rays, thin uniform outlines, no fill -->
+  <g fill="none" stroke-linecap="round" stroke-width="14">
+    <circle cx="256" cy="256" r="70" stroke="#FFD166"/>
+    <g stroke="#FFFFFF">
+      <line x1="356"   y1="256"   x2="394"   y2="256"/>
+      <line x1="326.7" y1="326.7" x2="353.6" y2="353.6"/>
+      <line x1="256"   y1="356"   x2="256"   y2="394"/>
+      <line x1="185.3" y1="326.7" x2="158.4" y2="353.6"/>
+      <line x1="156"   y1="256"   x2="118"   y2="256"/>
+      <line x1="185.3" y1="185.3" x2="158.4" y2="158.4"/>
+      <line x1="256"   y1="156"   x2="256"   y2="118"/>
+      <line x1="326.7" y1="185.3" x2="353.6" y2="158.4"/>
+    </g>
+  </g>
+</svg>

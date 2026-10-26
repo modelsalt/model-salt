@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f3e9">
+<meta name="description" content="Little Plan makes cooking for one feel easy. A flexible week of dinners, a practical grocery list, and more time for everything else.">
+<title>Little Plan — Dinner, off your mind.</title>
+<style>
+  :root {
+    --paper: #f5f3e9;
+    --ink: #243e30;
+    --muted: #626b5f;
+    --line: #d4d7c9;
+    --lime: #d6ed93;
+    --orange: #b43b23;
+    --white: #fffef7;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: Arial, Helvetica, sans-serif; }
+  a { color: inherit; }
+  a:focus-visible { outline: 3px solid var(--orange); outline-offset: 6px; }
+  ::selection { background: var(--lime); color: var(--ink); }
+  .wrap { width: min(1280px, calc(100% - 96px)); margin: auto; }
+  .skip { position: fixed; top: -80px; left: 16px; z-index: 10; padding: 12px; background: var(--white); }
+  .skip:focus { top: 12px; }
+  header { position: sticky; top: 0; z-index: 5; background: var(--paper); border-bottom: 1px solid var(--line); }
+  .nav { height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: 25px; text-decoration: none; letter-spacing: -1.3px; }
+  .brand-mark { display: grid; place-items: center; width: 31px; height: 35px; border: 2px solid currentColor; border-radius: 14px 14px 7px 7px; font-size: 23px; }
+  nav { display: flex; align-items: center; gap: 30px; }
+  nav a { font-size: 13px; font-weight: 600; text-decoration: none; }
+  nav a:hover, footer a:hover { text-decoration: underline; text-underline-offset: 5px; }
+  .button { display: inline-flex; align-items: center; justify-content: space-between; gap: 32px; padding: 18px 24px; border: 1px solid var(--ink); background: var(--ink); color: var(--white); border-radius: 5px; font-size: 14px; font-weight: 600; text-decoration: none; transition: background .2s, color .2s; }
+  .button:hover { background: var(--lime); color: var(--ink); text-decoration: none; }
+  .button.small { padding: 12px 17px; gap: 22px; }
+  .eyebrow { display: flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 700; letter-spacing: 1.7px; text-transform: uppercase; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--orange); }
+  .hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 50px; padding: 73px 0 64px; align-items: center; }
+  h1 { font-size: clamp(64px, 7.5vw, 106px); line-height: .97; letter-spacing: -7px; font-weight: 500; margin: 30px 0 27px; }
+  h1 em { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; }
+  .intro { max-width: 365px; font-size: 17px; line-height: 1.65; color: var(--muted); margin-bottom: 30px; }
+  .micro { color: var(--muted); font-size: 11px; margin-top: 15px; }
+  .poster { position: relative; min-height: 470px; padding: 28px 30px 25px; background: var(--lime); border-radius: 3px; overflow: hidden; transform: rotate(2deg); }
+  .poster-top { display: flex; justify-content: space-between; font-size: 10px; font-weight: 700; letter-spacing: 1.6px; border-bottom: 1px solid #243e3040; padding-bottom: 17px; }
+  .poster-type { margin: 25px 0 27px; font-size: clamp(62px, 6.8vw, 94px); letter-spacing: -6px; line-height: .96; font-weight: 800; }
+  .poster-type span { display: block; }
+  .poster-type .serif { font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-weight: 400; }
+  .poster-type .outline { color: transparent; -webkit-text-stroke: 1.5px var(--ink); }
+  .poster-bottom { display: flex; justify-content: space-between; align-items: end; gap: 16px; border-top: 1px solid #243e3040; padding-top: 17px; font-size: 11px; line-height: 1.6; }
+  .asterisk { font-family: Georgia, serif; font-size: 76px; line-height: .6; }
+  .hero-note { text-align: right; margin: 20px 8px 0; font: italic 14px Georgia, serif; }
+  .week { padding: 49px 0 60px; border-top: 1px solid var(--line); }
+  .section-head { display: flex; justify-content: space-between; align-items: end; gap: 25px; margin-bottom: 30px; }
+  h2 { font-size: clamp(32px, 3.4vw, 47px); font-weight: 500; letter-spacing: -2px; line-height: 1.08; margin: 14px 0 0; }
+  .section-head > p { font-size: 13px; line-height: 1.7; max-width: 265px; color: var(--muted); margin: 0; }
+  .meal-grid { display: grid; grid-template-columns: repeat(5, 1fr); border: 1px solid var(--line); border-radius: 5px; overflow: hidden; }
+  .meal { min-height: 253px; padding: 22px 21px; background: var(--white); border-right: 1px solid var(--line); display: flex; flex-direction: column; align-items: start; }
+  .meal:last-child { border: 0; }
+  .meal.featured { background: #e8ecd9; }
+  .meal .day { font-size: 10px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; display: flex; justify-content: space-between; width: 100%; }
+  .day span { color: var(--muted); font-weight: 400; }
+  .meal h3 { font-family: Georgia, serif; font-weight: 400; font-size: 25px; line-height: 1.12; letter-spacing: -.7px; margin: 31px 0 12px; }
+  .meal p { font-size: 12px; line-height: 1.6; color: var(--muted); margin: 0 0 20px; }
+  .tag { margin-top: auto; border: 1px solid var(--line); padding: 6px 8px; border-radius: 3px; font-size: 10px; }
+  .week-foot { display: flex; justify-content: space-between; gap: 20px; color: var(--muted); font-size: 11px; margin-top: 17px; line-height: 1.5; }
+  .week-foot strong { color: var(--ink); font-weight: 500; }
+  .how { padding: 65px 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: .9fr 1.3fr; gap: 80px; }
+  .how h2 { max-width: 330px; }
+  .steps { margin: 0; padding: 0; list-style: none; }
+  .steps li { display: grid; grid-template-columns: 35px 1fr; gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .steps li:first-child { padding-top: 0; }
+  .number { font-size: 11px; color: var(--orange); padding-top: 5px; }
+  .steps h3 { font-size: 19px; letter-spacing: -.5px; font-weight: 500; margin: 0 0 9px; }
+  .steps p { margin: 0; font-size: 13px; line-height: 1.7; color: var(--muted); max-width: 400px; }
+  .closing { background: var(--ink); color: var(--paper); border-radius: 5px; padding: 50px; display: flex; justify-content: space-between; align-items: center; gap: 40px; margin: 10px 0 60px; }
+  .closing h2 { max-width: 590px; margin: 15px 0 20px; font-size: clamp(34px, 4vw, 54px); }
+  .closing p { margin: 0; font-size: 13px; color: #d1d8ca; line-height: 1.7; max-width: 410px; }
+  .closing .button { background: var(--lime); color: var(--ink); white-space: nowrap; }
+  .closing .button:hover { background: var(--white); }
+  footer { border-top: 1px solid var(--line); padding: 28px 0; }
+  .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+  .footer-inner p, .footer-inner > a { color: var(--muted); font-size: 11px; text-decoration: none; }
+  .footer-inner .brand { font-size: 19px; }
+  @media (min-width: 1440px) { .hero { padding-top: 90px; padding-bottom: 85px; } }
+  @media (max-width: 1000px) {
+    .wrap { width: calc(100% - 56px); }
+    .hero { gap: 35px; }
+    h1 { font-size: 76px; letter-spacing: -5px; }
+    .poster { min-height: auto; padding: 23px; }
+    .poster-type { font-size: 70px; letter-spacing: -4px; }
+    .meal { padding: 18px 14px; }
+    .meal h3 { font-size: 22px; }
+    .how { gap: 40px; }
+  }
+  @media (max-width: 700px) {
+    html { scroll-padding-top: 125px; }
+    .wrap { width: calc(100% - 36px); }
+    .nav { height: auto; min-height: 94px; padding: 15px 0; flex-wrap: wrap; gap: 15px; }
+    .brand { font-size: 22px; }
+    nav { width: 100%; justify-content: space-between; gap: 12px; }
+    nav a { font-size: 12px; }
+    .button.small { padding: 8px 11px; gap: 10px; }
+    .hero { grid-template-columns: 1fr; padding: 42px 0; gap: 37px; }
+    h1 { font-size: clamp(68px, 13vw, 94px); letter-spacing: -5px; margin-top: 24px; }
+    .intro { max-width: 410px; font-size: 16px; }
+    .hero-art { max-width: 450px; width: calc(100% - 10px); margin: 0 auto; }
+    .poster { padding: 25px; }
+    .poster-type { font-size: clamp(70px, 16vw, 95px); margin: 24px 0; }
+    .hero-note { font-size: 12px; }
+    .week { padding: 35px 0 40px; }
+    .section-head { display: block; }
+    .section-head > p { margin-top: 15px; max-width: 330px; }
+    .meal-grid { grid-template-columns: 1fr; }
+    .meal { min-height: 0; padding: 20px; border-right: 0; border-bottom: 1px solid var(--line); }
+    .meal h3 { font-size: 26px; margin: 18px 0 8px; }
+    .meal p { margin-bottom: 14px; }
+    .week-foot { flex-direction: column; gap: 6px; }
+    .how { grid-template-columns: 1fr; gap: 30px; padding: 40px 0; }
+    .how h2 { max-width: 100%; }
+    .closing { flex-direction: column; align-items: start; padding: 30px 24px; margin-bottom: 35px; gap: 25px; }
+    .footer-inner { flex-wrap: wrap; }
+    .footer-inner p { order: 3; width: 100%; margin: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .button { transition: none; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#" aria-label="Little Plan home">
+      <span class="brand-mark" aria-hidden="true">≋</span> little plan
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="#your-week">Your week</a>
+      <a href="#how-it-works">How it works</a>
+      <a class="button small" href="#start">Meet your little plan <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <section class="hero" aria-labelledby="hero-title">
+    <div>
+      <div class="eyebrow"><span class="dot"></span> A little planning. A lot more living.</div>
+      <h1 id="hero-title">Dinner,<br>off your<br><em>mind.</em></h1>
+      <p class="intro">Big day. Empty fridge. Familiar story?<br>Meet the meal-planning app that makes cooking for yourself the easy part.</p>
+      <a class="button" href="#your-week">Find your weeknight rhythm <span aria-hidden="true">↗</span></a>
+      <p class="micro">Less deciding. More “that was good.”</p>
+    </div>
+    <div class="hero-art">
+      <div class="poster" aria-label="A little less what’s for dinner. A little more time for you.">
+        <div class="poster-top" aria-hidden="true"><span>THE LITTLE PLAN PHILOSOPHY</span><span>NO. 001</span></div>
+        <div class="poster-type" aria-hidden="true">
+          <span>Less</span>
+          <span class="outline">what’s for</span>
+          <span class="serif">dinner?</span>
+          <span>More <i>you.</i></span>
+        </div>
+        <div class="poster-bottom" aria-hidden="true">
+          <span>A FULL PLATE.<br>A LITTLE MORE HEADSPACE.</span>
+          <span class="asterisk">✳</span>
+        </div>
+      </div>
+      <p class="hero-note">Good food can fit into a full life.</p>
+    </div>
+  </section>
+
+  <section id="your-week" class="week" aria-labelledby="week-title">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">01 / A taste of your week</div>
+        <h2 id="week-title">Five nights. Zero daily debate.</h2>
+      </div>
+      <p>A sample plan for one busy person.<br>Simple dinners, shared ingredients, room to improvise.</p>
+    </div>
+
+    <div class="meal-grid">
+      <article class="meal featured">
+        <div class="day">Monday <span>01</span></div>
+        <h3>Lemony<br>chickpea bowl</h3>
+        <p>Couscous, cucumber &amp; a generous spoon of yogurt.</p>
+        <span class="tag">15 min · Fresh start</span>
+      </article>
+      <article class="meal">
+        <div class="day">Tuesday <span>02</span></div>
+        <h3>One-pan<br>tomato orzo</h3>
+        <p>Cherry tomatoes, spinach &amp; a little parmesan.</p>
+        <span class="tag">25 min · One pan</span>
+      </article>
+      <article class="meal">
+        <div class="day">Wednesday <span>03</span></div>
+        <h3>Crispy<br>chickpea wraps</h3>
+        <p>Monday’s ingredients, with a completely new mood.</p>
+        <span class="tag">20 min · Use what’s left</span>
+      </article>
+      <article class="meal">
+        <div class="day">Thursday <span>04</span></div>
+        <h3>Ginger-sesame<br>noodles</h3>
+        <p>A quick tangle of noodles, greens &amp; pantry staples.</p>
+        <span class="tag">15 min · Big on flavor</span>
+      </article>
+      <article class="meal">
+        <div class="day">Friday <span>05</span></div>
+        <h3>Whatever’s-in<br>frittata</h3>
+        <p>Give the last of your vegetables a very good ending.</p>
+        <span class="tag">20 min · Fridge-friendly</span>
+      </article>
+    </div>
+    <div class="week-foot">
+      <span><strong>Made for one.</strong> Because a good dinner doesn’t need a dinner party.</span>
+      <span>And the weekend? Leave a little room for life. ↗</span>
+    </div>
+  </section>
+
+  <section id="how-it-works" class="how" aria-labelledby="how-title">
+    <div>
+      <div class="eyebrow">02 / Small effort, all week</div>
+      <h2 id="how-title">A plan that fits<br>around your life.</h2>
+    </div>
+    <ol class="steps">
+      <li>
+        <span class="number" aria-hidden="true">01</span>
+        <div><h3>Start with what you like.</h3><p>Your tastes, your schedule, your appetite. Build a week around the way you actually eat.</p></div>
+      </li>
+      <li>
+        <span class="number" aria-hidden="true">02</span>
+        <div><h3>Shop once. Make it count.</h3><p>One practical grocery list brings it all together. Ingredients do double duty, so less gets forgotten at the back of the fridge.</p></div>
+      </li>
+      <li>
+        <span class="number" aria-hidden="true">03</span>
+        <div><h3>Come home to a decision already made.</h3><p>Follow your plan or move a meal when life happens. There’s no perfect week to keep up with. Just dinner.</p></div>
+      </li>
+    </ol>
+  </section>
+
+  <section id="start" class="closing" aria-labelledby="start-title">
+    <div>
+      <div class="eyebrow">Your next week can feel lighter</div>
+      <h2 id="start-title">Start small.<br>Eat well. Get on with life.</h2>
+      <p>Try the sample week above as your first little plan. Five approachable dinners. One less thing to think about.</p>
+    </div>
+    <a class="button" href="#your-week">See my first week <span aria-hidden="true">↑</span></a>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <a href="#" class="brand">little plan<span aria-hidden="true">✳</span></a>
+    <p>© 2026 Little Plan. Made for real life, and really good dinners.</p>
+    <a href="#main">Back to the good stuff ↑</a>
+  </div>
+</footer>
+</body>
+</html>
