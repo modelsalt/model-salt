@@ -107,6 +107,10 @@ In a separate short run, the model names the biggest open decisions in your requ
 
 Found a prompt that still gives the same answer every time with Model Salt? [Open an issue](https://github.com/modelsalt/model-salt/issues) with the prompt, the model and a few runs. How to test a change to a family's steps: [CONTRIBUTING.md](https://github.com/modelsalt/model-salt/blob/main/CONTRIBUTING.md).
 
+## Privacy
+
+Model Salt runs on your machine and never sends your prompts anywhere. It only asks public random sources for random bytes. Details: [Privacy policy](https://github.com/modelsalt/model-salt/blob/main/PRIVACY.md).
+
 ## Licence
 
 - **Code:** MIT, see [LICENSE](https://github.com/modelsalt/model-salt/blob/main/LICENSE).
