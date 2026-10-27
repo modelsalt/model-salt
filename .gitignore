@@ -4,3 +4,4 @@ node_modules/
 eval/runs/
 eval/runs-failed/
 __pycache__/
+dist/
