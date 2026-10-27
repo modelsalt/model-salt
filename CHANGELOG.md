@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1
+
+- **Listed in the official MCP registry** as `com.modelsalt/model-salt` (`mcpName` in package.json, `server.json`). No change to the server.
+
 ## 1.0.0
 
 The first public release.
