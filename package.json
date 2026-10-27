@@ -1,6 +1,7 @@
 {
   "name": "@modelsalt/model-salt",
   "version": "1.0.0",
+  "mcpName": "com.modelsalt/model-salt",
   "description": "An MCP server that gives your model randomness from outside it, so one prompt gives different answers that still do what you asked. For Claude Code, Codex, Gemini CLI and Kimi Code.",
   "keywords": [
     "mcp",

@@ -1,0 +1,15 @@
+{
+  "name": "model-salt",
+  "version": "1.0.0",
+  "description": "Randomness from outside the model, so one prompt gives different answers that still do what you asked.",
+  "mcpServers": {
+    "model-salt": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelsalt/model-salt",
+        "anthropic"
+      ]
+    }
+  }
+}
