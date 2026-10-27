@@ -18,7 +18,5 @@
       ]
     }
   },
-  "repository": "https://github.com/modelsalt/model-salt",
-  "privacyPolicyUrl": "https://github.com/modelsalt/model-salt/blob/main/PRIVACY.md",
-  "termsOfServiceUrl": "https://github.com/modelsalt/model-salt/blob/main/LICENSE"
+  "repository": "https://github.com/modelsalt/model-salt"
 }
