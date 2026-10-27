@@ -1,10 +1,10 @@
 {
   "name": "model-salt",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Varied results for creative requests that are still exactly what was asked: the model calls model_salt before a creative task and follows what it returns.",
   "author": {
-    "name": "Model Salt",
-    "url": "https://modelsalt.com"
+    "name": "Chris Benjaminsen",
+    "url": "https://chrisbenjaminsen.com"
   },
   "homepage": "https://modelsalt.com",
   "license": "MIT",
@@ -13,9 +13,10 @@
       "command": "npx",
       "args": [
         "-y",
-        "@modelsalt/model-salt",
+        "@modelsalt/model-salt@1.0.1",
         "anthropic"
       ]
     }
-  }
+  },
+  "repository": "https://github.com/modelsalt/model-salt"
 }
