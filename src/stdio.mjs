@@ -28,7 +28,12 @@ const stepsFile = arg('--steps');
 const mod = stepsFile ? await import(new URL(stepsFile, `file://${process.cwd()}/`).href) : {};
 const steps = mod.default, description = mod.description, instructions = mod.instructions; // a steps file may also export its own tool description, choose and answer (codepick.mjs)
 const calls = stepsFile ? { choose: mod.choose || null, answer: mod.answer || null, stage1: mod.stage1 || null } : {}; // an eval arm brings its own, or none
-const handle = makeHandler(service, { steps, ...(description ? { description } : {}), ...calls, ...(instructions ? { instructions } : {}), repeatWindowMs: 5 * 60 * 1000, log: logFile ? (e) => appendFileSync(logFile, JSON.stringify({ t: new Date().toISOString(), service: service.id, ...e }) + '\n') : undefined });
+// No claude or codex CLI on this machine (a Docker container, Cursor or Copilot alone): the calling model does the explore step
+// itself, in two calls (src/in-context.mjs). With a CLI, the explore step runs on it as before. SALT_IN_CONTEXT=1
+// forces the two calls (a check), SALT_IN_CONTEXT=0 the CLI.
+const { cliFound, cliFor } = await import('./runner.mjs');
+const inContext = !stepsFile && (process.env.SALT_IN_CONTEXT === '1' || (process.env.SALT_IN_CONTEXT !== '0' && !cliFound(cliFor(service)))) ? await import('./in-context.mjs') : null;
+const handle = makeHandler(service, { steps, inContext, ...(description ? { description } : {}), ...calls, ...(instructions ? { instructions } : {}), repeatWindowMs: 5 * 60 * 1000, log: logFile ? (e) => appendFileSync(logFile, JSON.stringify({ t: new Date().toISOString(), service: service.id, ...e }) + '\n') : undefined });
 
 let client = ''; // the MCP client's clientInfo from initialize, for the log
 createInterface({ input: process.stdin }).on('line', async (line) => {

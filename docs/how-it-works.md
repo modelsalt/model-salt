@@ -8,7 +8,7 @@ The tool `model_salt` takes the user's `request` word for word, the calling `mod
 2. **Pick.** Randomness from outside the model picks one answer per question. The setting decides how often the usual answer is kept: always at 0, 70% at 0.5, 45% at 1, 25% at 1.5, and no more often than any other answer at 2.
 3. **Answer.** The tool returns the questions with their picked answers. The caller's model does the user's request in its own conversation and makes every answer show in the result.
 
-If the explore run can't start (no sign-in, no CLI), the tool says nothing was settled and the model carries on as asked. The explore run goes through Codex for the `openai` service and through Claude Code, on Claude Opus 5.5 (Fable 5.1 for a Fable caller), for the `anthropic` service.
+With no Claude Code or Codex CLI on the machine (a Docker container, Cursor or Copilot alone), the caller's model does step 1 itself (`src/in-context.mjs`): the first call returns the exploring step with its outside words and numbers and an `id`, the model does it without showing it, and a second call with the `id` and its reply in `explored` goes through the same pick and returns the answers. `SALT_IN_CONTEXT=1` forces this, `0` the CLI. If a CLI is there but its run can't start (signed out), the tool says nothing was settled and the model carries on as asked. The explore run goes through Codex for the `openai` service and through Claude Code, on Claude Opus 5.5 (Fable 5.1 for a Fable caller), for the `anthropic` service.
 
 ## One service per model family
 
@@ -24,7 +24,7 @@ Models in a family share their habits (Fable draws Opus's pelican, Astra names i
 ## Files
 
 - `src/stdio.mjs` the MCP server over stdio (the package's `model-salt` command), and `setup` / `uninstall` (`src/setup.mjs`)
-- `src/server.mjs` the MCP handler. `src/template-steps.mjs` the explore, pick and answer steps. `src/runner.mjs` the explore run on Claude Code or Codex
+- `src/server.mjs` the MCP handler. `src/template-steps.mjs` the explore, pick and answer steps. `src/runner.mjs` the explore run on Claude Code or Codex. `src/in-context.mjs` the same step done by the caller's model when neither is there
 - `src/entropy.mjs` the outside randomness (below). `src/words.mjs` 174,323 words (Webster's 2nd, 1934, public domain)
 - `services/<family>/`: `service.mjs` (the listing text and the current steps), `steps/` (the steps: `0.45a.mjs` is the 1.0.0 steps, named by its development number), `models.mjs` (the members), `habits.mjs` (what each plain model does run after run, with the evidence)
 - `plugin/` the Codex and Claude Code plugins, the Gemini CLI extension and the skill. `alias/` the `model-salt` short-name package

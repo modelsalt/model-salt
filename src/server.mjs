@@ -39,17 +39,24 @@ const PROMPT = { name: 'salt', title: 'Start a task with Model Salt', descriptio
 // A later method maps the same 0-2 scale its own way.
 const MODEL_ARG = { type: 'string', description: 'Which AI model you are, as exactly as you know it (name and version). Model Salt tunes its work to each model.' };
 const REQUEST_ARG = { type: 'string', description: "The user's request, word for word." };
+// options.inContext ({ start, finish } from src/in-context.mjs; stdio.mjs sets it when no claude or codex CLI is found): the explore
+// step is not run in our own model call but handed to the calling model. The tool is called twice: { model,
+// request } returns the exploring step with its outside words and numbers and an id; { model, id, explored } takes the model's
+// reply through the same code (repick on the curve) and returns the decided answers.
+const ID_ARG = { type: 'string', description: 'Second call, only when the first call returned an exploring step: the id it returned.' };
+const EXPLORED_ARG = { type: 'string', description: 'Second call: your whole reply to the exploring step, its answer lines with their shares and the final ```json block included.' };
+const TWO_CALLS = ' If the tool returns an exploring step with an `id`, do that step silently, without showing it to the user, and call this tool again with `model`, the `id` and your whole reply to the step in `explored`; that second call returns what to settle.';
 const RANDOMNESS_ARG = { type: 'number', minimum: 0, maximum: 2, description: 'How varied the result should be: 0 the usual answer, 0.5 a little more varied, 1 clearly varied, 1.5 more, 2 as varied as it gets. Left out it is 1, the default. Set it only when the user asks for more or less randomness.' };
 
-export function makeHandler(service, { steps = service.steps, description = service.description, choose = service.choose || null, answer = service.answer || null, stage1 = service.stage1 || null, instructions = service.instructions, repeatWindowMs = 0, log = () => {} } = {}) {
+export function makeHandler(service, { steps = service.steps, description = service.description, choose = service.choose || null, answer = service.answer || null, stage1 = service.stage1 || null, inContext = null, instructions = service.instructions, repeatWindowMs = 0, log = () => {} } = {}) {
   // repeatWindowMs (stdio: one process per client session): a second call within the window returns the same draw, so a model
   // that calls the tool twice for one task never gets two different draws (it then mixed them or dropped its list)
   let last = null, picked = null, answered = null, staged = null;
   const TOOL = {
     name: service.tool,
     title: service.title,
-    description,
-    inputSchema: { type: 'object', properties: { model: MODEL_ARG, ...(stage1 ? { request: REQUEST_ARG } : {}), ...(stage1?.randomness ? { randomness: RANDOMNESS_ARG } : {}), ...(answer ? { questions: answer.schema } : {}), ...(choose ? { choices: choose.schema || CHOICES_SCHEMA } : {}), ...(choose?.check ? { checked: { type: 'boolean', description: 'Only when the tool asked you to check your choices: true, sent with the checked list.' } } : {}) }, required: stage1 ? ['model', 'request'] : ['model'], additionalProperties: false },
+    description: inContext ? description.replace(/^Call this once before/, 'Call this before') + TWO_CALLS : description,
+    inputSchema: { type: 'object', properties: { model: MODEL_ARG, ...(stage1 ? { request: REQUEST_ARG } : {}), ...(inContext ? { id: ID_ARG, explored: EXPLORED_ARG } : {}), ...(stage1?.randomness ? { randomness: RANDOMNESS_ARG } : {}), ...(answer ? { questions: answer.schema } : {}), ...(choose ? { choices: choose.schema || CHOICES_SCHEMA } : {}), ...(choose?.check ? { checked: { type: 'boolean', description: 'Only when the tool asked you to check your choices: true, sent with the checked list.' } } : {}) }, required: stage1 && !inContext ? ['model', 'request'] : ['model'], additionalProperties: false },
     annotations: { readOnlyHint: true, openWorldHint: false },
   };
   // The model names itself in the `model` argument; a member of the family may bring its own method (models.mjs: `steps`
@@ -86,6 +93,21 @@ export function makeHandler(service, { steps = service.steps, description = serv
         log({ method, client: ctx.client, userAgent: ctx.userAgent, args: params?.arguments, member: member(model)?.id || null });
         const request = params?.arguments?.request;
         const run1 = stage1For(member(model));
+        if (inContext && run1) {
+          const a = params?.arguments || {};
+          if (typeof a.id === 'string' && a.id) {
+            const r = await inContext.finish(service, a.id, a.explored);
+            log({ method: 'in-context', step: 2, id: a.id, ok: r.ok, picks: r.r?.picks, decided: r.r?.decided, how: r.r?.randomness });
+            if (r.ok) staged = { request: String(r.request || ''), text: r.text };
+            return ok({ content: [{ type: 'text', text: r.text }] });
+          }
+          if (typeof request === 'string' && request.trim()) {
+            if (repeatWindowMs && staged?.request === request.trim()) return ok({ content: [{ type: 'text', text: staged.text }] });
+            const r = await inContext.start(service, request, a.randomness ?? RANDOMNESS.default, { again: (id) => `call model_salt again with \`model\`, id "${id}" and your whole reply to it in \`explored\`` });
+            log({ method: 'in-context', step: 1, id: r.id, from: r.from });
+            return ok({ content: [{ type: 'text', text: r.text }] });
+          }
+        }
         if (run1 && typeof request === 'string' && request.trim()) {
           // one run per request in a session: a second call for the same request gets the same decided answers
           if (repeatWindowMs && staged?.request === request.trim()) return ok({ content: [{ type: 'text', text: staged.text }] });

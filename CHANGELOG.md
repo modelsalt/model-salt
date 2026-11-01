@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2
+
+- **Works without Claude Code or Codex.** With neither CLI on the machine (a Docker container, Cursor or Copilot alone), the tool no longer returns "nothing was settled" every time: your model does the exploring step itself, in two calls of the tool (the request, then its reply with the `id` the first call gave). With a CLI, nothing changes. `SALT_IN_CONTEXT=1` forces the two calls, `0` the CLI.
+
 ## 1.0.1
 
 - **Listed in the official MCP registry** as `com.modelsalt/model-salt` (`mcpName` in package.json, `server.json`). No change to the server.

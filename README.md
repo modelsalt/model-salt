@@ -85,7 +85,7 @@ Every run, plain and salted, is in [`examples/`](https://github.com/modelsalt/mo
 ## What it needs
 
 - **Node 18 or later.** `npx` fetches the package the first time.
-- **Claude Code or Codex, signed in.** Each call runs one short extra request on your machine, on your own plan, with no API key: through Codex when you use Codex, and through Claude Code (Claude Opus 5.5) when you use Claude Code, Gemini CLI or Kimi Code. If that request can't run, the tool says so and your model carries on with the request as asked.
+- **Claude Code or Codex, signed in, or neither.** With one of them on the machine, each call runs one short extra request on your machine, on your own plan, with no API key: through Codex when you use Codex, and through Claude Code (Claude Opus 5.5) when you use Claude Code, Gemini CLI or Kimi Code. If that request can't run (signed out), the tool says so and your model carries on with the request as asked. With neither on the machine (a Docker container, Cursor or Copilot alone), your own model does that step in its own chat: it calls the tool twice, first with the request, then with its reply to the exploring step, and uses more of its own tokens for it.
 - **Time and tokens.** A salted answer takes longer and uses more tokens than a plain one. On the pelican prompt, Claude Opus 5.5 used about 3,300 more output tokens per answer.
 - **Network.** The server fetches random bytes from public randomness sources (atmospheric and quantum noise, and the drand beacon). Your prompt is not sent to them. Offline, it uses your computer's own random generator.
 
@@ -101,7 +101,7 @@ Every run, plain and salted, is in [`examples/`](https://github.com/modelsalt/mo
 
 ## How it works
 
-In a separate short run, the model names the biggest open decisions in your request (the questions an expert would ask) and a range of answers to each, its usual one included. Randomness from outside the model picks one answer per question. Your model then does the request with those answers settled. More, and why simpler ways failed: [docs/how-it-works.md](https://github.com/modelsalt/model-salt/blob/main/docs/how-it-works.md).
+In a separate short run (with no Claude Code or Codex on the machine, in your own model's chat, over two tool calls), the model names the biggest open decisions in your request (the questions an expert would ask) and a range of answers to each, its usual one included. Randomness from outside the model picks one answer per question. Your model then does the request with those answers settled. More, and why simpler ways failed: [docs/how-it-works.md](https://github.com/modelsalt/model-salt/blob/main/docs/how-it-works.md).
 
 ## Contributing
 

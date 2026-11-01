@@ -7,7 +7,7 @@
 import { spawn, spawnSync } from 'node:child_process';
 import { mkdtempSync, readFileSync, rmSync, existsSync } from 'node:fs';
 import { tmpdir, homedir } from 'node:os';
-import { join } from 'node:path';
+import { join, delimiter } from 'node:path';
 
 const CLAUDE = process.env.SALT_CLAUDE || [join(homedir(), '.local/bin/claude'), '/opt/homebrew/bin/claude', '/usr/local/bin/claude'].find(existsSync) || 'claude';
 const CODEX = process.env.SALT_CODEX || ['/Applications/Codex.app/Contents/Resources/codex-cli/bin/codex', '/opt/homebrew/bin/codex', '/usr/local/bin/codex'].find(existsSync) || 'codex';
@@ -84,3 +84,15 @@ export function parse(reply) {
   for (const q of out) if (q.a.length || !byn.has(q.n)) byn.set(q.n, q);
   return [...byn.values()].sort((a, b) => a.n - b.n).slice(0, 5).map(({ q, a }) => ({ q, a }));
 }
+
+// cliFound(kind): is there a `claude` or `codex` CLI this machine can run the explore step on? The paths call() would use, or the
+// name on the PATH. stdio.mjs asks once at start: with none (a Docker container, Cursor or Copilot without Claude Code or Codex) the
+// server hands the explore step to the calling model instead (src/in-context.mjs). A CLI that is there but signed
+// out is still found, and its run gets the steps' fallback text as before.
+export function cliFound(kind, { env = process.env } = {}) {
+  const bin = kind === 'codex' ? CODEX : CLAUDE;
+  if (bin.includes('/')) return existsSync(bin);
+  return (env.PATH || '').split(delimiter).some((d) => d && existsSync(join(d, bin)));
+}
+// which CLI a service's explore step runs on: Codex for GPT runners, Claude otherwise
+export const cliFor = (service, env = process.env) => (service.id === 'openai' || /^gpt/i.test(env.SALT_RUNNER_MODEL || '') ? 'codex' : 'claude');
