@@ -1,0 +1,10 @@
+.git
+node_modules
+eval
+examples
+docs
+mcpb
+checks
+scripts
+alias
+*.tgz
