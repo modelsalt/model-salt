@@ -34,6 +34,8 @@
     "developerName": "Model Salt",
     "websiteUrl": "https://modelsalt.com",
     "longDescription": "Ask a model for the same thing ten times and you often get the same answer. Model Salt gives the model randomness from outside it: before a creative task it calls model_salt, gets a few things to settle this time, and then does your request as you asked it.",
-    "category": "Productivity"
+    "category": "Productivity",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png"
   }
 }
