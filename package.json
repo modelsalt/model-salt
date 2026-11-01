@@ -43,6 +43,7 @@
     "src/entropy.mjs",
     "src/placeholders.mjs",
     "src/runner.mjs",
+    "src/in-context.mjs",
     "src/seedlines.mjs",
     "src/template-steps.mjs",
     "src/wordlist.mjs",
