@@ -2,7 +2,7 @@
   "manifest_version": "0.2",
   "name": "model-salt",
   "display_name": "Model Salt",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Randomness from outside the model, so one prompt gives different answers that still do what you asked.",
   "long_description": "Ask a model for the same thing ten times and you often get the same answer ten times. Model Salt is a local MCP server with one tool, model_salt. Before a creative task the model calls it and gets back a few things to settle this time, such as a palette, a pose, a name or an opening line, and then does your request as you asked it. It runs on your machine, needs no keys and sends nothing anywhere.",
   "author": {
@@ -32,7 +32,7 @@
   "tools": [
     {
       "name": "model_salt",
-      "description": "Call this once before you start any creative or open-ended request (a picture, an SVG, a story, a poem, an email, a design, a name, a plan, an approach to a problem)."
+      "description": "Call this before you start any creative or open-ended request (a picture, an SVG, a story, a poem, an email, a design, a name, a plan, an approach to a problem). If it returns an exploring step with an id, do it and call again with the id and your reply."
     }
   ],
   "keywords": [

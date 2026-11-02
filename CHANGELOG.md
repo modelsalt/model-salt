@@ -3,6 +3,7 @@
 ## 1.0.2
 
 - **Works without Claude Code or Codex.** With neither CLI on the machine (a Docker container, Cursor or Copilot alone), the tool no longer returns "nothing was settled" every time: your model does the exploring step itself, in two calls of the tool (the request, then its reply with the `id` the first call gave). With a CLI, nothing changes. `SALT_IN_CONTEXT=1` forces the two calls, `0` the CLI.
+- **Every install route on 1.0.2:** the Claude plugin pin, `server.json` (official MCP registry), the MCPB desktop bundle and the root `plugin.json`. The skill and the bundle's tool text now describe the second call.
 
 ## 1.0.1
 
