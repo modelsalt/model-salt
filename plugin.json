@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "model-salt",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "An MCP server that gives your model randomness from outside it, so one prompt gives different answers that still do what you asked.",
   "author": {
     "name": "Chris Benjaminsen",
