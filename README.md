@@ -89,7 +89,7 @@ Every run, plain and salted, is in [`examples/`](https://github.com/modelsalt/mo
 - **Node 18 or later.** `npx` fetches the package the first time.
 - **Claude Code or Codex, signed in, or neither.** With one of them on the machine, each call runs one short extra request on your machine, on your own plan, with no API key: through Codex when you use Codex, and through Claude Code (Claude Opus 5.5) when you use Claude Code, Gemini CLI or Kimi Code. If that request can't run (signed out), the tool says so and your model carries on with the request as asked. With neither on the machine (a Docker container, Cursor or Copilot alone), your own model does that step in its own chat: it calls the tool twice, first with the request, then with its reply to the exploring step, and uses more of its own tokens for it.
 - **Time and tokens.** A salted answer takes longer and uses more tokens than a plain one. On the pelican prompt, Claude Opus 5.5 used about 3,300 more output tokens per answer.
-- **Network.** The server fetches random bytes from public randomness sources (atmospheric and quantum noise, and the drand beacon). Your prompt is not sent to them. Offline, it uses your computer's own random generator.
+- **Network.** The server fetches random bytes from public randomness sources (quantum noise from the LfD quantum random number service, and the public drand and NIST beacons). Your prompt is not sent to them. Offline, it uses your computer's own random generator.
 
 ## Other ways to run it
 

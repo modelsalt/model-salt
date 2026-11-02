@@ -1,24 +1,26 @@
 // Where the dice come from. Each roll XORs 32 bytes from every source that answered:
-//   random.org   atmospheric radio noise   private, pooled 64 bytes per request (per-IP quota, one request at a time)
 //   LfD QRNG     quantum noise             private, pooled 64 bytes per request (OTH Regensburg's Quantis card, free, no key)
 //   drand        League of Entropy beacon  public: anyone can read the same round, so it adds a verifiable source, never secrecy
+//   NIST beacon  US-government beacon      public, 512 bits a minute, same rule as drand
 //   local CSPRNG crypto.getRandomValues    always in the mix; on its own only when every outside source is down
 // XOR of independent sources is uniform if any one of them is, so the mix is at least as random as its best source.
 // Every roll reports which sources served it; "csprng only" is the labelled fallback.
 // With a pool token (MODEL_SALT_POOL_TOKEN, or on a Mac the Keychain item model-salt.pool / token) the physical bytes come
-// from the Model Salt entropy pool, which fetches random.org and LfD QRNG within their free limits and hands
+// from the Model Salt entropy pool, which holds the CPU hardware noise of its server (RDSEED) and LfD QRNG and hands
 // each byte out once. Without one, or when the pool doesn't answer, each process fetches from the sources itself.
 
-const RANDOM_ORG = 'https://www.random.org/integers/?num=64&min=0&max=255&col=1&base=16&format=plain&rnd=new';
-const RANDOM_ORG_QUOTA = 'https://www.random.org/quota/?format=plain';
 const LFD = 'https://lfdr.de/qrng_api/qrng?length=64&format=HEX';
 // ANU's QRNG left the mix: its free API stopped answering in Oct 2026 and its keyed trial is one person's 100 a month.
 const env0 = (typeof process !== 'undefined' && process.env) || {};
 let poolUrl = env0.MODEL_SALT_POOL || 'https://entropy.modelsalt.com';
 let poolToken = env0.MODEL_SALT_POOL_TOKEN ?? null; // null: not looked up yet
+// policy (for a hosted server): a function read at each roll that may say { pool: false } (this roll takes nothing
+// from the pool) and { direct: false } (never fetch LfD from this process, only the pool). Left unset, every roll works as before.
+let policy = null;
 export function configure(env = {}) { // the Worker passes its secrets here
   if (env.MODEL_SALT_POOL) poolUrl = env.MODEL_SALT_POOL;
   if (env.MODEL_SALT_POOL_TOKEN) poolToken = env.MODEL_SALT_POOL_TOKEN;
+  if (typeof env.policy === 'function') policy = env.policy;
 }
 // Codex starts MCP servers with a clean environment, so on a Mac the token is read from the Keychain (no prompt for it).
 function token() {
@@ -78,12 +80,6 @@ function pool(name, label, fetchBytes, minGapMs) {
   };
 }
 
-const randomOrg = pool('random.org', 'random.org atmospheric noise', async () => {
-  const q = parseInt(await (await get(RANDOM_ORG_QUOTA, 1500)).text(), 10);
-  if (!(q >= 512)) throw new Error('quota'); // random.org asks clients to stop when the quota is used up and back off 10 minutes
-  return hex((await (await get(RANDOM_ORG, 2500)).text()).trim().split(/\s+/).map((h) => h.padStart(2, '0')).join(''));
-}, 0);
-
 const lfd = pool('lfd', 'LfD QRNG quantum noise (OTH Regensburg)', async () => {
   const j = await (await get(LFD, 2500)).json();
   if (!(typeof j.qrn === 'string' && j.qrn.length === 128)) throw new Error('lfd');
@@ -97,12 +93,30 @@ async function drand(ms) {
   return null;
 }
 
+// The NIST Randomness Beacon (since 1.0.4): 512 bits a minute from a US-government lab, offered "as a public
+// utility" (csrc.nist.gov/projects/interoperable-randomness-beacons), no key or quota. Public like drand, so it is hashed with
+// the local bytes before mixing, and NIST says never to use it alone as a secret. Asked at most once a minute per process.
+const NIST = 'https://beacon.nist.gov/beacon/2.0/pulse/last';
+let nistHit = { at: 0, v: null };
+async function nist(ms) {
+  if (nistHit.v && Date.now() - nistHit.at < 60_000) return nistHit.v;
+  if (Date.now() - nistHit.at < 60_000) return null; // a failed ask also waits a minute
+  nistHit.at = Date.now();
+  try {
+    const p = (await (await get(NIST, ms)).json()).pulse;
+    if (typeof p?.outputValue === 'string' && p.outputValue.length === 128) nistHit.v = { index: p.pulseIndex, bytes: hex(p.outputValue) };
+    else nistHit.v = null;
+  } catch { nistHit.v = null; }
+  return nistHit.v;
+}
+
 // Waits at most about 2.5 s for the network; a source that is slower is left out of this roll and refilled behind it.
 export async function roll() {
   const local = crypto.getRandomValues(new Uint8Array(ROLL));
   // the pool first; a process with no pool, or one the pool can't serve, asks the sources itself
-  const [pooled, dr] = await Promise.all([fromPool(2500), drand(800)]);
-  const physicalBytes = pooled || (await Promise.all([randomOrg, lfd].map(async (src) => [src.label, await src.take(2500)]))).filter(([, b]) => b);
+  const p = policy?.() || {};
+  const [pooled, dr, ni] = await Promise.all([p.pool === false ? null : fromPool(2500), drand(800), nist(800)]);
+  const physicalBytes = pooled || (p.direct === false ? [] : (await Promise.all([lfd].map(async (src) => [src.label, await src.take(2500)]))).filter(([, b]) => b));
   const out = Uint8Array.from(local);
   const sources = [];
   for (const [label, b] of physicalBytes) { b.forEach((x, i) => (out[i] ^= x)); sources.push(pooled ? `${label} (pool)` : label); }
@@ -112,9 +126,14 @@ export async function roll() {
     h.forEach((x, i) => (out[i] ^= x));
     sources.push(`drand beacon round ${dr.round}`);
   }
+  if (ni) {
+    const h = new Uint8Array(await crypto.subtle.digest('SHA-256', new Uint8Array([...ni.bytes, ...local, 1])));
+    h.forEach((x, i) => (out[i] ^= x));
+    sources.push(`NIST beacon pulse ${ni.index}`);
+  }
   sources.push('local CSPRNG');
   const physical = physicalBytes.length > 0;
-  return { bytes: out, sources, physical, via: pooled ? 'pool' : 'direct', kind: physical ? 'physical' : dr ? 'beacon + CSPRNG fallback' : 'CSPRNG only fallback' };
+  return { bytes: out, sources, physical, via: pooled ? 'pool' : 'direct', kind: physical ? 'physical' : dr || ni ? 'beacon + CSPRNG fallback' : 'CSPRNG only fallback' };
 }
 
 // Uniform integers from a roll's bytes by rejection sampling (no modulo bias). 32 bytes cover the word and five dice

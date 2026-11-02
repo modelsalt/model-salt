@@ -54,11 +54,11 @@ Each roll XORs 32 bytes from every source that answers within 2.5 s (`roll()` in
 
 | Source | What it is | Limits |
 |---|---|---|
-| random.org | atmospheric radio noise, private | 1,000,000 bits a day per IP plus a daily top-up. Free use is personal and non-commercial. Quota checked first, 10-minute back-off when low |
 | LfD QRNG | quantum noise from OTH Regensburg's Quantis card, private | free, no key |
 | drand quicknet | League of Entropy beacon, public, a new round every 3 s | public, so it is hashed with local bytes first. Cloudflare mirror plus two fallbacks |
+| NIST Randomness Beacon | US-government beacon, public, 512 bits a minute, offered as a public utility | no key; asked at most once a minute, hashed with local bytes first |
 | local CSPRNG | `crypto.getRandomValues` | always mixed in |
 
-Model Salt's own test runs take random.org and LfD QRNG bytes from a shared pool (`MODEL_SALT_POOL_TOKEN`), so many processes don't drain random.org's per-IP quota. Without a pool token, which is the normal case, the server fetches from the two sources itself.
+Model Salt's own runs and its hosted server at modelsalt.com/mcp take their private bytes from a shared pool (`MODEL_SALT_POOL_TOKEN`), which holds LfD QRNG bytes and the hardware noise of its server's CPU (RDSEED). Without a pool token, which is the normal case, the server fetches LfD QRNG itself.
 
 XOR of independent inputs is uniform if any one input is, so a roll is at least as random as its best source. The tool's reply names the sources that served the roll. `node scripts/entropy-check.mjs` measures every source live.

@@ -33,7 +33,7 @@ export async function finish(service, id, explored) {
   const s = drawn.get(id);
   if (!s || s.service !== service.id) return { ok: false, text: `Model Salt: no exploring step with id "${id}" (they are kept for an hour). Call model_salt again with the request to start over, or carry on with the request as asked.` };
   // the outside numbers were drawn in call 1 (values); `below` is only a spare for a reply with the wrong question count, so call 2
-  // takes nothing from the entropy pool (random.org's free share is about 780 draws a day)
+  // takes nothing from the entropy pool
   const r = await service.stage1(s.request, '', { below: async (n) => randomInt(n), from: '' }, { randomness: s.randomness, dial: 'curve', values: s.values, keep: s.keep, call: async () => ({ text: String(explored || ''), usage: {} }) });
   if (!r.ok) return { ok: false, text: `Model Salt: ${r.why}. Send your whole reply to the exploring step again in \`explored\`, ending in its \`\`\`json block, with the same id.` };
   drawn.delete(id);

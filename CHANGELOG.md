@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- **random.org is no longer used.** Its free terms cover personal, non-commercial use and development only. The physical source is now LfD's quantum random number service; the NIST Randomness Beacon is mixed in next to drand, hashed with local bytes and asked at most once a minute.
+
 ## 1.0.3
 
 - **Keep what you like.** Say what to keep ("keep the palette and layout, give me new illustrations") and your model sends those decided answers in the new `keep` field. Only the open choices are rolled again, the reply starts with a `Kept:` line that carries over to later runs until you start fresh, and a kept answer that no longer fits the request is dropped and named. Nothing is stored. In a model-fit test Claude Opus 5.5 and GPT-6.1 Sol filled `keep` when asked to keep something and left it out on "something new", 21 of 21 runs each.
