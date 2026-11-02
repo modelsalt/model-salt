@@ -10,6 +10,8 @@ The tool `model_salt` takes the user's `request` word for word, the calling `mod
 
 With no Claude Code or Codex CLI on the machine (a Docker container, Cursor or Copilot alone), the caller's model does step 1 itself (`src/in-context.mjs`): the first call returns the exploring step with its outside words and numbers and an `id`, the model does it without showing it, and a second call with the `id` and its reply in `explored` goes through the same pick and returns the answers. `SALT_IN_CONTEXT=1` forces this, `0` the CLI. If a CLI is there but its run can't start (signed out), the tool says nothing was settled and the model carries on as asked. The explore run goes through Codex for the `openai` service and through Claude Code, on Claude Opus 5.5 (Fable 5.1 for a Fable caller), for the `anthropic` service.
 
+**Keep (1.0.3).** The tool also takes `keep`: decided answers the user wants kept from an earlier reply, one `"<what> = <answer>"` item each (a pasted `Kept: a; b` line works too). The explore step gets them right after the request as already settled, asks only about what is still open, and lists any that no longer fit the request under `"dropped"` in its json block. The reply then starts with `Kept: <the items that still hold>`, and a second line names any dropped ones. If the explore run fails, the reply still starts with the `Kept:` line. The items travel only in the call and the reply; nothing is stored (`keepItems`, `withKeep` and `keptHead` in `src/template-steps.mjs`).
+
 ## One service per model family
 
 Models in a family share their habits (Fable draws Opus's pelican, Astra names its game like Sol), so a family shares its steps. Each family can change its steps without changing the tool.

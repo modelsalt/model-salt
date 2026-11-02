@@ -5,7 +5,7 @@ import WORDS from './wordlist.mjs';
 import { roll, reader } from './entropy.mjs';
 import { CHOICES_SCHEMA } from './codepick.mjs';
 import { OLD_TOOL_NAMES, OLD_PROMPT_NAMES } from './common.mjs';
-import { RANDOMNESS } from './template-steps.mjs';
+import { RANDOMNESS, keepItems, keptHead } from './template-steps.mjs';
 
 // Every steps file gets a draw: `below(n)` gives a uniform integer 0..n-1 from the outside bytes, `word` a random word
 // from 174,323, `from` names the sources so the model reads that the randomness isn't its own.
@@ -48,6 +48,11 @@ const EXPLORED_ARG = { type: 'string', description: 'Second call: your whole rep
 const TWO_CALLS = ' If the tool returns an exploring step with an `id`, do that step silently, without showing it to the user, and call this tool again with `model`, the `id` and your whole reply to the step in `explored`; that second call returns what to settle.';
 const RANDOMNESS_ARG = { type: 'number', minimum: 0, maximum: 2, description: 'How varied the result should be: 0 the usual answer, 0.5 a little more varied, 1 clearly varied, 1.5 more, 2 as varied as it gets. Left out it is 1, the default. Set it only when the user asks for more or less randomness.' };
 
+// keep (2 Nov, ask 5909): the user never sees it; they say what to keep in plain words and their model fills it. Model-fit test
+// (notes/modelsalt-salt-replay.md in mba): Opus 5.5 and GPT-6.1 Sol filled it on "keep the palette and layout" and left it out on
+// "give me something new", 21 of 21 runs each, with this text.
+const KEEP_ARG = { type: 'array', items: { type: 'string' }, description: 'Only when the user wants to keep part of an earlier Model Salt result and vary the rest ("keep the palette and layout", "same colours, new drawings", or a pasted `Kept:` line): the decided answers they want kept, copied from that earlier Model Salt reply, one item each as "<what> = <answer>", e.g. "palette = burnt orange on cream". If the last Model Salt reply began with a `Kept:` line, send its items again on every later call for this work, until the user says to start fresh. Leave it out when the user wants something new, another one, or a fresh start.' };
+
 export function makeHandler(service, { steps = service.steps, description = service.description, choose = service.choose || null, answer = service.answer || null, stage1 = service.stage1 || null, inContext = null, instructions = service.instructions, repeatWindowMs = 0, log = () => {} } = {}) {
   // repeatWindowMs (stdio: one process per client session): a second call within the window returns the same draw, so a model
   // that calls the tool twice for one task never gets two different draws (it then mixed them or dropped its list)
@@ -56,7 +61,7 @@ export function makeHandler(service, { steps = service.steps, description = serv
     name: service.tool,
     title: service.title,
     description: inContext ? description.replace(/^Call this once before/, 'Call this before') + TWO_CALLS : description,
-    inputSchema: { type: 'object', properties: { model: MODEL_ARG, ...(stage1 ? { request: REQUEST_ARG } : {}), ...(inContext ? { id: ID_ARG, explored: EXPLORED_ARG } : {}), ...(stage1?.randomness ? { randomness: RANDOMNESS_ARG } : {}), ...(answer ? { questions: answer.schema } : {}), ...(choose ? { choices: choose.schema || CHOICES_SCHEMA } : {}), ...(choose?.check ? { checked: { type: 'boolean', description: 'Only when the tool asked you to check your choices: true, sent with the checked list.' } } : {}) }, required: stage1 && !inContext ? ['model', 'request'] : ['model'], additionalProperties: false },
+    inputSchema: { type: 'object', properties: { model: MODEL_ARG, ...(stage1 ? { request: REQUEST_ARG, keep: KEEP_ARG } : {}), ...(inContext ? { id: ID_ARG, explored: EXPLORED_ARG } : {}), ...(stage1?.randomness ? { randomness: RANDOMNESS_ARG } : {}), ...(answer ? { questions: answer.schema } : {}), ...(choose ? { choices: choose.schema || CHOICES_SCHEMA } : {}), ...(choose?.check ? { checked: { type: 'boolean', description: 'Only when the tool asked you to check your choices: true, sent with the checked list.' } } : {}) }, required: stage1 && !inContext ? ['model', 'request'] : ['model'], additionalProperties: false },
     annotations: { readOnlyHint: true, openWorldHint: false },
   };
   // The model names itself in the `model` argument; a member of the family may bring its own method (models.mjs: `steps`
@@ -93,28 +98,33 @@ export function makeHandler(service, { steps = service.steps, description = serv
         log({ method, client: ctx.client, userAgent: ctx.userAgent, args: params?.arguments, member: member(model)?.id || null });
         const request = params?.arguments?.request;
         const run1 = stage1For(member(model));
+        // the kept answers, if any (src/template-steps.mjs keepItems); the repeat window counts a request with other kept answers as new
+        const keep = () => keepItems(params?.arguments?.keep);
+        const key = (req, kept = keep()) => `${String(req).trim()}${kept?.length ? `\n${kept.join('; ')}` : ''}`;
         if (inContext && run1) {
           const a = params?.arguments || {};
           if (typeof a.id === 'string' && a.id) {
             const r = await inContext.finish(service, a.id, a.explored);
             log({ method: 'in-context', step: 2, id: a.id, ok: r.ok, picks: r.r?.picks, decided: r.r?.decided, how: r.r?.randomness });
-            if (r.ok) staged = { request: String(r.request || ''), text: r.text };
+            if (r.ok) staged = { request: key(String(r.request || ''), r.r?.kept), text: r.text };
             return ok({ content: [{ type: 'text', text: r.text }] });
           }
           if (typeof request === 'string' && request.trim()) {
-            if (repeatWindowMs && staged?.request === request.trim()) return ok({ content: [{ type: 'text', text: staged.text }] });
-            const r = await inContext.start(service, request, a.randomness ?? RANDOMNESS.default, { again: (id) => `call model_salt again with \`model\`, id "${id}" and your whole reply to it in \`explored\`` });
+            if (repeatWindowMs && staged?.request === key(request)) return ok({ content: [{ type: 'text', text: staged.text }] });
+            const r = await inContext.start(service, request, a.randomness ?? RANDOMNESS.default, { keep: keep(), again: (id) => `call model_salt again with \`model\`, id "${id}" and your whole reply to it in \`explored\`` });
             log({ method: 'in-context', step: 1, id: r.id, from: r.from });
             return ok({ content: [{ type: 'text', text: r.text }] });
           }
         }
         if (run1 && typeof request === 'string' && request.trim()) {
           // one run per request in a session: a second call for the same request gets the same decided answers
-          if (repeatWindowMs && staged?.request === request.trim()) return ok({ content: [{ type: 'text', text: staged.text }] });
-          const r = await run1(request, model, await draw(), { randomness: params?.arguments?.randomness ?? RANDOMNESS.default, dial: 'curve' }).catch((e) => ({ ok: false, why: String(e), calls: [] }));
+          if (repeatWindowMs && staged?.request === key(request)) return ok({ content: [{ type: 'text', text: staged.text }] });
+          const r = await run1(request, model, await draw(), { randomness: params?.arguments?.randomness ?? RANDOMNESS.default, dial: 'curve', keep: keep() }).catch((e) => ({ ok: false, why: String(e), calls: [] }));
           log({ method: 'stage1', ok: r.ok, why: r.why, from: r.from, decided: r.decided, words: r.words, picks: r.picks, randomness: r.randomness, picks_written: r.picks_written, questions: r.questions, drawn: r.drawn, calls: r.calls || [] }); // the log is local (stdio --log): it keeps every stage 1 prompt and reply
-          if (r.ok) { staged = { request: request.trim(), text: r.text }; return ok({ content: [{ type: 'text', text: r.text }] }); }
-          return ok({ content: [{ type: 'text', text: run1.fallback || await text(model, ctx) }] });
+          if (r.ok) { staged = { request: key(request), text: r.text }; return ok({ content: [{ type: 'text', text: r.text }] }); }
+          // nothing was settled, but the kept answers still hold
+          const head = keptHead(keep());
+          return ok({ content: [{ type: 'text', text: `${head ? `${head}\n` : ''}${run1.fallback || await text(model, ctx)}` }] });
         }
         if (choose && params?.arguments?.choices !== undefined) {
           // in one session (stdio: repeatWindowMs set; the HTTP worker's handler is shared by every client, so it doesn't keep them)
