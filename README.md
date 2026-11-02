@@ -50,6 +50,8 @@ Want more or less of it? Say so in your prompt ("make it really different", "kee
 
 The model skips the tool for questions with one right answer (a sum, a fact, a bug fix).
 
+**Keep what you like.** Like part of a result? Say what to keep in plain words ("keep the palette and layout, give me new illustrations"). Your model copies those decided answers from the earlier Model Salt reply into the tool's `keep` field and calls it again. Only the open choices are rolled again, and the reply starts with one line, e.g. `Kept: palette = burnt orange on cream; layout = split screen, text left`. That holds on later runs until you say start fresh, and "give me something new" leaves it out. In a new chat, paste the `Kept:` line or say it in your own words. A kept answer that no longer fits a new request is dropped, and the reply says so. Nothing is stored on our side.
+
 ## What it changes
 
 Same prompt, 10 runs each, from the examples on [modelsalt.com](https://modelsalt.com).

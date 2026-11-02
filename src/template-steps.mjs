@@ -236,6 +236,42 @@ export function reply(t, values, request, prompt, text, j = lift(text)) {
   return { questions, picks, decided, text: out };
 }
 
+// keep (2 Nov, ask 5909; Matías Matthews on X: "Could I freeze the palette and layout once I like them, then vary just the
+// illustrations?"): the decided answers the user wants kept from an earlier Model Salt reply. The user says it in plain words; their
+// model copies those answers into `keep`, one "<what> = <answer>" item each, or sends a pasted "Kept: a; b" line as it is. The
+// explore step takes them as settled and asks only about what is still open; one that no longer fits the request it lists under
+// "dropped" in its json block, and the reply says so. Nothing is stored: the items travel in the call and in the reply's Kept line.
+export function keepItems(keep) {
+  // a list item that is a whole pasted Kept line is split like a string
+  const raw = (Array.isArray(keep) ? keep : typeof keep === 'string' ? [keep] : []).flatMap((k) => (typeof k === 'string' && (/^\s*kept:/i.test(k) || !Array.isArray(keep)) ? k.split(/\s*[;\n]\s*/) : [k]));
+  const out = [];
+  for (let k of raw) {
+    k = String(k ?? '').replace(/^\s*(?:[-*•]\s*)?(?:kept:\s*)?/i, '').trim().replace(/\.$/, '').trim().slice(0, 300);
+    if (k && !out.some((o) => o.toLowerCase() === k.toLowerCase())) out.push(k);
+  }
+  return out.slice(0, 12);
+}
+// the kept items go right after the paragraph that holds the request, before the explore step's own instructions
+export function withKeep(prompt, request, items) {
+  if (!items?.length) return prompt;
+  const block = `Already decided by the user and kept as they are:\n${items.map((k) => `- ${k}`).join('\n')}\nTake these as settled: no question may ask about them again, and every answer must fit them. If one of them no longer fits this task, leave it out and list it, exactly as written above, in the json block under "dropped": ["..."].`;
+  const at = request ? prompt.indexOf(request) : -1;
+  const end = at < 0 ? -1 : prompt.indexOf('\n\n', at + request.length);
+  return end < 0 ? `${block}\n\n${prompt}` : `${prompt.slice(0, end)}\n\n${block}${prompt.slice(end)}`;
+}
+// which kept items the explore step dropped: an item it names as written, or by the part before " = "
+export function droppedOf(items, j) {
+  const said = (Array.isArray(j?.dropped) ? j.dropped : []).map((d) => String(d).trim().toLowerCase().replace(/\.$/, '')).filter(Boolean);
+  const what = (k) => k.split('=')[0].trim().toLowerCase();
+  return items.filter((k) => said.some((d) => d === k.toLowerCase() || d === what(k) || d.split('=')[0].trim() === what(k)));
+}
+// the reply's first line(s): "Kept: a; b", and a line for any item that no longer fits
+export function keptHead(items, dropped = []) {
+  if (!items?.length) return '';
+  const kept = items.filter((k) => !dropped.includes(k));
+  return [kept.length ? `Kept: ${kept.join('; ')}` : 'Kept: nothing', dropped.length ? `Dropped, as it no longer fits this request: ${dropped.join('; ')}` : ''].filter(Boolean).join('\n');
+}
+
 // fromTemplates(t): { stage1, description, instructions, templates } for a steps file. t.runner is the model id of the explore run,
 // or a function of the calling model's name that returns it.
 export function fromTemplates(t) {
@@ -251,13 +287,15 @@ export function fromTemplates(t) {
     const dial = opts.dial || (opts.count !== undefined ? 'none' : 'questions');
     const text = !t.randomness ? t.stage1 : dial === 'curve' ? withShape(t.stage1, curveQuestionsFor(opts.randomness), answersFor(opts.randomness)) : dial === 'both' ? withShape(t.stage1, bothQuestionsFor(opts.randomness), answersFor(opts.randomness)) : dial === 'answers' ? withAnswers(t.stage1, answersFor(opts.randomness)) : withCount(t.stage1, opts.count ?? (dial === 'none' ? 5 : countFor(opts.randomness)));
     const values = await drawValues(names(text, t.line, t.reply), draw.below, opts.values);
-    const prompt = slots(fill(text, values), { REQUEST: task });
+    const keep = keepItems(opts.keep);
+    const prompt = withKeep(slots(fill(text, values), { REQUEST: task }), task, keep);
     const runner = opts.runner || runnerFor(model), t0 = Date.now(), r = await call(runner, prompt);
     const calls = [{ name: 'stage 1', runner, prompt, text: r.text, usage: r.usage, error: r.error, ms: Date.now() - t0 }];
     const lifted = lift(r.text);
     if (!lifted) return { ok: false, calls, drawn: { values }, from: draw.from, why: 'the reply has no well-formed JSON' };
     const rp = t.randomness ? await repick({ ...t, stage1: text }, values, r.text, lifted, opts.randomness, draw.below, dial === 'curve') : { j: lifted };
     const out = { ok: true, ...reply(t, values, task, prompt, r.text, rp.j), from: draw.from, calls, drawn: { values } };
+    if (keep.length) { out.kept = keep; out.dropped = droppedOf(keep, lifted); out.text = `${keptHead(keep, out.dropped)}\n${out.text}`; }
     if (rp.how) Object.assign(out, { randomness: rp.how, picks_written: rp.picks_written });
     if (text !== t.stage1) Object.assign(out, dial === 'curve' ? { asked: curveQuestionsFor(opts.randomness), options: answersFor(opts.randomness) } : dial === 'both' ? { asked: bothQuestionsFor(opts.randomness), options: answersFor(opts.randomness) } : dial === 'answers' ? { options: answersFor(opts.randomness) } : { asked: opts.count ?? countFor(opts.randomness) });
     return out;

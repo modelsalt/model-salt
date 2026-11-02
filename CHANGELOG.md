@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.3
+
+- **Keep what you like.** Say what to keep ("keep the palette and layout, give me new illustrations") and your model sends those decided answers in the new `keep` field. Only the open choices are rolled again, the reply starts with a `Kept:` line that carries over to later runs until you start fresh, and a kept answer that no longer fits the request is dropped and named. Nothing is stored. In a model-fit test Claude Opus 5.5 and GPT-6.1 Sol filled `keep` when asked to keep something and left it out on "something new", 21 of 21 runs each.
+
 ## 1.0.2
 
 - **Works without Claude Code or Codex.** With neither CLI on the machine (a Docker container, Cursor or Copilot alone), the tool no longer returns "nothing was settled" every time: your model does the exploring step itself, in two calls of the tool (the request, then its reply with the `id` the first call gave). With a CLI, nothing changes. `SALT_IN_CONTEXT=1` forces the two calls, `0` the CLI.
