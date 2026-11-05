@@ -3,7 +3,7 @@
   "name": "com.modelsalt/model-salt",
   "title": "Model Salt",
   "description": "Randomness from outside the model, so one prompt gives different answers that still fit the ask.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "repository": {
     "url": "https://github.com/modelsalt/model-salt",
     "source": "github"
@@ -14,7 +14,7 @@
       "registryType": "npm",
       "registryBaseUrl": "https://registry.npmjs.org",
       "identifier": "@modelsalt/model-salt",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "transport": {
         "type": "stdio"
       },
@@ -31,6 +31,12 @@
           ]
         }
       ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://modelsalt.com/mcp"
     }
   ]
 }
