@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- **Claude Code plugin 1.0.3 is hosted.** The plugin now connects to https://modelsalt.com/mcp/listed instead of running `npx` on your machine, because the Claude plugin directory accepts local MCP servers only from verified organizations. Your request then goes to modelsalt.com and is not stored. `npx`, the other plugins and the MCPB bundle still run locally. No new npm release.
 - **random.org is no longer used.** Its free terms cover personal, non-commercial use and development only. The physical source is now LfD's quantum random number service; the NIST Randomness Beacon is mixed in next to drand, hashed with local bytes and asked at most once a minute.
 
 ## 1.0.3
