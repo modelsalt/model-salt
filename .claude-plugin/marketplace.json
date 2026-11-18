@@ -7,7 +7,7 @@
     {
       "name": "model-salt",
       "source": "./plugin",
-      "description": "Varied results for creative requests that are still exactly what was asked: the model calls model_salt before a creative task and follows what it returns."
+      "description": "Varied results for creative requests that are still exactly what was asked. Before a creative task the model calls Model Salt's hosted server at modelsalt.com and gets back a few choices to settle this time, drawn from randomness outside the model (hardware and quantum noise). Then it does the request as asked. Your request and the model's reply to the exploring step are sent to modelsalt.com, which stores and logs neither."
     }
   ],
   "metadata": {
