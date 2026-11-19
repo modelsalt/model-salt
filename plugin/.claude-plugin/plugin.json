@@ -1,7 +1,7 @@
 {
   "name": "model-salt",
-  "version": "1.0.3",
-  "description": "Varied results for creative requests that are still exactly what was asked. Before a creative task the model calls Model Salt's hosted server at modelsalt.com and gets back a few choices to settle this time, drawn from randomness outside the model (hardware and quantum noise). Then it does the request as asked. Your request and the model's reply to the exploring step are sent to modelsalt.com, which stores and logs neither.",
+  "version": "1.0.4",
+  "description": "Varied results for creative requests that are still exactly what was asked. Before a creative task the model writes a few open choices with numbered options in its reply, then calls Model Salt's hosted server at modelsalt.com, which sends back one option number per choice, drawn from randomness outside the model (hardware and quantum noise). Then it does the request with those options. Only the number of options per choice is sent: not your request, not the options, nothing else from the chat.",
   "author": {
     "name": "Chris Benjaminsen",
     "url": "https://chrisbenjaminsen.com"

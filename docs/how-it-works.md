@@ -10,6 +10,17 @@ The tool `model_salt` takes the user's `request` word for word, the calling `mod
 
 With no Claude Code or Codex CLI on the machine (a Docker container, Cursor or Copilot alone), the caller's model does step 1 itself (`src/in-context.mjs`): the first call returns the exploring step with its outside words and numbers and an `id`, the model does it without showing it, and a second call with the `id` and its reply in `explored` goes through the same pick and returns the answers. `SALT_IN_CONTEXT=1` forces this, `0` the CLI. If a CLI is there but its run can't start (signed out), the tool says nothing was settled and the model carries on as asked. The explore run goes through Codex for the `openai` service and through Claude Code, on Claude Opus 5.5 (Fable 5.1 for a Fable caller), for the `anthropic` service.
 
+## The hosted endpoint: numbers only (since 19 November 2026)
+
+The hosted server at https://modelsalt.com/mcp (and /mcp/listed, used by the ChatGPT app, the Claude connector and the Claude Code plugin) no longer takes the request. Its `model_salt` tool takes only `counts`, and `randomness` when the user asks for more or less variety:
+
+1. **The model writes its options, openly.** The server's instructions ask the caller's model to write in its reply the decisions an expert would settle first and a numbered list of options for each, option 1 the usual choice: 5 decisions with 5 options at the default setting, 6 with 10 at setting 2.
+2. **It calls the tool with only the counts,** for example `{"counts": [5, 5, 5, 5, 5]}`. The tool's schema allows nothing else, and the server reads nothing else of the call: not the request, not the options, not the metadata an app attaches.
+3. **The server draws one option number per decision** from the same physical randomness, on the same curve as step 2 above (option 1 kept 45% of the time at setting 1, about 1 in 10 at setting 2), and returns only `decision 1: option 4`, and so on.
+4. **The model writes each decision with its drawn option** in one line, then does the request so the result shows them.
+
+Why it changed: since 12 November 2026 Claude Fable 5.2 and Opus 5.5 refused the earlier hosted step, which asked the model to explore without showing it and send that work back to the server. Here nothing is hidden and nothing of the chat is sent. A call in the earlier form (`request`, then `id` and `explored`) is still answered the earlier way, for apps that still hold that form. The local server run with `npx` is unchanged.
+
 **Keep (1.0.3).** The tool also takes `keep`: decided answers the user wants kept from an earlier reply, one `"<what> = <answer>"` item each (a pasted `Kept: a; b` line works too). The explore step gets them right after the request as already settled, asks only about what is still open, and lists any that no longer fit the request under `"dropped"` in its json block. The reply then starts with `Kept: <the items that still hold>`, and a second line names any dropped ones. If the explore run fails, the reply still starts with the `Kept:` line. The items travel only in the call and the reply; nothing is stored (`keepItems`, `withKeep` and `keptHead` in `src/template-steps.mjs`).
 
 ## One service per model family

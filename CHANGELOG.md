@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- **The hosted server takes numbers only (19 November 2026).** At https://modelsalt.com/mcp and /mcp/listed, your model now writes its decisions and numbered options openly in its reply and calls `model_salt` with only `counts` (how many options each decision has). The server returns one option number per decision, drawn from the same physical randomness on the same curve. Your request and the options are never sent. Claude Fable 5.2 and Opus 5.5 had refused the earlier hosted step since 12 November. Calls in the earlier form are still answered. The local `npx` server is unchanged.
+- **Claude Code plugin 1.0.4:** the skill covers both forms of the tool (`counts` on the hosted server, `request` on the local one), and the description says what is sent.
 - **Claude Code plugin 1.0.3 is hosted.** The plugin now connects to https://modelsalt.com/mcp/listed instead of running `npx` on your machine, because the Claude plugin directory accepts local MCP servers only from verified organizations. Your request then goes to modelsalt.com and is not stored. `npx`, the other plugins and the MCPB bundle still run locally. No new npm release.
 - **random.org is no longer used.** Its free terms cover personal, non-commercial use and development only. The physical source is now LfD's quantum random number service; the NIST Randomness Beacon is mixed in next to drand, hashed with local bytes and asked at most once a minute.
 
