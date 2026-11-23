@@ -61,7 +61,7 @@ export function makeHandler(service, { steps = service.steps, description = serv
     name: service.tool,
     title: service.title,
     description: inContext ? description.replace(/^Call this once before/, 'Call this before') + TWO_CALLS : description,
-    inputSchema: { type: 'object', properties: { model: MODEL_ARG, ...(stage1 ? { request: REQUEST_ARG, keep: KEEP_ARG } : {}), ...(inContext ? { id: ID_ARG, explored: EXPLORED_ARG } : {}), ...(stage1?.randomness ? { randomness: RANDOMNESS_ARG } : {}), ...(answer ? { questions: answer.schema } : {}), ...(choose ? { choices: choose.schema || CHOICES_SCHEMA } : {}), ...(choose?.check ? { checked: { type: 'boolean', description: 'Only when the tool asked you to check your choices: true, sent with the checked list.' } } : {}) }, required: stage1 && !inContext ? ['model', 'request'] : ['model'], additionalProperties: false },
+    inputSchema: { type: 'object', properties: { model: MODEL_ARG, ...(stage1 ? { request: REQUEST_ARG, ...(stage1.keep !== false ? { keep: KEEP_ARG } : {}) } : {}), ...(inContext ? { id: ID_ARG, explored: EXPLORED_ARG } : {}), ...(stage1?.randomness ? { randomness: RANDOMNESS_ARG } : {}), ...(answer ? { questions: answer.schema } : {}), ...(choose ? { choices: choose.schema || CHOICES_SCHEMA } : {}), ...(choose?.check ? { checked: { type: 'boolean', description: 'Only when the tool asked you to check your choices: true, sent with the checked list.' } } : {}) }, required: stage1 && !inContext ? ['model', 'request'] : ['model'], additionalProperties: false },
     annotations: { readOnlyHint: true, openWorldHint: false },
   };
   // The model names itself in the `model` argument; a member of the family may bring its own method (models.mjs: `steps`

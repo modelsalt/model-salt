@@ -66,7 +66,7 @@ export async function call(model, prompt) {
     try { j = JSON.parse(r.out); } catch {}
     const u = j.usage || {};
     const cached = (u.cache_read_input_tokens || 0) + (u.cache_creation_input_tokens || 0);
-    return { text: j.result || '', usage: { input: (u.input_tokens || 0) + cached, cached, output: u.output_tokens || 0 }, usd: j.total_cost_usd || 0, raw: r.out, error: j.result ? '' : (r.err || r.out).slice(-500) };
+    return { text: j.result || '', usage: { input: (u.input_tokens || 0) + cached, cached, output: u.output_tokens || 0 }, usd: j.total_cost_usd || 0, models: Object.keys(j.modelUsage || {}), raw: r.out, error: j.result ? '' : (r.err || r.out).slice(-500) };
   } finally { rmSync(tmp, { recursive: true, force: true }); }
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "model-salt",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "The short name for @modelsalt/model-salt: an MCP server that gives your model randomness from outside it, so one prompt gives different answers.",
   "keywords": [
     "mcp",
@@ -32,7 +32,7 @@
     "bin.mjs"
   ],
   "dependencies": {
-    "@modelsalt/model-salt": "^1.0.0"
+    "@modelsalt/model-salt": "^1.1.0"
   },
   "publishConfig": {
     "access": "public"

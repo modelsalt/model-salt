@@ -1,6 +1,6 @@
 // The Anthropic family service (Claude Opus 5.5, Fable 5.1). Its steps are versioned in steps/; this file names the current one.
 import { TOOL_NAME } from '../../src/common.mjs';
-import * as current from './steps/0.45a.mjs'; // v1 (1.0.0): steps 0.45a with the randomness setting (the curve of round r43, src/template-steps.mjs)
+import * as current from './steps/1.0-server.mjs'; // 1.1.0: 1.0.0's steps with the choices drawn on the server (steps/1.0-server.mjs)
 import models from './models.mjs';
 
 // The listing text: what the tool does for the caller and how to call it, never how it works. It stays true across versions
@@ -10,6 +10,6 @@ const INSTRUCTIONS = "Model Salt: before a creative or open-ended request, call 
 
 export default {
   id: 'anthropic', familyName: 'Claude (Anthropic)', family: /claude|anthropic|opus|sonnet|haiku|fable/i, client: /claude/i,
-  name: 'model-salt-anthropic', version: '1.0.0', title: 'Model Salt for Claude models',
+  name: 'model-salt-anthropic', version: '1.1.0', title: 'Model Salt for Claude models',
   tool: TOOL_NAME, instructions: INSTRUCTIONS, description: DESCRIPTION, steps: current.default, choose: current.choose, stage1: current.stage1, templates: current.templates, models,
 };

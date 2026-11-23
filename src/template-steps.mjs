@@ -14,15 +14,15 @@ const stop = (s) => { s = String(s).trim(); return s + (/[.!?]$/.test(s) ? '' : 
 const slots = (text, map) => String(text).replace(/\{\{([A-Z0-9_]+)\}\}/g, (s, k) => (k in map ? String(map[k]) : s));
 
 // the reply's last ```json block, if it holds questions with answers and one valid pick per question
-export function lift(text) {
+export function lift(text, { picks = true } = {}) {
   const blocks = [...String(text || '').matchAll(/```json\s*([\s\S]*?)```/g)];
   const raw = blocks.length ? blocks[blocks.length - 1][1] : (String(text || '').match(/\{[\s\S]*\}\s*$/) || [''])[0];
   try {
     const j = JSON.parse(raw);
     const qs = j.questions;
     const ok = Array.isArray(qs) && qs.length > 0 && qs.every((q) => q && typeof q.q === 'string' && Array.isArray(q.answers) && q.answers.length > 0 && q.answers.every((a) => typeof a === 'string' && a.trim()))
-      && Array.isArray(j.picks) && j.picks.length === qs.length && j.picks.every((p, i) => Number.isInteger(p) && p >= 1 && p <= qs[i].answers.length);
-    return ok ? j : null;
+      && (!picks || (Array.isArray(j.picks) && j.picks.length === qs.length && j.picks.every((p, i) => Number.isInteger(p) && p >= 1 && p <= qs[i].answers.length)));
+    return ok ? (picks ? j : { questions: qs }) : null;
   } catch { return null; }
 }
 
@@ -121,10 +121,13 @@ export const bothQuestionsFor = (r) => {
   }
   return 9;
 };
+const SERVER_PICK_JSON = ', ...five questions]}';
 // withShape(text, n, a): the stage 1 text with n questions of a answers each; 5 and 5, or a text without the parts, comes back as it is
 export function withShape(text, n, a) {
   const s = String(text);
-  const has = [...Object.values(COUNT_PARTS), ...Object.values(ANSWER_PARTS)].every((x) => (typeof x === 'string' ? s.includes(x) : x.test(s)));
+  // a server-pick text (serverPick below) has no numbers and no picks: its JSON line ends after the questions
+  const sp = !s.includes('"picks"'), need = { ...COUNT_PARTS, ...ANSWER_PARTS, ...(sp ? { numbers: /(?:)/, json: SERVER_PICK_JSON, pick: '' } : {}) };
+  const has = Object.values(need).every((x) => (typeof x === 'string' ? s.includes(x) : x.test(s)));
   if ((n === 5 && a === 5) || !has || !(n >= 1 && n <= 10) || !(a >= 2 && a <= 10)) return s;
   const lines = (f) => Array.from({ length: n }, (_, i) => f(i + 1)).join('\n');
   const nouns = (w) => `${NUMBER_WORDS[n]} ${w}${n > 1 ? 's' : ''}`, pick = `<the number, 1 to ${a}, of the answer chosen for Q1>`;
@@ -135,6 +138,7 @@ export function withShape(text, n, a) {
     .replace(COUNT_PARTS.words, lines((i) => `Q${i}: ` + Array.from({ length: a }, (_, k) => `"<word_${pad(n + a * (i - 1) + k + 1)}>"`).join(', ')))
     .replace(COUNT_PARTS.numbers, lines((i) => `Q${i}: <number_${pad(i)}>`))
     .replace(COUNT_PARTS.json, n > 1 ? `, ...${nouns('question')}], "picks": [${pick}, ...${nouns('number')}]}` : `], "picks": [${pick}]}`)
+    .replace(SERVER_PICK_JSON, n > 1 ? `, ...${nouns('question')}]}` : ']}')
     .replace(ANSWER_PARTS.each, `and ${NUMBER_WORDS[a]} answers to each`)
     .replace(ANSWER_PARTS.shares, `the ${NUMBER_WORDS[a]} shares add up to 100%`)
     .replace(ANSWER_PARTS.last, `<word>, A${a}: <answer> [<share>%]`)
@@ -210,6 +214,17 @@ export const span = (p, x) => { let edge = 0; for (let i = 0; i < p.length; i++)
 // repick(t, values, text, j, r, below): j with its picks at randomness r, plus how each was reached. r of 1 (or none) returns j as it
 // is. Question n's number is the n-th <number_NN> of stage 1 when the template has one per question, else a fresh draw of
 // NUMBER_STEPS (1,000,001) values from the outside draw.
+// serverPick: the stage 1 text has no stage 3, so the model writes no picks and every pick is drawn here, on the
+// curve, from a fresh outside number per question; a reply without shares is drawn as option 1 at the curve's usual target, the rest even.
+export async function serverPick(text, j, r, below) {
+  r = clampR(r);
+  const p = shares(text, j) || j.questions.map((q) => { const n = q.answers.length, u = usualTarget(r, n); return q.answers.map((_, i) => (n === 1 ? 1 : i === 0 ? u : (1 - u) / (n - 1))); });
+  const x = [];
+  for (let i = 0; i < p.length; i++) x.push((await below(NUMBER_STEPS)) / 1e6);
+  const picks = p.map((pi, i) => span(temperTo(pi, usualTarget(r, pi.length)), x[i]) + 1);
+  return { j: { ...j, picks }, how: `randomness ${r} (curve, drawn by the server${shares(text, j) ? '' : ', no shares in the reply'})`, numbers: x, shares: p };
+}
+
 export async function repick(t, values, text, j, r, below, curve = false) {
   // with the curve (r43) 1 is a point on it too; only a missing setting keeps the model's own picks
   if (r === undefined || r === null || r === '' || !Number.isFinite(Number(r)) || (!curve && Number(r) === RANDOMNESS.default)) return { j };
@@ -290,17 +305,18 @@ export function fromTemplates(t) {
     const keep = keepItems(opts.keep);
     const prompt = withKeep(slots(fill(text, values), { REQUEST: task }), task, keep);
     const runner = opts.runner || runnerFor(model), t0 = Date.now(), r = await call(runner, prompt);
-    const calls = [{ name: 'stage 1', runner, prompt, text: r.text, usage: r.usage, error: r.error, ms: Date.now() - t0 }];
-    const lifted = lift(r.text);
+    const calls = [{ name: 'stage 1', runner, prompt, text: r.text, usage: r.usage, usd: r.usd, models: r.models, error: r.error, ms: Date.now() - t0 }];
+    const lifted = lift(r.text, { picks: !t.serverPick });
     if (!lifted) return { ok: false, calls, drawn: { values }, from: draw.from, why: 'the reply has no well-formed JSON' };
-    const rp = t.randomness ? await repick({ ...t, stage1: text }, values, r.text, lifted, opts.randomness, draw.below, dial === 'curve') : { j: lifted };
+    const rp = t.serverPick ? await serverPick(r.text, lifted, opts.randomness, draw.below) : t.randomness ? await repick({ ...t, stage1: text }, values, r.text, lifted, opts.randomness, draw.below, dial === 'curve') : { j: lifted };
     const out = { ok: true, ...reply(t, values, task, prompt, r.text, rp.j), from: draw.from, calls, drawn: { values } };
     if (keep.length) { out.kept = keep; out.dropped = droppedOf(keep, lifted); out.text = `${keptHead(keep, out.dropped)}\n${out.text}`; }
-    if (rp.how) Object.assign(out, { randomness: rp.how, picks_written: rp.picks_written });
+    if (rp.how) Object.assign(out, { randomness: rp.how, picks_written: rp.picks_written, ...(t.serverPick ? { numbers: rp.numbers, shares: rp.shares } : {}) });
     if (text !== t.stage1) Object.assign(out, dial === 'curve' ? { asked: curveQuestionsFor(opts.randomness), options: answersFor(opts.randomness) } : dial === 'both' ? { asked: bothQuestionsFor(opts.randomness), options: answersFor(opts.randomness) } : dial === 'answers' ? { options: answersFor(opts.randomness) } : { asked: opts.count ?? countFor(opts.randomness) });
     return out;
   };
   stage1.fallback = t.fallback;
   stage1.randomness = !!t.randomness;
+  stage1.keep = t.keep !== false;
   return { stage1, description: t.description, instructions: t.instructions, templates: t };
 }

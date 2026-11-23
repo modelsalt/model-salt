@@ -1,6 +1,11 @@
 # Changelog
 
-## Unreleased
+## 1.1.0
+
+- **The server makes every choice.** The steps are 1.0.0's, word for word, with one change: the explore run no longer chooses. It names the questions and answers with how often each is usually chosen, and the server draws one outside number per question and picks the answer. No model is asked to choose at random, which Claude Opus 5.5 and Fable 5.2 had started to refuse. Checked on 23 November 2026 on Claude Opus 5.5, Fable 5.2, Sonnet 5.5 and Haiku 5.5: 102 runs, no refusals or warnings.
+- **`keep` is gone.** The `keep` field added in 1.0.3 is not in 1.1.0, since it was not part of 1.0.0's steps. To keep part of a result, say so in the request.
+
+## Unreleased (hosted server and plugins)
 
 - **The hosted server takes numbers only (19 November 2026).** At https://modelsalt.com/mcp and /mcp/listed, your model now writes its decisions and numbered options openly in its reply and calls `model_salt` with only `counts` (how many options each decision has). The server returns one option number per decision, drawn from the same physical randomness on the same curve. Your request and the options are never sent. Claude Fable 5.2 and Opus 5.5 had refused the earlier hosted step since 12 November. Calls in the earlier form are still answered. The local `npx` server is unchanged.
 - **Claude Code plugin 1.0.4:** the skill covers both forms of the tool (`counts` on the hosted server, `request` on the local one), and the description says what is sent.
